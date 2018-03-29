@@ -60,7 +60,11 @@ bot.on("message", async message => {
 	
 		
 		if(messageArray.indexOf(name1, 0) != -1 || messageArray.indexOf(name2, 0) != -1 || messageArray.indexOf(name3, 0) != -1 || messageArray.indexOf(name4, 0) != -1){
-			console.log("DOXXED");
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
 			if(!safeZone) {
 			message.delete()
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
