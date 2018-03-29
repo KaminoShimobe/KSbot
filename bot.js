@@ -330,9 +330,9 @@ bot.on("message", async message => {
 
 	if(command === `${prefix}hug`){
 		var random = Math.floor(Math.random() * 4) + 1;
-		var hugs = ["https://tenor.com/view/anime-hug-gif-9200935", "https://tenor.com/view/hug-anime-love-dragon-loli-gif-9920978", "https://tenor.com/view/hug-anime-gif-10195705", "https://tenor.com/view/anime-run-hug-gif-9096291"]
+		var hugs = ["https://tenor.com/view/anime-hug-gif-9200935", "https://tenor.com/view/hug-anime-love-dragon-loli-gif-9920978", "https://tenor.com/view/hug-anime-gif-10195705", "https://tenor.com/view/anime-run-hug-gif-9096291"];
 		
-		let embed = new Discord.RichEmbed()
+		let hug = new Discord.RichEmbed()
 		.setDescription(`Hugs!`)
 		.url(hugs[random-1])
 		.setColor("#4286f4"); 
@@ -341,9 +341,9 @@ bot.on("message", async message => {
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
 		
+		message.channel.sendEmbed(hug);
+		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
 		
-		message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
-		return message.channel.sendEmbed(embed);
 	}
 
 
