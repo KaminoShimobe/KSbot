@@ -58,17 +58,18 @@ bot.on("message", async message => {
 	
 	
 
-	if(!safeZone ){
+	
 		
 		if(messageArray.indexOf(name1, 0) != -1 || messageArray.indexOf(name2, 0) != -1 || messageArray.indexOf(name3, 0) != -1 || messageArray.indexOf(name4, 0) != -1){
+			if(safeZone) return;
 			message.delete()
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
   			.catch(console.error);	
 		 return message.channel.send(":eyes: *cough*");
-			
+		;	
 		}
-		;
-	}
+		
+	
 	
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
 		
