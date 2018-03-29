@@ -17,8 +17,7 @@ bot.on("ready", async () => {
 	// });
 
 	// await bot.generateInvite(["ADMINISTRATOR"]);
-	try {
-		let link = await bot.generateInvite(["ADMINISTRATOR"]);
+	try		let link = await bot.generateInvite(["ADMINISTRATOR"]);
 		console.log(link);
 	}	catch(e) {
 		console.log(e.stack);
@@ -61,11 +60,13 @@ bot.on("message", async message => {
 	
 		
 		if(messageArray.indexOf(name1, 0) != -1 || messageArray.indexOf(name2, 0) != -1 || messageArray.indexOf(name3, 0) != -1 || messageArray.indexOf(name4, 0) != -1){
-			if(safeZone) return;
+			console.log("DOXXED");
+			if(!safeZone) {
 			message.delete()
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
   			.catch(console.error);	
 		 return message.channel.send(":eyes: *cough*");
+			}
 		;	
 		}
 		
