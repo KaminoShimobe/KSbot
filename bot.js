@@ -334,7 +334,7 @@ bot.on("message", async message => {
 		
 		let hug = new Discord.RichEmbed()
 		.setDescription(`Hugs!`)
-		.url(hugs[random-1])
+		.setURL(hugs[random-1])
 		.setColor("#4286f4"); 
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
