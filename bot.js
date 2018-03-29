@@ -282,8 +282,6 @@ bot.on("message", async message => {
 
 	}
 
-
-
 	if(command === `${prefix}flip`){
 
 		let coin = Math.floor(Math.random() * 101) + 1;
@@ -334,7 +332,7 @@ bot.on("message", async message => {
 		
 		let hug = new Discord.RichEmbed()
 		.setDescription(`Hugs!`)
-		.setURL(hugs[random-1])
+		.setImage(hugs[random-1])
 		.setColor("#4286f4"); 
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
