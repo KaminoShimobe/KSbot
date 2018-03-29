@@ -36,6 +36,7 @@ bot.on('guildMemberAdd', member => {
 });
 
 bot.on("message", async message => {
+	const safeZone = member.guild.channels.find('name', 'wholesome-squad-only')
 	if(message.author.bot) return;
 	if(message.channel.type === "dm") return;
 	var phrase1 = "is";
@@ -49,10 +50,26 @@ bot.on("message", async message => {
 	var phrase9 = "know";
 	
 	
+	
+	
 	let messageArray = message.content.split(" ");
 	let command = messageArray[0];
 	let args = messageArray.slice(1);
-	console.log(messageArray[2]);
+	
+	
+
+	if(!safeZone ){
+		
+		if(messageArray.indexOf(name1, 0) != -1 || messageArray.indexOf(name2, 0) != -1 || messageArray.indexOf(name3, 0) != -1 || messageArray.indexOf(name4, 0) != -1){
+			message.delete()
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+  			.catch(console.error);	
+		 return message.channel.send(":eyes: *cough*");
+			
+		}
+		;
+	}
+	
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
 		
 		
