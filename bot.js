@@ -514,14 +514,20 @@ bot.on("message", async message => {
 
 		var heh = Math.floor(Math.random() * 4) + 1;
 		
-		if(heh === 1 || heh === 2 || heh === 3){
-		
-		
-			message.delete()
+		function delet(){
+			
+		message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(console.error);
+			
+		}
+		
+		if(heh === 1 || heh === 2 || heh === 3){
+		
+		
+			setTimeout(delet(), 100);
 
 		 
 
