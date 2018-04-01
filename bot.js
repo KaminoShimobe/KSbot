@@ -516,18 +516,18 @@ bot.on("message", async message => {
 		
 		if(heh === 1 || heh === 2 || heh === 3){
 		
-		setTimeout(
-		message.delete()
+		
+			message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(msg => console.log(`*Oopsie Woopsie!*`), 100);
+  			.catch(msg => console.log(`*Oopsie Woopsie!*`);
 
-		 return;
+		 
 
 		} else {
 				
-			return message.channel.send("Were you *REALLY* joking tho? :smirk:");;
+			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
 			
 		}
 
