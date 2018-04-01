@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -10,12 +10,12 @@ const bot = new Discord.Client({disableEveryone: true})
 
 
 
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: passwordMYSQL,
-	database: "stats"
-});
+// var con = mysql.createConnection({
+// 	host: "localhost",
+// 	user: "root",
+// 	password: passwordMYSQL,
+// 	database: "stats"
+// });
 
 bot.on("ready", async () => {
 
@@ -516,14 +516,14 @@ bot.on("message", async message => {
 		
 		if(heh === 1 || heh === 2 || heh === 3){
 		
-		return setTimeout(
+		setTimeout(
 		message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(msg => console.log(`*Oopsie Woopsie!*`), 100);
 
-		 
+		 return;
 
 		} else {
 				
