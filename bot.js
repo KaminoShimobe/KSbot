@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-
+const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -10,7 +10,12 @@ const bot = new Discord.Client({disableEveryone: true})
 
 
 
-
+var con = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: passwordMYSQL,
+	database: "stats"
+});
 
 bot.on("ready", async () => {
 
@@ -473,13 +478,11 @@ bot.on("message", async message => {
 		}
 
 	}
-
-
-
+	
 	if(command === `${prefix}just`){
-
+ :sm
 		var wait = Math.floor(Math.random() * 200) + 1;
-
+		
 		message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -508,11 +511,44 @@ bot.on("message", async message => {
 
 
 
+	if(command === `${prefix}jk`){
+
+		var heh = Math.floor(Math.random() * 4) + 1;
+		
+		if(heh === 1 || heh === 2 || heh === 3){
+		
+		return setTimeout(
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(msg => console.log(`*Oopsie Woopsie!*`), 100);
+
+		 
+
+		} else {
+				
+			return message.channel.send("Were you *REALLY* joking tho? :smirk:");;
+			
+		}
+
+		 
+
+
+
+		 return;
+
+
+
+	}
+
+
+
 	if(command === `${prefix}help`){
 
 		
 
-		 message.channel.send("```Version 0.1.4: commands are !help, !just, !hug, !8ball, !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.4: commands are !help, !just, !jk, !hug, !8ball, !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
 
 		
 
