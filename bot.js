@@ -510,36 +510,36 @@ bot.on("message", async message => {
 
 
 
-	if(command === `${prefix}jk`){
+// 	if(command === `${prefix}jk`){
 
-		var heh = Math.floor(Math.random() * 4) + 1;
+// 		var heh = Math.floor(Math.random() * 4) + 1;
 		
-		if(heh === 1 || heh === 2 || heh === 3){
+// 		if(heh === 1 || heh === 2 || heh === 3){
 		
 		
-			message.delete()
+// 			message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(msg => console.log(`*Oopsie Woopsie!*`);
+//   			.catch(msg => console.log(`*Oopsie Woopsie!*`);
 
 		 
 
-		} else {
+// 		} else {
 				
-			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
+// 			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
 			
-		}
+// 		}
 
 		 
 
 
 
-		 return;
+// 		 return;
 
 
 
-	}
+// 	}
 
 
 
