@@ -446,7 +446,6 @@ bot.on("message", async message => {
 		} else if(fortune === 23 ){
 
 			message.reply(`Of course.`);
-
 		} else if(fortune === 24 ){
 
 			message.reply(`WDYM`);
@@ -480,7 +479,7 @@ bot.on("message", async message => {
 	}
 	
 	if(command === `${prefix}just`){
- :sm
+ 
 		var wait = Math.floor(Math.random() * 200) + 1;
 		
 		message.delete()
