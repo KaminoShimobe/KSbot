@@ -152,9 +152,9 @@ bot.on("message", async message => {
         	console.log(collector)
 		collector.on('collect', message => {
            		 if (message.content == ye.toLowerCase()) {
-                message.channel.send(`I really do hope so! Please don't hesitate to talk to us in ${realtalk}? <3`);
+                message.channel.send("I really do hope so! Please don't hesitate to talk to us <3");
             } else if (message.content == ne.toLowerCase()) {
-                message.channel.send(`I'm sorry to hear that.... Maybe talking to us in ${realtalk} can help? <3 <3`);
+                message.channel.send("I'm sorry to hear that.... Maybe talking to us can help? <3 <3");
             }
         })
 
