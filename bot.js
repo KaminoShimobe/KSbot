@@ -143,13 +143,13 @@ bot.on("message", async message => {
 	if(messageArray.indexOf(phrase10.toLowerCase()) != -1 ){
 
 		message.reply("Are you okay fam?");
-		const filter = m => m.content
+		const filter = m => m.content.indexOf("yes");
 		// Errors: ['time'] treats ending because of the time limit as an error
-		channel.awaitMessages(filter == "yes", { max: 1, time: 60000, errors: ['time'] })
+		channel.awaitMessages(filter != -1, { max: 1, time: 60000, errors: ['time'] })
   		.then(collected => { message.reply("Okay! If you need any love and support, lemme know! :heart:"); })
   		.catch(collected => { message.reply("Pls respond ):"); });
 			
-		channel.awaitMessages(filter == "no", { max: 1, time: 60000, errors: ['time'] })
+		channel.awaitMessages(filter == -1, { max: 1, time: 60000, errors: ['time'] })
   		.then(collected => { message.reply("I'm sorry to hear that ):! We're here for you! :heart:"); })
   		.catch(collected => { message.reply("Pls respond ):"); });
 
