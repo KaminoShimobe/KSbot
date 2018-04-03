@@ -144,16 +144,17 @@ bot.on("message", async message => {
 	}
 
 
-	if(messageArray.indexOf(phrase10.toLowerCase()) != -1 ){
-
+	if(messageArray.indexOf(phrase10.toLowerCase()) != -1 || messageArray.indexOf(phrase11.toLowerCase()) != -1){
+		const realtalk = member.guild.channels.find('name', 'wholesome-real-talk');
+		
 		message.reply("Are you okay fam?");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
         	console.log(collector)
 		collector.on('collect', message => {
            		 if (message.content == ye.toLowerCase()) {
-                message.channel.send("I really do hope so! Please don't hesitate to talk to us in #wholesome-real-talk okay? <3");
+                message.channel.send(`I really do hope so! Please don't hesitate to talk to us in ${realtalk}? <3`);
             } else if (message.content == ne.toLowerCase()) {
-                message.channel.send("I'm sorry to hear that.... Maybe talking to us in #wholesome-real-talk can help? <3 <3");
+                message.channel.send(`I'm sorry to hear that.... Maybe talking to us in ${realtalk} can help? <3 <3`);
             }
         })
 
