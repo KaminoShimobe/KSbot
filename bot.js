@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const mysql = require("mysql");
+//const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -66,18 +66,18 @@ bot.on('guildMemberAdd', member => {
 
 });
 
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: passwordMYSQL,
-	database: "stats"
-});
+// var con = mysql.createConnection({
+// 	host: "localhost",
+// 	user: "root",
+// 	password: passwordMYSQL,
+// 	database: "stats"
+// });
 
-con.connect(err => {
-	if(err) throw err;
-	console.log("connected to database");
-	con.query("SHOW TABLES", console.log);
-});
+// con.connect(err => {
+// 	if(err) throw err;
+// 	console.log("connected to database");
+// 	con.query("SHOW TABLES", console.log);
+// });
 
 
 
