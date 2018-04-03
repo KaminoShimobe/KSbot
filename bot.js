@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-// const mysql = require("mysql");
+const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -10,12 +10,7 @@ const bot = new Discord.Client({disableEveryone: true})
 
 
 
-// var con = mysql.createConnection({
-// 	host: "localhost",
-// 	user: "root",
-// 	password: passwordMYSQL,
-// 	database: "stats"
-// });
+	
 
 bot.on("ready", async () => {
 
@@ -69,6 +64,19 @@ bot.on('guildMemberAdd', member => {
 
   channel.send(`${member} Hewwo my niwwa! :sparkles:`);
 
+});
+
+var con = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: passwordMYSQL,
+	database: "stats"
+});
+
+con.connect(err => {
+	if(err) throw err;
+	console.log("connected to database");
+	con.query("SHOW TABLES", console.log);
 });
 
 
