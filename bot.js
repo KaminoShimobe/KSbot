@@ -144,7 +144,7 @@ bot.on("message", async message => {
 	}
 
 
-	if(messageArray.indexOf(phrase10.toLowerCase()) != -1 || messageArray.indexOf(phrase11.toLowerCase()) != -1){
+	if(messageArray.indexOf(phrase10.toLowerCase()) != -1){
 		const realtalk = member.guild.channels.find('name', 'wholesome-real-talk');
 		
 		message.reply("Are you okay fam?");
