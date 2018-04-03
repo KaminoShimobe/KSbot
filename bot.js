@@ -108,6 +108,10 @@ bot.on("message", async message => {
 	var phrase10 = "depressed";
 	
 	var phrase11 = "depression";
+	
+	var ye = "yes";
+	
+	var ne = "no";
 
  	
 
@@ -143,21 +147,15 @@ bot.on("message", async message => {
 	if(messageArray.indexOf(phrase10.toLowerCase()) != -1 ){
 
 		message.reply("Are you okay fam?");
-		const filter = m => m.content.indexOf("yes");
-		// Errors: ['time'] treats ending because of the time limit as an error
-		channel.awaitMessages(filter != -1, { max: 1, time: 60000, errors: ['time'] })
-  		.then(collected => { message.reply("Okay! If you need any love and support, lemme know! :heart:"); })
-  		.catch(collected => { message.reply("Pls respond ):"); });
-			
-		channel.awaitMessages(filter == -1, { max: 1, time: 60000, errors: ['time'] })
-  		.then(collected => { message.reply("I'm sorry to hear that ):! We're here for you! :heart:"); })
-  		.catch(collected => { message.reply("Pls respond ):"); });
-
-		 return message.channel.send("*Am I really?*");
-
-		
-
-		;
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        	console.log(collector)
+		collector.on('collect', message => {
+           		 if (message.content == ye.toLowerCase()) {
+                message.channel.send("I really do hope so! Please don't hesitate to talk to us in #wholesome-real-talk okay? <3");
+            } else if (message.content == ne.toLowerCase()) {
+                message.channel.send("I'm sorry to hear that.... Maybe talking to us in #wholesome-real-talk can help? <3 <3");
+            }
+        })
 
 	}
 
