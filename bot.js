@@ -145,7 +145,7 @@ bot.on("message", async message => {
 
 
 	if(messageArray.indexOf(phrase10.toLowerCase()) != -1){
-		const realtalk = member.guild.channels.find('name', 'wholesome-real-talk');
+		
 		
 		message.reply("Are you okay fam?");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
