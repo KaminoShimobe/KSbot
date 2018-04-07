@@ -17,7 +17,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 
-	bot.user.setPresence({ status: 'idle', game: { name: '!help' } });
+	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 	// bot.generateInvite(['ADMINISTRATOR']).then(link => {
 
