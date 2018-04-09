@@ -366,16 +366,15 @@ bot.on("message", async message => {
 		var random = Math.floor(Math.random() * 4) + 1;
 		var hugs = ["https://tenor.com/view/anime-hug-gif-9200935", "https://tenor.com/view/hug-anime-love-dragon-loli-gif-9920978", "https://tenor.com/view/hug-anime-gif-10195705", "https://tenor.com/view/anime-run-hug-gif-9096291"];
 		
-		let hug = new Discord.RichEmbed()
-		.setDescription(`Hugs!`)
-		.setImage(hugs[random-1])
-		.setColor("#4286f4"); 
+		
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
 		
-		message.channel.sendEmbed(hug);
+		message.channel.send("Hugs", {
+    		file: hugs[random-1] // Or replace with FileOptions object
+		});
 		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
 		
 	}
