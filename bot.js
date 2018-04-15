@@ -504,8 +504,7 @@ bot.on("message", async message => {
 
 			message.reply(`Idk I'm illiterate`);
 
-		}
-
+		
 	}
 	
 	if(command === `${prefix}just`){
@@ -557,7 +556,7 @@ bot.on("message", async message => {
 		if(heh === 1 || heh === 2 || heh === 3){
 		
 		
-			setTimeout(delet(), 100);
+			setTimeout(delet(), 1);
 
 		 
 
