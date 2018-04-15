@@ -504,7 +504,7 @@ bot.on("message", async message => {
 
 			message.reply(`Idk I'm illiterate`);
 
-		
+		}
 	}
 	
 	if(command === `${prefix}just`){
