@@ -112,7 +112,7 @@ bot.on("message", async message => {
 	
 	var ye = "yes";
 	
-	var ne = "no";
+ 	var ne = "no";
 
  	
 
@@ -161,7 +161,7 @@ bot.on("message", async message => {
 
 	}
 	
-	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray.indexOf("🤡🤡") != -1 || messageArray.indexOf(":clown::clown:") != -1){
+	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1){
 		
 			message.delete()
 
