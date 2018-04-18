@@ -160,6 +160,18 @@ bot.on("message", async message => {
         })
 
 	}
+	
+	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1){
+		
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+		
+
+	}
+
 
 
 
