@@ -174,7 +174,7 @@ bot.on("message", async message => {
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
 		var im = "I'm"
-		var pos = messageArray.indexOf(im.toLowerCase());
+		var pos = messageArray.indexOf(im);
 		
 		
 		
