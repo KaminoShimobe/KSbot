@@ -177,10 +177,10 @@ bot.on("message", async message => {
 		var pos = messageArray.indexOf(im);
 		
 		
+		var chance = Math.floor(Math.random() * 15) + 1;
 		
 		
-		
-			if(messageArray[pos + 1] != undefined){
+			if(messageArray[pos + 1] != undefined && chance === 1){
 				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
 			} else {
 			return 
