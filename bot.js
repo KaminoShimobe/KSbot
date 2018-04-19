@@ -179,7 +179,7 @@ bot.on("message", async message => {
 		var pos = messageArray.indexOf(im.toLowerCase());
 		
 			if(messageArray[pos + 1] != undefined){
-				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!);
+				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
 			} else {
 			return 
 		    }
