@@ -88,6 +88,7 @@ bot.on("message", async message => {
 
 	if(message.channel.type === "dm") return;
 
+
 	var phrase1 = "is";
 
 	var phrase2 = "it";
@@ -113,7 +114,8 @@ bot.on("message", async message => {
 	var ye = "yes";
 	
  	var ne = "no";
-
+	
+	var rip = "rip";
  	
 
 	
@@ -169,6 +171,18 @@ bot.on("message", async message => {
 
   			.catch(console.error);
 		
+
+	}
+	
+	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1){
+		var im = "im"
+		var pos = messageArray.indexOf(im.toLowerCase());
+		
+			if(messageArray[pos + 1] != undefined){
+				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!);
+			} else {
+			return 
+		    }
 
 	}
 
