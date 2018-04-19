@@ -131,7 +131,6 @@ bot.on("message", async message => {
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
 
 		
-
 		
 
 		 return message.react('👀')
@@ -174,7 +173,7 @@ bot.on("message", async message => {
 	}
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
-		var im = "i'm"
+		var im = "I'm"
 		var pos = messageArray.indexOf(im.toLowerCase());
 		
 		
