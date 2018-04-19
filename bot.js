@@ -173,12 +173,16 @@ bot.on("message", async message => {
 
 	}
 	
-	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1){
-		var im = "im"
+	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
+		var im = "i'm"
 		var pos = messageArray.indexOf(im.toLowerCase());
 		
-			if(messageArray[pos + 2] != undefined){
-				return message.channel.send("Hi , " + messageArray[pos + 2] + "! I'm Kamino's son!");
+		
+		
+		
+		
+			if(messageArray[pos + 1] != undefined){
+				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
 			} else {
 			return 
 		    }
