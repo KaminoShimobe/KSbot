@@ -139,7 +139,6 @@ bot.on("message", async message => {
   		.then(console.log("Reacted."))
 
   		.catch(console.error);
-
 		
 
 		;
@@ -178,7 +177,7 @@ bot.on("message", async message => {
 		var im = "im"
 		var pos = messageArray.indexOf(im.toLowerCase());
 		
-			if(messageArray[pos + 1] != undefined){
+			if(messageArray[pos + 2] != undefined){
 				return message.channel.send("Hi , " + messageArray[pos + 2] + "! I'm Kamino's son!");
 			} else {
 			return 
