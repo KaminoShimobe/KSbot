@@ -161,7 +161,7 @@ bot.on("message", async message => {
 
 	}
 	
-	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 || messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
+	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
 		
 			message.delete()
 
@@ -169,12 +169,12 @@ bot.on("message", async message => {
 
   			.catch(console.error);
 		 
-		var chance = Math.floor(Math.random() * 10) + 1;
-		if(messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
-			if(chance < 3){
-				message.channel.send("We don't talk about that trash here.");
-			}	
-		}
+// 		var chance = Math.floor(Math.random() * 10) + 1;
+// 		if(messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
+// 			if(chance < 3){
+// 				message.channel.send("We don't talk about that trash here.");
+// 			}	
+// 		}
 		
 		return;
 	}
