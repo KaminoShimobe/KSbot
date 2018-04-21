@@ -172,18 +172,18 @@ bot.on("message", async message => {
 
 	}
 	
-	if(messageArray.indexOf("Kamino") != -1 || messageArray.indexOf("KAMINO") != -1 || messageArray[0].indexOf("kamino") != -1 || messageArray[0].indexOf("Abdul") != -1 || messageArray[0].indexOf("ABDUL") != -1 || messageArray[0].indexOf("**ABDUL**") != -1 || messageArray[0].indexOf("Abadabdul") != -1 || messageArray[0].indexOf("kami") != -1 || messageArray[0].indexOf("Kami") != -1 || messageArray[0].indexOf("KAMI") != -1){
+// 	if(messageArray.indexOf("Kamino") != -1 || messageArray.indexOf("KAMINO") != -1 || messageArray[0].indexOf("kamino") != -1 || messageArray[0].indexOf("Abdul") != -1 || messageArray[0].indexOf("ABDUL") != -1 || messageArray[0].indexOf("**ABDUL**") != -1 || messageArray[0].indexOf("Abadabdul") != -1 || messageArray[0].indexOf("kami") != -1 || messageArray[0].indexOf("Kami") != -1 || messageArray[0].indexOf("KAMI") != -1){
 		
-			message.react('💔')
+// 			message.react('💔')
 
-  		.then(console.log("Reacted."))
+//   		.then(console.log("Reacted."))
 
-  		.catch(console.error);	
+//   		.catch(console.error);	
 		
-		return;
+// 		return;
 		
 
-	}
+// 	}
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
 		var im = "I'm"
