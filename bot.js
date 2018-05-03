@@ -161,23 +161,23 @@ bot.on("message", async message => {
 
 	}
 	
-	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
+// 	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
 		
-			message.delete()
+// 			message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(console.error);
+//   			.catch(console.error);
 		 
-// 		var chance = Math.floor(Math.random() * 10) + 1;
-// 		if(messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
-// 			if(chance < 3){
-// 				message.channel.send("We don't talk about that trash here.");
-// 			}	
-// 		}
+// // 		var chance = Math.floor(Math.random() * 10) + 1;
+// // 		if(messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
+// // 			if(chance < 3){
+// // 				message.channel.send("We don't talk about that trash here.");
+// // 			}	
+// // 		}
 		
-		return;
-	}
+// 		return;
+// 	}
 	
 // 	if(messageArray.indexOf("Kamino") != -1 || messageArray.indexOf("KAMINO") != -1 || messageArray[0].indexOf("kamino") != -1 || messageArray[0].indexOf("Abdul") != -1 || messageArray[0].indexOf("ABDUL") != -1 || messageArray[0].indexOf("**ABDUL**") != -1 || messageArray[0].indexOf("Abadabdul") != -1 || messageArray[0].indexOf("kami") != -1 || messageArray[0].indexOf("Kami") != -1 || messageArray[0].indexOf("KAMI") != -1){
 		
