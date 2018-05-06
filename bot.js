@@ -181,7 +181,7 @@ bot.on("message", async message => {
 	
 	if(messageArray.indexOf("rip") != -1 || messageArray.indexOf("RIP") != -1 || messageArray[0].indexOf("rip") != -1 || messageArray[0].indexOf("RIP") != -1 || messageArray[0].indexOf("Rip") != -1 || messageArray[0].indexOf("**RIP**") != -1 || messageArray[0].indexOf("rip") != -1 || messageArray[0].indexOf("Rip") != -1 || messageArray[0].indexOf("RIP") != -1 || messageArray[0].indexOf("rip") != -1){
 		
-		message.send("Press F to pay respects... :disappointed:");
+		message.channel.send("Press F to pay respects... :disappointed:");
 		
 			message.react('🙏')
 
