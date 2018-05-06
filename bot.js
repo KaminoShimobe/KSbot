@@ -179,20 +179,7 @@ bot.on("message", async message => {
 		return;
 	}
 	
-	if(messageArray.indexOf("rip") != -1 || messageArray.indexOf("RIP") != -1 || messageArray[0].indexOf("rip") != -1 || messageArray[0].indexOf("RIP") != -1 || messageArray[0].indexOf("Rip") != -1 || messageArray[0].indexOf("**RIP**") != -1 || messageArray[0].indexOf("rip") != -1 || messageArray[0].indexOf("Rip") != -1 || messageArray[0].indexOf("RIP") != -1 || messageArray[0].indexOf("rip") != -1){
-		
-		message.channel.send("Press F to pay respects... :disappointed:");
-		
-			message.react('🙏')
-
-  		.then(console.log("Reacted."))
-
-  		.catch(console.error);	
-		
-		return;
-		
-
-	}
+	
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
 		var im = "I'm"
