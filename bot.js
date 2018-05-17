@@ -710,7 +710,7 @@ bot.on("message", async message => {
 
 		}
 
-			message.send(answer);
+			message.reply(answer);
 		} else {
 			message.reply("You need to enter a phrase to bubblize!");
 		}	
