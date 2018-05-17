@@ -637,7 +637,7 @@ bot.on("message", async message => {
 		if(messageArray[1] != undefined){
 		var word = messageArray[1].toLowerCase();	
 		var answer = "";	
-		for(i = 0; i < word.length - 1; i++){
+		for(i = 0; i < word.length; i++){
 			if(word.charAt(i) === "a"){
 				answer += "ⓐ";
 			}	else if(word.charAt(i) === "a"){
@@ -668,7 +668,7 @@ bot.on("message", async message => {
 				answer += "ⓜ";
 			}	else if(word.charAt(i) === "n"){
 				answer += "ⓝ";
-			}	else if(word.charAt(i) === "o"){
+			} 	else if(word.charAt(i) === "o"){
 				answer += "ⓞ";
 			}	else if(word.charAt(i) === "p"){
 				answer += "ⓟ";
@@ -692,8 +692,6 @@ bot.on("message", async message => {
 				answer += "ⓨ";
 			}	else if(word.charAt(i) === "z"){
 				answer += "ⓩ";
-			}	else if(word.charAt(i) === " "){
-				answer += " ";
 			}	else if(word.charAt(i) === "."){
 				answer += "。";
 			}	else if(word.charAt(i) === "!"){
@@ -705,14 +703,13 @@ bot.on("message", async message => {
 			}	else {
 				answer += "?";
 			}	
-
-			i++;
+				
 
 		}
 
 			message.reply(answer);
 		} else {
-			message.reply("You need to enter a phrase to bubblize!");
+			message.reply("You need to enter a word to bubblize!");
 		}	
 		 
 
@@ -722,7 +719,7 @@ bot.on("message", async message => {
 
 
 
-	}
+	}	
 
 
 
