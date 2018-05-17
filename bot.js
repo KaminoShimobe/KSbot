@@ -619,10 +619,101 @@ bot.on("message", async message => {
 
 		
 
-		 message.channel.send("```Version 0.1.4: commands are !help, !just, !jk, !hug, !8ball, !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.5: commands are !help, !just, !jk, !hug, !8ball, !bubblize, !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
 
 		
 
+		 
+
+
+
+		 return;
+
+
+
+	}
+	
+	if(command === `${prefix}bubblize`){
+		if(messageArray[1] != undefined){
+		var word = messageArray[1].toLowerCase();	
+		var answer = "";	
+		for(i = 0; i < word.length - 1; i++){
+			if(word.charAt(i) === "a"){
+				answer += "ⓐ";
+			}	else if(word.charAt(i) === "a"){
+				answer += "ⓐ";
+			}	else if(word.charAt(i) === "b"){
+				answer += "ⓑ";
+			}	else if(word.charAt(i) === "c"){
+				answer += "ⓒ";
+			}	else if(word.charAt(i) === "d"){
+				answer += "ⓓ";
+			}	else if(word.charAt(i) === "e"){
+				answer += "ⓔ";
+			}	else if(word.charAt(i) === "f"){
+				answer += "ⓕ";
+			}	else if(word.charAt(i) === "g"){
+				answer += "ⓖ";
+			}	else if(word.charAt(i) === "h"){
+				answer += "ⓗ";
+			}	else if(word.charAt(i) === "i"){
+				answer += "ⓘ";
+			}	else if(word.charAt(i) === "j"){
+				answer += "ⓙ";
+			}	else if(word.charAt(i) === "k"){
+				answer += "ⓚ";
+			}	else if(word.charAt(i) === "l"){
+				answer += "ⓛ";
+			}	else if(word.charAt(i) === "m"){
+				answer += "ⓜ";
+			}	else if(word.charAt(i) === "n"){
+				answer += "ⓝ";
+			}	else if(word.charAt(i) === "o"){
+				answer += "ⓞ";
+			}	else if(word.charAt(i) === "p"){
+				answer += "ⓟ";
+			}	else if(word.charAt(i) === "q"){
+				answer += "ⓠ";
+			}	else if(word.charAt(i) === "r"){
+				answer += "ⓡ";
+			}	else if(word.charAt(i) === "s"){
+				answer += "ⓢ";
+			}	else if(word.charAt(i) === "t"){
+				answer += "ⓣ";
+			}	else if(word.charAt(i) === "u"){
+				answer += "ⓤ";
+			}	else if(word.charAt(i) === "v"){
+				answer += "ⓥ";
+			}	else if(word.charAt(i) === "w"){
+				answer += "ⓦ";
+			}	else if(word.charAt(i) === "x"){
+				answer += "ⓧ";
+			}	else if(word.charAt(i) === "y"){
+				answer += "ⓨ";
+			}	else if(word.charAt(i) === "z"){
+				answer += "ⓩ";
+			}	else if(word.charAt(i) === " "){
+				answer += " ";
+			}	else if(word.charAt(i) === "."){
+				answer += "。";
+			}	else if(word.charAt(i) === "!"){
+				answer += "!";
+			}	else if(word.charAt(i) === "("){
+				answer += "『";
+			}	else if(word.charAt(i) === ")"){
+				answer += "』";
+			}	else {
+				answer += "?";
+			}	
+
+			i++;
+
+		}
+
+			message.send(answer);
+		} else {
+			message.reply("You need to enter a phrase to bubblize!");
+		}	
 		 
 
 
