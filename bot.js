@@ -700,6 +700,8 @@ bot.on("message", async message => {
 				answer += "『";
 			}	else if(word.charAt(i) === ")"){
 				answer += "』";
+			}	else if(word.charAt(i) === "_"){
+				answer += " ";
 			}	else {
 				answer += "?";
 			}	
