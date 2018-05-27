@@ -126,6 +126,8 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 
+	
+	
 	console.log(messageArray[2]);
 
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
@@ -161,6 +163,9 @@ bot.on("message", async message => {
 
 	}
 	
+	if (message.guild.id === '242120806132482060') {
+   
+	
 	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
 		
 			message.delete()
@@ -179,6 +184,25 @@ bot.on("message", async message => {
 		return;
 	}
 	
+	
+	} else if(message.guild.id === '320660609664286740') {
+		
+		if(messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
+		
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+		 
+
+		
+		return;
+	}
+		
+		return;
+		
+	}	
 	
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
@@ -409,9 +433,9 @@ bot.on("message", async message => {
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
 		
-		message.channel.send("Hugs", {
-    		file: hugs[random-1] // Or replace with FileOptions object
-		});
+// 		message.channel.send("Hugs", {
+//     		file: hugs[random-1] // Or replace with FileOptions object
+// 		});
 		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
 		
 	}
