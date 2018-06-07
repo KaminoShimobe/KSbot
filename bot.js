@@ -163,7 +163,7 @@ bot.on("message", async message => {
 
 	}
 	
-	if (message.guild.id === '242120806132482060') {
+// 	if (message.guild.id === '242120806132482060') {
    
 	
 	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
@@ -185,7 +185,7 @@ bot.on("message", async message => {
 	}
 	
 	
-	} else {
+// 	} else {
 		
 		if(messageArray.indexOf("pancakes") != -1 || messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
 		
@@ -202,7 +202,7 @@ bot.on("message", async message => {
 		
 		
 		
-	}	
+// 	}	
 	
 	
 	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
