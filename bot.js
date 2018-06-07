@@ -185,7 +185,7 @@ bot.on("message", async message => {
 	}
 	
 	
-	} else if(message.guild.id === '320660609664286740') {
+	} else if(message.guild.id === '422477007029403648') {
 		
 		if(messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
 		
