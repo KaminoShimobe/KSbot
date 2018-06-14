@@ -187,18 +187,18 @@ bot.on("message", async message => {
 	
 // 	} else {
 		
-		if(messageArray.indexOf("Pancake") != -1 ||messageArray.indexOf("Pancakes") != -1 ||messageArray.indexOf("pancake") != -1 ||messageArray.indexOf("PANCAKES") != -1 || messageArray.indexOf("pancakes") != -1 || messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
+// 		if(messageArray.indexOf("Pancake") != -1 ||messageArray.indexOf("Pancakes") != -1 ||messageArray.indexOf("pancake") != -1 ||messageArray.indexOf("PANCAKES") != -1 || messageArray.indexOf("pancakes") != -1 || messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
 		
-			message.delete()
+// 			message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(console.error);
+//   			.catch(console.error);
 		 
 
 		
-		return;
-	}
+// 		return;
+// 	}
 		
 		
 		
@@ -220,8 +220,50 @@ bot.on("message", async message => {
 		    }
 
 	}
+	
+	function whom(){
+	var userList = message.channel.members.filter(m => m.user.bot === false);
+    var randomBoi = userList.random().user;
+    var random = Math.floor(Math.random()*10) + 1;
+    if(random === 1){
+    	message.channel.send("I heard " + randomBoi + " does... :eyes:");
+	}	else if(random === 2){
+    	message.channel.send("*cough* " + randomBoi + " *cough*");
+	}	else if(random === 3){
+    	message.channel.send("Definitely, " + randomBoi);
+	} 	else if(random === 4){
+    	message.channel.send(":no_mouth:" + randomBoi);
+	}   else if(random === 5){
+    	message.channel.send("It's " + randomBoi + " duhhhh");
+	}	else if(random === 6){
+    	message.channel.send(randomBoi + " maybe? ");
+	}	else if(random === 7){
+    	message.channel.send(":eyes: " + randomBoi);
+	}	else if(random === 8){
+    	message.channel.send("It **has** to be" + randomBoi);
+	}	else if(random === 9){
+    	message.channel.send("I am sorry to inform you...");
+    	setTimeout(message.channel.send("But it's " + randomBoi), 1000);
+	} 	else if(random === 10){
+    	message.channel.send("It's definitely NOT " + randomBoi);
+	}
+}
 
+if(command === `${prefix}who` && messageArray[1] != undefined){
+			
 
+		whom();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
 
 
 
@@ -643,7 +685,7 @@ bot.on("message", async message => {
 
 		
 
-		 message.channel.send("```Version 0.1.5: commands are !help, !just, !jk, !hug, !8ball, !bubblize, !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.6: commands are !help, !just, !jk, !hug, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
 
 		
 
