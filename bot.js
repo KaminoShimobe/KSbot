@@ -244,7 +244,7 @@ bot.on("message", async message => {
     	message.channel.send("It **has** to be" + randomBoid);
 	}	else if(random === 9){
     	message.channel.send("I am sorry to inform you...");
-    	setTimeout(message.channel.send("But it's " + randomBoi), 1000);
+    	setTimeout(message.channel.send("But it's " + randomBoi), 6000);
 	} 	else if(random === 10){
     	message.channel.send("It's definitely NOT " + randomBoi);
 	}
