@@ -224,23 +224,24 @@ bot.on("message", async message => {
 	function whom(){
 	var userList = message.channel.members.filter(m => m.user.bot === false);
     var randomBoi = userList.random().user;
+    var randomBoid = userList.random().user.username;
     var random = Math.floor(Math.random()*10) + 1;
     if(random === 1){
-    	message.channel.send("I heard " + randomBoi + " :eyes:");
+    	message.channel.send("I heard " + randomBoid + " :eyes:");
 	}	else if(random === 2){
-    	message.channel.send("*cough* " + randomBoi + " *cough*");
+    	message.channel.send("*cough* " + randomBoid + " *cough*");
 	}	else if(random === 3){
     	message.channel.send("Definitely, " + randomBoi);
 	} 	else if(random === 4){
-    	message.channel.send(":no_mouth:" + randomBoi);
+    	message.channel.send(":no_mouth:" + randomBoid);
 	}   else if(random === 5){
-    	message.channel.send("It's " + randomBoi + " duhhhh");
+    	message.channel.send("It's " + randomBoid + " duhhhh");
 	}	else if(random === 6){
-    	message.channel.send(randomBoi + " maybe? ");
+    	message.channel.send(randomBoid + " maybe? ");
 	}	else if(random === 7){
-    	message.channel.send(":eyes: " + randomBoi);
+    	message.channel.send(":eyes: " + randomBoid);
 	}	else if(random === 8){
-    	message.channel.send("It **has** to be" + randomBoi);
+    	message.channel.send("It **has** to be" + randomBoid);
 	}	else if(random === 9){
     	message.channel.send("I am sorry to inform you...");
     	setTimeout(message.channel.send("But it's " + randomBoi), 1000);
