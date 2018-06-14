@@ -226,7 +226,7 @@ bot.on("message", async message => {
     var randomBoi = userList.random().user;
     var random = Math.floor(Math.random()*10) + 1;
     if(random === 1){
-    	message.channel.send("I heard " + randomBoi + " does... :eyes:");
+    	message.channel.send("I heard " + randomBoi + " :eyes:");
 	}	else if(random === 2){
     	message.channel.send("*cough* " + randomBoi + " *cough*");
 	}	else if(random === 3){
