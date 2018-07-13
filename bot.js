@@ -1,6 +1,6 @@
 
 const Discord = require("discord.js");
-const Music = require('discord.js-musicbot-addon');
+
 //const mysql = require("mysql");
 
 
@@ -8,65 +8,6 @@ const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
 
-
-
-Music.start(bot, {
-
-  youtubeKey: youtubeAPI
-
-  
-
-  
-
-  // botOwner: '242118931769196544',
-
-  // botAdmins: ["451227460336615426"]// maxQueueSize: 25,        // Maximum queue size of 25.
-
-  // prefix: '+',  
-
-
-
-  //  advancedMode: {                     // The advancedMode object.
-
-
-
-  //   enabled: true                    // Master toggle for advancedMode.
-
-
-
-  //   // multiPrefix: true,                // multiple prefix toggle.
-
-
-
-  //   // serverPrefixs: mapObj             // Map object for server prefixs.
-
-
-
-  // }
-
-  // clearInvoker: true,      // If permissions applicable, allow the bot to delete the messages that invoke it.
-
-
-
-  // helpCmd: 'mhelp',        // Sets the name for the help command.
-
-
-
-  // playCmd: 'music',        // Sets the name for the 'play' command.
-
-
-
-  // volumeCmd: 'adjust',     // Sets the name for the 'volume' command.
-
-
-
-  // leaveCmd: 'begone',      // Sets the name for the 'leave' command.
-
-
-
-  // disableLoop: true        // Disable the loop command.
-
-});
 
 	
 
