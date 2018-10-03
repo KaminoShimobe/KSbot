@@ -110,44 +110,44 @@ bot.on("message", async message => {
             }
         }
 
-        function bday(){
-		client.messages
-  .create({
-     body: msg + '\n - ' + signature,
-     from: '+18722313924',
-     to: '+17735572900'
-   })
-  .then(message => console.log(message.sid))
-  .done();
-OUTPUT
-{
-  "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  "api_version": "2010-04-01",
-  "body": msg + '\n - ' + signature,
-  "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
-  "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
-  "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
-  "direction": "outbound-api",
-  "error_code": null,
-  "error_message": null,
-  "from": "+15017122661",
-  "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  "num_media": "0",
-  "num_segments": "1",
-  "price": -0.00750,
-  "price_unit": "USD",
-  "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  "status": "sent",
-  "subresource_uris": {
-    "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
-  },
-  "to": "+7735572900"
-  "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
-}
+//         function bday(){
+// 		client.messages
+//   .create({
+//      body: msg + '\n - ' + signature,
+//      from: '+18722313924',
+//      to: '+17735572900'
+//    })
+//   .then(message => console.log(message.sid))
+//   .done();
+// OUTPUT
+// {
+//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "api_version": "2010-04-01",
+//   "body": msg + '\n - ' + signature,
+//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
+//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "direction": "outbound-api",
+//   "error_code": null,
+//   "error_message": null,
+//   "from": "+15017122661",
+//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "num_media": "0",
+//   "num_segments": "1",
+//   "price": -0.00750,
+//   "price_unit": "USD",
+//   "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "status": "sent",
+//   "subresource_uris": {
+//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
+//   },
+//   "to": "+7735572900"
+//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
+// }
 
-	message.author.send("Message sent!");
+// 	message.author.send("Message sent!");
 
-	}
+// 	}
 	}
 
 	
