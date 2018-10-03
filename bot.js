@@ -7,7 +7,7 @@ const Discord = require("discord.js");
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
-const client = require('twilio')(accountSid, authToken);
+const client = require('twilio')("AC15b31f4334ee7e8514b3c4664109ea6a", "6f5801372b07d23153f12e2506627ff4");
 
 
 
@@ -113,8 +113,8 @@ bot.on("message", async message => {
             			client.messages
   .create({
      body: msg + '\n - ' + signature,
-     from: '+18722313924',
-     to: '+17735572900'
+     from: twilNum,
+     to: cellNum
    })
   .then(message => console.log(message.sid))
   .done();
@@ -140,7 +140,6 @@ bot.on("message", async message => {
 //   "subresource_uris": {
 //     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
 //   },
-//   "to": "+7735572900"
 //   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
 // }
 
@@ -165,8 +164,8 @@ bot.on("message", async message => {
             			client.messages
   .create({
      body: msg + '\n - ' + signature,
-     from: '+18722313924',
-     to: '+17735572900'
+     from: twilNum,
+     to: cellNum,
    })
   .then(message => console.log(message.sid))
   .done();
@@ -192,7 +191,6 @@ bot.on("message", async message => {
 //   "subresource_uris": {
 //     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
 //   },
-//   "to": "+7735572900"
 //   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
 // }
 
