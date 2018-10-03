@@ -111,12 +111,11 @@ bot.on("message", async message => {
             		} else {
             			msg = message.content;
             			client.messages
-				var tN = process.env.twilNum;
-				var cN = process.env.cellNum;
+				
   .create({
      body: msg + '\n - ' + signature,
-     from: tN,
-     to: cN,
+     from: +18722313924,
+     to: +17735572900,
    })
   .then(message => console.log(message.sid))
   .done();
@@ -163,13 +162,12 @@ bot.on("message", async message => {
                 		return;
             		} else {
             			msg = message.content;
-				var tN = process.env.twilNum;
-				var cN = process.env.cellNum;
+				
             			client.messages
   .create({
      body: msg + '\n - ' + signature,
-     from: tN,
-     to: cN,
+     from: +18722313924,
+     to: +17735572900,
    })
   .then(message => console.log(message.sid))
   .done();
