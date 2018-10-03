@@ -111,8 +111,8 @@ bot.on("message", async message => {
             		} else {
             			msg = message.content;
             			client.messages
-				var tN = twilNum;
-				var cN = cellNum;
+				var tN = process.env.twilNum;
+				var cN = process.env.cellNum;
   .create({
      body: msg + '\n - ' + signature,
      from: tN,
@@ -163,8 +163,8 @@ bot.on("message", async message => {
                 		return;
             		} else {
             			msg = message.content;
-				var tN = twilNum;
-				var cN = cellNum;
+				var tN = process.env.twilNum;
+				var cN = process.env.cellNum;
             			client.messages
   .create({
      body: msg + '\n - ' + signature,
