@@ -99,19 +99,18 @@ bot.on("message", async message => {
 		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
         collectorer.once('collect', message => {
             if (message.content == `no` || message.content == `NO` || message.content == `No` || message.content == `No.` || message.content == `no.`) {
-                message.author.send("Birthday message cancelled.");
-                return;
-            } else {
-            	signature = message.author.username;
+               message.author.send("Alright! :sparkles:");
+               bday2();
+            	function bday2(){
             	message.author.send("What is your message for Kamino? (!cancel to cancel)");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}cancel`) {
                		 message.author.send("Birthday message cancelled.");
                 		return;
-            } else {
-            	msg = message.content;
-            	client.messages
+            		} else {
+            			msg = message.content;
+            			client.messages
   .create({
      body: msg + '\n - ' + signature,
      from: '+18722313924',
@@ -150,6 +149,59 @@ bot.on("message", async message => {
             }
         });
             }
+                return;
+            } else {
+            	signature = message.author.username;
+            	bday();
+            	function bday(){
+            	message.author.send("What is your message for Kamino? (!cancel to cancel)");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.author.send("Birthday message cancelled.");
+                		return;
+            		} else {
+            			msg = message.content;
+            			client.messages
+  .create({
+     body: msg + '\n - ' + signature,
+     from: '+18722313924',
+     to: '+17735572900'
+   })
+  .then(message => console.log(message.sid))
+  .done();
+// OUTPUT
+// {
+//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "api_version": "2010-04-01",
+//   "body": msg + '\n - ' + signature,
+//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
+//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "direction": "outbound-api",
+//   "error_code": null,
+//   "error_message": null,
+//   "from": "+15017122661",
+//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "num_media": "0",
+//   "num_segments": "1",
+//   "price": -0.00750,
+//   "price_unit": "USD",
+//   "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "status": "sent",
+//   "subresource_uris": {
+//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
+//   },
+//   "to": "+7735572900"
+//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
+// }
+
+	message.author.send("Message sent! Thanks for the well wishes! :sparkles:");
+
+            }
+        });
+            }
+        }
           });
         
         
@@ -752,7 +804,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, **!birthday**, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.6: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
 
 		
 
@@ -862,7 +914,6 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 });
-
 
 
 
