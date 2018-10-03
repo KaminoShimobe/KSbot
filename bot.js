@@ -84,9 +84,15 @@ bot.on('guildMemberAdd', member => {
 
 bot.on("message", async message => {
 
+	let messageArray = message.content.split(" ");
+
+	let command = messageArray[0];
+
+	let args = messageArray.slice(1);
+
 	if(message.author.bot) return;
 	var msg = message.content;
-	var signature = '';
+	var signature = 'Anonymous';
 
 	if(command === `${prefix}birthday`){
 		message.author.send("Want to leave your signature for this message? (yes or no)");
@@ -96,24 +102,16 @@ bot.on("message", async message => {
                 message.author.send("Birthday message cancelled.");
                 return;
             } else {
-            	signature = author.username;
-            	sendBday();
-            }
-          });
-        function sendBday(){    
-		message.author.send("What is your message for Kamino? (!cancel to cancel)");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
-        collector.once('collect', message => {
-            if (message.content == `${prefix}cancel`) {
-                message.author.send("Birthday message cancelled.");
-                return;
+            	signature = message.author.username;
+            	message.author.send("What is your message for Kamino? (!cancel to cancel)");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.author.send("Birthday message cancelled.");
+                		return;
             } else {
-            	bday();
-            }
-        });
-    }
-        function bday(){
-		client.messages
+            	msg = message.content;
+            	client.messages
   .create({
      body: msg + '\n - ' + signature,
      from: '+18722313924',
@@ -147,9 +145,14 @@ bot.on("message", async message => {
 //   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
 // }
 
-	message.author.send("Message sent!");
+	message.author.send("Message sent! Thanks for the well wishes! :sparkles:");
 
-	}
+            }
+        });
+            }
+          });
+        
+        
 	}
 
 	
@@ -187,11 +190,7 @@ bot.on("message", async message => {
 
 	
 
-	let messageArray = message.content.split(" ");
-
-	let command = messageArray[0];
-
-	let args = messageArray.slice(1);
+	
 
 	
 	
@@ -753,7 +752,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.6: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, **!birthday**, and !userinfo. And we also have some easter eggs!```");
 
 		
 
@@ -863,6 +862,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 });
+
 
 
 
