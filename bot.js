@@ -7,6 +7,8 @@ const Discord = require("discord.js");
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
+const client = require('twilio')(accountSid, authToken);
+
 
 
 	
@@ -83,9 +85,76 @@ bot.on('guildMemberAdd', member => {
 bot.on("message", async message => {
 
 	if(message.author.bot) return;
+	var msg = message.content;
+	var signature = '';
+
+	if(command === `${prefix}birthday`){
+		message.author.send("Want to leave your signature for this message? (yes or no)");
+		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        collectorer.once('collect', message => {
+            if (message.content == `no` || message.content == `NO` || message.content == `No` || message.content == `No.` || message.content == `no.`) {
+                message.author.send("Birthday message cancelled.");
+                return;
+            } else {
+            	signature = author.username;
+            	sendBday();
+            }
+          });
+        function sendBday(){    
+		message.author.send("What is your message for Kamino? (!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        collector.once('collect', message => {
+            if (message.content == `${prefix}cancel`) {
+                message.author.send("Birthday message cancelled.");
+                return;
+            } else {
+            	bday();
+            }
+        });
+    }
+        function bday(){
+		client.messages
+  .create({
+     body: msg + '\n - ' + signature,
+     from: '+18722313924',
+     to: '+17735572900'
+   })
+  .then(message => console.log(message.sid))
+  .done();
+// OUTPUT
+// {
+//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "api_version": "2010-04-01",
+//   "body": msg + '\n - ' + signature,
+//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
+//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
+//   "direction": "outbound-api",
+//   "error_code": null,
+//   "error_message": null,
+//   "from": "+15017122661",
+//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "num_media": "0",
+//   "num_segments": "1",
+//   "price": -0.00750,
+//   "price_unit": "USD",
+//   "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+//   "status": "sent",
+//   "subresource_uris": {
+//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
+//   },
+//   "to": "+7735572900"
+//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
+// }
+
+	message.author.send("Message sent!");
+
+	}
+	}
+
+	
 
 	if(message.channel.type === "dm") return;
-
 
 	var phrase1 = "is";
 
