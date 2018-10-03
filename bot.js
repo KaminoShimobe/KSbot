@@ -804,7 +804,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.6: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !birthday and !userinfo. And we also have some easter eggs!```");
 
 		
 
