@@ -101,14 +101,14 @@ bot.on("message", async message => {
 	
 	if(command === `${prefix}birthday`){
 		message.author.send("Want to leave your signature for this message? (yes or no)");
-		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000 });
         collectorer.once('collect', message => {
             if (message.content == `no` || message.content == `NO` || message.content == `No` || message.content == `No.` || message.content == `no.`) {
                message.author.send("Alright! :sparkles:");
                bday2();
             	function bday2(){
             	message.author.send("What is your message for Kamino? (!cancel to cancel)");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}cancel`) {
                		 message.author.send("Birthday message cancelled.");
