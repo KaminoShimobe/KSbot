@@ -56,7 +56,7 @@ bot.on('guildMemberAdd', member => {
   // Send the message to a designated channel on a server:
 
   const channel = member.guild.channels.find('name', 'wholesome-general');
-  const room = member.guild.channels.find('name', 'the-living-room');
+  const room = member.guild.channels.find('name', 'the-front-porch');
   // Do nothing if the channel wasn't found on this server
   if(!room) return
   room.send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`);
