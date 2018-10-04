@@ -56,14 +56,15 @@ bot.on('guildMemberAdd', member => {
   // Send the message to a designated channel on a server:
 
   const channel = member.guild.channels.find('name', 'wholesome-general');
-
+  const room = member.guild.channels.find('name', 'the-living-room');
   // Do nothing if the channel wasn't found on this server
-
-  if (!channel) return;
+  if(!room) return
+  room.send(`${member} Hewwo! :sparkles:`);
+  //if (!channel) return;
 
   // Send the message, mentioning the member
 
-  channel.send(`${member} Hewwo my niwwa! :sparkles:`);
+  //channel.send(`${member} Hewwo my niwwa! :sparkles:`);
 
 });
 
@@ -93,7 +94,11 @@ bot.on("message", async message => {
 	if(message.author.bot) return;
 	var msg = message.content;
 	var signature = 'Anonymous';
-
+	
+	if(command === `${prefix}wish`){
+		message.author.send("Hi! If you want to wish my Dad, Kamino, some well wishes just use the command `!birthday` Thanks so much!");
+	}
+	
 	if(command === `${prefix}birthday`){
 		message.author.send("Want to leave your signature for this message? (yes or no)");
 		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
