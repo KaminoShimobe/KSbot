@@ -17,7 +17,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 
-	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
+	bot.user.setPresence({ status: 'online', game: { name: '!help & !wish' } });
 
 	// bot.generateInvite(['ADMINISTRATOR']).then(link => {
 
@@ -809,7 +809,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !birthday and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !birthday, !wish and !userinfo. And we also have some easter eggs!```");
 
 		
 
