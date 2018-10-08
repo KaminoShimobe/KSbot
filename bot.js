@@ -93,7 +93,7 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
-	const place = channel.id(`456956416847249412`)
+	const room = bot.channels.get('456957934690238464');
 	
 	if(command === `${prefix}whisper`){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
@@ -104,7 +104,9 @@ bot.on("message", async message => {
                 		return;
             		} else {
 				var msg = message.content;
-				message.place.send(`:speaking_head: So apparently "`+ msg +`"`);
+				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
+				var chance = Math.floor(Math.random()*2);
+				room.send(setting[chance]);
 				message.author.send("Message Sent.");
 			}
 			});
