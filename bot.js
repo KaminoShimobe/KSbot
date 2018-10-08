@@ -93,7 +93,7 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
-	const place = member.guild.channels.find('name', 'the-living-room');
+	const place = channel.id(`456956416847249412`)
 	
 	if(command === `${prefix}whisper`){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
@@ -104,7 +104,7 @@ bot.on("message", async message => {
                 		return;
             		} else {
 				var msg = message.content;
-				room.send(`:speaking_head: So apparently "`+ msg +`"`);
+				message.place.send(`:speaking_head: So apparently "`+ msg +`"`);
 				message.author.send("Message Sent.");
 			}
 			});
