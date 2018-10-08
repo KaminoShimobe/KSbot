@@ -93,6 +93,22 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
+	const place = member.guild.channels.find('name', 'the-living-room');
+	
+	if(command === `${prefix}whisper`){
+		message.author.send("What secret would you like to share? (!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.author.send("Message cancelled.");
+                		return;
+            		} else {
+				var msg = message.content;
+				room.send(`:speaking_head: So apparently "`+ msg +`"`);
+				message.author.send("Message Sent.");
+			}
+			});
+	}
 	
 
 	if(message.channel.type === "dm") return;
@@ -690,7 +706,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
 
 		
 
