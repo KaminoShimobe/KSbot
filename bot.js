@@ -7,7 +7,7 @@ const Discord = require("discord.js");
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
-const client = require('twilio')("AC15b31f4334ee7e8514b3c4664109ea6a", "6f5801372b07d23153f12e2506627ff4");
+
 
 
 
@@ -17,7 +17,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 
-	bot.user.setPresence({ status: 'online', game: { name: '!help & !wish' } });
+	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 	// bot.generateInvite(['ADMINISTRATOR']).then(link => {
 
@@ -92,126 +92,7 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 
 	if(message.author.bot) return;
-	var msg = message.content;
-	var signature = 'Anonymous';
 	
-	if(command === `${prefix}wish`){
-		message.author.send("Hi! If you want to wish my Dad, Kamino, some well wishes just use the command `!birthday` Thanks so much!");
-	}
-	
-	if(command === `${prefix}birthday`){
-		message.author.send("Want to leave your signature for this message? (yes or no)");
-		const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000 });
-        collectorer.once('collect', message => {
-            if (message.content == `no` || message.content == `NO` || message.content == `No` || message.content == `No.` || message.content == `no.`) {
-               message.author.send("Alright! :sparkles:");
-               bday2();
-            	function bday2(){
-            	message.author.send("What is your message for Kamino? (!cancel to cancel)");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.author.send("Birthday message cancelled.");
-                		return;
-            		} else {
-            			msg = message.content;
-            			client.messages
-				
-  .create({
-     body: msg + '\n - ' + signature,
-     from: +18722313924,
-     to: +17735572900,
-   })
-  .then(message => console.log(message.sid))
-  .done();
-// OUTPUT
-// {
-//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "api_version": "2010-04-01",
-//   "body": msg + '\n - ' + signature,
-//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
-//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "direction": "outbound-api",
-//   "error_code": null,
-//   "error_message": null,
-//   "from": "+15017122661",
-//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "num_media": "0",
-//   "num_segments": "1",
-//   "price": -0.00750,
-//   "price_unit": "USD",
-//   "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "status": "sent",
-//   "subresource_uris": {
-//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
-//   },
-//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
-// }
-
-	message.author.send("Message sent! Thanks for the well wishes! :sparkles:");
-
-            }
-        });
-            }
-                return;
-            } else {
-            	signature = message.author.username;
-            	bday();
-            	function bday(){
-            	message.author.send("What is your message for Kamino? (!cancel to cancel)");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.author.send("Birthday message cancelled.");
-                		return;
-            		} else {
-            			msg = message.content;
-				
-            			client.messages
-  .create({
-     body: msg + '\n - ' + signature,
-     from: +18722313924,
-     to: +17735572900,
-   })
-  .then(message => console.log(message.sid))
-  .done();
-// OUTPUT
-// {
-//   "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "api_version": "2010-04-01",
-//   "body": msg + '\n - ' + signature,
-//   "date_created": "Thu, 30 Jul 2015 20:12:31 +0000",
-//   "date_sent": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "date_updated": "Thu, 30 Jul 2015 20:12:33 +0000",
-//   "direction": "outbound-api",
-//   "error_code": null,
-//   "error_message": null,
-//   "from": "+15017122661",
-//   "messaging_service_sid": "MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "num_media": "0",
-//   "num_segments": "1",
-//   "price": -0.00750,
-//   "price_unit": "USD",
-//   "sid": "MMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-//   "status": "sent",
-//   "subresource_uris": {
-//     "media": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json"
-//   },
-//   "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
-// }
-
-	message.author.send("Message sent! Thanks for the well wishes! :sparkles:");
-
-            }
-        });
-            }
-        }
-          });
-        
-        
-	}
-
 	
 
 	if(message.channel.type === "dm") return;
@@ -809,7 +690,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		
 
-		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !birthday, !wish and !userinfo. And we also have some easter eggs!```");
+		 message.channel.send("```Version 0.1.7: commands are !help, !just, !jk, !musichelp, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, and !userinfo. And we also have some easter eggs!```");
 
 		
 
