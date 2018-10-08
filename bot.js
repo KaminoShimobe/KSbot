@@ -93,7 +93,9 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
-	const room = bot.channels.get('456957934690238464');
+	var rooms = ['456957934690238464', '496323317028880394', '496322540579454986', '456956416847249412', '496313147808940033', '496313478089277445'];
+	var chancu = Math.floor(Math.random()*5);
+	const room = bot.channels.get(rooms[chancu]);
 	
 	if(command === `${prefix}whisper`){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
