@@ -108,6 +108,7 @@ bot.on("message", async message => {
 				var chance = Math.floor(Math.random()*2);
 				room.send(setting[chance]);
 				message.author.send("Message Sent.");
+				//BOI
 			}
 			});
 	}
