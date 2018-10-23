@@ -1,7 +1,7 @@
 
 const Discord = require("discord.js");
 
-//const mysql = require("mysql");
+const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -19,19 +19,7 @@ bot.on("ready", async () => {
 
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
-	// bot.generateInvite(['ADMINISTRATOR']).then(link => {
 
-	// 	console.log(link);
-
-	// }).catch(err =>{
-
-	// 	console.log(err.stack);
-
-	// });
-
-
-
-	// await bot.generateInvite(["ADMINISTRATOR"]);
 
 	try {
 
@@ -68,18 +56,18 @@ bot.on('guildMemberAdd', member => {
 
 });
 
-// var con = mysql.createConnection({
-// 	host: "localhost",
-// 	user: "root",
-// 	password: passwordMYSQL,
-// 	database: "stats"
-// });
+var con = mysql.createConnection({
+	host: "kaminosh@kaminoshimobe.com",
+	user: "kaminosh_KS",
+	password: process.env.passwordMYSQL,
+	database: "kaminosh_KSBOT"
+});
 
-// con.connect(err => {
-// 	if(err) throw err;
-// 	console.log("connected to database");
-// 	con.query("SHOW TABLES", console.log);
-// });
+con.connect(err => {
+	if(err) throw err;
+	console.log("connected to database");
+	con.query("SHOW TABLES", console.log);
+});
 
 
 
@@ -150,7 +138,97 @@ bot.on("message", async message => {
 	
 
 	
+	function addUser(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}), '!bio to add a bio.';`;
+			con.query(sql, console.log);
+			message.channel.send("User created! use command `!view [user]` to view someone else's info, or `!view` to view your own info!");
+			return;
+		}	else {
 
+			message.reply(" You have a user!");
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+	}
+
+	function viewUser(){
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		let bio = rows[0].bio;
+		
+				
+
+		let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(message.author.username)
+			.setDescription("Money: " + money + "\n" + bio)
+			.setColor("#4286f4"); 
+
+		message.channel.sendEmbed(stats);
+
+
+		
+		
+
+	});
+
+}
+
+let other = message.mentions.users.first();
+
+function viewOtherUser(){
+
+
+
+con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(!rows[0]) return message.channel.send("They don't have a user!");
+
+		
+		let money = rows[0].money;
+		let bio = rows[0].bio;
+		
+				
+
+		let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(message.author.username)
+			.setDescription("Money: " + money + "\n" + bio);
+			.setColor("#d10026"); 
+
+		message.channel.sendEmbed(stats);
+
+
+		
+		
+
+	});
+
+return;
+}
 	
 	
 	console.log(messageArray[2]);
@@ -712,8 +790,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.1.9: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!userinfo**: \n Displays info about user. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setTitle("KS Bot Version 0.2.0: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user.  \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
@@ -821,6 +899,52 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 	}	
+
+	if(command === `${prefix}user`){
+
+		addUser();
+		 
+
+
+
+		 return;
+
+
+
+	}
+
+	if(command === `${prefix}view` && messageArray[1] === undefined){
+			
+
+		viewUser();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	
+
+	if(command === `${prefix}view` && messageArray[1] != undefined ){
+			
+		viewOtherUser();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
 
 
 
