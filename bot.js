@@ -60,7 +60,8 @@ var con = mysql.createConnection({
 	host: "kaminoshimobe.com",
 	user: "kaminosh_KS",
 	password: process.env.passwordMYSQL,
-	database: "kaminosh_KSBOT"
+	database: "kaminosh_KSBOT",
+	port: 3306
 });
 
 con.connect(err => {
