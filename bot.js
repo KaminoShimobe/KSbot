@@ -1,7 +1,7 @@
 
 const Discord = require("discord.js");
 
-// const mysql = require("mysql");
+const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -56,18 +56,18 @@ bot.on('guildMemberAdd', member => {
 
 });
 
-// var con = mysql.createConnection({
-// 	host: "kaminoshimobe.com",
-// 	user: "kaminosh_KS",
-// 	password: process.env.passwordMYSQL,
-// 	database: "kaminosh_KSBOT"
-// });
+var con = mysql.createConnection({
+	host: "kaminoshimobe.com",
+	user: "kaminosh_KS",
+	password: process.env.passwordMYSQL,
+	database: "kaminosh_KSBOT"
+});
 
-// con.connect(err => {
-// 	if(err) throw err;
-// 	console.log("connected to database");
-// 	con.query("SHOW TABLES", console.log);
-// });
+con.connect(err => {
+	if(err) throw err;
+	console.log("connected to database");
+	con.query("SHOW TABLES", console.log);
+});
 
 
 
@@ -138,97 +138,97 @@ bot.on("message", async message => {
 	
 
 	
-// 	function addUser(){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		if(rows.length < 1) {
+	function addUser(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
 			
-// 			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}), '!bio to add a bio.';`;
-// 			con.query(sql, console.log);
-// 			message.channel.send("User created! use command `!view [user]` to view someone else's info, or `!view` to view your own info!");
-// 			return;
-// 		}	else {
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}), '!bio to add a bio.';`;
+			con.query(sql, console.log);
+			message.channel.send("User created! use command `!view [user]` to view someone else's info, or `!view` to view your own info!");
+			return;
+		}	else {
 
-// 			message.reply(" You have a user!");
+			message.reply(" You have a user!");
 			
 
 			
-// 			return;
-// 		}
+			return;
+		}
 
 
-// 		});
+		});
 		
-// 	}
+	}
 
-// 	function viewUser(){
+	function viewUser(){
 
-// con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
 
-// 		let money = rows[0].money;
-// 		let bio = rows[0].bio;
+		let money = rows[0].money;
+		let bio = rows[0].bio;
 		
 				
 
-// 		let stats = new Discord.RichEmbed()
+		let stats = new Discord.RichEmbed()
 
 			
-// 			.setAuthor(message.author.username)
-// 			.setDescription("Money: " + money + "\n" + bio)
-// 			.setColor("#4286f4"); 
+			.setAuthor(message.author.username)
+			.setDescription("Money: " + money + "\n" + bio)
+			.setColor("#4286f4"); 
 
-// 		message.channel.sendEmbed(stats);
+		message.channel.sendEmbed(stats);
 
 
 		
 		
 
-// 	});
+	});
 
-// }
+}
 
-// let other = message.mentions.users.first();
+let other = message.mentions.users.first();
 
-// function viewOtherUser(){
+function viewOtherUser(){
 
 
 
-// con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
-// 		if(err) throw err;
+con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
 
-// 		if(!rows[0]) return message.channel.send("They don't have a user!");
+		if(!rows[0]) return message.channel.send("They don't have a user!");
 
 		
-// 		let money = rows[0].money;
-// 		let bio = rows[0].bio;
+		let money = rows[0].money;
+		let bio = rows[0].bio;
 		
 				
 
-// 		let stats = new Discord.RichEmbed()
+		let stats = new Discord.RichEmbed()
 
 			
-// 			.setAuthor(message.author.username)
-// 			.setDescription("Money: " + money + "\n" + bio)
-// 			.setColor("#d10026"); 
+			.setAuthor(message.author.username)
+			.setDescription("Money: " + money + "\n" + bio)
+			.setColor("#d10026"); 
 
-// 		message.channel.sendEmbed(stats);
+		message.channel.sendEmbed(stats);
 
 
 		
 		
 
-// 	});
+	});
 
-// return;
-// }
+return;
+}
 	
 	
 	console.log(messageArray[2]);
