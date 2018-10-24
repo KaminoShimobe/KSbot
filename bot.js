@@ -813,25 +813,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 	}
 	
-	if(command === `${prefix}password`){
-
-		
-
-		message.channel.send(process.env.MY_SQL);
-
-		 //message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
-
-		
-
-		 
-
-
-
-		 return;
-
-
-
-	}
+	
 	
 	if(command === `${prefix}bubblize`){
 		if(messageArray[1] != undefined){
