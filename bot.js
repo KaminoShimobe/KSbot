@@ -59,7 +59,7 @@ bot.on('guildMemberAdd', member => {
 var con = mysql.createConnection({
 	host: "kaminoshimobe.com",
 	user: "kaminosh_KS",
-	password: process.env.passwordMYSQL,
+	password: process.env.MY_SQL ,
 	database: "kaminosh_KSBOT",
 	port: 3306
 });
