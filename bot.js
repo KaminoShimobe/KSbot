@@ -1,7 +1,7 @@
 
 const Discord = require("discord.js");
 
-// const mysql = require("mysql");
+const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -553,6 +553,47 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		return;
 
 	}
+	
+	let dio = message.guild.roles.find("name", "DIO");
+    let kakyoin = message.guild.roles.find("name", "kakyoin");
+	function zaWarudo(){
+		var userList = message.channel.members.filter(m => m.user.bot === false);
+    	var randomBoi = userList.random().user;
+    	if(message.member.roles.find("name", "DIO") ) {
+				
+				for(var i = 0; i < userList.length(); i++){
+					if(message.userList[i].roles.find("name", "DIO")){
+						i++
+					} else{
+					userList[i].addRole(kakyoin).catch(console.error);
+					console.log(userList[i]);
+					}
+				}
+			} else {
+  			message.channel.send("You do not have the power to use ZA WARUDO!");
+			}
+
+    	message.channel.send("**TOKI WA TOMARE**");
+	}
+
+	function zaWarudoDo(){
+		var userList = message.channel.members.filter(m => m.user.bot === false);
+		if(message.member.roles.find("name", "DIO") ) {
+				
+				for(var i = 0; i < userList.length(); i++){
+					if(message.userList[i].roles.find("name", "DIO")){
+						i++
+					} else{
+					userList[i].removeRole(kakyoin).catch(console.error);
+					console.log(userList[i]);
+					}
+				}
+			} else {
+  			message.channel.send("You do not have the power to use ZA WARUDO!");
+			}
+
+    	message.channel.send("**TOKI WA MOKIDASU**");
+	}
 
 
 
@@ -951,7 +992,35 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 	}
 
+	if(command === `${prefix}ZAWARUDO`){
+		
 
+		zaWarudo();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}ZAWARUDO!`){
+		
+
+		zaWarudoDo();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
 
 
 
