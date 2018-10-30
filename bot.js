@@ -1,7 +1,7 @@
 
 const Discord = require("discord.js");
 
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
 
 const prefix = "!";
