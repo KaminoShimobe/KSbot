@@ -70,9 +70,9 @@ con.connect(err => {
 	con.query("SHOW TABLES", console.log);
 });
 
-process.on('uncaughtException', function (err) {
-    console.log(err);
-}); 
+// process.on('uncaughtException', function (err) {
+//     console.log(err);
+// }); 
 
 bot.on("message", async message => {
 
@@ -556,43 +556,41 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 	
 	let dio = message.guild.roles.find("name", "DIO");
     let kakyoin = message.guild.roles.find("name", "kakyoin");
+
 	function zaWarudo(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
     	var randomBoi = userList.random().user;
     	if(message.member.roles.find("name", "DIO") ) {
 				
-				for(var i = 0; i < userList.length(); i++){
-					if(message.userList[i].roles.find("name", "DIO")){
-						i++
-					} else{
-					userList[i].addRole(kakyoin).catch(console.error);
-					console.log(userList[i]);
-					}
-				}
+				let role = message.guild.roles.find('name', 'Stand User');
+
+				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+
+				message.guild.members.filter(m => !m.user.bot).map(async member => await member.addRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**TOKI WA TOMARE**");
 			} else {
   			message.channel.send("You do not have the power to use ZA WARUDO!");
 			}
 
-    	message.channel.send("**TOKI WA TOMARE**");
+    	
 	}
 
 	function zaWarudoDo(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
 		if(message.member.roles.find("name", "DIO") ) {
-				
-				for(var i = 0; i < userList.length(); i++){
-					if(message.userList[i].roles.find("name", "DIO")){
-						i++
-					} else{
-					userList[i].removeRole(kakyoin).catch(console.error);
-					console.log(userList[i]);
-					}
-				}
+				let role = message.guild.roles.find('name', 'kakyoin');
+
+				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+
+				message.guild.members.filter(m => !m.user.bot).map(async member => await member.removeRole(kakyoin));
+				console.log("Time has began to move again.")
+				message.channel.send("**TOKI WA MOKIDASU**");
 			} else {
   			message.channel.send("You do not have the power to use ZA WARUDO!");
 			}
 
-    	message.channel.send("**TOKI WA MOKIDASU**");
+    	
 	}
 
 
