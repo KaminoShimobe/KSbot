@@ -70,9 +70,9 @@ con.connect(err => {
 	con.query("SHOW TABLES", console.log);
 });
 
-// process.on('uncaughtException', function (err) {
-//     console.log(err);
-// }); 
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 
 bot.on("message", async message => {
 
