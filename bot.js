@@ -43,11 +43,14 @@ bot.on('guildMemberAdd', member => {
 
   // Send the message to a designated channel on a server:
 
-  const channel = member.guild.channels.find('name', 'wholesome-general');
-  const room = member.guild.channels.find('name', 'the-front-porch');
-  // Do nothing if the channel wasn't found on this server
-  if(!room) return
-  room.send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`);
+    member.guild.channels.get("456956416377225218").send("${member} Hewwo! Welcome to Kamino's House! :sparkles:"); 
+    member.guild.channels.get("242120806132482060").send("${member} Hewwo my niwwa! :sparkles:"); 
+    member.guild.channels.get("235197222587727872").send("${member} Welcome to the Pauli Pocket Circlejerk!"); 
+  // const channel = member.guild.channels.find('name', 'wholesome-general');
+  // const room = member.guild.channels.find('name', 'the-front-porch');
+  // // Do nothing if the channel wasn't found on this server
+  // if(!room) return
+  // room.send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`);
   //if (!channel) return;
 
   // Send the message, mentioning the member
@@ -828,12 +831,12 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}help`){
-
+		if (message.guild.id == '456956416377225218') {
 		let help = new Discord.RichEmbed()
 
 			
 			.setTitle("KS Bot Version 0.2.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user.  \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin!  \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
@@ -847,7 +850,28 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 		 return;
+		}
 
+		if (message.guild.id == '242120806132482060') {
+		let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS Bot Version 0.2.0: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user.  \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setColor("#1d498e"); 
+
+		message.channel.sendEmbed(help);
+
+		 //message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
+
+		
+
+		 
+
+
+
+		 return;
+		}
 
 
 	}
@@ -1024,6 +1048,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 });
+
+
 
 
 
