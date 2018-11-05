@@ -90,6 +90,7 @@ bot.on("message", async message => {
 	var rooms = ['456957934690238464', '496323317028880394', '496322540579454986', '456956416847249412', '496313147808940033', '496313478089277445'];
 	var chancu = Math.floor(Math.random()*5);
 	const room = bot.channels.get(rooms[chancu]);
+	const botspam = bot.channels.get('452166943093293059');
 	
 	if(command === `${prefix}whisper`){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
@@ -103,6 +104,24 @@ bot.on("message", async message => {
 				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
 				var chance = Math.floor(Math.random()*2);
 				room.send(setting[chance]);
+				message.author.send("Message Sent.");
+				//BOI
+			}
+			});
+	}
+
+	if(command === `${prefix}gossip`){
+		message.author.send("What secret would you like to share? (!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.author.send("Message cancelled.");
+                		return;
+            		} else {
+				var msg = message.content;
+				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
+				var chance = Math.floor(Math.random()*2);
+				botspam.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//BOI
 			}
@@ -238,7 +257,7 @@ return;
 	
 	
 	console.log(messageArray[2]);
-
+if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
 
 		
@@ -255,6 +274,7 @@ return;
 
 	}
 
+}
 
 	if(messageArray.indexOf(phrase10.toLowerCase()) != -1){
 		
@@ -272,26 +292,7 @@ return;
 
 	}
 	
-// 	if (message.guild.id === '242120806132482060') {
-   
-	
-	if(messageArray.indexOf(":clown:") != -1 || messageArray.indexOf("🤡") != -1 || messageArray[0].indexOf("🤡") != -1 || messageArray[0].indexOf(":clown:") != -1 ){
-		
-			message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  			.catch(console.error);
-		 
-// 		var chance = Math.floor(Math.random() * 10) + 1;
-// 		if(messageArray.indexOf("roblox") != -1 || messageArray.indexOf("Roblox") != -1 || messageArray.indexOf("ROBLOX") != -1){
-// 			if(chance < 3){
-// 				message.channel.send("We don't talk about that trash here.");
-// 			}	
-// 		}
-		
-		return;
-	}
 	
 	
 // 	} else {
@@ -559,7 +560,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 	
 	let dio = message.guild.roles.find("name", "DIO");
     let kakyoin = message.guild.roles.find("name", "kakyoin");
-
+	if (message.guild.id == '456956416377225218') {
 	function zaWarudo(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
     	var randomBoi = userList.random().user;
@@ -595,7 +596,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
     	
 	}
-
+	return;
+}
 
 
 	if(command === `${prefix}beat`){
@@ -872,6 +874,28 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		 return;
 		}
+
+		if (message.guild.id == '235197222587727872') {
+		let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS Bot Version 0.2.0: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN (permission to delete messages required for *full* effect) \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. (requires permission to delete messages to work) \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into bot spam.")
+			.setColor("#1d498e"); 
+
+		message.channel.sendEmbed(help);
+
+		 //message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
+
+		
+
+		 
+
+
+
+		 return;
+		}
+
 
 
 	}
