@@ -596,7 +596,6 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
     	
 	}
-	return;
 }
 
 
@@ -851,8 +850,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 
-		 return;
-		}
+		 		}
 
 		if (message.guild.id == '242120806132482060') {
 		let help = new Discord.RichEmbed()
@@ -872,7 +870,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 
-		 return;
+		 
 		}
 
 		if (message.guild.id == '235197222587727872') {
@@ -893,10 +891,10 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 
-		 return;
+		 
 		}
 
-
+		return;
 
 	}
 	
