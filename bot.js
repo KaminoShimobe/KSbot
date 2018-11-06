@@ -43,9 +43,9 @@ bot.on('guildMemberAdd', member => {
 
   // Send the message to a designated channel on a server:
 
-    member.guild.channels.get("496313147808940033").send("${member} Hewwo! Welcome to Kamino's House! :sparkles:"); 
-    member.guild.channels.get("242120806132482060").send("${member} Hewwo my niwwa! :sparkles:"); 
-    member.guild.channels.get("282162488454152192").send("${member} Welcome to the Pauli Pocket Circlejerk!"); 
+    member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
+    member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
+    member.guild.channels.get("282162488454152192").send(`{member} Welcome to the Pauli Pocket Circlejerk!`); 
   // const channel = member.guild.channels.find('name', 'wholesome-general');
   // const room = member.guild.channels.find('name', 'the-front-porch');
   // // Do nothing if the channel wasn't found on this server
