@@ -1035,7 +1035,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		
 
 	}
-
+if (message.guild.id == '456956416377225218') {
 	if(command === `${prefix}ZAWARUDO`){
 		
 
@@ -1065,7 +1065,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		
 
 	}
-
+}
 
 
 
