@@ -64,7 +64,8 @@ var con = mysql.createConnection({
 	user: "kaminosh_KS",
 	password: process.env.MY_SQL,
 	database: "kaminosh_KSBOT",
-	port: 3306
+	port: 3306,
+	insecureAuth: true
 });
 
 con.connect(err => {
