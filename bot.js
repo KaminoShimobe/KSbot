@@ -43,7 +43,7 @@ bot.on('guildMemberAdd', member => {
 
   // Send the message to a designated channel on a server:
 // if (message.guild.id == '235197222587727872') {
-	const wank = client.emojis.get("398321346247131136");
+	const wank = bot.emojis.get("398321346247131136");
 	member.guild.channels.get("235197222587727872").send(`${member} Welcome to the Pauli Pocket Circlejerk. Keep jerkin or ur gay ${wank}`);
 // }
     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
