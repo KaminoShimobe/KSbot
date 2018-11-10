@@ -42,9 +42,9 @@ bot.on("ready", async () => {
 bot.on('guildMemberAdd', member => {
 
   // Send the message to a designated channel on a server:
-if (message.guild.id == '235197222587727872') {
-	member.guild.channels.get("452166943093293059").send(`{member} Welcome to the Pauli Pocket Circlejerk!`);
-}
+// if (message.guild.id == '235197222587727872') {
+	member.guild.channels.get("235197222587727872").send(`{member} Welcome to the Pauli Pocket Circlejerk!`);
+// }
     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
     member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
     
