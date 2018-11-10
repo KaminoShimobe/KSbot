@@ -91,8 +91,8 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
-	var rooms = ['456957934690238464', '496323317028880394', '496322540579454986', '456956416847249412', '496313147808940033', '496313478089277445'];
-	var chancu = Math.floor(Math.random()*5);
+	var rooms = ['510954222536097807'];
+	var chancu = 0;
 	const room = bot.channels.get(rooms[chancu]);
 	const botspam = bot.channels.get('452166943093293059');
 	
