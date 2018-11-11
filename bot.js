@@ -110,7 +110,7 @@ bot.on("message", async message => {
 				room.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//BOI
-console.log(message.author);
+console.log(message.author.username);
 			}
 			});
 	}
