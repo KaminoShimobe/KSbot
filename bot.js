@@ -1,7 +1,7 @@
 
 const Discord = require("discord.js");
 
-const mysql = require("mysql");
+//const mysql = require("mysql");
 
 
 const prefix = "!";
@@ -261,7 +261,7 @@ return;
 }
 	
 	
-	console.log(messageArray[2]);
+	
 if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
 	if(command === `OOFERS` || command === `Oofers` || command === `oofers` || command === `oof` || command === `oofity` || command === `Oof` || command === `OOF` || command === `OOFITY` || command === `oofy` || command === `Oofy` || command === `OOFY` || command === `oofie` || command === `Oofie` || command === `Oofity` || command === `OOFUH` || command === `Oofuh` || command === `oofuh`){
 
