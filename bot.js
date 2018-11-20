@@ -72,10 +72,24 @@ var con = mysql.createConnection({
 	port: 3306
 });
 
+function handleDisconnect() {
+ console.log('handleDisconnect()');
+ connection.destroy();
+ connection = mysql.createConnection(db_config);
+ connection.connect(function(err) {
+     if(err) {
+ console.log(' Error when connecting to db  (DBERR001):', err);
+ setTimeout(handleDisconnect, 1000);
+     }
+ });
+ 
+}
 con.connect(err => {
 	if(err) throw err;
 	console.log("connected to database");
 	con.query("SHOW TABLES", console.log);
+	setTimeout(handleDisconnect, 1000);
+ 	handleDisconnect();
 });
 
 process.on('uncaughtException', function (err) {
