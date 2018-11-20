@@ -82,6 +82,10 @@ process.on('uncaughtException', function (err) {
     console.log(err);
 }); 
 
+con.query('SET GLOBAL connect_timeout=28800')
+con.query('SET GLOBAL wait_timeout=28800')
+con.query('SET GLOBAL interactive_timeout=28800')
+
 bot.on("message", async message => {
 
 	let messageArray = message.content.split(" ");
