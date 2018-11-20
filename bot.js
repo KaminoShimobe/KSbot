@@ -86,13 +86,13 @@ process.on('uncaughtException', function (err) {
 }); 
 
 con.on('error', function(err){
-      log.warn('On SQL connection error: ', err);
+      console.log('On SQL connection error: ', err);
       if(!err.fatal)
           return;
-      if(err.code !== 'PROTOCOL_CONNECTION_LOST')
+      if(err.code != 'PROTOCOL_CONNECTION_LOST')
           throw err;
 
-      log.info("Attempting to re-connect with SQL.");
+      console.log("Attempting to re-connect with SQL.");
       // This is what was previously in there
       // setupMysqlConnection();
 
