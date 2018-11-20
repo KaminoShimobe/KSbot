@@ -68,7 +68,7 @@ var con = mysql.createConnection({
 	host: "us-cdbr-iron-east-01.cleardb.net",
 	user: "bc9ba9370a9522",
 	password: process.env.MY_SQL,
-	database: "ksbot",
+	database: "heroku_b523f37d8e76acb",
 	port: 3306
 });
 
