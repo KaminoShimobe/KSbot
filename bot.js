@@ -65,12 +65,11 @@ if (message.guild.id == '456956416377225218') {
 });
 
 var con = mysql.createConnection({
-	host: "kaminoshimobe.com",
-	user: "kaminosh_KS",
+	host: "us-cdbr-iron-east-01.cleardb.net",
+	user: "	bc9ba9370a9522",
 	password: process.env.MY_SQL,
-	database: "kaminosh_KSBOT",
-	port: 3306,
-	insecureAuth: true
+	database: "ksbot",
+	port: 3306
 });
 
 con.connect(err => {
