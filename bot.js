@@ -77,8 +77,7 @@ con.connect(err => {
 	if(err) throw err;
 	console.log("connected to database");
 	con.query("SHOW TABLES", console.log);
-	setTimeout(handleDisconnect, 1000);
- 	handleDisconnect();
+
 });
 
 process.on('uncaughtException', function (err) {
@@ -86,7 +85,7 @@ process.on('uncaughtException', function (err) {
 	
 }); 
 
-req.con.on('error', function(err){
+con.on('error', function(err){
       log.warn('On SQL connection error: ', err);
       if(!err.fatal)
           return;
