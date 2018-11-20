@@ -175,7 +175,7 @@ console.log(message.author.username);
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}, '!bio to add a bio.');
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}, '!bio to add a bio.')`;
 			con.query(sql, console.log);
 			message.channel.send("User created! use command `!view [user]` to view someone else's info, or `!view` to view your own info!");
 			return;
