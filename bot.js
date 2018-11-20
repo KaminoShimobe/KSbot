@@ -74,9 +74,15 @@ var con = mysql.createConnection({
 
 function handleDisconnect() {
  console.log('handleDisconnect()');
- connection.destroy();
- connection = mysql.createConnection(db_config);
- connection.connect(function(err) {
+ con.destroy();
+ con = mysql.createConnection({
+	host: "us-cdbr-iron-east-01.cleardb.net",
+	user: "bc9ba9370a9522",
+	password: process.env.MY_SQL,
+	database: "heroku_b523f37d8e76acb",
+	port: 3306
+});
+ con.connect(function(err) {
      if(err) {
  console.log(' Error when connecting to db  (DBERR001):', err);
  setTimeout(handleDisconnect, 1000);
