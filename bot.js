@@ -246,7 +246,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let stats = new Discord.RichEmbed()
 
 			
-			.setAuthor(message.author.username)
+			.setAuthor(other.username)
 			.setDescription("Money: " + money + "\n" + bio)
 			.setColor("#d10026"); 
 
@@ -260,6 +260,45 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 return;
 }
+	
+function bio(){
+
+
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		
+		let bio = rows[0].bio;
+		
+				
+
+		message.channel.send("Update your bio! You have 100 characters. !cancel to cancel.");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+				
+				sql = `UPDATE user SET bio = ${message.content} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.channel.send("Bio Updated!");
+			}
+			});
+
+		
+		
+
+	});
+
+}		
 	
 	
 	
@@ -1061,6 +1100,21 @@ if (message.guild.id == '456956416377225218') {
 		
 
 		zaWarudoDo();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}bio`){
+		
+
+		bio();
 
 			
 
