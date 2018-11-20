@@ -66,7 +66,7 @@ if (message.guild.id == '456956416377225218') {
 
 var con = mysql.createConnection({
 	host: "us-cdbr-iron-east-01.cleardb.net",
-	user: "	bc9ba9370a9522",
+	user: "bc9ba9370a9522",
 	password: process.env.MY_SQL,
 	database: "ksbot",
 	port: 3306
