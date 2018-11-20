@@ -261,6 +261,25 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 return;
 }
 	
+	function deleteUser(){
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user.");
+			console.log(rows);
+		} else {
+			sql = `DELETE FROM user WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.reply("User Deleted! `!user` to create a new one!");
+		}
+
+	});
+	return;
+}
+	
 function bio(){
 
 
@@ -1115,6 +1134,22 @@ if (message.guild.id == '456956416377225218') {
 		
 
 		bio();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}delete`){
+
+
+		deleteUser();
+		
 
 			
 
