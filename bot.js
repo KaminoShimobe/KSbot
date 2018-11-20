@@ -72,24 +72,7 @@ var con = mysql.createConnection({
 	port: 3306
 });
 
-function handleDisconnect() {
- console.log('handleDisconnect()');
- con.destroy();
- con = mysql.createConnection({
-	host: "us-cdbr-iron-east-01.cleardb.net",
-	user: "bc9ba9370a9522",
-	password: process.env.MY_SQL,
-	database: "heroku_b523f37d8e76acb",
-	port: 3306
-});
- con.connect(function(err) {
-     if(err) {
- console.log(' Error when connecting to db  (DBERR001):', err);
- setTimeout(handleDisconnect, 1000);
-     }
- });
- 
-}
+
 con.connect(err => {
 	if(err) throw err;
 	console.log("connected to database");
@@ -100,7 +83,23 @@ con.connect(err => {
 
 process.on('uncaughtException', function (err) {
     console.log(err);
+	
 }); 
+
+req.con.on('error', function(err){
+      log.warn('On SQL connection error: ', err);
+      if(!err.fatal)
+          return;
+      if(err.code !== 'PROTOCOL_CONNECTION_LOST')
+          throw err;
+
+      log.info("Attempting to re-connect with SQL.");
+      // This is what was previously in there
+      // setupMysqlConnection();
+
+      // And this is what it should have been
+      setupMysqlConnection(req, res, next);
+    });
 
 con.query('SET GLOBAL connect_timeout=28800')
 con.query('SET GLOBAL wait_timeout=28800')
