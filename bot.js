@@ -287,7 +287,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
                 		return;
             		} else {
 				
-				sql = `UPDATE user SET bio = ${message.content} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET bio = '${message.content}' WHERE id = '${message.author.id}'`;
 				con.query(sql);
 				message.channel.send("Bio Updated!");
 			}
