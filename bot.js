@@ -179,9 +179,9 @@ console.log(message.author.username);
 
 		let money = rows[0].money;
 		
-		var funds = Math.floor(message.content.length)*.1;
-		if(funds >= 10){
-			funds = 10;
+		var funds = (message.content.length);
+		if(funds >= 50){
+			funds = 50;
 		}	
 		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
 		//console.log(message.author.username + " got $" + funds);	
