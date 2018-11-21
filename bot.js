@@ -97,7 +97,12 @@ con.on('error', function(err){
       // setupMysqlConnection();
 
       // And this is what it should have been
-      setupMysqlConnection(req, res, next);
+      con.connect(err => {
+	if(err) throw err;
+	console.log("reconnected to database");
+	con.query("SHOW TABLES", console.log);
+
+});
     });
 
 con.query('SET GLOBAL connect_timeout=28800')
