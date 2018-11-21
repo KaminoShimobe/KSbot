@@ -102,7 +102,26 @@ con.on('error', function(err) {
 handleDisconnect();
 
 bot.on("message", async message => {
+	function getMuns(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 
+		if(rows.length < 1) {
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		var funds = message.content.length();	
+			
+		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
+		console.log(message.author.id + " got $" + funds);	
+		con.query(sql);
+			
+	});	
+	
+	getMuns();	
+	
 	let messageArray = message.content.split(" ");
 
 	let command = messageArray[0];
