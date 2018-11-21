@@ -64,50 +64,40 @@ if (message.guild.id == '456956416377225218') {
 
 });
 
-var con = mysql.createConnection({
+var con_fig = {
 	host: "us-cdbr-iron-east-01.cleardb.net",
 	user: "bc9ba9370a9522",
 	password: process.env.MY_SQL,
 	database: "heroku_b523f37d8e76acb",
 	port: 3306
-});
+};
 
-
-con.connect(err => {
-	if(err) throw err;
-	console.log("connected to database");
-	con.query("SHOW TABLES", console.log);
-
-});
+function handleDisconnect() {
+con = mysql.createConnection(con_fig);
+con.connect(function(err) {              // The server is either down
+    if(err) {                                     // or restarting (takes a while sometimes).
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+    }                                     // to avoid a hot loop, and to allow our node script to
+  }); 	
 
 process.on('uncaughtException', function (err) {
     console.log(err);
 	
 }); 
+	
 
-con.on('error', function(err){
-      console.log('On SQL connection error: ', err);
-      if(!err.fatal)
-          return;
-      if(err.code != 'PROTOCOL_CONNECTION_LOST')
-          throw err;
 
-      console.log("Attempting to re-connect with SQL.");
-      // This is what was previously in there
-      // setupMysqlConnection();
-
-      // And this is what it should have been
-      con.connect(err => {
-	if(err) throw err;
-	console.log("reconnected to database");
-	con.query("SHOW TABLES", console.log);
-
-});
+con.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+       throw err;                                 // server variable configures this)
     });
-
-con.query('SET GLOBAL connect_timeout=28800')
-con.query('SET GLOBAL wait_timeout=28800')
-con.query('SET GLOBAL interactive_timeout=28800')
+}
+       }
+handleDisconnect();
 
 bot.on("message", async message => {
 
