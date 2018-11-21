@@ -102,31 +102,6 @@ con.on('error', function(err) {
 handleDisconnect();
 
 bot.on("message", async message => {
-	function getMuns(){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		if(rows.length < 1) {
-			return;
-		}
-
-		let money = rows[0].money;
-		
-		var funds = message.content.length;
-		if(funds >= 50){
-			funds = 50;
-		}	
-		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
-		console.log(message.author.username + " got $" + funds);	
-		con.query(sql);
-			
-	});	
-	
-	}
-	
-	if (message.guild.id == '456956416377225218') {	
-	getMuns();	
-	}
 	
 	let messageArray = message.content.split(" ");
 
@@ -180,6 +155,32 @@ console.log(message.author.username);
 	
 
 	if(message.channel.type === "dm") return;
+	
+	function getMuns(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		var funds = message.content.length;
+		if(funds >= 50){
+			funds = 50;
+		}	
+		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
+		//console.log(message.author.username + " got $" + funds);	
+		con.query(sql);
+			
+	});	
+	
+	}
+	
+	if (message.guild.id == '456956416377225218') {	
+	getMuns();	
+	}
 
 	var phrase1 = "is";
 
