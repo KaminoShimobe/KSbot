@@ -112,10 +112,10 @@ bot.on("message", async message => {
 
 		let money = rows[0].money;
 		
-		var funds = message.size;	
+		var funds = message.content.length;	
 			
 		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
-		console.log(message.author.id + " got $" + funds);	
+		console.log(message.author.username + " got $" + funds);	
 		con.query(sql);
 			
 	});	
