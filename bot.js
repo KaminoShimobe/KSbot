@@ -118,7 +118,7 @@ bot.on("message", async message => {
 		console.log(message.author.id + " got $" + funds);	
 		con.query(sql);
 			
-	});	
+	};	
 	
 	getMuns();	
 	
