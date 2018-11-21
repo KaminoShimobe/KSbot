@@ -20,7 +20,7 @@ antispam(bot, {
   banMessage: "has been banned for spamming, anyone else?", // Ban message, always tags the banned user in front of it.
   maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user can send in a timespan before getting warned
   maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
-  deleteMessagesAfterBanForPastDays: 7 // Delete the spammed messages after banning for the past x days.
+  deleteMessagesAfterBanForPastDays: 7, // Delete the spammed messages after banning for the past x days.
   exemptRoles: ["Dad"] // The names of the roles which should not be spam-filtered
  
 });
