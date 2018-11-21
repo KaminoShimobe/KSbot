@@ -192,7 +192,7 @@ console.log(message.author.username);
 	}
 	
 	if (message.guild.id == '456956416377225218') {	
-	getMuns();	
+	//getMuns();	
 	}
 
 	var phrase1 = "is";
