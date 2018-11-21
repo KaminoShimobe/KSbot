@@ -122,7 +122,9 @@ bot.on("message", async message => {
 	
 	}
 	
+	if (message.guild.id == '456956416377225218') {	
 	getMuns();	
+	}
 	
 	let messageArray = message.content.split(" ");
 
