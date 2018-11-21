@@ -253,7 +253,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username)
-			.setDescription("Money: " + money + "\n" + bio)
+			.setDescription("Money: $" + money + "\n" + bio)
 			.setColor("#4286f4"); 
 
 		message.channel.sendEmbed(stats);
@@ -287,7 +287,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username)
-			.setDescription("Money: " + money + "\n" + bio)
+			.setDescription("Money: $" + money + "\n" + bio)
 			.setColor("#d10026"); 
 
 		message.channel.sendEmbed(stats);
