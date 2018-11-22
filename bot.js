@@ -226,6 +226,7 @@ console.log(message.author.username);
 	const member = message.member;
 
 	function waifuPic(){
+		console.log("waifu");
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe female' }).then(posts => {
   		// Select a random post from posts array
@@ -234,7 +235,7 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  
+  		console.log(url);
  		let pic = new Discord.RichEmbed()
 
 			
@@ -248,6 +249,7 @@ console.log(message.author.username);
 	}
 
 	function husbandoPic(){
+		console.log("waifu");
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe male' }).then(posts => {
   		// Select a random post from posts array
@@ -256,7 +258,7 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  
+  		console.log(url);
  		let pic = new Discord.RichEmbed()
 
 			
@@ -264,6 +266,7 @@ console.log(message.author.username);
 			.setColor("#4327f7"); 
 
 		message.channel.sendEmbed(pic);
+			
  		
   
 })
