@@ -224,6 +224,7 @@ console.log(message.author.username);
 	var rip = "rip";
  	
 
+	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -250,31 +251,35 @@ console.log(message.author.username);
   			
 		})
 
+		.then(role => console.log(`Created new role with name ${role.name}`))
+  	.catch(console.error)
+
 		message.reply("What's the hex color of your role?");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
         	console.log(collector)
 		collector.on('collect', message => {
            		 if (message.content != undefined) {
-                roleName.setColor(message.content);
+            if(message.member.roles.find("name", "Dad")){   
+            sql = `UPDATE user SET money = ${money - 10} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			}
+			else {
+				 sql = `UPDATE user SET money = ${money - 25000} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+			}	
+			member.addRole(roleName).catch(console.error);
+			roleName.setColor(message.content)
+  			.then(updated => console.log(`Set color of role to ${role.color}`))
+  			.catch(console.error);
+        	message.reply("Unique Role Purchased!")
             } else {
             	return;
             }
         })
 
 		
-  .then(role => console.log(`Created new role with name ${role.name} and color ${role.color}`))
-  .catch(console.error)
+  
 	}	
-				
-
-		
-
-
-		
-		
-
-	});
-	}
 
 	
 	function addUser(){
