@@ -225,7 +225,7 @@ console.log(message.author.username);
 
 	const member = message.member;
 
-	function waifuPic(){
+	async function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
 		const post = await booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
@@ -245,7 +245,7 @@ console.log(message.author.username);
 
 	}
 
-	function husbandoPic(){
+	async function husbandoPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
 		const post = await booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
