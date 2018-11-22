@@ -258,7 +258,7 @@ console.log(message.author.username);
 				con.query(sql);
 			}		
 
-		guild.createRole({
+		message.guild.createRole({
   			name: messageArray[2],
   			color: messageArray[3],
 		})
