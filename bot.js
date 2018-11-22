@@ -263,9 +263,11 @@ console.log(message.author.username);
   			color: messageArray[3],
 		})
 		
+		let role = message.guild.roles.find(r => r.name === roleName);	
+			
 		.then(role => console.log(`Created new role with name ${role.name} with color ${role.color}.`))
   		.catch(console.error);
-		member.addRole(roleName).catch(console.error);
+		member.addRole(role).catch(console.error);
   		message.reply("Unique Role Purchased!");
 
 		
