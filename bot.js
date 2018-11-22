@@ -244,9 +244,9 @@ console.log(message.author.username);
 
 		if(money >= 25000 || message.member.roles.find("name", "Dad")){
 
-		var roleName = messageArray[2];
+		
 
-		var roleName = messageArray[2];
+		
 
 		if(message.member.roles.find("name", "Dad")){   
             sql = `UPDATE user SET money = ${money - 10} WHERE id = '${message.author.id}'`;
@@ -263,11 +263,11 @@ console.log(message.author.username);
   			color: messageArray[3],
 		})
 		
-			
+		
 			
 		.then(role => console.log(`Created new role with name ${role.name} with color ${role.color}.`))
   		.catch(console.error);
-		let role = message.guild.roles.find(r => r.name === roleName);
+		let role = message.guild.roles.find(r => r.name === messageArray[2]);
 		member.addRole(role).catch(console.error);
   		message.reply("Unique Role Purchased!");
 
