@@ -252,7 +252,7 @@ console.log(message.author.username);
 		})
 
 		.then(role => console.log(`Created new role with name ${role.name}`))
-  	.catch(console.error)
+  		.catch(console.error);
 
 		message.reply("What's the hex color of your role?");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
@@ -275,10 +275,12 @@ console.log(message.author.username);
             } else {
             	return;
             }
-        })
+
+        });
 
 		
-  
+  	}
+  	 });
 	}	
 
 	
