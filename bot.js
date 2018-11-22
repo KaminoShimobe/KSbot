@@ -246,8 +246,8 @@ console.log(message.author.username);
 
 		var roleName = messageArray[2];
 
-		guild.createRole({
-  			name: messageArray[2]
+		message.guild.createRole({
+  			name: messageArray[2],
   			
 		})
 
