@@ -228,7 +228,7 @@ console.log(message.author.username);
 	function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
+		const post = await booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
@@ -248,7 +248,7 @@ console.log(message.author.username);
 	function husbandoPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
+		const post = await booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
   		
  
   		// Get post's url and create a filename for it
