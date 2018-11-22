@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
-const https = require('https');
+const http = require('http');
 
 const prefix = "!";
 
@@ -232,13 +232,13 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		//const request = https.get(url.href)
+  		const request = http.get(url.href)
 		//console.log(post);
 		console.log(url);
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url.href)
+			.setImage(request)
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
@@ -255,13 +255,13 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		//const request = https.get(url.href)
+  		const request = http.get(url.href)
 		//console.log(post);
 		console.log(url);
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url.href)
+			.setImage(request)
 			.setColor("#4327f7"); 
 
 		message.channel.sendEmbed(pic);
