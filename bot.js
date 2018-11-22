@@ -267,7 +267,7 @@ console.log(message.author.username);
 				 sql = `UPDATE user SET money = ${money - 25000} WHERE id = '${message.author.id}'`;
 				con.query(sql);
 			}	
-			member.addRole(roleName).catch(console.error);
+			message.member.addRole(roleName).catch(console.error);
 			roleName.setColor(message.content)
   			.then(updated => console.log(`Set color of role to ${role.color}`))
   			.catch(console.error);
