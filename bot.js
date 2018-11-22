@@ -1042,7 +1042,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.");
+			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
