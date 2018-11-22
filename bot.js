@@ -238,10 +238,10 @@ console.log(message.author.username);
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url)
+			.setImage(url.href)
 			.setColor("#ff30e0"); 
 
-		message.channel.sendEmbed(url.href);
+		message.channel.sendEmbed(pic);
  		
   
 
@@ -261,10 +261,10 @@ console.log(message.author.username);
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url)
+			.setImage(url.href)
 			.setColor("#4327f7"); 
 
-		message.channel.sendEmbed(url.href);
+		message.channel.sendEmbed(pic);
 			
  		
   
