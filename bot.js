@@ -222,8 +222,8 @@ console.log(message.author.username);
  	var ne = "no";
 	
 	var rip = "rip";
- 	
 
+	const member = message.member;
 	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -265,7 +265,7 @@ console.log(message.author.username);
 		
 		.then(role => console.log(`Created new role with name ${role.name} with color ${role.color}.`))
   		.catch(console.error);
-		message.member.addRole(roleName).catch(console.error);
+		member.addRole(roleName).catch(console.error);
   		message.reply("Unique Role Purchased!");
 
 		
