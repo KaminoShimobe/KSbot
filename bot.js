@@ -262,10 +262,10 @@ console.log(message.author.username);
   			name: messageArray[2],
   			color: messageArray[3],
 		})
-
+		
 		.then(role => console.log(`Created new role with name ${role.name} with color ${role.color}.`))
   		.catch(console.error);
-
+		message.member.addRole(roleName).catch(console.error);
   		message.reply("Unique Role Purchased!");
 
 		
