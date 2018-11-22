@@ -235,14 +235,14 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		console.log(url);
+  		
  		let pic = new Discord.RichEmbed()
 
 			
 			.setImage(url)
 			.setColor("#ff30e0"); 
 
-		message.channel.sendEmbed(pic);
+		message.channel.sendEmbed(url);
  		
   
 })
@@ -258,14 +258,14 @@ console.log(message.author.username);
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		console.log(url);
+  		
  		let pic = new Discord.RichEmbed()
 
 			
 			.setImage(url)
 			.setColor("#4327f7"); 
 
-		message.channel.sendEmbed(pic);
+		message.channel.sendEmbed(url);
 			
  		
   
