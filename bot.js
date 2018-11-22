@@ -224,7 +224,57 @@ console.log(message.author.username);
 	var rip = "rip";
  	
 
-	
+	function customRole(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 25000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+
+		if(money >= 25000 || message.member.roles.find("name", "Dad")){
+
+		var roleName = messageArray[2];
+
+		guild.createRole({
+  			name: messageArray[2]
+  			
+		})
+
+		message.reply("What's the hex color of your role?");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        	console.log(collector)
+		collector.on('collect', message => {
+           		 if (message.content != undefined) {
+                roleName.setColor(message.content);
+            } else {
+            	return;
+            }
+        })
+
+		
+  .then(role => console.log(`Created new role with name ${role.name} and color ${role.color}`))
+  .catch(console.error)
+	}	
+				
+
+		
+
+
+		
+		
+
+	});
+	}
 
 	
 	function addUser(){
@@ -981,6 +1031,25 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 	}
+	
+	if(command === `${prefix}shop`){
+		let shop = new Discord.RichEmbed()
+
+			
+			.setTitle("Kamino's Shop (!buy [item] to purchase)")
+			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.");
+			.setColor("#1d498e"); 
+
+		message.channel.sendEmbed(shop);
+
+	}	
+
+	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined){
+
+		customRole();
+
+	}	
+
 
 
 
