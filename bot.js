@@ -1,6 +1,6 @@
 
 const Discord = require("discord.js");
-
+const Danbooru = require('danbooru');
 const mysql = require("mysql");
 
 
@@ -224,6 +224,50 @@ console.log(message.author.username);
 	var rip = "rip";
 
 	const member = message.member;
+
+	function waifuPic(){
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe female' }).then(posts => {
+  		// Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url and create a filename for it
+  		const url = booru.url(post.file_url)
+  
+ 		let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url)
+			.setColor("#ff30e0"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  
+})
+	}
+
+	function husbandoPic(){
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe male' }).then(posts => {
+  		// Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url and create a filename for it
+  		const url = booru.url(post.file_url)
+  
+ 		let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url)
+			.setColor("#4327f7"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  
+})
+	}
 	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -237,7 +281,7 @@ console.log(message.author.username);
 
 		let money = rows[0].money;
 		
-		if(money < 10) {
+		if(money < 25000) {
 			message.reply("Insufficient Funds.");
 			return;
 		}
@@ -1048,6 +1092,47 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		customRole();
 
 	}	
+
+	if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		waifuPic();
+
+		});
+	}	
+
+	if(command === `${prefix}buy` && messageArray[1] === `husbandoPic`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		husbandoPic();
+		});
+	}
 
 
 
