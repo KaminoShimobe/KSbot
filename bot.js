@@ -237,7 +237,7 @@ console.log(message.author.username);
 
 		let money = rows[0].money;
 		
-		if(money < 25000) {
+		if(money < 10) {
 			message.reply("Insufficient Funds.");
 			return;
 		}
