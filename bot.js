@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
-const https = require('https');
+const http = require('http');
 
 const prefix = "!";
 
@@ -228,17 +228,21 @@ console.log(message.author.username);
 	async function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		const post = await booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
+		const posts = await booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
+ 
+  		// Get post's url and create a filename for it
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		const request = https.get(url.href)
+  		const p = url.href;
 		//console.log(post);
 		console.log(url);
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(request)
+			.setImage(p)
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
@@ -250,18 +254,20 @@ console.log(message.author.username);
 	async function husbandoPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		const post = await booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
+		const posts = await booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
   		
+		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		const request = https.get(url.href)
+  		const p = url.href;
 		//console.log(post);
-		console.log(url);
+		console.log(url); 
  		let pic = new Discord.RichEmbed()
 
 			
-			.setImage(request)
+			.setImage(p)
 			.setColor("#4327f7"); 
 
 		message.channel.sendEmbed(pic);
