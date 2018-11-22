@@ -246,37 +246,27 @@ console.log(message.author.username);
 
 		var roleName = messageArray[2];
 
-		message.guild.createRole({
-  			name: messageArray[2],
-  			
-		})
+		var roleName = messageArray[2];
 
-		.then(role => console.log(`Created new role with name ${role.name}`))
-  		.catch(console.error);
-
-		message.reply("What's the hex color of your role?");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
-        	console.log(collector)
-		collector.on('collect', message => {
-           		 if (message.content != undefined) {
-            if(message.member.roles.find("name", "Dad")){   
+		if(message.member.roles.find("name", "Dad")){   
             sql = `UPDATE user SET money = ${money - 10} WHERE id = '${message.author.id}'`;
 			con.query(sql);
 			}
-			else {
+
+		else {
 				 sql = `UPDATE user SET money = ${money - 25000} WHERE id = '${message.author.id}'`;
 				con.query(sql);
-			}	
-			message.member.addRole(roleName).catch(console.error);
-			roleName.setColor(message.content)
-  			.then(updated => console.log(`Set color of role to ${role.color}`))
-  			.catch(console.error);
-        	message.reply("Unique Role Purchased!")
-            } else {
-            	return;
-            }
+			}		
 
-        });
+		guild.createRole({
+  			name: messageArray[2],
+  			color: messageArray[3],
+		})
+
+		.then(role => console.log(`Created new role with name ${role.name} with color ${role.color}.`))
+  		.catch(console.error);
+
+  		message.reply("Unique Role Purchased!");
 
 		
   	}
@@ -1051,7 +1041,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 	}	
 
-	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined){
+	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
 
 		customRole();
 
