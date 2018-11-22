@@ -225,52 +225,51 @@ console.log(message.author.username);
 
 	const member = message.member;
 
-	async function waifuPic(){
+	function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		const posts = await booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
- 
-  		// Get post's url and create a filename for it
+		booru.posts({ tags: 'rating:safe female' }).then(posts => {
+ 		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
  
-  		// Get post's url and create a filename for it
-  		const url = booru.url(post.file_url)
-  		const p = url.href;
-		//console.log(post);
-		console.log(url);
- 		let pic = new Discord.RichEmbed()
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage(p)
+			.setImage(url.href)
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
  		
-  
+  		 })
+		
+		
 
 	}
 
-	async function husbandoPic(){
-		console.log("waifu");
+	function husbandoPic(){
+		console.log("husbando");
 		const booru = new Danbooru()
-		const posts = await booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
-  		
-		const index = Math.floor(Math.random() * posts.length)
+		booru.posts({ tags: 'rating:safe male' }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
  
-  		// Get post's url and create a filename for it
-  		const url = booru.url(post.file_url)
-  		const p = url.href;
-		//console.log(post);
-		console.log(url); 
- 		let pic = new Discord.RichEmbed()
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage(p)
-			.setColor("#4327f7"); 
+			.setImage(url.href)
+			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
+ 		
+  		 })
 			
  		
   
