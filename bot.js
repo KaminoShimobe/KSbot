@@ -228,37 +228,32 @@ console.log(message.author.username);
 	function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe female' }).then(posts => {
-  		// Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+		booru.posts({ tags: 'rating:safe female', random: true, limit: 300 })
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-  		const request = http.get(url.href)
+  		
  		let pic = new Discord.RichEmbed()
 
 			
 			.setImage(url)
 			.setColor("#ff30e0"); 
 
-		message.channel.sendEmbed(request);
+		message.channel.sendEmbed(url);
  		
   
-})
+
 	}
 
 	function husbandoPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe male' }).then(posts => {
-  		// Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+		booru.posts({ tags: 'rating:safe male', random: true, limit: 300 })
+  		
  
   		// Get post's url and create a filename for it
   		const url = booru.url(post.file_url)
-		const request = http.get(url.href)
+		
   		
  		let pic = new Discord.RichEmbed()
 
@@ -266,11 +261,11 @@ console.log(message.author.username);
 			.setImage(url)
 			.setColor("#4327f7"); 
 
-		message.channel.sendEmbed(request);
+		message.channel.sendEmbed(url);
 			
  		
   
-})
+
 	}
 	
 	function customRole(){
