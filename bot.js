@@ -235,11 +235,11 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
- 		
+ 		console.log(url.href);
 		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage({url: `${post.file_url}`})
+			.setImage(url.href)
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
@@ -260,11 +260,11 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
- 		
+ 		console.log(url.href);
 		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage({url: `${post.file_url}`})
+			.setImage(url.href)
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
