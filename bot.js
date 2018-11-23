@@ -231,7 +231,7 @@ console.log(message.author.username);
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-		
+			var percentage = Math.floor((1 / 10) * money);
 			sql = `UPDATE user SET money = ${money - percentage} WHERE id = '${message.author.id}'`;
 			member.addRole(insurance).catch(console.error);
 			con.query(sql);
