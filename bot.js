@@ -228,7 +228,7 @@ console.log(message.author.username);
 	function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe female' }).then(posts => {
+		booru.posts({ tags: 'rating:safe 1girl' }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -254,7 +254,7 @@ console.log(message.author.username);
 	function husbandoPic(){
 		console.log("husbando");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe male' }).then(posts => {
+		booru.posts({ tags: 'rating:safe 1boy' }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
