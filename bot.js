@@ -224,6 +224,74 @@ console.log(message.author.username);
 	var rip = "rip";
 
 	const member = message.member;
+	let insurance = message.guild.roles.find("name", "allstate");
+
+	function insure(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		
+			sql = `UPDATE user SET money = ${money - percentage} WHERE id = '${message.author.id}'`;
+			member.addRole(insurance).catch(console.error);
+			con.query(sql);
+			message.reply("Insurance Purchased for $" + percentage +"! You are now in good hands!");
+			return;
+			});
+	}
+
+	function gambleFlip(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		
+
+	var num = parseInt(messageArray[1]); 
+	if(Number.isInteger(num) === true && money >= num){
+
+	var bet = num * 2;
+		
+
+		var chance = Math.floor(Math.random() * 2) + 1;
+		if(chance == 1){
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + num} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+		
+			message.reply("*CHA~CHING!* You made $" + num + "!");
+			
+		} else {
+			if(message.member.roles.find("name", "allstate") ) {
+				num = 0;
+  			message.reply("'s insurance kicked in! No Money lost!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+		}
+
+
+		
+	return;
+	} else{
+		message.reply("Can't bet that...");
+		return;
+	}
+
+	});
+}
 
 	function waifuPic(){
 		console.log("waifu");
@@ -235,6 +303,7 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
+ 		
 		 let pic = new Discord.RichEmbed()
 
 			
@@ -259,11 +328,12 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
+ 			
 		 let pic = new Discord.RichEmbed()
 
 			
 			.setImage(url.href)
-			.setColor("#ff30e0"); 
+			.setColor("#4327f7"); 
 
 		message.channel.sendEmbed(pic);
  		
@@ -323,6 +393,191 @@ console.log(message.author.username);
   	}
   	 });
 	}	
+
+	function gambleSlots(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		
+		
+
+	
+	if(money >= 10){
+
+	
+		
+
+		var slot1 = Math.floor(Math.random() * 9) + 1;
+		var slot2 = Math.floor(Math.random() * 9) + 1;
+		var slot3 = Math.floor(Math.random() * 9) + 1;
+		var prize = 0;
+		var space = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:"];
+		var box1 = "";
+		var box2 = "";
+		var box3 = "";
+		if(slot1 === 1){
+			box1 = space[0];
+		} else if(slot1 === 2){
+			box1 = space[1];
+		} else if(slot1 === 3){
+			box1 = space[2];
+		} else if(slot1 === 4){
+			box1 = space[3];
+		} else if(slot1 === 5){
+			box1 = space[4];
+		} else if(slot1 === 6){
+			box1 = space[5];
+		} else if(slot1 === 7){
+			box1 = space[6];
+		} else if(slot1 === 8){
+			box1 = space[7];
+		} else if(slot1 === 9){
+			box1 = space[8];
+		} 
+
+		if(slot2 === 1){
+			box2 = space[0];
+		} else if(slot2 === 2){
+			box2 = space[1];
+		} else if(slot2 === 3){
+			box2 = space[2];
+		} else if(slot2 === 4){
+			box2 = space[3];
+		} else if(slot2 === 5){
+			box2 = space[4];
+		} else if(slot2 === 6){
+			box2 = space[5];
+		} else if(slot2 === 7){
+			box2 = space[6];
+		} else if(slot2 === 8){
+			box2 = space[7];
+		} else if(slot2 === 9){
+			box2 = space[8];
+		} 
+
+		if(slot3 === 1){
+			box3 = space[0];
+		} else if(slot3 === 2){
+			box3 = space[1];
+		} else if(slot3 === 3){
+			box3 = space[2];
+		} else if(slot3 === 4){
+			box3 = space[3];
+		} else if(slot3 === 5){
+			box3 = space[4];
+		} else if(slot3 === 6){
+			box3 = space[5];
+		} else if(slot3 === 7){
+			box3 = space[6];
+		} else if(slot3 === 8){
+			box3 = space[7];
+		} else if(slot3 === 9){
+			box3 = space[8];
+		} 
+		if(slot1 === slot2 && slot1 === slot3 && slot1 === 7){
+			prize = 1000000;
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(box1 + box2 + box3);
+			message.reply("**JACKPOTTTTTT** You made $1000000 Nya~!");
+
+			
+		} else if(slot1 === slot2 && slot1 === slot3 && slot1 != 7){
+			prize = (slot1 + (10 * slot2) + (100 * slot3));
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		} else if(slot1 === slot2 && slot1 != slot3){
+			prize = (slot1 + (10 * slot2));
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		} else if(slot2 === slot3 && slot1 != slot2){
+			prize = (slot2 + (10 * slot3));
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+		
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + " Nya~!");
+			
+		}  else if(slot1 === slot3 && slot2 != slot3){
+			prize = (slot1 + (10 * slot3));
+
+			if(message.member.roles.find("name", "allstate") ) {
+				
+  			message.reply("'s insurance expired!")
+  			member.removeRole(insurance).catch(console.error);
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		}
+		 else {
+			prize = 10;
+			if(message.member.roles.find("name", "allstate") ) {
+				prize = 0;
+				member.removeRole(insurance).catch(console.error);
+  			message.reply("'s insurance kicked in! No Money lost!")
+			} else {
+  			console.log(`Nope, noppers, nadda.`);
+			}
+			sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You *lost* $" + prize +"!");
+		}
+
+
+		
+	return;
+	} else{
+		message.reply("You're broke...");
+		return;
+	}
+
+	});
+}
 
 	
 	function addUser(){
@@ -1144,6 +1399,28 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		});
 	}
 
+	if(command === `${prefix}buy` && messageArray[1] === "insurance"){
+			insure();
+		}
+
+	if(command === `${prefix}spin` && messageArray[1] != undefined){
+
+
+		gambleFlip();
+
+		return;
+
+	}	
+	
+	if(command === `${prefix}slots`){
+
+
+		gambleSlots();
+
+		return;
+
+	}	
+
 
 
 
@@ -1153,7 +1430,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS Bot Version 0.2.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n Spends $10 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
