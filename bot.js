@@ -235,7 +235,8 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
- 		console.log(url.href);
+ 		console.log(url);
+		console.log(post);
 		 let pic = new Discord.RichEmbed()
 
 			
@@ -260,7 +261,8 @@ console.log(message.author.username);
  
   		// Get post's url 
  		 const url = booru.url(post.file_url)
- 		console.log(url.href);
+ 		console.log(url);
+		console.log(post);	
 		 let pic = new Discord.RichEmbed()
 
 			
