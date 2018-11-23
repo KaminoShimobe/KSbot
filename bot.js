@@ -59,9 +59,9 @@ if (message.guild.id == '235197222587727872') {
 	const wank = bot.emojis.get("398321346247131136");
 	member.guild.channels.get("235197222587727872").send(`${member} Welcome to the Pauli Pocket Circlejerk. Keep jerkin or ur gay ${wank}`);
 }
-if (message.guild.id == '456956416377225218') {	
-    member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
-}	
+// if (message.guild.id == '456956416377225218') {	
+//     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
+// }	
     member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
     
   // const channel = member.guild.channels.find('name', 'wholesome-general');
@@ -1340,7 +1340,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
+			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 50% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
