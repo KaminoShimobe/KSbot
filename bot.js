@@ -21,7 +21,7 @@ antispam(bot, {
   maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user can send in a timespan before getting warned
   maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
   deleteMessagesAfterBanForPastDays: 7, // Delete the spammed messages after banning for the past x days.
-  exemptRoles: ["Dad"] // The names of the roles which should not be spam-filtered
+  exemptRoles: ["Dad", "Archangel"] // The names of the roles which should not be spam-filtered
  
 });
 	
@@ -239,7 +239,7 @@ console.log(message.author.username);
 		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url.href)
+			.setImage({url: `${post.file_url}`})
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
@@ -264,7 +264,7 @@ console.log(message.author.username);
 		 let pic = new Discord.RichEmbed()
 
 			
-			.setImage(url.href)
+			.setImage({url: `${post.file_url}`})
 			.setColor("#ff30e0"); 
 
 		message.channel.sendEmbed(pic);
