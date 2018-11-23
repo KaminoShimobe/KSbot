@@ -1118,6 +1118,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 			message.reply("Insufficient Funds.");
 			return;
 		}
+		sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
 		waifuPic();
 
 		});
@@ -1139,7 +1141,10 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 			message.reply("Insufficient Funds.");
 			return;
 		}
+		sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
 		husbandoPic();
+		
 		});
 	}
 
