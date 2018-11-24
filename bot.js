@@ -240,7 +240,7 @@ console.log(message.author.username);
 			check = 1000;
 		}	
 
-		if (talkedRecently.has(msg.author.id)) {
+		if (talkedRecently.has(message.author.id)) {
             message.reply("You have already collected your daily check!");
             return;
     } else {
@@ -248,10 +248,10 @@ console.log(message.author.username);
            // the user can type the command ... your command code goes here :)
            message.reply(" got $" + check + "!");
         // Adds the user to the set so that they can't talk for a minute
-        talkedRecently.add(msg.author.id);
+        talkedRecently.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
-          talkedRecently.delete(msg.author.id);
+          talkedRecently.delete(message.author.id);
         }, (1000*60*60*24));
 
     }
