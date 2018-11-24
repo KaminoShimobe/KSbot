@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
-
+const talkedRecently = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -62,7 +62,7 @@ if (message.guild.id == '235197222587727872') {
 // if (message.guild.id == '456956416377225218') {	
 //     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
 // }	
-    member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
+   // member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
     
   // const channel = member.guild.channels.find('name', 'wholesome-general');
   // const room = member.guild.channels.find('name', 'the-front-porch');
@@ -226,12 +226,44 @@ console.log(message.author.username);
 	const member = message.member;
 	let insurance = message.guild.roles.find("name", "allstate");
 
+	function daily(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+
+		var check;
+
+		if(message.member.roles.find("name", "Father") ) {
+			check = 100000;
+		} else {
+			check = 1000;
+		}	
+
+		if (talkedRecently.has(msg.author.id)) {
+            message.reply("You have already collected your daily check!");
+            return;
+    } else {
+    	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
+           // the user can type the command ... your command code goes here :)
+           message.reply(" got $" + check + "!");
+        // Adds the user to the set so that they can't talk for a minute
+        talkedRecently.add(msg.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          talkedRecently.delete(msg.author.id);
+        }, (1000*60*60*24));
+
+    }
+	});
+	}
+
 	function insure(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((5 / 10) * money);
+			var percentage = Math.floor((3 / 10) * money);
 			sql = `UPDATE user SET money = ${money - percentage} WHERE id = '${message.author.id}'`;
 			member.addRole(insurance).catch(console.error);
 			con.query(sql);
@@ -271,8 +303,8 @@ console.log(message.author.username);
 			
 		} else {
 			if(message.member.roles.find("name", "allstate") ) {
-				num = 0;
-  			message.reply("'s insurance kicked in! No Money lost!")
+				num = num / 2;
+  			message.reply("'s insurance kicked in! Losses cut in half!")
   			member.removeRole(insurance).catch(console.error);
 			} else {
   			console.log(`Nope, noppers, nadda.`);
@@ -280,6 +312,7 @@ console.log(message.author.username);
 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			
+			message.reply("*CHA~CHING!* You lost $" + num + "!");
 		}
 
 
@@ -296,7 +329,7 @@ console.log(message.author.username);
 	function waifuPic(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe 1girl', random: true }).then(posts => {
+		booru.posts({ tags: 'rating:safe 1girl solo', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -321,7 +354,7 @@ console.log(message.author.username);
 	function husbandoPic(){
 		console.log("husbando");
 		const booru = new Danbooru()
-		booru.posts({ tags: 'rating:safe 1boy', random: true }).then(posts => {
+		booru.posts({ tags: 'rating:safe 1boy solo', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -488,7 +521,7 @@ console.log(message.author.username);
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			message.channel.send(box1 + box2 + box3);
-			message.reply("**JACKPOTTTTTT** You made $1000000 Nya~!");
+			message.reply("**JACKPOTTTTTT** You made $1000000!");
 
 			
 		} else if(slot1 === slot2 && slot1 === slot3 && slot1 != 7){
@@ -554,11 +587,11 @@ console.log(message.author.username);
 			
 		}
 		 else {
-			prize = 10;
+			prize = money * .01;
 			if(message.member.roles.find("name", "allstate") ) {
-				prize = 0;
+				prize = math.floor((money * .01)/2);
 				member.removeRole(insurance).catch(console.error);
-  			message.reply("'s insurance kicked in! No Money lost!")
+  			message.reply("'s insurance kicked in! Losses cut in half!")
 			} else {
   			console.log(`Nope, noppers, nadda.`);
 			}
@@ -781,7 +814,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 
 }
-
+if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
 	if(messageArray.indexOf(phrase10.toLowerCase()) != -1){
 		
 		
@@ -798,7 +831,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	}
 	
-
+}
 	
 	
 // 	} else {
@@ -821,21 +854,21 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 // 	}	
 	
 	
-	if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
-		var im = "I'm"
-		var pos = messageArray.indexOf(im);
+	// if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
+	// 	var im = "I'm"
+	// 	var pos = messageArray.indexOf(im);
 		
 		
-		var chance = Math.floor(Math.random() * 15) + 1;
+	// 	var chance = Math.floor(Math.random() * 15) + 1;
 		
 		
-			if(messageArray[pos + 1] != undefined && chance === 1){
-				return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
-			} else {
-			return 
-		    }
+	// 		if(messageArray[pos + 1] != undefined && chance === 1){
+	// 			return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
+	// 		} else {
+	// 		return 
+	// 	    }
 
-	}
+	// }
 	
 	function whom(){
 	var userList = message.channel.members.filter(m => m.user.bot === false);
@@ -883,7 +916,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 	}
 
 
-
+if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
 	if(command.toLowerCase() === phrase1 && messageArray[1].toLowerCase() === phrase2 && messageArray[2] === undefined){
 
 		
@@ -1002,7 +1035,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 	}
 
-
+}
 
 
 
@@ -1113,7 +1146,24 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
-		
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe punching', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
 
 		return message.reply(`beat ` + toBeat  + ` up!` || `beat ` + toBeat.user + ` up!` );
 
@@ -1122,18 +1172,31 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}hug`){
-		var random = Math.floor(Math.random() * 4) + 1;
-		var hugs = ["https://tenor.com/view/anime-hug-gif-9200935", "https://tenor.com/view/hug-anime-love-dragon-loli-gif-9920978", "https://tenor.com/view/hug-anime-gif-10195705", "https://tenor.com/view/anime-run-hug-gif-9096291"];
 		
 		
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
-		
-// 		message.channel.send("Hugs", {
-//     		file: hugs[random-1] // Or replace with FileOptions object
-// 		});
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe hug', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
 		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
 		
 	}
@@ -1340,7 +1403,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. \n 50% of your money | **insurance**: \n Your next gamble will not contain any losses. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
+			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. `!buy customRole [name] #hexcolor` \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
@@ -1429,8 +1492,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.2.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n Spends $10 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setTitle("KS Bot Version 0.3.1: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n Spends 1% of your money for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
@@ -1470,8 +1533,8 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.2.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN (permission to delete messages required for *full* effect) \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. (requires permission to delete messages to work) \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into bot spam.")
+			.setTitle("KS Bot Version 0.3.1: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n Spends 1% of your money for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into bot spam.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
@@ -1673,6 +1736,21 @@ if (message.guild.id == '456956416377225218') {
 		
 
 		bio();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}daily`){
+		
+
+		daily();
 
 			
 
