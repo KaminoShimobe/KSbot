@@ -595,7 +595,7 @@ console.log(message.author.username);
 		 else {
 			prize = money * .01;
 			if(message.member.roles.find("name", "allstate") ) {
-				prize = math.floor((money * .01)/2);
+				prize = Math.floor((money * .01)/2);
 				member.removeRole(insurance).catch(console.error);
   			message.reply("'s insurance kicked in! Losses cut in half!")
 			} else {
