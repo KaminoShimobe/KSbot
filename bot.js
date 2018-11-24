@@ -234,7 +234,11 @@ console.log(message.author.username);
 
 		var check;
 
-			
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}	
 
 		if (talkedRecently.has(message.author.id)) {
             message.reply("You have already collected your daily check!");
