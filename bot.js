@@ -247,6 +247,7 @@ console.log(message.author.username);
 		}
     	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
+        con.query(sql); 
            message.reply(" got $" + check + "!");
         // Adds the user to the set so that they can't talk for a minute
         talkedRecently.add(message.author.id);
