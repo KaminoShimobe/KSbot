@@ -234,16 +234,17 @@ console.log(message.author.username);
 
 		var check;
 
-		if(message.member.roles.find("name", "Father") ) {
-			check = 100000;
-		} else {
-			check = 1000;
-		}	
+			
 
 		if (talkedRecently.has(message.author.id)) {
             message.reply("You have already collected your daily check!");
             return;
     } else {
+    	if(message.member.roles.find("name", "Father") ) {
+			check = 100000;
+		} else {
+			check = 1000;
+		}
     	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
            message.reply(" got $" + check + "!");
