@@ -393,7 +393,7 @@ console.log(message.author.username);
 						if(err) throw err;
 
 						if(rows.length < 1) {
-							sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${potential.id}', ${message.author.id},)`;
+							sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${potential.id}', ${message.author.id})`;
 							con.query(sql, console.log);
 							console.log("married???")
 							
@@ -409,7 +409,7 @@ console.log(message.author.username);
 		if(err) throw err;
 		
 		if(rows.length < 1) {
-			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', ${potential.id},)`;
+			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', ${potential.id})`;
 			con.query(sql, console.log);
 			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 		}
@@ -667,9 +667,9 @@ console.log(message.author.username);
 			
 		}
 		 else {
-			prize = 100;
+			prize = 10;
 			if(message.member.roles.find("name", "allstate") ) {
-				prize = 50;
+				prize = 5;
 				member.removeRole(insurance).catch(console.error);
   			message.reply("'s insurance kicked in! Losses cut in half!")
 			} else {
