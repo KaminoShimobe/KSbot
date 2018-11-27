@@ -1,3 +1,4 @@
+
 const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
@@ -390,11 +391,13 @@ console.log(message.author.username);
             		if (message.content == `I do`) {
             		con.query(`SELECT * FROM marriage WHERE id = '${potential.id}'`, (err, rows) => {
 						if(err) throw err;
-
+						console.log("here in marriage database");
 						if(rows.length < 1) {
+							console.log("gonna enter marriage stuff");
+							let sql;
 							sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${potential.id}', '${message.author.id}')`;
 							con.query(sql, console.log);
-							console.log("married???")
+							console.log("married???");
 							
 						}
 
@@ -408,6 +411,8 @@ console.log(message.author.username);
 		if(err) throw err;
 		
 		if(rows.length < 1) {
+			console.log("gonna enter marriage stuff");
+			let sql;
 			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', '${potential.id}')`;
 			con.query(sql, console.log);
 			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
