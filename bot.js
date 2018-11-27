@@ -382,6 +382,64 @@ console.log(message.author.username);
   
 
 	}
+
+	function consent(){
+		let potential = message.mentions.users.first() || message.guild.members.get(args[0]);
+		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "I do" to accept.)`);
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `I do`) {
+            		con.query(`SELECT * FROM marriage WHERE id = '${potential.id}'`, (err, rows) => {
+						if(err) throw err;
+
+						if(rows.length < 1) {
+							sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${potential.id}', ${message.author.id},)`;
+							con.query(sql, console.log);
+							console.log("married???")
+							
+						}
+
+						else{
+							message.channel.send("They're already married!");
+							return;
+						}
+					});	
+               		 marriage();
+                		return;
+            		} else {
+				 message.react('🇫')
+
+  				.then(console.log("Reacted."))
+
+  				.catch(console.error);	
+
+		 		return message.channel.send("**Press F to pay respects.**");
+			}
+			});
+	}
+
+	function marriage(){
+		let spouseId = message.mentions.users.first() || message.guild.members.get(args[0]);
+		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		if(rows.length < 1) {
+			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', ${spouseId.id},)`;
+			con.query(sql, console.log);
+			return message.reply(`got married to ` + spouseId  + `! :tada:` || `got married to ` + spouseId.user + `! :tada:` );
+		}
+
+		else{
+			message.channel.send("You're already married!");
+		}
+		
+		
+
+		});
+
+
+	
+	}
 	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -643,8 +701,23 @@ console.log(message.author.username);
 		
 	}
 
-	function viewUser(){
 
+
+	function viewUser(){
+	var spouseMsg = "";	
+con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let id = rows[0].idSpouse
+
+		if(rows.length < 1) {
+			
+			
+		} else {
+			var spouse = bot.users.get(id);
+			spouseMsg = `\n :ring: Married to ${spouse} :heart:`
+		}
+});	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -663,7 +736,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username)
-			.setDescription("Money: $" + money + "\n" + bio)
+			.setDescription("Money: $" + money + "\n" + bio + spouseMsg)
 			.setColor("#4286f4"); 
 
 		message.channel.sendEmbed(stats);
@@ -679,7 +752,20 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 let other = message.mentions.users.first();
 
 function viewOtherUser(){
+var spouseMsg = "";	
+con.query(`SELECT * FROM marriage WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
 
+		let id = rows[0].idSpouse
+
+		if(rows.length < 1) {
+			
+			
+		} else {
+			var spouse = bot.users.get(id);
+			spouseMsg = `\n :ring: Married to ${spouse} :heart:`
+		}
+});	
 
 
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
@@ -697,7 +783,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username)
-			.setDescription("Money: $" + money + "\n" + bio)
+			.setDescription("Money: $" + money + "\n" + bio + spouseMsg)
 			.setColor("#d10026"); 
 
 		message.channel.sendEmbed(stats);
@@ -1409,7 +1495,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole**: \n Creates a custom role with it's own color. `!buy customRole [name] #hexcolor` \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic.")
+			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
@@ -1472,6 +1558,32 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			insure();
 		}
 
+	if(command === `${prefix}buy` && messageArray[1] === "marriageRegistration" && messageArray[2] === "for" && messageArray[3] != undefined){
+			let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
+			if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
+			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 10000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+			con.query(sql);	
+			consent();
+		});
+	
+
+			
+		}	
+
 	if(command === `${prefix}spin` && messageArray[1] != undefined){
 
 
@@ -1498,7 +1610,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.3.1: commands")
+			.setTitle("KS Bot Version 0.3.2: commands")
 			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
@@ -1706,6 +1818,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		return;
 
 	}
+
+
 	
 if (message.guild.id == '456956416377225218') {
 	if(command === `${prefix}ZAWARUDO`){
