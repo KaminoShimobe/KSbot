@@ -1,4 +1,3 @@
-
 const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
