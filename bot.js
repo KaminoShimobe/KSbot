@@ -414,8 +414,8 @@ console.log(message.author.username);
 		
 		if(rows.length < 1) {
 			console.log("gonna enter marriage stuff");
-			let sql;
-			sql = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', '${potential.id}')`;
+			let sql2;
+			sql2 = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', '${potential.id}')`;
 			con.query(sql, console.log);
 			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 		}
