@@ -389,13 +389,15 @@ console.log(message.author.username);
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `I do`) {
+            			console.log("I DO DAMN IT");
             		con.query(`SELECT * FROM marriage WHERE id = '${potential.id}'`, (err, rows) => {
 						if(err) throw err;
 						console.log("here in marriage database");
+						let sql;
 						if(rows.length < 1) {
 							console.log("gonna enter marriage stuff");
-							let sql;
-							sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${potential.id}', '${message.author.id}')`;
+							
+							sql = `INSERT INTO marriage (id, spouseID) VALUES ('${potential.id}', '${message.author.id}')`;
 							con.query(sql, console.log);
 							console.log("married???");
 							
@@ -413,7 +415,7 @@ console.log(message.author.username);
 		if(rows.length < 1) {
 			console.log("gonna enter marriage stuff");
 			let sql;
-			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', '${potential.id}')`;
+			sql = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', '${potential.id}')`;
 			con.query(sql, console.log);
 			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 		}
@@ -748,8 +750,7 @@ console.log(message.author.username);
 con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
-		let id = rows[0].idSpouse
-
+		let id = rows[0].spouseId
 		if(rows.length < 1) {
 			
 			
@@ -796,7 +797,7 @@ var spouseMsg = "";
 con.query(`SELECT * FROM marriage WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 
-		let id = rows[0].idSpouse
+		let id = rows[0].spouseId
 
 		if(rows.length < 1) {
 			
