@@ -388,7 +388,7 @@ console.log(message.author.username);
 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "I do" to accept.)`);
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `I do`) {
+            		if (message.content === "I do") {
             			console.log("I DO DAMN IT");
             		con.query(`SELECT * FROM marriage WHERE id = '${potential.id}'`, (err, rows) => {
 						if(err) throw err;
