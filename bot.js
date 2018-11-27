@@ -404,7 +404,23 @@ console.log(message.author.username);
 							return;
 						}
 					});	
-               		 marriage();
+               		 
+		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		if(rows.length < 1) {
+			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', ${potential.id},)`;
+			con.query(sql, console.log);
+			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
+		}
+
+		else{
+			message.channel.send("You're already married!");
+		}
+		
+		
+
+		});
                 		return;
             		} else {
 				 message.react('🇫')
