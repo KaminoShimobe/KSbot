@@ -408,25 +408,11 @@ console.log(message.author.username);
 							return;
 						}
 					});	
-               		 
-		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		
-		if(rows.length < 1) {
-			console.log("gonna enter marriage stuff");
-			let sql2;
-			sql2 = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', '${potential.id}')`;
-			con.query(sql, console.log);
-			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
-		}
-
-		else{
-			message.channel.send("You're already married!");
-		}
-		
+        
+			marriage();
 		
 
-		});
+	
                 		return;
             		} else {
 				 message.react('🇫')
@@ -441,14 +427,14 @@ console.log(message.author.username);
 	}
 
 	function marriage(){
-		let spouseId = message.mentions.users.first() || message.guild.members.get(args[0]);
+		
 		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
 		if(rows.length < 1) {
-			sql = `INSERT INTO marriage (id, idSpouse) VALUES ('${message.author.id}', ${spouseId.id},)`;
+			sql = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', ${potential.id})`;
 			con.query(sql, console.log);
-			return message.reply(`got married to ` + spouseId  + `! :tada:` || `got married to ` + spouseId.user + `! :tada:` );
+			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 		}
 
 		else{
