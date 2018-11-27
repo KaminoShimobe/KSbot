@@ -460,6 +460,26 @@ console.log(message.author.username);
 
 	
 	}
+
+	function divorce(){
+		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			console.log("Divorce");
+			message.channel.send("You single af wyd.");
+		}
+
+		else{
+			sql = `DELETE FROM marriage WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.channel.send("You are now single!");
+		}
+		
+		
+
+		});
+	}
 	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -1651,7 +1671,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("KS Bot Version 0.2.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user.  \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!divorce**: Divorces one person. other person has to divorce for you all to be divorced.  \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into KS Bot's room in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
@@ -1787,6 +1807,19 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	if(command === `${prefix}user`){
 
 		addUser();
+		 
+
+
+
+		 return;
+
+
+
+	}
+
+	if(command === `${prefix}divorce`){
+
+		divorce();
 		 
 
 
