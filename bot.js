@@ -225,6 +225,7 @@ console.log(message.author.username);
 
 	const member = message.member;
 	let insurance = message.guild.roles.find("name", "allstate");
+	let ticket = message.guild.roles.find("name", "tournament");
 
 	function daily(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -244,7 +245,7 @@ console.log(message.author.username);
             message.reply("You have already collected your daily check!");
             return;
     } else {
-    	if(message.member.roles.find("name", "Father") ) {
+    	if(message.author.id !== '242118931769196544') {
 			check = 100000;
 		} else {
 			check = 1000;
@@ -276,6 +277,41 @@ console.log(message.author.username);
 			message.reply("Insurance Purchased for $" + percentage +"! You are now in good hands!");
 			return;
 			});
+	}
+
+	function tourney(){
+
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		if(message.member.roles.find("name", "tournament")){
+			message.reply("You already have a ticket!");
+		}
+
+		
+		
+		if(money < 10000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}	
+			const trainingRoom = bot.channels.get('517363501883457540');
+			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+			member.addRole(ticket).catch(console.error);
+			con.query(sql);
+			trainingRoom.send(`${message.author} has joined the battle!`);
+			return;
+
+
+			
+			});
+	
 	}
 
 	function gambleFlip(){
@@ -1522,7 +1558,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds!")
+			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $10,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
@@ -1584,6 +1620,10 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	if(command === `${prefix}buy` && messageArray[1] === "insurance"){
 			insure();
 		}
+
+	if(command === `${prefix}buy` && messageArray[1] === "ticket"){
+			tourney();
+		}	
 
 	if(command === `${prefix}buy` && messageArray[1] === "marriageRegistration" && messageArray[2] === "for" && messageArray[3] != undefined){
 			let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
