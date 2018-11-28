@@ -245,7 +245,7 @@ console.log(message.author.username);
             message.reply("You have already collected your daily check!");
             return;
     } else {
-    	if(message.author.id !== '242118931769196544') {
+    	if(message.author.id == '242118931769196544') {
 			check = 100000;
 		} else {
 			check = 1000;
