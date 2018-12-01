@@ -1933,6 +1933,7 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
+}	
 	
 	if(command === `${prefix}bio`){
 		
@@ -1979,7 +1980,7 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
-}
+
 
 
 
