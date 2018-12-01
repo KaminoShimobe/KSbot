@@ -58,7 +58,9 @@ bot.on('guildMemberAdd', member => {
 if (message.guild.id == '235197222587727872') {
 	const wank = bot.emojis.get("398321346247131136");
 	member.guild.channels.get("235197222587727872").send(`${member} Welcome to the Pauli Pocket Circlejerk. Keep jerkin or ur gay ${wank}`);
-}
+} else{
+	member.guild.channels.get("496313147808940033").send(`${member} Welcome to Kamino's House!`);
+}	
 // if (message.guild.id == '456956416377225218') {	
 //     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
 // }	
