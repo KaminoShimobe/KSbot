@@ -176,6 +176,74 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			});
 	}
 	
+	if(command === `${prefix}buy` && messageArray[1] === `lewdWaifu`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		lewdWaifu();
+
+		});
+	}	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `lewdHusbando`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		lewdHusbando();
+
+		});
+	}	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `customPic` && messageArray[2] != undefined){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 5000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 5000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		customPic();
+
+		});
+	}	
 
 	if(message.channel.type === "dm") return;
 	
@@ -477,6 +545,83 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			.setColor("#4327f7"); 
 
 		message.channel.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
+	
+	function lewdWaifu(){
+		console.log("waifu");
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:explicit 1girl solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#ff30e0"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+		
+		
+
+	}
+	
+	function lewdHusbando(){
+		console.log("husbando");
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:explicit 1boy solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#4327f7"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
+	
+	function customPic(){
+		console.log("LEWD");
+		const booru = new Danbooru()
+		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#7b18a3"); 
+
+		message.author.sendEmbed(pic);
  		
   		 })
 			
@@ -1297,7 +1442,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also bug fixes")
+			.setDescription("- Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also bug fixes")
 			.setColor("#1f3c5b");
 			
 			
@@ -1437,6 +1582,38 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
 		
 	}
+	
+	if(command === `${prefix}pat`){
+		
+		
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe petting solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
+		return message.reply(`pat ` + toBeat  + `!` || `pat ` + toBeat.user + `!` );
+		
+	}
+	
+
 
 
 
@@ -1640,7 +1817,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $10,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
+			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking.  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $10,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
