@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated! Check me out with !patchNotes");
+ 	channel.sendMessage("I have been updated! \n Check me out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -213,8 +213,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		let bio = rows[0].bio;
 		console.log(bio);
 		var wait = Math.floor(Math.random() * 200) + 1;
-		if(message.author.id == '242118931769196544'){
-			 message.channel.send("The culprit is...");
+		
+		 message.channel.send("The culprit is...");
 
 		 message.channel.send(".");
 
@@ -229,9 +229,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 
 		 setTimeout(message.channel.send("```"+ bio + "```"), wait);
-		} else {
-			message.channel.send("You do not have permissions to use that!");
-		}	
+			
 		});	
 	}
 	
@@ -1298,7 +1296,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- EXPOSE WORKS BUT I CANT SPELL BUT NOW I CAN. Working on marriage next! \n -PATCHNOTES")
+			.setDescription("- EXPOSE WORKS BUT COSTS $50K. Working on marriage next! \n - Also bug fixes")
 			.setColor("#1f3c5b");
 			
 			
@@ -1753,7 +1751,26 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}	
 	
 	if(command === `${prefix}expose`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 50000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		exposeSET();
+
+		});
 
 		exposeSET();
 
