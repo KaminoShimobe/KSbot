@@ -183,7 +183,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		var check = parseInt(messageArray[1]);
 			
 	 
-	if(Number.isInteger(check) === true && money >= check){
+	if(Number.isInteger(check) === true){
 		sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
