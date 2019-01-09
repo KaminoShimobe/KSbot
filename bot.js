@@ -556,7 +556,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function lewdWaifu(){
 		console.log("waifu");
 		const booru = new Danbooru()
-		booru.posts({ tags: '1girl solo', random: true }).then(posts => {
+		booru.posts({ tags: '1girl rating:explicit', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -581,7 +581,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function lewdHusbando(){
 		console.log("husbando");
 		const booru = new Danbooru()
-		booru.posts({ tags: '1boy solo', random: true }).then(posts => {
+		booru.posts({ tags: '1boy rating:explicit', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
