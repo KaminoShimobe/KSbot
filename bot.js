@@ -29,7 +29,8 @@ const antispam = require("discord-anti-spam");
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
-
+	var channel = bot.channels.get('510954222536097807');
+ 	channel.sendMessage("I have been updated! Check me out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -130,7 +131,7 @@ bot.on("message", async message => {
 	var chancu = 0;
 	const room = bot.channels.get(rooms[chancu]);
 	const botspam = bot.channels.get('452166943093293059');
-	
+	var currPerson = "";
 	if(command === `${prefix}whisper`){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -146,6 +147,7 @@ bot.on("message", async message => {
 				message.author.send("Message Sent.");
 				//BOI
 console.log(message.author.username);
+currPerson = message.author.username;				
 			}
 			});
 	}
@@ -170,6 +172,15 @@ console.log(message.author.username);
 	
 
 	if(message.channel.type === "dm") return;
+	
+	function expose(){
+		console.log(currPerson);
+		if(message.author.id == '242118931769196544'){
+			message.channel.send("Exposed name here!");
+		} else {
+			message.channel.send("You do not have permissions to use that!");
+		}	
+	}
 	
 	function getMuns(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -1227,6 +1238,23 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		return;
 
 	}
+	
+	if(command === `${prefix}patchNotes`){
+		
+		let notes = new Discord.RichEmbed()
+
+			
+			.setTitle("Patch Notes: 1-9-19 ")
+			.setDescription("- TESTING expose so you all would stop being mean uwu \n -PATCHNOTES")
+			.setColor("#1f3c5b");
+			
+			
+
+		message.channel.sendEmbed(notes);
+
+		 
+
+		 		}
 
 	if(command === `${prefix}flip`){
 
@@ -1670,7 +1698,15 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		return;
 
 	}	
+	
+	if(command === `${prefix}expose`){
 
+
+		expose();
+
+		return;
+
+	}
 
 
 
@@ -1680,7 +1716,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("KS Bot Version 0.3.2: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(help);
