@@ -233,6 +233,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});	
 	}
 	
+	
+	
 	function getMuns(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -490,17 +492,18 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
         		collector.once('collect', message => {
             		if (message.content === "I do") {
             			console.log("I DO DAMN IT");
-            		con.query(`SELECT * FROM marriage WHERE id = '${potential.id}'`, (err, rows) => {
+            		con.query(`SELECT * FROM user WHERE id = 'M${potential.id}'`, (err, rows) => {
 						if(err) throw err;
 						console.log("here in marriage database");
 						let sql;
 						if(rows.length < 1) {
 							console.log("gonna enter marriage stuff");
 							
-							sql = `INSERT INTO marriage (id, spouseId) VALUES ('${potential.id}', '${message.author.id}')`;
+							sql = `INSERT INTO user (id, bio) VALUES ('M${potential.id}', ':ring: is married to ${message.author.username} :heart:')`;
 							con.query(sql, console.log);
+							sql = `INSERT INTO user (id, bio) VALUES ('M${message.author.id}', ':ring: is married to ${potential.username} :heart:')`;
 							console.log("married???");
-							
+							message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 						}
 
 						else{
@@ -509,7 +512,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 						}
 					});	
         
-			marriage();
+			
 		
 
 	
@@ -526,31 +529,32 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			});
 	}
 
-	function marriage(){
+// 	function marriage(){
 		
-		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
+// 		con.query(`SELECT * FROM user WHERE id = 'M${message.author.id}'`, (err, rows) => {
+// 		if(err) throw err;
 		
-		if(rows.length < 1) {
-			sql = `INSERT INTO marriage (id, spouseId) VALUES ('${message.author.id}', ${potential.id})`;
-			con.query(sql, console.log);
-			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
-		}
+// 		if(rows.length < 1) {
+// 			sql = `INSERT INTO user (id, bio) VALUES ('M${potential.id}', ':ring: is married to ${message.author.username} :heart:')`;
+// 			sql = `INSERT INTO marriage (id, bio) VALUES ('M${message.author.id}', ${potential.id})`;
+// 			con.query(sql, console.log);
+// 			return message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
+// 		}
 
-		else{
-			message.channel.send("You're already married!");
-		}
+// 		else{
+// 			message.channel.send("You're already married!");
+// 		}
 		
 		
 
-		});
+// 		});
 
 
 	
-	}
+// 	}
 
 	function divorce(){
-		con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
+		con.query(`SELECT * FROM user WHERE id = 'M${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
@@ -559,7 +563,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 
 		else{
-			sql = `DELETE FROM marriage WHERE id = '${message.author.id}'`;
+			sql = `DELETE FROM user WHERE id = 'M${message.author.id}'`;
 			con.query(sql, console.log);
 			message.channel.send("You are now single!");
 		}
@@ -832,19 +836,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 
 	function viewUser(){
-	var spouseMsg = "";	
-con.query(`SELECT * FROM marriage WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		let id = rows[0].spouseId
-		if(rows.length < 1) {
-			
-			
-		} else {
-			var spouse = bot.users.get(id);
-			spouseMsg = `\n :ring: Married to ${spouse} :heart:`
-		}
-});	
+		
+	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -863,7 +856,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username)
-			.setDescription("Money: $" + money + "\n" + bio + spouseMsg)
+			.setDescription("Money: $" + money + "\n" + bio)
 			.setColor("#4286f4"); 
 
 		message.channel.sendEmbed(stats);
@@ -873,27 +866,24 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		
 
 	});
+con.query(`SELECT * FROM user WHERE id = 'M${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let status = rows[0].bio
+		if(rows.length < 1) {
+			
+			
+		} else {
+			message.channel.send("**" + status + "**");
+		}
+});		
 
 }
 
 let other = message.mentions.users.first();
 
 function viewOtherUser(){
-var spouseMsg = "";	
-con.query(`SELECT * FROM marriage WHERE id = '${other.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		let id = rows[0].spouseId
-
-		if(rows.length < 1) {
-			
-			
-		} else {
-			var spouse = bot.users.get(id);
-			spouseMsg = `\n :ring: Married to ${spouse} :heart:`
-		}
-});	
-
+	
 
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -920,6 +910,17 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		
 
 	});
+con.query(`SELECT * FROM user WHERE id = 'M${other.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let status = rows[0].bio
+		if(rows.length < 1) {
+			
+			
+		} else {
+			message.channel.send("**" + status + "**");
+		}
+});	
 
 return;
 }
@@ -1296,7 +1297,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- Expose doesn't repeat now. Working on marriage next! \n - Also bug fixes")
+			.setDescription("- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also bug fixes")
 			.setColor("#1f3c5b");
 			
 			
