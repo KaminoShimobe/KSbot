@@ -1099,7 +1099,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username)
-			.setDescription("Money: $" + money + "\n" + bio + spouseMsg)
+			.setDescription("Money: $" + money + "\n" + bio)
 			.setColor("#d10026"); 
 
 		message.channel.sendEmbed(stats);
@@ -1496,7 +1496,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("-Amulet Coin and other stuff \n - Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also !pat [user]")
+			.setDescription("- Fixed bug in !view [other user] \n -Amulet Coin and other stuff \n - Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also !pat [user]")
 			.setColor("#1f3c5b");
 			
 			
