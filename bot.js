@@ -133,6 +133,10 @@ bot.on("message", async message => {
 	const botspam = bot.channels.get('452166943093293059');
 	var currPerson = "";
 	if(command === `${prefix}whisper`){
+		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let bio = rows[0].bio;
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
@@ -147,8 +151,10 @@ bot.on("message", async message => {
 				message.author.send("Message Sent.");
 				//BOI
 console.log(message.author.username);
-currPerson = message.author.username;				
+sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
+				con.query(sql);				
 			}
+			});
 			});
 	}
 
@@ -173,13 +179,60 @@ currPerson = message.author.username;
 
 	if(message.channel.type === "dm") return;
 	
+	function exposeSET(){
+		
+		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}, '')`;
+			con.query(sql, console.log);
+			message.channel.send("Time to Expose.");
+			return;
+		}	else {
+
+			expose();
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+	
+	}
+	
+	
 	function expose(){
-		console.log(currPerson);
+		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let bio = rows[0].bio;
+		console.log(bio);
+		var wait = Math.floor(Math.random() * 200) + 1;
 		if(message.author.id == '242118931769196544'){
-			message.channel.send("Exposed name here!");
+			 message.channel.send("The culpret is...");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 
+
+
+
+		 setTimeout(message.channel.send("```"+ bio + "```"), wait);
 		} else {
 			message.channel.send("You do not have permissions to use that!");
 		}	
+		});	
 	}
 	
 	function getMuns(){
@@ -1245,7 +1298,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- TESTING expose so you all would stop being mean uwu \n -PATCHNOTES")
+			.setDescription("- Expose should work now. Working on marriage next! \n -PATCHNOTES")
 			.setColor("#1f3c5b");
 			
 			
@@ -1702,7 +1755,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	if(command === `${prefix}expose`){
 
 
-		expose();
+		exposeSET();
 
 		return;
 
