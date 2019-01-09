@@ -214,7 +214,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		console.log(bio);
 		var wait = Math.floor(Math.random() * 200) + 1;
 		if(message.author.id == '242118931769196544'){
-			 message.channel.send("The culpret is...");
+			 message.channel.send("The culprit is...");
 
 		 message.channel.send(".");
 
@@ -1298,7 +1298,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- Expose should work now. Working on marriage next! \n -PATCHNOTES")
+			.setDescription("- EXPOSE WORKS BUT I CANT SPELL BUT NOW I CAN. Working on marriage next! \n -PATCHNOTES")
 			.setColor("#1f3c5b");
 			
 			
