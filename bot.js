@@ -176,6 +176,27 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			});
 	}
 	
+	if(command === `${prefix}pay` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		var money = rows[0].money;
+
+		var check = parseInt(messageArray[1]);
+			
+	 
+	if(Number.isInteger(check) === true && money >= check){
+		sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
+           // the user can type the command ... your command code goes here :)
+        con.query(sql); 
+           message.reply(" collected $" + check + "!");
+		
+	}		
+	else{
+		message.reply("Invalid Option.");
+		return;
+	}		
+		});
+	}	
+	
 	if(command === `${prefix}buy` && messageArray[1] === `lewdWaifu`){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -359,6 +380,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	const member = message.member;
 	let insurance = message.guild.roles.find("name", "allstate");
+	let duo = message.guild.roles.find("name", "Amulet-Coin");
 	let ticket = message.guild.roles.find("name", "tournament");
 
 	function daily(){
@@ -384,6 +406,10 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		} else {
 			check = 1000;
 		}
+	if(message.member.roles.find("name", "Amulet-Coin") ) {
+		check = 2000;
+		message.channel.send("Funds Doubled cus of Amulet coin!");
+	}	
     	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
@@ -471,6 +497,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			} else {
   			console.log(`Nope, noppers, nadda.`);
 			}
+			
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+			num *=2;
+			message.channel.send("Amulet Coin Doubled your earnings!")	
+			}	
+				
 			sql = `UPDATE user SET money = ${money + num} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			
@@ -859,11 +891,16 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			} else {
   			console.log(`Nope, noppers, nadda.`);
 			}
+			
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+				prize = 2000000;
+				message.channel.send("Funds Doubled cus of Amulet coin!");
+			}	
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			message.channel.send(box1 + box2 + box3);
-			message.reply("**JACKPOTTTTTT** You made $1000000!");
-
+			message.reply("**JACKPOTTTTTT** You made $" + prize + "!!");
+			
 			
 		} else if(slot1 === slot2 && slot1 === slot3 && slot1 != 7){
 			prize = (slot1 + (10 * slot2) + (100 * slot3));
@@ -874,6 +911,11 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
   			member.removeRole(insurance).catch(console.error);
 			} else {
   			console.log(`Nope, noppers, nadda.`);
+			}
+			
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+				prize *= 2;
+				message.channel.send("Funds Doubled cus of Amulet coin!");
 			}
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
@@ -890,6 +932,10 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			} else {
   			console.log(`Nope, noppers, nadda.`);
 			}
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+				prize *= 2;
+				message.channel.send("Funds Doubled cus of Amulet coin!");
+			}
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			message.channel.send(box1 + box2 + box3);
@@ -905,11 +951,15 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			} else {
   			console.log(`Nope, noppers, nadda.`);
 			}
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+				prize *= 2;
+				message.channel.send("Funds Doubled cus of Amulet coin!");
+			}
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 		
 			message.channel.send(box1 + box2 + box3);
-			message.reply("*CHA~CHING!* You made $" + prize + " Nya~!");
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
 			
 		}  else if(slot1 === slot3 && slot2 != slot3){
 			prize = (slot1 + (10 * slot3));
@@ -920,6 +970,10 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
   			member.removeRole(insurance).catch(console.error);
 			} else {
   			console.log(`Nope, noppers, nadda.`);
+			}
+			if(message.member.roles.find("name", "Amulet-Coin") ) {
+				prize *= 2;
+				message.channel.send("Funds Doubled cus of Amulet coin!");
 			}
 			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
@@ -1442,7 +1496,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also !pat [user]")
+			.setDescription("-Amulet Coin and other stuff \n - Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also !pat [user]")
 			.setColor("#1f3c5b");
 			
 			
