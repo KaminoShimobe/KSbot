@@ -1296,7 +1296,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- EXPOSE WORKS BUT COSTS $50K. Working on marriage next! \n - Also bug fixes")
+			.setDescription("- Expose doesn't repeat now. Working on marriage next! \n - Also bug fixes")
 			.setColor("#1f3c5b");
 			
 			
@@ -1772,7 +1772,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 		});
 
-		exposeSET();
+		
 
 		return;
 
