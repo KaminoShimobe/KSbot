@@ -186,7 +186,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id}', ${0}, '')`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('EXPOSE', ${0}, '')`;
 			con.query(sql, console.log);
 			message.channel.send("Time to Expose.");
 			return;
