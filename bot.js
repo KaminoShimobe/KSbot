@@ -669,14 +669,14 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
         		collector.once('collect', message => {
             		if (message.content === "I do") {
             			console.log("I DO DAMN IT");
-            		con.query(`SELECT * FROM user WHERE id = 'M' + '${potential.id}'`, (err, rows) => {
+            		con.query(`SELECT * FROM user WHERE id = '${"M" + potential.id}'`, (err, rows) => {
 						if(err) throw err;
 						console.log("here in marriage database");
 						let sql;
 						if(rows.length < 1) {
 							console.log("gonna enter marriage stuff");
 							
-							sql = `INSERT INTO user (id, bio) VALUES ('M' +'${potential.id}', ':ring: is married to ${message.author.username} :heart:')`;
+							sql = `INSERT INTO user (id, bio) VALUES ('${"M" + potential.id}', ':ring: is married to ${message.author.username} :heart:')`;
 							con.query(sql, console.log);
 							
 							console.log("married???");
@@ -689,7 +689,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 						}
 					});	
         		
-			con.query(`SELECT * FROM user WHERE id = 'M${message.author.id}'`, (err, rows) => {
+			con.query(`SELECT * FROM user WHERE id = '${"M" + message.author.id}'`, (err, rows) => {
 						if(err) throw err;
 						console.log("here in marriage database");
 						let sql;
@@ -698,7 +698,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 							
 							
 							
-							sql = `INSERT INTO user (id, bio) VALUES ('M' +'${message.author.id}', ':ring: is married to ${potential.username} :heart:')`;
+							sql = `INSERT INTO user (id, bio) VALUES ('${"M" + message.author.id}', ':ring: is married to ${potential.username} :heart:')`;
 							con.query(sql, console.log);
 							console.log("married???");
 							
@@ -750,7 +750,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 // 	}
 
 	function divorce(){
-		con.query(`SELECT * FROM user WHERE id = 'M' +'${message.author.id}'`, (err, rows) => {
+		con.query(`SELECT * FROM user WHERE id = '${"M" + message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
@@ -759,7 +759,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 
 		else{
-			sql = `DELETE FROM user WHERE id = 'M' +'${message.author.id}'`;
+			sql = `DELETE FROM user WHERE id = '${"M" + message.author.id}'`;
 			con.query(sql, console.log);
 			message.channel.send("You are now single!");
 		}
@@ -1084,7 +1084,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		
 
 	});
-con.query(`SELECT * FROM user WHERE id = 'M' +'${message.author.id}'`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE id = '${"M" + message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
 		let status = rows[0].bio
@@ -1128,7 +1128,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		
 
 	});
-con.query(`SELECT * FROM user WHERE id = 'M' +'${other.id}'`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE id = '${"M" + other.id}'`, (err, rows) => {
 		if(err) throw err;
 
 		let status = rows[0].bio
