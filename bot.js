@@ -680,7 +680,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 							con.query(sql, console.log);
 							sql = `INSERT INTO user (id, bio) VALUES ('M${message.author.id}', ':ring: is married to ${potential.username} :heart:')`;
 							console.log("married???");
-							message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
+							
 						}
 
 						else{
@@ -688,10 +688,29 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 							return;
 						}
 					});	
-        
-			
-		
+        		
+			con.query(`SELECT * FROM user WHERE id = 'M${message.author.id}'`, (err, rows) => {
+						if(err) throw err;
+						console.log("here in marriage database");
+						let sql;
+						if(rows.length < 1) {
+							console.log("gonna enter marriage stuff");
+							
+							
+							
+							sql = `INSERT INTO user (id, bio) VALUES ('M${message.author.id}', ':ring: is married to ${potential.username} :heart:')`;
+							con.query(sql, console.log);
+							console.log("married???");
+							
+						}
 
+						else{
+							message.channel.send("They're already married!");
+							return;
+						}
+					});
+		
+				message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 	
                 		return;
             		} else {
@@ -1495,8 +1514,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-9-19 ")
-			.setDescription("- Fixed bug in !view [other user] \n -Amulet Coin and other stuff \n - Check !shop :rolling_eyes: \n- TESTING MARRIAGE RN HOLY SHIT IS KAMINO ON A ROLL?! \n - Also !pat [user]")
+			.setTitle("Patch Notes: 1-10-19 ")
+			.setDescription("- Need to see if marriage works \n - Also !help dms list")
 			.setColor("#1f3c5b");
 			
 			
@@ -2021,7 +2040,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
-		message.channel.sendEmbed(help);
+		message.author.sendEmbed(help);
 
 		 //message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
 
