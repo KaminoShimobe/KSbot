@@ -676,7 +676,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 						if(rows.length < 1) {
 							console.log("gonna enter marriage stuff");
 							
-							sql = `INSERT INTO user (id, moeny, bio) VALUES ('${potential.id - 1000}', ${0},':ring: is married to ${message.author.username} :heart:')`;
+							sql = `INSERT INTO user (id, money, bio) VALUES ('${potential.id - 1000}', ${0},':ring: is married to ${message.author.username} :heart:')`;
 							con.query(sql, console.log);
 							
 							console.log("married???");
