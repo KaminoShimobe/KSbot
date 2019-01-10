@@ -662,39 +662,39 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	}
 
-	function consent(){
-		let potential = message.mentions.users.first() || message.guild.members.get(args[0]);
-		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "I do" to accept.)`);
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content === "I do") {
-            			var roleName = ":heart:" + potential.username + ":ring:" + message.author.username + ":heart:";
-				message.guild.createRole({
-  				name: roleName,
-  				color: #dd8096,
-			})
+// 	function consent(){
+// 		let potential = message.mentions.users.first() || message.guild.members.get(args[0]);
+// 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "I do" to accept.)`);
+// 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+//         		collector.once('collect', message => {
+//             		if (message.content === "I do") {
+//             			var roleName = ":heart:" + potential.username + ":ring:" + message.author.username + ":heart:";
+// 				message.guild.createRole({
+//   				name: roleName,
+//   				color: #dd8096,
+// 			})
 		
 		
 			
-		.then(role => member.addRole(role).catch(console.error))
-  		.catch(console.error);
+// 		.then(role => member.addRole(role).catch(console.error))
+//   		.catch(console.error);
 		
-  		potential.addRole(roleName).catch(console.error);
+//   		potential.addRole(roleName).catch(console.error);
 				
-				message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
+// 				message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 	
-                		return;
-            		} else {
-				 message.react('🇫')
+//                 		return;
+//             		} else {
+// 				 message.react('🇫')
 
-  				.then(console.log("Reacted."))
+//   				.then(console.log("Reacted."))
 
-  				.catch(console.error);	
+//   				.catch(console.error);	
 
-		 		return message.channel.send("**Press F to pay respects.**");
-			}
-			});
-	}
+// 		 		return message.channel.send("**Press F to pay respects.**");
+// 			}
+// 			});
+// 	}
 
 // 	function marriage(){
 		
@@ -720,9 +720,9 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	
 // 	}
 
-	function divorce(){
-		message.send("Ping Kamino to divorce you unlawful scumbags");
-	}
+// 	function divorce(){
+// 		message.send("Ping Kamino to divorce you unlawful scumbags");
+// 	}
 	
 	function customRole(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
