@@ -668,48 +668,19 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content === "I do") {
-            			console.log("M" + potential.id);
-            		con.query(`SELECT * FROM user WHERE id = '${potential.id - 1000}'`, (err, rows) => {
-						if(err) throw err;
-						console.log("here in marriage database");
-						let sql;
-						if(rows.length < 1) {
-							console.log("gonna enter marriage stuff");
-							
-							sql = `INSERT INTO user (id, money, bio) VALUES ('${potential.id - 1000}', ${0},':ring: is married to ${message.author.username} :heart:')`;
-							con.query(sql, console.log);
-							
-							console.log("married???");
-							
-						}
-
-						else{
-							message.channel.send("They're already married!");
-							return;
-						}
-					});	
-        		
-			con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, rows) => {
-						if(err) throw err;
-						console.log("here in marriage database");
-						let sql;
-						if(rows.length < 1) {
-							console.log("gonna enter marriage stuff");
-							
-							
-							
-							sql = `INSERT INTO user (id, money, bio) VALUES ('${message.author.id - 1000}', ${0}, ':ring: is married to ${potential.username} :heart:')`;
-							con.query(sql, console.log);
-							console.log("married???");
-							
-						}
-
-						else{
-							message.channel.send("They're already married!");
-							return;
-						}
-					});
+            			var roleName = ":heart:" + potential.username + ":ring:" + message.author.username + ":heart:";
+				message.guild.createRole({
+  				name: roleName,
+  				color: #dd8096,
+			})
 		
+		
+			
+		.then(role => member.addRole(role).catch(console.error))
+  		.catch(console.error);
+		
+  		potential.addRole(roleName).catch(console.error);
+				
 				message.reply(`got married to ` + potential  + `! :tada:` || `got married to ` + potential.user + `! :tada:` );
 	
                 		return;
@@ -750,23 +721,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 // 	}
 
 	function divorce(){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		if(rows.length < 1) {
-			console.log("Divorce");
-			message.channel.send("You single af wyd.");
-		}
-
-		else{
-			sql = `DELETE FROM user WHERE id = '${message.author.id - 1000}'`;
-			con.query(sql, console.log);
-			message.channel.send("You are now single!");
-		}
-		
-		
-
-		});
+		message.send("Ping Kamino to divorce you unlawful scumbags");
 	}
 	
 	function customRole(){
@@ -1515,7 +1470,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-10-19 ")
-			.setDescription("- Need to see if marriage works \n - Also !help dms list")
+			.setDescription("- Legit fuck marriage I hate this dumb ass piece of shit function like why is it so damn hard to marry 2 damn people holy fucking hell why can't you cootie infested fiends just jump over a fucking broom and make out it's not that fucking hard HOLY FUCKING SHIT THIS HAS REALLY GOTTEN ON MY NERVES. \n - Also !help dms list")
 			.setColor("#1f3c5b");
 			
 			
