@@ -296,7 +296,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			if(messageArray[2] === "!join"){
+			if(messageArray[2] === "join"){
 			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, ${message.author.username})`;
 			con.query(sql, console.log);
 			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");	
@@ -347,12 +347,13 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				message.reply("Insufficient Funds.");
 				return;
 			} else {
-				sql = `UPDATE user SET money = ${money - 5000} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - cost} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 			}	
 		});
+			var name = " " + message.author.username;
 			if(participants.indexOf(message.author.username) === -1){
-			sql = `UPDATE user SET bio = ${participants + " " + message.author.username}, money = ${cost + cost}  WHERE id = 'TOURNEY'`;
+			sql = `UPDATE user SET bio = ${participants + name}, money = ${cost + cost}  WHERE id = 'TOURNEY'`;
 			con.query(sql);
 			message.reply(" has entered the tournament for $" + cost + "!");
 			} else {
