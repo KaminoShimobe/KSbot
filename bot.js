@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated! \n Check me out with !patchNotes");
+ 	channel.sendMessage("I have been updated with a BIG update! \n Check me out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -267,6 +267,376 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	}	
 
 	if(message.channel.type === "dm") return;
+	
+	
+	
+	function tournamentSET(){
+		var num = parseInt(messageArray[1]);
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		
+		if(money < num) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+		con.query(sql);
+		});
+		
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			if(messageArray[2] === "!join"){
+			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, ${message.author.username})`;
+			con.query(sql, console.log);
+			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");	
+			} else {
+			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, "")`;
+			con.query(sql, console.log);
+			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");
+			}
+			return;
+		}	else {
+
+			message.channel.send("A tournament is undergoing right now!")
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+	
+	}
+	
+	function tournamentJOIN(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let cost = rows[0].money;	
+		let participants = rows[0].bio;
+		if(rows.length < 1) {
+			message.reply(" No tournament going on yet. Make one with !tourney");	
+		}	
+		else{	
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+			if(err) throw err;
+
+			if(rows.length < 1) {
+				message.reply("You have no user!");
+				console.log(rows);
+				return;
+			}
+
+			let money = rows[0].money;
+
+
+			if(money < cost) {
+				message.reply("Insufficient Funds.");
+				return;
+			} else {
+				sql = `UPDATE user SET money = ${money - 5000} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+			}	
+		});
+			if(participants.indexOf(message.author.username) === -1){
+			sql = `UPDATE user SET bio = ${participants + " " + message.author.username}, money = ${cost + cost}  WHERE id = 'TOURNEY'`;
+			con.query(sql);
+			message.reply(" has entered the tournament for $" + cost + "!");
+			} else {
+				message.reply(" has already joined this tournament!");
+				return;
+			}	
+		}	
+		});	
+	}
+	
+	function tournamentSTART(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;
+			if(rows.length < 1) {
+				message.reply(" No tournament to start! Make one with !tourney");
+			}	else {
+				var list = participants.split(" ");
+				message.channel.send("Here are the matches!");
+				var i;
+				if(list.length > 1){
+				for(i = 0; i < list.length + 1; i++){
+					var spot = Math.floor(Math.random() * list.length) + 1;
+					var index = array.indexOf(spot);
+					var player = list[spot];
+					list.splice(index, 1);
+					var spot2 = Math.floor(Math.random() * list.length) + 1;
+					var index2 = array.indexOf(spot2);
+					var player2 = list[spot2];
+					message.channel.send("```" + player + " VS " + player2 + "```");
+							     
+				}
+				} else {
+					message.channel.send("The winner needs to claim his/her prize using !win");
+			}
+			}
+			});
+	}
+	
+	function tournamentSTAT(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;
+			if(rows.length < 1) {
+				message.reply(" No tournament to start! Make one with !tourney");
+			}	else {
+				message.channel.send("Participants: \n" + participants + "\n Prize: \n" + "$" + prize);
+			}
+			});
+	}
+	
+	function tournamentLOSE(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+			if(rows.length < 1) {
+				message.reply(" No tournament to lose! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(message.author.username) === -1){
+				message.reply(" you're not in this tourney to lose!");
+			}	else {
+			var newList = participants.replace(message.author.username, "");	
+			sql = `UPDATE user SET bio = ${newList} WHERE id = 'TOURNEY'`;
+			con.query(sql);
+				}
+			}
+			});
+	}
+	
+	function tournamentWIN(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;	
+			if(rows.length < 1) {
+				message.reply(" No tournament to win! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(message.author.username) === -1){
+				message.reply(" you didn't win this tournament this time around!");
+			}	else {
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+			if(err) throw err;
+
+			if(rows.length < 1) {
+				message.reply("You have no user!");
+				console.log(rows);
+				return;
+			}
+
+			let money = rows[0].money;
+
+				sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply(" CONGRATS FOR WINNING! GGS EVERYONE!!! You got $" + prize + "!");
+				
+		});
+				}
+				sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
+			con.query(sql, console.log);
+			message.channel.send("Tourney SHUT DOWN!");
+			}
+			});
+	}
+	
+	function tournamentKICK(){
+		if(message.author.id == '242118931769196544') {
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+			if(rows.length < 1) {
+				message.reply(" No tournament to kick someone from!! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(messageArray[1].username) === -1){
+				message.reply(" is not there to kick!");
+			}	else {
+			var newList = participants.replace(messageArray[1].username, "");	
+			sql = `UPDATE user SET bio = ${newList} WHERE id = 'TOURNEY'`;
+			con.query(sql);
+				}
+			}
+			});
+		} else {
+			message.reply(" you can't do that!");
+			return;
+		}	
+	}
+	
+	function tournamentEND(){
+		if(message.author.id == '242118931769196544') {
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+
+		let sql;
+		if(rows.length < 1) {
+			message.reply(" No tourney to end!");
+			
+		} else {
+			sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
+			con.query(sql, console.log);
+			message.reply("Tourney SHUT DOWN!");
+		}
+			});
+		} else {
+			message.reply(" cannot end the tourney");
+		}	
+	}
+	
+	if(command === `${prefix}tourney` && messageArray[1] > 0){
+			
+
+		tournamentSET();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}join`){
+			
+
+		tournamentJOIN();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}lose`){
+			
+
+		tournamentLOSE();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}nextRound`){
+			
+
+		tournamentSTART();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}end`){
+			
+
+		tournamentEND();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}status`){
+			
+
+		tournamentSTAT();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}kick`){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");		
+
+		tournamentKICK();
+		
+	
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}win`){
+			
+
+		tournamentWIN();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	
 	
 	function exposeSET(){
 		
@@ -1469,8 +1839,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-10-19 ")
-			.setDescription("- Legit fuck marriage I hate this dumb ass piece of shit function like why is it so damn hard to marry 2 damn people holy fucking hell why can't you cootie infested fiends just jump over a fucking broom and make out it's not that fucking hard HOLY FUCKING SHIT THIS HAS REALLY GOTTEN ON MY NERVES. \n - Also !help dms list")
+			.setTitle("Patch Notes: 1-11-19 ")
+			.setDescription("-YO BRUH WE CAN FUCKING HOST TOURNAMENTS WITH MONEY ON THE LINE(TESTING) SO **Ping Kamino for more details** \n - Also !help dms list")
 			.setColor("#1f3c5b");
 			
 			
