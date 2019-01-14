@@ -1639,8 +1639,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
     		var randomBoi = userList.random().user;
 		var randomBoid = userList.random().user.username;
 		console.log(randomBoi.username);
-		console.log(userList);
-		message.randomBoi.send(`${message.author.username} sends well wishes! He/She wishes you are having a great day!`);
+		
+		randomBoi.send(`${message.author.username} sends well wishes! He/She wishes you are having a great day!`);
 		message.channel.send("Well wishes sent to " + randomBoid +"!");
 		
 	}	
