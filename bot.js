@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated! \n Check me out with !patchNotes");
+ 	channel.sendMessage("I have been updated with a WHOLESOME update! \n Check me out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1634,6 +1634,17 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	// }
 	
+	function wellWish(){
+		var userList = message.channel.members.filter(m => m.user.bot === false);
+    		var randomBoi = userList.random().user;
+		var randomBoid = userList.random().user.username;
+		console.log(randomBoi.username);
+		console.log(userList);
+		message.randomBoi.send(`${message.author.username} sends well wishes! He/She wishes you are having a great day!`);
+		message.channel.send(`Well wishes sent to " + randomBoid +"!");
+		
+	}	
+	
 	function whom(){
 	var userList = message.channel.members.filter(m => m.user.bot === false);
     var randomBoi = userList.random().user;
@@ -1841,7 +1852,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-14-19 CLICK HERE")
-			.setDescription("-A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency** \n - Minor Bug fixes")
+			.setDescription("-A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency** \n - Added a command !wellWish, try it out!")
 			.setColor("#1f3c5b")
 			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
 			
@@ -1851,6 +1862,13 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		 
 
 		 		}
+	
+	if(command === `${prefix}wellWish`){
+		
+		wellWish();
+		 
+
+		 }
 
 	if(command === `${prefix}flip`){
 
@@ -2363,11 +2381,11 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("KS Bot Version 0.3.2: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n **!wellWish** \n Sends a dm to a random person wishing them a good day! \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-
+		message.reply(" sent you a dm of the help list!");
 		 //message.channel.send("```Version 0.1.8: commands are !help, !just, !jk, !8ball, !bubblize, !who [condition], !beat [username], !hug [username], !flip, !whisper, and !userinfo. And we also have some easter eggs!```");
 
 		
