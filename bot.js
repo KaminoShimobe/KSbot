@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated with a BIG update! \n Check me out with !patchNotes");
+ 	channel.sendMessage("I have been updated! \n Check me out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1840,10 +1840,10 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-11-19 ")
-			.setDescription("-YO BRUH WE CAN FUCKING HOST TOURNAMENTS WITH MONEY ON THE LINE(TESTING) SO **Ping Kamino for more details** \n - Also !help dms list")
-			.setColor("#1f3c5b");
-			
+			.setTitle("Patch Notes: 1-14-19 CLICK HERE")
+			.setDescription("-A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency** \n - Minor Bug fixes")
+			.setColor("#1f3c5b")
+			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
 			
 
 		message.channel.sendEmbed(notes);
