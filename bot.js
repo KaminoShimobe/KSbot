@@ -1430,10 +1430,10 @@ function viewLeaderboard(){
 con.query(`SELECT * FROM user ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
-		let rank[] = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
-		let id[] = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
-		let name[] = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
-		let user[] = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
+		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
+		let id = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
+		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
+		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
 
 		let leaderboard = new Discord.RichEmbed()
 
