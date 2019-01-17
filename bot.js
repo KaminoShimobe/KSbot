@@ -369,14 +369,14 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
                		 collect();
                 		return;
             		} else{
-				
+				lostChest();	
 			}
 			});
 		
 		
 		
 		
-		setTimeout(lostChest(), 180000);
+		
 	}	
 
 	function collect(){
