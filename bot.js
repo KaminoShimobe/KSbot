@@ -438,7 +438,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	
 	
 	if(command === `${prefix}open`){
-		collect();
+		//collect();
 	}	
 	
 	function lostChest(){
