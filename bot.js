@@ -365,7 +365,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		room.sendEmbed(item);
 		
-		setTimeout(lostChest(), 180000);
+		
 		
 		
 	}	
