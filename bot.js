@@ -384,6 +384,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	}	
 
 	function collect(){
+		message.channel.send("TRYING");
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
 		let type = rows[0].bio;
