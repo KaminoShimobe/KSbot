@@ -364,19 +364,6 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		
 		room.sendEmbed(item);
-		open();
-		function open(){
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 200000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}open`) {
-			room.send("Trying to open");
-               		 collect();
-                		return;
-            		} else{
-				lostChest();	
-			}
-			});
-		}
 		
 		
 		
@@ -447,7 +434,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		});
 	}
-
+	
+	
+	if(command === `${prefix}open`){
+		collect();
+	}	
+	
 	function lostChest(){
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
