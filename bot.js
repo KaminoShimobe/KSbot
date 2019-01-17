@@ -273,9 +273,11 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function treasure(){
 		var appear = Math.floor(Math.random() * 10) + 1;
 		if(appear == 10){
+			console.log(appear);
 			console.log("YOOMTAH");
 			chest();	
 		} else {
+			console.log(appear);
 			console.log("Oof.");
 			return;	
 		}
