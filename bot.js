@@ -311,7 +311,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			
 			
 		}	else {
-
+			sql = `DELETE FROM user WHERE id = 'CHEST'`;
+		con.query(sql);
 			return;
 		}
 
@@ -341,7 +342,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			
 			
 		}	else {
-
+			sql = `DELETE FROM user WHERE id = 'CHEST'`;
+			con.query(sql);
 			
 			return;
 		}
