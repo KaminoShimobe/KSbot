@@ -280,7 +280,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	}
 	let duo = message.guild.roles.find("name", "Amulet-Coin");
 	
-	chest(){
+	function chest(){
 		var karma = "";
 		var type = Math.floor(Math.random() * 10) + 1;
 		if(type > 3){
@@ -296,7 +296,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			amount = Math.floor(Math.random() * 10000) + 1000
 		} else if(rank === 100){
 			member.addRole(duo).catch(console.error);
-			message.reply(" found an amulet coin!);
+			message.reply(" found an amulet coin!");
 			return;
 		}
 		if(rows.length < 1) {
