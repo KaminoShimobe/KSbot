@@ -365,7 +365,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		room.sendEmbed(item);
 		
-		
+		setTimeout(lostChest(), 180000);
 		
 		
 	}	
@@ -373,7 +373,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function collect(){
 		
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
-		message.channel.send("TRYING");
+		
 		if(err) throw err;
 		let type = rows[0].bio;
 		let cost = rows[0].money;
@@ -438,7 +438,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	
 	
 	if(command === `${prefix}open`){
-		//collect();
+		collect();
 	}	
 	
 	function lostChest(){
@@ -446,6 +446,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		if(err) throw err;
 		let sql;
 		sql = `DELETE FROM user WHERE id = 'CHEST'`;
+		con.query(sql);
 		message.channel.send("The chest mysteriously disappeared!");
 		return;	
 		});
