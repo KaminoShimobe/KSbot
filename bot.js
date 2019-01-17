@@ -368,6 +368,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 200000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}open`) {
+			console.log("Trying to open");
                		 collect();
                 		return;
             		} else{
