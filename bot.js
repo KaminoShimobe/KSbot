@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated with a WHOLESOME update! \n Check me out with !patchNotes");
+ 	channel.sendMessage("I have been updated with a **rad** update! :sunglasses: \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1423,6 +1423,35 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, r
 });		
 
 }
+	
+function viewLeaderboard(){
+		
+	
+con.query(`SELECT * FROM user ORDER BY money DESC LIMIT 10`, (err, rows) => {
+		if(err) throw err;
+		
+		let rank[] = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
+		let id[] = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
+		let name[] = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
+		let user[] = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
+
+		let leaderboard = new Discord.RichEmbed()
+
+			
+			.setTitle("KS Currency Leaderboard")
+			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3." + user[2] + "`\n $" + rank[2] + "\n 4." + user[3] + "`\n $" + rank[3] + "\n 5." + user[4] + "`\n $" + rank[4] + "\n 6." + user[5] + "`\n $" + rank[5] + "\n 7." + user[6] + "`\n $" + rank[6] + "\n 8." + user[7] + "`\n $" + rank[7] + "\n 9." + user[8] + "`\n $" + rank[8] + "\n 10." + user[9] + "`\n $" + rank[9])
+			.setColor("#00fffa"); 
+
+		message.channel.sendEmbed(leaderboard);
+
+
+		
+		
+
+	});
+		
+
+}	
 
 let other = message.mentions.users.first();
 
@@ -1850,8 +1879,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-14-19 CLICK HERE")
-			.setDescription("-A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency** \n - Added a command !wellWish, try it out!")
+			.setTitle("Patch Notes: 1-16-19 CLICK HERE")
+			.setDescription("- Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
 			.setColor("#1f3c5b")
 			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
 			
@@ -2536,6 +2565,19 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	if(command === `${prefix}user`){
 
 		addUser();
+		 
+
+
+
+		 return;
+
+
+
+	}
+	
+	if(command === `${prefix}leaderboard`){
+
+		viewLeaderboard();
 		 
 
 
