@@ -306,7 +306,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, '${karma}')`;
 			con.query(sql, console.log);
 			
 			
@@ -335,7 +335,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, '${karma}')`;
 			
 			con.query(sql, console.log);
 			
