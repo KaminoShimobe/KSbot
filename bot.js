@@ -268,7 +268,191 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	if(message.channel.type === "dm") return;
 	
+	treasure();
 	
+	function treasure(){
+		var appear = Math.floor(Math.random() * 50) + 1;
+		if(appear == 100){
+			chest();	
+		} else {
+			return;	
+		}
+	}
+	let duo = message.guild.roles.find("name", "Amulet-Coin");
+	
+	chest(){
+		var karma = "";
+		var type = Math.floor(Math.random() * 10) + 1;
+		if(type > 3){
+			karma = "good";
+		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = Math.floor(Math.random() * 100000) + 10000
+		} else if(rank >= 11 && rank <= 99){
+			amount = Math.floor(Math.random() * 10000) + 1000
+		} else if(rank === 100){
+			member.addRole(duo).catch(console.error);
+			message.reply(" found an amulet coin!);
+			return;
+		}
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
+			con.query(sql, console.log);
+			
+			return;
+		}	else {
+
+			
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+			
+		} else {
+			karma = "bad";
+			con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = 1;
+		} else if(rank >= 11 && rank <= 99){
+			amount = 2;
+		} else if(rank === 100){
+			amount = 3;
+		}
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
+			con.query(sql, console.log);
+			
+			return;
+		}	else {
+
+			
+			
+
+			
+			return;
+		}
+
+
+		});
+		}
+		
+		 let item = new Discord.RichEmbed()
+
+			.setTitle("A chest has appeared, type !open to open it!")
+			.setImage("https://www.google.com/imgres?imgurl=http%3A%2F%2Fclipart-library.com%2Fimages%2F6Tr5dko7c.png&imgrefurl=http%3A%2F%2Fclipart-library.com%2Fcartoon-treasure-chest.html&docid=tsy18C8j-N3VwM&tbnid=4bqpQOK8eGrTLM%3A&vet=10ahUKEwjvtZXVuPXfAhXos1kKHZ_OBLoQMwhoKAcwBw..i&w=1000&h=786&safe=active&bih=1009&biw=1920&q=cartoon%20chest&ved=0ahUKEwjvtZXVuPXfAhXos1kKHZ_OBLoQMwhoKAcwBw&iact=mrc&uact=8")
+			.setColor("#a57400"); 
+
+		
+		
+		var rooms = ['510954222536097807', '496313478089277445', '456956416847249412', '496323317028880394', '456957934690238464'];
+		var chancu = Math.floor(Math.random() * 5) + 1;
+		const room = bot.channels.get(rooms[chancu]);
+		room.sendEmbed(item);
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 200000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}open`) {
+               		 collect();
+                		return;
+            		} else{
+				
+			}
+			});
+		
+		
+		
+		
+		setTimeout(lostChest(), 180000);
+	}	
+	
+	function collect(){
+		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
+		if(err) throw err;
+		let type = rows[0].bio;
+		let cost = rows[0].money;
+			if(rows.length < 1) {
+			
+			message.reply(" nothing to collect!");
+			
+			return;
+		}	else {
+			if(type == "good"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+		
+
+				sql = `UPDATE user SET money = ${money + cost} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" found $" + cost + " in the chest!");
+				lostChest();	
+				});	
+			} else if(type == "bad"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+				var penalty;
+				if(cost == 1){
+					penalty = money / 2;
+				} else if(cost == 2){
+					penalty = money / 4;
+				} else if(cost == 3){
+					penalty = money / 10;
+				} else {
+					penalty = 1;
+				}	
+
+				sql = `UPDATE user SET money = ${money - penalty} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" lost $" + penalty + " from a trap in the chest!");
+				lostChest();	
+				});
+			}	
+
+			
+			return;
+		}
+		});
+	}
+	
+	function lostChest(){
+		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		sql = `DELETE FROM user WHERE id = 'CHEST'`;
+		message.channel.send("The chest mysteriously disappeared!");
+		return;	
+		});
+	}
 	
 	function tournamentSET(){
 		var num = parseInt(messageArray[1]);
@@ -751,7 +935,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	const member = message.member;
 	let insurance = message.guild.roles.find("name", "allstate");
-	let duo = message.guild.roles.find("name", "Amulet-Coin");
+	
 	let ticket = message.guild.roles.find("name", "tournament");
 
 	function daily(){
@@ -1886,7 +2070,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-16-19 CLICK HERE")
-			.setDescription("- Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
+			.setDescription("-Added a new background function where random chests appear throughout the server! If one appears use !open for a chance to gain **or** lose money! It's really cool! \n Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
 			.setColor("#1f3c5b")
 			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
 			
