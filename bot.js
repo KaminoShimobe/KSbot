@@ -271,8 +271,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	treasure();
 	
 	function treasure(){
-		var appear = Math.floor(Math.random() * 10) + 1;
-		if(appear == 10){
+		var appear = Math.floor(Math.random() * 2) + 1;
+		if(appear == 2){
 			console.log(appear);
 			console.log("YOOMTAH");
 			chest();	
@@ -364,7 +364,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		
 		room.sendEmbed(item);
-		
+		open();
+		function open(){
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 200000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}open`) {
@@ -375,7 +376,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				lostChest();	
 			}
 			});
-		
+		}
 		
 		
 		
