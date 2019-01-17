@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated with a **rad** update! :sunglasses: \n Check it out with !patchNotes");
+ 	channel.sendMessage("I have been updated with a **AWESOME** update! :sunglasses: \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -271,8 +271,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	treasure();
 	
 	function treasure(){
-		var appear = Math.floor(Math.random() * 10) + 1;
-		if(appear == 10){
+		var appear = Math.floor(Math.random() * 25) + 1;
+		if(appear == 25){
 			console.log(appear);
 			console.log("YOOMTAH");
 			chest();	
@@ -354,17 +354,27 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		var chancu = Math.floor(Math.random() * 5) + 1;
 		const room = bot.channels.get(rooms[chancu]);
 		
-		 let item = new Discord.RichEmbed()
+		
+		const booru = new Danbooru()
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let item = new Discord.RichEmbed()
 
 			.setTitle("A chest has appeared, type !open to open it!")
-			.setImage("https://www.google.com/imgres?imgurl=http%3A%2F%2Fclipart-library.com%2Fimages%2F6Tr5dko7c.png&imgrefurl=http%3A%2F%2Fclipart-library.com%2Fcartoon-treasure-chest.html&docid=tsy18C8j-N3VwM&tbnid=4bqpQOK8eGrTLM%3A&vet=10ahUKEwjvtZXVuPXfAhXos1kKHZ_OBLoQMwhoKAcwBw..i&w=1000&h=786&safe=active&bih=1009&biw=1920&q=cartoon%20chest&ved=0ahUKEwjvtZXVuPXfAhXos1kKHZ_OBLoQMwhoKAcwBw&iact=mrc&uact=8")
-			.setColor("#a57400"); 
+			.setImage(url.href)
+			.setColor("#a57400");
 
-		
-		
-		
 		room.sendEmbed(item);
+ 		
+  		 })
 		
+			
 		
 		
 		
@@ -1612,9 +1622,7 @@ function viewLeaderboard(){
 con.query(`SELECT * FROM user ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
-	let sql = `ALTER IGNORE TABLE user
-ADD UNIQUE INDEX "242118931769196544" (id, money, bio);`;
-	con.query(sql);
+	
 	
 	
 	
@@ -2068,7 +2076,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-16-19 CLICK HERE")
-			.setDescription("-Added a new background function where random chests appear throughout the server! If one appears use !open for a chance to gain **or** lose money! It's really cool! \n Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
+			.setDescription("-SPAWN RATES ADJUSTED \n -Added a new background function where random chests appear throughout the server! If one appears use !open for a chance to gain **or** lose money! It's really cool! \n Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
 			.setColor("#1f3c5b")
 			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
 			
