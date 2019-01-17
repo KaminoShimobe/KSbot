@@ -379,7 +379,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		setTimeout(lostChest(), 180000);
 	}	
-	
+}
 	function collect(){
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
@@ -443,7 +443,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		});
 	}
-	
+
 	function lostChest(){
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
