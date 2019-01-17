@@ -1439,7 +1439,7 @@ con.query(`SELECT * FROM user ORDER BY money DESC LIMIT 10`, (err, rows) => {
 
 			
 			.setTitle("KS Currency Leaderboard")
-			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3." + user[2] + "`\n $" + rank[2] + "\n 4." + user[3] + "`\n $" + rank[3] + "\n 5." + user[4] + "`\n $" + rank[4] + "\n 6." + user[5] + "`\n $" + rank[5] + "\n 7." + user[6] + "`\n $" + rank[6] + "\n 8." + user[7] + "`\n $" + rank[7] + "\n 9." + user[8] + "`\n $" + rank[8] + "\n 10." + user[9] + "`\n $" + rank[9])
+			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
 			.setColor("#00fffa"); 
 
 		message.channel.sendEmbed(leaderboard);
