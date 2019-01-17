@@ -307,10 +307,6 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			return;
 		}	else {
 
-			
-			
-
-			
 			return;
 		}
 
@@ -341,15 +337,16 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}	else {
 
 			
-			
-
-			
 			return;
 		}
 
 
 		});
 		}
+		
+		var rooms = ['510954222536097807', '496313478089277445', '456956416847249412', '496323317028880394', '456957934690238464'];
+		var chancu = Math.floor(Math.random() * 5) + 1;
+		const room = bot.channels.get(rooms[chancu]);
 		
 		 let item = new Discord.RichEmbed()
 
@@ -359,9 +356,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 		
 		
-		var rooms = ['510954222536097807', '496313478089277445', '456956416847249412', '496323317028880394', '456957934690238464'];
-		var chancu = Math.floor(Math.random() * 5) + 1;
-		const room = bot.channels.get(rooms[chancu]);
+		
 		room.sendEmbed(item);
 		
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 200000 });
@@ -379,7 +374,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 		setTimeout(lostChest(), 180000);
 	}	
-}
+
 	function collect(){
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
