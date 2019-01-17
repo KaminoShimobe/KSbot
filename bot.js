@@ -306,8 +306,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		if(rows.length < 1) {
 			
-			//sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
-			sql = `UPDATE user SET money = ${amount}, bio = ${karma} WHERE id = 'CHEST'`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
 			con.query(sql, console.log);
 			
 			
@@ -336,8 +335,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		}
 		if(rows.length < 1) {
 			
-			//sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
-			sql = `UPDATE user SET money = ${amount}, bio = ${karma} WHERE id = 'CHEST'`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('CHEST', ${amount}, ${karma})`;
+			
 			con.query(sql, console.log);
 			
 			
@@ -372,8 +371,9 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	}	
 
 	function collect(){
-		message.channel.send("TRYING");
+		
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
+		message.channel.send("TRYING");
 		if(err) throw err;
 		let type = rows[0].bio;
 		let cost = rows[0].money;
