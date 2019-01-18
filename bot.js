@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated with a **AWESOME** update! :sunglasses: \n Check it out with !patchNotes");
+ 	channel.sendMessage("I have been updated!!! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -491,7 +491,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		let sql;
 		if(rows.length < 1) {
 			if(messageArray[2] === "join"){
-			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, ${message.author.username})`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, '${message.author.username}')`;
 			con.query(sql, console.log);
 			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");	
 			} else {
@@ -547,7 +547,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});
 			var name = " " + message.author.username;
 			if(participants.indexOf(message.author.username) === -1){
-			sql = `UPDATE user SET bio = ${participants + name}, money = ${cost + cost}  WHERE id = 'TOURNEY'`;
+			sql = `UPDATE user SET bio = '${participants + name}', money = ${cost + cost}  WHERE id = 'TOURNEY'`;
 			con.query(sql);
 			message.reply(" has entered the tournament for $" + cost + "!");
 			} else {
@@ -615,7 +615,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				message.reply(" you're not in this tourney to lose!");
 			}	else {
 			var newList = participants.replace(message.author.username, "");	
-			sql = `UPDATE user SET bio = ${newList} WHERE id = 'TOURNEY'`;
+			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
 			con.query(sql);
 				}
 			}
@@ -671,7 +671,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				message.reply(" is not there to kick!");
 			}	else {
 			var newList = participants.replace(messageArray[1].username, "");	
-			sql = `UPDATE user SET bio = ${newList} WHERE id = 'TOURNEY'`;
+			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
 			con.query(sql);
 				}
 			}
@@ -2077,10 +2077,10 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-16-19 CLICK HERE")
-			.setDescription("-SPAWN RATES ADJUSTED \n -Added a new background function where random chests appear throughout the server! If one appears use !open for a chance to gain **or** lose money! It's really cool! \n Added a leaderboard you can check with !leaderboard \n -A Super duper cool survey is here! Click the link in the title! **After completing ping Kamino for $5,000 survey currency**")
-			.setColor("#1f3c5b")
-			.setURL("https://goo.gl/forms/SOhnNQTSXVl2qyaC3");
+			.setTitle("Patch Notes: 1-18-19")
+			.setDescription("-SPAWN RATES ADJUSTED FOR CHESTS \n -testing out !tourney command")
+			.setColor("#1f3c5b");
+			
 			
 
 		message.channel.sendEmbed(notes);
