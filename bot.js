@@ -271,8 +271,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	treasure();
 	
 	function treasure(){
-		var appear = Math.floor(Math.random() * 25) + 1;
-		if(appear == 25){
+		var appear = Math.floor(Math.random() * 50) + 1;
+		if(appear == 50){
 			console.log(appear);
 			console.log("YOOMTAH");
 			chest();	
@@ -287,7 +287,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function chest(){
 		var karma = "";
 		var type = Math.floor(Math.random() * 10) + 1;
-		if(type > 3){
+		if(type > 2){
 			karma = "good";
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		if(err) throw err;
@@ -296,12 +296,11 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		var rank = Math.floor(Math.random() * 100) + 1;	
 		var amount = 0;		
 		if(rank >= 1 && rank <= 10){
-			amount = Math.floor(Math.random() * 100000) + 10000
+			amount = Math.floor(Math.random() * 999999) + 10000;
 		} else if(rank >= 11 && rank <= 99){
-			amount = Math.floor(Math.random() * 10000) + 1000
+			amount = Math.floor(Math.random() * 99999) + 1000;
 		} else if(rank === 100){
-			member.addRole(duo).catch(console.error);
-			message.reply(" found an amulet coin!");
+			amount = Math.floor(Math.random() * 9999999) + 100000;
 			return;
 		}
 		if(rows.length < 1) {
@@ -426,9 +425,9 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				let money = rows[0].money;
 				var penalty;
 				if(cost == 1){
-					penalty = money / 2;
+					penalty = money / 100;
 				} else if(cost == 2){
-					penalty = money / 4;
+					penalty = money / 25;
 				} else if(cost == 3){
 					penalty = money / 10;
 				} else {
@@ -2077,8 +2076,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-18-19")
-			.setDescription("-SPAWN RATES ADJUSTED FOR CHESTS \n -testing out !tourney command")
+			.setTitle("Patch Notes: 1-21-19")
+			.setDescription("-Chests now spawn at lower rates, have more money, and a 20% chance to lose up to 10% \n -testing out !tourney command")
 			.setColor("#1f3c5b");
 			
 			
