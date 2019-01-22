@@ -349,7 +349,7 @@ bot.on("message", async message => {
  			var appear = Math.floor(Math.random() * 10) + 1;
 			var flee = Math.floor(Math.random() * 4) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
-			var eAtk = Math.floor(Math.random() * 6) + 1;
+			var eAtk = Math.floor(Math.random() * 3) + 1;
 			
 			if(appear < 2){
 				const booru = new Danbooru()
