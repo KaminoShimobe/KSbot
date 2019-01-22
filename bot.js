@@ -135,7 +135,6 @@ bot.on("message", async message => {
 	
 	function begin(){
 		let directoryID = 'D' + message.author.id;
-		message.author.send(directoryID);
 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -144,21 +143,83 @@ bot.on("message", async message => {
 			sql = `INSERT INTO user (id, money, bio) VALUES ('${directoryID}', ${1}, 'Home')`;
 			con.query(sql, console.log);
 			message.author.send("Welcome to a new journey! \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
-			return;
+			
 		}	else {
 
  			
 			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 
 			
-			return;
+			
 		}
 			});
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${statsID}', ${100}, '')`;
+			con.query(sql, console.log);
+			message.author.send("Type `!stats` to see your stats!");
+			return;
+		}	else {
+
+ 			
+			
+
+			
+			
+		}
+			});
+		
+		return;
+	}
+	
+	function stats(){
+		var statList = "**" + message.author.username + "**";
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let money = rows[0].money;
+			if(rows.length < 1) {
+			
+			
+			message.author.send("You don't have a user! Go into the server and type `!user` to create one!");
+			return;
+		}	else {
+
+ 			
+			
+			statList += ": \n Money:" + money; 
+			
+		}
+		});	
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let lvl = rows[0].money;
+		let inventory =  rows[0].bio;
+		if(rows.length < 1) {
+			
+			
+			message.author.send("You have no stats, type `!begin` to obtain some!");
+			return;
+		}	else {
+
+ 			
+			statList += "\n Power Level: " + lvl + "\n Inventory:" " + inventory + "";
+
+			
+			
+		}
+			});
+		message.author.send(statList);
+		return;
 	}
 	
 	function endJourney(){
 		let directoryID = 'D' + message.author.id;
-		message.author.send(directoryID);
 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -187,6 +248,12 @@ bot.on("message", async message => {
 	if(command === `${prefix}endSearch`){
 		endJourney();
 	}
+	
+	
+	if(command === `${prefix}stats`){
+		stats();
+	}
+	
 	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
