@@ -542,6 +542,7 @@ bot.on("message", async message => {
 				sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
 				con.query(sql);
 				message.author.send("You gained " + wizard + " power levels from defeating the boss!!");
+				message.author.send("You have completed the forest! New Levels coming soon!"); 
 				goBIGMoney(); 
 				return;
 			 } else {
@@ -598,11 +599,12 @@ bot.on("message", async message => {
 				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
 				con.query(sql);	
 				message.author.send("Progressed to floor: **" + nextFloor + "**");
-					goBossForest();
+					
 			} else if(location == "Forest" && floor == 100){
 				sql = `UPDATE user SET money = ${0}, bio = 'Home' WHERE id = '${directoryID}'`;
 				con.query(sql);	
-				message.author.send("You have completed the forest! New Levels coming soon!");
+				goBossForest();
+				
 				return;
 			} else {
 				message.author.send("Where are you going? \n Begin a quest with `!begin`");
