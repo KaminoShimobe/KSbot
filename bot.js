@@ -134,7 +134,8 @@ bot.on("message", async message => {
 	var currPerson = "";
 	
 	function search(){
-		let directoryID = 'D' + message.author.id;
+		let directoryID = 'D' + message.author.discriminator;
+		message.author.send(directoryID);
 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
