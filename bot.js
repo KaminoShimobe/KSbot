@@ -190,7 +190,7 @@ bot.on("message", async message => {
 
  			
 			
-			var statList += "Money:" + money; 
+			var statList = "Money:" + money; 
 			message.author.send(statList);
 		}
 		});	
@@ -208,8 +208,8 @@ bot.on("message", async message => {
 		}	else {
 
  			
-			var statList += "Power Level: " + lvl + "\n Inventory:"  + inventory + "";
-			message.author.send(statList);
+			var statList2 = "Power Level: " + lvl + "\n Inventory:"  + inventory + "";
+			message.author.send(statList2);
 			
 			
 		}
