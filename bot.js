@@ -136,12 +136,12 @@ bot.on("message", async message => {
 	function search(){
 		let directoryID = 'D' + message.author.id;
 		message.author.send(directoryID);
-		con.query(`SELECT * FROM user WHERE id = directoryID`, (err, rows) => {
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES (directoryID, ${0}, 'Forest')`;
+			sql = `INSERT INTO user (id, money, bio) VALUES (${directoryID}', ${0}, 'Forest')`;
 			con.query(sql, console.log);
 			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 			return;
@@ -151,7 +151,7 @@ bot.on("message", async message => {
 // 			con.query(sql);
 // 			message.author.send("Search Query Deleted!");
 // 			return;
-			
+			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 
 			
 			return;
