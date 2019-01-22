@@ -345,7 +345,7 @@ bot.on("message", async message => {
 		}	else {
 			var slime = Math.floor(Math.random() * 100) + lvl/4;
 			var dragon = Math.floor(Math.random() * 250) + lvl/2;
-			var demon = Math.floor(Math.random() * 500) + lvl/2;
+			var demon = Math.floor(Math.random() * 500) + lvl;
  			var appear = Math.floor(Math.random() * 10) + 1;
 			var flee = Math.floor(Math.random() * 4) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
