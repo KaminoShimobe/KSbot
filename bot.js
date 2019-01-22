@@ -139,16 +139,16 @@ bot.on("message", async message => {
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('D' + '${message.author.id}', ${0}, 'Forest')`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('D${message.author.id}', ${0}, 'Forest')`;
 			con.query(sql, console.log);
 			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 			return;
 		}	else {
 
-			sql = `DELETE FROM user WHERE id = 'D' + '${message.author.id}'`;
-			con.query(sql);
-			message.author.send("Search Query Deleted!");
-			return;
+// 			sql = `DELETE FROM user WHERE id = 'D' + '${message.author.id}'`;
+// 			con.query(sql);
+// 			message.author.send("Search Query Deleted!");
+// 			return;
 			
 
 			
