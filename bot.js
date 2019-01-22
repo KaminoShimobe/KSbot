@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been updated!!! \n Check it out with !patchNotes");
+ 	channel.sendMessage("I have been ***HUGELY*** updated!!! \n Check it out with !patchNotes RIGHT NOW!!!");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -274,7 +274,27 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var appear = Math.floor(Math.random() * 99999) + 1;
+			var appear = Math.floor(Math.random() * 9999) + 1;
+			
+			
+ 			
+			sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("You found $" + appear +"!");
+			return;
+		}
+		});	
+	}
+	
+	function goBIGMoney(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let money = rows[0].money;
+			if(rows.length < 1) {
+			
+			return;
+		}	else {
+			var appear = Math.floor(Math.random() * 999999) + 1;
 			
 			
  			
@@ -359,6 +379,7 @@ bot.on("message", async message => {
 				sql = `UPDATE user SET money = ${lvl + dragon} WHERE id = '${statsID}'`;
 				con.query(sql);
 				message.author.send("You gained " + dragon + " power levels from defeating the dragon!!"); 
+				goMoney(); 
 				return;
 			 } else {
 				goLose();
@@ -404,7 +425,8 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + demon} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + demon + " power levels from defeating the demon!!"); 
+				message.author.send("You gained " + demon + " power levels from defeating the demon!!");
+				goMoney(); 
 				return;
 			 } else {
 				goLose();
@@ -449,7 +471,8 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + slime} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + slime + " power levels from defeating the slime!!"); 
+				message.author.send("You gained " + slime + " power levels from defeating the slime!!");
+				goMoney();  
 				return;
 			 } else {
 				goLose();
@@ -518,7 +541,8 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + wizard + " power levels from defeating the boss!!"); 
+				message.author.send("You gained " + wizard + " power levels from defeating the boss!!");
+				goBIGMoney(); 
 				return;
 			 } else {
 				goLose();
@@ -2585,7 +2609,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-22-19")
-			.setDescription("-Working on something interesting, please be patient (:")
+			.setDescription("-KSRPG IS NOW LIVE \n DM the bot `!begin` to get started! \n This is a GREAT and interesting way to grind money and have fun! New levels coming soon!")
 			.setColor("#1f3c5b");
 			
 			
