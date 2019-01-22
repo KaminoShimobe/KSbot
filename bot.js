@@ -132,6 +132,35 @@ bot.on("message", async message => {
 	const room = bot.channels.get(rooms[chancu]);
 	const botspam = bot.channels.get('452166943093293059');
 	var currPerson = "";
+	
+	function search(){
+		con.query(`SELECT * FROM user WHERE id = 'D' + '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, bio) VALUES ('D' + '${message.author.id}', ${0}, 'Forest')`;
+			con.query(sql, console.log);
+			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
+			return;
+		}	else {
+
+			sql = `DELETE FROM user WHERE id = 'D' + '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("Search Query Deleted!");
+			return;
+			
+
+			
+			return;
+		}
+			});
+	}
+	
+	if(command === `${prefix}search`){
+		search();
+	}	
+	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
 		if(err) throw err;
@@ -2076,8 +2105,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-21-19")
-			.setDescription("-Chests now spawn at lower rates, have more money, and a 20% chance to lose up to 10% \n -testing out !tourney command")
+			.setTitle("Patch Notes: 1-22-19")
+			.setDescription("-Working on something interesting, please be patient (:")
 			.setColor("#1f3c5b");
 			
 			
