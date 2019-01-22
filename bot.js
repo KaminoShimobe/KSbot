@@ -641,7 +641,7 @@ bot.on("message", async message => {
 		begin();
 	}	
 	
-	if(command === `${prefix}endSearch`){
+	if(command === `${prefix}searchEnd`){
 		endJourney();
 	}
 	
@@ -802,7 +802,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	
 	function statLeaderboard(){
 		let statsID = 'ST' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}', ORDER BY money DESC LIMIT 10`, (err, rows) => {
+		con.query(`SELECT TOP 10 * FROM user WHERE id = '${statsID}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		
@@ -2181,7 +2181,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, r
 function viewLeaderboard(){
 		
 	
-con.query(`SELECT * FROM user WHERE id = '${message.author.id}' ORDER BY money DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT TOP 10 * FROM user WHERE id = '${message.author.id}' `, (err, rows) => {
 		if(err) throw err;
 		
 	
