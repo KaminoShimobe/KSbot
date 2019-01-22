@@ -147,7 +147,7 @@ bot.on("message", async message => {
 		}	else {
 
  			
-			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
+			message.author.send("You already have began a journey!  \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
 
 			
 			
@@ -177,7 +177,26 @@ bot.on("message", async message => {
 	}
 	
 	function stats(){
-		
+		let directoryID = 'D' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].bio;
+		let floor = rows[0].money;
+		if(rows.length < 1) {
+			
+			message.author.send("You haven't begun a journey! Start one with `!begin`");
+			return;
+		}	else {
+
+ 			
+			var statList0 = "Location:" + location + "\n Floor: " + floor; 
+			message.author.send(statList0);
+
+			
+			
+		}
+			});
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let money = rows[0].money;
@@ -218,6 +237,359 @@ bot.on("message", async message => {
 		return;
 	}
 	
+	function searchForest(){
+		let directoryID = 'D' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].bio;
+		let floor = rows[0].money;
+		if(rows.length < 1) {
+			
+			message.author.send("You do not have access to this area! \n Begin a quest with `!begin`");
+			
+		}	else {
+			
+			if(floor == 1){
+				sql = `UPDATE user SET bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+				return;
+			} else {
+				sql = `UPDATE user SET money = ${1}, bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+				return;
+			}
+			
+		}
+			});
+	}
+	
+	function goMoney(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let money = rows[0].money;
+			if(rows.length < 1) {
+			
+			return;
+		}	else {
+			var appear = Math.floor(Math.random() * 99999) + 1;
+			
+			
+ 			
+			sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("You found $" + appear +"!");
+			return;
+		}
+		});	
+	}
+	
+		function goLose(){
+		let directoryID = 'D' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].bio;
+		let floor = rows[0].money;
+		if(rows.length < 1) {
+			
+			
+			
+		}	else {
+			
+			
+				sql = `UPDATE user SET money = ${1}, bio = 'Home' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("You have been defeated! You scurried and ran home! Now you must start from floor 1!");
+				return;
+			
+			
+		}
+			});
+	}
+	
+	function goBattle(){
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let lvl = rows[0].money;
+		let inventory =  rows[0].bio;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else {
+			var slime = Math.floor(Math.random() * 100) + 1;
+			var dragon = Math.floor(Math.random() * 400) + 100;
+			var demon = Math.floor(Math.random() * 350) + 400;
+ 			var appear = Math.floor(Math.random() * 10) + 1;
+			var flee = Math.floor(Math.random() * 4) + 1;
+			var atk = Math.floor(Math.random() * 6) + 1;
+			var eAtk = Math.floor(Math.random() * 6) + 1;
+			
+			if(appear < 2){
+				const booru = new Danbooru()
+		booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let dragon1 = new Discord.RichEmbed()
+
+			.setTitle("A dragon has appeared? !fight to fight it, or !flee to run away!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(dragon1);
+ 		
+  		 })
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+				var eDmg = dragon * atk;
+               		 if((lvl * atk) >= (eDmg)){
+				sql = `UPDATE user SET money = ${lvl + dragon} WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.author.send("You gained " + dragon + " power levels from defeating the dragon!!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+            		} else if (message.content == `${prefix}flee`) {
+				 if(flee == 1){
+				message.author.send("You got away safely!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+			} else {
+				goLose();
+			}	
+			});		
+				
+			} else if(appear == 10){
+			const booru = new Danbooru()
+		booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let demon1 = new Discord.RichEmbed()
+
+			.setTitle("A demon has appeared? !fight to fight it, or !flee to run away!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(demon1);
+ 		
+  		 })
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+				var eDmg = demon * atk;
+               		 if((lvl * atk) >= (eDmg)){
+				sql = `UPDATE user SET money = ${lvl + demon} WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.author.send("You gained " + demon + " power levels from defeating the dragon!!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+            		} else if (message.content == `${prefix}flee`) {
+				 if(flee == 1){
+				message.author.send("You got away safely!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+			} else {
+				goLose();
+			}	
+			});
+			} else {
+				const booru = new Danbooru()
+		booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let slime1 = new Discord.RichEmbed()
+
+			.setTitle("A slime has appeared? !fight to fight it, or !flee to run away!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(slime1);
+ 		
+  		 })
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+				var eDmg = slime * atk;
+               		 if((lvl * atk) >= (eDmg)){
+				sql = `UPDATE user SET money = ${lvl + slime} WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.author.send("You gained " + slime + " power levels from defeating the dragon!!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+            		} else if (message.content == `${prefix}flee`) {
+				 if(flee == 1){
+				message.author.send("You got away safely!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+			} else {
+				goLose();
+			}	
+			});
+			}	
+			
+			
+		}
+			});
+	}	
+	
+	function goBossForest(){
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let lvl = rows[0].money;
+		let inventory =  rows[0].bio;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else {
+			var wizard = Math.floor(Math.random() * 1000) + 1000;
+			var atk = Math.floor(Math.random() * 6) + 1;
+			var eAtk = Math.floor(Math.random() * 6) + 1;
+			
+			
+				const booru = new Danbooru()
+		booru.posts({ tags: 'wizard rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let dragon1 = new Discord.RichEmbed()
+
+			.setTitle("The evil A wizard has appeared! !fight to fight it")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(dragon1);
+ 		
+  		 })
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+				var eDmg = wizard * atk;
+               		 if((lvl * atk) >= (eDmg)){
+				sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.author.send("You gained " + wizard + " power levels from defeating the dragon!!"); 
+				return;
+			 } else {
+				goLose();
+			 }	 
+                		return;
+            		} else {
+				goLose();
+			 }	 
+                		
+			});		
+			
+			
+			}	
+			
+			
+		
+			});
+	}	
+	
+	function go(){
+		let directoryID = 'D' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].bio;
+		let floor = rows[0].money;
+		if(rows.length < 1) {
+			
+			message.author.send("Where are you going? \n Begin a quest with `!begin`");
+			
+		}	else {
+			
+			if(location == "Forest" && floor < 100){
+				var nextFloor = floor + 1;
+				var appear = Math.floor(Math.random() * 10) + 1;
+				if(appear == 1){
+				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("Progressed to floor: **" + nextFloor + "**");
+					goMoney();
+				} else if(appear > 1 && appear < 6) {
+				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+					message.author.send("Progressed to floor: **" + nextFloor + "**");
+				} else {
+				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("Progressed to floor: **" + nextFloor + "**");	
+					goBattle();
+				}
+			} else if(location == "Forest" && floor == 99){
+				var nextFloor = floor + 1;
+				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("Progressed to floor: **" + nextFloor + "**");
+					goBossForest();
+			} else if(location == "Forest" && floor == 100){
+				sql = `UPDATE user SET money = ${0}, bio = 'Home' WHERE id = '${directoryID}'`;
+				con.query(sql);	
+				message.author.send("You have completed the forest! New Levels coming soon!");
+				return;
+			} else {
+				message.author.send("Where are you going? \n Begin a quest with `!begin`");
+				return;
+			}
+			
+		}
+			});
+		
+	}
+	
 	function endJourney(){
 		let directoryID = 'D' + message.author.id;
 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
@@ -254,6 +626,19 @@ bot.on("message", async message => {
 		stats();
 	}
 	
+	if(command === `${prefix}search`){
+		if(messageArray[1] === undefined){
+			message.author.send("You need to respond with a location");
+		} else if(messageArray[1] === "forest"){
+			searchForest();
+		} else {
+			message.author.send("Area not found.");
+		}	
+	}
+	
+	if(command === `${prefix}go`){
+		go();
+	}	
 	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
