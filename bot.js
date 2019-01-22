@@ -208,7 +208,7 @@ bot.on("message", async message => {
 		}	else {
 
  			
-			statList += "\n Power Level: " + lvl + "\n Inventory:" " + inventory + "";
+			statList += "\n Power Level: " + lvl + "\n Inventory:"  + inventory + "";
 
 			
 			
