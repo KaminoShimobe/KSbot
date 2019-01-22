@@ -800,6 +800,35 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	if(message.channel.type === "dm") return;
 	
+	function statLeaderboard(){
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}', ORDER BY money DESC LIMIT 10`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+	
+	
+	
+		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
+		let id = [rows[0].id.replace("ST", ""), rows[1].id.replace("ST", ""), rows[2].id.replace("ST", ""), rows[3].id.replace("ST", ""), rows[4].id.replace("ST", ""), rows[5].id.replace("ST", ""), rows[6].id.replace("ST", ""), rows[7].id.replace("ST", ""), rows[8].id.replace("ST", ""), rows[9].id].replace("ST", "");
+		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
+		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
+
+		let leaderboard = new Discord.RichEmbed()
+
+			
+			.setTitle("KS Stats Leaderboard")
+			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
+			.setColor("#00fffa"); 
+
+		message.channel.sendEmbed(leaderboard);
+
+
+		
+		
+
+	});
+	}
 	treasure();
 	
 	function treasure(){
@@ -2152,7 +2181,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, r
 function viewLeaderboard(){
 		
 	
-con.query(`SELECT * FROM user ORDER BY money DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}' ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
 	
@@ -3307,6 +3336,19 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	if(command === `${prefix}leaderboard`){
 
 		viewLeaderboard();
+		 
+
+
+
+		 return;
+
+
+
+	}
+	
+	if(command === `${prefix}statLeaderboard`){
+
+		statLeaderboard();
 		 
 
 
