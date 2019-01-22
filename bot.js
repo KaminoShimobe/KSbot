@@ -404,7 +404,7 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + demon} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + demon + " power levels from defeating the dragon!!"); 
+				message.author.send("You gained " + demon + " power levels from defeating the demon!!"); 
 				return;
 			 } else {
 				goLose();
@@ -449,7 +449,7 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + slime} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + slime + " power levels from defeating the dragon!!"); 
+				message.author.send("You gained " + slime + " power levels from defeating the slime!!"); 
 				return;
 			 } else {
 				goLose();
@@ -503,7 +503,7 @@ bot.on("message", async message => {
  			
 		let dragon1 = new Discord.RichEmbed()
 
-			.setTitle("The evil A wizard has appeared! !fight to fight it")
+			.setTitle("BOSS: The evil A wizard has appeared! !fight to fight it")
 			.setImage(url.href)
 			.setColor("#407f3b");
 
@@ -518,7 +518,7 @@ bot.on("message", async message => {
                		 if((lvl * atk) >= (eDmg)){
 				sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + wizard + " power levels from defeating the dragon!!"); 
+				message.author.send("You gained " + wizard + " power levels from defeating the boss!!"); 
 				return;
 			 } else {
 				goLose();
