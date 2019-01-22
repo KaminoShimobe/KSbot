@@ -343,13 +343,13 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var slime = Math.floor(Math.random() * 100) + lvl;
-			var dragon = Math.floor(Math.random() * 400) + lvl;
-			var demon = Math.floor(Math.random() * 350) + lvl;
+			var slime = Math.floor(Math.random() * 100) + lvl/4;
+			var dragon = Math.floor(Math.random() * 250) + lvl/2;
+			var demon = Math.floor(Math.random() * 500) + lvl/2;
  			var appear = Math.floor(Math.random() * 10) + 1;
 			var flee = Math.floor(Math.random() * 4) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
-			var eAtk = Math.floor(Math.random() * 3) + 1;
+			var eAtk = Math.floor(Math.random() * 5) + 1;
 			
 			if(appear < 2){
 				const booru = new Danbooru()
@@ -510,7 +510,7 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var wizard = Math.floor(Math.random() * 1000) + lvl;
+			var wizard = Math.floor(Math.random() * 1000) + (lvl * 7/8);
 			var atk = Math.floor(Math.random() * 6) + 1;
 			var eAtk = Math.floor(Math.random() * 6) + 1;
 			
