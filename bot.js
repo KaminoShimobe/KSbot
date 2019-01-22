@@ -164,18 +164,19 @@ bot.on("message", async message => {
 		let sql;
 		if(rows.length < 1) {
 			
-		sql = `DELETE FROM user WHERE id = '${directoryID}'`;
+		message.author.send("You don't have a journey to end!");
+			return;
+		}	else {
+
+	
+			message.author.send("You don't have a journey to end!");
+			sql = `DELETE FROM user WHERE id = '${directoryID}'`;
 			con.query(sql);
 			message.author.send("Journey ended!");
 			
 			return;
-		}	else {
-
-// 		
-			message.author.send("You don't have a journey to end!");
-
 			
-			return;
+			
 		}
 			});
 	}
