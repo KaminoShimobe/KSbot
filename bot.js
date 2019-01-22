@@ -133,7 +133,7 @@ bot.on("message", async message => {
 	const botspam = bot.channels.get('452166943093293059');
 	var currPerson = "";
 	
-	function search(){
+	function begin(){
 		let directoryID = 'D' + message.author.id;
 		message.author.send(directoryID);
 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
@@ -141,16 +141,13 @@ bot.on("message", async message => {
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES (${directoryID}', ${0}, 'Forest')`;
+			sql = `INSERT INTO user (id, money, bio) VALUES (${directoryID}', ${1}, 'Home')`;
 			con.query(sql, console.log);
-			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
+			message.author.send("Welcome to a new journey! \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
 			return;
 		}	else {
 
-// 			sql = `DELETE FROM user WHERE id = 'D' + '${message.author.id}'`;
-// 			con.query(sql);
-// 			message.author.send("Search Query Deleted!");
-// 			return;
+// 			
 			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 
 			
@@ -159,9 +156,37 @@ bot.on("message", async message => {
 			});
 	}
 	
-	if(command === `${prefix}search`){
-		search();
+	function endJourney(){
+		let directoryID = 'D' + message.author.id;
+		message.author.send(directoryID);
+		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+		sql = `DELETE FROM user WHERE id = '${directoryID}'`;
+			con.query(sql);
+			message.author.send("Journey ended!");
+			
+			return;
+		}	else {
+
+// 		
+			message.author.send("You don't have a journey to end!");
+
+			
+			return;
+		}
+			});
+	}
+	
+	if(command === `${prefix}begin`){
+		begin();
 	}	
+	
+	if(command === `${prefix}endSearch`){
+		endJourney();
+	}
 	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
