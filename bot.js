@@ -2179,7 +2179,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, r
 }
 	
 function viewLeaderboard(){
-	console.log("Omega oof".);	
+	console.log("Omega oof");	
 	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id} ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
