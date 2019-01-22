@@ -141,7 +141,7 @@ bot.on("message", async message => {
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES (${directoryID}', ${1}, 'Home')`;
+			sql = `INSERT INTO user (id, money, bio) VALUES ('${directoryID}', ${1}, 'Home')`;
 			con.query(sql, console.log);
 			message.author.send("Welcome to a new journey! \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
 			return;
