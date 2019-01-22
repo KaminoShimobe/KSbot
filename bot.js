@@ -177,7 +177,7 @@ bot.on("message", async message => {
 	}
 	
 	function stats(){
-		var statList = "**" + message.author.username + "**";
+		
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let money = rows[0].money;
@@ -190,8 +190,8 @@ bot.on("message", async message => {
 
  			
 			
-			statList += ": \n Money:" + money; 
-			
+			var statList += "Money:" + money; 
+			message.author.send(statList);
 		}
 		});	
 		let statsID = 'ST' + message.author.id;
@@ -208,13 +208,13 @@ bot.on("message", async message => {
 		}	else {
 
  			
-			statList += "\n Power Level: " + lvl + "\n Inventory:"  + inventory + "";
-
+			var statList += "Power Level: " + lvl + "\n Inventory:"  + inventory + "";
+			message.author.send(statList);
 			
 			
 		}
 			});
-		message.author.send(statList);
+		
 		return;
 	}
 	
