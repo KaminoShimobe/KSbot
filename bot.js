@@ -343,9 +343,9 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var slime = Math.floor(Math.random() * 100) + 1;
-			var dragon = Math.floor(Math.random() * 400) + 100;
-			var demon = Math.floor(Math.random() * 350) + 400;
+			var slime = Math.floor(Math.random() * 100) + lvl;
+			var dragon = Math.floor(Math.random() * 400) + lvl;
+			var demon = Math.floor(Math.random() * 350) + lvl;
  			var appear = Math.floor(Math.random() * 10) + 1;
 			var flee = Math.floor(Math.random() * 4) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
@@ -510,7 +510,7 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var wizard = Math.floor(Math.random() * 1000) + 1000;
+			var wizard = Math.floor(Math.random() * 1000) + lvl;
 			var atk = Math.floor(Math.random() * 6) + 1;
 			var eAtk = Math.floor(Math.random() * 6) + 1;
 			
@@ -2609,7 +2609,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-22-19")
-			.setDescription("-KSRPG IS NOW LIVE \n DM the bot `!begin` to get started! \n This is a GREAT and interesting way to grind money and have fun! New levels coming soon!")
+			.setDescription("-KSRPG IS NOW LIVE \n DM the bot `!begin` to get started! \n This is a GREAT and interesting way to grind money and have fun! New levels coming soon! \n- Monsters scale in level now!")
 			.setColor("#1f3c5b");
 			
 			
