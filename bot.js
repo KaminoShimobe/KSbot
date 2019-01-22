@@ -147,7 +147,7 @@ bot.on("message", async message => {
 			return;
 		}	else {
 
-// 			
+ 			
 			message.author.send("ID: " + rows[0].id + "\n Floor: " + rows[0].money + "\n Location: " + rows[0].bio);
 
 			
@@ -169,7 +169,6 @@ bot.on("message", async message => {
 		}	else {
 
 	
-			message.author.send("You don't have a journey to end!");
 			sql = `DELETE FROM user WHERE id = '${directoryID}'`;
 			con.query(sql);
 			message.author.send("Journey ended!");
