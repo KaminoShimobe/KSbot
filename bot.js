@@ -2808,7 +2808,7 @@ if(command === `${prefix}ORA`){
 	
 
 	
-	toBeat.kick();
+	other.kick("Yare Yare Daze");
 	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
   		 })
 		
