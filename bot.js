@@ -2769,8 +2769,7 @@ if(command === `${prefix}ORA`){
 
 		message.channel.sendEmbed(pic);
  		
-  		 })
-		message.channel.send(`Yare Yare Daze...`);
+ 		message.channel.send(`Yare Yare Daze...`);
 		message.channel.send(`You can't pay what you owe back with money...`);
 		
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
@@ -2803,6 +2802,8 @@ if(command === `${prefix}ORA`){
 	
 	toBeat.kick();
 	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
+  		 })
+		
 		return;
 	} else {
 		message.reply("You do not have rights to that.");
