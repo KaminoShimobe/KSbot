@@ -2774,95 +2774,29 @@ if(command === `${prefix}ORA`){
 		message.channel.send(`You can't pay what you owe back with money...`);
 		
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat+ ` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
-		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		setTimeout(message.toBeat.send(`**ORA**`), 100);
+		message.toBeat.send(`**ORA**`)
+		message.channel.send(`**ORA** ` + toBeat+ ` **ORA**`);
 
 	
 
