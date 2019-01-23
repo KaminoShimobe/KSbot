@@ -343,9 +343,9 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var slime = Math.floor(Math.random() * 100) + lvl/4;
-			var dragon = Math.floor(Math.random() * 250) + lvl/2;
-			var demon = Math.floor(Math.random() * 500) + lvl;
+			var slime = Math.floor(Math.random() * 100) + 1;
+			var dragon = Math.floor(Math.random() * 500) + 100;
+			var demon = Math.floor(Math.random() * 1500) + 500;
  			var appear = Math.floor(Math.random() * 10) + 1;
 			var flee = Math.floor(Math.random() * 4) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
@@ -376,9 +376,9 @@ bot.on("message", async message => {
             		if (message.content == `${prefix}fight`) {
 				var eDmg = dragon * atk;
                		 if((lvl * atk) >= (eDmg)){
-				sql = `UPDATE user SET money = ${lvl + dragon} WHERE id = '${statsID}'`;
+				sql = `UPDATE user SET money = ${lvl + (dragon*.1)} WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("You gained " + dragon + " power levels from defeating the dragon!!"); 
+				message.author.send("You gained " + (dragon*.1) + " power levels from defeating the dragon!!"); 
 				goMoney(); 
 				return;
 			 } else {
@@ -510,7 +510,7 @@ bot.on("message", async message => {
 			
 			return;
 		}	else {
-			var wizard = Math.floor(Math.random() * 1000) + (lvl * 7/8);
+			var wizard = Math.floor(Math.random() * 10000) + 1;
 			var atk = Math.floor(Math.random() * 6) + 1;
 			var eAtk = Math.floor(Math.random() * 6) + 1;
 			
@@ -638,6 +638,24 @@ bot.on("message", async message => {
 		}
 			});
 	}
+
+	function purge(){
+		let statsID = 'ST' + other.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let lvl = rows[0].money;
+		let inventory =  rows[0].bio;
+		if(rows.length < 1) {
+			
+			} else {
+				sql = `DELETE FROM user WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.author.send("PURGED! They will have to create a new user via !begin");
+			}
+			});
+			return;
+		}
 	
 	if(command === `${prefix}begin`){
 		begin();
@@ -664,6 +682,10 @@ bot.on("message", async message => {
 	
 	if(command === `${prefix}go`){
 		go();
+	}	
+
+	if(command === `${prefix}purge`){
+		purge();
 	}	
 	
 	if(command === `${prefix}whisper`){
@@ -2724,6 +2746,134 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 }
 
+if(command === `${prefix}ORA`){
+	let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+	const booru = new Danbooru()
+		if(message.author.id == '242118931769196544') {
+		booru.posts({ tags: 'rating:safe punching kuujou_joutarou', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+		message.channel.send(`Yare Yare Daze...`);
+		message.channel.send(`You can't pay what you owe back with money...`);
+		function ORA(){
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		setTimeout(message.author.send(`**ORA**`), 100);
+
+	}
+
+	setTimeout(ORA(), 1000);
+	toBeat.kick();
+	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
+		return;
+	} else {
+		message.reply("You do not have rights to that.");
+	}
+}
 
 	if(command === `${prefix}beat`){
 
