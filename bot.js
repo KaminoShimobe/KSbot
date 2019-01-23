@@ -640,6 +640,7 @@ bot.on("message", async message => {
 	}
 
 	function purge(){
+		let other = message.mentions.users.first();
 		let statsID = 'ST' + other.id;
 		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
 		if(err) throw err;
