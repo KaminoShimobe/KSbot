@@ -649,9 +649,13 @@ bot.on("message", async message => {
 		if(rows.length < 1) {
 			
 			} else {
+				if(message.author.id == '242118931769196544') {
 				sql = `DELETE FROM user WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.author.send("PURGED! They will have to create a new user via !begin");
+				message.channel.send("PURGED! They will have to create a new user via !begin");
+				} else {
+					message.reply("You cannot do that.");
+				}
 			}
 			});
 			return;
@@ -3306,7 +3310,7 @@ if(command === `${prefix}ORA`){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.3.1: commands")
+			.setTitle("KS Bot Version 0.4.2: commands")
 			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n ***DM CHANNEL ONLY*** : \n **!gossip**: \n Sends a your secret anonymously into bot spam.")
 			.setColor("#1d498e"); 
 
