@@ -2808,7 +2808,9 @@ if(command === `${prefix}ORA`){
 	
 
 	
-	other.kick("Yare Yare Daze");
+	other.kick("Yare Yare Daze")
+	.then(() => console.log(`Kicked ${member.displayName}`))
+  	.catch(console.error);
 	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
   		 })
 		
