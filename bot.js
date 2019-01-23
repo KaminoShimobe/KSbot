@@ -133,488 +133,488 @@ bot.on("message", async message => {
 	const botspam = bot.channels.get('452166943093293059');
 	var currPerson = "";
 	
-	function begin(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		if(rows.length < 1) {
+	// function begin(){
+	// 	let directoryID = 'D' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('${directoryID}', ${1}, 'Home')`;
-			con.query(sql, console.log);
-			message.author.send("Welcome to a new journey! \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
+	// 		sql = `INSERT INTO user (id, money, bio) VALUES ('${directoryID}', ${1}, 'Home')`;
+	// 		con.query(sql, console.log);
+	// 		message.author.send("Welcome to a new journey! \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
 			
-		}	else {
+	// 	}	else {
 
  			
-			message.author.send("You already have began a journey!  \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
+	// 		message.author.send("You already have began a journey!  \n Type `!search forest` to get started! \n Type `!searchEnd` to quit exploring!");
 
 			
 			
-		}
-			});
-		let statsID = 'ST' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		if(rows.length < 1) {
+	// 	}
+	// 		});
+	// 	let statsID = 'ST' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, bio) VALUES ('${statsID}', ${100}, '')`;
-			con.query(sql, console.log);
-			message.author.send("Type `!stats` to see your stats!");
-			return;
-		}	else {
+	// 		sql = `INSERT INTO user (id, money, bio) VALUES ('${statsID}', ${100}, '')`;
+	// 		con.query(sql, console.log);
+	// 		message.author.send("Type `!stats` to see your stats!");
+	// 		return;
+	// 	}	else {
 
  			
 			
 
 			
 			
-		}
-			});
+	// 	}
+	// 		});
 		
-		return;
-	}
+	// 	return;
+	// }
 	
-	function stats(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let location = rows[0].bio;
-		let floor = rows[0].money;
-		if(rows.length < 1) {
+	// function stats(){
+	// 	let directoryID = 'D' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let location = rows[0].bio;
+	// 	let floor = rows[0].money;
+	// 	if(rows.length < 1) {
 			
-			message.author.send("You haven't begun a journey! Start one with `!begin`");
-			return;
-		}	else {
+	// 		message.author.send("You haven't begun a journey! Start one with `!begin`");
+	// 		return;
+	// 	}	else {
 
  			
-			var statList0 = "Location:" + location + "\n Floor: " + floor; 
-			message.author.send(statList0);
+	// 		var statList0 = "Location:" + location + "\n Floor: " + floor; 
+	// 		message.author.send(statList0);
 
 			
 			
-		}
-			});
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let money = rows[0].money;
-			if(rows.length < 1) {
+	// 	}
+	// 		});
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let money = rows[0].money;
+	// 		if(rows.length < 1) {
 			
 			
-			message.author.send("You don't have a user! Go into the server and type `!user` to create one!");
-			return;
-		}	else {
-
- 			
-			
-			var statList = "Money:" + money; 
-			message.author.send(statList);
-		}
-		});	
-		let statsID = 'ST' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let lvl = rows[0].money;
-		let inventory =  rows[0].bio;
-		if(rows.length < 1) {
-			
-			
-			message.author.send("You have no stats, type `!begin` to obtain some!");
-			return;
-		}	else {
+	// 		message.author.send("You don't have a user! Go into the server and type `!user` to create one!");
+	// 		return;
+	// 	}	else {
 
  			
-			var statList2 = "Power Level: " + lvl + "\n Inventory:"  + inventory + "";
-			message.author.send(statList2);
+			
+	// 		var statList = "Money:" + money; 
+	// 		message.author.send(statList);
+	// 	}
+	// 	});	
+	// 	let statsID = 'ST' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let lvl = rows[0].money;
+	// 	let inventory =  rows[0].bio;
+	// 	if(rows.length < 1) {
 			
 			
-		}
-			});
+	// 		message.author.send("You have no stats, type `!begin` to obtain some!");
+	// 		return;
+	// 	}	else {
+
+ 			
+	// 		var statList2 = "Power Level: " + lvl + "\n Inventory:"  + inventory + "";
+	// 		message.author.send(statList2);
+			
+			
+	// 	}
+	// 		});
 		
-		return;
-	}
+	// 	return;
+	// }
 	
-	function searchForest(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let location = rows[0].bio;
-		let floor = rows[0].money;
-		if(rows.length < 1) {
+	// function searchForest(){
+	// 	let directoryID = 'D' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let location = rows[0].bio;
+	// 	let floor = rows[0].money;
+	// 	if(rows.length < 1) {
 			
-			message.author.send("You do not have access to this area! \n Begin a quest with `!begin`");
+	// 		message.author.send("You do not have access to this area! \n Begin a quest with `!begin`");
 			
-		}	else {
+	// 	}	else {
 			
-			if(floor == 1){
-				sql = `UPDATE user SET bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
-				return;
-			} else {
-				sql = `UPDATE user SET money = ${1}, bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
-				return;
-			}
+	// 		if(floor == 1){
+	// 			sql = `UPDATE user SET bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+	// 			return;
+	// 		} else {
+	// 			sql = `UPDATE user SET money = ${1}, bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+	// 			return;
+	// 		}
 			
-		}
-			});
-	}
+	// 	}
+	// 		});
+	// }
 	
-	function goMoney(){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let money = rows[0].money;
-			if(rows.length < 1) {
+	// function goMoney(){
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let money = rows[0].money;
+	// 		if(rows.length < 1) {
 			
-			return;
-		}	else {
-			var appear = Math.floor(Math.random() * 9999) + 1;
+	// 		return;
+	// 	}	else {
+	// 		var appear = Math.floor(Math.random() * 9999) + 1;
 			
 			
  			
-			sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
-			con.query(sql);
-			message.author.send("You found $" + appear +"!");
-			return;
-		}
-		});	
-	}
+	// 		sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
+	// 		con.query(sql);
+	// 		message.author.send("You found $" + appear +"!");
+	// 		return;
+	// 	}
+	// 	});	
+	// }
 	
-	function goBIGMoney(){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let money = rows[0].money;
-			if(rows.length < 1) {
+	// function goBIGMoney(){
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let money = rows[0].money;
+	// 		if(rows.length < 1) {
 			
-			return;
-		}	else {
-			var appear = Math.floor(Math.random() * 999999) + 1;
+	// 		return;
+	// 	}	else {
+	// 		var appear = Math.floor(Math.random() * 999999) + 1;
 			
 			
  			
-			sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
-			con.query(sql);
-			message.author.send("You found $" + appear +"!");
-			return;
-		}
-		});	
-	}
+	// 		sql = `UPDATE user SET money = ${money + appear} WHERE id = '${message.author.id}'`;
+	// 		con.query(sql);
+	// 		message.author.send("You found $" + appear +"!");
+	// 		return;
+	// 	}
+	// 	});	
+	// }
 	
-		function goLose(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let location = rows[0].bio;
-		let floor = rows[0].money;
-		if(rows.length < 1) {
+	// 	function goLose(){
+	// 	let directoryID = 'D' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let location = rows[0].bio;
+	// 	let floor = rows[0].money;
+	// 	if(rows.length < 1) {
 			
 			
 			
-		}	else {
+	// 	}	else {
 			
 			
-				sql = `UPDATE user SET money = ${1}, bio = 'Home' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("You have been defeated! You scurried and ran home! Now you must start from floor 1!");
-				return;
+	// 			sql = `UPDATE user SET money = ${1}, bio = 'Home' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("You have been defeated! You scurried and ran home! Now you must start from floor 1!");
+	// 			return;
 			
 			
-		}
-			});
-	}
+	// 	}
+	// 		});
+	// }
 	
-	function goBattle(){
-		let statsID = 'ST' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let lvl = rows[0].money;
-		let inventory =  rows[0].bio;
-		if(rows.length < 1) {
+	// function goBattle(){
+	// 	let statsID = 'ST' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let lvl = rows[0].money;
+	// 	let inventory =  rows[0].bio;
+	// 	if(rows.length < 1) {
 			
 			
 			
-			return;
-		}	else {
-			var slime = Math.floor(Math.random() * 100) + 1;
-			var dragon = Math.floor(Math.random() * 500) + 100;
-			var demon = Math.floor(Math.random() * 1500) + 500;
- 			var appear = Math.floor(Math.random() * 10) + 1;
-			var flee = Math.floor(Math.random() * 4) + 1;
-			var atk = Math.floor(Math.random() * 6) + 1;
-			var eAtk = Math.floor(Math.random() * 5) + 1;
+	// 		return;
+	// 	}	else {
+	// 		var slime = Math.floor(Math.random() * 100) + 1;
+	// 		var dragon = Math.floor(Math.random() * 500) + 100;
+	// 		var demon = Math.floor(Math.random() * 1500) + 500;
+ // 			var appear = Math.floor(Math.random() * 10) + 1;
+	// 		var flee = Math.floor(Math.random() * 4) + 1;
+	// 		var atk = Math.floor(Math.random() * 6) + 1;
+	// 		var eAtk = Math.floor(Math.random() * 5) + 1;
 			
-			if(appear < 2){
-				const booru = new Danbooru()
-		booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+	// 		if(appear < 2){
+	// 			const booru = new Danbooru()
+	// 	booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
+ // 		 // Select a random post from posts array
+ //  		const index = Math.floor(Math.random() * posts.length)
+ //  		const post = posts[index]
  
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
+ //  		// Get post's url 
+ // 		 const url = booru.url(post.file_url)
  			
-		let dragon1 = new Discord.RichEmbed()
+	// 	let dragon1 = new Discord.RichEmbed()
 
-			.setTitle("A dragon has appeared? !fight to fight it, or !flee to run away!")
-			.setImage(url.href)
-			.setColor("#407f3b");
+	// 		.setTitle("A dragon has appeared? !fight to fight it, or !flee to run away!")
+	// 		.setImage(url.href)
+	// 		.setColor("#407f3b");
 
-		message.author.sendEmbed(dragon1);
+	// 	message.author.sendEmbed(dragon1);
  		
-  		 })
+ //  		 })
 		
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}fight`) {
-				var eDmg = dragon * atk;
-               		 if((lvl * atk) >= (eDmg)){
-				sql = `UPDATE user SET money = ${lvl + (dragon*.1)} WHERE id = '${statsID}'`;
-				con.query(sql);
-				message.author.send("You gained " + (dragon*.1) + " power levels from defeating the dragon!!"); 
-				goMoney(); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-            		} else if (message.content == `${prefix}flee`) {
-				 if(flee == 1){
-				message.author.send("You got away safely!"); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-			} else {
-				goLose();
-			}	
-			});		
+	// 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+ //        		collector.once('collect', message => {
+ //            		if (message.content == `${prefix}fight`) {
+	// 			var eDmg = dragon * atk;
+ //               		 if((lvl * atk) >= (eDmg)){
+	// 			sql = `UPDATE user SET money = ${lvl + (dragon*.1)} WHERE id = '${statsID}'`;
+	// 			con.query(sql);
+	// 			message.author.send("You gained " + (dragon*.1) + " power levels from defeating the dragon!!"); 
+	// 			goMoney(); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+ //            		} else if (message.content == `${prefix}flee`) {
+	// 			 if(flee == 1){
+	// 			message.author.send("You got away safely!"); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+	// 		} else {
+	// 			goLose();
+	// 		}	
+	// 		});		
 				
-			} else if(appear == 10){
-			const booru = new Danbooru()
-		booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+	// 		} else if(appear == 10){
+	// 		const booru = new Danbooru()
+	// 	booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
+ // 		 // Select a random post from posts array
+ //  		const index = Math.floor(Math.random() * posts.length)
+ //  		const post = posts[index]
  
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
+ //  		// Get post's url 
+ // 		 const url = booru.url(post.file_url)
  			
-		let demon1 = new Discord.RichEmbed()
+	// 	let demon1 = new Discord.RichEmbed()
 
-			.setTitle("A demon has appeared? !fight to fight it, or !flee to run away!")
-			.setImage(url.href)
-			.setColor("#407f3b");
+	// 		.setTitle("A demon has appeared? !fight to fight it, or !flee to run away!")
+	// 		.setImage(url.href)
+	// 		.setColor("#407f3b");
 
-		message.author.sendEmbed(demon1);
+	// 	message.author.sendEmbed(demon1);
  		
-  		 })
+ //  		 })
 		
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}fight`) {
-				var eDmg = demon * atk;
-               		 if((lvl * atk) >= (eDmg)){
-				sql = `UPDATE user SET money = ${lvl + demon} WHERE id = '${statsID}'`;
-				con.query(sql);
-				message.author.send("You gained " + demon + " power levels from defeating the demon!!");
-				goMoney(); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-            		} else if (message.content == `${prefix}flee`) {
-				 if(flee == 1){
-				message.author.send("You got away safely!"); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-			} else {
-				goLose();
-			}	
-			});
-			} else {
-				const booru = new Danbooru()
-		booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+	// 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+ //        		collector.once('collect', message => {
+ //            		if (message.content == `${prefix}fight`) {
+	// 			var eDmg = demon * atk;
+ //               		 if((lvl * atk) >= (eDmg)){
+	// 			sql = `UPDATE user SET money = ${lvl + demon} WHERE id = '${statsID}'`;
+	// 			con.query(sql);
+	// 			message.author.send("You gained " + demon + " power levels from defeating the demon!!");
+	// 			goMoney(); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+ //            		} else if (message.content == `${prefix}flee`) {
+	// 			 if(flee == 1){
+	// 			message.author.send("You got away safely!"); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+	// 		} else {
+	// 			goLose();
+	// 		}	
+	// 		});
+	// 		} else {
+	// 			const booru = new Danbooru()
+	// 	booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
+ // 		 // Select a random post from posts array
+ //  		const index = Math.floor(Math.random() * posts.length)
+ //  		const post = posts[index]
  
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
+ //  		// Get post's url 
+ // 		 const url = booru.url(post.file_url)
  			
-		let slime1 = new Discord.RichEmbed()
+	// 	let slime1 = new Discord.RichEmbed()
 
-			.setTitle("A slime has appeared? !fight to fight it, or !flee to run away!")
-			.setImage(url.href)
-			.setColor("#407f3b");
+	// 		.setTitle("A slime has appeared? !fight to fight it, or !flee to run away!")
+	// 		.setImage(url.href)
+	// 		.setColor("#407f3b");
 
-		message.author.sendEmbed(slime1);
+	// 	message.author.sendEmbed(slime1);
  		
-  		 })
+ //  		 })
 		
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}fight`) {
-				var eDmg = slime * atk;
-               		 if((lvl * atk) >= (eDmg)){
-				sql = `UPDATE user SET money = ${lvl + slime} WHERE id = '${statsID}'`;
-				con.query(sql);
-				message.author.send("You gained " + slime + " power levels from defeating the slime!!");
-				goMoney();  
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-            		} else if (message.content == `${prefix}flee`) {
-				 if(flee == 1){
-				message.author.send("You got away safely!"); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-			} else {
-				goLose();
-			}	
-			});
-			}	
+	// 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+ //        		collector.once('collect', message => {
+ //            		if (message.content == `${prefix}fight`) {
+	// 			var eDmg = slime * atk;
+ //               		 if((lvl * atk) >= (eDmg)){
+	// 			sql = `UPDATE user SET money = ${lvl + slime} WHERE id = '${statsID}'`;
+	// 			con.query(sql);
+	// 			message.author.send("You gained " + slime + " power levels from defeating the slime!!");
+	// 			goMoney();  
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+ //            		} else if (message.content == `${prefix}flee`) {
+	// 			 if(flee == 1){
+	// 			message.author.send("You got away safely!"); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+	// 		} else {
+	// 			goLose();
+	// 		}	
+	// 		});
+	// 		}	
 			
 			
-		}
-			});
-	}	
+	// 	}
+	// 		});
+	// }	
 	
-	function goBossForest(){
-		let statsID = 'ST' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let lvl = rows[0].money;
-		let inventory =  rows[0].bio;
-		if(rows.length < 1) {
+	// function goBossForest(){
+	// 	let statsID = 'ST' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let lvl = rows[0].money;
+	// 	let inventory =  rows[0].bio;
+	// 	if(rows.length < 1) {
 			
 			
 			
-			return;
-		}	else {
-			var wizard = Math.floor(Math.random() * 10000) + 1;
-			var atk = Math.floor(Math.random() * 6) + 1;
-			var eAtk = Math.floor(Math.random() * 6) + 1;
+	// 		return;
+	// 	}	else {
+	// 		var wizard = Math.floor(Math.random() * 10000) + 1;
+	// 		var atk = Math.floor(Math.random() * 6) + 1;
+	// 		var eAtk = Math.floor(Math.random() * 6) + 1;
 			
 			
-				const booru = new Danbooru()
-		booru.posts({ tags: 'wizard rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
+	// 			const booru = new Danbooru()
+	// 	booru.posts({ tags: 'wizard rating:safe', random: true }).then(posts => {
+ // 		 // Select a random post from posts array
+ //  		const index = Math.floor(Math.random() * posts.length)
+ //  		const post = posts[index]
  
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
+ //  		// Get post's url 
+ // 		 const url = booru.url(post.file_url)
  			
-		let dragon1 = new Discord.RichEmbed()
+	// 	let dragon1 = new Discord.RichEmbed()
 
-			.setTitle("BOSS: The evil A wizard has appeared! !fight to fight it")
-			.setImage(url.href)
-			.setColor("#407f3b");
+	// 		.setTitle("BOSS: The evil A wizard has appeared! !fight to fight it")
+	// 		.setImage(url.href)
+	// 		.setColor("#407f3b");
 
-		message.author.sendEmbed(dragon1);
+	// 	message.author.sendEmbed(dragon1);
  		
-  		 })
+ //  		 })
 		
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}fight`) {
-				var eDmg = wizard * atk;
-               		 if((lvl * atk) >= (eDmg)){
-				sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
-				con.query(sql);
-				message.author.send("You gained " + wizard + " power levels from defeating the boss!!");
-				message.author.send("You have completed the forest! New Levels coming soon!"); 
-				goBIGMoney(); 
-				return;
-			 } else {
-				goLose();
-			 }	 
-                		return;
-            		} else {
-				goLose();
-			 }	 
+	// 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+ //        		collector.once('collect', message => {
+ //            		if (message.content == `${prefix}fight`) {
+	// 			var eDmg = wizard * atk;
+ //               		 if((lvl * atk) >= (eDmg)){
+	// 			sql = `UPDATE user SET money = ${lvl + wizard} WHERE id = '${statsID}'`;
+	// 			con.query(sql);
+	// 			message.author.send("You gained " + wizard + " power levels from defeating the boss!!");
+	// 			message.author.send("You have completed the forest! New Levels coming soon!"); 
+	// 			goBIGMoney(); 
+	// 			return;
+	// 		 } else {
+	// 			goLose();
+	// 		 }	 
+ //                		return;
+ //            		} else {
+	// 			goLose();
+	// 		 }	 
                 		
-			});		
+	// 		});		
 			
 			
-			}	
+	// 		}	
 			
 			
 		
-			});
-	}	
+	// 		});
+	// }	
 	
-	function go(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let location = rows[0].bio;
-		let floor = rows[0].money;
-		if(rows.length < 1) {
+	// function go(){
+	// 	let directoryID = 'D' + message.author.id;
+	// 	con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	let location = rows[0].bio;
+	// 	let floor = rows[0].money;
+	// 	if(rows.length < 1) {
 			
-			message.author.send("Where are you going? \n Begin a quest with `!begin`");
+	// 		message.author.send("Where are you going? \n Begin a quest with `!begin`");
 			
-		}	else {
+	// 	}	else {
 			
-			if(location == "Forest" && floor < 100){
-				var nextFloor = floor + 1;
-				var appear = Math.floor(Math.random() * 10) + 1;
-				if(appear == 1){
-				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("Progressed to floor: **" + nextFloor + "**");
-					goMoney();
-				} else if(appear > 1 && appear < 6) {
-				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-					message.author.send("Progressed to floor: **" + nextFloor + "**");
-				} else {
-				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("Progressed to floor: **" + nextFloor + "**");	
-					goBattle();
-				}
-			} else if(location == "Forest" && floor == 99){
-				var nextFloor = floor + 1;
-				sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				message.author.send("Progressed to floor: **" + nextFloor + "**");
+	// 		if(location == "Forest" && floor < 100){
+	// 			var nextFloor = floor + 1;
+	// 			var appear = Math.floor(Math.random() * 10) + 1;
+	// 			if(appear == 1){
+	// 			sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("Progressed to floor: **" + nextFloor + "**");
+	// 				goMoney();
+	// 			} else if(appear > 1 && appear < 6) {
+	// 			sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 				message.author.send("Progressed to floor: **" + nextFloor + "**");
+	// 			} else {
+	// 			sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("Progressed to floor: **" + nextFloor + "**");	
+	// 				goBattle();
+	// 			}
+	// 		} else if(location == "Forest" && floor == 99){
+	// 			var nextFloor = floor + 1;
+	// 			sql = `UPDATE user SET money = ${nextFloor}, bio = 'Forest' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			message.author.send("Progressed to floor: **" + nextFloor + "**");
 					
-			} else if(location == "Forest" && floor == 100){
-				sql = `UPDATE user SET money = ${0}, bio = 'Home' WHERE id = '${directoryID}'`;
-				con.query(sql);	
-				goBossForest();
+	// 		} else if(location == "Forest" && floor == 100){
+	// 			sql = `UPDATE user SET money = ${0}, bio = 'Home' WHERE id = '${directoryID}'`;
+	// 			con.query(sql);	
+	// 			goBossForest();
 				
-				return;
-			} else {
-				message.author.send("Where are you going? \n Begin a quest with `!begin`");
-				return;
-			}
+	// 			return;
+	// 		} else {
+	// 			message.author.send("Where are you going? \n Begin a quest with `!begin`");
+	// 			return;
+	// 		}
 			
-		}
-			});
+	// 	}
+	// 		});
 		
-	}
+	// }
 	
 	function endJourney(){
 		let directoryID = 'D' + message.author.id;
@@ -653,7 +653,27 @@ bot.on("message", async message => {
 				if(message.author.id == '242118931769196544') {
 				sql = `DELETE FROM user WHERE id = '${statsID}'`;
 				con.query(sql);
-				message.channel.send("PURGED! They will have to create a new user via !begin");
+				message.channel.send("PURGED! Please await for a new bot dedicated for RPG mechanics!");
+				let directoryID = 'D' + other.id;
+				con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+			
+				message.author.send("You don't have a journey to end!");
+				return;
+				}	else {
+
+	
+					sql = `DELETE FROM user WHERE id = '${directoryID}'`;
+					con.query(sql);
+					message.channel.send("Journey ended!");
+			
+			return;
+			
+			
+		}
+			});
 				} else {
 					message.reply("You cannot do that.");
 				}
@@ -662,32 +682,32 @@ bot.on("message", async message => {
 			return;
 		}
 	
-	if(command === `${prefix}begin`){
-		begin();
-	}	
+	// if(command === `${prefix}begin`){
+	// 	begin();
+	// }	
 	
-	if(command === `${prefix}searchEnd`){
-		endJourney();
-	}
+	// if(command === `${prefix}searchEnd`){
+	// 	endJourney();
+	// }
 	
 	
-	if(command === `${prefix}stats`){
-		stats();
-	}
+	// if(command === `${prefix}stats`){
+	// 	stats();
+	// }
 	
-	if(command === `${prefix}search`){
-		if(messageArray[1] === undefined){
-			message.author.send("You need to respond with a location");
-		} else if(messageArray[1] === "forest"){
-			searchForest();
-		} else {
-			message.author.send("Area not found.");
-		}	
-	}
+	// if(command === `${prefix}search`){
+	// 	if(messageArray[1] === undefined){
+	// 		message.author.send("You need to respond with a location");
+	// 	} else if(messageArray[1] === "forest"){
+	// 		searchForest();
+	// 	} else {
+	// 		message.author.send("Area not found.");
+	// 	}	
+	// }
 	
-	if(command === `${prefix}go`){
-		go();
-	}	
+	// if(command === `${prefix}go`){
+	// 	go();
+	// }	
 
 	if(command === `${prefix}purge`){
 		purge();
@@ -2666,8 +2686,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-22-19")
-			.setDescription("-KSRPG IS NOW LIVE \n DM the bot `!begin` to get started! \n This is a GREAT and interesting way to grind money and have fun! New levels coming soon! \n- Monsters scale in level now!")
+			.setTitle("Patch Notes: 1-23-19")
+			.setDescription("-KSRPG IS NOW DOWN! You cannot progress anymore! Please await the *new* bot to contine your journey (:")
 			.setColor("#1f3c5b");
 			
 			
