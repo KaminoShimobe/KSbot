@@ -2773,29 +2773,37 @@ if(command === `${prefix}ORA`){
 		message.channel.send(`You can't pay what you owe back with money...`);
 		
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat+ ` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat +` **ORA**`);
+		toBeat.send(`**ORA**`);
 		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
-		message.toBeat.send(`**ORA**`)
-		message.channel.send(`**ORA** ` + toBeat+ ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
 
 	
 
