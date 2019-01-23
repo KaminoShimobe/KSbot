@@ -2751,6 +2751,8 @@ if(command === `${prefix}ORA`){
 
 	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
+	var theOther = message.mentions.users.first()
+
 	const booru = new Danbooru()
 		if(message.author.id == '242118931769196544') {
 		booru.posts({ tags: 'rating:safe punching kuujou_joutarou', random: true }).then(posts => {
@@ -2808,7 +2810,7 @@ if(command === `${prefix}ORA`){
 	
 
 	
-	other.kick("Yare Yare Daze")
+	theOther.kick("Yare Yare Daze")
 	.then(() => console.log(`Kicked ${member.displayName}`))
   	.catch(console.error);
 	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
