@@ -142,7 +142,7 @@ bot.on("message", async message => {
 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
          
        			 con.query(sql); 
-           			message.channel.send(other.username + " transferred $" + funds + " to their KSRPG account!");
+           			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
 
 			
 			return;
