@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("I have been ***HUGELY*** updated!!! \n Check it out with !patchNotes RIGHT NOW!!!");
+ 	channel.sendMessage("I have been updated!!! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1578,10 +1578,10 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
     	if(message.author.id == '242118931769196544') {
 			check = 100000;
 		} else {
-			check = 1000;
+			check = 10000;
 		}
 	if(message.member.roles.find("name", "Amulet-Coin") ) {
-		check = 2000;
+		check = 20000;
 		message.channel.send("Funds Doubled cus of Amulet coin!");
 	}	
     	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
@@ -1631,12 +1631,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 		
 		
-		if(money < 10000) {
+		if(money < 100000) {
 			message.reply("Insufficient Funds.");
 			return;
 		}	
 			const trainingRoom = bot.channels.get('517363501883457540');
-			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money - 100000} WHERE id = '${message.author.id}'`;
 			member.addRole(ticket).catch(console.error);
 			con.query(sql);
 			trainingRoom.send(`${message.author} has joined the battle!`);
@@ -1910,12 +1910,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 		let money = rows[0].money;
 		
-		if(money < 25000) {
+		if(money < 50000) {
 			message.reply("Insufficient Funds.");
 			return;
 		}
 
-		if(money >= 25000 || message.member.roles.find("name", "Dad")){
+		if(money >= 50000 || message.member.roles.find("name", "Dad")){
 
 		
 
@@ -1927,7 +1927,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			}
 
 		else {
-				 sql = `UPDATE user SET money = ${money - 25000} WHERE id = '${message.author.id}'`;
+				 sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
 				con.query(sql);
 			}		
 		var roleName = messageArray[2];
@@ -2686,8 +2686,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-23-19")
-			.setDescription("-KSRPG IS NOW DOWN! You cannot progress anymore! Please await the *new* bot to contine your journey (:")
+			.setTitle("Patch Notes: 1-24-19")
+			.setDescription("-Dailies are now $10,000, Tournament Ticket now costs $100,000 and Custom Roles are $50,000!)
 			.setColor("#1f3c5b");
 			
 			
@@ -3144,7 +3144,7 @@ if(command === `${prefix}ORA`){
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$25,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $10,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
+			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
