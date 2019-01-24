@@ -2892,7 +2892,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
          
        			 con.query(sql); 
-           		message.channel.send(">ADD " + message.author + funds);
+           		message.channel.send(">ADD " + message.author + " " + funds);
 
 			} else{
 				message.channel.send("Invalid Input.");
