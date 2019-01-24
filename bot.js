@@ -2889,7 +2889,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}	else {
 
 			if(money > funds && Number.isInteger(funds) === true && funds > 0){
-			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${other.id}'`;
+			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
          
        			 con.query(sql); 
            		message.channel.send(">ADD " + message.author + funds);
