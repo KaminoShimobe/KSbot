@@ -2687,7 +2687,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 1-24-19")
-			.setDescription("-Dailies are now $10,000, Tournament Ticket now costs $100,000 and Custom Roles are $50,000!)
+			.setDescription("-Dailies are now $10,000, Tournament Ticket now costs $100,000 and Custom Roles are $50,000!")
 			.setColor("#1f3c5b");
 			
 			
