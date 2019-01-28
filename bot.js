@@ -2241,7 +2241,7 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 9999999 ORDER BY money D
 		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
 		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
 		
-		var index = user.indexOf(undefined);
+		var index = name.indexOf(undefined);
 		if(index != -1){
 			user[index] = "Insert rich person here";
 		}
