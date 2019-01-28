@@ -2241,10 +2241,51 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 9999999 ORDER BY money D
 		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
 		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
 		
-		var index = name.indexOf(undefined);
-		if(index != -1){
-			user[index] = "Insert rich person here";
-		}
+		
+		if(name[0] == undefined){
+			user[0] = "Insert rich person here";
+		} else if(name[1] == undefined){
+			user[1] = "Insert rich person here";
+		} else if(name[2] == undefined){
+			user[2] = "Insert rich person here";
+		} else if(name[3] == undefined){
+			user[3] = "Insert rich person here";
+		} else if(name[4] == undefined){
+			user[4] = "Insert rich person here";
+		} else if(name[5] == undefined){
+			user[5] = "Insert rich person here";
+		} else if(name[6] == undefined){
+			user[6] = "Insert rich person here";
+		} else if(name[7] == undefined){
+			user[7] = "Insert rich person here";
+		} else if(name[8] == undefined){
+			user[8] = "Insert rich person here";
+		} else if(name[9] == undefined){
+			user[9] = "Insert rich person here";
+		} 
+		
+		if(user[0] == undefined){
+			user[0] = "Insert rich person here";
+		} else if(user[1] == undefined){
+			user[1] = "Insert rich person here";
+		} else if(user[2] == undefined){
+			user[2] = "Insert rich person here";
+		} else if(user[3] == undefined){
+			user[3] = "Insert rich person here";
+		} else if(user[4] == undefined){
+			user[4] = "Insert rich person here";
+		} else if(user[5] == undefined){
+			user[5] = "Insert rich person here";
+		} else if(user[6] == undefined){
+			user[6] = "Insert rich person here";
+		} else if(user[7] == undefined){
+			user[7] = "Insert rich person here";
+		} else if(user[8] == undefined){
+			user[8] = "Insert rich person here";
+		} else if(user[9] == undefined){
+			user[9] = "Insert rich person here";
+		} 
+		
 		
 		let leaderboard = new Discord.RichEmbed()
 		
