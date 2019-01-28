@@ -2229,7 +2229,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id - 1000}'`, (err, r
 function viewLeaderboard(){
 	console.log("Omega oof");	
 	
-con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 99999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE money BETWEEN 10000 AND 9999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
 	
@@ -2685,8 +2685,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 1-24-19")
-			.setDescription("-Dailies are now $10,000, Tournament Ticket now costs $100,000 and Custom Roles are $50,000!")
+			.setTitle("Patch Notes: 1-28-19")
+			.setDescription("-Bug fixes pretty much *for now* -Dailies are now $10,000, Tournament Ticket now costs $100,000 and Custom Roles are $50,000!")
 			.setColor("#1f3c5b");
 			
 			
