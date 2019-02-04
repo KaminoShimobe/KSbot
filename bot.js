@@ -304,8 +304,8 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		var userID = rows[0].id;
 		let status = rows[0].bio;
 		var name = bot.users.get(userID);
-		var check = messageArray[2];
-			
+		var name2 = bot.users.get(messageArray[2]);
+		var check = `:ring: is married to ${name2.username} :heart:`
 	 
 	
 		sql = `UPDATE user SET bio = '${check}' WHERE id = '${theirID}'`;
