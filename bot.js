@@ -301,9 +301,9 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	if(command === `${prefix}mset` && message.author.id == '242118931769196544'){
 		let theirID = "M" + messageArray[1];
 		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
-		var userID = "267072439261986816"];
+		var userID = "267072439261986816";
 		let status = rows[0].bio;
-		var name = bot.users.get(userID);
+		var name = bot.users.get("267072439261986816");
 		var name2 = bot.users.get("159792243777994753");
 		var check = `:ring: is married to ${name2.username} :heart:`
 		let sql
