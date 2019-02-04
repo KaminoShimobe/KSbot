@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	//channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1169,7 +1169,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 
 	var num = parseInt(messageArray[1]); 
-	if(Number.isInteger(num) === true && money >= num && money > 0){
+	if(Number.isInteger(num) === true && money >= num && num > 0){
 
 	var bet = num * 2;
 		
