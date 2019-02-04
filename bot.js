@@ -302,16 +302,17 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		let theirID = "M" + messageArray[1];
 		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
 		var userID = "267072439261986816";
-		let status = rows[0].bio;
+		
 		var name = bot.users.get("267072439261986816");
 		var name2 = bot.users.get("159792243777994753");
 		var check = `:ring: is married to ${name2.username} :heart:`
-		let sql
-	 
-	
-		sql = `UPDATE user SET bio = '${check}' WHERE id = 'M267072439261986816'`;
+		let sql;
+	 	let sql2;
+		sql = `DELETE FROM user WHERE id = 'M267072439261986816'`;
+		con.query(sql); 	
+		sql2 = `INSERT INTO user (id, bio) VALUES ('M267072439261986816', ':ring: is married to Buddha :heart:')`;
            // the user can type the command ... your command code goes here :)
-        	con.query(sql); 
+        	con.query(sql2); 
            message.author.send(name.username + " has had their marriage bio set to set to " + check);
 		
 	
@@ -1461,7 +1462,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		} else{
 			sql = `DELETE FROM user WHERE id = '${mId}'`;
 			con.query(sql, console.log);
-			sql = `DELETE FROM user WHERE id = '$pId}'`;
+			sql = `DELETE FROM user WHERE id = '{$pId}'`;
 			con.query(sql, console.log);
 			message.reply("You have divorced!");
 			
