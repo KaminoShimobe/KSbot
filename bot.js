@@ -299,9 +299,9 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	}	
 	
 	if(command === `${prefix}mset` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
-		let theirID = messageArray[1];
+		let theirID = "M" + messageArray[1];
 		con.query(`SELECT * FROM user WHERE id = '${theirID}'`, (err, rows) => {
-		var userID = rows[0].id;
+		var userID = messageArray[1];
 		let status = rows[0].bio;
 		var name = bot.users.get(userID);
 		var name2 = bot.users.get(messageArray[2]);
