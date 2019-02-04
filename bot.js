@@ -1788,7 +1788,7 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 function viewLeaderboard(){
 	console.log("Omega oof");	
 	
-con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 99999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
 	
@@ -2292,7 +2292,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 2-3-19")
-			.setDescription("- Negative money flip exploit has been removed and monetary values for TangleWild Have been adjusted. Efforts for Tanglewild made notable and appreciated, but for the sake of server economy he must be nerfed.")
+			.setDescription("- Leaderboard limits extended. \n- Negative money flip exploit has been removed and monetary values for TangleWild Have been adjusted. Efforts for Tanglewild made notable and appreciated, but for the sake of server economy he must be nerfed.")
 			.setColor("#1f3c5b");
 			
 			
