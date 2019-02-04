@@ -282,7 +282,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		var userID = rows[0].id;
 		var name = bot.users.get(userID);
 		var check = parseInt(messageArray[2]);
-			
+		let sql;
 	 
 	if(Number.isInteger(check) === true){
 		sql = `UPDATE user SET money = ${check} WHERE id = '${theirID}'`;
@@ -298,17 +298,18 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});
 	}	
 	
-	if(command === `${prefix}mset` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
+	if(command === `${prefix}mset` && message.author.id == '242118931769196544'){
 		let theirID = "M" + messageArray[1];
-		con.query(`SELECT * FROM user WHERE id = '${theirID}'`, (err, rows) => {
-		var userID = messageArray[1];
+		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
+		var userID = "267072439261986816"];
 		let status = rows[0].bio;
 		var name = bot.users.get(userID);
-		var name2 = bot.users.get(messageArray[2]);
+		var name2 = bot.users.get("159792243777994753");
 		var check = `:ring: is married to ${name2.username} :heart:`
+		let sql
 	 
 	
-		sql = `UPDATE user SET bio = '${check}' WHERE id = '${theirID}'`;
+		sql = `UPDATE user SET bio = '${check}' WHERE id = 'M267072439261986816'`;
            // the user can type the command ... your command code goes here :)
         	con.query(sql); 
            message.author.send(name.username + " has had their marriage bio set to set to " + check);
