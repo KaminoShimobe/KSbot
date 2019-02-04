@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("This update is *really* sweet! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -125,64 +125,64 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 	
-	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
-		let other = message.mentions.users.first();
-		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let money = rows[0].money;
-		var funds = parseInt(messageArray[2]);	
-		if(rows.length < 1) {
+// 	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
+// 		let other = message.mentions.users.first();
+// 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		let money = rows[0].money;
+// 		var funds = parseInt(messageArray[2]);	
+// 		if(rows.length < 1) {
 			
-			message.channel.send("This person doesn't have a KSRPG account!");
-			return;
-		}	else {
+// 			message.channel.send("This person doesn't have a KSRPG account!");
+// 			return;
+// 		}	else {
 
 			
-			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
+// 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
          
-       			 con.query(sql); 
-           			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
+//        			 con.query(sql); 
+//            			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
 
 			
-			return;
-		}
+// 			return;
+// 		}
 
 
-		});
-	}
+// 		});
+// 	}
 
-	if(message.author.bot) return;
+// 	if(message.author.bot) return;
 	
-	var rooms = ['510954222536097807'];
-	var chancu = 0;
-	const room = bot.channels.get(rooms[chancu]);
-	const botspam = bot.channels.get('452166943093293059');
-	var currPerson = "";
+// 	var rooms = ['510954222536097807'];
+// 	var chancu = 0;
+// 	const room = bot.channels.get(rooms[chancu]);
+// 	const botspam = bot.channels.get('452166943093293059');
+// 	var currPerson = "";
 	
 	
-	function endJourney(){
-		let directoryID = 'D' + message.author.id;
-		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		if(rows.length < 1) {
+// 	function endJourney(){
+// 		let directoryID = 'D' + message.author.id;
+// 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		if(rows.length < 1) {
 			
-		message.author.send("You don't have a journey to end!");
-			return;
-		}	else {
+// 		message.author.send("You don't have a journey to end!");
+// 			return;
+// 		}	else {
 
 	
-			sql = `DELETE FROM user WHERE id = '${directoryID}'`;
-			con.query(sql);
-			message.author.send("Journey ended!");
+// 			sql = `DELETE FROM user WHERE id = '${directoryID}'`;
+// 			con.query(sql);
+// 			message.author.send("Journey ended!");
 			
-			return;
+// 			return;
 			
 			
-		}
-			});
-	}
+// 		}
+// 			});
+// 	}
 
 	function purge(){
 		let other = message.mentions.users.first();
@@ -275,6 +275,28 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			}
 			});
 	}
+	
+	if(command === `${prefix}set` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
+		let theirID = messageArray[1];
+		con.query(`SELECT * FROM user WHERE id = '${theirID}'`, (err, rows) => {
+		var userID = rows[0].id;
+		var name = bot.users.get(userID);
+		var check = parseInt(messageArray[2]);
+			
+	 
+	if(Number.isInteger(check) === true){
+		sql = `UPDATE user SET money = ${check} WHERE id = '${theirID}'`;
+           // the user can type the command ... your command code goes here :)
+        	con.query(sql); 
+           message.author.send(name.username + " has had their money set to " + check);
+		
+	}		
+	else{
+		message.reply("Invalid Option.");
+		return;
+	}		
+		});
+	}	
 	
 	if(command === `${prefix}pay` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -1147,7 +1169,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		
 
 	var num = parseInt(messageArray[1]); 
-	if(Number.isInteger(num) === true && money >= num){
+	if(Number.isInteger(num) === true && money >= num && money > 0){
 
 	var bet = num * 2;
 		
@@ -2269,8 +2291,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-1-19")
-			.setDescription("-MARRIAGE WORKS SOMEONE @ LILY!")
+			.setTitle("Patch Notes: 2-3-19")
+			.setDescription("- Negative money flip exploit has been removed and monetary values for TangleWild Have been adjusted. Efforts for Tanglewild made notable and appreciated, but for the sake of server economy he must be nerfed.")
 			.setColor("#1f3c5b");
 			
 			
@@ -2430,35 +2452,35 @@ if(command === `${prefix}ORA`){
 	}
 }
 	
-if(command === `${prefix}add` && messageArray[1] != undefined){
+// if(command === `${prefix}add` && messageArray[1] != undefined){
 		
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let money = rows[0].money;
-		var funds = parseInt(messageArray[1]);	
+// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		let money = rows[0].money;
+// 		var funds = parseInt(messageArray[1]);	
 	
-		if(rows.length < 1) {
+// 		if(rows.length < 1) {
 			
-			message.channel.send("This person doesn't have a user account!");
-			return;
-		}	else {
+// 			message.channel.send("This person doesn't have a user account!");
+// 			return;
+// 		}	else {
 
-			if(money > funds && Number.isInteger(funds) === true && funds > 0){
-			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
+// 			if(money > funds && Number.isInteger(funds) === true && funds > 0){
+// 			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
          
-       			 con.query(sql); 
-           		message.channel.send(">ADD " + message.author + " " + funds);
+//        			 con.query(sql); 
+//            		message.channel.send(">ADD " + message.author + " " + funds);
 
-			} else{
-				message.channel.send("Invalid Input.");
-			}
-			return;
-		}
+// 			} else{
+// 				message.channel.send("Invalid Input.");
+// 			}
+// 			return;
+// 		}
 
 
-		});
-	}		
+// 		});
+// 	}		
 
 	if(command === `${prefix}beat`){
 
