@@ -298,6 +298,28 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});
 	}	
 	
+	if(command === `${prefix}mset` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
+		let theirID = messageArray[1];
+		con.query(`SELECT * FROM user WHERE id = '${theirID}'`, (err, rows) => {
+		var userID = rows[0].id;
+		let status = rows[0].bio;
+		var name = bot.users.get(userID);
+		var check = messageArray[2];
+			
+	 
+	
+		sql = `UPDATE user SET bio = '${check}' WHERE id = '${theirID}'`;
+           // the user can type the command ... your command code goes here :)
+        	con.query(sql); 
+           message.author.send(name.username + " has had their marriage bio set to set to " + check);
+		
+	
+
+		return;
+			
+		});
+	}	
+	
 	if(command === `${prefix}pay` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		var money = rows[0].money;
