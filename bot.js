@@ -152,13 +152,13 @@ bot.on("message", async message => {
 // 		});
 // 	}
 
-// 	if(message.author.bot) return;
+	if(message.author.bot) return;
 	
-// 	var rooms = ['510954222536097807'];
-// 	var chancu = 0;
-// 	const room = bot.channels.get(rooms[chancu]);
-// 	const botspam = bot.channels.get('452166943093293059');
-// 	var currPerson = "";
+	var rooms = ['510954222536097807'];
+	var chancu = 0;
+	const room = bot.channels.get(rooms[chancu]);
+	const botspam = bot.channels.get('452166943093293059');
+	var currPerson = "";
 	
 	
 // 	function endJourney(){
@@ -298,29 +298,29 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});
 	}	
 	
-	if(command === `${prefix}mset` && message.author.id == '242118931769196544'){
-		let theirID = "M" + messageArray[1];
-		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
-		var userID = "267072439261986816";
+// 	if(command === `${prefix}mset` && message.author.id == '242118931769196544'){
+// 		let theirID = "M" + messageArray[1];
+// 		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
+// 		var userID = "267072439261986816";
 		
-		var name = bot.users.get("267072439261986816");
-		var name2 = bot.users.get("159792243777994753");
-		var check = `:ring: is married to ${name2.username} :heart:`
-		let sql;
-	 	let sql2;
-		sql = `DELETE FROM user WHERE id = 'M267072439261986816'`;
-		con.query(sql); 	
-		sql2 = `INSERT INTO user (id, bio) VALUES ('M267072439261986816', ':ring: is married to Buddha :heart:')`;
-           // the user can type the command ... your command code goes here :)
-        	con.query(sql2); 
-           message.author.send(name.username + " has had their marriage bio set to set to " + check);
+// 		var name = bot.users.get("267072439261986816");
+// 		var name2 = bot.users.get("159792243777994753");
+// 		var check = `:ring: is married to ${name2.username} :heart:`
+// 		let sql;
+// 	 	let sql2;
+// 		sql = `DELETE FROM user WHERE id = 'M267072439261986816'`;
+// 		con.query(sql); 	
+// 		sql2 = `INSERT INTO user (id, bio) VALUES ('M267072439261986816', ':ring: is married to Buddha :heart:')`;
+//            // the user can type the command ... your command code goes here :)
+//         	con.query(sql2); 
+//            message.author.send(name.username + " has had their marriage bio set to set to " + check);
 		
 	
 
-		return;
+// 		return;
 			
-		});
-	}	
+// 		});
+// 	}	
 	
 	if(command === `${prefix}pay` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
