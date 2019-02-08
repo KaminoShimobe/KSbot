@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	//channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1808,6 +1808,58 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 });		
 
 }
+
+function horoscope(){
+	con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
+		if(err) throw err;
+		
+		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
+		var bad = ["|| was jumped by some thugs!||", "|| got a deduction for slacking off at work!||", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity!||", "|| dropped their money down a sewer pipe!||", "|| was fined for parking in front of a fire hydrant!||", "|| lost a highstake bet!||", "|| invested their money in a volitable market!||", "|| bought to many waifu pillows and anime merch!||"];
+	
+		
+	
+		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
+		let id = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
+		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
+		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
+		
+		for(var i = 0; i < user.length; i++){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[i];
+			var mons = rank[i];
+			if(chance > 4){
+				var loss = rank[i] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[i] +  bad[condition]), wait);
+			message.channel.send("||They lost $" + loss + "! ||");
+			} else {
+			var gain = rank[i] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[i] +  good[condition]), wait);		
+			message.channel.send("||They gained $" + gain + "! ||");	
+				
+				
+			}
+		}
+		
+		});
+	
+}
 	
 function viewLeaderboard(){
 	console.log("Omega oof");	
@@ -2315,8 +2367,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-3-19")
-			.setDescription("- Leaderboard limits extended. \n- Negative money flip exploit has been removed and monetary values for TangleWild Have been adjusted. Efforts for Tanglewild made notable and appreciated, but for the sake of server economy he must be nerfed.")
+			.setTitle("Patch Notes: 2-8-19")
+			.setDescription("-Added new command !horoscope This is a daily command only usable by Kamino. Depending on your luck, you may lose or gain money. Only applies to top 10 on the leaderboard :P")
 			.setColor("#1f3c5b");
 			
 			
@@ -3245,6 +3297,14 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
+	
+	if(command === `${prefix}horoscope`){
+		if(message.author.id == '242118931769196544'){
+			horoscope();
+		} else {
+			message.channel.send("You don't have the power to change your fate");
+		}
+	}	
 
 	if(command === `${prefix}daily`){
 		
