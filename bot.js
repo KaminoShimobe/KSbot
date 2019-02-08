@@ -1953,14 +1953,14 @@ function horoscope(){
 		let money = rows[0].money;
 	
 		
-		function choose1(){
+		
 			var wait = Math.floor(Math.random() * 200) + 1;
 			var chance = Math.floor(Math.random() * 10) + 1;
 			var percent = Math.floor(Math.random() * 10) + 1;
 			var condition = Math.floor(Math.random() * 9);
 			
 			if(chance > 4){
-				var loss = rank[0] / percent;
+				var loss = money / percent;
 			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
 			con.query(sql, console.log);
 			message.channel.send(".");
@@ -1971,7 +1971,7 @@ function horoscope(){
 			setTimeout(message.channel.send(other.username +  bad[condition]), wait);
 			
 			} else {
-			var gain = rank[0] / percent;
+			var gain = money / percent;
 			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
 			con.query(sql, console.log);
 			message.channel.send(".");
@@ -1979,11 +1979,11 @@ function horoscope(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send( other.username +  good[condition]), wait);		
+			setTimeout(message.channel.send(other.username +  good[condition]), wait);		
 				
 			}
-		} 
-		choose1();
+		 
+		
 		
 		
 		});
