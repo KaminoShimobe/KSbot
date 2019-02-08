@@ -1956,7 +1956,7 @@ function horoscope(){
 		
 			var wait = Math.floor(Math.random() * 200) + 1;
 			var chance = Math.floor(Math.random() * 10) + 1;
-			var percent = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 30) + 10;
 			var condition = Math.floor(Math.random() * 9);
 			
 			if(chance > 4){
