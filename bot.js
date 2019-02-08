@@ -1809,59 +1809,7 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 
 }
 
-function horoscope(){
-	let other = message.mentions.users.first();
-	
-	con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
-		if(err) throw err;
-		
-		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
-		var bad = ["|| was jumped by some thugs!||", "|| got a deduction for slacking off at work!||", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity!||", "|| dropped their money down a sewer pipe!||", "|| was fined for parking in front of a fire hydrant!||", "|| lost a highstake bet!||", "|| invested their money in a volitable market!||", "|| bought to many waifu pillows and anime merch!||"];
-	
-		
 
-		if(!rows[0]) return message.channel.send("They don't have a user!");
-
-		
-		let money = rows[0].money;
-	
-		
-		function choose1(){
-			var wait = Math.floor(Math.random() * 200) + 1;
-			var chance = Math.floor(Math.random() * 10) + 1;
-			var percent = Math.floor(Math.random() * 10) + 1;
-			var condition = Math.floor(Math.random() * 9);
-			
-			if(chance > 4){
-				var loss = rank[0] / percent;
-			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
-			con.query(sql, console.log);
-			message.channel.send(".");
-			message.channel.send(".");	
-			message.channel.send(".");	
-			message.channel.send(".");	
-			message.channel.send(".");	
-			setTimeout(message.channel.send(other.username +  bad[condition]), wait);
-			
-			} else {
-			var gain = rank[0] / percent;
-			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
-			con.query(sql, console.log);
-			message.channel.send(".");
-			message.channel.send(".");	
-			message.channel.send(".");	
-			message.channel.send(".");	
-			message.channel.send(".");	
-			setTimeout(message.channel.send( other.username +  good[condition]), wait);		
-				
-			}
-		} 
-		choose1();
-		
-		
-		});
-	
-}
 	
 function viewLeaderboard(){
 	console.log("Omega oof");	
@@ -1987,6 +1935,60 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 
 return;
 }
+	
+function horoscope(){
+	
+	
+	con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
+		var bad = ["|| was jumped by some thugs!||", "|| got a deduction for slacking off at work!||", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity!||", "|| dropped their money down a sewer pipe!||", "|| was fined for parking in front of a fire hydrant!||", "|| lost a highstake bet!||", "|| invested their money in a volitable market!||", "|| bought to many waifu pillows and anime merch!||"];
+		let sql;
+		
+
+		if(!rows[0]) return message.channel.send("They don't have a user!");
+
+		
+		let money = rows[0].money;
+	
+		
+		function choose1(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			
+			if(chance > 4){
+				var loss = rank[0] / percent;
+			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(other.username +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[0] / percent;
+			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send( other.username +  good[condition]), wait);		
+				
+			}
+		} 
+		choose1();
+		
+		
+		});
+	
+}	
 	
 	function deleteUser(){
 
