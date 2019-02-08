@@ -1840,7 +1840,7 @@ function horoscope(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send(name[i] +  bad[condition]), wait);
-			message.channel.send("||They lost $" + loss + "! ||");
+			
 			} else {
 			var gain = rank[i] / percent;
 			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
@@ -1851,7 +1851,7 @@ function horoscope(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send(name[i] +  good[condition]), wait);		
-			message.channel.send("||They gained $" + gain + "! ||");	
+			
 				
 				
 			}
