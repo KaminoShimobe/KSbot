@@ -1823,15 +1823,15 @@ function horoscope(){
 		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
 		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
 		
-		for(var i = 0; i < user.length; i++){
+		function choose1(){
 			var wait = Math.floor(Math.random() * 200) + 1;
 			var chance = Math.floor(Math.random() * 10) + 1;
 			var percent = Math.floor(Math.random() * 10) + 1;
 			var condition = Math.floor(Math.random() * 9);
-			var who = id[i];
-			var mons = rank[i];
+			var who = id[0];
+			var mons = rank[0];
 			if(chance > 4){
-				var loss = rank[i] / percent;
+				var loss = rank[0] / percent;
 			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
 			con.query(sql, console.log);
 			message.channel.send(".");
@@ -1839,7 +1839,37 @@ function horoscope(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(name[i] +  bad[condition]), wait);
+			setTimeout(message.channel.send(name[0] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[0] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[0] +  good[condition]), wait);		
+				
+			}
+		} function choose2(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[1];
+			var mons = rank[1];
+			if(chance > 4){
+				var loss = rank[1] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[1] +  bad[condition]), wait);
 			
 			} else {
 			var gain = rank[i] / percent;
@@ -1850,12 +1880,261 @@ function horoscope(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(name[i] +  good[condition]), wait);		
-			
+			setTimeout(message.channel.send(name[1] +  good[condition]), wait);		
 				
+			}
+		} function choose3(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[2];
+			var mons = rank[2];
+			if(chance > 4){
+				var loss = rank[2] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[2] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[2] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[2] +  good[condition]), wait);		
+				
+			}
+		} function choose4(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[3];
+			var mons = rank[3];
+			if(chance > 4){
+				var loss = rank[3] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[3] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[3] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[3] +  good[condition]), wait);		
+				
+			}
+		} function choose5(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[4];
+			var mons = rank[4];
+			if(chance > 4){
+				var loss = rank[4] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[4] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[4] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[4] +  good[condition]), wait);		
+				
+			}
+		} function choose6(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[5];
+			var mons = rank[5];
+			if(chance > 4){
+				var loss = rank[5] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[5] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[5] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[5] +  good[condition]), wait);		
+				
+			}
+		} function choose7(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[6];
+			var mons = rank[6];
+			if(chance > 4){
+				var loss = rank[6] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[6] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[6] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[6] +  good[condition]), wait);		
+				
+			}
+		} function choose8(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[7];
+			var mons = rank[7];
+			if(chance > 4){
+				var loss = rank[7] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[7] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[7] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[7] +  good[condition]), wait);		
+				
+			}
+		} function choose9(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[8];
+			var mons = rank[8];
+			if(chance > 4){
+				var loss = rank[8] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[8] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[8] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[8] +  good[condition]), wait);		
+				
+			}
+		} function choose10(){
+			var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 1;
+			var condition = Math.floor(Math.random() * 9);
+			var who = id[9];
+			var mons = rank[9];
+			if(chance > 4){
+				var loss = rank[9] / percent;
+			sql = `UPDATE user SET money = ${mons - loss} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[9] +  bad[condition]), wait);
+			
+			} else {
+			var gain = rank[9] / percent;
+			sql = `UPDATE user SET money = ${mons + gain} WHERE id = '${who}'`;
+			con.query(sql, console.log);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(name[9] +  good[condition]), wait);		
 				
 			}
 		}
+		
+		choose1();
+		choose2();
+		choose3();
+		choose4();
+		choose5();
+		choose6();
+		choose7();
+		choose8();
+		choose9();
+		choose10();
 		
 		});
 	
