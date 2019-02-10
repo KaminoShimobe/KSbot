@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	//channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
