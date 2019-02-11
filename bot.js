@@ -4,6 +4,7 @@ const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
 const talkedRecently = new Set();
+const exposeLimit = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -30,7 +31,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	//channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been FREAKIN updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1012,6 +1013,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		let sql;
 		let bio = rows[0].bio;
 		console.log(bio);
+		
 		var wait = Math.floor(Math.random() * 200) + 1;
 		
 		 message.channel.send("The culprit is...");
@@ -2371,8 +2373,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-8-19")
-			.setDescription("-Added new command !horoscope This is a daily command only usable by Kamino. Depending on your luck, you may lose or gain money. Only applies to top 10 on the leaderboard :P")
+			.setTitle("Patch Notes: 2-11-19")
+			.setDescription("-!expose has a cooldown of 24 hours! \n -Added new command !horoscope This is a daily command only usable by Kamino. Depending on your luck, you may lose or gain money. Only applies to top 10 on the leaderboard :P")
 			.setColor("#1f3c5b");
 			
 			
@@ -2981,15 +2983,23 @@ if(command === `${prefix}ORA`){
 		}
 
 		let money = rows[0].money;
-		
+		if (exposeLimit.has(message.author.id)) {
+            message.reply("You have already exposed today!");
+            return;
+   		 } else {	
 		if(money < 50000) {
 			message.reply("Insufficient Funds.");
 			return;
 		}
+		exposeLimit.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          exposeLimit.delete(message.author.id);
+        }, (1000*60*60*24));	 
 		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		exposeSET();
-
+		 }
 		});
 
 		
