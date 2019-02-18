@@ -31,7 +31,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been FREAKIN updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been *slightly* updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -126,32 +126,32 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 	
-// 	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
-// 		let other = message.mentions.users.first();
-// 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let money = rows[0].money;
-// 		var funds = parseInt(messageArray[2]);	
-// 		if(rows.length < 1) {
+	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
+		let other = message.mentions.users.first();
+		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var funds = parseInt(messageArray[2]);	
+		if(rows.length < 1) {
 			
-// 			message.channel.send("This person doesn't have a KSRPG account!");
-// 			return;
-// 		}	else {
+			message.channel.send("This person doesn't have a KSRPG account!");
+			return;
+		}	else {
 
 			
-// 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
+			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
          
-//        			 con.query(sql); 
-//            			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
+       			 con.query(sql); 
+           			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
 
 			
-// 			return;
-// 		}
+			return;
+		}
 
 
-// 		});
-// 	}
+		});
+	}
 
 	if(message.author.bot) return;
 	
@@ -1037,31 +1037,29 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	
 	
 	
-	function getMuns(){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
+	// function getMuns(){
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
 
-		if(rows.length < 1) {
-			return;
-		}
+	// 	if(rows.length < 1) {
+	// 		return;
+	// 	}
 
-		let money = rows[0].money;
+	// 	let money = rows[0].money;
 		
-		var funds = (message.content.length);
-		if(funds >= 50){
-			funds = 50;
-		}	
-		sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
-		//console.log(message.author.username + " got $" + funds);	
-		con.query(sql);
+	// 	var funds = (message.content.length);
+	// 	if(funds >= 50){
+	// 		funds = 50;
+	// 	}	
+	// 	sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
+	// 	//console.log(message.author.username + " got $" + funds);	
+	// 	con.query(sql);
 			
-	});	
+	// });	
 	
-	}
+	// }
 	
-	if (message.guild.id == '456956416377225218') {	
-	//getMuns();	
-	}
+	
 
 	var phrase1 = "is";
 
@@ -1814,7 +1812,7 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 
 	
 function viewLeaderboard(){
-	console.log("Omega oof");	
+	//console.log("Omega oof");	
 	
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
@@ -2121,41 +2119,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 }
 	
 	
-// 	} else {
-		
-// 		if(messageArray.indexOf("Pancake") != -1 ||messageArray.indexOf("Pancakes") != -1 ||messageArray.indexOf("pancake") != -1 ||messageArray.indexOf("PANCAKES") != -1 || messageArray.indexOf("pancakes") != -1 || messageArray.indexOf(":pancakes:") != -1 || messageArray.indexOf("🥞") != -1 || messageArray[0].indexOf("🥞") != -1 || messageArray[0].indexOf(":pancakes:") != -1 ){
-		
-// 			message.delete()
 
-//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-//   			.catch(console.error);
-		 
-
-		
-// 		return;
-// 	}
-		
-		
-		
-// 	}	
-	
-	
-	// if(messageArray.indexOf("I'm") != -1 || messageArray.indexOf("i'm") != -1 || messageArray.indexOf("I'M") != -1){
-	// 	var im = "I'm"
-	// 	var pos = messageArray.indexOf(im);
-		
-		
-	// 	var chance = Math.floor(Math.random() * 15) + 1;
-		
-		
-	// 		if(messageArray[pos + 1] != undefined && chance === 1){
-	// 			return message.channel.send("Hi , " + messageArray[pos + 1] + "! I'm Kamino's son!");
-	// 		} else {
-	// 		return 
-	// 	    }
-
-	// }
 	
 	function wellWish(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
@@ -2373,8 +2337,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-11-19")
-			.setDescription("-!expose has a cooldown of 24 hours! \n -Added new command !horoscope This is a daily command only usable by Kamino. Depending on your luck, you may lose or gain money. Only applies to top 10 on the leaderboard :P")
+			.setTitle("Patch Notes: 2-18-19")
+			.setDescription("-Tweaks :eyes:")
 			.setColor("#1f3c5b");
 			
 			
@@ -2534,35 +2498,35 @@ if(command === `${prefix}ORA`){
 	}
 }
 	
-// if(command === `${prefix}add` && messageArray[1] != undefined){
+if(command === `${prefix}add` && messageArray[1] != undefined){
 		
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let money = rows[0].money;
-// 		var funds = parseInt(messageArray[1]);	
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var funds = parseInt(messageArray[1]);	
 	
-// 		if(rows.length < 1) {
+		if(rows.length < 1) {
 			
-// 			message.channel.send("This person doesn't have a user account!");
-// 			return;
-// 		}	else {
+			message.channel.send("This person doesn't have a user account!");
+			return;
+		}	else {
 
-// 			if(money > funds && Number.isInteger(funds) === true && funds > 0){
-// 			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
+			if(money > funds && Number.isInteger(funds) === true && funds > 0){
+			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
          
-//        			 con.query(sql); 
-//            		message.channel.send(">ADD " + message.author + " " + funds);
+       			 con.query(sql); 
+           		message.channel.send(">ADD " + message.author + " " + funds);
 
-// 			} else{
-// 				message.channel.send("Invalid Input.");
-// 			}
-// 			return;
-// 		}
+			} else{
+				message.channel.send("Invalid Input.");
+			}
+			return;
+		}
 
 
-// 		});
-// 	}		
+		});
+	}		
 
 	if(command === `${prefix}beat`){
 
@@ -3015,7 +2979,7 @@ if(command === `${prefix}ORA`){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.3.2: commands")
+			.setTitle("KS Bot Version 0.4.0: commands")
 			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n **!wellWish** \n Sends a dm to a random person wishing them a good day! \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
 			.setColor("#1d498e"); 
 
