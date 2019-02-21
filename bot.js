@@ -2432,7 +2432,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let money = rows[0].money;
 		let basement = bot.channels.get("456957934690238464");
 		var lastInt;	
-		channel.fetchMessages({ limit: 1 }).then(messages => {
+		basement.fetchMessages({ limit: 1 }).then(messages => {
   		let lastMessage = messages.first();
 		console.log(lastMessage);
   		if (lastMessage.author.bot) {
