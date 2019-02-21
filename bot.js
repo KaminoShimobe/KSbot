@@ -2435,10 +2435,11 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		basement.fetchMessages({ limit: 1 }).then(messages => {
   		let lastMessage = messages.first();
 		console.log(lastMessage);
-  		if (lastMessage.author.bot) {
-   		 lastInt = lastMessage.match(/\d+/g).map(Number);
+  		if (!lastMessage.author.bot) {
+			return
+   		 
   		} else {
-		 lastInt = Math.floor(Math.random(100 * 1)) + 1;	
+		 lastInt = lastMessage.match(/\d+/)[0];
 		}
 		})
 		.catch(console.error);
