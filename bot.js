@@ -253,14 +253,14 @@ bot.on("message", async message => {
 			return;
 		}	else {
 			if (HeavensDoorCD.has(message.author.id)) {
-            message.author.send("Heaven's Door must wait about 30 mins from when you first used it!");
+            message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
             return;
    		 } else{
 			 			
-			
+			const chan = new Discord.DMChannel(bot, receivedMessage.author);
 			 
 			message.author.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+		const collector = new Discord.MessageCollector(chan, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}cancel`) {
                		 message.author.send("Message cancelled.");
