@@ -2431,7 +2431,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let sql;
 		let money = rows[0].money;
 		let basement = bot.channels.get("456957934690238464");
-		var lastInt;	
+		var lastInt;
+		
 		basement.fetchMessages({ limit: 1 }).then(messages => {
   		let lastMessage = messages.first();
 		console.log(lastMessage);
@@ -2440,7 +2441,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
    		 
   		} else {
 		message.channel.send("last message in basement was: " + lastMessage);	
-		 lastInt = lastMessage.match(/\\d+\\.?\\d*/g);
+		var lastMsg = lastMessage.replace(/\D/g,'');
+		 lastInt = Integer.parseInt(lastMsg);
 		}
 		})
 		.catch(console.error);
