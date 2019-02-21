@@ -2442,6 +2442,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
   		} else {
 		message.channel.send("last message in basement was: " + lastMessage);	
 		var lastMsg = lastMessage.replace(/\D/g,'');
+		message.channel.send("last msg in basement was: " + lastMsg);		
 		 lastInt = Integer.parseInt(lastMsg);
 		}
 		})
