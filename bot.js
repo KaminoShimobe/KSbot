@@ -230,8 +230,10 @@ bot.on("message", async message => {
 			return;
 		}
 	
+	
+	
 	function HeavensDoor(){
-		if(message.member.roles.find("name", "HeavensDoor") ) {
+		if(message.member.roles.find("name", "HeavensDoor")) {
 		let otherID = messageArray[1];	
 		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
 		if(err) throw err;
@@ -258,12 +260,17 @@ bot.on("message", async message => {
    		 } else{
 			 			
 			
-			 
-			message.author.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
-		const collector = new Discord.MessageCollector(message.author.channel, m => m.author.id === message.author.id, { time: 100000000 });
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+				
+			message.channel.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}cancel`) {
-               		 message.author.send("Message cancelled.");
+               		 message.channel.send("Message cancelled.");
                 		return;
             		} else {
 				var msg = message.content;
@@ -274,8 +281,8 @@ bot.on("message", async message => {
         }, (1000*60*30));
 				
 				sql = `UPDATE user SET bio = ${msg} WHERE id = '${otherID}'`;
-			con.query(sql);		
-				message.author.send(name.username + "'s bio set to ```" + msg + "```");
+			con.query(sql);	
+			message.channel.send("**HEAVEN'S DOOR**");
 			}		//BOI
 
 			});
@@ -295,13 +302,15 @@ bot.on("message", async message => {
 		});
 		} 
 		else {
-  			message.author.send("You do not have the power to use HEAVEN'S DOOR!");
+  			message.channel.send("You do not have the power to use HEAVEN'S DOOR!");
 			}
 	}
 	
 	if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined){
 		HeavensDoor();
-	}
+	} 
+		
+		
 	
 	if(command === `${prefix}purge`){
 		purge();
