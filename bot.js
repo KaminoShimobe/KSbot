@@ -255,6 +255,11 @@ bot.on("message", async message => {
 			return;
 		}	else {
 			if (HeavensDoorCD.has(message.author.id)) {
+				 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
             message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
             return;
    		 } else{
