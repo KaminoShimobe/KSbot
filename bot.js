@@ -2439,6 +2439,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
    		 lastInt = lastMessage.match(/\d+/g).map(Number);
   		} else {
 		 lastInt = Math.floor(Math.random(100 * 1)) + 1;	
+		}
 		})
 		.catch(console.error);
 		
