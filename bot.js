@@ -2434,7 +2434,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
-			
+		
+
 		var lastMsg = toBeat.lastMessage.content.replace(/[^\d.-]/g, '');
 		var lastInt = parseInt(lastMsg);
 		
@@ -2453,14 +2454,21 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
             message.reply("Harvest must wait about 3 hours from when you first used it!");
             return;
    		 } else{
+			 		if(toBeat.lastMessage.content.indexOf('!spin') != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 100000){	
 			HarvestCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
           HarvestCD.delete(message.author.id);
         }, (1000*60*60*3));
+			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
+			con.query(sql);			
+			message.channel.send("Harvest collected " + lastInt + "!");			
+		}	
 			
+		else {
+			message.channel.send("Harvest cannot collect that!");
+		}	
 			
-			message.channel.send("Harvest collected " + lastInt + "!");
 			
 			
 			return;
