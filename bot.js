@@ -231,7 +231,7 @@ bot.on("message", async message => {
 		}
 	
 	function HeavensDoor(){
-		if(message.member.roles.find("name", "Heaven's Door") ) {
+		if(message.member.roles.find("name", "HeavensDoor") ) {
 		let otherID = messageArray[1];	
 		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
 		if(err) throw err;
@@ -249,7 +249,7 @@ bot.on("message", async message => {
 			
 			
 			
-			message.reply(" You have no user!");
+			message.reply(" They have no user!");
 			return;
 		}	else {
 			if (HeavensDoorCD.has(message.author.id)) {
@@ -275,7 +275,7 @@ bot.on("message", async message => {
 				
 				sql = `UPDATE user SET bio = ${msg} WHERE id = '${otherID}'`;
 			con.query(sql);		
-				message.author.send(name + "'s bio set to ```" + msg + "```");
+				message.author.send(name.username + "'s bio set to ```" + msg + "```");
 			}		//BOI
 
 			});
