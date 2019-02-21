@@ -2432,6 +2432,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let money = rows[0].money;
 		var lastMsg = bot.lastMessage.content;
 		var lastInt = lastMsg.match(/\d+/g).map(Number);	
+		
 		if(rows.length < 1) {
 			
 			
@@ -2440,8 +2441,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			message.reply(" You have no user!");
 			return;
 		}	else {
-			if (exposeLimit.has(message.author.id)) {
-            message.reply("You have already exposed today!");
+			if (HarvestCD.has(message.author.id)) {
+            message.reply("Harvest must wait about 3 hours from when you first used it!");
             return;
    		 } else{
 			HarvestCD.add(message.author.id);
@@ -2450,7 +2451,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
           HarvestCD.delete(message.author.id);
         }, (1000*60*60*3));
 			
-			
+			console.log(lastInt);
 			message.channel.send("Harvest collected " + lastInt + "!");
 			
 			
