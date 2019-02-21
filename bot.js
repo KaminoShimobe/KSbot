@@ -287,6 +287,11 @@ bot.on("message", async message => {
 				
 				sql = `UPDATE user SET bio = '${msg}' WHERE id = '${otherID}'`;
 			con.query(sql);	
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);	
 			message.channel.send("**HEAVEN'S DOOR**");
 			}		//BOI
 
