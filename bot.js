@@ -2430,23 +2430,15 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		if(err) throw err;
 		let sql;
 		let money = rows[0].money;
-		let basement = bot.channels.get("456957934690238464");
-		var lastInt;
+			
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+			
+		var lastMsg = toBeat.lastMessage.content.replace(/[^\d.-]/g, '');
+		var lastInt = parseInt(lastMsg);
 		
-		basement.fetchMessages({ limit: 1 }).then(messages => {
-  		let lastMessage = messages.first();
-		console.log(lastMessage);
-  		if (!lastMessage.author.bot) {
-			return
-   		 
-  		} else {
-		message.channel.send("last message in basement was: " + lastMessage);	
-		var lastMsg = lastMessage.replace(/[^\d.-]/g, '');
-		message.channel.send("last msg in basement was: " + lastMsg);		
-		 lastInt = Integer.parseInt(lastMsg);
-		}
-		})
-		.catch(console.error);
+		
 		
 		
 		if(rows.length < 1) {
@@ -3357,7 +3349,7 @@ if (message.guild.id == '456956416377225218') {
 
 	}
 	
-	if(command === `${prefix}HARVEST`){
+	if(command === `${prefix}HARVEST` && messageArray[1] != undefined){
 		
 
 		harvest();
