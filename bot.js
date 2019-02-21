@@ -257,10 +257,10 @@ bot.on("message", async message => {
             return;
    		 } else{
 			 			
-			const chan = new Discord.DMChannel(bot, message.author);
+			
 			 
 			message.author.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
-		const collector = new Discord.MessageCollector(chan, m => m.author.id === message.author.id, { time: 100000000 });
+		const collector = new Discord.MessageCollector(message.author, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}cancel`) {
                		 message.author.send("Message cancelled.");
