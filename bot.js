@@ -5,6 +5,7 @@ const mysql = require("mysql");
 const http = require('http');
 const talkedRecently = new Set();
 const exposeLimit = new Set();
+const HarvestCD = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -2337,8 +2338,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-18-19")
-			.setDescription("-Tweaks :eyes:")
+			.setTitle("Patch Notes: 2-21-19")
+			.setDescription("-Stando Powa coming soon :eyes:")
 			.setColor("#1f3c5b");
 			
 			
@@ -2384,6 +2385,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	let dio = message.guild.roles.find("name", "DIO");
     let kakyoin = message.guild.roles.find("name", "kakyoin");
+	
 	if (message.guild.id == '456956416377225218') {
 	function zaWarudo(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
@@ -2421,6 +2423,84 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
     	
 	}
 }
+	
+	function harvest(){
+		if(message.member.roles.find("name", "Harvest") ) {
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var lastMsg = bot.lastMessage.content;
+		var lastInt = lastMsg.match(/\d+/g).map(Number);	
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" You have no user!");
+			return;
+		}	else {
+			if (exposeLimit.has(message.author.id)) {
+            message.reply("You have already exposed today!");
+            return;
+   		 } else{
+			HarvestCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HarvestCD.delete(message.author.id);
+        }, (1000*60*60*3));
+			
+			
+			message.channel.send("Harvest collected " + lastInt + "!");
+			
+			
+			return;
+		 }
+		}
+
+
+		});
+		} 
+		else {
+  			message.channel.send("You do not have the power to use HARVEST!");
+			}
+	}
+	
+	function HeavensDoor(){
+		
+	}
+	
+	function firstBomb(){
+		
+	}
+	
+	function secondBomb(){
+		
+	}
+	
+	function thirdBomb(){
+		
+	}
+	
+	function kingCrimson(){
+		
+	}
+	
+	function D4C(){
+		
+	}
+	
+	function KISS(){
+		
+	}
+	
+	function mandom(){
+		
+	}
+	
+	function goldenExperienceR(){
+		
+	}
 
 if(command === `${prefix}ORA`){
 	let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
@@ -3249,6 +3329,21 @@ if (message.guild.id == '456956416377225218') {
 		
 
 		zaWarudoDo();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}HARVEST`){
+		
+
+		harvest();
 
 			
 
