@@ -2451,7 +2451,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
           HarvestCD.delete(message.author.id);
         }, (1000*60*60*3));
 			
-			console.log(lastInt);
+			console.log(lastMsg);
 			message.channel.send("Harvest collected " + lastInt + "!");
 			
 			
