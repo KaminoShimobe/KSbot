@@ -273,7 +273,7 @@ bot.on("message", async message => {
           HeavensDoorCD.delete(message.author.id);
         }, (1000*60*30));
 				
-				sql = `UPDATE user SET bio = ${msg} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET bio = ${msg} WHERE id = '${otherID}'`;
 			con.query(sql);		
 				message.author.send(name + "'s bio set to ```" + msg + "```");
 			}		//BOI
