@@ -6,6 +6,7 @@ const http = require('http');
 const talkedRecently = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
+const HeavensDoorCD = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -229,6 +230,78 @@ bot.on("message", async message => {
 			return;
 		}
 	
+	function HeavensDoor(){
+		if(message.member.roles.find("name", "Heaven's Door") ) {
+		let otherID = messageArray[1];	
+		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let bio = rows[0].bio;
+		var name = bot.users.get(otherID);
+		
+
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" You have no user!");
+			return;
+		}	else {
+			if (HeavensDoorCD.has(message.author.id)) {
+            message.author.send("Heaven's Door must wait about 30 mins from when you first used it!");
+            return;
+   		 } else{
+			 			
+			
+			 
+			message.author.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.author.send("Message cancelled.");
+                		return;
+            		} else {
+				var msg = message.content;
+				HeavensDoorCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HeavensDoorCD.delete(message.author.id);
+        }, (1000*60*30));
+				
+				sql = `UPDATE user SET bio = ${msg} WHERE id = '${message.author.id}'`;
+			con.query(sql);		
+				message.author.send(name + "'s bio set to ```" + msg + "```");
+			}		//BOI
+
+			});
+	
+			
+		
+			
+			
+			
+			
+			
+			return;
+		 }
+		}
+
+
+		});
+		} 
+		else {
+  			message.author.send("You do not have the power to use HEAVEN'S DOOR!");
+			}
+	}
+	
+	if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined){
+		HeavensDoor();
+	}
 	
 	if(command === `${prefix}purge`){
 		purge();
@@ -2483,9 +2556,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			}
 	}
 	
-	function HeavensDoor(){
-		
-	}
+	
 	
 	function firstBomb(){
 		
