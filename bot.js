@@ -2430,8 +2430,17 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		if(err) throw err;
 		let sql;
 		let money = rows[0].money;
-		var lastMsg = bot.lastMessage.content;
-		var lastInt = lastMsg.match(/\d+/g).map(Number);	
+		let basement = bot.channels.get("456957934690238464");
+		var lastInt;	
+		channel.fetchMessages({ limit: 1 }).then(messages => {
+  		let lastMessage = messages.first();
+		console.log(lastMessage);
+  		if (lastMessage.author.bot) {
+   		 lastInt = lastMessage.match(/\d+/g).map(Number);
+  		} 
+		})
+		.catch(console.error);
+		
 		
 		if(rows.length < 1) {
 			
@@ -2451,7 +2460,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
           HarvestCD.delete(message.author.id);
         }, (1000*60*60*3));
 			
-			console.log(lastMsg);
+			
 			message.channel.send("Harvest collected " + lastInt + "!");
 			
 			
