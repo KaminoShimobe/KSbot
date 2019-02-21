@@ -2439,7 +2439,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			return
    		 
   		} else {
-		 lastInt = lastMessage.match(/\d+/)[0];
+		message.channel.send("last message in basement was: " + lastMessage);	
+		 lastInt = lastMessage.match(/\\d+\\.?\\d*/g);
 		}
 		})
 		.catch(console.error);
