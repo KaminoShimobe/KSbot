@@ -257,7 +257,7 @@ bot.on("message", async message => {
             return;
    		 } else{
 			 			
-			const chan = new Discord.DMChannel(bot, receivedMessage.author);
+			const chan = new Discord.DMChannel(bot, message.author);
 			 
 			message.author.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
 		const collector = new Discord.MessageCollector(chan, m => m.author.id === message.author.id, { time: 100000000 });
