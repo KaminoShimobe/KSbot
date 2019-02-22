@@ -2578,8 +2578,9 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function firstBomb(){
-		message.channel.fetchMessages({ limit: 1 }).then(messages => {
-  let lastMessage = messages.first();
+		message.channel.fetchMessages({ limit: 2 }).then(messages => {
+  let lastMessage = messages.filter(msg => msg.author.id != message.author.id);
+
 
   if (!lastMessage.author.bot) {
      lastMessage.delete()
