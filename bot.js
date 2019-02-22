@@ -569,7 +569,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			
 
 			message.channel.fetchMessages({ limit: 100 }).then(messages => {
-  const botMessages = messages.filter(msg => !msg.user.bot );
+  const botMessages = messages.filter(msg => msg.content.length >= 1 );
 
 
 
