@@ -2582,9 +2582,9 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
   let lastMessage = messages.first();
 
   if (!lastMessage.author.bot) {
-     message.delete()
+     lastMessage.delete()
 
-  			.then(msg => message.send("**KILLA QUEEN**"))
+  			.then(msg => message.channel.send("**KILLA QUEEN**"))
 
   			.catch(console.error);
   }
@@ -3473,7 +3473,7 @@ if (message.guild.id == '456956416377225218') {
 
 	}
 
-	if(command === `${prefix}FIRSTBOMB` && messageArray[1] != undefined){
+	if(command === `${prefix}FIRSTBOMB`){
 		
 
 		firstBomb();
