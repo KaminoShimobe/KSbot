@@ -2848,7 +2848,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
         }, (1000*60));	
     
 		message.guild.members.get(them.id).setNickname(messageArray[2]);
-			message.channel.send("**ECHOES ACT !**");
+			message.channel.send("**ECHOES ACT 1 !**");
 		 }
 		} else { 
 	message.channel.sendMessage("You do not have the power to use ECHOES");
@@ -2858,7 +2858,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 	function echoesAct3(){
 		if(message.member.roles.find("name", "Echoes")) {
 			if (act3CD.has(message.author.id)) {
-            message.reply("Echoes must wait about 1 minute from when you first used act 1!");
+            message.reply("Echoes must wait about 30 minutes from when you first used act !");
             return;
    		 } else{
 			 		
@@ -2866,15 +2866,15 @@ if(message.member.roles.find("name", "Killer Queen")) {
         setTimeout(() => {
           // Removes the user from the set after a minute
           act3CD.delete(message.author.id);
-        }, (1000*60*60*3));	
+        }, (1000*60*30));	
     message.channel.fetchMessages({ limit: 2 }).then(messages => {
-  const botMessages = messages.filter(msg => msg.author.id != message.author.id );
+  var lastMessage = messages.last(); 
 
 
 
-      botMessages.pin()
+      lastMessage.pin()
 	     .then(console.log)
- 		 .catch(console.error);
+ 		.catch(console.error);
 
   			 message.channel.send("**ECHOES ACT 3 FREEZE! S-H-I-T!**")
 
