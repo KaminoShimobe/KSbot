@@ -2844,20 +2844,45 @@ if(message.member.roles.find("name", "Killer Queen")) {
 
 		if(chance == 1){
 			member.addRole(std1).catch(console.error);
-			message.reply(`has bestowed ` + toBeat  + ` with KILLER QUEEN!` || `has bestowed ` + toBeat.user  + ` with KILLER QUEEN!` );
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
 		} else if(chance > 1 && chance < 4){
 			member.addRole(std2).catch(console.error);
-			message.reply(`has bestowed ` + toBeat  + ` with KING CRIMSON!` || `has bestowed ` + toBeat.user  + ` with KING CRIMSON!` );
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
 		} else if(chance > 3 && chance < 7){
 			member.addRole(std3).catch(console.error);
-			message.reply(`has bestowed ` + toBeat  + ` with HARVEST!` || `has bestowed ` + toBeat.user  + ` with HARVEST!` );
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
 		} else if(chance > 6 && chance < 11){
 			member.addRole(std4).catch(console.error);
-			message.reply(`has bestowed ` + toBeat  + ` HEAVEN'S DOOR!` || `has bestowed ` + toBeat.user  + ` with HEAVEN'S DOOR!` );
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
 		} else if(chance >= 11){
 			member.addRole(std5).catch(console.error);
-			toBeat.removeRole(std6)
-			message.reply(`has bestowed ` + toBeat  + ` STAR PLATINUM!` || `has bestowed ` + toBeat.user  + ` with STAR PLATINUM!` );
+			memebr.removeRole(std6)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
 		}
 
 
