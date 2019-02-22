@@ -2579,7 +2579,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	function firstBomb(){
 		if(messageArray[1] != undefined && Number.isInteger(messageArray[1]) == true ){
-			let msg = message.channel.fetchMessage(messageArray[1])
+			 message.channel.fetchMessage(messageArray[1])
   .then(message => msg.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
