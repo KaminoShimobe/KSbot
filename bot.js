@@ -2643,15 +2643,15 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			return;
 		}	else {
 			if (HarvestCD.has(message.author.id)) {
-            message.reply("Harvest must wait about 6 hours from when you first used it!");
+            message.reply("Harvest must wait about 30 mins from when you first used it!");
             return;
    		 } else{
-			 		if(toBeat.lastMessage.content.indexOf('!spin') != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 100000){	
+			 		if(toBeat.lastMessage.content.indexOf('!spin') != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 10000000){	
 			HarvestCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
           HarvestCD.delete(message.author.id);
-        }, (1000*60*60*6));
+        }, (1000*60*30));
 			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
 			con.query(sql);			
 			message.channel.send("Harvest collected " + lastInt + "!");			
