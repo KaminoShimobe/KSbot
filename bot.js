@@ -3790,7 +3790,7 @@ if (message.guild.id == '456956416377225218') {
 	if(command === `${prefix}KINGCRIMSON`){
 		
 
-		thirdBomb();
+		kingCrimson();
 
 			
 
