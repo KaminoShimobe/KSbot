@@ -2716,7 +2716,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let bomb = message.guild.roles.find("name", "bomb");	
 		let member = message.mentions.members.first();
 
-		member.addRole(bomb)
+		
 		if (Bomb2CD.has(message.author.id)) {
             message.reply("Killer Queen must wait about 30 minutes from when you first used the second bomb!");
             return;
@@ -2728,6 +2728,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
           Bomb2CD.delete(message.author.id);
         }, (1000*60*30));	
     }
+			member.addRole(bomb)
 		return;
 } else { 
 	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
