@@ -39,7 +39,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("**WRYYYYYYYYYYYYYYY** \n KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("**MUDA MUDA MUDA MUDA** \n KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -2531,7 +2531,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 2-21-19")
-			.setDescription("-STANDO POWA IS HERE \n Rn there are **5** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 20% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
+			.setDescription("- EVERY STAND WORKS! \n STANDO POWA IS HERE \n Rn there are **5** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 20% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
 			.setColor("#1f3c5b");
 			
 			
