@@ -515,6 +515,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	if(message.channel.type === "dm") return;
 	
+	if (message.guild.id == '456956416377225218') {
 	boom();
 	
 	treasure();
@@ -522,6 +523,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	bitesTheDust();
 
 	justWorks();
+	}	
 
 	function boom(){
 		let bom = message.guild.roles.find("name", "bomb");
