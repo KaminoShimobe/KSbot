@@ -528,6 +528,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				
   			
   			message.member.removeRole(bom).catch(console.error);
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
   			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN!**");
   			return;
 			} 
