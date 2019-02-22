@@ -7,6 +7,10 @@ const talkedRecently = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
 const HeavensDoorCD = new Set();
+const Bomb1CD = new Set();
+const Bomb2CD = new Set();
+const Bomb3CD = new Set();
+const KingCrimsonCD = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -33,7 +37,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been *slightly* updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been **menancingly** updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -508,8 +512,25 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 
 	if(message.channel.type === "dm") return;
 	
+	boom();
 	
 	treasure();
+
+	bitesTheDust();
+
+	justWorks();
+
+	function boom(){
+		let bom = message.guild.roles.find("name", "bomb");
+
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			member.removeRole(bom).catch(console.error);
+  			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN!**");
+  			return;
+			} 
+		}	
 	
 	function treasure(){
 		var appear = Math.floor(Math.random() * 100) + 1;
@@ -522,6 +543,74 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			console.log("Oof.");
 			return;	
 		}
+	}
+
+	function bitesTheDust(){
+		
+		con.query(`SELECT * FROM user WHERE id = 'BITES'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].bio;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else if(message.content.indexOf(trigger) != -1) {
+
+			
+			
+
+			message.channel.fetchMessages({ limit: 100 }).then(messages => {
+  const botMessages = messages.filter(msg => !msg.user.bot );
+
+
+
+      message.channel.bulkDelete(botMessages)
+message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
+
+  			
+  
+})
+.catch(console.error);
+
+	sql = `DELETE FROM user WHERE id = 'BITES'`;
+			con.query(sql, console.log);
+			return;
+		}
+
+
+		});
+		
+	}
+
+	function justWorks(){
+		con.query(`SELECT * FROM user WHERE id = 'CRIM'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].money;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else if(trigger > 0) {
+
+			
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+
+  			sql = `UPDATE user SET money = ${trigger - 1} WHERE id = 'CRIM'`;
+			con.query(sql, console.log);
+
+			return;
+		}
+
+
+		});
 	}
 	let duo = message.guild.roles.find("name", "Amulet-Coin");
 	
@@ -2431,7 +2520,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 2-21-19")
-			.setDescription("-Stando Powa coming soon :eyes:")
+			.setDescription("-STANDO POWA IS HERE \n Rn there are **5** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands, and or wait for more stands and roll later.\n -Rates are as follows: \n 7% chance - Killer Queen \n 13% chance - King Crimson \n 20% chance - Harvest \n 26% chance - Heaven's Door \n 34% chance - Star Platinum")
 			.setColor("#1f3c5b");
 			
 			
@@ -2578,6 +2667,20 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function firstBomb(){
+		if(message.member.roles.find("name", "Killer Queen")) {
+
+
+			if (Bomb1CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 30 seconds from when you first used the first bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb1CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb1CD.delete(message.author.id);
+        }, (1000*30));	
+			
 		message.channel.fetchMessages({ limit: 2 }).then(messages => {
   const botMessages = messages.filter(msg => msg.author.id != message.author.id );
 
@@ -2591,34 +2694,172 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
   
 })
 .catch(console.error);
+}
+} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
 	}
+
+	let bomb = message.guild.roles.find("name", "bomb");
 	
 	function secondBomb(){
-		
+		if(message.member.roles.find("name", "Killer Queen")) {
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		toBeat.addRole(bomb)
+		if (Bomb2CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 30 minutes from when you first used the second bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb2CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb2CD.delete(message.author.id);
+        }, (1000*60*30));	
+    }
+		return;
+} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
 	}
 	
 	function thirdBomb(){
-		
+if(message.member.roles.find("name", "Killer Queen")) {
+
+
+		con.query(`SELECT * FROM user WHERE id = 'BITES'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var trigger = messageArray[1];
+		if(rows.length < 1) {
+			if (Bomb3CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 24 hours from when you first used the third bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb3CD.delete(message.author.id);
+        }, (1000*60*60*24));	}
+			sql = `INSERT INTO user (id, bio) VALUES ('BITES', '${trigger}')`;
+			con.query(sql, console.log);
+			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
+			return;
+		}	else {
+			if (Bomb3CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 24 hours from when you first used the third bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb3CD.delete(message.author.id);
+        }, (1000*60*60*24));	}
+			sql = `UPDATE user SET bio = '${trigger}' WHERE id = 'BITES'`;
+			con.query(sql, console.log);
+
+			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
+			return;
+		}
+	});
+		} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
 	}
 	
 	function kingCrimson(){
-		
+	if(message.member.roles.find("name", "King Crimson")) {	
+		con.query(`SELECT * FROM user WHERE id = 'CRIM'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var trigger = 10;
+		if(rows.length < 1) {
+			if (KingCrimsonCD.has(message.author.id)) {
+            message.reply("King Crimson must wait about 30 minutes from when you first used it!");
+            return;
+   		 } else{
+			 		
+			KingCrimsonCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          KingCrimsonCD.delete(message.author.id);
+        }, (1000*60*30));	}
+			sql = `INSERT INTO user (id, money) VALUES ('CRIM', ${trigger})`;
+			con.query(sql, console.log);
+			message.channel.send("**KING CRIMSON**");
+			return;
+		}	else {
+			if (KingCrimsonCD.has(message.author.id)) {
+            message.reply("King Crimson must wait about 30 minutes from when you first used it!");
+            return;
+   		 } else{
+			 		
+			KingCrimsonCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          KingCrimsonCD.delete(message.author.id);
+        }, (1000*60*30));	}
+			sql = `UPDATE user SET money = ${trigger} WHERE id = 'CRIM'`;
+			con.query(sql, console.log);
+
+			message.channel.send("**KING CRIMSON**");
+			return;
+		}
+
+	});
+		} else { 
+	message.channel.sendMessage("You do not have the power to use KING CRIMSON");
+}
 	}
 	
-	function D4C(){
-		
-	}
 	
-	function KISS(){
-		
-	}
-	
-	function mandom(){
-		
-	}
 	
 	function crazyDiamond(){
 		
+	}
+
+	function madeInHeaven(){
+		
+	}
+
+	function bestow(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		var chance = Math.floor(Math.random() * 15) + 1;
+		var std1 = message.guild.roles.find("name", "Killer Queen");
+		var std2 = message.guild.roles.find("name", "King Crimson");
+		var std3 = message.guild.roles.find("name", "Harvest");
+		var std4 = message.guild.roles.find("name", "HeavensDoor");
+		var std5 = message.guild.roles.find("name", "Star Platinum");
+		var std6 = message.guild.roles.find("name", "Stand User");
+
+		if(chance == 1){
+			toBeat.addRole(std1);
+			message.reply(`has bestowed ` + toBeat  + ` with KILLER QUEEN!` || `has bestowed ` + toBeat.user  + ` with KILLER QUEEN!` );
+		} else if(chance > 1 && chance < 4){
+			toBeat.addRole(std2);
+			message.reply(`has bestowed ` + toBeat  + ` with KING CRIMSON!` || `has bestowed ` + toBeat.user  + ` with KING CRIMSON!` );
+		} else if(chance > 3 && chance < 7){
+			toBeat.addRole(std3);
+			message.reply(`has bestowed ` + toBeat  + ` with HARVEST!` || `has bestowed ` + toBeat.user  + ` with HARVEST!` );
+		} else if(chance > 6 && chance < 11){
+			toBeat.addRole(std4);
+			message.reply(`has bestowed ` + toBeat  + ` HEAVEN'S DOOR!` || `has bestowed ` + toBeat.user  + ` with HEAVEN'S DOOR!` );
+		} else if(chance >= 11){
+			toBeat.addRole(std5);
+			toBeat.removeRole(std6)
+			message.reply(`has bestowed ` + toBeat  + ` STAR PLATINUM!` || `has bestowed ` + toBeat.user  + ` with STAR PLATINUM!` );
+		}
+
+
+
 	}
 
 if(command === `${prefix}ORA`){
@@ -3474,7 +3715,7 @@ if (message.guild.id == '456956416377225218') {
 
 	}
 
-	if(command === `${prefix}FIRSTBOMB`){
+	if(command === `${prefix}1STBOMB`){
 		
 
 		firstBomb();
@@ -3488,6 +3729,59 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
+
+	if(command === `${prefix}2NDBOMB`){
+		
+
+		secondBomb();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}3RDBOMB`){
+		
+
+		thirdBomb();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}KINGCRIMSON`){
+		
+
+		thirdBomb();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}STAN` && messageArray[1] != undefined){
+		if(message.author.id == '242118931769196544'){
+			bestow();
+		} else {
+			message.channel.send("You don't have the power to choose a stand");
+		}
+	}	
 
 
 }	
