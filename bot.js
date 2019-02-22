@@ -2578,15 +2578,18 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function firstBomb(){
-		if(messageArray[1] != undefined && Number.isInteger(messageArray[1]) == true ){
-			 message.channel.fetchMessage(messageArray[1])
-  .then(message => msg.delete()
+		message.channel.fetchMessages({ limit: 1 }).then(messages => {
+  let lastMessage = messages.first();
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+  if (!lastMessage.author.bot) {
+     message.delete()
 
-  			.catch(console.error))
-  .catch(console.error);
-		} 
+  			.then(msg => message.send("**KILLA QUEEN**"))
+
+  			.catch(console.error);
+  }
+})
+.catch(console.error);
 	}
 	
 	function secondBomb(){
@@ -3511,20 +3514,20 @@ if (message.guild.id == '456956416377225218') {
 		}
 	}	
 
-	if(command === `${prefix}daily`){
+	// if(command === `${prefix}daily`){
 		
 
-		daily();
+	// 	daily();
 
 			
 
-		 return; 
+	// 	 return; 
 
 		
 
 		
 
-	}
+	// }
 	
 	if(command === `${prefix}delete`){
 
