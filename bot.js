@@ -2543,7 +2543,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			return;
 		}	else {
 			if (HarvestCD.has(message.author.id)) {
-            message.reply("Harvest must wait about 3 hours from when you first used it!");
+            message.reply("Harvest must wait about 6 hours from when you first used it!");
             return;
    		 } else{
 			 		if(toBeat.lastMessage.content.indexOf('!spin') != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 100000){	
@@ -2551,7 +2551,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
         setTimeout(() => {
           // Removes the user from the set after a minute
           HarvestCD.delete(message.author.id);
-        }, (1000*60*60*3));
+        }, (1000*60*60*6));
 			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
 			con.query(sql);			
 			message.channel.send("Harvest collected " + lastInt + "!");			
@@ -2578,7 +2578,15 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function firstBomb(){
-		
+		if(messageArray[1] != undefined && Number.isInteger(messageArray[1]) == true ){
+			let msg = message.channel.fetchMessage(messageArray[1])
+  .then(message => msg.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error))
+  .catch(console.error);
+		} 
 	}
 	
 	function secondBomb(){
@@ -2605,7 +2613,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		
 	}
 	
-	function goldenExperienceR(){
+	function crazyDiamond(){
 		
 	}
 
@@ -3461,6 +3469,23 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
+
+	if(command === `${prefix}FIRSTBOMB` && messageArray[1] != undefined){
+		
+
+		firstBomb();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+
 }	
 	
 	if(command === `${prefix}bio`){
