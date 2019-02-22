@@ -3809,20 +3809,20 @@ if (message.guild.id == '456956416377225218') {
 		}
 	}	
 
-	// if(command === `${prefix}daily`){
+	if(command === `${prefix}daily`){
 		
 
-	// 	daily();
+		daily();
 
 			
 
-	// 	 return; 
+		 return; 
 
 		
 
 		
 
-	// }
+	}
 	
 	if(command === `${prefix}delete`){
 
