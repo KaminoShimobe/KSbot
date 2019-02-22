@@ -2579,16 +2579,16 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	function firstBomb(){
 		message.channel.fetchMessages({ limit: 2 }).then(messages => {
-  let lastMessage = messages.filter(msg => msg.content.startsWith("!"));
+  const botMessages = messages.filter(msg => msg.author.bot);
 
 
-  if (!lastMessage.author.bot) {
-     lastMessage.delete()
 
-  			.then(msg => message.channel.send("**KILLA QUEEN**"))
+      message.channel.bulkDelete(botMessages)
 
-  			.catch(console.error);
-  }
+  			 message.channel.send("**KILLA QUEEN**")
+
+  			
+  
 })
 .catch(console.error);
 	}
