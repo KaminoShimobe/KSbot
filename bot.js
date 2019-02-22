@@ -2700,15 +2700,14 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 }
 	}
 
-	let bomb = message.guild.roles.find("name", "bomb");
+	
 	
 	function secondBomb(){
 		if(message.member.roles.find("name", "Killer Queen")) {
-		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+		let bomb = message.guild.roles.find("name", "bomb");	
+		let member = message.mentions.members.first();
 
-		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
-
-		toBeat.addRole(bomb)
+		member.addRole(bomb)
 		if (Bomb2CD.has(message.author.id)) {
             message.reply("Killer Queen must wait about 30 minutes from when you first used the second bomb!");
             return;
