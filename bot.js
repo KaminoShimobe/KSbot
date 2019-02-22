@@ -65,7 +65,8 @@ bot.on('guildMemberAdd', member => {
   // Send the message to a designated channel on a server:
 if (member.guild.id == '235197222587727872') {
 	const wank = bot.emojis.get("398321346247131136");
-	member.guild.channels.get("235197222587727872").send(`Welcome, ${member} , to **DrUpauli's Discord!** Be sure to read everything in #welcome and say hi! :grin:`);
+	const channel = member.guild.channels.find('name', 'welcome');
+	member.guild.channels.get("235197222587727872").send(`Welcome, ${member} , to **DrUpauli's Discord!** Be sure to read everything in ${channel} and say hi! :grin:`);
 } else{
 	member.guild.channels.get("496313147808940033").send(`${member} Welcome to Kamino's House!`);
 }	
@@ -526,7 +527,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		if(message.member.roles.find("name", "bomb") ) {
 				
   			
-  			member.removeRole(bom).catch(console.error);
+  			message.member.removeRole(bom).catch(console.error);
   			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN!**");
   			return;
 			} 
@@ -2875,7 +2876,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
 		} else if(chance >= 11){
 			member.addRole(std5).catch(console.error);
-			memebr.removeRole(std6)
+			member.removeRole(std6)
 			message.channel.send(".");
 			message.channel.send(".");	
 			message.channel.send(".");	
