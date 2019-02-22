@@ -11,6 +11,8 @@ const Bomb1CD = new Set();
 const Bomb2CD = new Set();
 const Bomb3CD = new Set();
 const KingCrimsonCD = new Set();
+const act1CD = new Set();
+const act3CD = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -37,7 +39,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("Yare Yare... \n KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("**WRYYYYYYYYYYYYYYY** \n KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -2527,7 +2529,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 2-21-19")
-			.setDescription("-STANDO POWA IS HERE \n Rn there are **5** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands, and or wait for more stands and roll later.\n -Rates are as follows: \n 7% chance - Killer Queen \n 13% chance - King Crimson \n 20% chance - Harvest \n 26% chance - Heaven's Door \n 34% chance - Star Platinum")
+			.setDescription("-STANDO POWA IS HERE \n Rn there are **5** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 20% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
 			.setColor("#1f3c5b");
 			
 			
@@ -2825,8 +2827,62 @@ if(message.member.roles.find("name", "Killer Queen")) {
 	
 	
 	
-	function crazyDiamond(){
+	function echoesAct1(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+		let them = message.mentions.users.first();
+		if(message.member.roles.find("name", "Echoes")) {
+			if (act1CD.has(message.author.id)) {
+            message.reply("Echoes must wait about 1 minute from when you first used act 1!");
+            return;
+   		 } else{
+			 		
+			act1CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          act1CD.delete(message.author.id);
+        }, (1000*60));	
+    
+		message.guild.members.get(them.id).setNickname(messageArray[2]);
+			message.channel.send("**ECHOES ACT !**");
+		 }
+		} else { 
+	message.channel.sendMessage("You do not have the power to use ECHOES");
+}
+	}
+	
+	function echoesAct3(){
+		if(message.member.roles.find("name", "Echoes")) {
+			if (act3CD.has(message.author.id)) {
+            message.reply("Echoes must wait about 1 minute from when you first used act 1!");
+            return;
+   		 } else{
+			 		
+			act3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          act3CD.delete(message.author.id);
+        }, (1000*60*60*3));	
+    message.channel.fetchMessages({ limit: 2 }).then(messages => {
+  const botMessages = messages.filter(msg => msg.author.id != message.author.id );
+
+
+
+      botMessages.pin()
+	     .then(console.log)
+ 		 .catch(console.error);
+
+  			 message.channel.send("**ECHOES ACT 3 FREEZE! S-H-I-T!**")
+
+  			
+  
+})
+.catch(console.error); }
 		
+		} else { 
+	message.channel.sendMessage("You do not have the power to use ECHOES");
+}
 	}
 
 	function madeInHeaven(){
@@ -2838,9 +2894,9 @@ if(message.member.roles.find("name", "Killer Queen")) {
 
 	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
-		var chance = Math.floor(Math.random() * 15) + 1;
+		var chance = Math.floor(Math.random() * 5) + 1;
 		var std1 = message.guild.roles.find("name", "Killer Queen");
-		var std2 = message.guild.roles.find("name", "King Crimson");
+		var std2 = message.guild.roles.find("name", "Echoes");
 		var std3 = message.guild.roles.find("name", "Harvest");
 		var std4 = message.guild.roles.find("name", "HeavensDoor");
 		var std5 = message.guild.roles.find("name", "Star Platinum");
@@ -2856,15 +2912,15 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
-		} else if(chance > 1 && chance < 4){
+		} else if(chance == 2){
 			member.addRole(std2).catch(console.error);
 			message.channel.send(".");
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
-		} else if(chance > 3 && chance < 7){
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
+		} else if(chance == 3){
 			member.addRole(std3).catch(console.error);
 			message.channel.send(".");
 			message.channel.send(".");	
@@ -2872,7 +2928,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
-		} else if(chance > 6 && chance < 11){
+		} else if(chance == 4){
 			member.addRole(std4).catch(console.error);
 			message.channel.send(".");
 			message.channel.send(".");	
@@ -2880,7 +2936,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
-		} else if(chance >= 11){
+		} else if(chance == 5){
 			member.addRole(std5).catch(console.error);
 			member.removeRole(std6)
 			message.channel.send(".");
@@ -3293,12 +3349,102 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	}
 	
+	function standArrow(){
+
+		var chance = Math.floor(Math.random() * 100) + 1;
+		var std1 = message.guild.roles.find("name", "Killer Queen");
+		var std2 = message.guild.roles.find("name", "Echoes");
+		var std3 = message.guild.roles.find("name", "Harvest");
+		var std4 = message.guild.roles.find("name", "HeavensDoor");
+		var std5 = message.guild.roles.find("name", "Star Platinum");
+		var std6 = message.guild.roles.find("name", "Stand User");
+
+	let member = message.mentions.members.first();	
+
+		if(chance == 1){
+			member.addRole(std1).catch(console.error);
+			member.addRole(std6).catch(console.error);
+			member.removeRole(std2)
+			member.removeRole(std3)
+			member.removeRole(std4)
+			member.removeRole(std5)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
+		} else if(chance == 2){
+			member.addRole(std2).catch(console.error);
+			member.addRole(std6).catch(console.error);
+			member.removeRole(std1)
+			member.removeRole(std3)
+			member.removeRole(std4)
+			member.removeRole(std5)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
+		} else if(chance == 3){
+			member.addRole(std3).catch(console.error);
+			member.addRole(std6).catch(console.error);
+			member.removeRole(std1)
+			member.removeRole(std2)
+			member.removeRole(std4)
+			member.removeRole(std5)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
+		} else if(chance == 4){
+			member.addRole(std4).catch(console.error);
+			member.addRole(std6).catch(console.error);
+			member.removeRole(std1)
+			member.removeRole(std3)
+			member.removeRole(std4)
+			member.removeRole(std2)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
+		} else if(chance == 5){
+			member.addRole(std5).catch(console.error);
+			member.removeRole(std6)
+			member.removeRole(std1)
+			member.removeRole(std2)
+			member.removeRole(std4)
+			member.removeRole(std3)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
+		} else {
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||You barely managed to stay alive! Try Again!||"), 200);
+		}	
+
+
+
+	}
+	
 	if(command === `${prefix}shop`){
 		let shop = new Discord.RichEmbed()
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament!")
+			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament! \n $50,000 | **standArrow** \n Roll for a 5% chance for a stand!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
@@ -3353,6 +3499,29 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		husbandoPic();
+		
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 50000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		standArrow();
 		
 		});
 	}
@@ -3793,10 +3962,40 @@ if (message.guild.id == '456956416377225218') {
 
 	}
 
-	if(command === `${prefix}KINGCRIMSON`){
+// 	if(command === `${prefix}KINGCRIMSON`){
 		
 
-		kingCrimson();
+// 		kingCrimson();
+
+			
+
+// 		 return; 
+
+		
+
+		
+
+// 	}
+	
+	if(command === `${prefix}ACT1` && messageArray[1] != undefined){
+		
+
+		echoesAct1();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}ACT3`){
+		
+
+		echoesAct3();
 
 			
 
