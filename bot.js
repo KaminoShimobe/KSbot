@@ -2840,20 +2840,22 @@ if(message.member.roles.find("name", "Killer Queen")) {
 		var std5 = message.guild.roles.find("name", "Star Platinum");
 		var std6 = message.guild.roles.find("name", "Stand User");
 
+	let member = message.mentions.members.first();	
+
 		if(chance == 1){
-			toBeat.addRole(std1);
+			member.addRole(std1).catch(console.error);
 			message.reply(`has bestowed ` + toBeat  + ` with KILLER QUEEN!` || `has bestowed ` + toBeat.user  + ` with KILLER QUEEN!` );
 		} else if(chance > 1 && chance < 4){
-			toBeat.addRole(std2);
+			member.addRole(std2).catch(console.error);
 			message.reply(`has bestowed ` + toBeat  + ` with KING CRIMSON!` || `has bestowed ` + toBeat.user  + ` with KING CRIMSON!` );
 		} else if(chance > 3 && chance < 7){
-			toBeat.addRole(std3);
+			member.addRole(std3).catch(console.error);
 			message.reply(`has bestowed ` + toBeat  + ` with HARVEST!` || `has bestowed ` + toBeat.user  + ` with HARVEST!` );
 		} else if(chance > 6 && chance < 11){
-			toBeat.addRole(std4);
+			member.addRole(std4).catch(console.error);
 			message.reply(`has bestowed ` + toBeat  + ` HEAVEN'S DOOR!` || `has bestowed ` + toBeat.user  + ` with HEAVEN'S DOOR!` );
 		} else if(chance >= 11){
-			toBeat.addRole(std5);
+			member.addRole(std5).catch(console.error);
 			toBeat.removeRole(std6)
 			message.reply(`has bestowed ` + toBeat  + ` STAR PLATINUM!` || `has bestowed ` + toBeat.user  + ` with STAR PLATINUM!` );
 		}
