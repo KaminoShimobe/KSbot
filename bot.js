@@ -41,7 +41,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("**Tsugi no Omae wa** \n *KS-Bot has been updated?* TOYU! \n Check it out with !patchNotes");
+ 	channel.sendMessage("**ORA ORA ORA ORA!!** \n KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -2787,10 +2787,11 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*5));	
 			 
-		}	else {
+		}	
+	}
+		else {
   			message.channel.send("You do not have the power to use STAR PLATINUM!");
 			}
-	}
 }
 	
 	function harvest(){
