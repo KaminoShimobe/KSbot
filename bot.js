@@ -2777,12 +2777,12 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			
 			 
 			 
-			 message.guild.members.filter(m =>  m.roles.has(standUser)).forEach(m => m.addRole(kakyoin));
+			 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
 			 
 			 setTimeout(() => {
-         message.guild.members.filter(m =>  m.roles.has(kakyoin)).forEach(m => m.removeRole(kakyoin));
+         message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
 				console.log("Time has been resumed.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*60*2));	
