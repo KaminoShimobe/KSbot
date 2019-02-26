@@ -14,6 +14,7 @@ const KingCrimsonCD = new Set();
 const act1CD = new Set();
 const act3CD = new Set();
 const CrazyDiamondCD = new Set();
+const StarPlatinumCD = new Set();
 const prefix = "!";
 
 const bot = new Discord.Client({disableEveryone: true})
@@ -2676,7 +2677,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 2-26-19")
-			.setDescription("- 2 Stands added! \n STANDO POWA IS HERE \n Rn there are **7** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 14% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, Crazy Diamond, King Crimson and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
+			.setDescription("- !STARPLATINUM can be used by star platinum users to freeze time for 5 seconds! try it out! \n- 2 Stands added! \n STANDO POWA IS HERE \n Rn there are **7** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 14% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, Crazy Diamond, King Crimson and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
 			.setColor("#1f3c5b");
 			
 			
@@ -2758,6 +2759,37 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			}
 
     	
+	}
+		
+	function starPlatinum(){
+		if(message.member.roles.find("name", "Star Platinum") ) {
+		
+			
+			if (StarPlatinumCD.has(message.author.id)) {
+            message.reply("Star Platinum must wait about 30 mins from when you first used it!");
+            return;
+   		 } else{
+		StarPlatinumCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          StarPlatinumCD.delete(message.author.id);
+        }, (1000*60*30));	
+			
+			 
+			 
+			 message.guild.members.filter(m => !m.user.bot && m.guild.roles.has('name', 'Stand User')).map(async member => await member.addRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
+			 
+			 setTimeout(() => {
+          message.guild.members.filter(m => !m.user.bot && m.guild.roles.has('name', 'Stand User')).map(async member => await member.removeRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
+        }, (1000*5));	
+			 
+		}	else {
+  			message.channel.send("You do not have the power to use STAR PLATINUM!");
+			}
 	}
 }
 	
@@ -4250,6 +4282,21 @@ if (message.guild.id == '456956416377225218') {
 		
 
 		kingCrimson();
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}STARPLATINUM`){
+		
+
+		starPlatinum();
 
 			
 
