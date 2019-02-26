@@ -2723,7 +2723,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	let dio = message.guild.roles.find("name", "DIO");
     let kakyoin = message.guild.roles.find("name", "kakyoin");
-	
+	let standUser = message.guild.roles.find("name", "Stand User");
 	if (message.guild.id == '456956416377225218') {
 	function zaWarudo(){
 		var userList = message.channel.members.filter(m => m.user.bot === false);
@@ -2777,13 +2777,13 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 			
 			 
 			 
-			 message.guild.members.filter(m => !m.user.bot && m.guild.roles.has('name', 'Stand User')).map(async member => await member.addRole(kakyoin));
+			 message.guild.members.filter(m =>  m.roles.has(standUser)).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
 			 
 			 setTimeout(() => {
-          message.guild.members.filter(m => !m.user.bot && m.guild.roles.has('name', 'Stand User')).map(async member => await member.removeRole(kakyoin));
-				console.log("Everyone has been frozen in time.")
+         message.guild.members.filter(m =>  m.roles.has(kakyoin)).forEach(m => m.removeRole(kakyoin));
+				console.log("Time has been resumed.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*60*2));	
 			 
