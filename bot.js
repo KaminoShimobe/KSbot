@@ -2785,7 +2785,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
           message.guild.members.filter(m => !m.user.bot && m.guild.roles.has('name', 'Stand User')).map(async member => await member.removeRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
-        }, (1000*5));	
+        }, (1000*60*2));	
 			 
 		}	
 	}
