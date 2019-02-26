@@ -2734,7 +2734,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
 
-				message.guild.members.filter(m => !m.user.bot).map(async member => await member.addRole(kakyoin));
+				 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**TOKI WA TOMARE**");
 			} else {
@@ -2751,7 +2751,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
 
-				message.guild.members.filter(m => !m.user.bot).map(async member => await member.removeRole(kakyoin));
+				   message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
 				console.log("Time has began to move again.")
 				message.channel.send("**TOKI WA MOKIDASU**");
 			} else {
@@ -2785,7 +2785,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
          message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
 				console.log("Time has been resumed.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
-        }, (1000*60*2));	
+        }, (1000*60*1));	
 			 
 		}	
 	}
