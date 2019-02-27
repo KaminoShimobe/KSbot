@@ -762,7 +762,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${cost} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 				lostChest();	
@@ -802,7 +802,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${cost} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});			
 				lostChest();	
@@ -1344,6 +1344,19 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
     	sql = `UPDATE user SET money = ${money + check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
+	   let crazyID = 'J' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
+			let sql2;
+			let sql3;
+			
+			if(rows.length < 1) {
+				sql3 = `INSERT INTO user (id, money) VALUES ('${crazyID}', ${check})`;
+			con.query(sql3, console.log);
+			} else {	
+			sql2 = `UPDATE user SET money = ${check} WHERE id = '${crazyID}'`;
+				con.query(sql2); 
+			}	
+		});			 
            message.reply(" got $" + check + "!");
         // Adds the user to the set so that they can't talk for a minute
         talkedRecently.add(message.author.id);
@@ -1879,7 +1892,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${prize} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(box1 + box2 + box3);
@@ -1912,7 +1925,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${prize} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(box1 + box2 + box3);
@@ -1943,7 +1956,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${prize} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(box1 + box2 + box3);
@@ -1974,7 +1987,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${prize} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(box1 + box2 + box3);
@@ -2005,7 +2018,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${prize} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});		
 			message.channel.send(box1 + box2 + box3);
@@ -2032,7 +2045,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${10} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(box1 + box2 + box3);
@@ -2287,7 +2300,7 @@ function horoscope(){
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${refund} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(".");
@@ -2310,7 +2323,7 @@ function horoscope(){
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${gain} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.channel.send(".");
