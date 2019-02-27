@@ -41,7 +41,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("**ORA ORA ORA ORA!!** \n KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -2689,8 +2689,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-26-19")
-			.setDescription("- !STARPLATINUM can be used by star platinum users to freeze time for 5 seconds! try it out! \n- 2 Stands added! \n STANDO POWA IS HERE \n Rn there are **7** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 14% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, Crazy Diamond, King Crimson and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
+			.setTitle("Patch Notes: 2-2-19")
+			.setDescription("-Crazy Diamond can now undo dailies!\n- !STARPLATINUM can be used by star platinum users to freeze time for 5 seconds! try it out! \n- 2 Stands added! \n STANDO POWA IS HERE \n Rn there are **7** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 14% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, Crazy Diamond, King Crimson and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
 			.setColor("#1f3c5b");
 			
 			
