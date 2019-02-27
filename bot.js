@@ -2954,6 +2954,11 @@ if(message.member.roles.find("name", "Killer Queen")) {
         }, (1000*60*60*24));	}
 			sql = `INSERT INTO user (id, bio) VALUES ('BITES', '${trigger}')`;
 			con.query(sql, console.log);
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
 			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
 			return;
 		}	else {
