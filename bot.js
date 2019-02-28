@@ -41,7 +41,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been delightfully* updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been *delightfully* updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1314,7 +1314,20 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	let ticket = message.guild.roles.find("name", "tournament");
 
 	function daily(){
-		boom();
+		
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
+  			return;
+			} 
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1420,7 +1433,20 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function gambleFlip(){
-		boom();
+		
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
+  			return;
+			} 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1796,7 +1822,20 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}	
 
 	function gambleSlots(){
-		boom();
+		
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
+  			return;
+			} 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
