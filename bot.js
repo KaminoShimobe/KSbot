@@ -3019,7 +3019,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
         }, (1000*60*5));	}
 			sql = `INSERT INTO user (id, money) VALUES ('CRIM', ${trigger})`;
 			con.query(sql, console.log);
-			message.channel.send("**KING CRIMSON**");
+			message.channel.send("**KING CRIMSON NO NOURYOKU**");
 			return;
 		}	else {
 			if (KingCrimsonCD.has(message.author.id)) {
@@ -3039,7 +3039,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			setTimeout(() => {
          var sql2 = `UPDATE user SET money = ${0} WHERE id = 'CRIM'`;
 			con.query(sql2, console.log);
-        }, (1000*12));	
+        }, (1000*60));	
 			return;
 		}
 
@@ -3955,7 +3955,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-Bot Stand Commands")
-			.setDescription("`Star Platinum` \n Can talk during stopped time. Can freeze time for a short period of time. \n **!STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n `Harvest` \n **!HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's !spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n `Echoes` \n **!ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **!ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n `Heaven's Door` \n **!HEAVENSDOOR [user id]** (make sure developer mode is turned on): \n Changes someone's bio. Cannot use quotes in bio. Has a cooldown of 30 minutes. \n `Crazy Diamond` \n **!CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as !daily, !spin, !slots, !horoscope, and !open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n `Killer Queen` \n **!1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **!2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **!3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n `King Crimson` \n **!KINGCRIMSON** \n Deletes all messages for about the next 10 seconds. Has a cooldown of 30 minutes.")
+			.setDescription("`Star Platinum` \n Can talk during stopped time. Can freeze time for a short period of time. \n **!STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n `Harvest` \n **!HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's !spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n `Echoes` \n **!ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **!ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n `Heaven's Door` \n **!HEAVENSDOOR [user id]** (make sure developer mode is turned on): \n Changes someone's bio. Cannot use quotes in bio. Has a cooldown of 30 minutes. \n `Crazy Diamond` \n **!CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as !daily, !spin, !slots, !horoscope, and !open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n `Killer Queen` \n **!1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **!2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **!3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n `King Crimson` \n **!KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(stands);
