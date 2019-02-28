@@ -3039,7 +3039,8 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			setTimeout(() => {
          var sql2 = `UPDATE user SET money = ${0} WHERE id = 'CRIM'`;
 			con.query(sql2, console.log);
-        }, (1000*60));	
+			message.channel.send("`It just works.`");	
+        }, (1000*30));	
 			return;
 		}
 
