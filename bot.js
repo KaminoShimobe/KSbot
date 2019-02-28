@@ -41,7 +41,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been delightfully* updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -533,14 +533,14 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		if(message.member.roles.find("name", "bomb") ) {
 				
   			
-  			message.member.removeRole(bom).catch(console.error);
+  			
 			
 			 message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(console.error);
-  			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN!**");
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
   			return;
 			} 
 		}	
@@ -607,7 +607,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			
 			
 			return;
-		}	else if(trigger > 0) {
+		}	else if(trigger == 1) {
 
 			
 			message.delete()
@@ -616,8 +616,6 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 
   			.catch(console.error);
 
-  			sql = `UPDATE user SET money = ${trigger - 1} WHERE id = 'CRIM'`;
-			con.query(sql, console.log);
 
 			return;
 		}
@@ -2689,8 +2687,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-2-19")
-			.setDescription("-Crazy Diamond can now undo dailies!\n- !STARPLATINUM can be used by star platinum users to freeze time for 5 seconds! try it out! \n- 2 Stands added! \n STANDO POWA IS HERE \n Rn there are **7** stands. People who have passed the *test* have a chance to roll for a confirmed one of these stands. !shop also allows you to buy stand arrows for a chance to get a stand. The ultimate gamble! 14% distribution for the following stands: \n Killer Queen, Echoes, Heaven's Door, Star Platinum, Crazy Diamond, King Crimson and Harvest. \n More stands to come, but for now this is all I can manage to really think of without major spoilers for those who arent super into Jojo. Thanks!")
+			.setTitle("Patch Notes: 2-28-19")
+			.setDescription("- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
@@ -2911,6 +2909,11 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 		
 		if (Bomb2CD.has(message.author.id)) {
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);		
             message.reply("Killer Queen must wait about 30 minutes from when you first used the second bomb!");
             return;
    		 } else{
@@ -2919,7 +2922,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(console.error);	
-			message.channel.send("**KILLA QUEEN SHEER HEART ATTACK**"); 		
+			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN**"); 		
 			Bomb2CD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
@@ -2927,6 +2930,10 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
         }, (1000*60*30));	
     }
 			member.addRole(bomb)
+			 setTimeout(() => {
+         	member.removeRole(bomb)
+		message.channel.send("Sheer Heartattack has stopped pursuing its target!"); 	
+        }, (1000*60*1));
 		return;
 } else { 
 	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
@@ -2943,6 +2950,11 @@ if(message.member.roles.find("name", "Killer Queen")) {
 		var trigger = messageArray[1];
 		if(rows.length < 1) {
 			if (Bomb3CD.has(message.author.id)) {
+				message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
             message.reply("Killer Queen must wait about 24 hours from when you first used the third bomb!");
             return;
    		 } else{
@@ -2963,7 +2975,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 			return;
 		}	else {
 			if (Bomb3CD.has(message.author.id)) {
-            message.reply("Killer Queen must wait about 24 hours from when you first used the third bomb!");
+            message.reply("Killer Queen must wait about 3 hours from when you first used the third bomb!");
             return;
    		 } else{
 			 		
@@ -2971,7 +2983,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
         setTimeout(() => {
           // Removes the user from the set after a minute
           Bomb3CD.delete(message.author.id);
-        }, (1000*60*60*24));	}
+        }, (1000*60*60*3));	}
 			sql = `UPDATE user SET bio = '${trigger}' WHERE id = 'BITES'`;
 			con.query(sql, console.log);
 			message.delete()
@@ -2993,10 +3005,10 @@ if(message.member.roles.find("name", "Killer Queen")) {
 		con.query(`SELECT * FROM user WHERE id = 'CRIM'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		var trigger = 10;
+		var trigger = 1;
 		if(rows.length < 1) {
 			if (KingCrimsonCD.has(message.author.id)) {
-            message.reply("King Crimson must wait about 30 minutes from when you first used it!");
+            message.reply("King Crimson must wait about 5 minutes from when you first used it!");
             return;
    		 } else{
 			 		
@@ -3004,7 +3016,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
         setTimeout(() => {
           // Removes the user from the set after a minute
           KingCrimsonCD.delete(message.author.id);
-        }, (1000*60*30));	}
+        }, (1000*60*5));	}
 			sql = `INSERT INTO user (id, money) VALUES ('CRIM', ${trigger})`;
 			con.query(sql, console.log);
 			message.channel.send("**KING CRIMSON**");
@@ -3022,8 +3034,12 @@ if(message.member.roles.find("name", "Killer Queen")) {
         }, (1000*60*30));	}
 			sql = `UPDATE user SET money = ${trigger} WHERE id = 'CRIM'`;
 			con.query(sql, console.log);
-
-			message.channel.send("**KING CRIMSON**");
+			
+			message.channel.send("**KING CRIMSON NO NOURYOKU**");
+			setTimeout(() => {
+         var sql2 = `UPDATE user SET money = ${0} WHERE id = 'CRIM'`;
+			con.query(sql2, console.log);
+        }, (1000*12));	
 			return;
 		}
 
@@ -3933,6 +3949,18 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		return;
 
 	}
+		
+	if(command === `${prefix}stands`){
+		let stands = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands")
+			.setDescription("`Star Platinum` \n Can talk during stopped time. Can freeze time for a short period of time. \n **!STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n `Harvest` \n **!HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's !spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n `Echoes` \n **!ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **!ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n `Heaven's Door` \n **!HEAVENSDOOR [user id]** (make sure developer mode is turned on): \n Changes someone's bio. Cannot use quotes in bio. Has a cooldown of 30 minutes. \n `Crazy Diamond` \n **!CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as !daily, !spin, !slots, !horoscope, and !open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n `Killer Queen` \n **!1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **!2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **!3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n `King Crimson` \n **!KINGCRIMSON** \n Deletes all messages for about the next 10 seconds. Has a cooldown of 30 minutes.")
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(stands);
+		message.reply(" sent you a dm of the stand commands list!");	
+	}
 
 
 
@@ -3941,8 +3969,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS Bot Version 0.4.0: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily** : \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose** \n Calls someone out for a wack Af !whisper. \n **!wellWish** \n Sends a dm to a random person wishing them a good day! \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a random channel in Kamino's House.")
+			.setTitle("KS-Bot Version 0.6.3: commands")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily**: \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose**: \n Calls someone out for a wack Af !whisper.\n **!stands**: \n Gives Info on how to use stand power. \n **!wellWish**: \n Sends a dm to a random person wishing them a good day! \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a KS-Bot's Room in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -4121,18 +4149,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	}
 	
-	if(command === `${prefix}statLeaderboard`){
-
-		statLeaderboard();
-		 
-
-
-
-		 return;
-
-
-
-	}
+	
 
 	if(command === `${prefix}divorce`){
 
