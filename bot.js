@@ -723,7 +723,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}	
 
 	function collect(){
-			
+		boom();
 		con.query(`SELECT * FROM user WHERE id = 'CHEST'`, (err, rows) => {
 		
 		if(err) throw err;
@@ -1226,6 +1226,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	
 	
 	function expose(){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1313,6 +1314,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	let ticket = message.guild.roles.find("name", "tournament");
 
 	function daily(){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1368,6 +1370,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function insure(){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1382,7 +1385,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function tourney(){
-
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1417,6 +1420,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function gambleFlip(){
+		boom();
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1500,6 +1504,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 }
 
 	function waifuPic(){
+		boom();
 		console.log("waifu");
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe 1girl solo', random: true }).then(posts => {
@@ -1525,6 +1530,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function husbandoPic(){
+		boom();
 		console.log("husbando");
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe 1boy solo', random: true }).then(posts => {
@@ -1551,6 +1557,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 	
 	function lewdWaifu(){
+		boom();
 		console.log("waifu");
 		const booru = new Danbooru()
 		booru.posts({ tags: '1girl rating:explicit', random: true }).then(posts => {
@@ -1576,6 +1583,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 	
 	function lewdHusbando(){
+		boom();
 		console.log("husbando");
 		const booru = new Danbooru()
 		booru.posts({ tags: '1boy rating:explicit', random: true }).then(posts => {
@@ -1602,6 +1610,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 	
 	function customPic(){
+		boom();
 		console.log("LEWD");
 		const booru = new Danbooru()
 		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
@@ -1628,6 +1637,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 
 	function consent(){
+		boom();
 		let potential = message.mentions.users.first() || message.guild.members.get(args[0]);
 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "I do" to accept.)`);
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -1693,6 +1703,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	
 
 	function divorce(){
+		boom();
 		let potential = message.mentions.users.first() || message.guild.members.get(args[0]);
 		let mId = "M" + message.author.id;
 				let pId = "M" + potential.id;
@@ -1734,6 +1745,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 	
 	function customRole(){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1784,6 +1796,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}	
 
 	function gambleSlots(){
+		boom();
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -2063,6 +2076,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 
 	
 	function addUser(){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -2089,7 +2103,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 
 
 	function viewUser(){
-		
+		boom();
 	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2138,7 +2152,7 @@ con.query(`SELECT * FROM user WHERE id = '${mId}'`, (err, rows) => {
 	
 function viewLeaderboard(){
 	//console.log("Omega oof");	
-	
+	boom();
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
@@ -2218,7 +2232,7 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 let other = message.mentions.users.first();
 
 function viewOtherUser(){
-	
+	boom();
 
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2262,7 +2276,7 @@ return;
 }
 	
 function horoscope(){
-	
+	boom();
 	
 	con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2341,7 +2355,7 @@ function horoscope(){
 }	
 	
 	function deleteUser(){
-
+boom();
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -2360,6 +2374,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 }
 	
 function give(){
+	boom();
 	var num = parseInt(messageArray[2]); 
 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -2392,7 +2407,7 @@ function give(){
 	
 function bio(){
 
-
+boom();
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2472,6 +2487,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	
 	function wellWish(){
+		boom();
 		var userList = message.channel.members.filter(m => m.user.bot === false);
     		var randomBoi = userList.random().user;
 		console.log(randomBoi.username);
@@ -2482,6 +2498,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}	
 	
 	function whom(){
+		boom();
 	var userList = message.channel.members.filter(m => m.user.bot === false);
     var randomBoi = userList.random().user;
     var randomBoid = userList.random().user.username;
@@ -2562,7 +2579,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	if(command.toLowerCase() === phrase5 && messageArray[1].toLowerCase() === phrase6 && messageArray[2] === undefined){
 
-		
+		boom();
 
 			
 
@@ -2578,7 +2595,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	if(command.toLowerCase() === phrase7 && messageArray[1].toLowerCase() === phrase6 && messageArray[2] === undefined){
 
-		
+		boom();
 
 			
 
@@ -2594,7 +2611,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 	if(command.toLowerCase() === phrase4 && messageArray[1].toLowerCase() === phrase7){
 
-		
+		boom();
 
 		var chance = Math.floor(Math.random() * 10) + 1;
 
@@ -2621,7 +2638,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 
 	if(command.toLowerCase() === phrase4 && messageArray[1].toLowerCase() === phrase9){
-
+		boom();
 		
 
 		var chance = Math.floor(Math.random() * 10) + 1;
@@ -2657,7 +2674,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 
 	if(command === `${prefix}userinfo`){
-
+		boom();
 		let embed = new Discord.RichEmbed()
 
 			.setAuthor(message.author.username)
@@ -2683,7 +2700,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 	
 	if(command === `${prefix}patchNotes`){
-		
+		boom();
 		let notes = new Discord.RichEmbed()
 
 			
@@ -2707,7 +2724,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		 }
 
 	if(command === `${prefix}flip`){
-
+boom();
 		let coin = Math.floor(Math.random() * 101) + 1;
 
 		console.log(coin);
@@ -2773,6 +2790,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 		
 	function starPlatinum(){
+		boom();
 		if(message.member.roles.find("name", "Star Platinum") ) {
 		
 			
@@ -2806,6 +2824,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 }
 	
 	function harvest(){
+		boom();
 		if(message.member.roles.find("name", "Harvest") ) {
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2867,6 +2886,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function firstBomb(){
+		boom();
 		if(message.member.roles.find("name", "Killer Queen")) {
 
 
@@ -2903,6 +2923,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 	
 	function secondBomb(){
+		boom();
 		if(message.member.roles.find("name", "Killer Queen")) {
 		let bomb = message.guild.roles.find("name", "bomb");	
 		let member = message.mentions.members.first();
@@ -2941,6 +2962,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 	
 	function thirdBomb(){
+		boom();
 if(message.member.roles.find("name", "Killer Queen")) {
 
 
@@ -3001,6 +3023,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 	}
 	
 	function kingCrimson(){
+		boom();
 	if(message.member.roles.find("name", "King Crimson")) {	
 		con.query(`SELECT * FROM user WHERE id = 'CRIM'`, (err, rows) => {
 		if(err) throw err;
@@ -3053,6 +3076,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 	
 	
 	function echoesAct1(){
+		boom();
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
@@ -3111,6 +3135,7 @@ if(message.member.roles.find("name", "Killer Queen")) {
 	}
 
 	function crazyDiamond(){
+		boom();
 		let member = message.mentions.members.first();
 		if(message.member.roles.find("name", "Crazy Diamond")) {
 		let crazyID = 'J' + member.id;
@@ -3323,7 +3348,7 @@ if(command === `${prefix}ORA`){
 }
 	
 if(command === `${prefix}add` && messageArray[1] != undefined){
-		
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -3354,7 +3379,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	if(command === `${prefix}beat`){
 
-		
+		boom();
 
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
@@ -3386,7 +3411,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}hug`){
-		
+		boom();
 		
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
@@ -3416,7 +3441,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	
 	if(command === `${prefix}pat`){
-		
+		boom();
 		
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
@@ -3450,7 +3475,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}8ball`){
-
+boom();
 		let fortune = Math.floor(Math.random() * 30) + 1;
 
 		if(fortune === 1 ){
@@ -3576,7 +3601,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	
 	if(command === `${prefix}just`){
- 
+ boom();
 		var wait = Math.floor(Math.random() * 200) + 1;
 		
 		message.delete()
@@ -3608,7 +3633,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}jk`){
-
+boom();
 		var heh = Math.floor(Math.random() * 4) + 1;
 		
 		function delet(){
@@ -3645,7 +3670,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	
 	function standArrow(){
-
+	boom();
 		var chance = Math.floor(Math.random() * 100) + 1;
 		var std1 = message.guild.roles.find("name", "Killer Queen");
 		var std2 = message.guild.roles.find("name", "Echoes");
@@ -3777,6 +3802,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	
 	if(command === `${prefix}shop`){
+		boom();
 		let shop = new Discord.RichEmbed()
 
 			
@@ -3789,12 +3815,13 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}	
 
 	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
-
+		boom();
 		customRole();
 
 	}	
 
 	if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -3818,6 +3845,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}	
 
 	if(command === `${prefix}buy` && messageArray[1] === `husbandoPic`){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -3841,6 +3869,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	
 	if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
+		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -3898,7 +3927,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}	
 
 	if(command === `${prefix}spin` && messageArray[1] != undefined){
-
+	
 
 		gambleFlip();
 
@@ -3966,6 +3995,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 
 	if(command === `${prefix}help`){
+		boom();
 		if (message.guild.id == '456956416377225218') {
 		let help = new Discord.RichEmbed()
 
@@ -4035,6 +4065,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	
 	
 	if(command === `${prefix}bubblize`){
+		boom();
 		if(messageArray[1] != undefined){
 		var word = messageArray[1].toLowerCase();	
 		var answer = "";	
