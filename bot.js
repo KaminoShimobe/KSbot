@@ -2691,7 +2691,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 							gcard = ":black_heart::rainbow: \n";
 						} else {
 							card = "D4,";	
-							gcard = ":black_heart::heavy_plus_sign::four: /n";
+							gcard = ":black_heart::heavy_plus_sign::four: \n";
 						} 
 						hand += card;
 						ghand += gcard;
@@ -2709,7 +2709,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 		message.author.sendEmbed(notes);
 					
-				} else if (message.content == `${prefix}close` && message.author.id == initiator) {
+				} else if (message.content == `${prefix}close`) {
 			
 					message.reply("Collections have stopped. You're ready for a game of uno!");
 					return;
