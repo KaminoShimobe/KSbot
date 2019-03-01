@@ -172,28 +172,7 @@ bot.on("message", async message => {
 	var currPerson = "";
 	
 	
-// 	function endJourney(){
-// 		let directoryID = 'D' + message.author.id;
-// 		con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		if(rows.length < 1) {
-			
-// 		message.author.send("You don't have a journey to end!");
-// 			return;
-// 		}	else {
 
-	
-// 			sql = `DELETE FROM user WHERE id = '${directoryID}'`;
-// 			con.query(sql);
-// 			message.author.send("Journey ended!");
-			
-// 			return;
-			
-			
-// 		}
-// 			});
-// 	}
 
 	function purge(){
 		let other = message.mentions.users.first();
@@ -400,29 +379,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 		});
 	}	
 	
-// 	if(command === `${prefix}mset` && message.author.id == '242118931769196544'){
-// 		let theirID = "M" + messageArray[1];
-// 		con.query(`SELECT * FROM user WHERE id = 'M267072439261986816'`, (err, rows) => {
-// 		var userID = "267072439261986816";
-		
-// 		var name = bot.users.get("267072439261986816");
-// 		var name2 = bot.users.get("159792243777994753");
-// 		var check = `:ring: is married to ${name2.username} :heart:`
-// 		let sql;
-// 	 	let sql2;
-// 		sql = `DELETE FROM user WHERE id = 'M267072439261986816'`;
-// 		con.query(sql); 	
-// 		sql2 = `INSERT INTO user (id, bio) VALUES ('M267072439261986816', ':ring: is married to Buddha :heart:')`;
-//            // the user can type the command ... your command code goes here :)
-//         	con.query(sql2); 
-//            message.author.send(name.username + " has had their marriage bio set to set to " + check);
-		
 	
-
-// 		return;
-			
-// 		});
-// 	}	
 	
 	if(command === `${prefix}pay` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -2521,7 +2478,263 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	
 }
 	
-	
+	function uno(){
+		let uID = 'U' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = 'UNO'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var cards = messageArray[1];
+		var card1 = "";	
+		var Cchance = Math.floor(Math.random() * 10) + 1;
+		if(Cchance == 1){
+			card1 = "R0";
+		} else if(Cchance == 2){
+			card1 = "Y1";
+		} else if(Cchance == 3){
+			card1 = "B2";
+		} else if(Cchance == 4){
+			card1 = "G3";
+		} else if(Cchance == 5){
+			card1 = "R5";
+		} else if(Cchance == 6){
+			card1 = "Y5";
+		} else if(Cchance == 7){
+			card1 = "B6";
+		} else if(Cchance == 8){
+			card1 = "G7";
+		} else if(Cchance == 9){
+			card1 = "R8";
+		} else {
+			card1 = "Y9";
+		}	
+		let initiator = message.author.id;
+		if(cards > 15){
+			message.reply("The maximum amount of cards is 14!");
+			return;
+		}	
+		if(rows.length < 1) {
+// 			sql = `INSERT INTO user (id, money, bio) VALUES ('UNO', ${cards}, '${card1}')`;
+// 			con.query(sql, console.log);
+			message.channel.send("If you want to play uno reply with `!join`! The game will start when " + message.author.username + " says `!close`");
+			const collector = new Discord.MessageCollector(message.channel, m => !m.author.bot, { time: 100000000 });
+        		collector.on('collect', message => {
+            		if (message.content == `${prefix}join`) {
+               			let uID = 'U' + message.author.id;
+				con.query(`SELECT * FROM user WHERE id = '${uID}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					var hand = "";
+					var ghand = "";
+					for(var i = 0; i < cards; i++){
+						var chance = Math.floor(Math.random() * 108) + 1;
+						var card = "";
+						var gcard = "";
+						if(chance == 1){
+							card = "R0,";
+							gcard = ":heart::zero: /n";
+						} else if(chance == 2){
+							card = "Y0,";
+							gcard = ":yellow_heart::zero: /n";
+						} else if(chance == 3){
+							card = "B0,";
+							gcard = ":blue_heart::zero: /n";
+						} else if(chance == 4){
+							card = "G0,";
+							gcard = ":green_heart::zero: /n";
+						} else if(chance == 5 || chance == 6){
+							card = "R1,";
+							gcard = ":heart::one: /n";
+						} else if(chance == 7 || chance == 8){
+							card = "Y1,";
+							gcard = ":yellow_heart::one: /n";
+						} else if(chance == 9 || chance == 10){
+							card = "B1,";
+							gcard = ":blue_heart::one: /n";
+						} else if(chance == 11 || chance == 12){
+							card = "G1,";
+							gcard = ":green_heart::one: /n";
+						} else if(chance == 13 || chance == 14){
+							card = "R2,";
+							gcard = ":heart::two: /n";
+						} else if(chance == 15 || chance == 16){
+							card = "Y2,";
+							gcard = ":yellow_heart::two: /n";
+						} else if(chance == 17 || chance == 18){
+							card = "B2,";
+							gcard = ":blue_heart::two: /n";
+						} else if(chance == 19 || chance == 20){
+							card = "G2,";
+							gcard = ":green_heart::two: /n";
+						} else if(chance == 21 || chance == 22){
+							card = "R3,";
+							gcard = ":heart::three: /n";
+						} else if(chance == 23 || chance == 24){
+							card = "Y3,";
+							gcard = ":yellow_heart::three: /n";
+						} else if(chance == 25 || chance == 26){
+							card = "B3,";
+							gcard = ":blue_heart::three: /n";
+						} else if(chance == 27 || chance == 28){
+							card = "G3,";
+							gcard = ":green_heart::three: /n";
+						} else if(chance == 29 || chance == 30){
+							card = "R4,";
+							gcard = ":heart::four: /n";
+						} else if(chance == 31 || chance == 32){
+							card = "Y4,";
+							gcard = ":yellow_heart::four: /n";
+						} else if(chance == 33 || chance == 34){
+							card = "B4,";
+							gcard = ":blue_heart::four: /n";
+						} else if(chance == 35 || chance == 36){
+							card = "G4,";
+							gcard = ":green_heart::four: /n";
+						} else if(chance == 37 || chance == 38){
+							card = "R5,";
+							gcard = ":heart::five: /n";
+						} else if(chance == 39 || chance == 40){
+							card = "Y5,";
+							gcard = ":yellow_heart::five: /n";
+						} else if(chance == 41 || chance == 42){
+							card = "B5,";
+							gcard = ":blue_heart::five: /n";
+						} else if(chance == 43 || chance == 44){
+							card = "G5,";
+							gcard = ":green_heart::five: /n";
+						} else if(chance == 45 || chance == 46){
+							card = "R6,";
+							gcard = ":heart::six: /n";
+						} else if(chance == 47 || chance == 48){
+							card = "Y6,";
+							gcard = ":yellow_heart::six: /n";
+						} else if(chance == 49 || chance == 50){
+							card = "B6,";
+							gcard = ":blue_heart::six: /n";
+						} else if(chance == 51 || chance == 52){
+							card = "G6,";
+							gcard = ":green_heart::six: /n";
+						} else if(chance == 53 || chance == 54){
+							card = "R7,";
+							gcard = ":heart::seven: /n";
+						} else if(chance == 55 || chance == 56){
+							card = "Y7,";
+							gcard = ":yellow_heart::seven: /n";
+						} else if(chance == 57 || chance == 58){
+							card = "B7,";
+							gcard = ":blue_heart::seven: /n";
+						} else if(chance == 59 || chance == 60){
+							card = "G7,";
+							gcard = ":green_heart::seven: /n";
+						} else if(chance == 61 || chance == 62){
+							card = "R8,";
+							gcard = ":heart::eight: /n";
+						} else if(chance == 63 || chance == 64){
+							card = "Y8,";
+							gcard = ":yellow_heart::eight: /n";
+						} else if(chance == 65 || chance == 66){
+							card = "B8,";
+							gcard = ":blue_heart::eight: /n";
+						} else if(chance == 67 || chance == 68){
+							card = "G8,";
+							gcard = ":green_heart::eight: /n";
+						} else if(chance == 69 || chance == 70){
+							card = "R9,";
+							gcard = ":heart::nine: /n";
+						} else if(chance == 71 || chance == 72){
+							card = "Y9,";
+							gcard = ":yellow_heart::nine: /n";
+						} else if(chance == 73 || chance == 74){
+							card = "B9,";
+							gcard = ":blue_heart::nine: /n";
+						} else if(chance == 75 || chance == 76){
+							card = "G9,";
+							gcard = ":green_heart::nine: /n";
+						} else if(chance == 77 || chance == 78){
+							card = "RD2,";
+							gcard = ":heart::heavy_plus_sign::two: /n";
+						} else if(chance == 79 || chance == 80){
+							card = "YD2,";
+							gcard = ":yellow_heart::heavy_plus_sign::two: /n";
+						} else if(chance == 81 || chance == 82){
+							card = "BD2,";
+							gcard = ":blue_heart::heavy_plus_sign::two: /n";
+						} else if(chance == 83 || chance == 84){
+							card = "GD2,";
+							gcard = ":green_heart::heavy_plus_sign::two: /n";
+						} else if(chance == 85 || chance == 86){
+							card = "RS,";
+							gcard = ":heart::no_entry_sign: /n";
+						} else if(chance == 87 || chance == 88){
+							card = "YS,";
+							gcard = ":yellow_heart::no_entry_sign: /n";
+						} else if(chance == 89 || chance == 90){
+							card = "BS,";
+							gcard = ":blue_heart::no_entry_sign: /n";
+						} else if(chance == 91 || chance == 92){
+							card = "GS,";
+							gcard = ":green_heart::no_entry_sign: /n";
+						} else if(chance == 93 || chance == 94){
+							card = "RR,";
+							gcard = ":heart::repeat: /n";
+						} else if(chance == 95 || chance == 96){
+							card = "YR,";
+							gcard = ":yellow_heart::repeat: /n";
+						} else if(chance == 97 || chance == 98){
+							card = "BR,";
+							gcard = ":blue_heart::repeat: /n";
+						} else if(chance == 99 || chance == 100){
+							card = "GR,";
+							gcard = ":green_heart::repeat: /n";
+						} else if(chance == 101 || chance == 102 || chance == 103 || chance == 104){
+							card = "W,";
+							gcard = ":black_heart::rainbow: /n";
+						} else {
+							card = "D4,";	
+							gcard = ":black_heart::heavy_plus_sign::four: /n";
+						} 
+						hand += card;
+						ghand += gcard;
+					}	
+// 					sql = `INSERT INTO user (id, money, bio) VALUES ('UNO', ${cards}, '${hand}')`;
+// 					con.query(sql, console.log);
+					let notes = new Discord.RichEmbed()
+
+			
+			.setTitle(message.author.username + "'s UNO hand:")
+			.setDescription(ghand)
+			.setColor("#e82402");
+			
+			
+
+		message.author.sendEmbed(notes);
+					
+				} else if (message.content == `${prefix}close` && message.author.id == initiator) {
+			collector.stop("Ready to start UNO");
+					message.send("Collections have stopped. You're ready for a game of uno!");
+			}
+					else {
+					message.reply(" You already have entered!");
+				}
+                		return;
+            		} else {
+				
+				console.log("Not valid");
+			}
+			});
+			
+		}	else {
+
+			message.reply("A game of uno is already going on!");
+			
+
+			
+			return;
+		}
+
+
+		});
+	}
 
 	
 	function wellWish(){
@@ -2569,6 +2782,22 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 			
 
 		whom();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}uno` && messageArray[1] != undefined){
+			
+
+		uno();
 		
 
 			
@@ -2742,8 +2971,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 2-28-19")
-			.setDescription("- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
+			.setTitle("Patch Notes: 3-1-19")
+			.setDescription("- Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
