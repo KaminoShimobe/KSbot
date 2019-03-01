@@ -2532,163 +2532,163 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 						var gcard = "";
 						if(chance == 1){
 							card = "R0,";
-							gcard = ":heart::zero: /n";
+							gcard = ":heart::zero: \n";
 						} else if(chance == 2){
 							card = "Y0,";
-							gcard = ":yellow_heart::zero: /n";
+							gcard = ":yellow_heart::zero: \n";
 						} else if(chance == 3){
 							card = "B0,";
-							gcard = ":blue_heart::zero: /n";
+							gcard = ":blue_heart::zero: \n";
 						} else if(chance == 4){
 							card = "G0,";
-							gcard = ":green_heart::zero: /n";
+							gcard = ":green_heart::zero: \n";
 						} else if(chance == 5 || chance == 6){
 							card = "R1,";
-							gcard = ":heart::one: /n";
+							gcard = ":heart::one: \n";
 						} else if(chance == 7 || chance == 8){
 							card = "Y1,";
-							gcard = ":yellow_heart::one: /n";
+							gcard = ":yellow_heart::one: \n";
 						} else if(chance == 9 || chance == 10){
 							card = "B1,";
-							gcard = ":blue_heart::one: /n";
+							gcard = ":blue_heart::one: \n";
 						} else if(chance == 11 || chance == 12){
 							card = "G1,";
-							gcard = ":green_heart::one: /n";
+							gcard = ":green_heart::one: \n";
 						} else if(chance == 13 || chance == 14){
 							card = "R2,";
-							gcard = ":heart::two: /n";
+							gcard = ":heart::two: \n";
 						} else if(chance == 15 || chance == 16){
 							card = "Y2,";
-							gcard = ":yellow_heart::two: /n";
+							gcard = ":yellow_heart::two: \n";
 						} else if(chance == 17 || chance == 18){
 							card = "B2,";
-							gcard = ":blue_heart::two: /n";
+							gcard = ":blue_heart::two: \n";
 						} else if(chance == 19 || chance == 20){
 							card = "G2,";
-							gcard = ":green_heart::two: /n";
+							gcard = ":green_heart::two: \n";
 						} else if(chance == 21 || chance == 22){
 							card = "R3,";
-							gcard = ":heart::three: /n";
+							gcard = ":heart::three: \n";
 						} else if(chance == 23 || chance == 24){
 							card = "Y3,";
-							gcard = ":yellow_heart::three: /n";
+							gcard = ":yellow_heart::three: \n";
 						} else if(chance == 25 || chance == 26){
 							card = "B3,";
-							gcard = ":blue_heart::three: /n";
+							gcard = ":blue_heart::three: \n";
 						} else if(chance == 27 || chance == 28){
 							card = "G3,";
-							gcard = ":green_heart::three: /n";
+							gcard = ":green_heart::three: \n";
 						} else if(chance == 29 || chance == 30){
 							card = "R4,";
-							gcard = ":heart::four: /n";
+							gcard = ":heart::four: \n";
 						} else if(chance == 31 || chance == 32){
 							card = "Y4,";
-							gcard = ":yellow_heart::four: /n";
+							gcard = ":yellow_heart::four: \n";
 						} else if(chance == 33 || chance == 34){
 							card = "B4,";
-							gcard = ":blue_heart::four: /n";
+							gcard = ":blue_heart::four: \n";
 						} else if(chance == 35 || chance == 36){
 							card = "G4,";
-							gcard = ":green_heart::four: /n";
+							gcard = ":green_heart::four: \n";
 						} else if(chance == 37 || chance == 38){
 							card = "R5,";
-							gcard = ":heart::five: /n";
+							gcard = ":heart::five: \n";
 						} else if(chance == 39 || chance == 40){
 							card = "Y5,";
-							gcard = ":yellow_heart::five: /n";
+							gcard = ":yellow_heart::five: \n";
 						} else if(chance == 41 || chance == 42){
 							card = "B5,";
-							gcard = ":blue_heart::five: /n";
+							gcard = ":blue_heart::five: \n";
 						} else if(chance == 43 || chance == 44){
 							card = "G5,";
-							gcard = ":green_heart::five: /n";
+							gcard = ":green_heart::five: \n";
 						} else if(chance == 45 || chance == 46){
 							card = "R6,";
-							gcard = ":heart::six: /n";
+							gcard = ":heart::six: \n";
 						} else if(chance == 47 || chance == 48){
 							card = "Y6,";
-							gcard = ":yellow_heart::six: /n";
+							gcard = ":yellow_heart::six: \n";
 						} else if(chance == 49 || chance == 50){
 							card = "B6,";
-							gcard = ":blue_heart::six: /n";
+							gcard = ":blue_heart::six: \n";
 						} else if(chance == 51 || chance == 52){
 							card = "G6,";
-							gcard = ":green_heart::six: /n";
+							gcard = ":green_heart::six: \n";
 						} else if(chance == 53 || chance == 54){
 							card = "R7,";
-							gcard = ":heart::seven: /n";
+							gcard = ":heart::seven: \n";
 						} else if(chance == 55 || chance == 56){
 							card = "Y7,";
-							gcard = ":yellow_heart::seven: /n";
+							gcard = ":yellow_heart::seven: \n";
 						} else if(chance == 57 || chance == 58){
 							card = "B7,";
-							gcard = ":blue_heart::seven: /n";
+							gcard = ":blue_heart::seven: \n";
 						} else if(chance == 59 || chance == 60){
 							card = "G7,";
-							gcard = ":green_heart::seven: /n";
+							gcard = ":green_heart::seven: \n";
 						} else if(chance == 61 || chance == 62){
 							card = "R8,";
-							gcard = ":heart::eight: /n";
+							gcard = ":heart::eight: \n";
 						} else if(chance == 63 || chance == 64){
 							card = "Y8,";
-							gcard = ":yellow_heart::eight: /n";
+							gcard = ":yellow_heart::eight: \n";
 						} else if(chance == 65 || chance == 66){
 							card = "B8,";
-							gcard = ":blue_heart::eight: /n";
+							gcard = ":blue_heart::eight: \n";
 						} else if(chance == 67 || chance == 68){
 							card = "G8,";
-							gcard = ":green_heart::eight: /n";
+							gcard = ":green_heart::eight: \n";
 						} else if(chance == 69 || chance == 70){
 							card = "R9,";
-							gcard = ":heart::nine: /n";
+							gcard = ":heart::nine: \n";
 						} else if(chance == 71 || chance == 72){
 							card = "Y9,";
-							gcard = ":yellow_heart::nine: /n";
+							gcard = ":yellow_heart::nine: \n";
 						} else if(chance == 73 || chance == 74){
 							card = "B9,";
-							gcard = ":blue_heart::nine: /n";
+							gcard = ":blue_heart::nine: \n";
 						} else if(chance == 75 || chance == 76){
 							card = "G9,";
-							gcard = ":green_heart::nine: /n";
+							gcard = ":green_heart::nine: \n";
 						} else if(chance == 77 || chance == 78){
 							card = "RD2,";
-							gcard = ":heart::heavy_plus_sign::two: /n";
+							gcard = ":heart::heavy_plus_sign::two: \n";
 						} else if(chance == 79 || chance == 80){
 							card = "YD2,";
-							gcard = ":yellow_heart::heavy_plus_sign::two: /n";
+							gcard = ":yellow_heart::heavy_plus_sign::two: \n";
 						} else if(chance == 81 || chance == 82){
 							card = "BD2,";
-							gcard = ":blue_heart::heavy_plus_sign::two: /n";
+							gcard = ":blue_heart::heavy_plus_sign::two: \n";
 						} else if(chance == 83 || chance == 84){
 							card = "GD2,";
-							gcard = ":green_heart::heavy_plus_sign::two: /n";
+							gcard = ":green_heart::heavy_plus_sign::two: \n";
 						} else if(chance == 85 || chance == 86){
 							card = "RS,";
-							gcard = ":heart::no_entry_sign: /n";
+							gcard = ":heart::no_entry_sign: \n";
 						} else if(chance == 87 || chance == 88){
 							card = "YS,";
-							gcard = ":yellow_heart::no_entry_sign: /n";
+							gcard = ":yellow_heart::no_entry_sign: \n";
 						} else if(chance == 89 || chance == 90){
 							card = "BS,";
-							gcard = ":blue_heart::no_entry_sign: /n";
+							gcard = ":blue_heart::no_entry_sign: \n";
 						} else if(chance == 91 || chance == 92){
 							card = "GS,";
-							gcard = ":green_heart::no_entry_sign: /n";
+							gcard = ":green_heart::no_entry_sign: \n";
 						} else if(chance == 93 || chance == 94){
 							card = "RR,";
-							gcard = ":heart::repeat: /n";
+							gcard = ":heart::repeat: \n";
 						} else if(chance == 95 || chance == 96){
 							card = "YR,";
-							gcard = ":yellow_heart::repeat: /n";
+							gcard = ":yellow_heart::repeat: \n";
 						} else if(chance == 97 || chance == 98){
 							card = "BR,";
-							gcard = ":blue_heart::repeat: /n";
+							gcard = ":blue_heart::repeat: \n";
 						} else if(chance == 99 || chance == 100){
 							card = "GR,";
-							gcard = ":green_heart::repeat: /n";
+							gcard = ":green_heart::repeat: \n";
 						} else if(chance == 101 || chance == 102 || chance == 103 || chance == 104){
 							card = "W,";
-							gcard = ":black_heart::rainbow: /n";
+							gcard = ":black_heart::rainbow: \n";
 						} else {
 							card = "D4,";	
 							gcard = ":black_heart::heavy_plus_sign::four: /n";
@@ -2710,8 +2710,9 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		message.author.sendEmbed(notes);
 					
 				} else if (message.content == `${prefix}close` && message.author.id == initiator) {
-			collector.stop("Ready to start UNO");
-					message.send("Collections have stopped. You're ready for a game of uno!");
+			
+					message.reply("Collections have stopped. You're ready for a game of uno!");
+					return;
 			}
 					else {
 					message.reply(" You already have entered!");
