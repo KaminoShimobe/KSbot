@@ -2717,13 +2717,11 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 					message.reply(" You already have entered!");
 				}
                 		return;
-            		} else {
-				
-				console.log("Not valid");
+            		}); 
 			}
-			});
 			
-		}	else {
+		});
+		} else {
 
 			message.reply("A game of uno is already going on!");
 			
