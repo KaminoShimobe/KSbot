@@ -2160,6 +2160,28 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
 		let user = [name[0].username, name[1].username, name[2].username, name[3].username, name[4].username, name[5].username, name[6].username, name[7].username, name[8].username, name[9].username];	
 		
+
+		if(rank[0] == undefined){
+			rank[0] = "Someone";
+		} else if(rank[1] == undefined){
+			rank[1] = "Someone";
+		} else if(rank[2] == undefined){
+			rank[2] = "Someone";
+		} else if(rank[3] == undefined){
+			rank[3] = "Someone";
+		} else if(rank[4] == undefined){
+			rank[4] = "Someone";
+		} else if(rank[5] == undefined){
+			rank[5] = "Someone";
+		} else if(rank[6] == undefined){
+			rank[6] = "Someone";
+		} else if(rank[7] == undefined){
+			rank[7] = "Someone";
+		} else if(rank[8] == undefined){
+			rank[8] = "Someone";
+		} else if(rank[9] == undefined){
+			rank[9] = "Someone";
+		} 
 		
 		if(name[0] == undefined){
 			user[0] = "Insert rich person here";
