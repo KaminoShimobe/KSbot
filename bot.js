@@ -2182,6 +2182,28 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 		} else if(rank[9] == undefined){
 			rank[9] = "Someone";
 		} 
+
+		if(id[0] == undefined){
+			name[0] = undefined;
+		} else if(id[1] == undefined){
+			name[1] = undefined;
+		} else if(id[2] == undefined){
+			name[2] = undefined;
+		} else if(id[3] == undefined){
+			name[3] = undefined;
+		} else if(id[4] == undefined){
+			name[4] = undefined;
+		} else if(id[5] == undefined){
+			name[5] = undefined
+		} else if(id[6] == undefined){
+			name[6] = undefined;
+		} else if(id[7] == undefined){
+			name[7] = undefined;
+		} else if(id[8] == undefined){
+			name[8] = undefined;
+		} else if(id[9] == undefined){
+			name[9] = undefined;
+		} 
 		
 		if(name[0] == undefined){
 			user[0] = "Insert rich person here";
