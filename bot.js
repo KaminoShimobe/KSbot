@@ -2368,6 +2368,25 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	return;
 }
 	
+function removeUser(){
+let them = messageArray[1];
+con.query(`SELECT * FROM user WHERE id = '${them}'`, (err, rows) => {
+		if(err) throw err;
+
+		let sql;
+		if(rows.length < 1) {
+			message.reply("There is no user for this ID");
+			console.log(rows);
+		} else {
+			sql = `DELETE FROM user WHERE id = '${them}'`;
+			con.query(sql, console.log);
+			message.reply("They have been removed.");
+		}
+
+	});
+	return;
+}	
+	
 function give(){
 	boom();
 	var num = parseInt(messageArray[2]); 
@@ -4736,6 +4755,22 @@ if (message.guild.id == '456956416377225218') {
 		
 
 	}
+		
+	if(command === `${prefix}remove` && messageArray[1] != undefined && message.author.id == '242118931769196544'){
+
+
+		removeUser();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
 
 
 	}
