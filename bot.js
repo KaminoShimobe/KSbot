@@ -2151,16 +2151,16 @@ function viewLeaderboard(){
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
-		console.log(rows[0].money);
-		console.log(rows[1].money);
-		console.log(rows[2].money);
-		console.log(rows[3].money);
-		console.log(rows[4].money);
-		console.log(rows[5].money);
-		console.log(rows[6].money);
-		console.log(rows[7].money);
-		console.log(rows[8].money);
-		console.log(rows[9].money);
+		console.log(rows[0].id);
+		console.log(rows[1].id);
+		console.log(rows[2].id);
+		console.log(rows[3].id);
+		console.log(rows[4].id);
+		console.log(rows[5].id);
+		console.log(rows[6].id);
+		console.log(rows[7].id);
+		console.log(rows[8].id);
+		console.log(rows[9].id);
 
 
 		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
