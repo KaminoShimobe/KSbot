@@ -2151,10 +2151,18 @@ function viewLeaderboard(){
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
-	
-	
-	
-	
+		console.log(rows[0].money);
+		console.log(rows[1].money);
+		console.log(rows[2].money);
+		console.log(rows[3].money);
+		console.log(rows[4].money);
+		console.log(rows[5].money);
+		console.log(rows[6].money);
+		console.log(rows[7].money);
+		console.log(rows[8].money);
+		console.log(rows[9].money);
+
+
 		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
 		let id = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
 		let name = [bot.users.get(id[0]), bot.users.get(id[1]), bot.users.get(id[2]), bot.users.get(id[3]), bot.users.get(id[4]), bot.users.get(id[5]), bot.users.get(id[6]), bot.users.get(id[7]), bot.users.get(id[8]), bot.users.get(id[9])];
