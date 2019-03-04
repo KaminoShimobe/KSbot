@@ -4144,7 +4144,7 @@ boom();
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament! \n $50,000 | **standArrow** \n Roll for a 7% chance for a stand!")
+			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament! \n $50,000 | **standArrow** \n Roll for a 7% chance for a stand! \n $100,000,000 | **room** \n Purchase your own customizable room inside Kamino's house! It can be used for *almost* any purpose. \n $500,000,000 | **customBot** \n Send a request for a customized bot with **5** custom commands/features. Be willing to work with Kamino, and please give time and understanding for your requests!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
@@ -4228,6 +4228,65 @@ boom();
 		
 		});
 	}
+
+	if(command === `${prefix}buy` && messageArray[1] === `room`){
+		boom();
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100000000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 100000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);	
+
+		var name = message.author.username.replace(" ", "-");
+		var channelName = name + `s-room`;
+		
+		message.guild.createChannel(channelName, 'text')
+  		.then(console.log)
+  		.catch(console.error);
+
+  		const channel = member.guild.channels.find('name', channelName);
+  		channel.send(message.author + " welcome to your very own room in Kamino's house! Make sure to contact Kamino with any customization or changes you would like to it!");
+		
+		});
+	}
+
+	if(command === `${prefix}buy` && messageArray[1] === `room`){
+		boom();
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 500000000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 500000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);	
+
+		
+		
+		});
+	}
+
 
 	if(command === `${prefix}buy` && messageArray[1] === "insurance"){
 			insure();
