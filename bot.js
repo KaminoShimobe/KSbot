@@ -40,7 +40,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been *freakin'* updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been kinda updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -3042,7 +3042,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 			
 			.setTitle("Patch Notes: 3-4-19")
-			.setDescription("- Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
+			.setDescription("- Added 2 new shop items check with !shop \n - Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
