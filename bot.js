@@ -40,7 +40,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been *nicely* updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been *freakin'* updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -2349,19 +2349,19 @@ function horoscope(){
 				var loss = money / percent;
 			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
 			con.query(sql, console.log);
-			let crazyID = 'J' + other.id;
-		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
-			let sql2;
-			let sql3;
-			var refund = loss * -1;
-			if(rows.length < 1) {
-				sql3 = `INSERT INTO user (id, money) VALUES ('${crazyID}', ${refund})`;
-			con.query(sql3, console.log);
-			} else {	
-			sql2 = `UPDATE user SET money = ${refund} WHERE id = '${crazyID}'`;
-				con.query(sql2); 
-			}	
-		});	
+// 			let crazyID = 'J' + other.id;
+// 		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
+// 			let sql2;
+// 			let sql3;
+// 			var refund = loss * -1;
+// 			if(rows.length < 1) {
+// 				sql3 = `INSERT INTO user (id, money) VALUES ('${crazyID}', ${refund})`;
+// 			con.query(sql3, console.log);
+// 			} else {	
+// 			sql2 = `UPDATE user SET money = ${refund} WHERE id = '${crazyID}'`;
+// 				con.query(sql2); 
+// 			}	
+// 		});	
 			message.channel.send(".");
 			message.channel.send(".");	
 			message.channel.send(".");	
@@ -2371,20 +2371,20 @@ function horoscope(){
 			
 			} else {
 			var gain = money / percent;
-			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
-			con.query(sql, console.log);
-				let crazyID = 'J' + other.id;
-		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
-			let sql2;
-			let sql3;
-			if(rows.length < 1) {
-				sql3 = `INSERT INTO user (id, money) VALUES ('${crazyID}', ${gain})`;
-			con.query(sql3, console.log);
-			} else {	
-			sql2 = `UPDATE user SET money = ${gain} WHERE id = '${crazyID}'`;
-				con.query(sql2); 
-			}	
-		});	
+// 			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
+// 			con.query(sql, console.log);
+// 				let crazyID = 'J' + other.id;
+// 		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
+// 			let sql2;
+// 			let sql3;
+// 			if(rows.length < 1) {
+// 				sql3 = `INSERT INTO user (id, money) VALUES ('${crazyID}', ${gain})`;
+// 			con.query(sql3, console.log);
+// 			} else {	
+// 			sql2 = `UPDATE user SET money = ${gain} WHERE id = '${crazyID}'`;
+// 				con.query(sql2); 
+// 			}	
+// 		});	
 			message.channel.send(".");
 			message.channel.send(".");	
 			message.channel.send(".");	
@@ -3041,8 +3041,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 3-1-19")
-			.setDescription("- Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
+			.setTitle("Patch Notes: 3-4-19")
+			.setDescription("- Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
@@ -4338,7 +4338,7 @@ boom();
 
 			
 			.setTitle("KS-Bot Version 0.6.3: commands")
-			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily**: \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose**: \n Calls someone out for a wack Af !whisper.\n **!stands**: \n Gives Info on how to use stand power. \n **!wellWish**: \n Sends a dm to a random person wishing them a good day! \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a KS-Bot's Room in Kamino's House.")
+			.setDescription("**!help**: \n Pulls up this list. \n **!just**: \n Just....SAIYAN \n **!jk**: \n Deletes your message, but 25% chance to backfire and expose you. \n **!8ball** [Yes or no Question]: \n KS bot predicts the future! \n **!bubblize** [statement_separated_with_underscore]: \n makes your phrase bubble letters, underscores are turned into spaces. \n **!who** [condition] : \n Randomly selects a user in the channel to expose them of their deeds. \n **!beat** [user mention]: \n Beats the user up. \n **!hug** [user mention]: \n Hugs the user. \n **!pat** [user mention]: \n Pats the user \n **!flip**: \n Flips a coin! \n **!user**: \n creates a user. \n **!view**: \n Views users information. \n **!view** [mention]: \n Displays info about another user. \n **!give** [mention] [amount]: \n Gives money to another user. \n **!shop**: \n Shows the shop menu \n **!slots**: \n $100 for a slot machine roll. Match at least 2 to win! \n **!spin** [amount]: \n Flip a coin to see if you double your amount or lose it!\n **!daily**: \n Gives you some money every 24 hours. \n **!patchNotes**: \n Tells you what was updated. \n **!expose**: \n Calls someone out for a wack Af !whisper.\n **!stands**: \n Gives Info on how to use stand power. \n **!wellWish**: \n Sends a dm to a random person wishing them a good day! \n **!leaderboard**: \n Displays the top 10 richest people in Kamino's House. Their wealth is suspsectable to horoscopes though!. \n ***DM CHANNEL ONLY*** : \n **!whisper**: \n Sends a your secret anonymously into a KS-Bot's Room in Kamino's House.")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
