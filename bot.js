@@ -2780,7 +2780,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 		message.author.sendEmbed(notes);
 					
-				} else if (message.content == `${prefix}begin` && message.author.id == initiator) {
+				} else if (message.content == `${prefix}unoGo` && message.author.id == initiator) {
 			
 					message.reply("Collections have stopped. You're ready for a game of uno!");
 					return;
