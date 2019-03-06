@@ -172,7 +172,32 @@ bot.on("message", async message => {
 	var currPerson = "";
 	
 	
+	function customPic(){
+		
+		console.log("LEWD");
+		const booru = new Danbooru()
+		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
 
+			
+			.setImage(url.href)
+			.setColor("#7b18a3"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
 
 	function purge(){
 		let other = message.mentions.users.first();
@@ -451,7 +476,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	if(command === `${prefix}buy` && messageArray[1] === `customPic` && messageArray[2] != undefined){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
-
+		let sql;
 		if(rows.length < 1) {
 			message.reply("You have no user!");
 			console.log(rows);
@@ -1591,32 +1616,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 
 	}
 	
-	function customPic(){
-		boom();
-		console.log("LEWD");
-		const booru = new Danbooru()
-		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
- 
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
- 			
-		 let pic = new Discord.RichEmbed()
-
-			
-			.setImage(url.href)
-			.setColor("#7b18a3"); 
-
-		message.author.sendEmbed(pic);
- 		
-  		 })
-			
- 		
-  
-
-	}
+	
 
 	function consent(){
 		boom();
@@ -2780,7 +2780,7 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 
 		message.author.sendEmbed(notes);
 					
-				} else if (message.content == `${prefix}unoGo` && message.author.id == initiator) {
+				} else if (message.content == `${prefix}begin` && message.author.id == initiator) {
 			
 					message.reply("Collections have stopped. You're ready for a game of uno!");
 					return;
