@@ -2371,8 +2371,8 @@ function horoscope(){
 			
 			} else {
 			var gain = money / percent;
-// 			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
-// 			con.query(sql, console.log);
+			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
+			con.query(sql, console.log);
 // 				let crazyID = 'J' + other.id;
 // 		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
 // 			let sql2;
@@ -3041,8 +3041,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 3-4-19")
-			.setDescription("- Added 2 new shop items check with !shop \n - Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
+			.setTitle("Patch Notes: 3-7-19")
+			.setDescription("-Doubled the rates for stand arrows to 14% \n - Added 2 new shop items check with !shop \n - Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
@@ -4020,7 +4020,7 @@ boom();
 
 	let member = message.mentions.members.first();	
 
-		if(chance == 1){
+		if(chance == 1 || chance == 2){
 			member.addRole(std1).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std2)
@@ -4035,7 +4035,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
-		} else if(chance == 2){
+		} else if(chance == 3 || chance == 4){
 			member.addRole(std2).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std1)
@@ -4050,7 +4050,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
-		} else if(chance == 3){
+		} else if(chance == 13 || chance == 14){
 			member.addRole(std3).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std1)
@@ -4065,7 +4065,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
-		} else if(chance == 4){
+		} else if(chance == 5 || chance == 6){
 			member.addRole(std4).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std1)
@@ -4080,7 +4080,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
-		} else if(chance == 5){
+		} else if(chance == 7 || chance == 8){
 			member.addRole(std5).catch(console.error);
 			member.removeRole(std6)
 			member.removeRole(std1)
@@ -4095,7 +4095,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
-		} else if(chance == 6){
+		} else if(chance == 9 ||chance == 10){
 			member.addRole(std7).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std1)
@@ -4110,7 +4110,7 @@ boom();
 			message.channel.send(".");	
 			message.channel.send(".");	
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
-		} else if(chance == 7){
+		} else if(chance == 11 || chance == 12){
 			member.addRole(std8).catch(console.error);
 			member.addRole(std6).catch(console.error);
 			member.removeRole(std1)
@@ -4144,7 +4144,7 @@ boom();
 
 			
 			.setTitle("Kamino's Shop (!buy [item] to purchase)")
-			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament! \n $50,000 | **standArrow** \n Roll for a 7% chance for a stand! \n $100,000,000 | **room** \n Purchase your own customizable room inside Kamino's house! It can be used for *almost* any purpose. \n $500,000,000 | **customBot** \n Send a request for a customized bot with **5** custom commands/features. Be willing to work with Kamino, and please give time and understanding for your requests!")
+			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 30% of your money | **insurance**: \n Your next gamble will cut your losses in half. \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **marriageRegistration for [user] ** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $100,000 | **ticket** \n Purchase a ticket to participate in Kamino's smash tournament! \n $50,000 | **standArrow** \n Roll for a 14% chance for a stand! \n $100,000,000 | **room** \n Purchase your own customizable room inside Kamino's house! It can be used for *almost* any purpose. \n $500,000,000 | **customBot** \n Send a request for a customized bot with **5** custom commands/features. Be willing to work with Kamino, and please give time and understanding for your requests!")
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(shop);
