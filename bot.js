@@ -40,7 +40,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been kinda updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been *slightly* updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -1467,7 +1467,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${num} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 		
@@ -1493,7 +1493,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 			con.query(sql3, console.log);
 			} else {	
 			sql2 = `UPDATE user SET money = ${refund} WHERE id = '${crazyID}'`;
-				con.query(sql); 
+				con.query(sql2); 
 			}	
 		});	
 			message.reply("*CHA~CHING!* You lost $" + num + "!");
@@ -3041,8 +3041,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 3-7-19")
-			.setDescription("-Doubled the rates for stand arrows to 14% \n - Added 2 new shop items check with !shop \n - Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
+			.setTitle("Patch Notes: 3-8-19")
+			.setDescription("- Crazy Diamond has been fixed \n -Doubled the rates for stand arrows to 14% \n - Added 2 new shop items check with !shop \n - Temporarily Removed Crazy Diamond from !horoscopes because of a bug that messes up !leaderboard\n - Testing out UNO cards. Trying to see if you get an accurate hand. `!uno`\n- Updated !help \n - Added !stands to give info on how to use stand abilities \n - Made changes in cooldown and functionality for a couple of stands.")
 			.setColor("#1f3c5b");
 			
 			
