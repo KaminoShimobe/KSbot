@@ -3623,7 +3623,7 @@ boom();
 		}
 		sql = `UPDATE user SET money = ${money - 500000000} WHERE id = '${message.author.id}'`;
 		con.query(sql);	
-		message.reply("Keep this as a receipt! Bot Order: " + message.author.id + " | For: " + message.author.username + ");
+		message.reply("Keep this as a receipt! Bot Order: " + message.author.id + " | For: " + message.author.username);
 		
 		
 		});
