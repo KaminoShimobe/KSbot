@@ -20,14 +20,27 @@ const bot = new Discord.Client({disableEveryone: true})
 
 
 
-
+const antispam = require("discord-anti-spam");
+ 
+// antispam(bot, {
+//   warnBuffer: 3, //Maximum amount of messages allowed to send in the interval time before getting warned.
+//   maxBuffer: 5, // Maximum amount of messages allowed to send in the interval time before getting banned.
+//   interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
+//   warningMessage: "Stop spamming BOI", // Warning message send to the user indicating they are going to fast.
+//   banMessage: "has been banned for spamming, anyone else?", // Ban message, always tags the banned user in front of it.
+//   maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user can send in a timespan before getting warned
+//   maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
+//   deleteMessagesAfterBanForPastDays: 7, // Delete the spammed messages after banning for the past x days.
+//   exemptRoles: ["Dad", "Archangel"] // The names of the roles which should not be spam-filtered
+ 
+// });
 	
 
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
- 	channel.sendMessage("KS-Bot has been incrementally updated! \n Check it out with !patchNotes");
+ 	channel.sendMessage("KS-Bot has been very teenily updated! \n Check it out with !patchNotes");
 	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
 
 
@@ -60,7 +73,21 @@ if (member.guild.id == '235197222587727872') {
 } else{
 	member.guild.channels.get("496313147808940033").send(`${member} Welcome to Kamino's House!`);
 }	
+// if (message.guild.id == '456956416377225218') {	
+//     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
+// }	
+   // member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
+    
+  // const channel = member.guild.channels.find('name', 'wholesome-general');
+  // const room = member.guild.channels.find('name', 'the-front-porch');
+  // // Do nothing if the channel wasn't found on this server
+  // if(!room) return
+  // room.send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`);
+  //if (!channel) return;
 
+  // Send the message, mentioning the member
+
+  //channel.send(`${member} Hewwo my niwwa! :sparkles:`);
 
 });
 
@@ -109,8 +136,6 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 	
-	//Adds money from KS-Bot account to KSRPG
-	
 	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
 		let other = message.mentions.users.first();
 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
@@ -140,17 +165,16 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
-	
 	var rooms = ['510954222536097807'];
 	var chancu = 0;
 	const room = bot.channels.get(rooms[chancu]);
 	const botspam = bot.channels.get('452166943093293059');
-	
+	var currPerson = "";
 	
 	
 	function customPic(){
 		
-		
+		console.log("LEWD");
 		const booru = new Danbooru()
 		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -165,7 +189,7 @@ bot.on("message", async message => {
 			
 			.setImage(url.href)
 			.setColor("#7b18a3"); 
-		//DM's custom picture
+
 		message.author.sendEmbed(pic);
  		
   		 })
@@ -175,7 +199,48 @@ bot.on("message", async message => {
 
 	}
 
+	function purge(){
+		let other = message.mentions.users.first();
+		let statsID = 'ST' + other.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let lvl = rows[0].money;
+		let inventory =  rows[0].bio;
+		if(rows.length < 1) {
+			
+			} else {
+				if(message.author.id == '242118931769196544') {
+				sql = `DELETE FROM user WHERE id = '${statsID}'`;
+				con.query(sql);
+				message.channel.send("PURGED! Please await for a new bot dedicated for RPG mechanics!");
+				let directoryID = 'D' + other.id;
+				con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+			
+				message.author.send("You don't have a journey to end!");
+				return;
+				}	else {
+
 	
+					sql = `DELETE FROM user WHERE id = '${directoryID}'`;
+					con.query(sql);
+					message.channel.send("Journey ended!");
+			
+			return;
+			
+			
+		}
+			});
+				} else {
+					message.reply("You cannot do that.");
+				}
+			}
+			});
+			return;
+		}
 	
 	
 	
@@ -240,7 +305,7 @@ bot.on("message", async message => {
 
   			.catch(console.error);	
 			message.channel.send("**HEAVEN'S DOOR**");
-			}		
+			}		//BOI
 
 			});
 	
@@ -269,6 +334,9 @@ bot.on("message", async message => {
 		
 		
 	
+	if(command === `${prefix}purge`){
+		purge();
+	}	
 	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
@@ -287,8 +355,8 @@ bot.on("message", async message => {
 				var chance = Math.floor(Math.random()*2);
 				room.send(setting[chance]);
 				message.author.send("Message Sent.");
-				
-
+				//BOI
+console.log(message.author.username);
 sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				con.query(sql);				
 			}
@@ -309,12 +377,32 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 				var chance = Math.floor(Math.random()*2);
 				botspam.send(setting[chance]);
 				message.author.send("Message Sent.");
-				
+				//BOI
 			}
 			});
 	}
 	
+	if(command === `${prefix}set` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
+		let theirID = messageArray[1];
+		con.query(`SELECT * FROM user WHERE id = '${theirID}'`, (err, rows) => {
+		var userID = rows[0].id;
+		var name = bot.users.get(userID);
+		var check = parseInt(messageArray[2]);
+		let sql;
+	 
+	if(Number.isInteger(check) === true){
+		sql = `UPDATE user SET money = ${check} WHERE id = '${theirID}'`;
+           // the user can type the command ... your command code goes here :)
+        	con.query(sql); 
+           message.author.send(name.username + " has had their money set to " + check);
 		
+	}		
+	else{
+		message.reply("Invalid Option.");
+		return;
+	}		
+		});
+	}	
 	
 	
 	
@@ -722,6 +810,374 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 		});
 	}
 	
+	function tournamentSET(){
+		var num = parseInt(messageArray[1]);
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		
+		if(money < num) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+		con.query(sql);
+		});
+		
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			if(messageArray[2] === "join"){
+			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, '${message.author.username}')`;
+			con.query(sql, console.log);
+			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");	
+			} else {
+			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, "")`;
+			con.query(sql, console.log);
+			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");
+			}
+			return;
+		}	else {
+
+			message.channel.send("A tournament is undergoing right now!")
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+	
+	}
+	
+	function tournamentJOIN(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let cost = rows[0].money;	
+		let participants = rows[0].bio;
+		if(rows.length < 1) {
+			message.reply(" No tournament going on yet. Make one with !tourney");	
+		}	
+		else{	
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+			if(err) throw err;
+
+			if(rows.length < 1) {
+				message.reply("You have no user!");
+				console.log(rows);
+				return;
+			}
+
+			let money = rows[0].money;
+
+
+			if(money < cost) {
+				message.reply("Insufficient Funds.");
+				return;
+			} else {
+				sql = `UPDATE user SET money = ${money - cost} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+			}	
+		});
+			var name = " " + message.author.username;
+			if(participants.indexOf(message.author.username) === -1){
+			sql = `UPDATE user SET bio = '${participants + name}', money = ${cost + cost}  WHERE id = 'TOURNEY'`;
+			con.query(sql);
+			message.reply(" has entered the tournament for $" + cost + "!");
+			} else {
+				message.reply(" has already joined this tournament!");
+				return;
+			}	
+		}	
+		});	
+	}
+	
+	function tournamentSTART(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;
+			if(rows.length < 1) {
+				message.reply(" No tournament to start! Make one with !tourney");
+			}	else {
+				var list = participants.split(" ");
+				message.channel.send("Here are the matches!");
+				var i;
+				if(list.length > 1){
+				for(i = 0; i < list.length + 1; i++){
+					var spot = Math.floor(Math.random() * list.length) + 1;
+					var index = array.indexOf(spot);
+					var player = list[spot];
+					list.splice(index, 1);
+					var spot2 = Math.floor(Math.random() * list.length) + 1;
+					var index2 = array.indexOf(spot2);
+					var player2 = list[spot2];
+					message.channel.send("```" + player + " VS " + player2 + "```");
+							     
+				}
+				} else {
+					message.channel.send("The winner needs to claim his/her prize using !win");
+			}
+			}
+			});
+	}
+	
+	function tournamentSTAT(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;
+			if(rows.length < 1) {
+				message.reply(" No tournament to start! Make one with !tourney");
+			}	else {
+				message.channel.send("Participants: \n" + participants + "\n Prize: \n" + "$" + prize);
+			}
+			});
+	}
+	
+	function tournamentLOSE(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+			if(rows.length < 1) {
+				message.reply(" No tournament to lose! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(message.author.username) === -1){
+				message.reply(" you're not in this tourney to lose!");
+			}	else {
+			var newList = participants.replace(message.author.username, "");	
+			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
+			con.query(sql);
+				}
+			}
+			});
+	}
+	
+	function tournamentWIN(){
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+		let prize = rows[0].money;	
+			if(rows.length < 1) {
+				message.reply(" No tournament to win! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(message.author.username) === -1){
+				message.reply(" you didn't win this tournament this time around!");
+			}	else {
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+			if(err) throw err;
+
+			if(rows.length < 1) {
+				message.reply("You have no user!");
+				console.log(rows);
+				return;
+			}
+
+			let money = rows[0].money;
+
+				sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply(" CONGRATS FOR WINNING! GGS EVERYONE!!! You got $" + prize + "!");
+				
+		});
+				}
+				sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
+			con.query(sql, console.log);
+			message.channel.send("Tourney SHUT DOWN!");
+			}
+			});
+	}
+	
+	function tournamentKICK(){
+		if(message.author.id == '242118931769196544') {
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let participants = rows[0].bio;
+			if(rows.length < 1) {
+				message.reply(" No tournament to kick someone from!! Make one with !tourney");
+			}	else {
+			if(participants.indexOf(messageArray[1].username) === -1){
+				message.reply(" is not there to kick!");
+			}	else {
+			var newList = participants.replace(messageArray[1].username, "");	
+			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
+			con.query(sql);
+				}
+			}
+			});
+		} else {
+			message.reply(" you can't do that!");
+			return;
+		}	
+	}
+	
+	function tournamentEND(){
+		if(message.author.id == '242118931769196544') {
+		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
+		if(err) throw err;
+
+		let sql;
+		if(rows.length < 1) {
+			message.reply(" No tourney to end!");
+			
+		} else {
+			sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
+			con.query(sql, console.log);
+			message.reply("Tourney SHUT DOWN!");
+		}
+			});
+		} else {
+			message.reply(" cannot end the tourney");
+		}	
+	}
+	
+	if(command === `${prefix}tourney` && messageArray[1] > 0){
+			
+
+		tournamentSET();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}join`){
+			
+
+		tournamentJOIN();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}lose`){
+			
+
+		tournamentLOSE();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}nextRound`){
+			
+
+		tournamentSTART();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}end`){
+			
+
+		tournamentEND();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}status`){
+			
+
+		tournamentSTAT();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}kick`){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");		
+
+		tournamentKICK();
+		
+	
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}win`){
+			
+
+		tournamentWIN();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	
 	
 	function exposeSET(){
 		
@@ -780,7 +1236,58 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	}
 	
 	
+	
+	// function getMuns(){
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
 
+	// 	if(rows.length < 1) {
+	// 		return;
+	// 	}
+
+	// 	let money = rows[0].money;
+		
+	// 	var funds = (message.content.length);
+	// 	if(funds >= 50){
+	// 		funds = 50;
+	// 	}	
+	// 	sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
+	// 	//console.log(message.author.username + " got $" + funds);	
+	// 	con.query(sql);
+			
+	// });	
+	
+	// }
+	
+	
+
+	var phrase1 = "is";
+
+	var phrase2 = "it";
+
+	var phrase3 = "am";
+
+	var phrase4 = "i";
+
+	var phrase5 = "are";
+
+	var phrase6 = "you";
+
+	var phrase7 = "will";
+
+	var phrase8 = "definitely";
+
+	var phrase9 = "know";
+	
+	var phrase10 = "depressed";
+	
+	var phrase11 = "depression";
+	
+	var ye = "yes";
+	
+ 	var ne = "no";
+	
+	var rip = "rip";
 
 	const member = message.member;
 	let insurance = message.guild.roles.find("name", "allstate");
@@ -2023,7 +2530,24 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 	}
 
 }
+if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
+	if(messageArray.indexOf(phrase10.toLowerCase()) != -1){
+		
+		
+		message.reply("Are you okay fam?");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        	console.log(collector)
+		collector.on('collect', message => {
+           		 if (message.content == ye.toLowerCase()) {
+                message.channel.send("I really do hope so! Please don't hesitate to talk to us <3");
+            } else if (message.content == ne.toLowerCase()) {
+                message.channel.send("I'm sorry to hear that.... Maybe talking to us can help? <3 <3");
+            }
+        })
 
+	}
+	
+}
 	
 	function uno(){
 		let uID = 'U' + message.author.id;
@@ -2358,7 +2882,67 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
 
 
 if (message.guild.id == '456956416377225218' || message.guild.id == '242120806132482060') {
-	
+	if(command.toLowerCase() === phrase1 && messageArray[1].toLowerCase() === phrase2 && messageArray[2] === undefined){
+
+		
+
+			
+
+		 return message.channel.send("*Is it really?*");
+
+		
+
+		;
+
+	}
+
+
+
+	if(command.toLowerCase() === phrase3 && messageArray[1].toLowerCase() === phrase4 && messageArray[2] === undefined ){
+
+		
+
+			
+
+		 return message.channel.send("*Am I really?*");
+
+		
+
+		;
+
+	}
+
+
+
+	if(command.toLowerCase() === phrase5 && messageArray[1].toLowerCase() === phrase6 && messageArray[2] === undefined){
+
+		boom();
+
+			
+
+		 return message.channel.send("*Are you really?*");
+
+		
+
+		;
+
+	}
+
+
+
+	if(command.toLowerCase() === phrase7 && messageArray[1].toLowerCase() === phrase6 && messageArray[2] === undefined){
+
+		boom();
+
+			
+
+		 return message.channel.send("*Will you really?*");
+
+		
+
+		;
+
+	}
 
 
 
@@ -2457,8 +3041,8 @@ if (message.guild.id == '456956416377225218' || message.guild.id == '24212080613
 		let notes = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes: 3-15-19")
-			.setDescription("- customBot can be purchased! PURCHASE IT NOW CHEFFY \n - **MAJOR CHANGES COMING TO KSBOT** stay tuned!")
+			.setTitle("Patch Notes: 3-14-19")
+			.setDescription("- Cooldown for !3RDBOMB set to 3 hours \n - **MAJOR CHANGES COMING TO KSBOT** stay tuned!")
 			.setColor("#1f3c5b");
 			
 			
@@ -3024,7 +3608,81 @@ if(message.member.roles.find("name", "Killer Queen")) {
 
 	}
 
+if(command === `${prefix}ORA`){
+	let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+	var theOther = message.mentions.users.first()
+
+	const booru = new Danbooru()
+		if(message.author.id == '242118931769196544') {
+		booru.posts({ tags: 'rating:safe punching kuujou_joutarou', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+ 		message.channel.send(`Yare Yare Daze...`);
+		message.channel.send(`You can't pay what you owe back with money...`);
+		
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+		message.channel.send(`**ORA** ` + toBeat + ` **ORA**`);
+		toBeat.send(`**ORA**`);
+
+	
+
+	
+	theOther.kick("Yare Yare Daze")
+	.then(() => console.log(`Kicked ${member.displayName}`))
+  	.catch(console.error);
+	message.channel.send(`**ORAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!** `);
+  		 })
+		
+		return;
+	} else {
+		message.reply("You do not have rights to that.");
+	}
+}
 	
 if(command === `${prefix}add` && messageArray[1] != undefined){
 		boom();
@@ -3604,7 +4262,7 @@ boom();
 		});
 	}
 
-	if(command === `${prefix}buy` && messageArray[1] === `customBot`){
+	if(command === `${prefix}buy` && messageArray[1] === `room`){
 		boom();
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -3623,13 +4281,11 @@ boom();
 		}
 		sql = `UPDATE user SET money = ${money - 500000000} WHERE id = '${message.author.id}'`;
 		con.query(sql);	
-		message.reply("Keep this as a receipt! Bot Order: " + message.author.id + " | For: " + message.author.username);
+
 		
 		
 		});
 	}
-		
-		
 
 
 	if(command === `${prefix}buy` && messageArray[1] === "insurance"){
