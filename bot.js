@@ -250,12 +250,12 @@ bot.on("message", async message => {
     	if (err) throw err;
     	message.author.send("Tables created for user");
   	});
-	}
+	
 	con.query(sql2, function (err, result) {
     	if (err) throw err;
     	message.author.send("Tables created for server");
   	});	
-	}
+	
 	con.query(sql3, function (err, result) {
     	if (err) throw err;
     	message.author.send("Tables created for global);
@@ -263,7 +263,9 @@ bot.on("message", async message => {
 	con.query(sql4, function (err, result) {
     	if (err) throw err;
     	message.author.send("Tables created for pet");
-  	});	
+  	});
+	}
+		  }
 			
 	if(command === `${prefix}drop`){
 	if(message.author.id == '242118931769196544'){
