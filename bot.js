@@ -28,7 +28,7 @@ bot.on("ready", async () => {
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
   	//channel.sendMessage("KS-Bot has been very teenily updated! \n Check it out with !patchNotes");
-	bot.user.setPresence({ status: 'idle', game: { name: 'being revamped' } });
+	bot.user.setPresence({ status: 'idle', game: { name: 'being revamped in' + bot.guilds.size } });
 
 
 
