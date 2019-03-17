@@ -20,28 +20,15 @@ const bot = new Discord.Client({disableEveryone: true})
 
 
 
-const antispam = require("discord-anti-spam");
- 
-// antispam(bot, {
-//   warnBuffer: 3, //Maximum amount of messages allowed to send in the interval time before getting warned.
-//   maxBuffer: 5, // Maximum amount of messages allowed to send in the interval time before getting banned.
-//   interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
-//   warningMessage: "Stop spamming BOI", // Warning message send to the user indicating they are going to fast.
-//   banMessage: "has been banned for spamming, anyone else?", // Ban message, always tags the banned user in front of it.
-//   maxDuplicatesWarning: 7,// Maximum amount of duplicate messages a user can send in a timespan before getting warned
-//   maxDuplicatesBan: 10, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
-//   deleteMessagesAfterBanForPastDays: 7, // Delete the spammed messages after banning for the past x days.
-//   exemptRoles: ["Dad", "Archangel"] // The names of the roles which should not be spam-filtered
- 
-// });
+
 	
 
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 	var channel = bot.channels.get('510954222536097807');
-//  	channel.sendMessage("KS-Bot has been very teenily updated! \n Check it out with !patchNotes");
-	bot.user.setPresence({ status: 'online', game: { name: '!help' } });
+  	//channel.sendMessage("KS-Bot has been very teenily updated! \n Check it out with !patchNotes");
+	bot.user.setPresence({ status: 'idle', game: { name: 'being revamped' } });
 
 
 
@@ -65,7 +52,7 @@ bot.on("ready", async () => {
 
 bot.on('guildMemberAdd', member => {
 
-  // Send the message to a designated channel on a server:
+  
 if (member.guild.id == '235197222587727872') {
 	const wank = bot.emojis.get("398321346247131136");
 	const channel = member.guild.channels.find('name', 'welcome');
@@ -73,21 +60,7 @@ if (member.guild.id == '235197222587727872') {
 } else{
 	member.guild.channels.get("496313147808940033").send(`${member} Welcome to Kamino's House!`);
 }	
-// if (message.guild.id == '456956416377225218') {	
-//     member.guild.channels.get("496313147808940033").send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`); 
-// }	
-   // member.guild.channels.get("242120806132482060").send(`${member} Hewwo my niwwa! :sparkles:`); 
-    
-  // const channel = member.guild.channels.find('name', 'wholesome-general');
-  // const room = member.guild.channels.find('name', 'the-front-porch');
-  // // Do nothing if the channel wasn't found on this server
-  // if(!room) return
-  // room.send(`${member} Hewwo! Welcome to Kamino's House! :sparkles:`);
-  //if (!channel) return;
 
-  // Send the message, mentioning the member
-
-  //channel.send(`${member} Hewwo my niwwa! :sparkles:`);
 
 });
 
@@ -136,32 +109,6 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 	
-	if(message.author.bot == true && command === "!ADD" && messageArray[2] != undefined){
-		let other = message.mentions.users.first();
-		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let money = rows[0].money;
-		var funds = parseInt(messageArray[2]);	
-		if(rows.length < 1) {
-			
-			message.channel.send("This person doesn't have a KSRPG account!");
-			return;
-		}	else {
-
-			
-			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
-         
-       			 con.query(sql); 
-           			message.channel.send(other.username + " transferred $" + funds + " to their USER account!");
-
-			
-			return;
-		}
-
-
-		});
-	}
 
 	if(message.author.bot) return;
 	
@@ -174,7 +121,7 @@ bot.on("message", async message => {
 	
 	function customPic(){
 		
-		console.log("LEWD");
+		
 		const booru = new Danbooru()
 		booru.posts({ tags: messageArray[2] + ' ' + messageArray[3], random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -199,48 +146,7 @@ bot.on("message", async message => {
 
 	}
 
-	function purge(){
-		let other = message.mentions.users.first();
-		let statsID = 'ST' + other.id;
-		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let lvl = rows[0].money;
-		let inventory =  rows[0].bio;
-		if(rows.length < 1) {
-			
-			} else {
-				if(message.author.id == '242118931769196544') {
-				sql = `DELETE FROM user WHERE id = '${statsID}'`;
-				con.query(sql);
-				message.channel.send("PURGED! Please await for a new bot dedicated for RPG mechanics!");
-				let directoryID = 'D' + other.id;
-				con.query(`SELECT * FROM user WHERE id = '${directoryID}'`, (err, rows) => {
-				if(err) throw err;
-				let sql;
-				if(rows.length < 1) {
-			
-				message.author.send("You don't have a journey to end!");
-				return;
-				}	else {
-
 	
-					sql = `DELETE FROM user WHERE id = '${directoryID}'`;
-					con.query(sql);
-					message.channel.send("Journey ended!");
-			
-			return;
-			
-			
-		}
-			});
-				} else {
-					message.reply("You cannot do that.");
-				}
-			}
-			});
-			return;
-		}
 	
 	
 	
@@ -332,11 +238,31 @@ bot.on("message", async message => {
 		HeavensDoor();
 	} 
 		
-		
 	
-	if(command === `${prefix}purge`){
-		purge();
+	if(command === `${prefix}table`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN)";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
+  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7)";
+  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30) id VARCHAR(12), iq SMALLINT";
+  	
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Tables created for user, server, global, and pet");
+  	});
+	}
+	}
+			
+	if(command === `${prefix}drop`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "DROP TABLE user";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table dropped!");
+  	});
+	}
 	}	
+	
 	
 	if(command === `${prefix}whisper`){
 		con.query(`SELECT * FROM user WHERE id = 'EXPOSE'`, (err, rows) => {
@@ -364,23 +290,7 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 			});
 	}
 
-	if(command === `${prefix}gossip`){
-		message.author.send("What secret would you like to share? (!cancel to cancel)");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.author.send("Message cancelled.");
-                		return;
-            		} else {
-				var msg = message.content;
-				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
-				var chance = Math.floor(Math.random()*2);
-				botspam.send(setting[chance]);
-				message.author.send("Message Sent.");
-				//BOI
-			}
-			});
-	}
+	
 	
 	if(command === `${prefix}set` && messageArray[1] != undefined && messageArray[2] != undefined && message.author.id == '242118931769196544'){
 		let theirID = messageArray[1];
@@ -529,12 +439,12 @@ sql = `UPDATE user SET bio = '${message.author.username}' WHERE id = 'EXPOSE'`;
 	function treasure(){
 		var appear = Math.floor(Math.random() * 100) + 1;
 		if(appear == 100){
-			console.log(appear);
-			console.log("YOOMTAH");
+			
+			
 			chest();	
 		} else {
-			console.log(appear);
-			console.log("Oof.");
+			
+			
 			return;	
 		}
 	}
@@ -604,7 +514,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 
 		});
 	}
-	let duo = message.guild.roles.find("name", "Amulet-Coin");
+	
 	
 	function chest(){
 		var karma = "";
@@ -810,372 +720,22 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 		});
 	}
 	
-	function tournamentSET(){
-		var num = parseInt(messageArray[1]);
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
-
-		let money = rows[0].money;
-		
-		
-		if(money < num) {
-			message.reply("Insufficient Funds.");
-			return;
-		}
-		sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
-		con.query(sql);
-		});
-		
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		if(rows.length < 1) {
-			if(messageArray[2] === "join"){
-			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, '${message.author.username}')`;
-			con.query(sql, console.log);
-			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");	
-			} else {
-			sql = `INSERT INTO user (id, money, bio) VALUES ("TOURNEY", ${num}, "")`;
-			con.query(sql, console.log);
-			message.channel.send("A new tournament has been started with a entry fee of $" + num + "!");
-			}
-			return;
-		}	else {
-
-			message.channel.send("A tournament is undergoing right now!")
-			
-
-			
-			return;
-		}
-
-
-		});
-		
 	
-	}
 	
-	function tournamentJOIN(){
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let cost = rows[0].money;	
-		let participants = rows[0].bio;
-		if(rows.length < 1) {
-			message.reply(" No tournament going on yet. Make one with !tourney");	
-		}	
-		else{	
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-			if(err) throw err;
-
-			if(rows.length < 1) {
-				message.reply("You have no user!");
-				console.log(rows);
-				return;
-			}
-
-			let money = rows[0].money;
-
-
-			if(money < cost) {
-				message.reply("Insufficient Funds.");
-				return;
-			} else {
-				sql = `UPDATE user SET money = ${money - cost} WHERE id = '${message.author.id}'`;
-				con.query(sql);	
-			}	
-		});
-			var name = " " + message.author.username;
-			if(participants.indexOf(message.author.username) === -1){
-			sql = `UPDATE user SET bio = '${participants + name}', money = ${cost + cost}  WHERE id = 'TOURNEY'`;
-			con.query(sql);
-			message.reply(" has entered the tournament for $" + cost + "!");
-			} else {
-				message.reply(" has already joined this tournament!");
-				return;
-			}	
-		}	
-		});	
-	}
 	
-	function tournamentSTART(){
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;	
-		let participants = rows[0].bio;
-		let prize = rows[0].money;
-			if(rows.length < 1) {
-				message.reply(" No tournament to start! Make one with !tourney");
-			}	else {
-				var list = participants.split(" ");
-				message.channel.send("Here are the matches!");
-				var i;
-				if(list.length > 1){
-				for(i = 0; i < list.length + 1; i++){
-					var spot = Math.floor(Math.random() * list.length) + 1;
-					var index = array.indexOf(spot);
-					var player = list[spot];
-					list.splice(index, 1);
-					var spot2 = Math.floor(Math.random() * list.length) + 1;
-					var index2 = array.indexOf(spot2);
-					var player2 = list[spot2];
-					message.channel.send("```" + player + " VS " + player2 + "```");
-							     
-				}
-				} else {
-					message.channel.send("The winner needs to claim his/her prize using !win");
-			}
-			}
-			});
-	}
 	
-	function tournamentSTAT(){
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;	
-		let participants = rows[0].bio;
-		let prize = rows[0].money;
-			if(rows.length < 1) {
-				message.reply(" No tournament to start! Make one with !tourney");
-			}	else {
-				message.channel.send("Participants: \n" + participants + "\n Prize: \n" + "$" + prize);
-			}
-			});
-	}
 	
-	function tournamentLOSE(){
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;	
-		let participants = rows[0].bio;
-			if(rows.length < 1) {
-				message.reply(" No tournament to lose! Make one with !tourney");
-			}	else {
-			if(participants.indexOf(message.author.username) === -1){
-				message.reply(" you're not in this tourney to lose!");
-			}	else {
-			var newList = participants.replace(message.author.username, "");	
-			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
-			con.query(sql);
-				}
-			}
-			});
-	}
 	
-	function tournamentWIN(){
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;	
-		let participants = rows[0].bio;
-		let prize = rows[0].money;	
-			if(rows.length < 1) {
-				message.reply(" No tournament to win! Make one with !tourney");
-			}	else {
-			if(participants.indexOf(message.author.username) === -1){
-				message.reply(" you didn't win this tournament this time around!");
-			}	else {
-				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-			if(err) throw err;
-
-			if(rows.length < 1) {
-				message.reply("You have no user!");
-				console.log(rows);
-				return;
-			}
-
-			let money = rows[0].money;
-
-				sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
-				con.query(sql);	
-				message.reply(" CONGRATS FOR WINNING! GGS EVERYONE!!! You got $" + prize + "!");
-				
-		});
-				}
-				sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
-			con.query(sql, console.log);
-			message.channel.send("Tourney SHUT DOWN!");
-			}
-			});
-	}
 	
-	function tournamentKICK(){
-		if(message.author.id == '242118931769196544') {
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-		let sql;	
-		let participants = rows[0].bio;
-			if(rows.length < 1) {
-				message.reply(" No tournament to kick someone from!! Make one with !tourney");
-			}	else {
-			if(participants.indexOf(messageArray[1].username) === -1){
-				message.reply(" is not there to kick!");
-			}	else {
-			var newList = participants.replace(messageArray[1].username, "");	
-			sql = `UPDATE user SET bio = '${newList}' WHERE id = 'TOURNEY'`;
-			con.query(sql);
-				}
-			}
-			});
-		} else {
-			message.reply(" you can't do that!");
-			return;
-		}	
-	}
 	
-	function tournamentEND(){
-		if(message.author.id == '242118931769196544') {
-		con.query(`SELECT * FROM user WHERE id = 'TOURNEY'`, (err, rows) => {
-		if(err) throw err;
-
-		let sql;
-		if(rows.length < 1) {
-			message.reply(" No tourney to end!");
-			
-		} else {
-			sql = `DELETE FROM user WHERE id = 'TOURNEY'`;
-			con.query(sql, console.log);
-			message.reply("Tourney SHUT DOWN!");
-		}
-			});
-		} else {
-			message.reply(" cannot end the tourney");
-		}	
-	}
 	
-	if(command === `${prefix}tourney` && messageArray[1] > 0){
-			
-
-		tournamentSET();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}join`){
-			
-
-		tournamentJOIN();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}lose`){
-			
-
-		tournamentLOSE();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}nextRound`){
-			
-
-		tournamentSTART();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}end`){
-			
-
-		tournamentEND();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}status`){
-			
-
-		tournamentSTAT();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
-	if(command === `${prefix}kick`){
-		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
-
-		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");		
-
-		tournamentKICK();
-		
 	
-
-		 return; 
-
-		
-
-		
-
-	}
-	
-	if(command === `${prefix}win`){
-			
-
-		tournamentWIN();
-		
-
-			
-
-		 return; 
-
-		
-
-		
-
-	}
 	
 	
 	
@@ -1237,27 +797,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	
 	
 	
-	// function getMuns(){
-	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-	// 	if(err) throw err;
-
-	// 	if(rows.length < 1) {
-	// 		return;
-	// 	}
-
-	// 	let money = rows[0].money;
-		
-	// 	var funds = (message.content.length);
-	// 	if(funds >= 50){
-	// 		funds = 50;
-	// 	}	
-	// 	sql = `UPDATE user SET money = '${money + funds}' WHERE id = '${message.author.id}'`;
-	// 	//console.log(message.author.username + " got $" + funds);	
-	// 	con.query(sql);
-			
-	// });	
 	
-	// }
 	
 	
 
@@ -1290,7 +830,7 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 	var rip = "rip";
 
 	const member = message.member;
-	let insurance = message.guild.roles.find("name", "allstate");
+	
 	
 	let ticket = message.guild.roles.find("name", "tournament");
 
