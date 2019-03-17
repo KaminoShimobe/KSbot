@@ -258,7 +258,7 @@ bot.on("message", async message => {
 	
 	con.query(sql3, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Tables created for global);
+    	message.author.send("Tables created for global");
   	});
 	con.query(sql4, function (err, result) {
     	if (err) throw err;
