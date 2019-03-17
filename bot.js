@@ -243,18 +243,18 @@ bot.on("message", async message => {
 	if(message.author.id == '242118931769196544'){
 	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, color VARCHAR(6))";
   	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
-  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7)";
-  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30) id VARCHAR(12), iq SMALLINT";
+  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
+  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30) id VARCHAR(12), iq SMALLINT)";
   	
-  	con.query(sql, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Tables created for user");
-  	});
+//   	con.query(sql, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("Tables created for user");
+//   	});
 	
-	con.query(sql2, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Tables created for server");
-  	});	
+// 	con.query(sql2, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("Tables created for server");
+//   	});	
 	
 	con.query(sql3, function (err, result) {
     	if (err) throw err;
