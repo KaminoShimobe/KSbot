@@ -108,16 +108,21 @@ bot.on("ready", async () => {
 bot.on('guildMemberAdd', member => {
 
 	let greeting;
+	let gchanneL;
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let thisGreeting = rows[0].greeting;
+		let thisgChannel = rows[0].gchannel;
 
 		if(rows.length < 1) {
 				greeting = `${member} Welcome to ${member.guild.name} !`;
+				gchanneL = defaultSettings.gChannel;
+
 		} else {
 				greeting = `${member} ` + thisGreeting;
+				gchanneL = thisgChannel;
 		}
 	});			
    const channel = member.guild.channels.find('name', gchannel);
@@ -152,19 +157,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	});	
 
 
-let gchannel;
 
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let thisgChannel = rows[0].gchannel;
-
-		if(rows.length < 1) {
-				gchannel = defaultSettings.gChannel;
-		} else {
-				gchannel = thisgChannel;
-		}
-	});
 		
 	
 	
