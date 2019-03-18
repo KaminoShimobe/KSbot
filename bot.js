@@ -394,7 +394,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, color) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
 			con.query(sql, console.log);
 			
 			return;
@@ -426,7 +426,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let money = rows[0].money;
 		let bio = rows[0].bio;
 		let patreon = rows[0].patreon;
-		let color = rows[0].hue;
+		let color = rows[0].color;
 		let rank = rows[0].rank;
 		let marriage = rows[0].marriage;
 		let stand = rows[0].stand;
@@ -479,7 +479,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let money = rows[0].money;
 		let bio = rows[0].bio;
 		let patreon = rows[0].patreon;
-		let color = rows[0].hue;
+		let color = rows[0].color;
 		let rank = rows[0].rank;
 		let marriage = rows[0].marriage;
 		let stand = rows[0].stand;
