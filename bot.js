@@ -144,23 +144,12 @@ bot.on("message", async message => {
 	
 	
 
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		
 
-		if(rows.length < 1) {
-			let  prefix = defaultSettings.prefix;	
-		} else {
-			let	prefix = thisPrefix;
-		}
-		 botCommands(prefix)
-	});	
 
 
 
 		
-	function botCommands(prefix){
+	
 	
 	if(message.author.bot) return;
 	
@@ -657,9 +646,20 @@ function help(){
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the help list!");
 }
-	
 
-if(command === `${prefix}help` || command === `KS!help`){
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+
+
+		if(rows.length < 1) {
+			let  prefix = defaultSettings.prefix;	
+		} else {
+			let	prefix = rows[0].prefix;
+		}
+
+		if(command === `${prefix}help` || command === `KS!help`){
 		help();
 }	
 
@@ -956,7 +956,12 @@ if(command === `${prefix}8ball`){
 
 
 	}
-}
+		 
+	});	
+	
+
+
+
 
 });
 
