@@ -103,34 +103,7 @@ bot.on("ready", async () => {
 
 
 
-var prefix;
 
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let thisPrefix = rows[0].prefix;
-
-		if(rows.length < 1) {
-				prefix = defaultSettings.prefix;
-		} else {
-				prefix = thisPrefix;
-		}
-	});	
-
-
-var gchannel;
-
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let thisgChannel = rows[0].gchannel;
-
-		if(rows.length < 1) {
-				gchannel = defaultSettings.gChannel;
-		} else {
-				gchannel = thisgChannel;
-		}
-	});
 
 bot.on('guildMemberAdd', member => {
 
@@ -164,7 +137,34 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 
 	
+	let prefix;
 
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let thisPrefix = rows[0].prefix;
+
+		if(rows.length < 1) {
+				prefix = defaultSettings.prefix;
+		} else {
+				prefix = thisPrefix;
+		}
+	});	
+
+
+let gchannel;
+
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let thisgChannel = rows[0].gchannel;
+
+		if(rows.length < 1) {
+				gchannel = defaultSettings.gChannel;
+		} else {
+				gchannel = thisgChannel;
+		}
+	});
 		
 	
 	
