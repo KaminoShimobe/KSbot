@@ -142,24 +142,25 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 
 	
-	let prefix = defaultSettings.prefix;
+	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		let thisPrefix = rows[0].prefix;
+		
 
 		if(rows.length < 1) {
-				
+			let  prefix = defaultSettings.prefix;	
 		} else {
-				prefix = thisPrefix;
+			let	prefix = thisPrefix;
 		}
+		 botCommands(prefix)
 	});	
 
 
 
 		
-	
+	function botCommands(prefix){
 	
 	if(message.author.bot) return;
 	
@@ -955,6 +956,7 @@ if(command === `${prefix}8ball`){
 
 
 	}
+}
 
 });
 
