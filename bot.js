@@ -142,7 +142,7 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 
 	
-	let prefix;
+	let prefix = defaultSettings.prefix;
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -150,7 +150,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let thisPrefix = rows[0].prefix;
 
 		if(rows.length < 1) {
-				prefix = defaultSettings.prefix;
+				
 		} else {
 				prefix = thisPrefix;
 		}
