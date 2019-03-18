@@ -118,19 +118,6 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		}
 	});	
 
-var greeting;
-
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let thisGreeting = rows[0].greeting;
-
-		if(rows.length < 1) {
-				greeting = defaultSettings.greeting;
-		} else {
-				greeting = `${member} ` + thisGreeting
-		}
-	});
 
 var gchannel;
 
@@ -148,6 +135,19 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 bot.on('guildMemberAdd', member => {
 
+	let greeting;
+
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let thisGreeting = rows[0].greeting;
+
+		if(rows.length < 1) {
+				greeting = `${member} Welcome to ${member.guild.name} !`;
+		} else {
+				greeting = `${member} ` + thisGreeting;
+		}
+	});			
    const channel = member.guild.channels.find('name', gchannel);
    if(!channel) return;
 
