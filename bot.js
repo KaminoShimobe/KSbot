@@ -16,6 +16,7 @@ const CrazyDiamondCD = new Set();
 const StarPlatinumCD = new Set();
 const commandCD = new Set();
 const boomCD = new Set();
+const prefix = "!";
 const defaultSettings = {
 	prefix: "!",
 	gChannel: "general",
@@ -647,19 +648,22 @@ function help(){
 		message.reply(" sent you a dm of the help list!");
 }
 
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
+// con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
 		
 
 
-		if(rows.length < 1) {
-			let  prefix = defaultSettings.prefix;	
-		} else {
-			let	prefix = rows[0].prefix;
-		}
+// 		if(rows.length < 1) {
+// 			let  prefix = defaultSettings.prefix;	
+// 		} else {
+// 			let	prefix = rows[0].prefix;
+// 		}
+		 
+// 	});	
+	
 
-		if(command === `${prefix}help` || command === `KS!help`){
+if(command === `${prefix}help` || command === `KS!help`){
 		help();
 }	
 
@@ -956,11 +960,6 @@ if(command === `${prefix}8ball`){
 
 
 	}
-		 
-	});	
-	
-
-
 
 
 });
