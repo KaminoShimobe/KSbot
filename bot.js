@@ -19,7 +19,6 @@ const boomCD = new Set();
 const defaultSettings = {
 	prefix: "!",
 	gChannel: "general",
-	greeting: `${member} Welcome to ${member.guild.name} !`,
  	whisper: true,
  	exposeSet: true,
  	cooldown: 200,
