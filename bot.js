@@ -183,6 +183,82 @@ bot.on("message", async message => {
 	}
 	}
 
+function bio(){
+
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		
+		let bio = rows[0].bio;
+		
+				
+
+		message.author.send("Update your bio! You have 100 characters. Refrain from use of quotations. \n !cancel to cancel.");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+				
+				sql = `UPDATE user SET bio = '${message.content}' WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.author.send("Bio Updated!");
+			}
+			});
+
+		
+		
+
+	});
+
+}		
+
+function hexcolor(){
+
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		
+		let color = rows[0].hue;
+		
+				
+
+		message.author.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+				
+				sql = `UPDATE user SET hue = '${message.content}' WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.author.send("Color Updated!");
+			}
+			});
+
+		
+		
+
+	});
+
+}		
+
 	if(command === `!bio`){
 		
 
@@ -622,81 +698,7 @@ function give(){
 	return;
 }	
 
-function bio(){
 
-
-con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
-
-		
-		let bio = rows[0].bio;
-		
-				
-
-		message.author.send("Update your bio! You have 100 characters. Refrain from use of quotations. \n !cancel to cancel.");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.channel.send("Message cancelled.");
-                		return;
-            		} else {
-				
-				sql = `UPDATE user SET bio = '${message.content}' WHERE id = '${message.author.id}'`;
-				con.query(sql);
-				message.author.send("Bio Updated!");
-			}
-			});
-
-		
-		
-
-	});
-
-}		
-
-function hexcolor(){
-
-
-con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
-
-		
-		let color = rows[0].hue;
-		
-				
-
-		message.author.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.channel.send("Message cancelled.");
-                		return;
-            		} else {
-				
-				sql = `UPDATE user SET hue = '${message.content}' WHERE id = '${message.author.id}'`;
-				con.query(sql);
-				message.author.send("Color Updated!");
-			}
-			});
-
-		
-		
-
-	});
-
-}	
 
 function help(){
 
