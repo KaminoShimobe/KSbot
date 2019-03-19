@@ -16,7 +16,7 @@ const CrazyDiamondCD = new Set();
 const StarPlatinumCD = new Set();
 const commandCD = new Set();
 const boomCD = new Set();
-const prefix = "!";
+//const prefix = "!";
 const defaultSettings = {
 	prefix: "!",
 	gChannel: "general",
@@ -142,11 +142,27 @@ bot.on("message", async message => {
 
 	let args = messageArray.slice(1);
 
+	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, RPG) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true})`;
+			con.query(sql, console.log);
+			
+			
+		}
+
+
+		
+			let	prefix = rows[0].prefix;
+		theCommands(prefix);
+		 
+	});	
 	
-	
 
 
-
+	function theCommands(prefix){	
 
 
 		
@@ -158,9 +174,54 @@ bot.on("message", async message => {
 		
 	
 	
+	if(command === `${prefix}table`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
+  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
+  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
+  	
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Tables created for user");
+  	});
+  		}
+  	}
+
+
+	if(command === `${prefix}drop`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "DROP TABLE user";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table dropped!");
+  	});
+	}
+	}
+
+	if(command === `${prefix}bio`){
+		
+
+		bio();
 	
 
+		 return; 	
+
+} 
+
+if(command === `${prefix}color`){
+		
+
+		hexcolor();
+	
+
+		 return; 	
+
+}
+
 	if(message.channel.type === "dm") return;
+
+
 	
 	function toggle(){
 
@@ -648,19 +709,7 @@ function help(){
 		message.reply(" sent you a dm of the help list!");
 }
 
-// con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-		
 
-
-// 		if(rows.length < 1) {
-// 			let  prefix = defaultSettings.prefix;	
-// 		} else {
-// 			let	prefix = rows[0].prefix;
-// 		}
-		 
-// 	});	
 	
 
 if(command === `${prefix}help` || command === `KS!help`){
@@ -704,25 +753,7 @@ if(command === `${prefix}user`){
 
 	}
 
-if(command === `${prefix}bio`){
-		
 
-		bio();
-	
-
-		 return; 	
-
-} 
-
-if(command === `${prefix}color`){
-		
-
-		hexcolor();
-	
-
-		 return; 	
-
-}
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 			
@@ -961,30 +992,8 @@ if(command === `${prefix}8ball`){
 
 	}
 
-	if(command === `${prefix}table`){
-	if(message.author.id == '242118931769196544'){
-	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
-  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
-  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
-  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
-  	
-  	con.query(sql, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Tables created for user");
-  	});
-  		}
-  	}
-
-
-	if(command === `${prefix}drop`){
-	if(message.author.id == '242118931769196544'){
-	var sql = "DROP TABLE user";
-  	con.query(sql, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Table dropped!");
-  	});
-	}
-	}
+	
+}
 
 });
 
