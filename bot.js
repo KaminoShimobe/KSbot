@@ -928,7 +928,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	let cooldown = rows[0].cooldown;
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
-	message.send(`${cooldown}`);		
+			
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
 	message.react('🕒')
