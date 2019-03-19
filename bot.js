@@ -1553,7 +1553,7 @@ if(command === `${prefix}kiss`){
 
 
 	}
-
+}
 	});
 	
 }
