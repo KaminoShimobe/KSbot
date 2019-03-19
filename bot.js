@@ -164,11 +164,11 @@ bot.on("message", async message => {
 	if(command === `!table`){
 	if(message.author.id == '242118931769196544'){
 	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
-  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN)";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
   	
-  	con.query(sql, function (err, result) {
+  	con.query(sql2, function (err, result) {
     	if (err) throw err;
     	message.author.send("Tables created for user");
   	});
@@ -178,10 +178,10 @@ bot.on("message", async message => {
 
 	if(command === `!drop`){
 	if(message.author.id == '242118931769196544'){
-	var sql = "DROP TABLE user";
+	var sql = "DROP TABLE server";
   	con.query(sql, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Table dropped!");
+    	message.author.send("Table dropped for server!");
   	});
 	}
 	}
@@ -290,7 +290,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, RPG) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
 			con.query(sql, console.log);
 			
 			
@@ -311,7 +311,7 @@ function theCommands(prefix){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, RPG) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true})`;
+			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
 			con.query(sql, console.log);
 			
 			
@@ -335,10 +335,10 @@ function theCommands(prefix){
 				});
 				} else if(messageArray[1] == "channel"){
 					let channel;
-					if (rows[0].gchannel == "default"){
+					if (rows[0].channel == "default"){
 						channel = "default";
 					} else {
-						channel = bot.channels.get(rows[0].gchannel);
+						channel = bot.channels.get(rows[0].channel);
 					}	
 					message.channel.send("The current bot channel is: \n" + channel + " \n Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -348,9 +348,30 @@ function theCommands(prefix){
 	                		return;
 	            		} else {
 					
-					sql = `UPDATE server SET gchannel = '${message.content}' WHERE id = '${message.guild.id}'`;
+					sql = `UPDATE server SET channel = '${message.content}' WHERE id = '${message.guild.id}'`;
 					con.query(sql);
 					message.author.send("Bot Channel Updated!");
+					return;
+				} 
+			}); 
+	        	} else if(messageArray[1] == "gChannel"){
+					let gChannel;
+					if (rows[0].gchannel == "default"){
+						gChannel = "default";
+					} else {
+						gChannel = bot.channels.get(rows[0].gchannel);
+					}	
+					message.channel.send("The current greeting channel is: \n" + gChannel + " \n Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Greeting channel cancelled.");
+	                		return;
+	            		} else {
+					
+					sql = `UPDATE server SET gchannel = '${message.content}' WHERE id = '${message.guild.id}'`;
+					con.query(sql);
+					message.author.send("Greeting Channel Updated!");
 					return;
 				} 
 			}); 
@@ -413,15 +434,40 @@ function theCommands(prefix){
 	                		return;
 	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
 
-	               		sql = `UPDATE server SET RPG = ${true} WHERE id = '${message.guild.id}'`;
+	               		sql = `UPDATE server SET rpg = ${true} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
 							message.channel.send("KSRPG enabled!");
 							return;
 	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
 
-	               		sql = `UPDATE server SET RPG = ${false} WHERE id = '${message.guild.id}'`;
+	               		sql = `UPDATE server SET rpg = ${false} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
 							message.channel.send("KSRPG disabled!");
+							return;
+	            		} else {
+							message.channel.send("Invalid Input.");
+							return;
+					
+						}
+				}); 
+	        	}else if(messageArray[1] == "chests"){
+					message.channel.send("Do you want to allow random chests to spawn?(yes or no) \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Chests changes cancelled.");
+	                		return;
+	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
+
+	               		sql = `UPDATE server SET chests = ${true} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("Chests enabled!");
+							return;
+	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
+
+	               		sql = `UPDATE server SET chests = ${false} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("Chests disabled!");
 							return;
 	            		} else {
 							message.channel.send("Invalid Input.");
@@ -561,19 +607,27 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 			
 			return;
 		}
-
+		
+		let channel;
+		if (rows[0].gchannel == "default"){
+			channel = "default";
+		} else {
+			channel = bot.channels.get(rows[0].channel);
+		}
 		let whisper = rows[0].whisper;
 		let expose = rows[0].exposeSet;
 		let cooldown = rows[0].cooldown;
 		let stands = rows[0].stands;
 		let waifu = rows[0].waifu;
 		let prefix = rows[0].prefix;
-		let RPG = rows[0].prefix;
+		let RPG = rows[0].rpg;
+		let chests = rows[0].chests;
 		var w;
 		var e;
 		var s;
 		var wi;
 		var r;
+		var ch;
 		if(whisper == true){
 			w = "Yes";
 		} else {
@@ -599,6 +653,11 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		} else {
 			r = "No";
 		}
+		if(chests == true){
+			ch = "Yes";
+		} else {
+			ch = "No";
+		}
 	
 		var owner = bot.users.get(message.guild.ownerID);
 		
@@ -611,7 +670,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + " \n Server Prefix: " + prefix + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
