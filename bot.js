@@ -387,7 +387,7 @@ bot.on("message", async message => {
 			
 			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
 			con.query(sql, console.log);
-			
+			message.send(`User account created! ${prefix}view to view your account!`)
 			return;
 		}	else {
 
@@ -428,15 +428,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		}
 
 		var supporter = "";
-		if(patreon == 1){
-			supporter = " :star:";
-		} else if(patreon == 2){
-			supporter = " :star: :star:";
-		} else if(patreon == 3){
-			supporter = " :star: :star: :star:";
-		} else {
-			supporter = " :star: :star: :star: :star:";
-		}
+		// if(patreon == 1){
+		// 	supporter = " :star:";
+		// } else if(patreon == 2){
+		// 	supporter = " :star: :star:";
+		// } else if(patreon == 3){
+		// 	supporter = " :star: :star: :star:";
+		// } else {
+		// 	supporter = " :star: :star: :star: :star:";
+		// }
 				
 
 		let stats = new Discord.RichEmbed()
@@ -597,7 +597,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 }		
 
-function hue(){
+function hexcolor(){
 
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -717,7 +717,7 @@ if(command === `${prefix}bio`){
 if(command === `${prefix}color`){
 		
 
-		color();
+		hexcolor();
 	
 
 		 return; 	
