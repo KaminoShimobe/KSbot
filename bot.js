@@ -299,7 +299,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 		
 			let prefix = rows[0].prefix;
-			let cooldown = rows[0].cooldown;
+			
 		theCommands(prefix);
 		 
 	});	
@@ -1419,7 +1419,7 @@ if(command === `${prefix}8ball`){
 
 }
 		
-if(waifu == true){		
+if(waifu == true ){		
 		
 if(command === `${prefix}beat`){
 
@@ -1551,7 +1551,15 @@ if(command === `${prefix}kiss`){
 	}		
 
 } else {
+	if(command === `${prefix}beat`){
 	message.reply("Waifu's and husbando's are disabled in this server!");
+	} else if(command === `${prefix}hug`){
+	message.reply("Waifu's and husbando's are disabled in this server!");
+	} else if(command === `${prefix}pat`){
+	message.reply("Waifu's and husbando's are disabled in this server!");
+	} else if(command === `${prefix}kiss`){
+	message.reply("Waifu's and husbando's are disabled in this server!");
+	}
 }	
 
 
