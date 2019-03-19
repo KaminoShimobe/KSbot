@@ -203,7 +203,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		message.author.send("Update your bio! You have 100 characters. Refrain from use of quotations. \n !cancel to cancel.");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
+            		if (message.content == `!cancel`) {
                		 message.channel.send("Message cancelled.");
                 		return;
             		} else {
@@ -241,7 +241,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		message.author.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
+            		if (message.content == `!cancel`) {
                		 message.channel.send("Message cancelled.");
                 		return;
             		} else {
