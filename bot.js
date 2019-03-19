@@ -684,6 +684,266 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 }	
 	
+//MONEY MONEY MONEY
+	
+function daily(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		let rank = rows[0].rank;
+		let lasttrans = rows[0].lasttrans;	
+		var check;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			
+			return;
+		}	
+
+		if (dailyCD.has(message.author.id)) {
+            message.reply("You have already collected your daily check!");
+            return;
+    } else {
+    		check = 1000;
+    	sql = `UPDATE user SET money = ${money + check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
+           // the user can type the command ... your command code goes here :)
+        con.query(sql); 
+	   			 
+           message.reply(" got $" + check + "!");
+        // Adds the user to the set so that they can't talk for a minute
+       dailyCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          dailyCD.delete(message.author.id);
+        }, (1000*60*60*24));
+
+    }
+	});
+	}
+	
+function gambleFlip(){
+		
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		var streak = rows[0].streak;
+		
+
+	var num = parseInt(messageArray[1]); 
+	if(Number.isInteger(num) === true && money >= num && num > 0){
+
+	var bet;
+	
+		var chance = Math.floor(Math.random() * 2) + 1;
+		if(chance == 1){
+
+			if(streak >= 2){
+			bet = num + Math.floor((streak / 100) * num );
+			sql = `UPDATE user SET money = ${money + bet}, lasttrans = ${bet}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);	
+			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
+				
+			}
+				
+			sql = `UPDATE user SET money = ${money + num}, lasttrans = ${num}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+		
+			message.reply("*CHA~CHING!* You made $" + num + "!");
+			
+		} else {
+			
+			sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-num}, streak = ${0} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			if(streak >= 2){
+			message.reply("*CHA~CHING!* You lost $" + num + "! \n Streak Lost!");
+			} else {
+			message.reply("*CHA~CHING!* You lost $" + num + "!");
+			}
+		}
+
+
+		
+	return;
+	} else{
+		message.reply("Can't bet that...");
+		return;
+	}
+
+	});
+}	
+	
+function gambleSlots(){
+		
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
+  			return;
+			} 
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		
+		
+
+	
+	if(money >= 10){
+
+	
+		
+
+		var slot1 = Math.floor(Math.random() * 9) + 1;
+		var slot2 = Math.floor(Math.random() * 9) + 1;
+		var slot3 = Math.floor(Math.random() * 9) + 1;
+		var prize = 0;
+		var space = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:"];
+		var box1 = "";
+		var box2 = "";
+		var box3 = "";
+		if(slot1 === 1){
+			box1 = space[0];
+		} else if(slot1 === 2){
+			box1 = space[1];
+		} else if(slot1 === 3){
+			box1 = space[2];
+		} else if(slot1 === 4){
+			box1 = space[3];
+		} else if(slot1 === 5){
+			box1 = space[4];
+		} else if(slot1 === 6){
+			box1 = space[5];
+		} else if(slot1 === 7){
+			box1 = space[6];
+		} else if(slot1 === 8){
+			box1 = space[7];
+		} else if(slot1 === 9){
+			box1 = space[8];
+		} 
+
+		if(slot2 === 1){
+			box2 = space[0];
+		} else if(slot2 === 2){
+			box2 = space[1];
+		} else if(slot2 === 3){
+			box2 = space[2];
+		} else if(slot2 === 4){
+			box2 = space[3];
+		} else if(slot2 === 5){
+			box2 = space[4];
+		} else if(slot2 === 6){
+			box2 = space[5];
+		} else if(slot2 === 7){
+			box2 = space[6];
+		} else if(slot2 === 8){
+			box2 = space[7];
+		} else if(slot2 === 9){
+			box2 = space[8];
+		} 
+
+		if(slot3 === 1){
+			box3 = space[0];
+		} else if(slot3 === 2){
+			box3 = space[1];
+		} else if(slot3 === 3){
+			box3 = space[2];
+		} else if(slot3 === 4){
+			box3 = space[3];
+		} else if(slot3 === 5){
+			box3 = space[4];
+		} else if(slot3 === 6){
+			box3 = space[5];
+		} else if(slot3 === 7){
+			box3 = space[6];
+		} else if(slot3 === 8){
+			box3 = space[7];
+		} else if(slot3 === 9){
+			box3 = space[8];
+		} 
+		if(slot1 === slot2 && slot1 === slot3 && slot1 === 7){
+			prize = 1000000;
+
+			
+				
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+			
+			message.channel.send(box1 + box2 + box3);
+			message.reply("**JACKPOTTTTTT** You made $" + prize + "!!");
+			
+			
+		} else if(slot1 === slot2 && slot1 === slot3 && slot1 != 7){
+			prize = (slot1 + (10 * slot2) + (100 * slot3));
+
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		} else if(slot1 === slot2 && slot1 != slot3){
+			prize = (slot1 + (10 * slot2));
+
+			
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		} else if(slot2 === slot3 && slot1 != slot2){
+			prize = (slot2 + (10 * slot3));
+
+			
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		}  else if(slot1 === slot3 && slot2 != slot3){
+			prize = (slot1 + (10 * slot3));
+
+			
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You made $" + prize + "!");
+			
+		}
+		 else {
+			prize = 10;
+			
+			sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize}  WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+		
+			message.channel.send(box1 + box2 + box3);
+			message.reply("*CHA~CHING!* You *lost* $" + prize +"!");
+		}
+
+
+		
+	return;
+	} else{
+		message.reply("You're broke...");
+		return;
+	}
+
+	});
+}	
+	
 //MISC	
 	
 function ball8(){
@@ -1418,6 +1678,94 @@ if(command === `${prefix}8ball`){
 }
 
 }
+	
+//money
+if(command === `${prefix}daily`){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		daily();
+	}
+} else {
+// insert function here.
+	daily();
+}
+
+
+
+	}	
+	
+if(command === `${prefix}spin` && messageArray[1] != undefined){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		gambleFlip();
+	}
+} else {
+// insert function here.
+	gambleFlip();
+}
+
+
+
+	}	
+	
+if(command === `${prefix}slots`){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		gambleSlots();
+	}
+} else {
+// insert function here.
+	gambleSlots();
+}
+
+
+
+	}	
 		
 if(waifu == true ){		
 		
