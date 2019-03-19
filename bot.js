@@ -162,7 +162,7 @@ bot.on("message", async message => {
 	
 
 
-	function theCommands(prefix){	
+	
 
 
 		
@@ -199,7 +199,7 @@ bot.on("message", async message => {
 	}
 	}
 
-	if(command === `${prefix}bio`){
+	if(command === `!bio`){
 		
 
 		bio();
@@ -209,7 +209,7 @@ bot.on("message", async message => {
 
 } 
 
-if(command === `${prefix}color`){
+if(command === `!color`){
 		
 
 		hexcolor();
@@ -222,7 +222,7 @@ if(command === `${prefix}color`){
 	if(message.channel.type === "dm") return;
 
 
-	
+function theCommands(prefix){		
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -237,7 +237,7 @@ if(command === `${prefix}color`){
 		}	
 
 			
-				if(messageArray[1] == greeting){
+				if(messageArray[1] == "greeting"){
 					message.channel.send("Update your greeting! You have 255 characters. Refrain from use of quotations and be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -252,7 +252,7 @@ if(command === `${prefix}color`){
 					return;
 				}
 				});
-				} else if(messageArray[1] == gchannel){
+				} else if(messageArray[1] == "gchannel"){
 					message.channel.send("Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -267,7 +267,7 @@ if(command === `${prefix}color`){
 					return;
 				} 
 			}); 
-	        	} else if(messageArray[1] == whisper){
+	        	} else if(messageArray[1] == "whisper"){
 					message.channel.send("Do you want to turn the whisper command on or off(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -292,7 +292,7 @@ if(command === `${prefix}color`){
 					
 						}
 				}); 
-	        	} else if(messageArray[1] == expose){
+	        	} else if(messageArray[1] == "expose"){
 					message.channel.send("Do you want to turn the expose command on or off?(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -317,7 +317,7 @@ if(command === `${prefix}color`){
 					
 						}
 				}); 
-	        	} else if(messageArray[1] == RPG){
+	        	} else if(messageArray[1] == "RPG"){
 					message.channel.send("Do you want to allow KSRPG transactions?(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -342,7 +342,7 @@ if(command === `${prefix}color`){
 					
 						}
 				}); 
-	        	} else if(messageArray[1] == cooldown){
+	        	} else if(messageArray[1] == "cooldown"){
 					message.channel.send("How much do you want the command cooldown to be?(In milliseconds) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -385,7 +385,7 @@ if(command === `${prefix}color`){
 					
 						}
 				}); 
-	        	} else if(messageArray[1] == prefix){
+	        	} else if(messageArray[1] == "prefix"){
 					message.channel.send("What do you want your command prefix to be? (5 character limit) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -400,7 +400,7 @@ if(command === `${prefix}color`){
 					
 						}
 				}); 
-	        	} else if(messageArray[1] == waifus){
+	        	} else if(messageArray[1] == "waifus"){
 					message.channel.send("Do you want to allow waifu/husbando images/transactions in your server?(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
