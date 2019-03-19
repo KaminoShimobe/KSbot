@@ -319,7 +319,7 @@ function theCommands(prefix){
 
 			
 				if(messageArray[1] == "greeting"){
-					message.channel.send("Update your greeting! You have 255 characters. Refrain from use of quotations and be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
+					message.channel.send("The current greeting is: \n " + rows[0].greeting + "\n Update your greeting! You have 255 characters. Refrain from use of quotations and be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -333,8 +333,14 @@ function theCommands(prefix){
 					return;
 				}
 				});
-				} else if(messageArray[1] == "gchannel"){
-					message.channel.send("Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
+				} else if(messageArray[1] == "channel"){
+					let channel;
+					if (rows[0].gchannel == "default"){
+						channel = "default";
+					} else {
+						channel = bot.channels.get(rows[0].gchannel);
+					}	
+					message.channel.send("The current bot channel is: \n" + channel + " \n Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
