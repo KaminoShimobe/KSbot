@@ -360,7 +360,7 @@ function theCommands(prefix){
 	                		return;
 						}
 				}); 
-	        	} else if(messageArray[1] == stands){
+	        	} else if(messageArray[1] == "stands"){
 					message.channel.send("Do you want to allow stand abilities in your server?(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
