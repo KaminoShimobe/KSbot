@@ -16,7 +16,7 @@ const CrazyDiamondCD = new Set();
 const StarPlatinumCD = new Set();
 const commandCD = new Set();
 const boomCD = new Set();
-//const prefix = "!";
+
 const defaultSettings = {
 	prefix: "!",
 	gChannel: "general",
@@ -108,28 +108,31 @@ bot.on("ready", async () => {
 
 bot.on('guildMemberAdd', member => {
 
-	let greeting;
-	let gchanneL;
+	
+	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let thisGreeting = rows[0].greeting;
 		let thisgChannel = rows[0].gchannel;
-
+		let greeting;
+		let gchanneL;
 		if(rows.length < 1) {
-				greeting = `${member} Welcome to ${member.guild.name} !`;
-				gchanneL = defaultSettings.gChannel;
+			greeting = `${member} Welcome to ${member.guild.name} !`;
+			gchanneL = "general"
 
 		} else {
-				greeting = `${member} ` + thisGreeting;
-				gchanneL = thisgChannel;
+			greeting = `${member} ` + thisGreeting;
+			gchanneL = thisgChannel;
 		}
-	});			
-   const channel = member.guild.channels.find('name', gchannel);
+	
+		const channel = member.guild.channels.find('name', gchanneL);
    if(!channel) return;
 
    channel.send(greeting);	
+	});			
+   	
 
 
 });
@@ -295,7 +298,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 
 		
-			let	prefix = rows[0].prefix;
+			let prefix = rows[0].prefix;
 		theCommands(prefix);
 		 
 	});	
@@ -541,6 +544,49 @@ function theCommands(prefix){
 		});
 		
 	}
+	
+function aboutServer(){
+		
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			
+			
+			return;
+		}
+
+		let whisper = rows[0].whisper;
+		let expose = rows[0].exposeSet;
+		let cooldown = rows[0].cooldown;
+		let stands = rows[0].stands;
+		let waifu = rows[0].waifu;
+		let prefix = rows[0].prefix;
+		let RPG = rows[0].prefix;
+		
+		var owner = bot.users.get(message.guild.ownerID);
+		
+
+		var supporter = "";
+		
+				
+
+		let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(message.guild.name + " KS Bot-settings")
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "Server Prefix: " + prefix + "\n Whisper Allowed? :" + whisper + "\n Expose Allowed? :" + expose + "\n Stand Abilities Allowed? :" + stands + "\n Command Cooldown: " + cooldown + "\n Waifu/Husbandos allowed?: " + waifu + "\n KS-RPG allowed? :" + RPG)
+			.setColor("#1f3c5b"); 
+
+		message.channel.sendEmbed(stats);
+
+
+		
+		
+
+	});
+
+}	
 
 function viewUser(){
 		
@@ -620,15 +666,15 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		}
 
 		var supporter = "";
-		if(patreon == 1){
-			supporter = " :star:";
-		} else if(patreon == 2){
-			supporter = " :star: :star:";
-		} else if(patreon == 3){
-			supporter = " :star: :star: :star:";
-		} else {
-			supporter = " :star: :star: :star: :star:";
-		}
+// 		if(patreon == 1){
+// 			supporter = " :star:";
+// 		} else if(patreon == 2){
+// 			supporter = " :star: :star:";
+// 		} else if(patreon == 3){
+// 			supporter = " :star: :star: :star:";
+// 		} else {
+// 			supporter = " :star: :star: :star: :star:";
+// 		}
 				
 
 		let stats = new Discord.RichEmbed()
@@ -706,7 +752,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **__DM CHANNEL ONLY__** \n **${prefix}bio**: \n Set your KS-Bot account bio. \n **${prefix}color**: \n Set your KS-Bot account color.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__DM CHANNEL ONLY__** \n **${prefix}bio**: \n Set your KS-Bot account bio. \n **${prefix}color**: \n Set your KS-Bot account color.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -718,6 +764,10 @@ function help(){
 
 if(command === `${prefix}help` || command === `KS!help`){
 		help();
+}	
+	
+if(command === `${prefix}server` || command === `KS!server`){
+		aboutServer();
 }	
 
 if(command === `${prefix}toggle`){
