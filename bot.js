@@ -924,7 +924,7 @@ if(command === `${prefix}user`){
 
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
-	message.send(cooldown);		
+	message.send(`${cooldown}`);		
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
 	message.react('🕒')
