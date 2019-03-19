@@ -982,7 +982,10 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	//insert function here.
 		viewOtherUser();
 }
-		
+	} else {
+// insert function here.
+	viewOtherUser();
+}	
 
 			
 
