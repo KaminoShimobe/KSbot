@@ -385,7 +385,7 @@ bot.on("message", async message => {
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, color) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
 			con.query(sql, console.log);
 			
 			return;
@@ -417,7 +417,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let money = rows[0].money;
 		let bio = rows[0].bio;
 		let patreon = rows[0].patreon;
-		let color = rows[0].color;
+		let color = rows[0].hue;
 		let rank = rows[0].rank;
 		let marriage = rows[0].marriage;
 		let stand = rows[0].stand;
@@ -470,7 +470,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let money = rows[0].money;
 		let bio = rows[0].bio;
 		let patreon = rows[0].patreon;
-		let color = rows[0].color;
+		let color = rows[0].hue;
 		let rank = rows[0].rank;
 		let marriage = rows[0].marriage;
 		let stand = rows[0].stand;
@@ -961,6 +961,30 @@ if(command === `${prefix}8ball`){
 
 	}
 
+	if(command === `${prefix}table`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), RPG BOOLEAN)";
+  	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
+  	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
+  	
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Tables created for user");
+  	});
+  		}
+  	}
+
+
+	if(command === `${prefix}drop`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "DROP TABLE user";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table dropped!");
+  	});
+	}
+	}
 
 });
 
