@@ -563,7 +563,37 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let waifu = rows[0].waifu;
 		let prefix = rows[0].prefix;
 		let RPG = rows[0].prefix;
-		
+		var w;
+		var e;
+		var s;
+		var wi;
+		var r;
+		if(whisper == true){
+			w = "Yes";
+		} else {
+			w = "No";
+		}	
+		if(expose == true){
+			e = "Yes";
+		} else {
+			e = "No";
+		}
+		if(stands == true){
+			s = "Yes";
+		} else {
+			s = "No";
+		}
+		if(waifu == true){
+			wi = "Yes";
+		} else {
+			wi = "No";
+		}
+		if(RPG == true){
+			r = "Yes";
+		} else {
+			r = "No";
+		}
+	
 		var owner = bot.users.get(message.guild.ownerID);
 		
 
@@ -575,7 +605,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "Server Prefix: " + prefix + "\n Whisper Allowed? :" + whisper + "\n Expose Allowed? :" + expose + "\n Stand Abilities Allowed? :" + stands + "\n Command Cooldown: " + cooldown + "\n Waifu/Husbandos allowed?: " + waifu + "\n KS-RPG allowed? :" + RPG)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + " \n Server Prefix: " + prefix + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
