@@ -924,7 +924,7 @@ if(command === `${prefix}user`){
 
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
-			
+	message.send(cooldown);		
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
 	message.react('🕒')
@@ -939,7 +939,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
-        }, (1000*60*cooldown));	
+        }, (cooldown));	
 	//insert function here.
 		viewUser();
 	}
@@ -978,7 +978,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
-        }, (1000*60*cooldown));	
+        }, (cooldown));	
 	//insert function here.
 		viewOtherUser();
 }
@@ -1014,7 +1014,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
-        }, (1000*60*cooldown));	
+        }, (cooldown));	
 	//insert function here.
 		give();
 	}
