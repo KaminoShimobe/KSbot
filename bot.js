@@ -345,7 +345,7 @@ function theCommands(prefix){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
+			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
 			con.query(sql, console.log);
 			
 			
@@ -409,6 +409,51 @@ function theCommands(prefix){
 					return;
 				} 
 			}); 
+	        	} else if(messageArray[1] == "shop"){
+					let shop;
+					if (rows[0].shop == ""){
+						shop = "";
+					} else {
+						shop = rows[0].shop;
+					}	
+					message.channel.send("The current shop item is: \n" + shop + " \n Update your shop item role! Make sure it shares the exact same spelling as the role you want the guild member to purchase. \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Shop Item cancelled.");
+	                		return;
+	            		} else {
+					
+					sql = `UPDATE server SET shop = '${message.content}' WHERE id = '${message.guild.id}'`;
+					con.query(sql);
+					message.channel.send("Shop item Updated!");
+					return;
+				} 
+			}); 
+	        	} else if(messageArray[1] == "price"){
+				let shop;
+					if (rows[0].shop == ""){
+						shop = "";
+					} else {
+						shop = rows[0].shop;
+					}	
+					message.channel.send("How much do you want the shop price to be for " + shop + " ? \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	        			var num = parseInt(message.content);
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Price change cancelled.");
+	                		return;
+	            		}  else if(Number.isInteger(num) == true && num >= 0) {
+							sql = `UPDATE server SET prices = '${num}' WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("Price set to " + num + " for the shop item: " + shop + "!");
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a value > 0.");
+	                		return;
+						}
+				}); 
 	        	} else if(messageArray[1] == "whisper"){
 					message.channel.send("Do you want to turn the whisper command on or off(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -704,7 +749,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
@@ -975,6 +1020,29 @@ function gambleSlots(){
 	}
 
 	});
+}	
+	
+function shop(){
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			
+			
+			return;
+		}	
+	let customItem = rows[0].shop;
+	let customPrice = rows[0].prices;
+	let shop = new Discord.RichEmbed()
+
+			
+			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
+			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your losses for the next 30 minutes will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **weddingRing** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customItem + "|" + customPrice + "\n An Exlcusive item to this server!")
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(shop);
+	message.reply(" Shop list sent to you!");
+});	
 }	
 	
 //MISC	
@@ -1495,7 +1563,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -1508,7 +1576,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details \n **${prefix}toggle shop**: \n Changes the name of the role you're selling in your server. \n **${prefix}toggle price**: \n Changes the price of your role you're selling in your server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -1522,7 +1590,11 @@ if(command === `${prefix}help` || command === `KS!help`){
 }	
 	
 if(command === `${prefix}admin` || command === `KS!admin`){
+		if(message.author.id == message.guild.ownerID){
 		admin();
+	}		else {
+		message.reply(" You don't have the credentials to perform this function.")
+	}
 }		
 	
 if(command === `${prefix}server` || command === `KS!server`){
