@@ -290,7 +290,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${200}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
 			con.query(sql, console.log);
 			
 			
@@ -299,11 +299,12 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 		
 			let prefix = rows[0].prefix;
-		theCommands(prefix);
+			let cooldown = rows[0].cooldown;
+		theCommands(prefix, cooldown);
 		 
 	});	
 
-function theCommands(prefix){		
+function theCommands(prefix, cooldown){		
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -350,7 +351,7 @@ function theCommands(prefix){
 					
 					sql = `UPDATE server SET channel = '${message.content}' WHERE id = '${message.guild.id}'`;
 					con.query(sql);
-					message.author.send("Bot Channel Updated!");
+					message.channel.send("Bot Channel Updated!");
 					return;
 				} 
 			}); 
@@ -371,7 +372,7 @@ function theCommands(prefix){
 					
 					sql = `UPDATE server SET gchannel = '${message.content}' WHERE id = '${message.guild.id}'`;
 					con.query(sql);
-					message.author.send("Greeting Channel Updated!");
+					message.channel.send("Greeting Channel Updated!");
 					return;
 				} 
 			}); 
@@ -559,7 +560,7 @@ function theCommands(prefix){
 						}
 				}); 
 	        	} else {
-	        		message.channel.send(`Read **${prefix}help** for more details on how to manage KS-Bot in your server.`);
+	        		message.channel.send(`Read **${prefix}admin** for more details on how to manage KS-Bot in your server.`);
 					return;
 	        	}
 
@@ -609,7 +610,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		}
 		
 		let channel;
-		if (rows[0].gchannel == "default"){
+		if (rows[0].channel == "default"){
 			channel = "default";
 		} else {
 			channel = bot.channels.get(rows[0].channel);
@@ -723,7 +724,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n Rank: " + rank + "\n Spouse:" + spouse + "\n Stand:" + stand + "\n " + bio)
+			.setDescription("Money: $" + money + "\n Rank: " + rank + "\n Spouse:" + spouse + "\n Stand:" + stand + "\n Bio: \n" + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -847,19 +848,35 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__DM CHANNEL ONLY__** \n **${prefix}bio**: \n Set your KS-Bot account bio. \n **${prefix}color**: \n Set your KS-Bot account color.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the help list!");
 }
 
+function admin(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Admin commands")
+			.setDescription(`**${prefix}admin*: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details`)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		message.reply(" sent you a dm of the admin help list!");
+}
 
 	
 
 if(command === `${prefix}help` || command === `KS!help`){
 		help();
 }	
+	
+if(command === `${prefix}admin` || command === `KS!admin`){
+		admin();
+}		
 	
 if(command === `${prefix}server` || command === `KS!server`){
 		aboutServer();
@@ -872,6 +889,8 @@ if(command === `${prefix}toggle`){
 		message.reply(" You don't have the credentials to perform this function.")
 	}
 }
+
+	
 
 if(command === `${prefix}user`){
 
@@ -906,8 +925,29 @@ if(command === `${prefix}user`){
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
 
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (1000*60*cooldown));	
+	//insert function here.
 		viewUser();
+	}
+} else {
+// insert function here.
+	viewUser();
+}
+		
 		
 
 			
@@ -924,7 +964,24 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 
 	if(command === `${prefix}view` && messageArray[1] != undefined ){
 			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (1000*60*cooldown));	
+	//insert function here.
 		viewOtherUser();
+}
 		
 
 			
@@ -940,7 +997,28 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	if(command === `${prefix}give`){
 
 
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (1000*60*cooldown));	
+	//insert function here.
 		give();
+	}
+} else {
+// insert function here.
+	give();
+}
 
 		return;
 
