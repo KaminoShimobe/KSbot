@@ -337,7 +337,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		 
 	});	
 
-function theCommands(prefix){		
+function theCommands(prefix){	
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -979,6 +979,36 @@ function gambleSlots(){
 	
 //MISC	
 	
+function whom(){
+		
+	var userList = message.channel.members.filter(m => m.user.bot === false);
+    var randomBoi = userList.random().user;
+    var randomBoid = userList.random().user.username;
+    var random = Math.floor(Math.random()*10) + 1;
+    if(random === 1){
+    	message.channel.send("I heard " + randomBoid + " :eyes:");
+	}	else if(random === 2){
+    	message.channel.send("*cough* " + randomBoid + " *cough*");
+	}	else if(random === 3){
+    	message.channel.send("Definitely, " + randomBoi);
+	} 	else if(random === 4){
+    	message.channel.send(":no_mouth:" + randomBoid);
+	}   else if(random === 5){
+    	message.channel.send("It's " + randomBoid + " duhhhh");
+	}	else if(random === 6){
+    	message.channel.send(randomBoid + " maybe? ");
+	}	else if(random === 7){
+    	message.channel.send(":eyes: " + randomBoid);
+	}	else if(random === 8){
+    	message.channel.send("It **has** to be" + randomBoid);
+	}	else if(random === 9){
+    	message.channel.send("I am sorry to inform you...");
+    	setTimeout(message.channel.send("But it's " + randomBoi), 6000);
+	} 	else if(random === 10){
+    	message.channel.send("It's definitely NOT " + randomBoi);
+	}
+}	
+	
 function ball8(){
 	
 	let fortune = Math.floor(Math.random() * 30) + 1;
@@ -1130,6 +1160,31 @@ function justSaiyan(){
 
 		 return setTimeout(message.channel.send("**SAIYAN**"), wait);
 }
+	
+function flip(){
+	
+	let coin = Math.floor(Math.random() * 101) + 1;
+
+		console.log(coin);
+
+		if(coin >= 1 && coin <= 50 ){
+
+			message.reply(`flipped a coin and got heads!`);
+
+		} else if(coin >= 51 && coin <= 100 ){
+
+			message.reply(`flipped a coin and got tails!`);
+
+		} else {
+
+			message.reply(`flipped a coin and it landed in the middle?!?!?!`); 
+
+		}
+
+		
+
+		return;
+}	
 	
 //Waifu related
 	
@@ -1440,7 +1495,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -1453,7 +1508,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin*: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -1623,6 +1678,37 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 		return;
 
 	}
+	
+//MISC
+	
+if(command === `${prefix}who` && messageArray[1] != undefined){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		whom();
+	}
+} else {
+// insert function here.
+	whom();
+}
+
+
+
+	}	
 
 if(command === `${prefix}8ball`){
 	
@@ -1711,6 +1797,33 @@ if(command === `${prefix}8ball`){
 }
 
 }
+	
+if(command === `${prefix}flip`){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		flip();
+	}
+} else {
+// insert function here.
+	flip();
+}
+
+}	
 	
 //money
 if(command === `${prefix}daily`){
