@@ -281,6 +281,39 @@ if(command === `!color`){
 		 return; 	
 
 }
+	
+if(command === `!whisper` && messageArray[1] != undefined){
+		con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let channel = bot.channels.get(rows[0].channel);
+		let whisper = rows[0].whisper;
+		if(whisper == true){	
+		message.author.send("What secret would you like to share? (!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `$!cancel`) {
+               		 message.author.send("Message cancelled.");
+                		return;
+            		} else {
+				var msg = message.content;
+				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
+				var chance = Math.floor(Math.random()*2) + 1;
+				channel.send(setting[chance]);
+				message.author.send("Message Sent.");
+				//BOI
+console.log(message.author.username);
+sql = `UPDATE server SET expose = '${message.author.username}' WHERE id = '${messageArray[1]}'`;
+				con.query(sql);				
+			}
+			});
+			}
+			else {
+			 message.author.send("Whispers are not allowed in that server.");
+			  }
+			});
+		
+	}	
 
 	if(message.channel.type === "dm") return;
 
