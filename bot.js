@@ -300,11 +300,11 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		
 			let prefix = rows[0].prefix;
 			let cooldown = rows[0].cooldown;
-		theCommands(prefix, cooldown);
+		theCommands(prefix);
 		 
 	});	
 
-function theCommands(prefix, cooldown){		
+function theCommands(prefix){		
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -921,7 +921,11 @@ if(command === `${prefix}user`){
 
 	}
 
-
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+	
+	let cooldown = rows[0].cooldown;
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 	message.send(`${cooldown}`);		
@@ -935,7 +939,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
 		return;
 	} else {
-		
+	commandCD.add(message.author.id);		
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
@@ -974,7 +978,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
 		return;
 	} else {
-		
+		commandCD.add(message.author.id);
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
@@ -1010,7 +1014,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
 		return;
 	} else {
-		
+		commandCD.add(message.author.id);
 	  setTimeout(() => {
           // Removes the user from the set after however long the cooldown is.
           commandCD.delete(message.author.id);
@@ -1222,8 +1226,10 @@ if(command === `${prefix}8ball`){
 
 	}
 
+	});
 	
 }
+	  
 
 });
 
