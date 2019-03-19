@@ -484,7 +484,7 @@ function theCommands(prefix){
 	            		if (message.content == `${prefix}cancel`) {
 	               		 message.channel.send("Cooldown change cancelled.");
 	                		return;
-	            		}  else if(Number.isInteger(num) == true && num > 0 && num < 10001 ) {
+	            		}  else if(Number.isInteger(num) == true && num >= 0 && num < 10001 ) {
 							sql = `UPDATE server SET cooldown = ${num} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
 							message.channel.send("Cooldown set to " + num + " millisecond(s)!");
@@ -683,6 +683,305 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	});
 
 }	
+	
+//MISC	
+	
+function ball8(){
+	
+	let fortune = Math.floor(Math.random() * 30) + 1;
+
+		if(fortune === 1 ){
+
+			message.reply(`Yes!`);
+
+		} else if(fortune === 2 ){
+
+			message.reply(`No.`);
+
+		} else if(fortune === 3 ){
+
+			message.reply(`Maybe...`);
+
+		} else if(fortune === 4 ){
+
+			message.reply(`Possibly`);
+
+		} else if(fortune === 5 ){
+
+			message.reply(`Not a chance LMAO`);
+
+		} else if(fortune === 6 ){
+
+			message.reply(`Boi you already know :smirk:`);
+
+		} else if(fortune === 7 ){
+
+			message.reply(`NAH NAH NAH`);
+
+		} 	else if(fortune === 8 ){
+
+			message.reply(`yeah...... no.`);
+
+		} else if(fortune === 9 ){
+
+			message.reply(`....what`);
+
+		} else if(fortune === 10 ){
+
+			message.reply(`YAHHHHHH`);
+
+		} else if(fortune === 11 ){
+
+			message.reply(`*Nope*`);
+
+		} else if(fortune === 12 ){
+
+			message.reply(`:rolling_eyes:`);
+
+		} else if(fortune === 13 ){
+
+			message.reply(`**LMFAOOOOOOOOO**`);
+
+		}  else if(fortune === 14 ){
+
+			message.reply(`:no_mouth:`);
+
+		} else if(fortune === 15 ){
+
+			message.reply(`I meannnnnnnn`);
+
+		} else if(fortune === 16){
+
+			message.reply(`Ye ye ye`);
+
+		} else if(fortune === 17 ){
+
+			message.reply(`Wtf bruh`);
+
+		} else if(fortune === 18 ){
+
+			message.reply(`*No*`);
+
+		} else if(fortune === 19 ){
+
+			message.reply(`You slow af fam for asking this`);
+
+		} else if(fortune === 20 ){
+
+			message.reply(`No BOI`);
+
+		} else if(fortune === 21 ){
+
+			message.reply(`Lemme be real wit u chief...... that shit ain't happenin'`);
+
+		} else if(fortune === 22 ){
+
+			message.reply(`Yessiree!`);
+
+		} else if(fortune === 23 ){
+
+			message.reply(`Of course.`);
+		} else if(fortune === 24 ){
+
+			message.reply(`WDYM`);
+
+		} else if(fortune === 25 ){
+
+			message.reply(`Of course not.`);
+
+		} else if(fortune === 26 ){
+
+			message.reply(`NO NO NO NO`);
+
+		} else if(fortune === 27 ){
+
+			message.reply(`YASSSSSSS`);
+
+		} else if(fortune === 28 ){
+
+			message.reply(`If you don't stop asking stupid questions...`);
+
+		} else if(fortune === 29 ){
+
+			message.reply(`Can you don't?`);
+
+		}  else {
+
+			message.reply(`Idk I'm illiterate`);
+
+		}
+}	
+	
+function justSaiyan(){
+	var wait = Math.floor(Math.random() * 200) + 1;
+		
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+
+		 message.channel.send("I'm just");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 
+
+
+
+		 return setTimeout(message.channel.send("**SAIYAN**"), wait);
+}
+	
+//Waifu related
+	
+function beat(){
+	let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe punching', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
+		return message.reply(`beat ` + toBeat  + ` up!` || `beat ` + toBeat.user + ` up!` );
+
+}
+	
+function hug(){
+	let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe hug', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
+		return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
+	
+}	
+	
+function pat(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe petting solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
+		return message.reply(`pat ` + toBeat  + `!` || `pat ` + toBeat.user + `!` );
+}
+	
+function kiss(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+
+		return message.reply(`kissed ` + toBeat  + `!` || `kissed ` + toBeat.user + `!` );
+}	
+	
+function jk(){
+	var heh = Math.floor(Math.random() * 4) + 1;
+		
+		function delet(){
+			
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+			
+		}
+		
+		if(heh === 1 || heh === 2 || heh === 3){
+		
+		
+			setTimeout(delet(), 1);
+
+		 
+
+		} else {
+				
+			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
+			
+		}
+
+		 
+
+
+
+		 return;
+}	
 
 function viewUser(){
 		
@@ -848,7 +1147,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -926,6 +1225,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 	
 	let cooldown = rows[0].cooldown;
+	let waifu = rows[0].waifu;
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 			
@@ -1032,156 +1332,59 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 	}
 
 if(command === `${prefix}8ball`){
+	let cooldown = rows[0].cooldown;
 
-		let fortune = Math.floor(Math.random() * 30) + 1;
+if(command === `${prefix}view` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
 
-		if(fortune === 1 ){
+  	.then(console.log("Reacted."))
 
-			message.reply(`Yes!`);
-
-		} else if(fortune === 2 ){
-
-			message.reply(`No.`);
-
-		} else if(fortune === 3 ){
-
-			message.reply(`Maybe...`);
-
-		} else if(fortune === 4 ){
-
-			message.reply(`Possibly`);
-
-		} else if(fortune === 5 ){
-
-			message.reply(`Not a chance LMAO`);
-
-		} else if(fortune === 6 ){
-
-			message.reply(`Boi you already know :smirk:`);
-
-		} else if(fortune === 7 ){
-
-			message.reply(`NAH NAH NAH`);
-
-		} 	else if(fortune === 8 ){
-
-			message.reply(`yeah...... no.`);
-
-		} else if(fortune === 9 ){
-
-			message.reply(`....what`);
-
-		} else if(fortune === 10 ){
-
-			message.reply(`YAHHHHHH`);
-
-		} else if(fortune === 11 ){
-
-			message.reply(`*Nope*`);
-
-		} else if(fortune === 12 ){
-
-			message.reply(`:rolling_eyes:`);
-
-		} else if(fortune === 13 ){
-
-			message.reply(`**LMFAOOOOOOOOO**`);
-
-		}  else if(fortune === 14 ){
-
-			message.reply(`:no_mouth:`);
-
-		} else if(fortune === 15 ){
-
-			message.reply(`I meannnnnnnn`);
-
-		} else if(fortune === 16){
-
-			message.reply(`Ye ye ye`);
-
-		} else if(fortune === 17 ){
-
-			message.reply(`Wtf bruh`);
-
-		} else if(fortune === 18 ){
-
-			message.reply(`*No*`);
-
-		} else if(fortune === 19 ){
-
-			message.reply(`You slow af fam for asking this`);
-
-		} else if(fortune === 20 ){
-
-			message.reply(`No BOI`);
-
-		} else if(fortune === 21 ){
-
-			message.reply(`Lemme be real wit u chief...... that shit ain't happenin'`);
-
-		} else if(fortune === 22 ){
-
-			message.reply(`Yessiree!`);
-
-		} else if(fortune === 23 ){
-
-			message.reply(`Of course.`);
-		} else if(fortune === 24 ){
-
-			message.reply(`WDYM`);
-
-		} else if(fortune === 25 ){
-
-			message.reply(`Of course not.`);
-
-		} else if(fortune === 26 ){
-
-			message.reply(`NO NO NO NO`);
-
-		} else if(fortune === 27 ){
-
-			message.reply(`YASSSSSSS`);
-
-		} else if(fortune === 28 ){
-
-			message.reply(`If you don't stop asking stupid questions...`);
-
-		} else if(fortune === 29 ){
-
-			message.reply(`Can you don't?`);
-
-		}  else {
-
-			message.reply(`Idk I'm illiterate`);
-
-		}
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		ball8();
+	}
+} else {
+// insert function here.
+	ball8();
+}
+		
 	}
 	
 	if(command === `${prefix}just`){
 
-		var wait = Math.floor(Math.random() * 200) + 1;
-		
-		message.delete()
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+  	.then(console.log("Reacted."))
 
-  			.catch(console.error);
-
-		 message.channel.send("I'm just");
-
-		 message.channel.send(".");
-
-		 message.channel.send(".");
-
-		 message.channel.send(".");
-
-		 message.channel.send(".");
-
-		 
-
-
-
-		 return setTimeout(message.channel.send("**SAIYAN**"), wait);
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		justSaiyan();
+	}
+} else {
+// insert function here.
+	justSaiyan();
+}
 
 
 
@@ -1191,37 +1394,162 @@ if(command === `${prefix}8ball`){
 
 	if(command === `${prefix}jk`){
 
-		var heh = Math.floor(Math.random() * 4) + 1;
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		jk();
+	}
+} else {
+// insert function here.
+	jk();
+}
 		
-		function delet(){
-			
-		message.delete()
-
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  			.catch(console.error);
-			
-		}
+if(waifu == true){		
 		
-		if(heh === 1 || heh === 2 || heh === 3){
+if(command === `${prefix}beat`){
+
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		beat();
+	}
+} else {
+// insert function here.
+	beat();
+}
+	
+	
+
+		return;
+
+	}
+
+if(command === `${prefix}hug`){
+
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		hug();
+	}
+} else {
+// insert function here.
+	hug();
+}
+	
+	
+
+		return;
+
+	}	
 		
+if(command === `${prefix}pat`){
+
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		pat();
+	}
+} else {
+// insert function here.
+	pat();
+}
+	
+	
+
+		return;
+
+	}
 		
-			setTimeout(delet(), 1);
-
-		 
-
-		} else {
-				
-			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
-			
-		}
-
-		 
+if(command === `${prefix}kiss`){
 
 
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
 
-		 return;
+  	.then(console.log("Reacted."))
 
+  	.catch(console.error);	
+	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		kiss();
+	}
+} else {
+// insert function here.
+	kiss();
+}
+	
+	
+
+		return;
+
+	}		
+
+} else {
+	message.reply("Waifu's and husbando's are disabled in this server!");
+}	
 
 
 	}
