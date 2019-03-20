@@ -102,11 +102,9 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 		if(err) throw err;
 		let sql;
 		let thisGreeting = rows[0].greeting;
-		let thisgChannel = rows[0].gchannel;
+		
 		let greeting;
-		console.log(thisGreeting);
-		console.log(member);
-		console.log(thisChannel)	;
+		
 		if(rows.length < 1) {
 			
 
