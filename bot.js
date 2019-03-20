@@ -340,7 +340,7 @@ function theCommands(prefix, chests){
 	function alter(){
 		
 
-	con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
+	con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let name = rows[0].uname;
