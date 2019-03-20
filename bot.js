@@ -2448,7 +2448,7 @@ if(command === `${prefix}user`){
 
 	}	
 
-	if(command === `${prefix}buy` && messageArray[1] === "marriageRegistration" && messageArray[2] === "for" && messageArray[3] != undefined){
+	if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
 			let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
 			if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
 			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
