@@ -889,15 +889,19 @@ function marriage(){
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content === "Yes" || message.content === "yes") {
+            	let free;
+            	let them;		
             	con.query(`SELECT * FROM user WHERE id = '${potential.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
-				let free = rows[0].marriage;
-				let them = rows[0].uname;		
+				free = rows[0].marriage;
+				them = rows[0].uname;		
 				if(rows.length < 1) {
 					message.reply(" They don't have an account!");
+					return;
 				}	
             	
+            	});
 				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql2;
@@ -905,19 +909,21 @@ function marriage(){
 				let spouse = rows[0].marriage;
 
 				if(spouse == '' && free == ''){
-					sql = `UPDATE user SET marriage = '${them}' WHERE id = '${message.author.id}`
+					sql = `UPDATE user SET marriage = '${them}' WHERE id = '${message.author.id}`;
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '${you}' WHERE id = '${potential.id}`
+					sql2 = `UPDATE user SET marriage = '${you}' WHERE id = '${potential.id}`;
 					con.query(sql2);
 					message.reply(" Congrats on getting married!")
 				} else if(spouse != ''){
-					message.reply(" you're married.....")
+					message.reply(" you're married.....");
+					return;
 				} else {
 					message.reply(" they're married.....")
+					return;
 				}
 				
 
-				});
+				
 		
 			});
 
