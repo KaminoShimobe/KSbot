@@ -458,7 +458,7 @@ function theCommands(prefix, chests){
 	                		return;
 	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
 
-	               		sql = `UPDATE server SET whisper ='${true} WHERE id = '${message.guild.id}'`;
+	               		sql = `UPDATE server SET whisper = ${true} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
 							message.channel.send("Whisper command enabled!");
 							return;
