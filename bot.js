@@ -155,7 +155,7 @@ bot.on("message", async message => {
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
   	
-  	con.query(sql2, function (err, result) {
+  	con.query(sql, function (err, result) {
     	if (err) throw err;
     	message.author.send("Tables created for user");
   	});
@@ -163,20 +163,20 @@ bot.on("message", async message => {
   	}
 
 
-	if(command === `!drop`){
-	if(message.author.id == '242118931769196544'){
-	var sql = "DROP TABLE server";
-  	con.query(sql, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Table dropped for server!");
-  	});
-  	var sql2 = "DROP TABLE user";
-  	con.query(sql2, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Table dropped for user!");
-  	});
-	}
-	}
+	// if(command === `!drop`){
+	// if(message.author.id == '242118931769196544'){
+	// var sql = "DROP TABLE server";
+ //  	con.query(sql, function (err, result) {
+ //    	if (err) throw err;
+ //    	message.author.send("Table dropped for server!");
+ //  	});
+ //  	var sql2 = "DROP TABLE user";
+ //  	con.query(sql2, function (err, result) {
+ //    	if (err) throw err;
+ //    	message.author.send("Table dropped for user!");
+ //  	});
+	// }
+	// }
 
 function bio(){
 
