@@ -104,20 +104,20 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let thisGreeting = rows[0].greeting;
 		let thisgChannel = rows[0].gchannel;
 		let greeting;
-		let gchanneL;
+		
 		if(rows.length < 1) {
-			greeting = `${member} Welcome to ${member.guild.name} !`;
-			gchanneL = "general"
+			
 
 		} else {
 			greeting = `${member} ` + thisGreeting;
-			gchanneL = thisgChannel;
-		}
+			
+		
 	
-		const channel = member.guild.channels.find('name', gchanneL);
+		channel = bot.channels.get(rows[0].gchannel);
    if(!channel) return;
 
    channel.send(greeting);	
+}
 	});			
    	
 
@@ -655,7 +655,7 @@ function theCommands(prefix, chests){
 			
 			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
 			con.query(sql, console.log);
-			message.send(`User account created! ${prefix}view to view your account!`)
+			message.channel.send(`User account created! ${prefix}view to view your account!`)
 			return;
 		}	else {
 
@@ -1912,7 +1912,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 }
 
 function viewLeaderboard(){
-	//console.log("Omega oof");	
+	console.log("Omega oof");	
 	
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
