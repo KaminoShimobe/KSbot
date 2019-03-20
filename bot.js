@@ -804,7 +804,7 @@ function marriage(){
 				
 				
 	
-                		return;
+                		
             		else {
 				 message.react('🇫')
 
