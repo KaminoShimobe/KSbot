@@ -280,6 +280,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 		let sql;
 		let channel = bot.channels.get(rows[0].channel);
 		let whisper = rows[0].whisper;
+		var id = messageArray[1];
 		if(whisper == true){	
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -294,8 +295,10 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//BOI
-console.log(message.author.username);
-sql = `UPDATE server SET expose = '${message.author.username}' WHERE id = '${messageArray[1]}'`;
+		var name = message.author.username;	
+
+
+sql = `UPDATE server SET expose = '${name}' WHERE id = '${id}'`;
 				con.query(sql);				
 			}
 			});
