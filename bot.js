@@ -110,7 +110,7 @@ bot.on('guildMemberAdd', member => {
 
 	
 	
-
+//greeting
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
