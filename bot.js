@@ -317,7 +317,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '')`;
 			con.query(sql, console.log);
 			
 			
@@ -340,7 +340,7 @@ function theCommands(prefix, chests){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, karma, kqueen) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '', '')`;
+			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, karma, kqueen) VALUES ('${message.guild.id}', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '', '')`;
 			con.query(sql, console.log);
 			
 			
@@ -756,6 +756,84 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	});
 
 }	
+
+function marriage(){
+	let potential = message.mentions.users.first();
+		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "Yes" to accept.)`);
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content === "Yes" || message.content === "yes") {
+            	con.query(`SELECT * FROM user WHERE id = '${potential.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let free = rows[0].marriage;
+				let them = rows[0].uname;		
+				if(rows.length < 1) {
+					message.reply(" They don't have an account!");
+				}	
+            	
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				let you = rows[0].uname;
+				let spouse = rows[0].marriage;
+
+				if(spouse == '' && free == ''){
+					sql = `UPDATE user SET marriage = '${them}' WHERE id = '${message.author.id}`
+					con.query(sql);
+					sql2 = `UPDATE user SET marriage = '${you}' WHERE id = '${potential.id}`
+					con.query(sql2);
+					message.reply(" Congrats on getting married!")
+				} else if(spouse != ''){
+					message.reply(" you're married.....")
+				} else {
+					message.reply(" they're married.....")
+				}
+				
+
+				});
+		
+			});
+
+		
+			}
+		
+		
+			
+		
+				
+				
+	
+                		return;
+            		else {
+				 message.react('🇫')
+
+  				.then(console.log("Reacted."))
+
+  				.catch(console.error);	
+
+		 		return message.channel.send("**Press F to pay respects.**");
+			}
+			});
+}
+
+function divorce(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+			
+				let spouse = rows[0].marriage;
+
+			if(rows.length < 1) {
+					message.reply(" You don't have an account!");
+				}	else {
+					sql = `UPDATE user SET marriage = '' WHERE id = '${message.author.id}`
+					con.query(sql);
+					message.channel.send("You are now a free spirit!")
+				}
+
+	});		
+}
 	
 //MONEY MONEY MONEY
 
@@ -765,6 +843,7 @@ if(chests == true){
 
 function treasure(){
 		var appear = Math.floor(Math.random() * 100) + 1;
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + appear);
 		if(appear == 100){
 			console.log(appear);
 			
@@ -2224,11 +2303,41 @@ if(command === `${prefix}user`){
 
 	}
 
+	if(command === `${prefix}divorce`){
+		divorce();
+	}
+
 	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
 		
 		customRole();
 
 	}	
+
+	if(command === `${prefix}buy` && messageArray[1] === "marriageRegistration" && messageArray[2] === "for" && messageArray[3] != undefined){
+			let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
+			if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
+			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 10000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+			con.query(sql);	
+			marriage();
+		});
+	
+
+			
+		}	
 
 	
 	
