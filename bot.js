@@ -1903,7 +1903,7 @@ function jk(){
 		 return;
 }	
 function expose(){
-con.query(`SELECT * FROM user WHERE id = '${message.guild.id}'`, (err, rows) => {
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let expose = rows[0].expose;
