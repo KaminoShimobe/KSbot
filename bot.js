@@ -16,25 +16,12 @@ const CrazyDiamondCD = new Set();
 const StarPlatinumCD = new Set();
 const commandCD = new Set();
 const boomCD = new Set();
+const insuranceCD = new Set();
+const amuletCoinCD = new Set();
 
-const defaultSettings = {
-	prefix: "!",
-	gChannel: "general",
- 	whisper: true,
- 	exposeSet: true,
- 	cooldown: 200,
- 	stands: true,
- 	waifu: true,
- 	rpg: true
-}
+
 
 const bot = new Discord.Client({disableEveryone: true})
-
-
-
-
-	
-
 
 
 
@@ -110,7 +97,7 @@ bot.on('guildMemberAdd', member => {
 
 	
 	
-//greeting
+
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -164,7 +151,7 @@ bot.on("message", async message => {
 	if(command === `!table`){
 	if(message.author.id == '242118931769196544'){
 	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
-  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN)";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50))";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
   	
@@ -315,6 +302,8 @@ sql = `UPDATE server SET expose = '${message.author.username}' WHERE id = '${mes
 		
 	}	
 
+
+
 	if(message.channel.type === "dm") return;
 
 
@@ -323,7 +312,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '')`;
 			con.query(sql, console.log);
 			
 			
@@ -332,12 +321,13 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 		
 			let prefix = rows[0].prefix;
+			let chests = rows[0].chests;
 			
 		theCommands(prefix);
 		 
 	});	
 
-function theCommands(prefix){	
+function theCommands(prefix, chests){	
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -345,7 +335,7 @@ function theCommands(prefix){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true})`;
+			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, karma, kqueen) VALUES ('${message.guild.id}', 'default', 'default', ${true}, '', ${true}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '', '')`;
 			con.query(sql, console.log);
 			
 			
@@ -763,6 +753,224 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 }	
 	
 //MONEY MONEY MONEY
+
+if(chests == true){
+	treasure();
+}
+
+function treasure(){
+		var appear = Math.floor(Math.random() * 100) + 1;
+		if(appear == 100){
+			console.log(appear);
+			
+			chest();	
+		} else {
+			console.log(appear);
+			
+			return;	
+		}
+	}
+
+function chest(){
+		var karma = "";
+		var type = Math.floor(Math.random() * 10) + 1;
+		if(type > 2){
+			karma = "good";
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;		
+		
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = Math.floor(Math.random() * 999999) + 10000;
+		} else if(rank >= 11 && rank <= 99){
+			amount = Math.floor(Math.random() * 99999) + 1000;
+		} else if(rank === 100){
+			amount = Math.floor(Math.random() * 9999999) + 100000;
+			return;
+		}
+		let chest = rows[0].chest;
+		let channel = rows[0].channel;
+		const room = bot.channels.get(channel);
+		if(rows.length < 1) {
+			
+			
+			
+			
+		}	else {
+			if(chest != 0){
+				message.channel.send("The chest mysteriously disappeared!");
+			}
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`;
+		con.query(sql);
+		const booru = new Danbooru()
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let item = new Discord.RichEmbed()
+
+			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setImage(url.href)
+			.setColor("#a57400");
+
+		room.sendEmbed(item);
+ 		
+  		 })
+			return;
+		}
+
+
+		});
+		
+			
+		} else {
+			karma = "bad";
+			con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = 1;
+		} else if(rank >= 11 && rank <= 99){
+			amount = 2;
+		} else if(rank === 100){
+			amount = 3;
+		}
+		let chest = rows[0].chest;
+		let channel = rows[0].channel;
+		const room = bot.channels.get(channel);
+		if(rows.length < 1) {
+			
+			
+			
+			
+		}	else {
+			if(chest != 0){
+				message.channel.send("The chest mysteriously disappeared!");
+			}
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`
+			con.query(sql);
+
+			const booru = new Danbooru()
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let item = new Discord.RichEmbed()
+
+			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setImage(url.href)
+			.setColor("#a57400");
+
+		room.sendEmbed(item);
+ 		
+  		 })
+
+			return;
+		}
+
+
+		});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}	
+
+function collect(){
+		
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		
+		if(err) throw err;
+		let type = rows[0].karma;
+		let cost = rows[0].money;
+			if(rows.length < 1) {
+			
+			message.reply(" nothing to collect!");
+			
+			return;
+		}	else {
+			if(type == "good"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+				let lasttrans = rows[0].lasttrans;
+
+				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" found $" + cost + " in the chest!");
+				
+				lostChest();	
+				});	
+			} else if(type == "bad"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+				var penalty;
+				if(cost == 1){
+					penalty = money / 100;
+				} else if(cost == 2){
+					penalty = money / 25;
+				} else if(cost == 3){
+					penalty = money / 10;
+				} else {
+					penalty = 1;
+				}	
+
+				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" lost $" + penalty + " from a trap in the chest!");
+				
+				lostChest();	
+				});
+			}	
+
+			
+			return;
+		}
+		});
+	}	
+
+function lostChest(){
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
+		con.query(sql);
+		message.channel.send("The chest mysteriously disappeared!");
+		return;	
+		});
+	}		
 	
 function daily(){
 		
@@ -1033,17 +1241,87 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		}	
 	let customItem = rows[0].shop;
 	let customPrice = rows[0].prices;
+
 	let shop = new Discord.RichEmbed()
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [name] #hexcolor**: \n Creates a custom role with it's own color. \n 10% of your money | **insurance**: \n Your losses for the next 30 minutes will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **weddingRing** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customItem + "|" + customPrice + "\n An Exlcusive item to this server!")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **weddingRing** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customPrice + "|**" + customItem + "\n** An Exlcusive item to this server!")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
 	message.reply(" Shop list sent to you!");
 });	
 }	
+
+function customRole(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 50000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+
+		if(money >= 50000){
+
+		
+				 sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+					
+		var roleName = messageArray[2];
+		message.guild.createRole({
+  			name: messageArray[2],
+  			color: messageArray[3],
+		})
+		
+		
+			
+		.then(role => member.addRole(role).catch(console.error))
+  		.catch(console.error);
+		
+  		message.reply("Unique Role Purchased!");
+
+		
+  	}
+  	 });
+}
+
+function insure(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+			var percentage = Math.floor((1 / 10) * money);
+			if (insuranceCD.has(message.author.id)) {
+				message.reply(" You already have insurance!")
+			}	
+			else {
+	insuranceCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          insuranceCD.delete(message.author.id);
+          message.reply("'s insurance has run out!")
+        }, (1000*90));	
+	//insert function here.
+		jk();
+	}
+			sql = `UPDATE user SET money = ${money - percentage} WHERE id = '${message.author.id}'`;
+			
+			con.query(sql);
+			message.reply("Insurance Purchased for $" + percentage +"! You are now in good hands!");
+			return;
+			});
+	}
 	
 //MISC	
 	
@@ -1365,6 +1643,145 @@ function kiss(){
 
 		return message.reply(`kissed ` + toBeat  + `!` || `kissed ` + toBeat.user + `!` );
 }	
+
+function waifuPic(){
+		
+		console.log("waifu");
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe 1girl solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#ff30e0"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+		
+		
+
+	}
+
+	function husbandoPic(){
+		
+		console.log("husbando");
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe 1boy solo', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#4327f7"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
+	
+	function lewdWaifu(){
+		
+		
+		const booru = new Danbooru()
+		booru.posts({ tags: '1girl rating:explicit', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#ff30e0"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+		
+		
+
+	}
+	
+	function lewdHusbando(){
+		
+		
+		const booru = new Danbooru()
+		booru.posts({ tags: '1boy rating:explicit', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#4327f7"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
+
+	function customPic(){
+		
+		var tag1 = messageArray[2];
+		var tag2;
+		if(messageArray[3] != undefined){
+			tag2 = messageArray[3];
+		} else {
+			tag2 = messageArray[2];
+		}
+		const booru = new Danbooru()
+		booru.posts({ tags: tag1 + ' ' + tag2, random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#7b18a3"); 
+
+		message.author.sendEmbed(pic);
+ 		
+  		 })
+			
+ 		
+  
+
+	}
 	
 function jk(){
 	var heh = Math.floor(Math.random() * 4) + 1;
@@ -1398,6 +1815,43 @@ function jk(){
 
 		 return;
 }	
+function expose(){
+con.query(`SELECT * FROM user WHERE id = 'server'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let expose = rows[0].expose;
+		if (exposeLimit.has(message.author.id)) {
+            message.reply("You have already exposed today!");
+            return;
+   		 } else {	
+		
+		exposeLimit.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          exposeLimit.delete(message.author.id);
+        }, (1000*60*60*24));
+		
+		var wait = Math.floor(Math.random() * 200) + 1;
+		
+		 message.channel.send("The culprit is...");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 message.channel.send(".");
+
+		 
+
+
+
+		 setTimeout(message.channel.send("```"+ expose + "```"), wait);
+		}
+			
+		});	
+}
 
 function viewUser(){
 		
@@ -1555,7 +2009,17 @@ function give(){
 	return;
 }	
 
+function standHelp(){
+	let stands = new Discord.RichEmbed()
 
+			
+			.setTitle("KS-Bot Stand Commands")
+			.setDescription("`Star Platinum` \n Can talk during stopped time. Can freeze time for a short period of time. \n **!STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n `Harvest` \n **!HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's !spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n `Echoes` \n **!ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **!ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n `Heaven's Door` \n **!HEAVENSDOOR [user id]** (make sure developer mode is turned on): \n Changes someone's bio. Cannot use quotes in bio. Has a cooldown of 30 minutes. \n `Crazy Diamond` \n **!CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as !daily, !spin, !slots, !horoscope, and !open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n `Killer Queen` \n **!1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **!2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **!3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n `King Crimson` \n **!KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.")
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(stands);
+		message.reply(" sent you a dm of the stand commands list!");
+}
 
 function help(){
 
@@ -1599,7 +2063,11 @@ if(command === `${prefix}admin` || command === `KS!admin`){
 	}		else {
 		message.reply(" You don't have the credentials to perform this function.")
 	}
-}		
+}
+
+if(command === `${prefix}stands`){
+			standHelp();
+	}		
 	
 if(command === `${prefix}server` || command === `KS!server`){
 		aboutServer();
@@ -1644,12 +2112,84 @@ if(command === `${prefix}user`){
 
 	}
 
+	if(command === `${prefix}open`){
+
+		collect();
+		 
+
+
+
+		 return;
+
+
+
+	}
+
+	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
+		
+		customRole();
+
+	}	
+
+	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 50000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		standArrow();
+		
+		});
+	}
+
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+
+	let exposeSet = rows[0].exposeSet;
+
+	if(exposeSet == true){
+		if(command === `${prefix}expose`){
+
+		expose();
+		 
+
+
+
+		 return;
+
+
+
+	}
+	} else {
+		message.reply(` ${prefix}expose is not permitted in this server!`)
+	}
+
+});		
+
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 	
 	let cooldown = rows[0].cooldown;
 	let waifu = rows[0].waifu;
+
+
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 			
@@ -1990,6 +2530,123 @@ if(command === `${prefix}slots`){
 	}	
 		
 if(waifu == true ){		
+
+if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		waifuPic();
+
+		});
+	}	
+
+	if(command === `${prefix}buy` && messageArray[1] === `husbandoPic`){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		husbandoPic();
+		
+		});
+	}
+
+	if(command === `${prefix}buy` && messageArray[1] === `lewdWaifu`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		lewdWaifu();
+
+		});
+	}	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `lewdHusbando`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		lewdHusbando();
+
+		});
+	}	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `customPic` && messageArray[2] != undefined){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 5000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 5000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		customPic();
+
+		});
+	}	
 		
 if(command === `${prefix}beat`){
 
