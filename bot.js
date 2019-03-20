@@ -163,6 +163,7 @@ bot.on("message", async message => {
   	}
 
 
+
 	// if(command === `!drop`){
 	// if(message.author.id == '242118931769196544'){
 	// var sql = "DROP TABLE server";
@@ -336,6 +337,128 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	});	
 
 function theCommands(prefix, chests){	
+	function alter(){
+		
+
+	con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let name = rows[0].uname;
+		let money = rows[0].money;
+		let status = rows[0].rank;
+		let patreon = rows[0].patreon;
+		let stand = rows[0].stand;
+		let them = messageArray[1];
+		function alterMoney(){
+			message.channel.send("What monetary changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		var num = parseInt(message.content);
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(Number.isInteger(num) == true && num >= 0) {
+							sql = `UPDATE user SET money = ${num} WHERE id = '${them}'`;
+							con.query(sql);
+							message.channel.send("Account Balance set to " + num + " for the User: " + name + "!");
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a value >= 0.");
+	                		return;
+						}
+				});
+		}
+
+		function alterRank(){
+			message.channel.send("What status changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else {
+							sql = `UPDATE user SET rank = '${message.content}' WHERE id = '${them}'`;
+							con.query(sql);
+							message.channel.send("Rank set to " + message.content + " for the User: " + name + "!");
+							return;
+						} 
+				});
+		}
+
+		function alterPatreon(){
+			message.channel.send("What patron changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		var num = parseInt(message.content);
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(Number.isInteger(num) == true && num >= 0) {
+							sql = `UPDATE user SET patreon = ${num} WHERE id = '${them}'`;
+							con.query(sql);
+							message.channel.send("Patreon Tier set to " + num + " for the User: " + name + "!");
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a value >= 0.");
+	                		return;
+						}
+				});
+		}
+
+		function alterStand(){
+			message.channel.send("What stando powa changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else {
+							sql = `UPDATE user SET stand = '${message.content}' WHERE id = '${them}'`;
+							con.query(sql);
+							message.channel.send("Stand set to " + message.content + " for the User: " + name + "!");
+							return;
+						} 
+				});
+		}
+
+		if(rows.length < 1) {
+			
+			message.reply(" They don't have a KS-user account!")
+			
+			
+		}	
+
+					message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand) !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Greeting message cancelled.");
+	                		return;
+	            		} else if(message.content == "money"){
+					
+					alterMoney();
+					return;
+				} else if(message.content == "rank"){
+					
+					alterRank();
+					return;
+				} else if(message.content == "patreon"){
+					
+					alterPatreon();
+					return;
+				} else if(message.content == "stand"){
+					
+					alterStand();
+					return;
+				} else {
+					message.channel.send("Invalid selection.")
+				}
+				}); 
+	        });		
+	}
+
 	function toggle(){
 
 	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -2217,6 +2340,13 @@ function patreon(){
 
 		message.author.sendEmbed(yeet);
 }
+//Use of Kamino ONLY
+if(command === `!alter` && messageArray[1] != undefined){
+	if(message.author.id == '242118931769196544'){
+		alter();
+
+	}
+	}
 
 	
 
