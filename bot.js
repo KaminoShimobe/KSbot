@@ -150,7 +150,7 @@ bot.on("message", async message => {
 	
 	if(command === `!table`){
 	if(message.author.id == '242118931769196544'){
-	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), name VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
+	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), uname VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
   	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50))";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
@@ -169,6 +169,11 @@ bot.on("message", async message => {
   	con.query(sql, function (err, result) {
     	if (err) throw err;
     	message.author.send("Table dropped for server!");
+  	});
+  	var sql2 = "DROP TABLE user";
+  	con.query(sql2, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table dropped for user!");
   	});
 	}
 	}
@@ -648,7 +653,7 @@ function theCommands(prefix, chests){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, name, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
 			con.query(sql, console.log);
 			message.send(`User account created! ${prefix}view to view your account!`)
 			return;
@@ -1906,6 +1911,42 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 }
 
+function viewLeaderboard(){
+	//console.log("Omega oof");	
+	
+con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
+		if(err) throw err;
+		
+		
+
+
+		let rank = [rows[0].money, rows[1].money, rows[2].money, rows[3].money, rows[4].money, rows[5].money, rows[6].money, rows[7].money, rows[8].money, rows[9].money];
+		
+		let user = [rows[0].uname, rows[1].uname, rows[2].uname, rows[3].uname, rows[4].uname, rows[5].uname, rows[6].uname, rows[7].uname, rows[8].uname, rows[9].uname];
+			
+		
+
+		
+		
+		
+		let leaderboard = new Discord.RichEmbed()
+		
+			
+			.setTitle("KS Currency Leaderboard")
+			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
+			.setColor("#00fffa"); 
+
+		message.channel.sendEmbed(leaderboard);
+
+
+		
+		
+
+	});
+		
+
+}
+
 
 
 function viewOtherUser(){
@@ -2027,7 +2068,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -2045,6 +2086,52 @@ function admin(){
 
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the admin help list!");
+}
+
+function credits(){
+
+		
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(`I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!`)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+
+		 
+
+		 			
+}
+
+function discordLink(){
+
+		let yeet = new Discord.RichEmbed()
+
+			
+			.setTitle("Kamino's House || CLICK ME")
+			.setDescription("Stop by and say hi (:")
+			.setColor("#1f3c5b")
+			.setURL("https://discord.gg/6Zf5HGH");
+			
+
+		message.author.sendEmbed(yeet);
+}
+
+function patreon(){
+
+		let yeet = new Discord.RichEmbed()
+
+			
+			.setTitle("Kamino's Patreon || CLICK ME")
+			.setDescription("DM Kamino @KaminoShimobe#1190 for patreon benefits through KS-Bot!")
+			.setColor("#1f3c5b")
+			.setURL("https://www.patreon.com/kaminoshimobe");
+			
+
+		message.author.sendEmbed(yeet);
 }
 
 	
@@ -2068,6 +2155,18 @@ if(command === `${prefix}admin` || command === `KS!admin`){
 if(command === `${prefix}stands`){
 			standHelp();
 	}		
+
+if(command === `${prefix}credits`){
+			credits();
+	}	
+
+if(command === `${prefix}discord`){
+			discordLink();
+	}
+
+if(command === `${prefix}patreon`){
+			patreon();
+	}				
 	
 if(command === `${prefix}server` || command === `KS!server`){
 		aboutServer();
