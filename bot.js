@@ -2371,8 +2371,8 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 	let exposeSet = rows[0].exposeSet;
 
-	if(exposeSet == true){
-		if(command === `${prefix}expose`){
+	
+		if(command === `${prefix}expose` && exposeSet == true){
 
 		expose();
 		 
@@ -2383,7 +2383,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 
 
-	}
+	
 	} else {
 		message.reply(` ${prefix}expose is not permitted in this server!`)
 	}
