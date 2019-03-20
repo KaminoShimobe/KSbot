@@ -1903,7 +1903,7 @@ function jk(){
 		 return;
 }	
 function expose(){
-con.query(`SELECT * FROM user WHERE id = 'server'`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let expose = rows[0].expose;
@@ -1918,6 +1918,8 @@ con.query(`SELECT * FROM user WHERE id = 'server'`, (err, rows) => {
           exposeLimit.delete(message.author.id);
         }, (1000*60*60*24));
 		
+		sql = `UPDATE server SET expose = '' WHERE id = '${message.guild.id}'`;
+				con.query(sql);	
 		var wait = Math.floor(Math.random() * 200) + 1;
 		
 		 message.channel.send("The culprit is...");
