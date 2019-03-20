@@ -291,14 +291,14 @@ if(command === `!whisper` && messageArray[1] != undefined){
             		} else {
 				var msg = message.content;
 				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
-				var chance = Math.floor(Math.random()*2) + 1;
+				var chance = Math.floor(Math.random()*2);
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//BOI
-		var name = message.author.username;	
+		var you = message.author.username;	
 
 
-sql = `UPDATE server SET expose = '${name}' WHERE id = '${id}'`;
+sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 				con.query(sql);				
 			}
 			});
