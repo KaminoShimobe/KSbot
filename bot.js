@@ -2418,7 +2418,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2457,7 +2457,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
@@ -2482,6 +2482,41 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 		
 
 	}
+
+if(command === `${prefix}leaderboard` ){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		viewLeaderboard();
+}
+	} else {
+// insert function here.
+	viewLeaderboard();
+}	
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
 	
 	if(command === `${prefix}give`){
 
@@ -2493,7 +2528,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
@@ -2524,7 +2559,7 @@ if(command === `${prefix}who` && messageArray[1] != undefined){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2556,7 +2591,7 @@ if(command === `${prefix}8ball`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2583,7 +2618,7 @@ if(command === `${prefix}8ball`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2614,7 +2649,7 @@ if(command === `${prefix}8ball`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2641,7 +2676,7 @@ if(command === `${prefix}flip`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2669,7 +2704,7 @@ if(command === `${prefix}daily`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2698,7 +2733,7 @@ if(command === `${prefix}spin` && messageArray[1] != undefined){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2727,7 +2762,7 @@ if(command === `${prefix}slots`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 	commandCD.add(message.author.id);		
@@ -2876,7 +2911,7 @@ if(command === `${prefix}beat`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
@@ -2908,7 +2943,7 @@ if(command === `${prefix}hug`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
@@ -2940,7 +2975,7 @@ if(command === `${prefix}pat`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
@@ -2972,7 +3007,7 @@ if(command === `${prefix}kiss`){
   	.then(console.log("Reacted."))
 
   	.catch(console.error);	
-	message.reply(" is on cooldown for " + cooldown + " millisecond(s)!");
+	
 		return;
 	} else {
 		commandCD.add(message.author.id);
