@@ -96,7 +96,7 @@ bot.on("ready", async () => {
 bot.on('guildMemberAdd', member => {
 
 	
-	
+console.log("Okay")	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -104,7 +104,9 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let thisGreeting = rows[0].greeting;
 		let thisgChannel = rows[0].gchannel;
 		let greeting;
-		
+		console.log(thisGreeting)
+		console.log(member)
+		console.log(thisChannel)	
 		if(rows.length < 1) {
 			
 
