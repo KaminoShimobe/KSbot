@@ -2384,8 +2384,13 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 
 	
-	} else {
-		message.reply(` ${prefix}expose is not permitted in this server!`)
+	} else if(command === `${prefix}expose` && exposeSet == false){
+
+		message.reply(`${prefix}expose is not permitted in this server!`)
+
+
+
+	
 	}
 
 });		
