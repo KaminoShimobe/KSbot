@@ -98,7 +98,7 @@ bot.on('guildMemberAdd', member => {
 	
 console.log("Okay")	;
 
-con.query(`SELECT * FROM server WHERE id = '${bot.guild.id}'`, (err, rows) => {
+con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let thisGreeting = rows[0].greeting;
