@@ -255,72 +255,72 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 }	
 
-	if (message.guild.id == '456956416377225218') {
+// 	if (message.guild.id == '456956416377225218') {
 
-function HeavensDoor(){
-		if(message.member.roles.find("name", "HeavensDoor")) {
-		let otherID = messageArray[1];	
-		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let bio = rows[0].bio;
-		var name = bot.users.get(otherID);
+// function HeavensDoor(){
+// 		if(message.member.roles.find("name", "HeavensDoor")) {
+// 		let otherID = messageArray[1];	
+// 		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		let bio = rows[0].bio;
+// 		var name = bot.users.get(otherID);
 		
 
 		
 		
 		
 		
-		if(rows.length < 1) {
+// 		if(rows.length < 1) {
 			
 			
 			
 			
-			message.reply(" They have no user!");
-			return;
-		}	else {
-			if (HeavensDoorCD.has(message.author.id)) {
-				 message.delete()
+// 			message.reply(" They have no user!");
+// 			return;
+// 		}	else {
+// 			if (HeavensDoorCD.has(message.author.id)) {
+// 				 message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(console.error);
-            message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
-            return;
-   		 } else{
+//   			.catch(console.error);
+//             message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
+//             return;
+//    		 } else{
 			 			
 			
-			 message.delete()
+// 			 message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(console.error);
+//   			.catch(console.error);
 				
-			message.channel.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-        		collector.once('collect', message => {
-            		if (message.content == `${prefix}cancel`) {
-               		 message.channel.send("Message cancelled.");
-                		return;
-            		} else {
-				var msg = message.content;
-				HeavensDoorCD.add(message.author.id);
-        setTimeout(() => {
-          // Removes the user from the set after a minute
-          HeavensDoorCD.delete(message.author.id);
-        }, (1000*60*30));
+// 			message.channel.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
+// 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+//         		collector.once('collect', message => {
+//             		if (message.content == `${prefix}cancel`) {
+//                		 message.channel.send("Message cancelled.");
+//                 		return;
+//             		} else {
+// 				var msg = message.content;
+// 				HeavensDoorCD.add(message.author.id);
+//         setTimeout(() => {
+//           // Removes the user from the set after a minute
+//           HeavensDoorCD.delete(message.author.id);
+//         }, (1000*60*30));
 				
-				sql = `UPDATE user SET bio = '${msg}' WHERE id = '${otherID}'`;
-			con.query(sql);	
-			 message.delete()
+// 				sql = `UPDATE user SET bio = '${msg}' WHERE id = '${otherID}'`;
+// 			con.query(sql);	
+// 			 message.delete()
 
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+//   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
-  			.catch(console.error);	
-			message.channel.send("**HEAVEN'S DOOR**");
-			}		//BOI
+//   			.catch(console.error);	
+// 			message.channel.send("**HEAVEN'S DOOR**");
+// 			}		//BOI
 
-			});
+// 			});
 	
 			
 		
@@ -329,22 +329,22 @@ function HeavensDoor(){
 			
 			
 			
-			return;
-		 }
-		}
+// 			return;
+// 		 }
+// 		}
 
 
-		});
-		} 
-		else {
-  			message.channel.send("You do not have the power to use HEAVEN'S DOOR!");
-			}
-	}
+// 		});
+// 		} 
+// 		else {
+//   			message.channel.send("You do not have the power to use HEAVEN'S DOOR!");
+// 			}
+// 	}
 	
-	if(command === `!HEAVENSDOOR` && messageArray[1] != undefined){
-		HeavensDoor();
-	} 
-}	
+// 	if(command === `!HEAVENSDOOR` && messageArray[1] != undefined){
+// 		HeavensDoor();
+// 	} 
+// }	
 
 	if(command === `!bio`){
 		
@@ -377,7 +377,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `$!cancel`) {
+            		if (message.content == `!cancel`) {
                		 message.author.send("Message cancelled.");
                 		return;
             		} else {
@@ -386,7 +386,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				var chance = Math.floor(Math.random()*2);
 
 				if(channel == undefined){
-					message.author.send("Channel not found!")
+					message.author.send("Channel not found!");
 				}
 
 				channel.send(setting[chance]);
