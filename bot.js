@@ -579,7 +579,7 @@ function treasure(){
 			if(chest != 0){
 				message.channel.send("The chest mysteriously disappeared!");
 			}
-			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`;
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
 		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
@@ -632,7 +632,7 @@ function treasure(){
 			if(chest != 0){
 				message.channel.send("The chest mysteriously disappeared!");
 			}
-			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
@@ -2405,7 +2405,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("ID:" + message.author.id + "Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n Bio: \n" + bio)
+			.setDescription("ID:" + message.author.id + "\n Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n Bio: \n" + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -2498,7 +2498,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("ID:" + other.id +"Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n " + bio)
+			.setDescription("ID:" + other.id +"\n Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n " + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
