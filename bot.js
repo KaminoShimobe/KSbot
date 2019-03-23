@@ -2952,19 +2952,18 @@ if(message.member.roles.find("name", "Killer Queen")) {
 		
 		let member = message.mentions.members.first();
 		if(message.member.roles.find("name", "Crazy Diamond")) {
-		
-		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		let crazyID = 'J' + member.id;
+		con.query(`SELECT * FROM user WHERE id = '${crazyID}'`, (err, rows) => {
 		if(err) throw err;
-		
-		
-		var dmg = rows[0].lasttrans;	
+		let sql2;
+		var status = rows[0].bio;
+		var dmg = rows[0].money;	
 		if(rows.length < 1) {
-			
+			if (CrazyDiamondCD.has(message.author.id)) {
+            message.reply("Crazy Diamond must wait about 30 minutes from when you first used it!");
+            return;
    		 } else{
 			 		
-			 if (CrazyDiamondCD.has(message.author.id)) {
-            message.reply("Crazy Diamond must wait about 30 minutes from when you first used it!");
-            return;		
 			CrazyDiamondCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
@@ -2984,13 +2983,15 @@ if(message.member.roles.find("name", "Killer Queen")) {
           // Removes the user from the set after a minute
           CrazyDiamondCD.delete(message.author.id);
         }, (1000*60*30));	}
-			
+			con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
 		let sql;
 		let money = rows[0].money;
-			sql = `UPDATE user SET money = ${money - dmg}, lasttrans = ${0} WHERE id = '${member.id}'`;
+			sql = `UPDATE user SET money = ${money - dmg} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
-		
-			
+		});
+			sql2 = `DELETE FROM user WHERE id = '${crazyID}'`;
+			con.query(sql2, console.log);
 			message.channel.send("**CRAZY DIAMOND**");
 				
 			return;
