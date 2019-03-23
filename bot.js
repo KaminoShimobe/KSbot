@@ -747,9 +747,11 @@ function lostChest(){
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
+		let channel = bot.channels.get(rows[0].channel);
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
-		message.channel.send("The chest mysteriously disappeared!");
+		if(!channel) return message.channel.send("A chest mysteriously disappeared!");
+		channel.send("The chest mysteriously disappeared!");
 		return;	
 		});
 	}		  
@@ -1111,32 +1113,7 @@ function lostChest(){
 	                		return;
 						}
 				}); 
-	        	} else if(messageArray[1] == "stands"){
-					message.channel.send("Do you want to allow stand abilities in your server?(yes or no) \n !cancel to cancel.");
-					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		if (message.content == `${prefix}cancel`) {
-	               		 message.channel.send("Stand Ability Toggle cancelled.");
-	                		return;
-	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
-
-	               		sql = `UPDATE server SET stands = ${true} WHERE id = '${message.guild.id}'`;
-							con.query(sql);
-							message.channel.send("Stand abilities enabled!");
-							return;
-	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
-
-	               		sql = `UPDATE server SET stands = ${false} WHERE id = '${message.guild.id}'`;
-							con.query(sql);
-							message.channel.send("Stand abilities disabled!");
-							return;
-	            		} else {
-							message.channel.send("Invalid Input.");
-							return;
-					
-						}
-				}); 
-	        	} else if(messageArray[1] == "prefix"){
+	        	}  else if(messageArray[1] == "prefix"){
 					message.channel.send("What do you want your command prefix to be? (5 character limit) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -1288,7 +1265,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Stand Abilities Allowed? :" + s + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
@@ -2405,7 +2382,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("ID:" + message.author.id + "\n Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n Bio: \n" + bio)
+			.setDescription("ID:" + message.author.id + "\n Money: $" + money + "\n" + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -2498,7 +2475,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("ID:" + other.id +"\n Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n " + bio)
+			.setDescription("ID:" + other.id +"\n Money: $" + money +  "\n " + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -3131,7 +3108,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle stands**: Allows or prohibits stand abilities in your server. ${prefix}stands for more details \n **${prefix}toggle shop**: \n Changes the name of the role you're selling in your server. \n **${prefix}toggle price**: \n Changes the price of your role you're selling in your server.`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle shop**: \n Changes the name of the role you're selling in your server. \n **${prefix}toggle price**: \n Changes the price of your role you're selling in your server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -3323,29 +3300,29 @@ if(command === `${prefix}user`){
 
 	
 	
-	if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
+	// if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
 		
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
+	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
 
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
+	// 	if(rows.length < 1) {
+	// 		message.reply("You have no user!");
+	// 		console.log(rows);
+	// 		return;
+	// 	}
 
-		let money = rows[0].money;
+	// 	let money = rows[0].money;
 		
-		if(money < 50000) {
-			message.reply("Insufficient Funds.");
-			return;
-		}
-		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
-		con.query(sql);		
-		standArrow();
+	// 	if(money < 50000) {
+	// 		message.reply("Insufficient Funds.");
+	// 		return;
+	// 	}
+	// 	sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+	// 	con.query(sql);		
+	// 	standArrow();
 		
-		});
-	}
+	// 	});
+	// }
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
