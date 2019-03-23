@@ -196,7 +196,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		
 				
 
-		message.author.send("Update your bio! You have 100 characters. Refrain from use of quotations. \n !cancel to cancel.");
+		message.author.send("Update your bio! You have 100 characters. \n !cancel to cancel.");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `!cancel`) {
@@ -204,7 +204,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
                 		return;
             		} else {
 				
-				sql = `UPDATE user SET bio = '${message.content}' WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET bio = "${message.content}" WHERE id = '${message.author.id}'`;
 				con.query(sql);
 				message.author.send("Bio Updated!");
 			}
@@ -385,7 +385,9 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
 				var chance = Math.floor(Math.random()*2);
 
-				if(!channel) return message.author.send("Channel Not found.");
+				if(channel == undefined){
+					message.author.send("Channel not found!")
+				}
 
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
@@ -894,7 +896,7 @@ function lostChest(){
 
 			
 				if(messageArray[1] == "greeting"){
-					message.channel.send("The current greeting is: \n " + rows[0].greeting + "\n Update your greeting! You have 255 characters. Refrain from use of quotations and be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
+					message.channel.send("The current greeting is: \n " + rows[0].greeting + "\n Update your greeting! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
