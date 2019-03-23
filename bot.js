@@ -411,15 +411,15 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 
 	if(message.channel.type === "dm") return;
 
-if (message.guild.id == '456956416377225218') {
-	boom();
+// if (message.guild.id == '456956416377225218') {
+// 	boom();
 	
 	
 
-	bitesTheDust();
+// 	bitesTheDust();
 
-	justWorks();
-	}	
+// 	justWorks();
+// 	}	
 
 	function boom(){
 		let bom = message.guild.roles.find("name", "bomb");
