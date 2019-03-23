@@ -151,33 +151,33 @@ bot.on("message", async message => {
 	if(command === `!table`){
 	if(message.author.id == '242118931769196544'){
 	var sql = "CREATE TABLE user (id VARCHAR(30), money BIGINT, rank VARCHAR(30), patreon TINYINT, bio VARCHAR(100), marriage VARCHAR(32), stand VARCHAR(30), uname VARCHAR(32), streak SMALLINT, lasttrans BIGINT, pet BOOLEAN, hue VARCHAR(7))";
-  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50))";
+  	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50), kcrimson BOOLEAN )";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
   	
-  	con.query(sql, function (err, result) {
+  	con.query(sql2, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Tables created for user");
+    	message.author.send("Tables created for server");
   	});
   		}
   	}
 
 
 
-	// if(command === `!drop`){
-	// if(message.author.id == '242118931769196544'){
-	// var sql = "DROP TABLE server";
- //  	con.query(sql, function (err, result) {
- //    	if (err) throw err;
- //    	message.author.send("Table dropped for server!");
- //  	});
- //  	var sql2 = "DROP TABLE user";
- //  	con.query(sql2, function (err, result) {
- //    	if (err) throw err;
- //    	message.author.send("Table dropped for user!");
- //  	});
-	// }
-	// }
+	if(command === `!drop`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "DROP TABLE server";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table dropped for server!");
+  	});
+  	// var sql2 = "DROP TABLE user";
+  	// con.query(sql2, function (err, result) {
+   //  	if (err) throw err;
+   //  	message.author.send("Table dropped for user!");
+  	// });
+	}
+	}
 
 function bio(){
 
@@ -253,7 +253,98 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 	});
 
-}		
+}	
+
+	if (message.guild.id == '456956416377225218') {
+
+function HeavensDoor(){
+		if(message.member.roles.find("name", "HeavensDoor")) {
+		let otherID = messageArray[1];	
+		con.query(`SELECT * FROM user WHERE id = '${otherID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let bio = rows[0].bio;
+		var name = bot.users.get(otherID);
+		
+
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" They have no user!");
+			return;
+		}	else {
+			if (HeavensDoorCD.has(message.author.id)) {
+				 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+            message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
+            return;
+   		 } else{
+			 			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+				
+			message.channel.send("What would you like Heaven's Door to change their bio too? Cannot use quotes in response.(!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+				var msg = message.content;
+				HeavensDoorCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HeavensDoorCD.delete(message.author.id);
+        }, (1000*60*30));
+				
+				sql = `UPDATE user SET bio = '${msg}' WHERE id = '${otherID}'`;
+			con.query(sql);	
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);	
+			message.channel.send("**HEAVEN'S DOOR**");
+			}		//BOI
+
+			});
+	
+			
+		
+			
+			
+			
+			
+			
+			return;
+		 }
+		}
+
+
+		});
+		} 
+		else {
+  			message.channel.send("You do not have the power to use HEAVEN'S DOOR!");
+			}
+	}
+	
+	if(command === `!HEAVENSDOOR` && messageArray[1] != undefined){
+		HeavensDoor();
+	} 
+}	
 
 	if(command === `!bio`){
 		
@@ -293,6 +384,9 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				var msg = message.content;
 				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
 				var chance = Math.floor(Math.random()*2);
+
+				if(!channel) return message.author.send("Channel Not found.");
+
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//BOI
@@ -313,7 +407,104 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 
 
 
+
+
 	if(message.channel.type === "dm") return;
+
+if (message.guild.id == '456956416377225218') {
+	boom();
+	
+	
+
+	bitesTheDust();
+
+	justWorks();
+	}	
+
+	function boom(){
+		let bom = message.guild.roles.find("name", "bomb");
+
+		if(message.member.roles.find("name", "bomb") ) {
+				
+  			
+  			
+			
+			 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
+  			return;
+			} 
+		}	
+	
+
+	function bitesTheDust(){
+		
+		con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].kqueen;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else if(message.content.indexOf(trigger) != -1) {
+
+			
+			
+
+			message.channel.fetchMessages({ limit: 100 }).then(messages => {
+  const botMessages = messages.filter(msg => msg.content.length >= 1 );
+
+
+
+      message.channel.bulkDelete(botMessages)
+message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
+
+  			
+  
+})
+.catch(console.error);
+
+	sql = `UPDATE user SET kqueen = '' WHERE id = '${message.author.id}'`;;
+			con.query(sql, console.log);
+			return;
+		}
+
+
+		});
+		
+	}
+
+	function justWorks(){
+		con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].kcrimson;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else if(trigger == 1) {
+
+			
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+
+
+			return;
+		}
+
+
+		});
+	}
 
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -321,22 +512,249 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false})`;
 			con.query(sql, console.log);
 			
 			
 		}
 
 
+
+
 		
 			let prefix = rows[0].prefix;
 			let chests = rows[0].chests;
 			
-		theCommands(prefix);
+		theCommands(prefix, chests);
 		 
 	});	
 
-function theCommands(prefix, chests){	
+function theCommands(prefix, chests){
+	if(chests == true){
+	treasure();
+}
+
+function treasure(){
+		var appear = Math.floor(Math.random() * 100) + 1;
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + appear);
+		if(appear == 100){
+			console.log(appear);
+			
+			chest();	
+		} else {
+			console.log(appear);
+			
+			return;	
+		}
+	}
+
+	function chest(){
+		var karma = "";
+		var type = Math.floor(Math.random() * 10) + 1;
+		if(type > 2){
+			karma = "good";
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;		
+		
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = Math.floor(Math.random() * 999999) + 10000;
+		} else if(rank >= 11 && rank <= 99){
+			amount = Math.floor(Math.random() * 99999) + 1000;
+		} else if(rank === 100){
+			amount = Math.floor(Math.random() * 9999999) + 100000;
+			return;
+		}
+		let chest = rows[0].chest;
+		let channel = rows[0].channel;
+		const room = bot.channels.get(channel);
+		if(rows.length < 1) {
+			
+			
+			
+			
+		}	else {
+			if(chest != 0){
+				message.channel.send("The chest mysteriously disappeared!");
+			}
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`;
+		con.query(sql);
+		const booru = new Danbooru()
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let item = new Discord.RichEmbed()
+
+			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setImage(url.href)
+			.setColor("#a57400");
+
+		room.sendEmbed(item);
+ 		
+  		 })
+			return;
+		}
+
+
+		});
+		
+			
+		} else {
+			karma = "bad";
+			con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var rank = Math.floor(Math.random() * 100) + 1;	
+		var amount = 0;		
+		if(rank >= 1 && rank <= 10){
+			amount = 1;
+		} else if(rank >= 11 && rank <= 99){
+			amount = 2;
+		} else if(rank === 100){
+			amount = 3;
+		}
+		let chest = rows[0].chest;
+		let channel = rows[0].channel;
+		const room = bot.channels.get(channel);
+		if(rows.length < 1) {
+			
+			
+			
+			
+		}	else {
+			if(chest != 0){
+				message.channel.send("The chest mysteriously disappeared!");
+			}
+			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`
+			con.query(sql);
+
+			const booru = new Danbooru()
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let item = new Discord.RichEmbed()
+
+			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setImage(url.href)
+			.setColor("#a57400");
+
+		room.sendEmbed(item);
+ 		
+  		 })
+
+			return;
+		}
+
+
+		});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}	
+
+function collect(){
+		
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		
+		if(err) throw err;
+		let type = rows[0].karma;
+		let cost = rows[0].money;
+			if(rows.length < 1) {
+			
+			message.reply(" nothing to collect!");
+			
+			return;
+		}	else {
+			if(type == "good"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+				let lasttrans = rows[0].lasttrans;
+
+				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" found $" + cost + " in the chest!");
+				
+				lostChest();	
+				});	
+			} else if(type == "bad"){
+				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				if(rows.length < 1) {
+					message.reply("You have no user!");
+					console.log(rows);
+					return;
+				}
+
+				let money = rows[0].money;
+				var penalty;
+				if(cost == 1){
+					penalty = money / 100;
+				} else if(cost == 2){
+					penalty = money / 25;
+				} else if(cost == 3){
+					penalty = money / 10;
+				} else {
+					penalty = 1;
+				}	
+
+				if (insuranceCD.has(message.author.id)) {
+				penalty *= .5;
+				message.channel.send("Insurance Kicked in!");
+				}	
+
+				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+				message.reply(" lost $" + penalty + " from a trap in the chest!");
+				
+				lostChest();	
+				});
+			}	
+
+			
+			return;
+		}
+		});
+	}	
+
+function lostChest(){
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
+		con.query(sql);
+		message.channel.send("The chest mysteriously disappeared!");
+		return;	
+		});
+	}		  
+
+
 	function alter(){
 		
 
@@ -466,7 +884,7 @@ function theCommands(prefix, chests){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, karma, kqueen) VALUES ('${message.guild.id}', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${true}, ${true}, ${0}, '', '')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false})`;
 			con.query(sql, console.log);
 			
 			
@@ -482,7 +900,7 @@ function theCommands(prefix, chests){
 	                		return;
 	            		} else {
 					
-					sql = `UPDATE server SET greeting = '${message.content}' WHERE id = '${message.guild.id}'`;
+					sql = `UPDATE server SET greeting = "${message.content}" WHERE id = '${message.guild.id}'`;
 					con.query(sql);
 					message.channel.send("Greeting Updated!");
 					return;
@@ -969,224 +1387,9 @@ function divorce(){
 	
 //MONEY MONEY MONEY
 
-if(chests == true){
-	treasure();
-}
-
-function treasure(){
-		var appear = Math.floor(Math.random() * 100) + 1;
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + appear);
-		if(appear == 100){
-			console.log(appear);
-			
-			chest();	
-		} else {
-			console.log(appear);
-			
-			return;	
-		}
-	}
-
-function chest(){
-		var karma = "";
-		var type = Math.floor(Math.random() * 10) + 1;
-		if(type > 2){
-			karma = "good";
-		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;		
-		
-		var rank = Math.floor(Math.random() * 100) + 1;	
-		var amount = 0;		
-		if(rank >= 1 && rank <= 10){
-			amount = Math.floor(Math.random() * 999999) + 10000;
-		} else if(rank >= 11 && rank <= 99){
-			amount = Math.floor(Math.random() * 99999) + 1000;
-		} else if(rank === 100){
-			amount = Math.floor(Math.random() * 9999999) + 100000;
-			return;
-		}
-		let chest = rows[0].chest;
-		let channel = rows[0].channel;
-		const room = bot.channels.get(channel);
-		if(rows.length < 1) {
-			
-			
-			
-			
-		}	else {
-			if(chest != 0){
-				message.channel.send("The chest mysteriously disappeared!");
-			}
-			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`;
-		con.query(sql);
-		const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
- 
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
- 			
-		let item = new Discord.RichEmbed()
-
-			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
-			.setImage(url.href)
-			.setColor("#a57400");
-
-		room.sendEmbed(item);
- 		
-  		 })
-			return;
-		}
 
 
-		});
-		
-			
-		} else {
-			karma = "bad";
-			con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		var rank = Math.floor(Math.random() * 100) + 1;	
-		var amount = 0;		
-		if(rank >= 1 && rank <= 10){
-			amount = 1;
-		} else if(rank >= 11 && rank <= 99){
-			amount = 2;
-		} else if(rank === 100){
-			amount = 3;
-		}
-		let chest = rows[0].chest;
-		let channel = rows[0].channel;
-		const room = bot.channels.get(channel);
-		if(rows.length < 1) {
-			
-			
-			
-			
-		}	else {
-			if(chest != 0){
-				message.channel.send("The chest mysteriously disappeared!");
-			}
-			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}`
-			con.query(sql);
 
-			const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
- 		 // Select a random post from posts array
-  		const index = Math.floor(Math.random() * posts.length)
-  		const post = posts[index]
- 
-  		// Get post's url 
- 		 const url = booru.url(post.file_url)
- 			
-		let item = new Discord.RichEmbed()
-
-			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
-			.setImage(url.href)
-			.setColor("#a57400");
-
-		room.sendEmbed(item);
- 		
-  		 })
-
-			return;
-		}
-
-
-		});
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-	}	
-
-function collect(){
-		
-		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		
-		if(err) throw err;
-		let type = rows[0].karma;
-		let cost = rows[0].money;
-			if(rows.length < 1) {
-			
-			message.reply(" nothing to collect!");
-			
-			return;
-		}	else {
-			if(type == "good"){
-				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-				if(err) throw err;
-				let sql;
-				if(rows.length < 1) {
-					message.reply("You have no user!");
-					console.log(rows);
-					return;
-				}
-
-				let money = rows[0].money;
-				let lasttrans = rows[0].lasttrans;
-
-				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost} WHERE id = '${message.author.id}'`;
-				con.query(sql);
-				message.reply(" found $" + cost + " in the chest!");
-				
-				lostChest();	
-				});	
-			} else if(type == "bad"){
-				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-				if(err) throw err;
-				let sql;
-				if(rows.length < 1) {
-					message.reply("You have no user!");
-					console.log(rows);
-					return;
-				}
-
-				let money = rows[0].money;
-				var penalty;
-				if(cost == 1){
-					penalty = money / 100;
-				} else if(cost == 2){
-					penalty = money / 25;
-				} else if(cost == 3){
-					penalty = money / 10;
-				} else {
-					penalty = 1;
-				}	
-
-				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
-				con.query(sql);
-				message.reply(" lost $" + penalty + " from a trap in the chest!");
-				
-				lostChest();	
-				});
-			}	
-
-			
-			return;
-		}
-		});
-	}	
-
-function lostChest(){
-		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
-		con.query(sql);
-		message.channel.send("The chest mysteriously disappeared!");
-		return;	
-		});
-	}		
 	
 function daily(){
 		
@@ -1194,7 +1397,8 @@ function daily(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-		let rank = rows[0].rank;
+		let rank = rows[0].rank; 
+		let patreon = rows[0].patreon;
 		let lasttrans = rows[0].lasttrans;	
 		var check;
 
@@ -1208,7 +1412,33 @@ function daily(){
             message.reply("You have already collected your daily check!");
             return;
     } else {
+    	if(rank == "Ambassador"){
+    		check = 1500;
+    	} else if(rank == "Beta Tester"){
+    		check = 1250;
+    	} else if(rank == "Companion"){
+    		check = 1500;
+    	} else if(rank == "Legend"){
+    		check = 1750;
+    	} else if(rank == "Bae"){
+    		check = 2000;
+    	} else if(rank == "Creator"){
+    		check = 1;
+    		message.channel.send("Pfft you don't even need this money you lame :stuck_out_tongue:")
+    	} else {
     		check = 1000;
+    	}
+
+    	 if(patreon == 1){
+    		check += 1000;
+    	} else if(patreon == 2){
+    		check += 3000;
+    	} else if(patreon == 3){
+    		check += 3000;
+    	} else if(patreon == 4){
+    		check += 3000;
+    	}
+
     	sql = `UPDATE user SET money = ${money + check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
@@ -1257,6 +1487,11 @@ function gambleFlip(){
 			
 		} else {
 			
+			if (insuranceCD.has(message.author.id)) {
+				num *= .5;
+				message.channel.send("Insurance Kicked in!");
+			}	
+
 			sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-num}, streak = ${0} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			if(streak >= 2){
@@ -1427,6 +1662,11 @@ function gambleSlots(){
 		}
 		 else {
 			prize = 10;
+
+			if (insuranceCD.has(message.author.id)) {
+				prize = 5;
+				message.channel.send("Insurance Kicked in!");
+			}	
 			
 			sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize}  WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
@@ -1462,7 +1702,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n  $10,000 | **weddingRing** \n Get married to someone you hold dear! Can be rejected and no refunds! \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customPrice + "|**" + customItem + "\n** An Exlcusive item to this server!")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customPrice + "|**" + customItem + "\n** An Exlcusive item to this server!")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -1511,6 +1751,59 @@ function customRole(){
   	 });
 }
 
+function customItem(){
+	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		if(rows.length < 1) {
+			
+			return;
+		} 
+
+		let customItem = rows[0].shop;
+		let customPrice = rows[0].prices;
+		var cost = parseInt(customPrice);
+		var item = message.guild.roles.find("name", customItem);
+
+		if(!item) return message.reply(" There is no role for " + customItem);
+
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < cost) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+
+		if(money >= cost){
+
+		
+				 sql = `UPDATE user SET money = ${money - cost} WHERE id = '${message.author.id}'`;
+				con.query(sql);
+					
+		
+		
+		member.addRole(item).catch(console.error);
+			
+		
+		
+  		message.reply(customItem + " Purchased!");
+
+		return;
+  	}
+  	 });
+
+	 });
+}	
+
 function insure(){
 		
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -1520,6 +1813,7 @@ function insure(){
 			var percentage = Math.floor((1 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
+				return;
 			}	
 			else {
 	insuranceCD.add(message.author.id);		
@@ -2091,27 +2385,27 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let stand = rows[0].stand;
 		var spouse = '';
 
-		if(marriage != ''){
-		spouse = bot.users.get(marriage);
-		}
+	
 
 		var supporter = "";
-		// if(patreon == 1){
-		// 	supporter = " :star:";
-		// } else if(patreon == 2){
-		// 	supporter = " :star: :star:";
-		// } else if(patreon == 3){
-		// 	supporter = " :star: :star: :star:";
-		// } else {
-		// 	supporter = " :star: :star: :star: :star:";
-		// }
+		if(patreon == 1){
+			supporter = " ⭐";
+		} else if(patreon == 2){
+			supporter = "⭐⭐";
+		} else if(patreon == 3){
+			supporter = "⭐⭐⭐";
+		} else if(patreon == 4) {
+			supporter = "⭐⭐⭐⭐";
+		} else {
+			supporter = "";
+		}
 				
 
 		let stats = new Discord.RichEmbed()
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n Rank: " + rank + "\n Spouse:" + spouse + "\n Stand:" + stand + "\n Bio: \n" + bio)
+			.setDescription("ID:" + message.author.id + "Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n Bio: \n" + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -2168,7 +2462,11 @@ function viewOtherUser(){
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 
-		if(!rows[0]) return message.channel.send("They don't have a user!");
+		if(rows.length < 1) {
+			message.reply("They have no user!");
+			
+			return;
+		}
 
 		
 		let money = rows[0].money;
@@ -2180,27 +2478,27 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let stand = rows[0].stand;
 		var spouse = '';
 
-		if(marriage != ''){
-		spouse = bot.users.get(marriage);
-		}
+		
 
 		var supporter = "";
-// 		if(patreon == 1){
-// 			supporter = " :star:";
-// 		} else if(patreon == 2){
-// 			supporter = " :star: :star:";
-// 		} else if(patreon == 3){
-// 			supporter = " :star: :star: :star:";
-// 		} else {
-// 			supporter = " :star: :star: :star: :star:";
-// 		}
+		if(patreon == 1){
+			supporter = " ⭐";
+		} else if(patreon == 2){
+			supporter = "⭐⭐";
+		} else if(patreon == 3){
+			supporter = "⭐⭐⭐";
+		} else if(patreon == 4) {
+			supporter = "⭐⭐⭐⭐";
+		} else {
+			supporter = "";
+		}
 				
 
 		let stats = new Discord.RichEmbed()
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money + "\n Rank: " + rank + "\n Spouse:" + spouse + "\n Stand:" + stand + "\n " + bio)
+			.setDescription("ID:" + other.id +"Money: $" + money + "\n Rank: " + rank + "\n Stand:" + stand + "\n " + bio)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
@@ -2263,11 +2561,536 @@ function give(){
 	return;
 }	
 
+//STANDO POWA!!!!!
+
+let dio = message.guild.roles.find("name", "DIO");
+    let kakyoin = message.guild.roles.find("name", "kakyoin");
+	let standUser = message.guild.roles.find("name", "Stand User");
+	if (message.guild.id == '456956416377225218') {
+	function zaWarudo(){
+		var userList = message.channel.members.filter(m => m.user.bot === false);
+    	var randomBoi = userList.random().user;
+    	if(message.member.roles.find("name", "DIO") ) {
+				
+				let role = message.guild.roles.find('name', 'Stand User');
+
+				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+
+				 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**TOKI WA TOMARE**");
+			} else {
+  			message.channel.send("You do not have the power to use ZA WARUDO!");
+			}
+
+    	
+	}
+
+	function zaWarudoDo(){
+		var userList = message.channel.members.filter(m => m.user.bot === false);
+		if(message.member.roles.find("name", "DIO") ) {
+				let role = message.guild.roles.find('name', 'kakyoin');
+
+				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+
+				   message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
+				console.log("Time has began to move again.")
+				message.channel.send("**TOKI WA MOKIDASU**");
+			} else {
+  			message.channel.send("You do not have the power to use ZA WARUDO!");
+			}
+
+    	
+	}
+		
+	function starPlatinum(){
+		
+		if(message.member.roles.find("name", "Star Platinum") ) {
+		
+			
+			if (StarPlatinumCD.has(message.author.id)) {
+            message.reply("Star Platinum must wait about 30 mins from when you first used it!");
+            return;
+   		 } else{
+		StarPlatinumCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          StarPlatinumCD.delete(message.author.id);
+        }, (1000*60*30));	
+			
+			 
+			 
+			 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
+			 
+			 setTimeout(() => {
+         message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
+				console.log("Time has been resumed.")
+				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
+        }, (1000*60*1));	
+			 
+		}	
+	}
+		else {
+  			message.channel.send("You do not have the power to use STAR PLATINUM!");
+			}
+}
+	
+	function harvest(){
+		
+		if(message.member.roles.find("name", "Harvest") ) {
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+			
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+		
+
+		var lastMsg = toBeat.lastMessage.content.replace(/[^\d.-]/g, '');
+		var lastInt = parseInt(lastMsg);
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" You have no user!");
+			return;
+		}	else {
+			if (HarvestCD.has(message.author.id)) {
+            message.reply("Harvest must wait about 30 mins from when you first used it!");
+            return;
+   		 } else{
+			 		if(toBeat.lastMessage.content.indexO(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 10000000){	
+			HarvestCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HarvestCD.delete(message.author.id);
+        }, (1000*60*30));
+			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
+			con.query(sql);			
+			message.channel.send("Harvest collected " + lastInt + "!");			
+		}	
+			
+		else {
+			message.channel.send("Harvest cannot collect that!");
+		}	
+			
+			
+			
+			return;
+		 }
+		}
+
+
+		});
+		} 
+		else {
+  			message.channel.send("You do not have the power to use HARVEST!");
+			}
+	}
+	
+	
+	
+	function firstBomb(){
+		
+		if(message.member.roles.find("name", "Killer Queen")) {
+
+
+			if (Bomb1CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 30 seconds from when you first used the first bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb1CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb1CD.delete(message.author.id);
+        }, (1000*30));	
+			
+		message.channel.fetchMessages({ limit: 2 }).then(messages => {
+  const botMessages = messages.filter(msg => msg.author.id != message.author.id );
+
+
+
+      message.channel.bulkDelete(botMessages)
+
+  			 message.channel.send("**KILLA QUEEN**")
+
+  			
+  
+})
+.catch(console.error);
+}
+} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
+	}
+
+	
+	
+	function secondBomb(){
+		
+		if(message.member.roles.find("name", "Killer Queen")) {
+		let bomb = message.guild.roles.find("name", "bomb");	
+		let member = message.mentions.members.first();
+
+		
+		if (Bomb2CD.has(message.author.id)) {
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);		
+            message.reply("Killer Queen must wait about 30 minutes from when you first used the second bomb!");
+            return;
+   		 } else{
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);	
+			message.channel.send("**KILLA QUEEN DAICHI NO BAKUDAN**"); 		
+			Bomb2CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb2CD.delete(message.author.id);
+        }, (1000*60*30));	
+    }
+			member.addRole(bomb)
+			 setTimeout(() => {
+         	member.removeRole(bomb)
+		message.channel.send("Sheer Heartattack has stopped pursuing its target!"); 	
+        }, (1000*60*1));
+		return;
+} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
+	}
+	
+	function thirdBomb(){
+		
+if(message.member.roles.find("name", "Killer Queen")) {
+
+
+		con.query(`SELECT * FROM user WHERE id = 'BITES'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var trigger = messageArray[1];
+		if(rows.length < 1) {
+			if (Bomb3CD.has(message.author.id)) {
+				message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+            message.reply("Killer Queen must wait about 3 hours from when you first used the third bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb3CD.delete(message.author.id);
+        }, (1000*60*60*3));	}
+			sql = `INSERT INTO user (id, bio) VALUES ('BITES', '${trigger}')`;
+			con.query(sql, console.log);
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
+			return;
+		}	else {
+			if (Bomb3CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 3 hours from when you first used the third bomb!");
+            return;
+   		 } else{
+			 		
+			Bomb3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb3CD.delete(message.author.id);
+        }, (1000*60*60*3));	}
+			sql = `UPDATE user SET bio = '${trigger}' WHERE id = 'BITES'`;
+			con.query(sql, console.log);
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);	
+			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
+			return;
+		}
+	});
+		} else { 
+	message.channel.sendMessage("You do not have the power to use KILLER QUEEN!");
+}
+	}
+	
+	function kingCrimson(){
+		
+	if(message.member.roles.find("name", "King Crimson")) {	
+		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var trigger = rows[0].kcrimson;
+		if(kcrimson == false) {
+			if (KingCrimsonCD.has(message.author.id)) {
+            message.reply("King Crimson must wait about 5 minutes from when you first used it!");
+            return;
+   		 } else{
+			 		
+			KingCrimsonCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          KingCrimsonCD.delete(message.author.id);
+        }, (1000*60*5));	}
+			sql = `UPDATE server SET kcrimson = ${true} WHERE id = '${message.guild.id}'`;
+			con.query(sql, console.log);
+			message.channel.send("**KING CRIMSON NO NOURYOKU**");
+			return;
+		}	else {
+			if (KingCrimsonCD.has(message.author.id)) {
+            message.reply("King Crimson must wait about 30 minutes from when you first used it!");
+            return;
+   		 } else{
+			 		
+			KingCrimsonCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          KingCrimsonCD.delete(message.author.id);
+        }, (1000*60*30));	}
+			sql = `UPDATE server SET kcrimson = ${true} WHERE id = '${message.guild.id}'`;;
+			con.query(sql, console.log);
+			
+			message.channel.send("**KING CRIMSON NO NOURYOKU**");
+			setTimeout(() => {
+        var sql2 = `UPDATE server SET kcrimson = ${false} WHERE id = '${message.guild.id}'`;
+			con.query(sql2, console.log);
+			message.channel.send("`It just works.`");	
+        }, (1000*30));	
+			return;
+		}
+
+	});
+		} else { 
+	message.channel.sendMessage("You do not have the power to use KING CRIMSON");
+}
+	}
+	
+	
+	
+	function echoesAct1(){
+		
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+		let them = message.mentions.users.first();
+		if(message.member.roles.find("name", "Echoes")) {
+			if (act1CD.has(message.author.id)) {
+            message.reply("Echoes must wait about 1 minute from when you first used act 1!");
+            return;
+   		 } else{
+			 		
+			act1CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          act1CD.delete(message.author.id);
+        }, (1000*60));	
+    
+		message.guild.members.get(them.id).setNickname(messageArray[2]);
+			message.channel.send("**ECHOES ACT 1 !**");
+		 }
+		} else { 
+	message.channel.sendMessage("You do not have the power to use ECHOES");
+}
+	}
+	
+	function echoesAct3(){
+		if(message.member.roles.find("name", "Echoes")) {
+			if (act3CD.has(message.author.id)) {
+            message.reply("Echoes must wait about 30 minutes from when you first used act !");
+            return;
+   		 } else{
+			 		
+			act3CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          act3CD.delete(message.author.id);
+        }, (1000*60*30));	
+    message.channel.fetchMessages({ limit: 2 }).then(messages => {
+  var lastMessage = messages.last(); 
+
+
+
+      lastMessage.pin()
+	     .then(console.log)
+ 		.catch(console.error);
+
+  			 message.channel.send("**ECHOES ACT 3 FREEZE! S-H-I-T!**")
+
+  			
+  
+})
+.catch(console.error); }
+		
+		} else { 
+	message.channel.sendMessage("You do not have the power to use ECHOES");
+}
+	}
+
+	function crazyDiamond(){
+		
+		let member = message.mentions.members.first();
+		if(message.member.roles.find("name", "Crazy Diamond")) {
+		
+		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+		var dmg = rows[0].lasttrans;	
+		if(rows.length < 1) {
+			
+   		 } else{
+			 		
+			 if (CrazyDiamondCD.has(message.author.id)) {
+            message.reply("Crazy Diamond must wait about 30 minutes from when you first used it!");
+            return;		
+			CrazyDiamondCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          CrazyDiamondCD.delete(message.author.id);
+        }, (1000*60*30));	}
+			
+			message.channel.send("This person's actions cannot be healed by Crazy Diamond!");
+			return;
+		}	else {
+			if (CrazyDiamondCD.has(message.author.id)) {
+            message.reply("Crazy Diamond must wait about 30 minutes from when you first used it!");
+            return;
+   		 } else{
+			 		
+			CrazyDiamondCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          CrazyDiamondCD.delete(message.author.id);
+        }, (1000*60*30));	}
+			
+		let sql;
+		let money = rows[0].money;
+			sql = `UPDATE user SET money = ${money - dmg}, lasttrans = ${0} WHERE id = '${member.id}'`;
+			con.query(sql, console.log);
+		
+			
+			message.channel.send("**CRAZY DIAMOND**");
+				
+			return;
+		}
+
+	});
+} else { 
+	message.channel.sendMessage("You do not have the power to use CRAZY DIAMOND!");
+}
+	}
+
+function bestow(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+
+		var chance = Math.floor(Math.random() * 7) + 1;
+		var std1 = message.guild.roles.find("name", "Killer Queen");
+		var std2 = message.guild.roles.find("name", "Echoes");
+		var std3 = message.guild.roles.find("name", "Harvest");
+		var std4 = message.guild.roles.find("name", "HeavensDoor");
+		var std5 = message.guild.roles.find("name", "Star Platinum");
+		var std6 = message.guild.roles.find("name", "Stand User");
+		var std7 = message.guild.roles.find("name", "King Crimson");
+		var std8 = message.guild.roles.find("name", "Crazy Diamond");
+
+	let member = message.mentions.members.first();	
+
+		if(chance == 1){
+			member.addRole(std1).catch(console.error);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
+		} else if(chance == 2){
+			member.addRole(std2).catch(console.error);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
+		} else if(chance == 3){
+			member.addRole(std3).catch(console.error);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
+		} else if(chance == 4){
+			member.addRole(std4).catch(console.error);
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
+		} else if(chance == 5){
+			member.addRole(std5).catch(console.error);
+			member.removeRole(std6)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
+		} else if(chance == 6){
+			member.addRole(std7).catch(console.error);
+			member.removeRole(std6)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
+		} else if(chance == 7){
+			member.addRole(std8).catch(console.error);
+			member.removeRole(std6)
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED CRAZY DIAMOND||"), 200);
+		}
+
+
+
+	}
+}		
+
+
 function standHelp(){
 	let stands = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Stand Commands")
+			.setTitle("KS-Bot Stand Commands - Only available in Kamino's House")
 			.setDescription("`Star Platinum` \n Can talk during stopped time. Can freeze time for a short period of time. \n **!STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n `Harvest` \n **!HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's !spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n `Echoes` \n **!ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **!ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n `Heaven's Door` \n **!HEAVENSDOOR [user id]** (make sure developer mode is turned on): \n Changes someone's bio. Cannot use quotes in bio. Has a cooldown of 30 minutes. \n `Crazy Diamond` \n **!CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as !daily, !spin, !slots, !horoscope, and !open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n `Killer Queen` \n **!1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **!2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **!3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n `King Crimson` \n **!KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.")
 			.setColor("#1d498e"); 
 
@@ -2286,6 +3109,19 @@ function help(){
 
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the help list!");
+}
+
+function channelCheck(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("About this channel")
+			.setDescription(`ID:` + message.channel.id)
+			.setColor("#1d498e"); 
+
+		message.channel.sendEmbed(help);
+		
 }
 
 function admin(){
@@ -2327,7 +3163,7 @@ function discordLink(){
 			.setTitle("Kamino's House || CLICK ME")
 			.setDescription("Stop by and say hi (:")
 			.setColor("#1f3c5b")
-			.setURL("https://discord.gg/6Zf5HGH");
+			.setURL("https://discord.gg/4V4Vch6");
 			
 
 		message.author.sendEmbed(yeet);
@@ -2371,6 +3207,10 @@ if(command === `${prefix}admin` || command === `KS!admin`){
 		message.reply(" You don't have the credentials to perform this function.")
 	}
 }
+
+if(command === `${prefix}channel`){
+			channelCheck();
+	}		
 
 if(command === `${prefix}stands`){
 			standHelp();
@@ -2454,31 +3294,31 @@ if(command === `${prefix}user`){
 
 	}	
 
-	if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
-			let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
-			if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
-			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
+	// if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
+	// 		let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
+	// 		if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
+	// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
 
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			return;
-		}
+	// 	if(rows.length < 1) {
+	// 		message.reply("You have no user!");
+	// 		return;
+	// 	}
 
-		let money = rows[0].money;
+	// 	let money = rows[0].money;
 		
-		if(money < 10000) {
-			message.reply("Insufficient Funds.");
-			return;
-		}
-			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
-			con.query(sql);	
-			marriage();
-		});
+	// 	if(money < 10000) {
+	// 		message.reply("Insufficient Funds.");
+	// 		return;
+	// 	}
+	// 		sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+	// 		con.query(sql);	
+	// 		marriage();
+	// 	});
 	
 
 			
-		}	
+	// 	}	
 
 	
 	
