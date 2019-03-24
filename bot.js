@@ -69,7 +69,7 @@ bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
   	
-	bot.user.setPresence({ status: 'online', game: { name: 'being revamped in ' + bot.guilds.size + ' servers' } });
+	bot.user.setPresence({ status: 'online', game: { name: 'KS!help |' + bot.guilds.size + ' servers' } });
 
 
 
@@ -953,52 +953,54 @@ function lostChest(){
 					return;
 				} 
 			}); 
-	        	} else if(messageArray[1] == "shop"){
-					let shop;
-					if (rows[0].shop == ""){
-						shop = "";
-					} else {
-						shop = rows[0].shop;
-					}	
-					message.channel.send("The current shop item is: \n" + shop + " \n Update your shop item role! Make sure it shares the exact same spelling as the role you want the guild member to purchase. \n !cancel to cancel.");
-					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		if (message.content == `${prefix}cancel`) {
-	               		 message.channel.send("Shop Item cancelled.");
-	                		return;
-	            		} else {
+	        	} 
+	  //       	else if(messageArray[1] == "shop"){
+			// 		let shop;
+			// 		if (rows[0].shop == ""){
+			// 			shop = "";
+			// 		} else {
+			// 			shop = rows[0].shop;
+			// 		}	
+			// 		message.channel.send("The current shop item is: \n" + shop + " \n Update your shop item role! Make sure it shares the exact same spelling as the role you want the guild member to purchase. \n !cancel to cancel.");
+			// 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	  //       		collector.once('collect', message => {
+	  //           		if (message.content == `${prefix}cancel`) {
+	  //              		 message.channel.send("Shop Item cancelled.");
+	  //               		return;
+	  //           		} else {
 					
-					sql = `UPDATE server SET shop = '${message.content}' WHERE id = '${message.guild.id}'`;
-					con.query(sql);
-					message.channel.send("Shop item Updated!");
-					return;
-				} 
-			}); 
-	        	} else if(messageArray[1] == "price"){
-				let shop;
-					if (rows[0].shop == ""){
-						shop = "";
-					} else {
-						shop = rows[0].shop;
-					}	
-					message.channel.send("How much do you want the shop price to be for " + shop + " ? \n !cancel to cancel.");
-					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	        			var num = parseInt(message.content);
-	            		if (message.content == `${prefix}cancel`) {
-	               		 message.channel.send("Price change cancelled.");
-	                		return;
-	            		}  else if(Number.isInteger(num) == true && num >= 0) {
-							sql = `UPDATE server SET prices = '${num}' WHERE id = '${message.guild.id}'`;
-							con.query(sql);
-							message.channel.send("Price set to " + num + " for the shop item: " + shop + "!");
-							return;
-						} else {
-							message.channel.send("Invalid Input. Must be a value > 0.");
-	                		return;
-						}
-				}); 
-	        	} else if(messageArray[1] == "whisper"){
+			// 		sql = `UPDATE server SET shop = '${message.content}' WHERE id = '${message.guild.id}'`;
+			// 		con.query(sql);
+			// 		message.channel.send("Shop item Updated!");
+			// 		return;
+			// 	} 
+			// }); 
+	  //       	} else if(messageArray[1] == "price"){
+			// 	let shop;
+			// 		if (rows[0].shop == ""){
+			// 			shop = "";
+			// 		} else {
+			// 			shop = rows[0].shop;
+			// 		}	
+			// 		message.channel.send("How much do you want the shop price to be for " + shop + " ? \n !cancel to cancel.");
+			// 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	  //       		collector.once('collect', message => {
+	  //       			var num = parseInt(message.content);
+	  //           		if (message.content == `${prefix}cancel`) {
+	  //              		 message.channel.send("Price change cancelled.");
+	  //               		return;
+	  //           		}  else if(Number.isInteger(num) == true && num >= 0) {
+			// 				sql = `UPDATE server SET prices = '${num}' WHERE id = '${message.guild.id}'`;
+			// 				con.query(sql);
+			// 				message.channel.send("Price set to " + num + " for the shop item: " + shop + "!");
+			// 				return;
+			// 			} else {
+			// 				message.channel.send("Invalid Input. Must be a value > 0.");
+	  //               		return;
+			// 			}
+			// 	}); 
+	  //       	} 
+	        	else if(messageArray[1] == "whisper"){
 					message.channel.send("Do you want to turn the whisper command on or off(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -1682,7 +1684,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n $" + customPrice + " | **" + customItem + "\n** An Exlcusive item to this server!")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -1803,7 +1805,7 @@ function insure(){
           message.reply("'s insurance has run out!")
         }, (1000*90));	
 	//insert function here.
-		jk();
+		
 	}
 			sql = `UPDATE user SET money = ${money - percentage} WHERE id = '${message.author.id}'`;
 			
@@ -3111,7 +3113,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle shop**: \n Changes the name of the role you're selling in your server. \n **${prefix}toggle price**: \n Changes the price of your role you're selling in your server.`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -3280,21 +3282,21 @@ if(command === `${prefix}user`){
 	}
 
 
-	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
-		if(err) throw err;
+// 	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+// 		if(err) throw err;
 		
-		if(rows.length < 1) {
+// 		if(rows.length < 1) {
 			
-			return;
-		} 
+// 			return;
+// 		} 
 
-		let customItem = rows[0].shop;
+// 		let customItem = rows[0].shop;
 		
-	if(command === `${prefix}buy` && messageArray[1] === customItem){
-		customItem();
-	}
+// 	if(command === `${prefix}buy` && messageArray[1] === customItem){
+// 		customItem();
+// 	}
 
-});
+// });
 
 	// if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
 	// 		let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
