@@ -3274,13 +3274,27 @@ if(command === `${prefix}user`){
 		customRole();
 
 	}	
-	
-		
-	if(command === `${prefix}buy` && messageArray[1] === "exclusive"){
-		customItem();
+
+	if(command === `${prefix}buy` && messageArray[1] === `insurance`){
+		insure();
 	}
 
 
+	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		if(rows.length < 1) {
+			
+			return;
+		} 
+
+		let customItem = rows[0].shop;
+		
+	if(command === `${prefix}buy` && messageArray[1] === customItem){
+		customItem();
+	}
+
+});
 
 	// if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
 	// 		let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
