@@ -1682,7 +1682,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n " + customPrice + "|**" + customItem + "\n** An Exlcusive item to this server!")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $5,000 | **standArrow** \n Roll for a 7% chance for a stand! \n $" + customPrice + " | **" + customItem + "\n** An Exlcusive item to this server!")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -3284,7 +3284,7 @@ if(command === `${prefix}user`){
 
 		let customItem = rows[0].shop;
 		
-	if(command === `${prefix}buy` && messageArray[1] === customItem){
+	if(command === `${prefix}buy` && messageArray[1] === "exclusive"){
 		customItem();
 	}
 
