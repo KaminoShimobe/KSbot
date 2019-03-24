@@ -385,8 +385,9 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				var setting = [`:speaking_head: So apparently "`+ msg +`"`, `:speaking_head: Did you hear about, "`+ msg +`" :eyes:`, `:speaking_head: A little birdie told me that "`+ msg +`"`]
 				var chance = Math.floor(Math.random()*2);
 
-				if(channel == undefined){
+				if(!channel){
 					message.author.send("Channel not found!");
+					return;
 				}
 
 				channel.send(setting[chance]);
