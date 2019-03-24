@@ -1461,11 +1461,12 @@ function gambleFlip(){
 			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
 				
 			}
-				
+			else {
 			sql = `UPDATE user SET money = ${money + num}, lasttrans = ${num}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 		
 			message.reply("*CHA~CHING!* You made $" + num + "!");
+		}
 			
 		} else {
 			
