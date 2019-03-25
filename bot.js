@@ -679,7 +679,7 @@ function collect(){
 		
 		if(err) throw err;
 		let type = rows[0].karma;
-		let cost = rows[0].money;
+		let cost = rows[0].chest;
 			if(rows.length < 1) {
 			
 			message.reply(" nothing to collect!");
@@ -1405,7 +1405,7 @@ function daily(){
     	} else if(rank == "Bae"){
     		check = 2000;
     	} else if(rank == "Creator"){
-    		check = 1;
+    		check = 1000;
     		message.channel.send("Pfft you don't even need this money you lame :stuck_out_tongue:")
     	} else {
     		check = 1000;
