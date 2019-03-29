@@ -1685,7 +1685,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next minute will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 30% of your money | **insurance**: \n Your losses for the next 30 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -1793,7 +1793,7 @@ function insure(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((1 / 10) * money);
+			var percentage = Math.floor((3 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
 				return;
@@ -1804,7 +1804,7 @@ function insure(){
           // Removes the user from the set after however long the cooldown is.
           insuranceCD.delete(message.author.id);
           message.reply("'s insurance has run out!")
-        }, (1000*90));	
+        }, (1000*30));	
 	//insert function here.
 		
 	}
