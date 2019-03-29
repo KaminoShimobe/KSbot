@@ -1453,13 +1453,13 @@ function gambleFlip(){
 	var chance;
 	
 		if(money > 0 && money <= 100000){
-		 chance = Math.floor(Math.random() * 2) + ;
+		 chance = Math.floor(Math.random() * 2) + 1;
 		} else if(money > 100000 && money <= 1000000){
-		 chance = Math.floor(Math.random() * 4) + ;
+		 chance = Math.floor(Math.random() * 4) + 1;
 		} else if(money > 1000000 && money <= 1000000){
-		 chance = Math.floor(Math.random() * 25) + ;
+		 chance = Math.floor(Math.random() * 25) + 1;
 		} else if(money > 10000000 && money <= 1000000000){
-		 chance = Math.floor(Math.random() * 100) + ;
+		 chance = Math.floor(Math.random() * 100) + 1;
 		} else {
 			chance = 0;
 		}
