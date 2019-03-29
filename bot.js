@@ -1452,13 +1452,13 @@ function gambleFlip(){
 	var bet;
 	var chance;
 	
-		if(num > 0 && num <= 100000){
+		if(num > 0 && num <= 999999){
 		 chance = Math.floor(Math.random() * 2) + 1;
-		} else if(num > 100000 && num <= 1000000){
+		} else if(num > 999999 && num <= 9999999){
 		 chance = Math.floor(Math.random() * 4) + 1;
-		} else if(num > 1000000 && num <= 1000000){
-		 chance = Math.floor(Math.random() * 8) + 1;
-		} else if(num > 10000000 && num <= 1000000000){
+		} else if(num > 9999999 && num <= 99999999){
+		 chance = Math.floor(Math.random() * 6) + 1;
+		} else if(num > 99999999 && num <= 9999999999){
 		 chance = Math.floor(Math.random() * 10) + 1;
 		} else {
 			chance = 0;
@@ -1696,7 +1696,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 30% of your money | **insurance**: \n Your losses for the next 30 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 90 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -1804,7 +1804,7 @@ function insure(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((3 / 10) * money);
+			var percentage = Math.floor((1 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
 				return;
@@ -1815,7 +1815,7 @@ function insure(){
           // Removes the user from the set after however long the cooldown is.
           insuranceCD.delete(message.author.id);
           message.reply("'s insurance has run out!")
-        }, (1000*30));	
+        }, (1000*90));	
 	//insert function here.
 		
 	}
@@ -3099,7 +3099,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **${prefix}shop**: \n DMs a list of the current shop items.\n **${prefix}channel**: \n Sends the ID of the current channel \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **${prefix}shop**: \n DMs a list of the current shop items.\n **${prefix}channel**: \n Sends the ID of the current channel \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL ONLY__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -3177,6 +3177,21 @@ function patreon(){
 
 		message.author.sendEmbed(yeet);
 }
+	
+function invite(){
+
+		let yeet = new Discord.RichEmbed()
+
+			
+			.setTitle("Add me to your server! | CLICK HERE")
+			.setDescription("Invite KS bot to your server!")
+			.setColor("#1f3c5b")
+			.setURL("https://discordapp.com/oauth2/authorize?client_id=427125117542203413&permissions=8&scope=bot");
+			
+
+		message.author.sendEmbed(yeet);
+		message.reply("I sent you a link to invite me to your server! Thanks so much!");
+}	
 //Use of Kamino ONLY
 if(command === `!alter` && messageArray[1] != undefined){
 	if(message.author.id == '242118931769196544'){
@@ -3189,6 +3204,10 @@ if(command === `!alter` && messageArray[1] != undefined){
 
 if(command === `${prefix}help` || command === `KS!help`){
 		help();
+}
+	
+if(command === `${prefix}invite` || command === `KS!invite`){
+		invite();
 }	
 	
 if(command === `${prefix}shop` || command === `KS!shop`){
