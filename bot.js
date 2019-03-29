@@ -1450,8 +1450,19 @@ function gambleFlip(){
 	if(Number.isInteger(num) === true && money >= num && num > 0){
 
 	var bet;
+	var chance;
 	
-		var chance = Math.floor(Math.random() * 2) + 1;
+		if(money > 0 && money <= 100000){
+		 chance = Math.floor(Math.random() * 2) + ;
+		} else if(money > 100000 && money <= 1000000){
+		 chance = Math.floor(Math.random() * 4) + ;
+		} else if(money > 1000000 && money <= 1000000){
+		 chance = Math.floor(Math.random() * 25) + ;
+		} else if(money > 10000000 && money <= 1000000000){
+		 chance = Math.floor(Math.random() * 100) + ;
+		} else {
+			chance = 0;
+		}
 		if(chance == 1){
 
 			if(streak >= 2){
