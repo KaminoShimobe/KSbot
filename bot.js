@@ -1466,7 +1466,7 @@ function gambleFlip(){
 		if(chance == 1){
 
 			if(streak >= 2){
-			bet = num + Math.floor((streak / 100) * num );
+			bet = num + Math.floor((streak / 10) * num );
 			sql = `UPDATE user SET money = ${money + bet}, lasttrans = ${bet}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);	
 			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
