@@ -1391,7 +1391,7 @@ function daily(){
 		}	
 
 		if (dailyCD.has(message.author.id)) {
-            message.reply("You have already collected your daily check!");
+            message.reply("You have already been taxed!");
             return;
     } else {
     	if(rank == "Ambassador"){
@@ -1406,7 +1406,7 @@ function daily(){
     		check = 2000;
     	} else if(rank == "Creator"){
     		check = 1000;
-    		message.channel.send("Pfft you don't even need this money you lame :stuck_out_tongue:")
+    		message.channel.send("Pfft this means nothing to you :stuck_out_tongue:")
     	} else {
     		check = 1000;
     	}
@@ -1421,11 +1421,11 @@ function daily(){
     		check += 3000;
     	}
 
-    	sql = `UPDATE user SET money = ${money + check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
+    	sql = `UPDATE user SET money = ${money - check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
 	   			 
-           message.reply(" got $" + check + "!");
+           message.reply(" got taxed $" + check + "!");
         // Adds the user to the set so that they can't talk for a minute
        dailyCD.add(message.author.id);
         setTimeout(() => {
