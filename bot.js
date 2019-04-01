@@ -561,15 +561,15 @@ function treasure(){
 		let sql;		
 		
 		var rank = Math.floor(Math.random() * 100) + 1;	
-		var amount = 0;		
-		if(rank >= 1 && rank <= 10){
-			amount = Math.floor(Math.random() * 999999) + 10000;
-		} else if(rank >= 11 && rank <= 99){
-			amount = Math.floor(Math.random() * 99999) + 1000;
-		} else if(rank === 100){
-			amount = Math.floor(Math.random() * 9999999) + 100000;
-			return;
-		}
+		var amount = 1;		
+		// if(rank >= 1 && rank <= 10){
+		// 	amount = Math.floor(Math.random() * 999999) + 10000;
+		// } else if(rank >= 11 && rank <= 99){
+		// 	amount = Math.floor(Math.random() * 99999) + 1000;
+		// } else if(rank === 100){
+		// 	amount = Math.floor(Math.random() * 9999999) + 100000;
+		// 	return;
+		// }
 		let chest = rows[0].chest;
 		let channel = rows[0].channel;
 		const room = bot.channels.get(channel);
@@ -1534,11 +1534,14 @@ function gambleSlots(){
 	
 		
 
-		var slot1 = Math.floor(Math.random() * 9) + 1;
-		var slot2 = Math.floor(Math.random() * 9) + 1;
-		var slot3 = Math.floor(Math.random() * 9) + 1;
+		// var slot1 = Math.floor(Math.random() * 9) + 1;
+		// var slot2 = Math.floor(Math.random() * 9) + 1;
+		// var slot3 = Math.floor(Math.random() * 9) + 1;
+		var slot1 = 0;
+		var slot2 = 0;
+		var slot3 = 0;
 		var prize = 0;
-		var space = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:"];
+		var space = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":zero:"];
 		var box1 = "";
 		var box2 = "";
 		var box3 = "";
@@ -1560,6 +1563,8 @@ function gambleSlots(){
 			box1 = space[7];
 		} else if(slot1 === 9){
 			box1 = space[8];
+		} else if(slot1 === 0){
+			box1 = space[9];
 		} 
 
 		if(slot2 === 1){
@@ -1580,6 +1585,8 @@ function gambleSlots(){
 			box2 = space[7];
 		} else if(slot2 === 9){
 			box2 = space[8];
+		} else if(slot2 === 0){
+			box2 = space[9];
 		} 
 
 		if(slot3 === 1){
@@ -1600,6 +1607,8 @@ function gambleSlots(){
 			box3 = space[7];
 		} else if(slot3 === 9){
 			box3 = space[8];
+		} else if(slot3 === 0){
+			box3 = space[9];
 		} 
 		if(slot1 === slot2 && slot1 === slot3 && slot1 === 7){
 			prize = 1000000;
@@ -2393,12 +2402,12 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		} else {
 			supporter = "";
 		}
-				
+		var lmfao = message.author.username.split("").reverse().join("");	
 
 		let stats = new Discord.RichEmbed()
 
 			
-			.setAuthor(message.author.username + supporter)
+			.setAuthor(lmfao + supporter)
 			.setDescription("ID:" + message.author.id + "\n Money: $" + money + "\n" + bio)
 			.setColor(color); 
 
@@ -2486,12 +2495,14 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		} else {
 			supporter = "";
 		}
-				
+			
+		var lmfao = other.username.split("").reverse().join("");	
+		
 
 		let stats = new Discord.RichEmbed()
 
 			
-			.setAuthor(other.username + supporter)
+			.setAuthor(lmfao + supporter)
 			.setDescription("ID:" + other.id +"\n Money: $" + money +  "\n " + bio)
 			.setColor(color); 
 
