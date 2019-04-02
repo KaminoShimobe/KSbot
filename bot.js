@@ -3114,7 +3114,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 				message.channel.send(artPiece);
 				
 					
-					
+			}	
 				});	
 		
 }	
