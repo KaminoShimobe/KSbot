@@ -3115,7 +3115,11 @@ let artPiece = new Discord.RichEmbed()
 			.setTitle(message.author.username + "'s artwork")
 			.attachFile(attachment)
 			.setColor("#c9ddff"); 
-			}		
+				
+				message.channel.send(artPiece);
+			}	
+					
+					
 				});	
 		
 }	
