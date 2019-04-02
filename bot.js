@@ -3443,10 +3443,7 @@ function invite(){
 		message.reply("I sent you a link to invite me to your server! Thanks so much!");
 }	
 
-function guildCheck(){
 
-	bot.guilds.forEach(guild => console.log("I am in: " + guild.name));
-}
 //Use of Kamino ONLY
 if(command === `!alter` && messageArray[1] != undefined){
 	if(message.author.id == '242118931769196544'){
@@ -3456,12 +3453,7 @@ if(command === `!alter` && messageArray[1] != undefined){
 	}
 
 if(command = `!check`){
-	if(message.author.id == '242118931769196544'){
-		guildCheck();
 
-	}
-}	
-	
 	
 
 	
