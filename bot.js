@@ -3120,7 +3120,7 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
   .scale(6)
   .draw(mycanvas.getContext('2d'));		
 	
-var cat = mycanvas.toDataURL() // defaults to PNG
+var cat = mycanvas.toBuffer() // defaults to PNG
 
 	
 	
