@@ -97,7 +97,7 @@ bot.on("ready", async () => {
 bot.on('guildMemberAdd', member => {
 
 	
-console.log("Okay")	;
+
 
 con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -540,13 +540,13 @@ function theCommands(prefix, chests){
 
 function treasure(){
 		var appear = Math.floor(Math.random() * 100) + 1;
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + appear);
+		
 		if(appear == 100){
-			console.log(appear);
+			
 			
 			chest();	
 		} else {
-			console.log(appear);
+			
 			
 			return;	
 		}
@@ -3079,28 +3079,15 @@ function give(){
 function art(){
 var PixelArt = require('pixel-art');	
 const { createCanvas } = require('canvas')
-const mycanvas = createCanvas(200, 200)	
-	var nyan = PixelArt.art(`\
-                  BBBBBBBBBBBBBBBBB
-                 B-----------------B
-                B--**************---B
-    rrrr    rrrrB--******@**@*****--B
-rrrrrrrrrrrrrrrrB-**@**************-B
-rrrroooorrrrooooB-**********BB*@***-B BB
-ooooooooooooooooB-*********B..B****-BB..B
-ooooyyyyooBBBByyB-******@**B...B***-B...B
-yyyyyyyyyyB..BByB-*********B....BBBB....B
-yyyyggggyyBB..BBB-***@*****B............B
-gggggggggggBB..BB-********B..............B
-ggggbbbbggggBB..B-*@******B...^B.....^B..B
-bbbbbbbbbbbbbBBBB-******@*B...BB...B.BB..B
-bbbbmmmmbbbbmmmBB-********B.**.........**B
-mmmmmmmmmmmmmmmmB--*@*****B.**.B..B..B.**B
-mmmm    mmmm    B---*******B...BBBBBBB..B
-               BBB----------B..........B
-              B...BBBBBBBBBBBBBBBBBBBBB
-              B..BB B..B     B..B B..B
-              BBBBB BBB       BBB  BB\
+message.channel.send(`Respond with your 64 x 64 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n ${prefix}cancel to cancel!`);
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+const mycanvas = createCanvas(64, 64)	
+	var artwork = PixelArt.art(`\${message.content}\
 `)
   .palette({
     'r': 'red',
@@ -3108,23 +3095,28 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
     'y': 'yellow',
     'g': '#0f0',
     'b': '#55f',
-    'm': '#909',
+    'P': '#909',
     'B': 'black',
-    '.': '#ddd',
-    '-': '#ffa',
-    '*': '#f8e',
-    '@': '#b09',
-    '^': 'white'
+    'G': '#ddd',
+    'p': '#f8e',
+    'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(6)
+  .scale(4)
   .draw(mycanvas.getContext('2d'));		
 	
-var cat = mycanvas.toBuffer() // defaults to PNG
+var art = mycanvas.toBuffer() // defaults to PNG
 
 const attachment = new Discord.Attachment(cat, 'cat.png');
 	
-message.channel.send(attachment);	
+let artPiece = new Discord.RichEmbed()
+
+			
+			.setTitle(message.author.username + "'s artwork")
+			.attachFile(attachment)
+			.setColor("#c9ddff"); 
+			}		
+				});	
 		
 }	
 
@@ -3247,11 +3239,11 @@ if(command === `!alter` && messageArray[1] != undefined){
 	}
 	}
 	
-if(command === `!art`){
-	if(message.author.id == '242118931769196544'){
+if(command === `${prefix}art`){
+	//if(message.author.id == '242118931769196544'){
 		art();
 
-	}
+	//}
 	}	
 
 	
