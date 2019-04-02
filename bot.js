@@ -3078,6 +3078,8 @@ function give(){
 
 function art(){
 var PixelArt = require('pixel-art');	
+const { createCanvas } = require('canvas')
+const mycanvas = createCanvas(200, 200)	
 	var nyan = PixelArt.art(`\
                   BBBBBBBBBBBBBBBBB
                  B-----------------B
@@ -3115,14 +3117,10 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
     '^': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(6);
+  .scale(6)
+  .draw(mycanvas.getContext('2d'));		
 	
-var filetype = 'image/png' // default: 'image/webp'
-var ratio = 0.5 // default: 1
-
-
-var cat = nyan.export(filetype, ratio);	
-	
+var cat = mycanvas.toDataURL() // defaults to PNG
 
 	
 	
