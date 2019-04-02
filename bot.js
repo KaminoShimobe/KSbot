@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
+const pixel = require('pixel-art');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -3075,6 +3076,63 @@ function give(){
 // 	}
 // }		
 
+function art(){
+	var nyan = PixelArt.art(`\
+                  BBBBBBBBBBBBBBBBB
+                 B-----------------B
+                B--**************---B
+    rrrr    rrrrB--******@**@*****--B
+rrrrrrrrrrrrrrrrB-**@**************-B
+rrrroooorrrrooooB-**********BB*@***-B BB
+ooooooooooooooooB-*********B..B****-BB..B
+ooooyyyyooBBBByyB-******@**B...B***-B...B
+yyyyyyyyyyB..BByB-*********B....BBBB....B
+yyyyggggyyBB..BBB-***@*****B............B
+gggggggggggBB..BB-********B..............B
+ggggbbbbggggBB..B-*@******B...^B.....^B..B
+bbbbbbbbbbbbbBBBB-******@*B...BB...B.BB..B
+bbbbmmmmbbbbmmmBB-********B.**.........**B
+mmmmmmmmmmmmmmmmB--*@*****B.**.B..B..B.**B
+mmmm    mmmm    B---*******B...BBBBBBB..B
+               BBB----------B..........B
+              B...BBBBBBBBBBBBBBBBBBBBB
+              B..BB B..B     B..B B..B
+              BBBBB BBB       BBB  BB\
+`)
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'm': '#909',
+    'B': 'black',
+    '.': '#ddd',
+    '-': '#ffa',
+    '*': '#f8e',
+    '@': '#b09',
+    '^': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(6);
+	
+var filetype = 'image/png' // default: 'image/webp'
+var ratio = 0.5 // default: 1
+
+nyan.export(filetype, ratio)
+	
+var encodedBuffer = nyan.toString();	
+	
+let artwork = new Discord.RichEmbed()
+
+			
+			.setTitle("Your art!")
+			.setImage(encodedBuffer)
+			.setColor("#1d498e"); 
+
+		message.channel.sendEmbed(artwork);
+		
+}	
 
 function standHelp(){
 	let stands = new Discord.RichEmbed()
@@ -3194,6 +3252,13 @@ if(command === `!alter` && messageArray[1] != undefined){
 
 	}
 	}
+	
+if(command === `!art`){
+	if(message.author.id == '242118931769196544'){
+		art();
+
+	}
+	}	
 
 	
 
