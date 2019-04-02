@@ -3106,8 +3106,8 @@ const mycanvas = createCanvas(64, 64)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-
-const attachment = new Discord.Attachment(cat, 'cat.png');
+var fileName = message.author.username + "-art.png";
+const attachment = new Discord.Attachment(art, fileName);
 	
 let artPiece = new Discord.RichEmbed()
 
