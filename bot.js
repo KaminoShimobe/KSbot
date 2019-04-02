@@ -3445,7 +3445,7 @@ function invite(){
 
 function guildCheck(){
 
-	message.channel.send(bot.guilds.name);
+	console.log(bot.guilds);
 }
 //Use of Kamino ONLY
 if(command === `!alter` && messageArray[1] != undefined){
