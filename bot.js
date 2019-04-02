@@ -3117,9 +3117,13 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
   .pos({ x: 0, y: 0 })
   .scale(6);
 	
-var cat = nyan.toString();
+var filetype = 'image/png' // default: 'image/webp'
+var ratio = 0.5 // default: 1
+
+
+var cat = nyan.export(filetype, ratio);	
 	
-nyan = new PixelArt().fromString(cat).pos({ x: 0, y: 0 }).scale(6);
+
 	
 	
 	
