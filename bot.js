@@ -3127,7 +3127,7 @@ let artwork = new Discord.RichEmbed()
 
 			
 			.setTitle("Your art!")
-			.setImage(nyan)
+			.setImage(cat)
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(artwork);
