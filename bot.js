@@ -3087,7 +3087,7 @@ message.channel.send(`Respond with your 200 x 200 drawing Code. \n Palette: \n '
                 		return;
             		} else {
 const mycanvas = createCanvas(200, 200)	
-	var artwork = PixelArt.art(`\${message.content}\
+	var artwork = PixelArt.art(`${message.content}
 `)
   .palette({
     'r': 'red',
