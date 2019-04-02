@@ -1076,7 +1076,32 @@ function lostChest(){
 					
 						}
 				}); 
-	        	}else if(messageArray[1] == "chests"){
+	        	}else if(messageArray[1] == "art"){
+					message.channel.send("Do you want to allow pixel art to be made in your server?(yes or no) \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Pixel art changed cancelled.");
+	                		return;
+	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
+
+	               		sql = `UPDATE server SET canvas = ${true} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("KSRPG enabled!");
+							return;
+	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
+
+	               		sql = `UPDATE server SET canvas = ${false} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("KSRPG disabled!");
+							return;
+	            		} else {
+							message.channel.send("Invalid Input.");
+							return;
+					
+						}
+				}); 
+	        	} else if(messageArray[1] == "chests"){
 					message.channel.send("Do you want to allow random chests to spawn?(yes or no) \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -1223,12 +1248,14 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let prefix = rows[0].prefix;
 		let RPG = rows[0].rpg;
 		let chests = rows[0].chests;
+		let canvas = rows[0].canvas;
 		var w;
 		var e;
 		var s;
 		var wi;
 		var r;
 		var ch;
+		var ca;
 		if(whisper == true){
 			w = "Yes";
 		} else {
@@ -1254,6 +1281,11 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		} else {
 			r = "No";
 		}
+		if(canvas == true){
+			ca = "Yes";
+		} else {
+			ca = "No";
+		}
 		if(chests == true){
 			ch = "Yes";
 		} else {
@@ -1271,7 +1303,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
@@ -1686,7 +1718,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 90 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n ")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 90 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 64x64 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 256x256 pixel art canvas to draw on(can be cancelled).")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -3076,10 +3108,28 @@ function give(){
 // 	}
 // }		
 
-function art(){
+function artSmol(){
 var PixelArt = require('pixel-art');	
 const { createCanvas } = require('canvas')
-message.channel.send(`Respond with your 8 x 8 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n ${prefix}cancel to cancel!`);
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 100) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+			
+
+message.channel.send(`Respond with your 8 x 8 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -3110,14 +3160,154 @@ var fileName = message.author.username + "-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
-				
-				message.channel.send(artPiece);
-				
-					
+			let drawing = new Discord.RichEmbed()
+
+			
+			.setTitle("©️" + message.author.username)
+			.setImage(artPiece)
+			.setColor("#1f3c5b");
+			sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
+			con.query(sql);		
+			message.channel.send(drawing);		
 			}	
 				});	
+	});
 		
 }	
+	
+function artMed(){
+var PixelArt = require('pixel-art');	
+const { createCanvas } = require('canvas')
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+			
+
+message.channel.send(`Respond with your 64 x 64 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+const mycanvas = createCanvas(256, 256)	
+	var artwork = PixelArt.art(`${message.content}
+`)
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(4)
+  .draw(mycanvas.getContext('2d'));		
+	
+var art = mycanvas.toBuffer() // defaults to PNG
+var fileName = message.author.username + "-art.png";
+const artPiece = new Discord.Attachment(art, fileName);
+	
+
+			let drawing = new Discord.RichEmbed()
+
+			
+			.setTitle("©️" + message.author.username)
+			.setImage(artPiece)
+			.setColor("#1f3c5b");
+			sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
+			con.query(sql);		
+			message.channel.send(drawing);		
+			}	
+				});	
+	});
+		
+}	
+	
+function artBeeg(){
+var PixelArt = require('pixel-art');	
+const { createCanvas } = require('canvas')
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 10000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+			
+
+message.channel.send(`Respond with your 256 x 256 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+               		 message.channel.send("Message cancelled.");
+                		return;
+            		} else {
+const mycanvas = createCanvas(256, 256)	
+	var artwork = PixelArt.art(`${message.content}
+`)
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(1)
+  .draw(mycanvas.getContext('2d'));		
+	
+var art = mycanvas.toBuffer() // defaults to PNG
+var fileName = message.author.username + "-art.png";
+const artPiece = new Discord.Attachment(art, fileName);
+	
+
+			let drawing = new Discord.RichEmbed()
+
+			
+			.setTitle("©️" + message.author.username)
+			.setImage(artPiece)
+			.setColor("#1f3c5b");
+			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
+			con.query(sql);		
+			message.channel.send(drawing);		
+			}	
+				});	
+	});
+		
+}		
 
 function standHelp(){
 	let stands = new Discord.RichEmbed()
@@ -3163,7 +3353,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server.`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -3238,12 +3428,7 @@ if(command === `!alter` && messageArray[1] != undefined){
 	}
 	}
 	
-if(command === `${prefix}art`){
-	//if(message.author.id == '242118931769196544'){
-		art();
-
-	//}
-	}	
+	
 
 	
 
@@ -3431,7 +3616,88 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 
 	let exposeSet = rows[0].exposeSet;
+	let canvas = rows[0].canvas;
 
+	
+	
+		if(command === `${prefix}buy` && messageArray[1] == "canvas" && canvas == true){
+
+		artSmol();
+		 
+
+
+
+		 return;
+
+
+
+	
+	} else if(command === `${prefix}buy` && messageArray[1] == "canvas" && canvas == false){
+
+		message.reply(`Artwork is not permitted in this server!`)
+		 
+
+
+
+		 return;
+
+
+
+	
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] == "medCanvas" && canvas == true){
+
+		artMed();
+		 
+
+
+
+		 return;
+
+
+
+	
+	} else if(command === `${prefix}buy` && messageArray[1] == "medCanvas" && canvas == false){
+
+		message.reply(`Artwork is not permitted in this server!`)
+		 
+
+
+
+		 return;
+
+
+
+	
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] == "bigCanvas" && canvas == true){
+
+		artBeeg();
+		 
+
+
+
+		 return;
+
+
+
+	
+	} else if(command === `${prefix}buy` && messageArray[1] == "bigCanvas" && canvas == false){
+
+		message.reply(`Artwork is not permitted in this server!`)
+		 
+
+
+
+		 return;
+
+
+
+	
+	}
+	
 	
 		if(command === `${prefix}expose` && exposeSet == true){
 
