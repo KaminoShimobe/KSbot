@@ -3077,6 +3077,7 @@ function give(){
 // }		
 
 function art(){
+var PixelArt = require('pixel-art');	
 	var nyan = PixelArt.art(`\
                   BBBBBBBBBBBBBBBBB
                  B-----------------B
@@ -3116,18 +3117,17 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
   .pos({ x: 0, y: 0 })
   .scale(6);
 	
-var filetype = 'image/png' // default: 'image/webp'
-var ratio = 0.5 // default: 1
-
-nyan.export(filetype, ratio)
+var cat = nyan.toString();
 	
-var encodedBuffer = nyan.toString();	
+nyan = new PixelArt().fromString(cat).pos({ x: 0, y: 0 }).scale(6);
+	
+	
 	
 let artwork = new Discord.RichEmbed()
 
 			
 			.setTitle("Your art!")
-			.setImage(encodedBuffer)
+			.setImage(nyan)
 			.setColor("#1d498e"); 
 
 		message.channel.sendEmbed(artwork);
