@@ -3102,22 +3102,17 @@ const mycanvas = createCanvas(16, 16)
     'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(1)
+  .scale(4)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
 var fileName = message.author.username + "-art.png";
-const attachment = new Discord.Attachment(art, fileName);
+const artPiece = new Discord.Attachment(art, fileName);
 	
-let artPiece = new Discord.RichEmbed()
 
-			
-			.setTitle(message.author.username + "'s artwork")
-			.attachFile(attachment)
-			.setColor("#c9ddff"); 
 				
 				message.channel.send(artPiece);
-			}	
+				
 					
 					
 				});	
