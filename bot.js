@@ -3102,7 +3102,7 @@ const mycanvas = createCanvas(32, 32)
     'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(10)
+  .scale(1)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
