@@ -561,15 +561,15 @@ function treasure(){
 		let sql;		
 		
 		var rank = Math.floor(Math.random() * 100) + 1;	
-		var amount = 1;		
-		// if(rank >= 1 && rank <= 10){
-		// 	amount = Math.floor(Math.random() * 999999) + 10000;
-		// } else if(rank >= 11 && rank <= 99){
-		// 	amount = Math.floor(Math.random() * 99999) + 1000;
-		// } else if(rank === 100){
-		// 	amount = Math.floor(Math.random() * 9999999) + 100000;
-		// 	return;
-		// }
+		var amount;		
+		if(rank >= 1 && rank <= 10){
+			amount = Math.floor(Math.random() * 999999) + 10000;
+		} else if(rank >= 11 && rank <= 99){
+			amount = Math.floor(Math.random() * 99999) + 1000;
+		} else if(rank === 100){
+			amount = Math.floor(Math.random() * 9999999) + 100000;
+			return;
+		}
 		let chest = rows[0].chest;
 		let channel = rows[0].channel;
 		const room = bot.channels.get(channel);
@@ -580,7 +580,7 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				message.channel.send("The chest mysteriously disappeared!");
+				room.send("The chest mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
@@ -633,7 +633,7 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				message.channel.send("The chest mysteriously disappeared!");
+				room.send("The chest mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
@@ -1329,12 +1329,7 @@ function marriage(){
 
 		
 			}
-		
-		
-			
-		
-				
-				
+
 	
                 		
             		else {
@@ -1391,7 +1386,7 @@ function daily(){
 		}	
 
 		if (dailyCD.has(message.author.id)) {
-            message.reply("You have already been taxed!");
+            message.reply("You have already collected your daily check!");
             return;
     } else {
     	if(rank == "Ambassador"){
@@ -1421,11 +1416,11 @@ function daily(){
     		check += 3000;
     	}
 
-    	sql = `UPDATE user SET money = ${money - check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
+    	sql = `UPDATE user SET money = ${money + check}, lasttrans = ${check} WHERE id = '${message.author.id}'`;
            // the user can type the command ... your command code goes here :)
         con.query(sql); 
 	   			 
-           message.reply(" got taxed $" + check + "!");
+           message.reply(" got $" + check + "!");
         // Adds the user to the set so that they can't talk for a minute
        dailyCD.add(message.author.id);
         setTimeout(() => {
@@ -1508,19 +1503,7 @@ function gambleFlip(){
 	
 function gambleSlots(){
 		
-		if(message.member.roles.find("name", "bomb") ) {
-				
-  			
-  			
-			
-			 message.delete()
-
-  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  			.catch(console.error);
-  			message.channel.send(message.author.username + "'s message was blown up by Killer Queen!");
-  			return;
-			} 
+		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1534,13 +1517,10 @@ function gambleSlots(){
 	
 		
 
-		// var slot1 = Math.floor(Math.random() * 9) + 1;
-		// var slot2 = Math.floor(Math.random() * 9) + 1;
-		// var slot3 = Math.floor(Math.random() * 9) + 1;
-		var slot1 = 0;
-		var slot2 = 0;
-		var slot3 = 0;
-		var prize = 0;
+		var slot1 = Math.floor(Math.random() * 9) + 1;
+		var slot2 = Math.floor(Math.random() * 9) + 1;
+		var slot3 = Math.floor(Math.random() * 9) + 1;
+		
 		var space = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":zero:"];
 		var box1 = "";
 		var box2 = "";
@@ -1744,7 +1724,7 @@ function customRole(){
 		
 		
 			
-		.then(role => member.addRole(role).catch(console.error))
+		.then(role => message.author.addRole(role).catch(console.error))
   		.catch(console.error);
 		
   		message.reply("Unique Role Purchased!");
@@ -2229,6 +2209,7 @@ function waifuPic(){
 			.setColor("#ff30e0"); 
 
 		message.author.sendEmbed(pic);
+		message.channel.send("Check your DMS, your picture was sent there!");
  		
   		 })
 		
@@ -2255,6 +2236,7 @@ function waifuPic(){
 			.setColor("#4327f7"); 
 
 		message.author.sendEmbed(pic);
+		message.channel.send("Check your DMS, your picture was sent there!");
  		
   		 })
 			
@@ -2288,6 +2270,7 @@ function waifuPic(){
 			.setColor("#7b18a3"); 
 
 		message.author.sendEmbed(pic);
+		message.channel.send("Check your DMS, your picture was sent there!");
  		
   		 })
 			
@@ -2402,12 +2385,12 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		} else {
 			supporter = "";
 		}
-		var lmfao = message.author.username.split("").reverse().join("");	
+			
 
 		let stats = new Discord.RichEmbed()
 
 			
-			.setAuthor(lmfao + supporter)
+			.setAuthor(message.author.username + supporter)
 			.setDescription("ID:" + message.author.id + "\n Money: $" + money + "\n" + bio)
 			.setColor(color); 
 
@@ -2496,13 +2479,13 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 			supporter = "";
 		}
 			
-		var lmfao = other.username.split("").reverse().join("");	
+		
 		
 
 		let stats = new Discord.RichEmbed()
 
 			
-			.setAuthor(lmfao + supporter)
+			.setAuthor(other.username + supporter)
 			.setDescription("ID:" + other.id +"\n Money: $" + money +  "\n " + bio)
 			.setColor(color); 
 
