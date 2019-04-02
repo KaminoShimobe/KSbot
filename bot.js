@@ -3129,7 +3129,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		}
 			
 
-message.channel.send(`Respond with your 8 x 8 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
+let rules = new Discord.RichEmbed()
+
+			
+			.setTitle("Respond with your 8 x 8 drawing Code.")
+			.setDescription(`Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`)
+			.setColor("#1f3c5b");
+					
+
+message.channel.send(rules);
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -3156,7 +3164,7 @@ const mycanvas = createCanvas(256, 256)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-var fileName = message.author.username + "-art.png";
+var fileName = message.author.username + "-8-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
@@ -3164,7 +3172,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 
 			
 			.setTitle("©️" + message.author.username)
-			.setImage(artPiece)
+			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
 			con.query(sql);		
@@ -3194,9 +3202,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 			message.reply("Insufficient Funds.");
 			return;
 		}
-			
+let rules = new Discord.RichEmbed()
 
-message.channel.send(`Respond with your 64 x 64 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
+			
+			.setTitle("Respond with your 64 x 64 drawing Code.")
+			.setDescription(`Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`)
+			.setColor("#1f3c5b");
+					
+
+message.channel.send(rules);
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -3223,7 +3237,7 @@ const mycanvas = createCanvas(256, 256)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-var fileName = message.author.username + "-art.png";
+var fileName = message.author.username + "-64-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
@@ -3231,7 +3245,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 
 			
 			.setTitle("©️" + message.author.username)
-			.setImage(artPiece)
+			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
 			con.query(sql);		
@@ -3263,7 +3277,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		}
 			
 
-message.channel.send(`Respond with your 256 x 256 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`);
+let rules = new Discord.RichEmbed()
+
+			
+			.setTitle("Respond with your 256 x 256 drawing Code.")
+			.setDescription(`Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`)
+			.setColor("#1f3c5b");
+					
+
+message.channel.send(rules);
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -3290,7 +3312,7 @@ const mycanvas = createCanvas(256, 256)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-var fileName = message.author.username + "-art.png";
+var fileName = message.author.username + "-256-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
@@ -3298,7 +3320,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 
 			
 			.setTitle("©️" + message.author.username)
-			.setImage(artPiece)
+			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
 			con.query(sql);		
