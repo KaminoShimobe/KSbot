@@ -3467,7 +3467,7 @@ if(command === `${prefix}shop` || command === `KS!shop`){
 }	
 	
 if(command === `${prefix}admin` || command === `KS!admin`){
-		if(message.author.id == message.guild.ownerID){
+		if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR")){
 		admin();
 	}		else {
 		message.reply(" You don't have the credentials to perform this function.")
@@ -3499,7 +3499,7 @@ if(command === `${prefix}server` || command === `KS!server`){
 }	
 
 if(command === `${prefix}toggle`){
-		if(message.author.id == message.guild.ownerID){
+		if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR")){
 		toggle();
 	}		else {
 		message.reply(" You don't have the credentials to perform this function.")
