@@ -3452,7 +3452,7 @@ if(command === `!alter` && messageArray[1] != undefined){
 	}
 	}
 
-if(command = `!check`){
+
 
 	
 
