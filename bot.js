@@ -1694,6 +1694,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 }	
 
 function customRole(){
+	const member = message.member;
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1724,7 +1725,7 @@ function customRole(){
 		
 		
 			
-		.then(role => message.author.addRole(role).catch(console.error))
+		.then(role => member.addRole(role).catch(console.error))
   		.catch(console.error);
 		
   		message.reply("Unique Role Purchased!");
