@@ -3122,17 +3122,9 @@ mmmm    mmmm    B---*******B...BBBBBBB..B
 	
 var cat = mycanvas.toBuffer() // defaults to PNG
 
+const attachment = new Discord.Attachment(cat, 'cat.png');
 	
-	
-	
-let artwork = new Discord.RichEmbed()
-
-			
-			.setTitle("Your art!")
-			.setImage(cat)
-			.setColor("#1d498e"); 
-
-		message.channel.sendEmbed(artwork);
+message.channel.send(attachment);	
 		
 }	
 
