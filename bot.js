@@ -3171,7 +3171,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("By" + message.author.username)
+			.setTitle("By " + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
@@ -3244,7 +3244,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("By" + message.author.username)
+			.setTitle("By " + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
@@ -3319,7 +3319,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("By" + message.author.username)
+			.setTitle("By " + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
