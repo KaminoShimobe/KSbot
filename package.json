@@ -14,6 +14,7 @@
     "discord.js": "^11.3.2",
     "mysql": "^2.15.0",
     "twilio": "^3.21.0",
-    "pixel-art": "^1.2.0"
+    "pixel-art": "^1.2.0",
+    "canvas": "^2.4.1"
   }
 }
