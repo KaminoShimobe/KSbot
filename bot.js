@@ -3079,7 +3079,7 @@ function give(){
 function art(){
 var PixelArt = require('pixel-art');	
 const { createCanvas } = require('canvas')
-message.channel.send(`Respond with your 16 x 16 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n ${prefix}cancel to cancel!`);
+message.channel.send(`Respond with your 8 x 8 drawing Code. \n Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n ${prefix}cancel to cancel!`);
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -3102,7 +3102,7 @@ const mycanvas = createCanvas(256, 256)
     'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(16)
+  .scale(32)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
