@@ -1087,13 +1087,13 @@ function lostChest(){
 
 	               		sql = `UPDATE server SET canvas = ${true} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
-							message.channel.send("KSRPG enabled!");
+							message.channel.send("Pixel Art Creation enabled!");
 							return;
 	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
 
 	               		sql = `UPDATE server SET canvas = ${false} WHERE id = '${message.guild.id}'`;
 							con.query(sql);
-							message.channel.send("KSRPG disabled!");
+							message.channel.send("Pixel Art Creation disabled!");
 							return;
 	            		} else {
 							message.channel.send("Invalid Input.");
@@ -3171,7 +3171,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("©️" + message.author.username)
+			.setTitle("By" + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 100} WHERE id = '${message.author.id}'`;
@@ -3244,7 +3244,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("©️" + message.author.username)
+			.setTitle("By" + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 1000} WHERE id = '${message.author.id}'`;
@@ -3319,7 +3319,7 @@ const artPiece = new Discord.Attachment(art, fileName);
 			let drawing = new Discord.RichEmbed()
 
 			
-			.setTitle("©️" + message.author.username)
+			.setTitle("By" + message.author.username)
 			.attachFile(artPiece)
 			.setColor("#1f3c5b");
 			sql = `UPDATE user SET money = ${money - 10000} WHERE id = '${message.author.id}'`;
@@ -3656,7 +3656,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	} else if(command === `${prefix}buy` && messageArray[1] == "canvas" && canvas == false){
 
-		message.reply(`Artwork is not permitted in this server!`)
+		message.reply(`Pixel Art Creation is not permitted in this server!`)
 		 
 
 
@@ -3682,7 +3682,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	} else if(command === `${prefix}buy` && messageArray[1] == "medCanvas" && canvas == false){
 
-		message.reply(`Artwork is not permitted in this server!`)
+		message.reply(`Pixel Art Creation is not permitted in this server!`)
 		 
 
 
@@ -3708,7 +3708,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	} else if(command === `${prefix}buy` && messageArray[1] == "bigCanvas" && canvas == false){
 
-		message.reply(`Artwork is not permitted in this server!`)
+		message.reply(`Pixel Art Creation is not permitted in this server!`)
 		 
 
 
