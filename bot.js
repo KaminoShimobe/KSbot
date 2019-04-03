@@ -1480,19 +1480,16 @@ function gambleFlip(){
 	var bet;
 	var chance;
 		
-		if(num > 0 && num <= 99999){
+		if(num > 0 && num <= 999999){
 		 chance = Math.floor(Math.random() * 2) + 1;
-		} else if(num > 99999 && num <= 999999){
-		 chance = Math.floor(Math.random() * 4) + 1;
 		} else if(num > 999999 && num <= 9999999){
+		 chance = Math.floor(Math.random() * 4) + 1;
+		} else if(num > 9999999 && num <= 99999999){
 		 chance = Math.floor(Math.random() * 6) + 1;
-		} else if(num > 9999999 && num <= 999999999){
+		} else if(num > 99999999 && num <= 9999999999){
 		 chance = Math.floor(Math.random() * 10) + 1;
 		} else {
 			chance = 0;
-		}
-		if(money > 5000000){
-			chance = Math.floor(Math.random() * 7) + 1;
 		}
 		if(chance == 1){
 
