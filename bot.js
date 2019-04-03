@@ -3445,6 +3445,12 @@ function invite(){
 
 
 //Use of Kamino ONLY
+function guildCheck(){
+	
+	bot.guilds.forEach(guild => console.log("I am in: " + guild.name));
+	return;
+}
+//Use of Kamino ONLY
 if(command === `!alter` && messageArray[1] != undefined){
 	if(message.author.id == '242118931769196544'){
 		alter();
@@ -3452,7 +3458,13 @@ if(command === `!alter` && messageArray[1] != undefined){
 	}
 	}
 
+if(command === `!check`){
+	if(message.author.id == '242118931769196544'){
+		guildCheck();
 
+	}
+
+}
 
 	
 
