@@ -1492,7 +1492,7 @@ function gambleFlip(){
 			chance = 0;
 		}
 		if(money > 6000000){
-			chance = 0;
+			Math.floor(Math.random() * 6) + 1;
 		}
 		if(chance == 1){
 
