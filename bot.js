@@ -1721,7 +1721,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 30% of your money | **insurance**: \n Your losses for the next 30 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 64x64 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 256x256 pixel art canvas to draw on(can be cancelled).")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 30% of your money | **insurance**: \n Your losses for the next 30 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 64x64 pixel art canvas to draw on(can be cancelled).")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -3208,7 +3208,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 let rules = new Discord.RichEmbed()
 
 			
-			.setTitle("Respond with your 64 x 64 drawing Code.")
+			.setTitle("Respond with your 32 x 32 drawing Code.")
 			.setDescription(`Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`)
 			.setColor("#1f3c5b");
 					
@@ -3236,11 +3236,11 @@ const mycanvas = createCanvas(256, 256)
     'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(4)
+  .scale(8)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-var fileName = message.author.username + "-64-art.png";
+var fileName = message.author.username + "-32-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
@@ -3283,7 +3283,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 let rules = new Discord.RichEmbed()
 
 			
-			.setTitle("Respond with your 256 x 256 drawing Code.")
+			.setTitle("Respond with your 64 x 64 drawing Code.")
 			.setDescription(`Palette: \n 'r' = red \n 'o' = orange \n 'y' = yellow \n 'g' = green \n 'b' = blue \n 'P' = purple \n 'B' = black \n 'G' = gray \n 'p' = pink \n 'w' = white \n '.' = space \n ${prefix}cancel to cancel!`)
 			.setColor("#1f3c5b");
 					
@@ -3311,11 +3311,11 @@ const mycanvas = createCanvas(256, 256)
     'w': 'white'
   })
   .pos({ x: 0, y: 0 })
-  .scale(1)
+  .scale(4)
   .draw(mycanvas.getContext('2d'));		
 	
 var art = mycanvas.toBuffer() // defaults to PNG
-var fileName = message.author.username + "-256-art.png";
+var fileName = message.author.username + "-64-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
 	
 
