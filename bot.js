@@ -1479,7 +1479,7 @@ function gambleFlip(){
 
 	var bet;
 	var chance;
-	
+		
 		if(num > 0 && num <= 999999){
 		 chance = Math.floor(Math.random() * 2) + 1;
 		} else if(num > 999999 && num <= 9999999){
@@ -1489,6 +1489,9 @@ function gambleFlip(){
 		} else if(num > 99999999 && num <= 9999999999){
 		 chance = Math.floor(Math.random() * 10) + 1;
 		} else {
+			chance = 0;
+		}
+		if(money > 6000000){
 			chance = 0;
 		}
 		if(chance == 1){
