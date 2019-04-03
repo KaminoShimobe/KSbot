@@ -25,7 +25,7 @@ const amuletCoinCD = new Set();
 const bot = new Discord.Client({disableEveryone: true})
 
 
-//TODO: Add stands, fix marriage, fix chests, preventive measures for channel/greeting channels and greetings, fix leaderboard, add global leaderboard, fix custom shop, add benefits
+//TODO: Add stands, fix marriage, add patchnotes and pets
 
 
 
