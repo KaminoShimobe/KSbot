@@ -1490,7 +1490,11 @@ function gambleFlip(){
 		 chance = Math.floor(Math.random() * 10) + 1;
 		} else {
 			chance = 0;
-		}
+		} 
+		
+		if(money > 5000000){
+			chance = Math.floor(Math.random() * 4) + 1;
+		}	
 		if(chance == 1){
 
 			if(streak >= 2){
