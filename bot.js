@@ -3456,7 +3456,21 @@ function guildCheck(){
 	bot.guilds.forEach(guild => console.log("I am in: " + guild.name));
 	return;
 }
-//Use of Kamino ONLY
+	
+function userList(){
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+	var i = 0;
+	while(rows[i].uname == undefined){
+	console.log(rows[i].uname);
+		i++;
+	}	
+		
+		return;
+		
+	}):	
+}	
+
 if(command === `!alter` && messageArray[1] != undefined){
 	if(message.author.id == '242118931769196544'){
 		alter();
@@ -3471,6 +3485,14 @@ if(command === `!check`){
 	}
 
 }
+	
+if(command === `!list`){
+	if(message.author.id == '242118931769196544'){
+		userList();
+
+	}
+
+}	
 
 	
 
