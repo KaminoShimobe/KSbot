@@ -69,8 +69,15 @@ handleDisconnect();
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
+	
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+		
+		
+	});
   	
-	bot.user.setPresence({ status: 'online', game: { name: 'KS!help |' + bot.guilds.size + ' servers' } });
+	
 
 
 
@@ -3460,7 +3467,11 @@ function guildCheck(){
 function userList(){
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
-	message.channel.send(rows.length);
+		
+	function userInfo(users, index){
+		console.log("User #" + index + " \n " + rows[index].uname + "\n + Money: " + rows[index].money)
+	}	
+	rows.length.forEach(userInfo);
 		return;
 		
 	});
