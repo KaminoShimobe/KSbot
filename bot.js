@@ -3460,12 +3460,7 @@ function guildCheck(){
 function userList(){
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
-	var i = 0;
-	while(rows[i].uname != undefined){
-	console.log(rows[i].uname);
-		i++;
-	}	
-		
+	message.channel.send(rows.length);
 		return;
 		
 	});
