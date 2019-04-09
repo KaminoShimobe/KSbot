@@ -3468,7 +3468,7 @@ function userList(){
 		
 		return;
 		
-	}):	
+	});
 }	
 
 if(command === `!alter` && messageArray[1] != undefined){
