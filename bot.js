@@ -3471,7 +3471,7 @@ function userList(){
 	function userInfo(users, index){
 		console.log("User #" + index + " \n " + rows[index].uname + "\n + Money: " + rows[index].money)
 	}	
-	rows.length.forEach(userInfo);
+	rows.forEach(userInfo);
 		return;
 		
 	});
