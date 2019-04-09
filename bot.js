@@ -3464,14 +3464,40 @@ function guildCheck(){
 	return;
 }
 	
-function userList(){
+function patchNotes(){
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
 		
-	function userInfo(users, index){
-		message.channel.send("User #" + index + " \n " + rows[index].uname + "\n + Money: " + rows[index].money)
-	}	
-	rows.forEach(userInfo);
+	
+		
+	message.channel.send("What update would you like to announce? (!cancel to cancel)");
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+			var msg = message.content;
+			function userInfo(users, index){
+				let yeet = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Patch Notes:")
+			.setDescription(msg)
+			.setColor("#1f3c5b")
+			.setTimestamp()
+			.setFooter("- Kamino", message.author.avatarURL);
+			
+
+		bot.users.get(rows[index].id).sendEmbed(yeet);
+		message.reply("Update sent to " + rows.length + " users!");
+			}	
+            		if (message.content == `!cancel`) {
+               		 message.author.send("Message cancelled.");
+                		return;
+            		} else {
+				
+				rows.forEach(userInfo);	
+			}	
+		
+			});
+	
 		return;
 		
 	});
@@ -3492,9 +3518,9 @@ if(command === `!check`){
 
 }
 	
-if(command === `!list`){
+if(command === `!update`){
 	if(message.author.id == '242118931769196544'){
-		userList();
+		patchNotes();
 
 	}
 
