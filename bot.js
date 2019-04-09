@@ -3469,7 +3469,7 @@ function userList(){
 		if(err) throw err;
 		
 	function userInfo(users, index){
-		console.log("User #" + index + " \n " + rows[index].uname + "\n + Money: " + rows[index].money)
+		message.channel.send("User #" + index + " \n " + rows[index].uname + "\n + Money: " + rows[index].money)
 	}	
 	rows.forEach(userInfo);
 		return;
