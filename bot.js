@@ -3421,6 +3421,7 @@ function discordLink(){
 			.setTitle("Kamino's House || CLICK ME")
 			.setDescription("Stop by and say hi (:")
 			.setColor("#1f3c5b")
+			.setTimestamp()
 			.setURL("https://discord.gg/4V4Vch6");
 			
 
@@ -3435,6 +3436,7 @@ function patreon(){
 			.setTitle("Kamino's Patreon || CLICK ME")
 			.setDescription("DM Kamino @KaminoShimobe#1190 for patreon benefits through KS-Bot!")
 			.setColor("#1f3c5b")
+			.setTimestamp()
 			.setURL("https://www.patreon.com/kaminoshimobe");
 			
 
@@ -3449,6 +3451,7 @@ function invite(){
 			.setTitle("Add me to your server! | CLICK HERE")
 			.setDescription("Invite KS bot to your server!")
 			.setColor("#1f3c5b")
+			.setTimestamp()
 			.setURL("https://discordapp.com/oauth2/authorize?client_id=427125117542203413&permissions=8&scope=bot");
 			
 
@@ -3483,10 +3486,16 @@ function patchNotes(){
 			.setColor("#1f3c5b")
 			.setTimestamp()
 			.setFooter("- Kamino", message.author.avatarURL);
-			
+		
+		var person = bot.users.get(rows[index].id);
+				
+		if(person != undefined){		
 
-		bot.users.get(rows[index].id).sendEmbed(yeet);
-		message.reply("Update sent to " + rows.length + " users!");
+		person.sendEmbed(yeet);
+		console.log("Patch Notes sent to " + person.username);
+		} else {
+			message.reply("Not connected to the member, " + rows[index].uname + " by a server");		
+		}	
 			}	
             		if (message.content == `!cancel`) {
                		 message.author.send("Message cancelled.");
@@ -3494,6 +3503,7 @@ function patchNotes(){
             		} else {
 				
 				rows.forEach(userInfo);	
+				message.reply("Update sent to " + rows.length + " users!");
 			}	
 		
 			});
