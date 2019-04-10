@@ -162,11 +162,13 @@ bot.on("message", async message => {
   	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50), kcrimson BOOLEAN )";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
+  	var sql5 = "ALTER TABLE user ADD updates BOOLEAN";
   	
-  	con.query(sql2, function (err, result) {
+  	con.query(sql5, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Tables created for server");
+    	message.author.send("updates added to user table!");
   	});
+  	
   		}
   	}
 
@@ -263,6 +265,32 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 }	
 
+function notifications(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let notifs = rows[0].updates;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			
+			return;
+		}
+
+		if(notifs != false){
+			sql = `UPDATE user SET updates = ${false} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("Post notifications turned **OFF**!");
+		} else {
+			sql = `UPDATE user SET updates = ${true} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("Post notifications turned **ON**!");
+		}
+
+});
+
+}
+
 // 	if (message.guild.id == '456956416377225218') {
 
 // function HeavensDoor(){
@@ -352,7 +380,17 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 // 	if(command === `!HEAVENSDOOR` && messageArray[1] != undefined){
 // 		HeavensDoor();
 // 	} 
-// }	
+// }
+
+if(command === `!notifs`){
+		
+
+		notifications();
+	
+
+		 return; 	
+
+} 	
 
 	if(command === `!bio`){
 		
@@ -1895,7 +1933,7 @@ function whom(){
 	
 function ball8(){
 	
-	let fortune = Math.floor(Math.random() * 30) + 1;
+	let fortune = Math.floor(Math.random() * 40) + 1;
 
 		if(fortune === 1 ){
 
@@ -2012,7 +2050,47 @@ function ball8(){
 
 			message.reply(`Can you don't?`);
 
-		}  else {
+		} else if(fortune === 30 ){
+
+			message.reply(`Uh huh!`);
+
+		} else if(fortune === 31 ){
+
+			message.reply(`Duhhhhhhhhhhh`);
+
+		} else if(fortune === 32 ){
+
+			message.reply(`This looking like a yes dawg`);
+
+		} else if(fortune === 33 ){
+
+			message.reply(`Hell yes.`);
+
+		} else if(fortune === 34 ){
+
+			message.reply(`I dunno bro`);
+
+		} else if(fortune === 35 ){
+
+			message.reply(`YEET`);
+
+		} else if(fortune === 36 ){
+
+			message.reply(`:smirk:`);
+
+		} else if(fortune === 37 ){
+
+			message.reply(`Mmmmmmm`);
+
+		} else if(fortune === 38 ){
+
+			message.reply(`Mhm.`);
+
+		} else if(fortune === 39 ){
+
+			message.reply(`That's the tea sis`);
+
+		} else {
 
 			message.reply(`Idk I'm illiterate`);
 
@@ -3481,18 +3559,21 @@ function patchNotes(){
 				let yeet = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Patch Notes:")
+			.setTitle("KS-Bot Patch Notes| !notifs to disable future messages")
 			.setDescription(msg)
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("- Kamino", message.author.avatarURL);
+			.setFooter("- KaminoShimobe", message.author.avatarURL);
 		
 		var person = bot.users.get(rows[index].id);
 				
 		if(person != undefined){		
-
-		person.sendEmbed(yeet);
-		console.log("Patch Notes sent to " + person.username);
+			if(rows[index].updates != false){	
+				person.sendEmbed(yeet);
+				console.log("Patch Notes sent to " + person.username);
+			} else {
+				console.log(person.username + " has disabled notifications of patch notes.")
+			}
 		} else {
 			message.reply("Not connected to the member, " + rows[index].uname + " by a server");		
 		}	
