@@ -25,7 +25,7 @@ const amuletCoinCD = new Set();
 const bot = new Discord.Client({disableEveryone: true})
 
 
-//TODO: Add stands, fix marriage, add patchnotes and pets
+//TODO: Add stands, fix marriage, add pets
 
 
 
@@ -1781,7 +1781,7 @@ function customRole(){
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -3207,7 +3207,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -3282,7 +3282,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -3355,7 +3355,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -3559,7 +3559,7 @@ function patchNotes(){
 				let yeet = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Patch Notes| !notifs to disable future messages")
+			.setTitle("KS-Bot Patch Notes| !notifs to disable future")
 			.setDescription(msg)
 			.setColor("#1f3c5b")
 			.setTimestamp()
@@ -4301,7 +4301,7 @@ if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -4325,7 +4325,7 @@ if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -4348,7 +4348,7 @@ if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -4371,7 +4371,7 @@ if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
@@ -4394,7 +4394,7 @@ if(command === `${prefix}buy` && messageArray[1] === `waifuPic`){
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			console.log(rows);
 			return;
 		}
