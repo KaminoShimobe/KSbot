@@ -2529,7 +2529,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 }
 
 function viewLeaderboard(){
-	console.log("Omega oof");	
+		
 	
 con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
@@ -2560,6 +2560,61 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 		
 
 	});
+		
+
+}
+//In progress
+function viewLocalboard(){
+
+let rank = [];
+var acc = {};
+function serverList(users, index){	
+	con.query(`SELECT * FROM user WHERE id = '${message.guild.members[index].id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let uname = rows[0].uname;
+		let money = rows[0].money;
+
+		
+		if(rows.length < 1) {
+			
+		} else {
+
+
+		}
+		
+		
+
+
+
+
+		
+			
+		
+
+			
+		
+		
+		
+
+
+		
+		
+
+	});
+
+}
+
+message.guild.members.forEach(serverList);
+
+let leaderboard = new Discord.RichEmbed()
+		
+			
+			.setTitle(guild.name + "'s KS Currency Leaderboard")
+			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
+			.setColor("#00fffa"); 
+
+		message.channel.sendEmbed(leaderboard);
 		
 
 }
