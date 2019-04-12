@@ -2549,7 +2549,7 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 		let leaderboard = new Discord.RichEmbed()
 		
 			
-			.setTitle("KS Currency Leaderboard")
+			.setTitle("Global KS Currency Leaderboard")
 			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
 			.setColor("#00fffa"); 
 
@@ -2563,35 +2563,48 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money
 		
 
 }
-//In progress
+	
 function viewLocalboard(){
-
-let rank = [];
-var acc = {};
-function serverList(users, index){	
-	con.query(`SELECT * FROM user WHERE id = '${message.guild.members[index].id}'`, (err, rows) => {
+con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
+	
+	
+let rank = [];
 
-		let uname = rows[0].uname;
-		let money = rows[0].money;
+function serverList(users, index){	
+	
 
-		
-		if(rows.length < 1) {
-			
+		var uname = rows[index].uname;
+		var funds = rows[index].money;
+		var acc = {tname: uname, money: funds};
+		if (message.guild.member(rows[index].id)) {
+ 			 // there is a GuildMember with that ID
+			rank.push(acc);
 		} else {
-
-
+			console.log(uname + " isn't in this server");
+			
 		}
 		
 		
+}
 
-
-
-
+	rows.forEach(serverList);	
+	rank.sort(function(a, b){return b.money - a.money});
+	var filler = {tname: "Insert Name Here", money: 0};
+if(rank.length < 10){
+	rank.push(filler, filler, filler, filler, filler, filler, filler, filler, filler, filler);
+}	
 		
 			
 		
+let leaderboard = new Discord.RichEmbed()
+		
+			
+			.setTitle(message.guild.name + "'s KS Currency Leaderboard")
+			.setDescription("1. `" + rank[0].tname + "`\n $" + rank[0].money + "\n 2.`" + rank[1].tname + "`\n $" + rank[1].money + "\n 3.`" + rank[2].tname + "`\n $" + rank[2].money + "\n 4.`" + rank[3].tname + "`\n $" + rank[3].money + "\n 5.`" + rank[4].tname + "`\n $" + rank[4].money + "\n 6.`" + rank[5].tname + "`\n $" + rank[5].money + "\n 7.`" + rank[6].tname + "`\n $" + rank[6].money + "\n 8.`" + rank[7].tname + "`\n $" + rank[7].money + "\n 9.`" + rank[8].tname + "`\n $" + rank[8].money + "\n 10.`" + rank[9].tname + "`\n $" + rank[9].money)
+			.setColor("#00fffa"); 
 
+		message.channel.sendEmbed(leaderboard);
 			
 		
 		
@@ -2599,25 +2612,18 @@ function serverList(users, index){
 
 
 		
-		
+	
 
 	});
 
 }
 
-message.guild.members.forEach(serverList);
 
-let leaderboard = new Discord.RichEmbed()
-		
-			
-			.setTitle(guild.name + "'s KS Currency Leaderboard")
-			.setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
-			.setColor("#00fffa"); 
 
-		message.channel.sendEmbed(leaderboard);
+
 		
 
-}
+
 
 
 
@@ -4072,6 +4078,41 @@ if(command === `${prefix}leaderboard` ){
 	} else {
 // insert function here.
 	viewLeaderboard();
+}	
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
+	
+if(command === `${prefix}localboard` ){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		viewLocalboard();
+}
+	} else {
+// insert function here.
+	viewLocalboard();
 }	
 
 			
