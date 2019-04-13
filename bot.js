@@ -64,12 +64,29 @@ con.on('error', function(err) {
     }
 });
        }
+
+function onlineUpdate(){
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+		
+		
+	});
+}       
 handleDisconnect();
 
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
-	
+
+	function onlineUpdate(){
+		con.query(`SELECT * FROM user`, (err, rows) => {
+			if(err) throw err;
+		bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+			
+			
+		});
+	}  
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
 	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
@@ -78,7 +95,7 @@ bot.on("ready", async () => {
 	});
   	
 	
-
+	setTimeout(onlineUpdate, 2000);
 
 
 	try {
@@ -2480,7 +2497,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			
 			return;
 		}
@@ -2634,7 +2651,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("They have no user!");
+			message.reply(`They have no user! \n Type ${prefix}user to create one!`);
 			
 			return;
 		}
