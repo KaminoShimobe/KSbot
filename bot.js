@@ -65,28 +65,15 @@ con.on('error', function(err) {
 });
        }
 
-function onlineUpdate(){
-	con.query(`SELECT * FROM user`, (err, rows) => {
-		if(err) throw err;
-	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-		
-		
-	});
-}       
+
+
 handleDisconnect();
 
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
 
-	function onlineUpdate(){
-		con.query(`SELECT * FROM user`, (err, rows) => {
-			if(err) throw err;
-		bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-		console.log(rows.length + " users in " + bot.guilds.size + " servers.")	
-			
-		});
-	}  
+	
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
 	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
@@ -114,7 +101,16 @@ bot.on("ready", async () => {
 
 });
 
+function onlineUpdate(){
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+		
+		
+	});
+}     
 
+setTimeout(onlineUpdate, 2000);
 
 
 
