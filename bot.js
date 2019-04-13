@@ -81,10 +81,19 @@ bot.on("ready", async () => {
 		
 	});
   	
+  	function onlineUpdate(){
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+		
+		setTimeout(onlineUpdate, 2000);
+	});
+}     
+
+onlineUpdate();
+
 	
-	setTimeout(onlineUpdate, 2000);
-
-
+	
 	try {
 
 		let link = await bot.generateInvite(["ADMINISTRATOR"]);
@@ -101,16 +110,6 @@ bot.on("ready", async () => {
 
 });
 
-function onlineUpdate(){
-	con.query(`SELECT * FROM user`, (err, rows) => {
-		if(err) throw err;
-	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-		
-		
-	});
-}     
-
-setTimeout(onlineUpdate, 2000);
 
 
 
