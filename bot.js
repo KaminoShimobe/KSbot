@@ -83,7 +83,7 @@ bot.on("ready", async () => {
 		con.query(`SELECT * FROM user`, (err, rows) => {
 			if(err) throw err;
 		bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-			
+		console.log(rows.length + " users in " + bot.guilds.size + " servers.")	
 			
 		});
 	}  
