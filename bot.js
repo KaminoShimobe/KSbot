@@ -513,9 +513,7 @@ function rps(){
 
 			function pt1(){
 			
-			other.createDM().then(channel => {const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });});
-			//const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
-	        		collectorr.once('collect', message => {
+			other.createDM().then(channel => {const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 }); collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
 						con.query(sql, console.log);
@@ -731,7 +729,9 @@ function rps(){
 	            		}
 
 	            		 
-				}); 
+				}); });
+			//const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
+	        		
 			}
 			other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
 			.then(pt1())
@@ -2892,7 +2892,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio)
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses)
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
@@ -3025,6 +3025,8 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let rank = rows[0].rank;
 		let marriage = rows[0].marriage;
 		let stand = rows[0].stand;
+		let wins = rows[0].wins;
+		let losses = rows[0].losses;
 		var spouse = '';
 
 		
@@ -3049,7 +3051,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio)
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses)
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
