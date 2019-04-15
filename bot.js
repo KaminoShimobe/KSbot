@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
 	bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-	console.log(bot.guilds.size + ' servers | ' + rows.length + ' users')	
+	
 		setTimeout(onlineUpdate, 2000);
 	});
 }     
@@ -512,7 +512,8 @@ function rps(){
 			
 
 			function pt1(){
-			const collectorr = message.channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
+
+			const collectorr = other.dmChannel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
@@ -739,7 +740,7 @@ function rps(){
 		function duel(){
 			
 			function pt2(){
-			const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
+			const collector = them.dmChannel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
