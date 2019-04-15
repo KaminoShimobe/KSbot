@@ -174,11 +174,21 @@ bot.on("message", async message => {
   	var sql2 = "CREATE TABLE server (id VARCHAR(30), greeting VARCHAR(255), channel VARCHAR(30), gchannel VARCHAR(30), whisper BOOLEAN, expose VARCHAR(32), exposeSet BOOLEAN, cooldown SMALLINT, stands BOOLEAN, canvas BOOLEAN, shop VARCHAR(100), prices VARCHAR(100), waifu BOOLEAN, prefix VARCHAR(5), rpg BOOLEAN, chests BOOLEAN, chest INT, karma VARCHAR(5), kqueen VARCHAR(50), kcrimson BOOLEAN )";
   	var sql3 = "CREATE TABLE global (id VARCHAR(30), serverCt INT, version VARCHAR(7))";
   	var sql4 = "CREATE TABLE pet (owner VARCHAR(30), name VARCHAR(32), hunger TINYINT, happiness TINYINT, sleepiness TINYINT, level TINYINT, personality VARCHAR(30), currowner VARCHAR(30), id VARCHAR(12), iq SMALLINT)";
-  	var sql5 = "ALTER TABLE user ADD updates BOOLEAN";
+  	var sql5 = "ALTER TABLE user ADD rps VARCHAR(1)";
+	var sql6 = "ALTER TABLE user ADD wins INT";
+	var sql7 = "ALTER TABLE user ADD losses INT";
   	
   	con.query(sql5, function (err, result) {
     	if (err) throw err;
-    	message.author.send("updates added to user table!");
+    	message.author.send("Rock Paper Scissors added to user table!");
+  	});
+		con.query(sql6, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Wins added to user table!");
+  	});
+		con.query(sql7, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Losses added to user table!");
   	});
   	
   		}
@@ -1762,6 +1772,83 @@ function gambleSlots(){
 
 	});
 }	
+	
+// function rps(){
+// 	let other = message.mentions.users.first();
+// 	var num = parseInt(messageArray[2]); 
+// 	let them = bot.users.get(message.author.id);
+// 	let results = message.channel;
+// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+
+// 		if(err) throw err;
+		
+// 		if(rows.length < 1) {
+// 			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+// 			return;
+// 		}
+		
+// 		let sql;
+// 		var money = rows[0].money;
+// 		var pick = rows[0].rps;
+// 		var wins = rows[0].wins;
+// 		var losses = rows[0].losses;
+// 		var mName = rows[0].uname;
+		
+// 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+// 				if(err) throw err;
+// 				let sql2;
+// 				var theirMoney = rows[0].money;
+// 				var theirPick = rows[0].rps;
+// 				var theirWins = rows[0].wins;
+// 				var theirLosses = rows[0].losses;
+// 				var tName = rows[0].uname;
+			
+// 		function duel(){
+// 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
+// 			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+// 	        		collector.once('collect', message => {
+// 	            		if (message.content == `rock` || message.content == `r`) {
+// 	               		 duel();
+// 	                		return;
+// 	            		}  else {
+// 					message.channel.send("Challenge Declined.");
+// 					return;
+// 				}
+// 				}); 
+// 		}	
+		
+// 		if(money > 0 && money > num && message.author.id != other.id && num > 0){
+// 			message.reply(`challenges ${other} to Rock Paper Scissors for $` + num + `! \n respond with **yes** to accept the challenge!`);
+// 			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
+// 	        		collector.once('collect', message => {
+// 	            		if (message.content == `yes` || message.content == `Yes` || message.content == `YES` || message.content == `ye` || message.content == `Ye` || message.content == `y` || message.content == `Y`) {
+// 	               		 message.channel.send("Check your dms and let the best win!");
+// 					duel();
+// 	                		return;
+// 	            		}  else {
+// 					message.channel.send("Challenge Declined.");
+// 					return;
+// 				}
+// 				}); 
+			
+// 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+			
+// 			con.query(sql, console.log);
+// 			con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+// 				if(err) throw err;
+// 				let sql;
+// 				var money = rows[0].money;
+// 				sql = `UPDATE user SET money = ${money + num} WHERE id = '${other.id}'`;
+// 				console.log("Received $" + num);
+// 				con.query(sql, console.log);
+// 				message.reply(`gave ${other} $` + num + `!`);
+// 	});	
+// 		} else{
+// 			message.reply(" You cannot challenge with all of your money, and you may have the order mixed up.");
+// 		}
+
+// }	
 	
 function shop(){
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
