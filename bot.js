@@ -732,7 +732,7 @@ function rps(){
 				}); 
 			}
 			other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
-			.then(pt1();)
+			.then(pt1())
 			.catch(console.error);
 		}	
 			
@@ -799,7 +799,7 @@ function rps(){
 			}
 			
 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
-			.then(pt2();)
+			.then(pt2())
  			.catch(console.error);
 		}	
 		
