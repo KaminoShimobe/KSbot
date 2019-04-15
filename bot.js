@@ -741,9 +741,7 @@ function rps(){
 		function duel(){
 			
 			function pt2(){
-				them.createDM().then(channel => {const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });});
-			//const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
+				them.createDM().then(channel => {const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 }); collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
@@ -798,7 +796,9 @@ function rps(){
 	            		}
 
 	            		 
-				}); 
+				}); });
+			//const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
+	        		
 			}
 			
 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
