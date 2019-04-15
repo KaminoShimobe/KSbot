@@ -510,7 +510,7 @@ function rps(){
 			
 		function duel2(){
 other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
-			const collectorr = new Discord.MessageCollector(bot.lastMessage.channel, m => m.author.id === other.id, { time: 100000000 });
+			const collectorr = new Discord.MessageCollector(other.dmChannel, m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
@@ -732,7 +732,7 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 			
 		function duel(){
 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
-			const collector = new Discord.MessageCollector(bot.lastMessage.channel, m => m.author.id === message.author.id, { time: 100000000 });
+			const collector = new Discord.MessageCollector(them.dmChannel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
