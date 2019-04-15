@@ -511,7 +511,8 @@ function rps(){
 		function duel2(){
 			
 other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
-			
+			.then(message => console.log(`Sent message: ${message.content}`))
+ 			.catch(console.error);
 			const collectorr = message.channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
@@ -735,7 +736,8 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 		function duel(){
 			
 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
-			
+			.then(message => console.log(`Sent message: ${message.content}`))
+ 			.catch(console.error);
 			const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
