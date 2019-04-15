@@ -739,7 +739,7 @@ function rps(){
 		function duel(){
 			
 			function pt2(){
-			const collector = m1.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
+			const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
