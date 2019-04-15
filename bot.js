@@ -1813,69 +1813,13 @@ function rps(){
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'r';
-						if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **rock** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **paper** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **scissors** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-
-						}
+					them.send("You chose rock!");	
 						//paper
 	            		} else if (message.content == `paper` || message.content == `p`) {
 	               		sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'p';
-						if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **paper** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **scissors** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **paper** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-							
-						}
+					them.send("You chose paper!");		
 
 	            		} 
 	            		//scissors
@@ -1883,143 +1827,31 @@ function rps(){
 	               		sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 's';
-						if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **scissors** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **rock** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **paper** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-							
-						}
+						them.send("You chose scissors!");	
 
 	            		} else {
 	            		var rand = Math.floor(Math.random()* 3) + 1;
 	            		if(rand == 1){
-	            			them.send("Random Selection gave you Rock!");
-	            			sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
+					sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'r';
-						if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **rock** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **paper** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **rock**. \n ${other} chose **scissors** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-							
-						}
+	            			them.send("Random Selection gave you Rock!");
+	            			
 	            		}	else if (rand == 2){
-	            			them.send("Random Selection gave you Paper!");
-	            			sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
+					sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'p';
-						if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **paper** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **scissors** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **paper**. \n ${other} chose **paper** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-							
-						}
+	            			them.send("Random Selection gave you Paper!");
 	            			
 	               		
 
 	            		} else {
-	            			them.send("Random Selection gave you Scissors!");
-	            			sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
+					sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 's';
-						if(theirPick == 's'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **scissors** \n Draw! Try again!`);
-							return;
-	                		
-						} else if(theirPick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **rock** \n ${them} payed ${other} $${num}! `);
-							return;	
-	                		
-						} else if(theirPick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
-							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${theirMoney - num}, wins = ${theirLosses + 1} WHERE id = '${other.id}'`;
-							con.query(sql3, console.log);
-							results.send(`${them} chose **scissors**. \n ${other} chose **paper** \n ${other} payed ${them} $${num}! `);
-							return;	
-
-	                		
-						}  else {
-							them.send(tName + " hasn't made a selection yet!");
-							
-						}
+	            			them.send("Random Selection gave you Scissors!");
+	            			
+						
 	            		}
 
 	            		}
