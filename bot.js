@@ -2872,7 +2872,14 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let losses = rows[0].losses;
 		var spouse = '';
 
-	
+		if(losses === null){
+			losses = 0;
+		} 
+
+		if(wins === null){
+			wins = 0;
+		}
+
 
 		var supporter = "";
 		if(patreon == 1){
@@ -3029,7 +3036,13 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let losses = rows[0].losses;
 		var spouse = '';
 
-		
+		if(losses === null){
+			losses = 0;
+		} 
+
+		if(wins === null){
+			wins = 0;
+		}
 
 		var supporter = "";
 		if(patreon == 1){
