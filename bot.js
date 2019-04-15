@@ -512,8 +512,8 @@ function rps(){
 			
 
 			function pt1(){
-			console.log(other.lastMessage.channel);	
-			const collectorr = other.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
+			var channel = bot.channels.get(other.lastMessageID);	
+			const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
@@ -740,8 +740,8 @@ function rps(){
 		function duel(){
 			
 			function pt2(){
-				console.log(them.lastMessage.channel);	
-			const collector = them.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
+				var channel = bot.channels.get(them.lastMessageID);
+			const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
