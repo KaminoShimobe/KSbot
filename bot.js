@@ -1805,60 +1805,8 @@ function rps(){
 				var theirLosses = rows[0].losses;
 				var tName = rows[0].uname;
 			
-		function duel(){
-			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
-			const collector = new Discord.MessageCollector(them.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		if (message.content == `rock` || message.content == `r`) {
-	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 'r';
-					them.send("You chose rock!");	
-						//paper
-	            		} else if (message.content == `paper` || message.content == `p`) {
-	               		sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 'p';
-					them.send("You chose paper!");		
-
-	            		} 
-	            		//scissors
-	            		else if (message.content == `scissors` || message.content == `s`) {
-	               		sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 's';
-						them.send("You chose scissors!");	
-
-	            		} else {
-	            		var rand = Math.floor(Math.random()* 3) + 1;
-	            		if(rand == 1){
-					sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 'r';
-	            			them.send("Random Selection gave you Rock!");
-	            			
-	            		}	else if (rand == 2){
-					sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 'p';
-	            			them.send("Random Selection gave you Paper!");
-	            			
-	               		
-
-	            		} else {
-					sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
-						con.query(sql, console.log);
-					pick = 's';
-	            			them.send("Random Selection gave you Scissors!");
-	            			
-						
-	            		}
-
-	            		}
-
-	            		 
-				}); 
-			other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
+		function duel2(){
+other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
 			const collectorr = new Discord.MessageCollector(other.channel, m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
@@ -2077,6 +2025,68 @@ function rps(){
 
 	            		 
 				}); 
+		}	
+			
+		function duel(){
+			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
+			const collector = new Discord.MessageCollector(them.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `rock` || message.content == `r`) {
+	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 'r';
+					them.send("You chose rock!");	
+					duel2();
+						//paper
+	            		} else if (message.content == `paper` || message.content == `p`) {
+	               		sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 'p';
+					them.send("You chose paper!");	
+					duel2();
+
+	            		} 
+	            		//scissors
+	            		else if (message.content == `scissors` || message.content == `s`) {
+	               		sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 's';
+						them.send("You chose scissors!");
+					duel2();
+
+	            		} else {
+	            		var rand = Math.floor(Math.random()* 3) + 1;
+	            		if(rand == 1){
+					sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 'r';
+	            			them.send("Random Selection gave you Rock!");
+					duel2();
+	            			
+	            		}	else if (rand == 2){
+					sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 'p';
+	            			them.send("Random Selection gave you Paper!");
+					duel2();
+	            			
+	               		
+
+	            		} else {
+					sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
+						con.query(sql, console.log);
+					pick = 's';
+	            			them.send("Random Selection gave you Scissors!");
+					duel2();
+	            			
+						
+	            		}
+
+	            		}
+
+	            		 
+				}); 
+			
 		}	
 		
 		if(money > 0 && money > num && message.author.id != other.id && num > 0 && theirMoney > num){
