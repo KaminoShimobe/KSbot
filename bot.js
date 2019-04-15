@@ -509,10 +509,10 @@ function rps(){
 				var tName = rows[0].uname;
 			
 		function duel2(){
-			var dmOther = bot.other.createDM();
+			
 other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
 			
-			const collectorr = dmOther.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
+			const collectorr = message.channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
@@ -733,10 +733,10 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 		}	
 			
 		function duel(){
-			var dmThem = bot.them.createDM();
+			
 			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
 			
-			const collector = dmThem.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
+			const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
