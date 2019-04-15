@@ -511,7 +511,7 @@ function rps(){
 		function duel2(){
 			var m2;
 other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
-			.then(message => m2 = message.channel;))
+			.then(message => m2 = message.channel)
  			.catch(console.error);
 			const collectorr = m2.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
