@@ -509,8 +509,9 @@ function rps(){
 				var tName = rows[0].uname;
 			
 		function duel2(){
-other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
 			var dmOther = other.createDM();
+dmOther.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
+			
 			const collectorr = dmOther.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
@@ -732,8 +733,9 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 		}	
 			
 		function duel(){
-			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
 			var dmThem = them.createDM();
+			dmThem.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
+			
 			const collector = dmThem.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
