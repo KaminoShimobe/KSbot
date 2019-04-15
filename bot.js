@@ -509,11 +509,10 @@ function rps(){
 				var tName = rows[0].uname;
 			
 		function duel2(){
-			var m2;
-other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
-			.then(message => m2 = message.channel)
- 			.catch(console.error);
-			const collectorr = m2.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
+			
+
+			function pt1(){
+			const collectorr = message.channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 });
 	        		collectorr.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
@@ -731,13 +730,15 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 
 	            		 
 				}); 
+			}
+			other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + mName + ` \n (r, p, s, rand for short)`)
+			.then(pt1();)
+			.catch(console.error);
 		}	
 			
 		function duel(){
-			var m1;
-			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
-			.then(message => m1 = message.channel)
- 			.catch(console.error);
+			
+			function pt2(){
 			const collector = m1.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `rock` || message.content == `r`) {
@@ -795,7 +796,11 @@ other.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use
 
 	            		 
 				}); 
+			}
 			
+			them.send(`Respond with **rock**, **paper**, **scissors**, or **random** to use against ` + tName + ` \n (r, p, s, rand for short)`)
+			.then(pt2();)
+ 			.catch(console.error);
 		}	
 		
 		if(money > 0 && money > num && message.author.id != other.id && num > 0 && theirMoney > num){
