@@ -4545,35 +4545,35 @@ if(command === `${prefix}localboard` ){
 
 	}
 	
-if(command === `${prefix}duel`){
+// if(command === `${prefix}duel`){
 
 
-		if(cooldown > 0){
-	if (commandCD.has(message.author.id)) {
-	message.react('🕒')
+// 		if(cooldown > 0){
+// 	if (commandCD.has(message.author.id)) {
+// 	message.react('🕒')
 
-  	.then(console.log("Reacted."))
+//   	.then(console.log("Reacted."))
 
-  	.catch(console.error);	
+//   	.catch(console.error);	
 	
-		return;
-	} else {
-		commandCD.add(message.author.id);
-	  setTimeout(() => {
-          // Removes the user from the set after however long the cooldown is.
-          commandCD.delete(message.author.id);
-        }, (cooldown));	
-	//insert function here.
-		rps();
-	}
-} else {
-// insert function here.
-	rps();
-}
+// 		return;
+// 	} else {
+// 		commandCD.add(message.author.id);
+// 	  setTimeout(() => {
+//           // Removes the user from the set after however long the cooldown is.
+//           commandCD.delete(message.author.id);
+//         }, (cooldown));	
+// 	//insert function here.
+// 		rps();
+// 	}
+// } else {
+// // insert function here.
+// 	rps();
+// }
 
-		return;
+// 		return;
 
-	}	
+// 	}	
 	
 //MISC
 	
