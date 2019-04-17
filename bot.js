@@ -227,8 +227,11 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let bio = rows[0].bio;
 		
 				
-
-		message.author.send("Update your bio! You have 100 characters. \n !cancel to cancel.");
+		if(message.channel.type === "dm"){
+			message.author.send("Update your bio! You have 100 characters. \n !cancel to cancel.");
+		} else {
+			message.channel.send("Update your bio! You have 100 characters. \n !cancel to cancel.");
+		}
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `!cancel`) {
@@ -507,6 +510,12 @@ function rps(){
 				var theirWins = rows[0].wins;
 				var theirLosses = rows[0].losses;
 				var tName = rows[0].uname;
+
+				if(rows.length < 1) {
+			message.reply(`They have no user! \n Type ${prefix}user to create one!`);
+			
+			return;
+		}
 			
 		function duel2(){
 			
@@ -514,7 +523,7 @@ function rps(){
 			function pt1(){
 			
 			other.createDM().then(channel => {const collectorr = channel.createMessageCollector(m => m.author.id === other.id, { time: 100000000 }); collectorr.once('collect', message => {
-	            		if (message.content == `rock` || message.content == `r`) {
+	            		if (message.content == `rock` || message.content == `r` || message.content == `Rock`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${other.id}'`;
 						con.query(sql, console.log);
 					theirPick = 'r';
@@ -548,7 +557,7 @@ function rps(){
 
 						}
 						//paper
-	            		} else if (message.content == `paper` || message.content == `p`) {
+	            		} else if (message.content == `paper` || message.content == `p` || message.content == `Paper`) {
 	               		sql = `UPDATE user SET rps = 'p' WHERE id = '${other.id}'`;
 						con.query(sql, console.log);
 					theirPick = 'p';
@@ -584,7 +593,7 @@ function rps(){
 
 	            		} 
 	            		//scissors
-	            		else if (message.content == `scissors` || message.content == `s`) {
+	            		else if (message.content == `scissors` || message.content == `s` || message.content == `Scissors`) {
 	               		sql = `UPDATE user SET rps = 's' WHERE id = '${other.id}'`;
 						con.query(sql, console.log);
 					theirPick = 's';
@@ -742,14 +751,14 @@ function rps(){
 			
 			function pt2(){
 				them.createDM().then(channel => {const collector = channel.createMessageCollector(m => m.author.id === message.author.id, { time: 100000000 }); collector.once('collect', message => {
-	            		if (message.content == `rock` || message.content == `r`) {
+	            		if (message.content == `rock` || message.content == `r` || message.content == `Rock`) {
 	               		sql = `UPDATE user SET rps = 'r' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'r';
 					them.send("You chose rock!");	
 					duel2();
 						//paper
-	            		} else if (message.content == `paper` || message.content == `p`) {
+	            		} else if (message.content == `paper` || message.content == `p` || message.content == `Paper`) {
 	               		sql = `UPDATE user SET rps = 'p' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 'p';
@@ -758,7 +767,7 @@ function rps(){
 
 	            		} 
 	            		//scissors
-	            		else if (message.content == `scissors` || message.content == `s`) {
+	            		else if (message.content == `scissors` || message.content == `s` || message.content == `Scissors`) {
 	               		sql = `UPDATE user SET rps = 's' WHERE id = '${them.id}'`;
 						con.query(sql, console.log);
 					pick = 's';
@@ -2290,7 +2299,7 @@ function whom(){
 	}	else if(random === 3){
     	message.channel.send("Definitely, " + randomBoi);
 	} 	else if(random === 4){
-    	message.channel.send(":no_mouth:" + randomBoid);
+    	message.channel.send(":no_mouth: " + randomBoid);
 	}   else if(random === 5){
     	message.channel.send("It's " + randomBoid + " duhhhh");
 	}	else if(random === 6){
@@ -2298,7 +2307,7 @@ function whom(){
 	}	else if(random === 7){
     	message.channel.send(":eyes: " + randomBoid);
 	}	else if(random === 8){
-    	message.channel.send("It **has** to be" + randomBoid);
+    	message.channel.send("It **has** to be " + randomBoid);
 	}	else if(random === 9){
     	message.channel.send("I am sorry to inform you...");
     	setTimeout(message.channel.send("But it's " + randomBoi), 6000);
@@ -2872,13 +2881,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let losses = rows[0].losses;
 		var spouse = '';
 
-		if(losses === null){
-			losses = 0;
-		} 
-
-		if(wins === null){
-			wins = 0;
-		}
+		
 
 
 		var supporter = "";
@@ -3036,13 +3039,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let losses = rows[0].losses;
 		var spouse = '';
 
-		if(losses === null){
-			losses = 0;
-		} 
-
-		if(wins === null){
-			wins = 0;
-		}
+		
 
 		var supporter = "";
 		if(patreon == 1){
