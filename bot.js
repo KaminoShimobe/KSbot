@@ -177,20 +177,13 @@ bot.on("message", async message => {
   	var sql5 = "ALTER TABLE user ADD rps VARCHAR(1)";
 	var sql6 = "ALTER TABLE user ADD wins INT";
 	var sql7 = "ALTER TABLE user ADD losses INT";
+	var sql8 = "CREATE TABLE uno (owner VARCHAR(30), active BOOLEAN, open BOOLEAN, reverse BOOLEAN, players)";
   	
-  	con.query(sql5, function (err, result) {
+  	con.query(sql8, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Rock Paper Scissors added to user table!");
+    	message.author.send("Uno added to user table!");
   	});
-		con.query(sql6, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Wins added to user table!");
-  	});
-		con.query(sql7, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Losses added to user table!");
-  	});
-  	
+	
   		}
   	}
 
@@ -2180,7 +2173,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 30% of your money | **insurance**: \n Your losses for the next 30 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled).")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 90 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled).")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -2289,7 +2282,7 @@ function insure(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((3 / 10) * money);
+			var percentage = Math.floor((1 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
 				return;
@@ -2300,7 +2293,7 @@ function insure(){
           // Removes the user from the set after however long the cooldown is.
           insuranceCD.delete(message.author.id);
           message.reply("'s insurance has run out!")
-        }, (1000*30));	
+        }, (1000*90));	
 	//insert function here.
 		
 	}
