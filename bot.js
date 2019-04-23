@@ -506,7 +506,7 @@ function rps(){
 		var mName = rows[0].uname;
 		var rank = rows[0].rank;
 		
-		if(rank = "rps"){
+		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
 		}
 		
@@ -521,7 +521,7 @@ function rps(){
 				var tName = rows[0].uname;
 				var trank = rows[0].rank;
 		
-		if(trank = "rps"){
+		if(trank == "rps"){
 			message.reply("You cannot gamble while they're playing Rock Paper Scissors!");
 		}
 
