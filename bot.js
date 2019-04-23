@@ -179,11 +179,11 @@ bot.on("message", async message => {
 	var sql7 = "ALTER TABLE user ADD losses INT";
 	var sql8 = "CREATE TABLE uno (owner VARCHAR(30), active BOOLEAN, open BOOLEAN, reverse BOOLEAN, players TINYINT, card VARCHAR(5), prize INT, cost INT)";
   	var sql9 = "ALTER TABLE user ADD unoID VARCHAR(1)";
-	var sql10 = "ALTER TABLE user ADD hand VARCHAR(64)";
+	var sql10 = "ALTER TABLE uno ADD turn VARCHAR(1)";
 		
-  	con.query(sql8, function (err, result) {
+  	con.query(sql10, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Uno table created!");
+    	message.author.send("turn added to uno table!");
   	});
 	
 	
@@ -2003,7 +2003,7 @@ function gambleSlots(){
 	
 	if(money >= 10){
 
-	
+		let prize;
 		
 
 		var slot1 = Math.floor(Math.random() * 9) + 1;
@@ -2309,6 +2309,72 @@ function insure(){
 	}
 	
 //MISC	
+	
+function uno(){
+		
+		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var cost = parseInt(messageArray[1]); 
+		var card1 = "";	
+		var Cchance = Math.floor(Math.random() * 10) + 1;
+		if(Cchance == 1){
+			card1 = "R0";
+		} else if(Cchance == 2){
+			card1 = "Y1";
+		} else if(Cchance == 3){
+			card1 = "B2";
+		} else if(Cchance == 4){
+			card1 = "G3";
+		} else if(Cchance == 5){
+			card1 = "R5";
+		} else if(Cchance == 6){
+			card1 = "Y5";
+		} else if(Cchance == 7){
+			card1 = "B6";
+		} else if(Cchance == 8){
+			card1 = "G7";
+		} else if(Cchance == 9){
+			card1 = "R8";
+		} else {
+			card1 = "Y9";
+		}	
+		let money;	
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		money = rows[0].money;
+			
+		});	
+			
+		if(rows.length < 1) {
+			if(Number.isInteger(cost) === true && money >= cost && cost > 0){
+			sql = `INSERT INTO uno (owner, active, open, reverse, players, card, prize, cost, turn) VALUES ('${message.author.id}', ${false}, ${true}, ${false}, ${1}, '${card1}, ${0}, ${cost}, ${0})`;
+			con.query(sql, console.log);
+			con.query(`UPDATE user SET money = ${money - cost},  WHERE id = '${message.author.id}'`, console.log);
+			message.channel.send(`If you want to play uno reply with ${prefix}join! The game will start when ${message.author.username} says ${prefix}close`);
+			} else {
+				message.reply("Not a valid prize amount.");
+				return;
+			}
+            		
+		} else {
+
+			message.reply("You can't start another game of uno until this one is finished");
+			
+
+			
+			return;
+		}
+
+
+		});
+	}	
+	
+function unoJoin(){
+	
+	
+}	
 	
 function whom(){
 		
