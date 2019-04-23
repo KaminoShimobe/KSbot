@@ -218,8 +218,8 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
+			message.reply("You have no user! Type KS!help for a list of commands!");
+			
 			return;
 		}
 
@@ -259,17 +259,21 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
+			message.reply("You have no user! Type KS!help for a list of commands!");
+			
 			return;
 		}
 
 		
 		let color = rows[0].hue;
 		
-				
+		if(message.channel.type === "dm"){
+			message.author.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
+		} else {
+			message.channel.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
+		}		
 
-		message.author.send("Update your profile color! Send the hexidecimal for your profile. \n !cancel to cancel.");
+		
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `!cancel`) {
@@ -500,6 +504,11 @@ function rps(){
 		var wins = rows[0].wins;
 		var losses = rows[0].losses;
 		var mName = rows[0].uname;
+		var rank = rows[0].rank;
+		
+		if(rank = "rps"){
+			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+		}
 		
 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 				if(err) throw err;
@@ -510,6 +519,11 @@ function rps(){
 				var theirWins = rows[0].wins;
 				var theirLosses = rows[0].losses;
 				var tName = rows[0].uname;
+				var trank = rows[0].rank;
+		
+		if(trank = "rps"){
+			message.reply("You cannot gamble while they're playing Rock Paper Scissors!");
+		}
 
 				if(rows.length < 1) {
 			message.reply(`They have no user! \n Type ${prefix}user to create one!`);
@@ -528,25 +542,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 'r';
 						if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **rock** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -562,25 +576,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 'p';
 						if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **paper** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -598,25 +612,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 's';
 						if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **scissors** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -635,25 +649,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 'r';
 						if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **rock** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -669,25 +683,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 'p';
 						if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **paper** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -704,25 +718,25 @@ function rps(){
 						con.query(sql, console.log);
 					theirPick = 's';
 						if(pick == 's'){
-							sql2 = `UPDATE user SET rps = '' WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '' WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '' WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '' WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **scissors** \n Draw! Try again!`);
 							return;
 	                		
 						} else if(pick == 'r'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney - num}, losses = ${theirLosses + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} payed ${them} $${num}! `);
 							return;	
 	                		
 						} else if(pick == 'p'){
-							sql2 = `UPDATE user SET rps = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
+							sql2 = `UPDATE user SET rps = '', rank = '', money = ${theirMoney + num}, wins = ${theirWins + 1} WHERE id = '${other.id}'`;
 							con.query(sql2, console.log);
-							sql3 = `UPDATE user SET rps = '', money = ${money - num}, wins = ${losses + 1} WHERE id = '${them.id}'`;
+							sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
 							con.query(sql3, console.log);
 							results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} payed ${other} $${num}! `);
 							return;	
@@ -820,6 +834,8 @@ function rps(){
 			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `yes` || message.content == `Yes` || message.content == `YES` || message.content == `ye` || message.content == `Ye` || message.content == `y` || message.content == `Y`) {
+	               		 con.query(`UPDATE user SET rank = 'rps' WHERE id = '${them.id}'`, console.log);
+	               		 con.query(`UPDATE user SET rank = 'rps' WHERE id = '${other.id}'`, console.log);
 	               		 message.channel.send("Check your dms and let the best win!");
 					duel();
 	                		return;
@@ -1850,22 +1866,22 @@ function daily(){
             message.reply("You have already collected your daily check!");
             return;
     } else {
-    	if(rank == "Ambassador"){
-    		check = 1500;
-    	} else if(rank == "Beta Tester"){
-    		check = 1250;
-    	} else if(rank == "Companion"){
-    		check = 1500;
-    	} else if(rank == "Legend"){
-    		check = 1750;
-    	} else if(rank == "Bae"){
-    		check = 2000;
-    	} else if(rank == "Creator"){
+    	// if(rank == "Ambassador"){
+    	// 	check = 1500;
+    	// } else if(rank == "Beta Tester"){
+    	// 	check = 1250;
+    	// } else if(rank == "Companion"){
+    	// 	check = 1500;
+    	// } else if(rank == "Legend"){
+    	// 	check = 1750;
+    	// } else if(rank == "Bae"){
+    	// 	check = 2000;
+    	// } else if(rank == "Creator"){
+    	// 	check = 1000;
+    	// 	message.channel.send("Pfft this means nothing to you :stuck_out_tongue:")
+    	// } else {
     		check = 1000;
-    		message.channel.send("Pfft this means nothing to you :stuck_out_tongue:")
-    	} else {
-    		check = 1000;
-    	}
+    	// }
 
     	 if(patreon == 1){
     		check += 1000;
@@ -1901,6 +1917,12 @@ function gambleFlip(){
 		var money = rows[0].money;
 		var streak = rows[0].streak;
 		
+		var rank = rows[0].rank;
+		
+		if(rank = "rps"){
+			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+		}
+
 
 	var num = parseInt(messageArray[1]); 
 	if(Number.isInteger(num) === true && money >= num && num > 0){
@@ -1973,9 +1995,11 @@ function gambleSlots(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
+		var rank = rows[0].rank;
 		
-		
-
+		if(rank = "rps"){
+			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+		}
 	
 	if(money >= 10){
 
@@ -2881,7 +2905,12 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let losses = rows[0].losses;
 		var spouse = '';
 
-		
+		if(wins == undefined){
+			wins = 0;
+		} 
+		if(losses == undefined){
+			losses = 0;
+		}
 
 
 		var supporter = "";
@@ -3039,7 +3068,12 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let losses = rows[0].losses;
 		var spouse = '';
 
-		
+		if(wins == undefined){
+			wins = 0;
+		} 
+		if(losses == undefined){
+			losses = 0;
+		}
 
 		var supporter = "";
 		if(patreon == 1){
@@ -4545,35 +4579,35 @@ if(command === `${prefix}localboard` ){
 
 	}
 	
-// if(command === `${prefix}duel`){
+if(command === `${prefix}duel`){
 
 
-// 		if(cooldown > 0){
-// 	if (commandCD.has(message.author.id)) {
-// 	message.react('🕒')
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
 
-//   	.then(console.log("Reacted."))
+  	.then(console.log("Reacted."))
 
-//   	.catch(console.error);	
+  	.catch(console.error);	
 	
-// 		return;
-// 	} else {
-// 		commandCD.add(message.author.id);
-// 	  setTimeout(() => {
-//           // Removes the user from the set after however long the cooldown is.
-//           commandCD.delete(message.author.id);
-//         }, (cooldown));	
-// 	//insert function here.
-// 		rps();
-// 	}
-// } else {
-// // insert function here.
-// 	rps();
-// }
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		rps();
+	}
+} else {
+// insert function here.
+	rps();
+}
 
-// 		return;
+		return;
 
-// 	}	
+	}	
 	
 //MISC
 	
