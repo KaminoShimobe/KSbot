@@ -4048,7 +4048,7 @@ function patchNotes(){
 				let yeet = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Patch Notes| !notifs to disable future")
+			.setTitle("KS-Bot Patch Notes| !notifs to disable future messages")
 			.setDescription(msg)
 			.setColor("#1f3c5b")
 			.setTimestamp()
