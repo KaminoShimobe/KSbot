@@ -508,6 +508,7 @@ function rps(){
 		
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+			return;
 		}
 		
 		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
@@ -523,6 +524,7 @@ function rps(){
 		
 		if(trank == "rps"){
 			message.reply("You cannot gamble while they're playing Rock Paper Scissors!");
+			return;
 		}
 
 				if(rows.length < 1) {
@@ -1919,7 +1921,7 @@ function gambleFlip(){
 		
 		var rank = rows[0].rank;
 		
-		if(rank = "rps"){
+		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
 			return;
 		}
@@ -1998,7 +2000,7 @@ function gambleSlots(){
 		var money = rows[0].money;
 		var rank = rows[0].rank;
 		
-		if(rank = "rps"){
+		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
 			return;
 		}
