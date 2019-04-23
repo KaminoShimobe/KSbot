@@ -1921,6 +1921,7 @@ function gambleFlip(){
 		
 		if(rank = "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+			return;
 		}
 
 
@@ -1931,21 +1932,21 @@ function gambleFlip(){
 	var chance;
 		
 		if(num > 0 && num <= 999999){
-		 chance = Math.floor(Math.random() * 2) + 1;
+		 chance = Math.floor(Math.random() * 100) + 1;
 		} else if(num > 999999 && num <= 9999999){
-		 chance = Math.floor(Math.random() * 4) + 1;
+		 chance = Math.floor(Math.random() * 200) + 1;
 		} else if(num > 9999999 && num <= 99999999){
-		 chance = Math.floor(Math.random() * 6) + 1;
+		 chance = Math.floor(Math.random() * 300) + 1;
 		} else if(num > 99999999 && num <= 9999999999){
-		 chance = Math.floor(Math.random() * 10) + 1;
+		 chance = Math.floor(Math.random() * 1000) + 1;
 		} else {
 			chance = 0;
 		} 
 		
-		if(money > 5000000){
-			chance = Math.floor(Math.random() * 4) + 1;
+		if(money > 1000000 && num >= (money/2)){
+			chance += money / 1000000;
 		}	
-		if(chance == 1){
+		if(chance <= 50 ){
 
 			if(streak >= 2){
 			bet = num + Math.floor((streak / 10) * num );
@@ -1999,6 +2000,7 @@ function gambleSlots(){
 		
 		if(rank = "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+			return;
 		}
 	
 	if(money >= 10){
