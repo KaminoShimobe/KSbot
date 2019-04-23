@@ -177,13 +177,23 @@ bot.on("message", async message => {
   	var sql5 = "ALTER TABLE user ADD rps VARCHAR(1)";
 	var sql6 = "ALTER TABLE user ADD wins INT";
 	var sql7 = "ALTER TABLE user ADD losses INT";
-	var sql8 = "CREATE TABLE uno (owner VARCHAR(30), active BOOLEAN, open BOOLEAN, reverse BOOLEAN, players)";
-  	
+	var sql8 = "CREATE TABLE uno (owner VARCHAR(30), active BOOLEAN, open BOOLEAN, reverse BOOLEAN, players TINYINT, card VARCHAR(5), prize INT, cost INT";
+  	var sql9 = "ALTER TABLE user ADD unoID VARCHAR(1)";
+	var sql10 = "ALTER TABLE user ADD hand VARCHAR(64)";
+		
   	con.query(sql8, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Uno added to user table!");
+    	message.author.send("Uno table created!");
   	});
 	
+		con.query(sql9, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("UnoID added to user table!");
+  	});
+		con.query(sql10, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Uno hand added to user table!");
+  	});
   		}
   	}
 
@@ -1938,7 +1948,7 @@ function gambleFlip(){
 			chance = 0;
 		} 
 		
-		if(money > 1000000 && num >= (money/2)){
+		if(money > 1000000){
 			chance += money / 1000000;
 		}	
 		if(chance <= 50 ){
