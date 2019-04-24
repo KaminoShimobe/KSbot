@@ -1963,7 +1963,7 @@ function gambleFlip(){
 		} else {
 			
 			if (insuranceCD.has(message.author.id)) {
-				num *= .5;
+				num *= .75;
 				message.channel.send("Insurance Kicked in!");
 			}	
 
