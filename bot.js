@@ -2285,7 +2285,7 @@ function insure(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((1 / 10) * money);
+			var percentage = Math.floor((3 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
 				return;
@@ -2296,7 +2296,7 @@ function insure(){
           // Removes the user from the set after however long the cooldown is.
           insuranceCD.delete(message.author.id);
           message.reply("'s insurance has run out!")
-        }, (1000*90));	
+        }, (1000*30));	
 	//insert function here.
 		
 	}
