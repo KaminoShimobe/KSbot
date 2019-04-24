@@ -1929,22 +1929,20 @@ function gambleFlip(){
 	var bet;
 	var chance;
 		
-		if(num > 0 && num <= 999999){
-		 chance = Math.floor(Math.random() * 100) + 1;
+		if(num > 0 && num <= 499999){
+		 chance = Math.floor(Math.random() * 2) + 1;
+		} else if(num > 499999 && num <= 999999){
+		 chance = Math.floor(Math.random() * 3) + 1;
 		} else if(num > 999999 && num <= 9999999){
-		 chance = Math.floor(Math.random() * 200) + 1;
-		} else if(num > 9999999 && num <= 99999999){
-		 chance = Math.floor(Math.random() * 300) + 1;
+		 chance = Math.floor(Math.random() * 4) + 1;
 		} else if(num > 99999999 && num <= 9999999999){
-		 chance = Math.floor(Math.random() * 1000) + 1;
+		 chance = Math.floor(Math.random() * 10) + 1;
 		} else {
-			chance = 0;
+			chance = Math.floor(Math.random() * 20) + 1;
 		} 
 		
-		if(money > 1000000){
-			chance += money / 1000000;
-		}	
-		if(chance <= 50 ){
+		
+		if(chance == 1 ){
 
 			if(streak >= 2){
 			bet = num + Math.floor((streak / 10) * num );
@@ -1963,7 +1961,7 @@ function gambleFlip(){
 		} else {
 			
 			if (insuranceCD.has(message.author.id)) {
-				num *= .75;
+				num *= .66;
 				message.channel.send("Insurance Kicked in!");
 			}	
 
@@ -2176,7 +2174,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 90 seconds will be cut in half \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled).")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 60 seconds will be cut by 33% \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled).")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -2285,7 +2283,7 @@ function insure(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
-			var percentage = Math.floor((3 / 10) * money);
+			var percentage = Math.floor((1 / 10) * money);
 			if (insuranceCD.has(message.author.id)) {
 				message.reply(" You already have insurance!")
 				return;
@@ -2296,7 +2294,7 @@ function insure(){
           // Removes the user from the set after however long the cooldown is.
           insuranceCD.delete(message.author.id);
           message.reply("'s insurance has run out!")
-        }, (1000*30));	
+        }, (1000*60));	
 	//insert function here.
 		
 	}
