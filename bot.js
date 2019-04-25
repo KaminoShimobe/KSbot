@@ -2785,7 +2785,7 @@ function unoJoin(){
 		
 		sql = `UPDATE user SET money = ${money - cost}, hand = ${hand}, unoID = ${players + 1}  WHERE id = '${message.author.id}'`
 		message.author.send(notes);
-		message.reply("You have joined " + other " 's uno game!");
+		message.reply("You have joined " + other + " 's uno game!");
 			
 		});
 		
