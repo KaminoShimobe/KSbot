@@ -2307,6 +2307,11 @@ function insure(){
 			});
 	}
 	
+//Pets
+	
+	
+	
+	
 //MISC	
 	
 function uno(){
