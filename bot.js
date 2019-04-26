@@ -1930,17 +1930,9 @@ function gambleFlip(){
 	var bet;
 	var chance;
 		
-		if(num > 0 && num <= 499999){
-		 chance = Math.floor(Math.random() * 2) + 1;
-		} else if(num > 499999 && num <= 999999){
-		 chance = Math.floor(Math.random() * 3) + 1;
-		} else if(num > 999999 && num <= 9999999){
-		 chance = Math.floor(Math.random() * 4) + 1;
-		} else if(num > 99999999 && num <= 9999999999){
-		 chance = Math.floor(Math.random() * 10) + 1;
-		} else {
-			chance = Math.floor(Math.random() * 20) + 1;
-		} 
+		
+			chance = Math.floor(Math.random() * 2) + 1;
+		
 		
 		
 		if(chance == 1 ){
