@@ -180,9 +180,9 @@ bot.on("message", async message => {
 	var sql8 = "CREATE TABLE uno (owner VARCHAR(30), active BOOLEAN, open BOOLEAN, reverse BOOLEAN, players TINYINT, card VARCHAR(5), prize INT, cost INT)";
   	var sql9 = "ALTER TABLE user ADD unoID VARCHAR(1)";
 	var sql10 = "ALTER TABLE uno ADD turn VARCHAR(1)";
-	var sql10 = "ALTER TABLE user ADD turn VARCHAR(1)";	
+	var sql11 = "ALTER TABLE user ADD unoLead VARCHAR(30)";	
 		
-  	con.query(sql10, function (err, result) {
+  	con.query(sql11, function (err, result) {
     	if (err) throw err;
     	message.author.send("turn added to uno table!");
   	});
@@ -2544,7 +2544,7 @@ function uno(){
 			.setColor("#e50b1d")
 			.setTimestamp();		
 			
-			con.query(`UPDATE user SET money = ${money - cost}, hand = ${hand}, unoID = ${1}  WHERE id = '${message.author.id}'`, console.log);	
+			con.query(`UPDATE user SET money = ${money - cost}, hand = ${hand}, unoID = ${1}, unoLead = ${message.author.id}  WHERE id = '${message.author.id}'`, console.log);	
 			message.author.send(notes);
 			message.channel.send(`If you want to play uno reply with ${prefix}join + ${message.author}! The game will start when ${message.author.username} says ${prefix}close`);
 			} else {
@@ -2788,9 +2788,9 @@ function unoJoin(){
 			.setColor("#e50b1d")
 			.setTimestamp();
 		
-		sql = `UPDATE user SET money = ${money - cost}, hand = ${hand}, unoID = ${players + 1}  WHERE id = '${message.author.id}'`
+		sql = `UPDATE user SET money = ${money - cost}, hand = ${hand}, unoID = ${players + 1}, unoLead = ${other.id}  WHERE id = '${message.author.id}'`
 		message.author.send(notes);
-		message.reply("You have joined " + other + " 's uno game!");
+		message.reply("You have joined " + other + " 's uno game as player " + (players + 1));
 			
 		});
 		
@@ -2798,8 +2798,14 @@ function unoJoin(){
 	
 }	
 	
-function unoPlay(){
-	
+function unoStart(){
+	con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+		
+		
+	});	
 	
 }
 	
