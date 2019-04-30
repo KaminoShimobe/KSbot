@@ -1135,9 +1135,9 @@ function collect(){
 				if(err) throw err;
 				let sql;
 				if(rows.length < 1) {
-					message.reply("You have no user!");
-					console.log(rows);
-					return;
+				message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+				return;
 				}
 
 				let money = rows[0].money;
@@ -3626,8 +3626,9 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 		let sql;
 		if(rows.length < 1) {
-			message.reply("You have no user.");
-			console.log(rows);
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+			return;
 		} else {
 			sql = `DELETE FROM user WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
@@ -3654,6 +3655,12 @@ function give(){
 			con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
+				
+				if(rows.length < 1) {
+					message.reply(`They have no user! \n Type ${prefix}user to create one!`);
+			
+				return;
+				}
 				var money = rows[0].money;
 				sql = `UPDATE user SET money = ${money + num} WHERE id = '${other.id}'`;
 				console.log("Received $" + num);
