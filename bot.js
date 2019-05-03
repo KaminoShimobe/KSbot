@@ -1854,6 +1854,13 @@ function daily(){
 		let patreon = rows[0].patreon;
 		let lasttrans = rows[0].lasttrans;	
 		var check;
+			
+			
+		
+		if(rank == "rps"){
+			message.reply("You cannot collect a daily while playing Rock Paper Scissors!");
+			return;
+		}
 
 		if(rows.length < 1) {
 			message.reply("You have no user!");
@@ -3648,6 +3655,12 @@ function give(){
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
+		var rank = rows[0].rank;
+		
+		if(rank == "rps"){
+			message.reply("You cannot give money while playing Rock Paper Scissors!");
+			return;
+		}
 		if(money > 0 && money > num && message.author.id != other.id && num > 0){
 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
 			console.log("Sent $" + num);
@@ -3655,6 +3668,13 @@ function give(){
 			con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
+				var rank2 = rows[0].rank;
+		
+		if(rank2 == "rps"){
+			con.query(`UPDATE user SET money = ${money + num} WHERE id = '${message.author.id}'`, console.log);
+			message.reply("You receive money while playing Rock Paper Scissors!");
+			return;
+		}
 				
 				if(rows.length < 1) {
 					message.reply(`They have no user! \n Type ${prefix}user to create one!`);
