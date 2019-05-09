@@ -1924,7 +1924,6 @@ function gambleFlip(){
 		var streak = rows[0].streak;
 		
 		var rank = rows[0].rank;
-		
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
 			return;
@@ -1939,6 +1938,7 @@ function gambleFlip(){
 		
 		
 			chance = Math.floor(Math.random() * 2) + 1;
+			
 		
 		
 		
@@ -2153,6 +2153,936 @@ function gambleSlots(){
 		return;
 	}
 
+	});
+}	
+	
+function midnight(){
+	var PixelArt = require('pixel-art');	
+const { createCanvas } = require('canvas')
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var money = rows[0].money;
+		
+		
+		var rank = rows[0].rank;
+		
+		if(rank == "midnight"){
+			message.reply("You're already playing midnight!");
+			return;
+		}
+
+
+	var num = parseInt(messageArray[1]); 
+	if(Number.isInteger(num) === true && money >= num && num > 0){
+
+	
+	const fullMoon = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var rand1 = Math.floor(Math.random() * 8);
+		fullMoon.splice(rand1, 1);
+		var rand2 = Math.floor(Math.random() * 7);
+		fullMoon.splice(rand2, 1);
+		var rand3 = Math.floor(Math.random() * 6);
+		fullMoon.splice(rand3, 1);
+		var rand4 = Math.floor(Math.random() * 5);
+		fullMoon.splice(rand4, 1);
+		var rand5 = Math.floor(Math.random() * 4);
+		fullMoon.splice(rand5, 1);
+	const quarterMoon = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var rand6 = Math.floor(Math.random() * 8);
+		quarterMoon.splice(rand6, 1);
+		var rand7 = Math.floor(Math.random() * 7);
+		quarterMoon.splice(rand7, 1);
+		var rand8= Math.floor(Math.random() * 6);
+		quarterMoon.splice(rand8, 1);
+		var rand9= Math.floor(Math.random() * 5);
+		quarterMoon.splice(rand9, 1);
+	const halfMoon = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var rand10 = Math.floor(Math.random() * 8);
+		halfMoon.splice(rand10, 1);
+		var rand11 = Math.floor(Math.random() * 7);
+		halfMoon.splice(rand11, 1);
+		var rand12 = Math.floor(Math.random() * 6);
+		halfMoon.splice(rand12, 1);	
+	const quarterTilMoon = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var rand13 = Math.floor(Math.random() * 8);
+		quarterTilMoon.splice(rand13, 1);
+		var rand14 = Math.floor(Math.random() * 7);
+		quarterTilMoon.splice(rand14, 1);
+	const midNight = Math.floor(Math.random() * 9) + 1;
+		
+	const blankMidnight = createCanvas(256, 256)	
+	var artwork = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(blankMidnight.getContext('2d'));	
+		
+const topLeftGood = createCanvas(256, 256)	
+	var artwork2 = PixelArt.art([
+	'gggGbbbGbb-',
+	'gggGb--G--b',
+	'gggG---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bbbG---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topLeftGood.getContext('2d'));
+		
+const topLeftBad = createCanvas(256, 256)	
+	var artwork3 = PixelArt.art([
+	'rrrGbbbGbb-',
+	'rrrGb--G--b',
+	'rrrG---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bbbG---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topLeftBad.getContext('2d'));	
+		
+const topMidGood = createCanvas(256, 256)	
+	var artwork4 = PixelArt.art([
+	'bbbGgggGbb-',
+	'bbbGgggG--b',
+	'bb-GgggG-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topMidGood.getContext('2d'));	
+		
+const topMidBad = createCanvas(256, 256)	
+	var artwork5 = PixelArt.art([
+	'bbbGrrrGbb-',
+	'bbbGrrrG--b',
+	'bb-GrrrG-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topMidBad.getContext('2d'));	
+		
+const topRightGood = createCanvas(256, 256)	
+	var artwork6 = PixelArt.art([
+	'bbbGbbbGggg',
+	'bbbGb--Gggg',
+	'bb-G---Gggg',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topRightGood.getContext('2d'));	
+		
+const topRightBad = createCanvas(256, 256)	
+	var artwork7 = PixelArt.art([
+	'bbbGbbbGrrr',
+	'bbbGb--Grrr',
+	'bb-G---Grrr',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(topRightBad.getContext('2d'));	
+		
+const midLeftGood = createCanvas(256, 256)	
+	var artwork8 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'gggG-bbGbbb',	
+	'gggGbbbGbbb',	
+	'gggG-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midLeftGood.getContext('2d'));		
+		
+const midLeftBad = createCanvas(256, 256)	
+	var artwork9 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'rrrG-bbGbbb',	
+	'rrrGbbbGbbb',	
+	'rrrG-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midLeftBad.getContext('2d'));	
+		
+const midMidGood = createCanvas(256, 256)	
+	var artwork10 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---GgggGbbb',	
+	'---GgggGbbb',	
+	'---GgggGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midMidGood.getContext('2d'));	
+		
+const midMidBad = createCanvas(256, 256)	
+	var artwork11 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---GrrrGbbb',	
+	'---GrrrGbbb',	
+	'---GrrrGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midMidBad.getContext('2d'));
+		
+const midRightGood = createCanvas(256, 256)	
+	var artwork12 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGggg',	
+	'---GbbbGggg',	
+	'---G-bbGggg',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midRightGood.getContext('2d'));		
+		
+const midRightBad = createCanvas(256, 256)	
+	var artwork13 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGrrr',	
+	'---GbbbGrrr',	
+	'---G-bbGrrr',	
+	'GGGGGGGGGGG',	
+	'bb-G---G-bb',	
+	'bbbGb--G--b',	
+	'bbbGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(midRightBad.getContext('2d'));
+		
+const botLeftGood = createCanvas(256, 256)	
+	var artwork14 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'gggG---G-bb',	
+	'gggGb--G--b',	
+	'gggGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botLeftGood.getContext('2d'));
+		
+const botLeftBad = createCanvas(256, 256)	
+	var artwork15 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'rrrG---G-bb',	
+	'rrrGb--G--b',	
+	'rrrGbbbGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botLeftBad.getContext('2d'));		
+		
+const botMidGood = createCanvas(256, 256)	
+	var artwork16 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-GgggG-bb',	
+	'bbbGgggG--b',	
+	'bbbGgggGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botMidGood.getContext('2d'));	
+		
+const botMidBad= createCanvas(256, 256)	
+	var artwork17 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-GrrrG-bb',	
+	'bbbGrrrG--b',	
+	'bbbGrrrGbb-'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botMidBad.getContext('2d'));	
+
+const botRightGood = createCanvas(256, 256)	
+	var artwork18 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---Gggg',	
+	'bbbGb--Gggg',	
+	'bbbGbbbGggg'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botRightGood.getContext('2d'));		
+		
+const botRightBad = createCanvas(256, 256)	
+	var artwork19 = PixelArt.art([
+	'bbbGbbbGbb-',
+	'bbbGb--G--b',
+	'bb-G---G-bb',
+	'GGGGGGGGGGG',	
+	'---G-bbGbbb',	
+	'---GbbbGbbb',	
+	'---G-bbGbbb',	
+	'GGGGGGGGGGG',	
+	'bb-G---Grrr',	
+	'bbbGb--Grrr',	
+	'bbbGbbbGrrr'	
+		
+		
+])
+  .palette({
+    'r': 'red',
+    'o': 'orange',
+    'y': 'yellow',
+    'g': '#0f0',
+    'b': '#55f',
+    'P': '#909',
+    'B': 'black',
+    'G': '#ddd',
+    'p': '#f8e',
+    '-': '#ffa',
+    'w': 'white'
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(23)
+  .draw(botRightBad.getContext('2d'));		
+
+		
+	
+var art = blankMidnight.toBuffer() // defaults to PNG
+const artPiece = new Discord.Attachment(art, "midnight.png");
+
+let prize;		
+
+			let drawing = new Discord.RichEmbed()
+
+			
+			.setTitle("Respond with a number 1 - 9 for the corresponding grid.")
+			.attachFile(artPiece)
+			.setColor("#1f3c5b");
+// 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+// 			con.query(sql);		
+			message.channel.send(drawing);	
+		
+
+	
+		
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content === rand1 || message.content === rand2 || message.content === rand3 || message.content === rand4) {
+				if(message.content == 1){
+					var art = topLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				
+			sql = `UPDATE user SET money = ${money + num} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("won $" + num + "!!!");	
+			}	else {
+				if(message.content == 1){
+					var art = topLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌕 Full Moon Not Collected 🌕")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("lost $" + num + "!\n Try again!");
+			} 
+				return;
+			});		
+					
+	
+		
+	
+	
+	} else{
+		message.reply("Invalid Input.");
+		return;
+	}
+	
+		
 	});
 }	
 	
@@ -5346,6 +6276,35 @@ if(command === `${prefix}spin` && messageArray[1] != undefined){
 } else {
 // insert function here.
 	gambleFlip();
+}
+
+
+
+	}	
+	
+if(command === `${prefix}midnight` && messageArray[1] != undefined){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		midnight();
+	}
+} else {
+// insert function here.
+	midnight();
 }
 
 
