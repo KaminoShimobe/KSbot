@@ -2213,17 +2213,17 @@ const { createCanvas } = require('canvas')
 		
 	const blankMidnight = createCanvas(256, 256)	
 	var artwork = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2246,17 +2246,17 @@ const { createCanvas } = require('canvas')
 		
 const topLeftGood = createCanvas(256, 256)	
 	var artwork2 = PixelArt.art([
-	'gggGbbbGbb-',
-	'gggGb--G--b',
-	'gggG---G-bb',
+	'gggGbbbG---',
+	'gggG---G--b',
+	'gggG---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bbbG---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2279,17 +2279,17 @@ const topLeftGood = createCanvas(256, 256)
 		
 const topLeftBad = createCanvas(256, 256)	
 	var artwork3 = PixelArt.art([
-	'rrrGbbbGbb-',
-	'rrrGb--G--b',
-	'rrrG---G-bb',
+	'rrrGbbbG---',
+	'rrrG---G--b',
+	'rrrG---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bbbG---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2312,17 +2312,17 @@ const topLeftBad = createCanvas(256, 256)
 		
 const topMidGood = createCanvas(256, 256)	
 	var artwork4 = PixelArt.art([
-	'bbbGgggGbb-',
+	'bbbGgggG---',
 	'bbbGgggG--b',
-	'bb-GgggG-bb',
+	'bb-GgggGbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2345,17 +2345,17 @@ const topMidGood = createCanvas(256, 256)
 		
 const topMidBad = createCanvas(256, 256)	
 	var artwork5 = PixelArt.art([
-	'bbbGrrrGbb-',
+	'bbbGrrrG---',
 	'bbbGrrrG--b',
-	'bb-GrrrG-bb',
+	'bb-GrrrGbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2379,16 +2379,16 @@ const topMidBad = createCanvas(256, 256)
 const topRightGood = createCanvas(256, 256)	
 	var artwork6 = PixelArt.art([
 	'bbbGbbbGggg',
-	'bbbGb--Gggg',
+	'bbbG---Gggg',
 	'bb-G---Gggg',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2412,16 +2412,16 @@ const topRightGood = createCanvas(256, 256)
 const topRightBad = createCanvas(256, 256)	
 	var artwork7 = PixelArt.art([
 	'bbbGbbbGrrr',
-	'bbbGb--Grrr',
+	'bbbG---Grrr',
 	'bb-G---Grrr',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2444,17 +2444,17 @@ const topRightBad = createCanvas(256, 256)
 		
 const midLeftGood = createCanvas(256, 256)	
 	var artwork8 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
 	'gggG-bbGbbb',	
 	'gggGbbbGbbb',	
 	'gggG-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2477,17 +2477,17 @@ const midLeftGood = createCanvas(256, 256)
 		
 const midLeftBad = createCanvas(256, 256)	
 	var artwork9 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
 	'rrrG-bbGbbb',	
 	'rrrGbbbGbbb',	
 	'rrrG-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2510,17 +2510,17 @@ const midLeftBad = createCanvas(256, 256)
 		
 const midMidGood = createCanvas(256, 256)	
 	var artwork10 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---GgggGbbb',	
-	'---GgggGbbb',	
-	'---GgggGbbb',	
+	'b--GgggGbbb',	
+	'b--GgggGbbb',	
+	'b--GgggGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'	
 		
 		
 ])
@@ -2543,17 +2543,17 @@ const midMidGood = createCanvas(256, 256)
 		
 const midMidBad = createCanvas(256, 256)	
 	var artwork11 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---GrrrGbbb',	
-	'---GrrrGbbb',	
-	'---GrrrGbbb',	
+	'b--GrrrGbbb',	
+	'b--GrrrGbbb',	
+	'b--GrrrGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2576,17 +2576,17 @@ const midMidBad = createCanvas(256, 256)
 		
 const midRightGood = createCanvas(256, 256)	
 	var artwork12 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGggg',	
-	'---GbbbGggg',	
-	'---G-bbGggg',	
+	'b--G-bbGggg',	
+	'b--GbbbGggg',	
+	'b--G-bbGggg',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2609,17 +2609,17 @@ const midRightGood = createCanvas(256, 256)
 		
 const midRightBad = createCanvas(256, 256)	
 	var artwork13 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGrrr',	
-	'---GbbbGrrr',	
-	'---G-bbGrrr',	
+	'b--G-bbGrrr',	
+	'b--GbbbGrrr',	
+	'b--G-bbGrrr',	
 	'GGGGGGGGGGG',	
-	'bb-G---G-bb',	
-	'bbbGb--G--b',	
-	'bbbGbbbGbb-'	
+	'bb-G---Gbbb',	
+	'bbbG---G--b',	
+	'bbbGbbbG---'
 		
 		
 ])
@@ -2642,17 +2642,17 @@ const midRightBad = createCanvas(256, 256)
 		
 const botLeftGood = createCanvas(256, 256)	
 	var artwork14 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'gggG---G-bb',	
-	'gggGb--G--b',	
-	'gggGbbbGbb-'	
+	'gggG---Gbbb',	
+	'gggG---G--b',	
+	'gggGbbbG---'
 		
 		
 ])
@@ -2675,17 +2675,17 @@ const botLeftGood = createCanvas(256, 256)
 		
 const botLeftBad = createCanvas(256, 256)	
 	var artwork15 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'rrrG---G-bb',	
-	'rrrGb--G--b',	
-	'rrrGbbbGbb-'	
+	'rrrG---Gbbb',	
+	'rrrG---G--b',	
+	'rrrGbbbG---'	
 		
 		
 ])
@@ -2708,17 +2708,17 @@ const botLeftBad = createCanvas(256, 256)
 		
 const botMidGood = createCanvas(256, 256)	
 	var artwork16 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-GgggG-bb',	
+	'bb-GgggGbbb',	
 	'bbbGgggG--b',	
-	'bbbGgggGbb-'	
+	'bbbGgggG---'	
 		
 		
 ])
@@ -2741,17 +2741,17 @@ const botMidGood = createCanvas(256, 256)
 		
 const botMidBad= createCanvas(256, 256)	
 	var artwork17 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
-	'bb-GrrrG-bb',	
+	'bb-GrrrGbbb',	
 	'bbbGrrrG--b',	
-	'bbbGrrrGbb-'	
+	'bbbGrrrG---'	
 		
 		
 ])
@@ -2774,17 +2774,17 @@ const botMidBad= createCanvas(256, 256)
 
 const botRightGood = createCanvas(256, 256)	
 	var artwork18 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
 	'bb-G---Gggg',	
-	'bbbGb--Gggg',	
-	'bbbGbbbGggg'	
+	'bbbG---Gggg',	
+	'bbbGbbbGggg'
 		
 		
 ])
@@ -2807,17 +2807,17 @@ const botRightGood = createCanvas(256, 256)
 		
 const botRightBad = createCanvas(256, 256)	
 	var artwork19 = PixelArt.art([
-	'bbbGbbbGbb-',
-	'bbbGb--G--b',
-	'bb-G---G-bb',
+	'bbbGbbbG---',
+	'bbbG---G--b',
+	'bb-G---Gbbb',
 	'GGGGGGGGGGG',	
-	'---G-bbGbbb',	
-	'---GbbbGbbb',	
-	'---G-bbGbbb',	
+	'b--G-bbGbbb',	
+	'b--GbbbGbbb',	
+	'b--G-bbGbbb',	
 	'GGGGGGGGGGG',	
 	'bb-G---Grrr',	
-	'bbbGb--Grrr',	
-	'bbbGbbbGrrr'	
+	'bbbG---Grrr',	
+	'bbbGbbbGrrr'
 		
 		
 ])
@@ -2854,13 +2854,18 @@ let prize;
 // 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
 // 			con.query(sql);		
 			message.channel.send(drawing);	
+			message.channel.send(rand1);
+			message.channel.send(rand2);
+			message.channel.send(rand3);
+			message.channel.send(rand4);
+			message.channel.send(rand5);
 		
 
 	
 		
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content === rand1 || message.content === rand2 || message.content === rand3 || message.content === rand4) {
+            		if (message.content === rand1 || message.content === rand2 || message.content === rand3 || message.content === rand4 || message.content === rand5) {
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
