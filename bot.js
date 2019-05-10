@@ -2853,12 +2853,921 @@ let prize;
 			.setColor("#1f3c5b");
 // 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
 // 			con.query(sql);		
-			message.channel.send(drawing);	
-			message.channel.send(rand1);
-			message.channel.send(rand2);
-			message.channel.send(rand3);
-			message.channel.send(rand4);
-			message.channel.send(rand5);
+			message.channel.send(drawing);
+		
+		function midnightRoll(){
+		message.channel.send(drawing);		
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == midNight) {
+				if(message.content == 1){
+					var art = topLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num *2 ;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+			
+			message.channel.send("***MIDNIGHT***");
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("won $" + prize + "!!!");	
+				
+			
+			}	else {
+				if(message.content == 1){
+					var art = topLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("lost $" + prize + "!\n Try again!");
+			} 
+				return;
+			});		
+
+
+
+		}
+		
+		function quarterTilRoll(){
+		message.channel.send(drawing);		
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == rand13 || message.content == rand14) {
+				if(message.content == 1){
+					var art = topLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num *2 ;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+			
+			message.channel.send("Continue? **yes** or **no**")
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == "yes" || message.content == "Yes" || message.content == "y"|| message.content == "Y"){
+				midnightRoll();
+			} else {
+				
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("won $" + prize + "!!!");	
+				
+			}
+			}	else {
+				if(message.content == 1){
+					var art = topLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 Crescent Moon Not Collected 🌙")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("lost $" + prize + "!\n Try again!");
+			} 
+				return;
+			});		
+
+
+
+		}
+		
+		function halfRoll(){
+		message.channel.send(drawing);		
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == rand10 || message.content == rand11 || message.content == rand12) {
+				if(message.content == 1){
+					var art = topLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num *2 ;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+			
+			message.channel.send("Continue? **yes** or **no**")
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == "yes" || message.content == "Yes" || message.content == "y"|| message.content == "Y"){
+				quarterTilRoll();
+			} else {
+				
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("won $" + prize + "!!!");	
+				
+			}
+			}	else {
+				if(message.content == 1){
+					var art = topLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌓 First Quarter Moon Not Collected 🌓")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("lost $" + prize + "!\n Try again!");
+			} 
+				return;
+			});		
+
+
+
+		}
+		
+		function quarterRoll(){
+		message.channel.send(drawing);		
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == rand6 || message.content == rand7 || message.content == rand8 || message.content == rand9) {
+				if(message.content == 1){
+					var art = topLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num *2 ;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightGood.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num * 2;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+			
+			message.channel.send("Continue? **yes** or **no**")
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == "yes" || message.content == "Yes" || message.content == "y"|| message.content == "Y"){
+				halfRoll();
+			} else {
+				
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("won $" + prize + "!!!");	
+				
+			}
+			}	else {
+				if(message.content == 1){
+					var art = topLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 2){
+					var art = topMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 3){
+					var art = topRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 4){
+					var art = midLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 5){
+					var art = midMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 6){
+					var art = midRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 7){
+					var art = botLeftBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 8){
+					var art = botMidBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");	
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				} else 	if(message.content == 9){
+					var art = botRightBad.toBuffer() // defaults to PNG
+					const win = new Discord.Attachment(art, "midnight.png");
+					prize = num;
+					let reveal = new Discord.RichEmbed()
+
+			
+			.setTitle("🌔 Waxing Moon Not Collected 🌔")
+			.attachFile(win)
+			.setColor("#1f3c5b");	
+			message.channel.send(reveal);
+				}
+				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				con.query(sql);	
+				message.reply("lost $" + prize + "!\n Try again!");
+			} 
+				return;
+			});		
+
+
+
+		}
 		
 
 	
@@ -2869,7 +3778,7 @@ let prize;
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num *2 ;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2880,7 +3789,7 @@ let prize;
 				} else 	if(message.content == 2){
 					var art = topMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2891,7 +3800,7 @@ let prize;
 				} else 	if(message.content == 3){
 					var art = topRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2902,7 +3811,7 @@ let prize;
 				} else 	if(message.content == 4){
 					var art = midLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2913,7 +3822,7 @@ let prize;
 				} else 	if(message.content == 5){
 					var art = midMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2924,7 +3833,7 @@ let prize;
 				} else 	if(message.content == 6){
 					var art = midRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2935,7 +3844,7 @@ let prize;
 				} else 	if(message.content == 7){
 					var art = botLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2946,7 +3855,7 @@ let prize;
 				} else 	if(message.content == 8){
 					var art = botMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");	
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2957,7 +3866,7 @@ let prize;
 				} else 	if(message.content == 9){
 					var art = botRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num;
+					prize = num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2966,10 +3875,21 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
+			
+			//Quarter Phase
 				
-			sql = `UPDATE user SET money = ${money + num} WHERE id = '${message.author.id}'`;
+			message.channel.send("Continue? **yes** or **no**")
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == "yes" || message.content == "Yes" || message.content == "y"|| message.content == "Y"){
+				quarterRoll();
+			} else {
+				
+			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
-				message.reply("won $" + num + "!!!");	
+				message.reply("won $" + prize + "!!!");	
+				
+			}
 			}	else {
 				if(message.content == 1){
 					var art = topLeftBad.toBuffer() // defaults to PNG
