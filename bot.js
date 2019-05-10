@@ -2863,7 +2863,7 @@ let prize;
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num *2 ;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2874,7 +2874,7 @@ let prize;
 				} else 	if(message.content == 2){
 					var art = topMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2885,7 +2885,7 @@ let prize;
 				} else 	if(message.content == 3){
 					var art = topRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2896,7 +2896,7 @@ let prize;
 				} else 	if(message.content == 4){
 					var art = midLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2907,7 +2907,7 @@ let prize;
 				} else 	if(message.content == 5){
 					var art = midMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2918,7 +2918,7 @@ let prize;
 				} else 	if(message.content == 6){
 					var art = midRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2929,7 +2929,7 @@ let prize;
 				} else 	if(message.content == 7){
 					var art = botLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2940,7 +2940,7 @@ let prize;
 				} else 	if(message.content == 8){
 					var art = botMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");	
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -2951,7 +2951,7 @@ let prize;
 				} else 	if(message.content == 9){
 					var art = botRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 5;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3087,7 +3087,7 @@ let prize;
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num *2 ;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3098,7 +3098,7 @@ let prize;
 				} else 	if(message.content == 2){
 					var art = topMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3109,7 +3109,7 @@ let prize;
 				} else 	if(message.content == 3){
 					var art = topRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3120,7 +3120,7 @@ let prize;
 				} else 	if(message.content == 4){
 					var art = midLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3131,7 +3131,7 @@ let prize;
 				} else 	if(message.content == 5){
 					var art = midMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3142,7 +3142,7 @@ let prize;
 				} else 	if(message.content == 6){
 					var art = midRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3153,7 +3153,7 @@ let prize;
 				} else 	if(message.content == 7){
 					var art = botLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3164,7 +3164,7 @@ let prize;
 				} else 	if(message.content == 8){
 					var art = botMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");	
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3175,7 +3175,7 @@ let prize;
 				} else 	if(message.content == 9){
 					var art = botRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3318,7 +3318,7 @@ let prize;
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num *2 ;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3329,7 +3329,7 @@ let prize;
 				} else 	if(message.content == 2){
 					var art = topMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3340,7 +3340,7 @@ let prize;
 				} else 	if(message.content == 3){
 					var art = topRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3351,7 +3351,7 @@ let prize;
 				} else 	if(message.content == 4){
 					var art = midLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3362,7 +3362,7 @@ let prize;
 				} else 	if(message.content == 5){
 					var art = midMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3373,7 +3373,7 @@ let prize;
 				} else 	if(message.content == 6){
 					var art = midRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3384,7 +3384,7 @@ let prize;
 				} else 	if(message.content == 7){
 					var art = botLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3395,7 +3395,7 @@ let prize;
 				} else 	if(message.content == 8){
 					var art = botMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");	
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3406,7 +3406,7 @@ let prize;
 				} else 	if(message.content == 9){
 					var art = botRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3549,7 +3549,7 @@ let prize;
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num *2 ;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3560,7 +3560,7 @@ let prize;
 				} else 	if(message.content == 2){
 					var art = topMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3571,7 +3571,7 @@ let prize;
 				} else 	if(message.content == 3){
 					var art = topRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3582,7 +3582,7 @@ let prize;
 				} else 	if(message.content == 4){
 					var art = midLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3593,7 +3593,7 @@ let prize;
 				} else 	if(message.content == 5){
 					var art = midMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3604,7 +3604,7 @@ let prize;
 				} else 	if(message.content == 6){
 					var art = midRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3615,7 +3615,7 @@ let prize;
 				} else 	if(message.content == 7){
 					var art = botLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3626,7 +3626,7 @@ let prize;
 				} else 	if(message.content == 8){
 					var art = botMidGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");	
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
@@ -3637,7 +3637,7 @@ let prize;
 				} else 	if(message.content == 9){
 					var art = botRightGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
-					prize = num * 2;
+					prize = prize + num * 2;
 					let reveal = new Discord.RichEmbed()
 
 			
