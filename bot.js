@@ -2865,7 +2865,7 @@ let prize;
 		
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content === rand1 || message.content === rand2 || message.content === rand3 || message.content === rand4 || message.content === rand5) {
+            		if (message.content == rand1 || message.content == rand2 || message.content == rand3 || message.content == rand4 || message.content == rand5) {
 				if(message.content == 1){
 					var art = topLeftGood.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
