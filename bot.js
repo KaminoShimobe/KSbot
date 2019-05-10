@@ -3197,6 +3197,7 @@ let prize;
 				message.reply("won $" + prize + "!!!");	
 				
 			}
+				});
 			}	else {
 				if(message.content == 1){
 					var art = topLeftBad.toBuffer() // defaults to PNG
@@ -3427,6 +3428,7 @@ let prize;
 				message.reply("won $" + prize + "!!!");	
 				
 			}
+				});
 			}	else {
 				if(message.content == 1){
 					var art = topLeftBad.toBuffer() // defaults to PNG
@@ -3657,6 +3659,7 @@ let prize;
 				message.reply("won $" + prize + "!!!");	
 				
 			}
+			});
 			}	else {
 				if(message.content == 1){
 					var art = topLeftBad.toBuffer() // defaults to PNG
@@ -3890,6 +3893,7 @@ let prize;
 				message.reply("won $" + prize + "!!!");	
 				
 			}
+			});
 			}	else {
 				if(message.content == 1){
 					var art = topLeftBad.toBuffer() // defaults to PNG
