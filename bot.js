@@ -133,10 +133,41 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 			
 		
 	
-		channel = bot.channels.get(rows[0].gchannel);
+		let channel = bot.channels.get(rows[0].gchannel);
    if(!channel) return;
 
    channel.send(greeting);	
+}
+	});			
+   	
+
+
+});
+
+bot.on('guildMemberRemove', member => {
+
+	
+
+
+con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let thisFarewell = rows[0].farewell;
+		
+		let farewell;
+		
+		if(rows.length < 1) {
+			
+
+		} else {
+			farewell = `${member} ` + thisFarewell;
+			
+		
+	
+		let channel = bot.channels.get(rows[0].gchannel);
+   if(!channel) return;
+
+   channel.send(farewell);	
 }
 	});			
    	
@@ -181,10 +212,12 @@ bot.on("message", async message => {
   	var sql9 = "ALTER TABLE user ADD unoID VARCHAR(1)";
 	var sql10 = "ALTER TABLE uno ADD turn VARCHAR(1)";
 	var sql11 = "ALTER TABLE user ADD unoLead VARCHAR(30)";	
+	var sql12 = "ALTER TABLE server ADD farewell VARCHAR(255)";	
+			
 		
-  	con.query(sql11, function (err, result) {
+  	con.query(sql12, function (err, result) {
     	if (err) throw err;
-    	message.author.send("turn added to uno table!");
+    	message.author.send("farewell add to table server!");
   	});
 	
 	
@@ -959,7 +992,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'nothing')`;
 			con.query(sql, console.log);
 			
 			
@@ -1154,10 +1187,10 @@ function collect(){
 				if(err) throw err;
 				let sql;
 				if(rows.length < 1) {
-					message.reply("You have no user!");
-					console.log(rows);
-					return;
-				}
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+			return;
+		}
 
 				let money = rows[0].money;
 				var penalty;
@@ -1333,7 +1366,7 @@ function lostChest(){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!')`;
 			con.query(sql, console.log);
 			
 			
@@ -1352,6 +1385,21 @@ function lostChest(){
 					sql = `UPDATE server SET greeting = "${message.content}" WHERE id = '${message.guild.id}'`;
 					con.query(sql);
 					message.channel.send("Greeting Updated!");
+					return;
+				}
+				});
+				} else if(messageArray[1] == "farewell"){
+					message.channel.send("The current farewell is: \n @member " + rows[0].greeting + "\n Update your greeting! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Farewell message cancelled.");
+	                		return;
+	            		} else {
+					
+					sql = `UPDATE server SET farewell = "${message.content}" WHERE id = '${message.guild.id}'`;
+					con.query(sql);
+					message.channel.send("Farewell Updated!");
 					return;
 				}
 				});
@@ -1863,7 +1911,7 @@ function daily(){
 		}
 
 		if(rows.length < 1) {
-			message.reply("You have no user!");
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			
 			return;
 		}	
@@ -2867,7 +2915,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2878,7 +2926,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2889,7 +2937,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2900,7 +2948,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2911,7 +2959,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2922,7 +2970,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2933,7 +2981,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2944,7 +2992,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2955,7 +3003,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT 🌑")
+			.setTitle("🌑 MIDNIGHT 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2975,7 +3023,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2986,7 +3034,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -2997,7 +3045,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3008,7 +3056,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3019,7 +3067,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3030,7 +3078,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3041,7 +3089,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3052,7 +3100,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -3063,7 +3111,7 @@ let prize;
 					let reveal = new Discord.RichEmbed()
 
 			
-			.setTitle("🌑 MIDNGIHT FAILED 🌑")
+			.setTitle("🌑 MIDNIGHT FAILED 🌑")
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
@@ -6348,7 +6396,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members\n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server.`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -6426,6 +6474,19 @@ function guildCheck(){
 	bot.guilds.forEach(guild => console.log("I am in: " + guild.name));
 	return;
 }
+
+function checkUpOn(){
+	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let expose = rows[0].expose;
+		let valid = rows[0].exposeSet;
+		if(valid == true){
+			message.author.send("```"+ expose + "```");
+		}
+	});
+}
+	
 	
 function patchNotes(){
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -6490,6 +6551,14 @@ if(command === `!check`){
 	}
 
 }
+
+if(command === `!checkUp` && messageArray[1] != undefined){
+	if(message.author.id == '242118931769196544'){
+		checkUpOn();
+
+	}
+
+}	
 	
 if(command === `!update`){
 	if(message.author.id == '242118931769196544'){
