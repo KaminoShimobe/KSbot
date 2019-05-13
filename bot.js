@@ -1389,7 +1389,7 @@ function lostChest(){
 				}
 				});
 				} else if(messageArray[1] == "farewell"){
-					message.channel.send("The current farewell is: \n @member " + rows[0].greeting + "\n Update your greeting! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
+					message.channel.send("The current farewell is: \n @member " + rows[0].farewell + "\n Update your greeting! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -6476,7 +6476,7 @@ function guildCheck(){
 }
 
 function checkUpOn(){
-	con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+	con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		let expose = rows[0].expose;
