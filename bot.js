@@ -72,7 +72,15 @@ handleDisconnect();
 bot.on("ready", async () => {
 
 	console.log(`Bot is ready bois! ${bot.user.username}`);
+	var me = bot.users.get('242118931769196544');
+	let yeet = new Discord.RichEmbed()
 
+			
+			.setTitle("Update Live!")
+			.setColor("#1f3c5b")
+			.setTimestamp()
+			.setFooter("Version 1.2.3", bot.avatarURL);
+	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
@@ -1389,7 +1397,7 @@ function lostChest(){
 				}
 				});
 				} else if(messageArray[1] == "farewell"){
-					message.channel.send("The current farewell is: \n @member " + rows[0].farewell + "\n Update your greeting! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
+					message.channel.send("The current farewell is: \n @member " + rows[0].farewell + "\n Update your farewell! You have 255 characters. Be sure to remember that channel mentions and emote tend to be more characters than what they seem. \n !cancel to cancel.");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -6480,7 +6488,7 @@ function checkUpOn(){
 		if(err) throw err;
 		let sql;
 		let expose = rows[0].expose;
-		let valid = rows[0].exposeSet;
+		let valid = rows[0].whisper;
 		if(valid == true){
 			message.author.send("```"+ expose + "```");
 		}
