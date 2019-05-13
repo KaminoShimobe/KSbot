@@ -79,7 +79,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.2.3", bot.avatarURL);
+			.setFooter("Version 1.2.4", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -168,8 +168,11 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 			
 
 		} else {
+			if(thisFarewell == undefined){
+				farewell = `${member} has left the server`;
+			} else {	
 			farewell = `${member} ` + thisFarewell;
-			
+			}
 		
 	
 		let channel = bot.channels.get(rows[0].gchannel);
