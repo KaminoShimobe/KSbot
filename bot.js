@@ -224,11 +224,12 @@ bot.on("message", async message => {
 	var sql10 = "ALTER TABLE uno ADD turn VARCHAR(1)";
 	var sql11 = "ALTER TABLE user ADD unoLead VARCHAR(30)";	
 	var sql12 = "ALTER TABLE server ADD farewell VARCHAR(255)";	
+	var sql12 = "ALTER TABLE pet ALTER COLUMN id TEXT";		
 			
 		
   	con.query(sql12, function (err, result) {
     	if (err) throw err;
-    	message.author.send("farewell add to table server!");
+    	message.author.send("id in Pet table changed to TEXT datatype!");
   	});
 	
 	
@@ -4225,7 +4226,9 @@ function insure(){
 	}
 	
 //Pets
+function getPet(){
 	
+}	
 	
 	
 	
