@@ -5178,9 +5178,15 @@ function waifuPic(){
 			
 			.setImage(url.href)
 			.setColor("#ff30e0"); 
-
-		message.author.sendEmbed(pic);
-		message.channel.send("Check your DMS, your picture was sent there!");
+		
+		if(message.channel.nsfw == true){
+			message.channel.sendEmbed(pic);
+		} else {
+			message.author.sendEmbed(pic);
+			message.channel.send("Check your DMS, your picture was sent there!");
+		}	
+			
+		
  		
   		 })
 		
@@ -5206,8 +5212,13 @@ function waifuPic(){
 			.setImage(url.href)
 			.setColor("#4327f7"); 
 
-		message.author.sendEmbed(pic);
-		message.channel.send("Check your DMS, your picture was sent there!");
+		if(message.channel.nsfw == true){
+			message.channel.sendEmbed(pic);
+		} else {
+			message.author.sendEmbed(pic);
+			message.channel.send("Check your DMS, your picture was sent there!");
+		}	
+		
  		
   		 })
 			
@@ -5240,8 +5251,13 @@ function waifuPic(){
 			.setImage(url.href)
 			.setColor("#7b18a3"); 
 
-		message.author.sendEmbed(pic);
-		message.channel.send("Check your DMS, your picture was sent there!");
+		if(message.channel.nsfw == true){
+			message.channel.sendEmbed(pic);
+		} else {
+			message.author.sendEmbed(pic);
+			message.channel.send("Check your DMS, your picture was sent there!");
+		}	
+		
  		
   		 })
 			
