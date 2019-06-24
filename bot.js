@@ -1687,7 +1687,32 @@ function lostChest(){
 					
 						}
 				}); 
-	        	} else {
+	        	} else if(messageArray[1] == "stands"){
+					message.channel.send("Do you want to allow Stand Abilities from Jojo's Bizarre Adventure in your server?(yes or no) \n !cancel to cancel.");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		if (message.content == `${prefix}cancel`) {
+	               		 message.channel.send("Stand Abilities Toggle cancelled.");
+	                		return;
+	            		} else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
+
+	               		sql = `UPDATE server SET stands = ${true} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("Stand Abilities enabled!");
+							return;
+	            		} else if (message.content == `no` || message.content == `No` || message.content == `N`) {
+
+	               		sql = `UPDATE server SET stands = ${false} WHERE id = '${message.guild.id}'`;
+							con.query(sql);
+							message.channel.send("Stand Abilities disabled!");
+							return;
+	            		} else {
+							message.channel.send("Invalid Input.");
+							return;
+					
+						}
+				}); 
+	        	}  else {
 	        		message.channel.send(`Read **${prefix}admin** for more details on how to manage KS-Bot in your server.`);
 					return;
 	        	}
@@ -1806,7 +1831,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setAuthor(message.guild.name + " KS Bot-settings")
-			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca)
+			.setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s)
 			.setColor("#1f3c5b"); 
 
 		message.channel.sendEmbed(stats);
@@ -3128,7 +3153,7 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
-				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - prize}, , lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
 			} 
@@ -3252,7 +3277,7 @@ let prize;
 				midnightRoll();
 			} else {
 				
-			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("won $" + prize + "!!!");	
 				
@@ -3359,7 +3384,7 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
-				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
 			} 
@@ -3483,7 +3508,7 @@ let prize;
 				quarterTilRoll();
 			} else {
 				
-			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("won $" + prize + "!!!");	
 				
@@ -3590,7 +3615,7 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
-				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
 			} 
@@ -3714,7 +3739,7 @@ let prize;
 				halfRoll();
 			} else {
 				
-			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("won $" + prize + "!!!");	
 				
@@ -3821,7 +3846,7 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
-				sql = `UPDATE user SET money = ${money - prize} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
 			} 
@@ -3948,7 +3973,7 @@ let prize;
 				quarterRoll();
 			} else {
 				
-			sql = `UPDATE user SET money = ${money + prize} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money + prize}, lasttrans = ${prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("won $" + prize + "!!!");	
 				
@@ -4055,7 +4080,7 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
-				sql = `UPDATE user SET money = ${money - num} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + num + "!\n Try again!");
 			} 
@@ -5386,7 +5411,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses)
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
@@ -5550,7 +5575,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses)
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
@@ -5636,45 +5661,47 @@ function give(){
 
 //STANDO POWA!!!!!
 
-// let dio = message.guild.roles.find("name", "DIO");
-//     let kakyoin = message.guild.roles.find("name", "kakyoin");
-// 	let standUser = message.guild.roles.find("name", "Stand User");
-// 	if (message.guild.id == '456956416377225218') {
-// 	function zaWarudo(){
-// 		var userList = message.channel.members.filter(m => m.user.bot === false);
-//     	var randomBoi = userList.random().user;
-//     	if(message.member.roles.find("name", "DIO") ) {
+	
+	
+
+	function zaWarudo(){
+		
+    			message.guild.createRole({
+  			name: "「kakyoin」",
+  			color: "#7c7c7c",
+			position: 2	
+		})
+		
+		let kakyoin = message.guild.roles.find('name', '「kakyoin」');
+		
 				
-// 				let role = message.guild.roles.find('name', 'Stand User');
 
-// 				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-// 				 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
-// 				console.log("Everyone has been frozen in time.")
-// 				message.channel.send("**TOKI WA TOMARE**");
-// 			} else {
-//   			message.channel.send("You do not have the power to use ZA WARUDO!");
-// 			}
+				 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
+				console.log("Everyone has been frozen in time.")
+				message.channel.send("**TOKI WA TOMARE**");
+			
 
     	
-// 	}
+	}
 
-// 	function zaWarudoDo(){
-// 		var userList = message.channel.members.filter(m => m.user.bot === false);
-// 		if(message.member.roles.find("name", "DIO") ) {
-// 				let role = message.guild.roles.find('name', 'kakyoin');
+	function zaWarudoDo(){
+		
+		let kakyoin = message.guild.roles.find('name', 'kakyoin')
+		
 
-// 				if (!role) return message.channel.send(`**${message.author.username}**, role not found`);
+				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-// 				   message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
-// 				console.log("Time has began to move again.")
-// 				message.channel.send("**TOKI WA MOKIDASU**");
-// 			} else {
-//   			message.channel.send("You do not have the power to use ZA WARUDO!");
-// 			}
+				   message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
+				console.log("Time has began to move again.")
+				message.channel.send("**TOKI WA MOKIDASU**");
+			
+  			
+			
 
     	
-// 	}
+	}
 		
 // 	function starPlatinum(){
 		
@@ -6076,88 +6103,97 @@ function give(){
 // }
 // 	}
 
-// function bestow(){
-// 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+function standDisc(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 
-// 	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+		if(rows.length < 1) {
+			message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+			return;
+		}
+		let sql;
+		let stand = rows[0].stand;
+		
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
-// 		var chance = Math.floor(Math.random() * 7) + 1;
-// 		var std1 = message.guild.roles.find("name", "Killer Queen");
-// 		var std2 = message.guild.roles.find("name", "Echoes");
-// 		var std3 = message.guild.roles.find("name", "Harvest");
-// 		var std4 = message.guild.roles.find("name", "HeavensDoor");
-// 		var std5 = message.guild.roles.find("name", "Star Platinum");
-// 		var std6 = message.guild.roles.find("name", "Stand User");
-// 		var std7 = message.guild.roles.find("name", "King Crimson");
-// 		var std8 = message.guild.roles.find("name", "Crazy Diamond");
+	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
-// 	let member = message.mentions.members.first();	
+		var chance = Math.floor(Math.random() * 7) + 1;
+		var ability = Math.floor(Math.random() * 10) + 1;
+		
 
-// 		if(chance == 1){
-// 			member.addRole(std1).catch(console.error);
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
-// 		} else if(chance == 2){
-// 			member.addRole(std2).catch(console.error);
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
-// 		} else if(chance == 3){
-// 			member.addRole(std3).catch(console.error);
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
-// 		} else if(chance == 4){
-// 			member.addRole(std4).catch(console.error);
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
-// 		} else if(chance == 5){
-// 			member.addRole(std5).catch(console.error);
-// 			member.removeRole(std6)
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
-// 		} else if(chance == 6){
-// 			member.addRole(std7).catch(console.error);
-// 			member.removeRole(std6)
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
-// 		} else if(chance == 7){
-// 			member.addRole(std8).catch(console.error);
-// 			member.removeRole(std6)
-// 			message.channel.send(".");
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			message.channel.send(".");	
-// 			setTimeout(message.channel.send("||YOU HAVE RECEIVED CRAZY DIAMOND||"), 200);
-// 		}
+	let member = message.mentions.members.first();	
+	if(ability == 7){
+		if(chance == 1){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");
+			sql = `UPDATE user SET stand = "「KILLER QUEEN」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KILLER QUEEN||"), 200);
+		} else if(chance == 2){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");
+			sql = `UPDATE user SET stand = "「ECHOES」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED ECHOES||"), 200);
+		} else if(chance == 3){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");
+			sql = `UPDATE user SET stand = "「HARVEST」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HARVEST||"), 200);
+		} else if(chance == 4){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			sql = `UPDATE user SET stand = "「HEAVEN'S DOOR」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED HEAVEN'S DOOR||"), 200);
+		} else if(chance == 5){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			sql = `UPDATE user SET stand = "「STAR PLATINUM」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED STAR PLATINUM||"), 200);
+		} else if(chance == 6){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");
+			sql = `UPDATE user SET stand = "「KING CRIMSON」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED KING CRIMSON||"), 200);
+		} else if(chance == 7){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			sql = `UPDATE user SET stand = "「CRAZY DIAMOND」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED CRAZY DIAMOND||"), 200);
+		}
+	}
 
-
-
-// 	}
-// }		
+	});
+	
+}		
 
 function artSmol(){
 var PixelArt = require('pixel-art');	
@@ -6757,29 +6793,7 @@ if(command === `${prefix}user`){
 
 	
 	
-	// if(command === `${prefix}buy` && messageArray[1] === `standArrow`){
-		
-	// 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-	// 	if(err) throw err;
-
-	// 	if(rows.length < 1) {
-	// 		message.reply("You have no user!");
-	// 		console.log(rows);
-	// 		return;
-	// 	}
-
-	// 	let money = rows[0].money;
-		
-	// 	if(money < 50000) {
-	// 		message.reply("Insufficient Funds.");
-	// 		return;
-	// 	}
-	// 	sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
-	// 	con.query(sql);		
-	// 	standArrow();
-		
-	// 	});
-	// }
+	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -6787,8 +6801,36 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 	let exposeSet = rows[0].exposeSet;
 	let canvas = rows[0].canvas;
-
+	let stands = rows[0].stands;
 	
+	if(command === `${prefix}buy` && messageArray[1] === `standDisc` && stands == true){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 50000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 50000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		standDisc();
+		
+		});
+	} else if(command === `${prefix}buy` && messageArray[1] === `standDisc` && stands == false){
+		
+		message.reply("Stand Abilities are disabled in this server!");
+			
+			return;
+	}
 	
 		if(command === `${prefix}buy` && messageArray[1] == "canvas" && canvas == true){
 
