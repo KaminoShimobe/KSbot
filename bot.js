@@ -5666,19 +5666,53 @@ function give(){
 
 	function zaWarudo(){
 		
-    			message.guild.createRole({
-  			name: "「kakyoin」",
-  			color: "#7c7c7c",
-			position: 2	
-		})
+    			
 		
-		let kakyoin = message.guild.roles.find('name', '「kakyoin」');
+		let kakyoin = message.guild.roles.find('name', 'kakyoin');
+		var standUsers = [];
+		
+		
+	
+	con.query(`SELECT * FROM user`, (err, rows) => {
+		if(err) throw err;
+		
+	
+		
+
+			function userInfo(users, index){
+				
+		
+		var person = bot.users.get(rows[index].id);
+				
+		if(person != undefined){		
+			if(rows[index].stand == "「STAR PLATINUM」" || rows[index].id == message.guild.ownerID){	
+				standUsers.push(rows[index].id)
+				console.log("This person had THE WORLD: " + person.username);
+			} else {
+				console.log(person.username + " is not eligible")
+			}
+		} else {
+			//nothing		
+		}	
+			}	
+            		
+				
+				rows.forEach(userInfo);	
+				
+			
+		
+			});
+	
+		
+		
+	
+
 		
 				
 
 				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-				 message.guild.members.filter(m =>  m.roles.find("name", "Stand User")).forEach(m => m.addRole(kakyoin));
+				 message.guild.members.filter(m =>  standUsers.indexOf(m.id) != -1).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**TOKI WA TOMARE**");
 			
@@ -6802,6 +6836,22 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	let exposeSet = rows[0].exposeSet;
 	let canvas = rows[0].canvas;
 	let stands = rows[0].stands;
+	
+	if(command === `${prefix}ZAWARUDO` && stands == true){
+		if(message.author.id == message.guild.ownerID){
+		zaWarudo();
+	}		else {
+		message.reply(" You do not have the power of THE WORLD.")
+	}
+}
+	
+	if(command === `${prefix}ZAWARUDO!` && stands == true){
+		if(message.author.id == message.guild.ownerID){
+		zaWarudoDo();
+	}		else {
+		message.reply(" You do not have the power of THE WORLD.")
+	}
+}
 	
 	if(command === `${prefix}buy` && messageArray[1] === `standDisc` && stands == true){
 		
