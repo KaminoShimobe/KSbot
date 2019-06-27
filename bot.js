@@ -864,10 +864,7 @@ function rps(){
 		if(err) throw err;
 		let sql;
 		let trigger = rows[0].kqueen;
-		if(message.content.indexOf("") != -1){
-			
-			return;
-		}
+		
 			
 		 if(message.content.indexOf(trigger) != -1 && message.content != "") {
 
