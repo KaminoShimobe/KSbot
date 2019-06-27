@@ -5712,7 +5712,7 @@ function give(){
 
 				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-				 message.guild.members.filter(m =>  standUsers.indexOf(m.id) != -1).forEach(m => m.addRole(kakyoin));
+				 message.guild.members.filter(m =>  standUsers.indexOf(m.id) == -1).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**TOKI WA TOMARE**");
 			
