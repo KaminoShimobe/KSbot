@@ -6151,15 +6151,12 @@ function standDisc(){
 		let sql;
 		let stand = rows[0].stand;
 		
-		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
-
-	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
 		var chance = Math.floor(Math.random() * 7) + 1;
 		var ability = Math.floor(Math.random() * 10) + 1;
 		
 
-	let member = message.mentions.members.first();	
+	
 	if(ability == 7){
 		if(chance == 1){
 			message.channel.send(".");
