@@ -863,12 +863,12 @@ function rps(){
 		if(err) throw err;
 		let sql;
 		let trigger = rows[0].kqueen;
-		if(rows.length < 1) {
-			
-			
+		if(message.content.indexOf("") != -1){
 			
 			return;
-		}	else if(message.content.indexOf(trigger) != -1) {
+		}
+			
+		 if(message.content.indexOf(trigger) != -1 && message.content != "") {
 
 			
 			
@@ -896,8 +896,10 @@ message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 		
 	}
 	
-	 	// bitesTheDust();
-
+	if (message.guild.id == '456956416377225218') {
+	 	bitesTheDust();
+	}
+	
 	function justWorks(){
 		con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
 		if(err) throw err;
