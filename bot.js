@@ -80,7 +80,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.3.8", bot.user.avatarURL);
+			.setFooter("Version 1.3.9", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -6104,10 +6104,10 @@ function heavensDoor(){
           HeavensDoorCD.delete(message.author.id);
         }, (1000*60*30));
 				
-				shameCD.add(message.author.id);
+				shameCD.add(member.id);
 				setTimeout(() => {
           // Removes the user from the set after a minute
-          shameCD.delete(message.author.id);
+          shameCD.delete(member.id);
         }, (1000*60*30));
 				
 				sql = `UPDATE user SET bio = '${msg}' WHERE id = '${member.id}'`;
