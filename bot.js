@@ -6072,7 +6072,7 @@ function heavensDoor(){
 			message.reply(" They have no user!");
 			return;
 		}	else {
-			if (shameCD.has(message.author.id)) {
+			if (shameCD.has(member.id)) {
 					message.reply("This person is already unable to change their bio!")
 				return;
 				}	
