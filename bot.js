@@ -6222,7 +6222,14 @@ function standDisc(){
 			con.query(sql, console.log);
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED 「CRAZY DIAMOND」||"), 200);
 		}
-	}
+	} else {
+		message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+		setTimeout(message.channel.send("||.............The Stand Disc was a dud.||"), 200);
+	}	
 
 	});
 	
