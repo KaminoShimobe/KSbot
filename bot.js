@@ -256,6 +256,10 @@ bot.on("message", async message => {
 
 function bio(){
 
+	if (shameCD.has(message.author.id)) {
+					message.reply("You are unable to change your bio right now because of HEAVEN'S DOOR!")
+				return;
+				} else {
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -292,7 +296,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		
 
 	});
-
+				}
 }		
 
 function hexcolor(){
@@ -382,10 +386,7 @@ if(command === `!notifs`){
 
 	if(command === `!bio`){
 		
-		if (shameCD.has(message.author.id)) {
-					message.reply("You are unable to change your bio right now because of HEAVEN'S DOOR!")
-				return;
-				}
+		
 
 		bio();
 	
