@@ -877,7 +877,7 @@ function rps(){
 
 
       message.channel.bulkDelete(botMessages)
-				sql = `UPDATE server SET kqueen = '' WHERE id = '${message.guild.id}'`;;
+				sql = `UPDATE server SET kqueen = '' WHERE id = '${message.guild.id}'`;
 			con.query(sql, console.log);
 			
 message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
@@ -893,10 +893,6 @@ return;
 
 		});
 		
-	}
-	
-	if (message.guild.id == '456956416377225218') {
-	 	//bitesTheDust();
 	}
 	
 	function justWorks(){
@@ -919,14 +915,21 @@ return;
   			.catch(console.error);
 
 
-			return;
+			
 		}
 
 
 		});
 	}
 	
-	//justWorks();	
+	if (message.guild.id == '456956416377225218') {
+	 	bitesTheDust();
+		justWorks();
+	}
+	
+	
+	
+		
 
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -5764,7 +5767,7 @@ function give(){
             message.reply("Harvest must wait about 30 mins from when you first used it!");
             return;
    		 } else{
-			 		if(toBeat.lastMessage.content.indexO(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 10000000){	
+			 		if(toBeat.lastMessage.content.indexOf(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 10000000){	
 			HarvestCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
