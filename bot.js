@@ -923,8 +923,8 @@ return;
 	}
 	
 	if (message.guild.id == '456956416377225218') {
-	 	bitesTheDust();
-		justWorks();
+	 	//bitesTheDust();
+		//justWorks();
 	}
 	
 	
@@ -5720,7 +5720,7 @@ function give(){
         }, (1000*60*30));	
 			
 			 
-			 console.log("TIME STOPPERS: >>>>>>>>>>>>>>>> " + standUsers);
+			 
 			 message.guild.members.filter(m =>  standUsers.indexOf(m.id) == -1 ).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
