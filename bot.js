@@ -888,7 +888,10 @@ return;
 .catch(console.error);
 
 	
-		}
+		} else {
+		
+			return;
+		}	
 
 
 		});
@@ -923,8 +926,8 @@ return;
 	}
 	
 	if (message.guild.id == '456956416377225218') {
-	 	//bitesTheDust();
-		//justWorks();
+	 	bitesTheDust();
+		justWorks();
 	}
 	
 	
@@ -5645,7 +5648,7 @@ function give(){
 
 				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-				 message.guild.members.filter(m =>  standUsers.indexOf(m.id) == -1).forEach(m => m.addRole(kakyoin));
+				 message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**TOKI WA TOMARE**");
 			
@@ -5721,7 +5724,7 @@ function give(){
 			
 			 
 			 
-			 message.guild.members.filter(m =>  standUsers.indexOf(m.id) == -1 ).forEach(m => m.addRole(kakyoin));
+			 message.guild.members.filter(m =>  StarPlatinumCD.has(m.id) == false ).forEach(m => m.addRole(kakyoin));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
 			 
@@ -5907,6 +5910,7 @@ function give(){
 		
 	}
 	
+	
 	function kingCrimson(){
 		
 	
@@ -5914,22 +5918,8 @@ function give(){
 		if(err) throw err;
 		let sql;
 		var trigger = rows[0].kcrimson;
-		if(trigger == false) {
-			if (KingCrimsonCD.has(message.author.id)) {
-            message.reply("King Crimson must wait about 5 minutes from when you first used it!");
-            return;
-   		 } else{
-			 		
-			KingCrimsonCD.add(message.author.id);
-        setTimeout(() => {
-          // Removes the user from the set after a minute
-          KingCrimsonCD.delete(message.author.id);
-        }, (1000*60*5));	}
-			sql = `UPDATE server SET kcrimson = ${true} WHERE id = '${message.guild.id}'`;
-			con.query(sql, console.log);
-			message.channel.send("**KING CRIMSON NO NOURYOKU**");
-			return;
-		}	else {
+	
+	
 			if (KingCrimsonCD.has(message.author.id)) {
             message.reply("King Crimson must wait about 30 minutes from when you first used it!");
             return;
@@ -5939,7 +5929,7 @@ function give(){
         setTimeout(() => {
           // Removes the user from the set after a minute
           KingCrimsonCD.delete(message.author.id);
-        }, (1000*60*30));	}
+        }, (1000*60*30));	
 			sql = `UPDATE server SET kcrimson = ${true} WHERE id = '${message.guild.id}'`;;
 			con.query(sql, console.log);
 			
