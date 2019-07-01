@@ -880,7 +880,7 @@ function rps(){
 				sql = `UPDATE server SET kqueen = '' WHERE id = '${message.guild.id}'`;
 			con.query(sql, console.log);
 			
-message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
+//message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 return;
   			
   
