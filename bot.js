@@ -870,7 +870,7 @@ function rps(){
 		let trigger = rows[0].kqueen;
 		
 			
-		 if(message.content.indexOf(trigger) != -1 && message.content != "") {
+		 if(message.content.indexOf(trigger) != -1 && message.content != undefined) {
 
 			
 			
@@ -881,10 +881,10 @@ function rps(){
 
 
       message.channel.bulkDelete(botMessages)
-				sql = `UPDATE server SET kqueen = '' WHERE id = '${message.guild.id}'`;
+				sql = `UPDATE server SET kqueen = ${undefined} WHERE id = '${message.guild.id}'`;
 			con.query(sql, console.log);
 			
-//message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
+message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
 return;
   			
   
@@ -930,7 +930,7 @@ return;
 	}
 	
 	if (message.guild.id == '456956416377225218') {
-	 	//bitesTheDust();
+	 	bitesTheDust();
 		justWorks();
 	}
 	
