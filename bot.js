@@ -881,7 +881,7 @@ function rps(){
 
 
       message.channel.bulkDelete(botMessages)
-				sql = `UPDATE server SET kqueen = ${undefined} WHERE id = '${message.guild.id}'`;
+				sql = `UPDATE server SET kqueen = '${undefined}' WHERE id = '${message.guild.id}'`;
 			con.query(sql, console.log);
 			
 message.channel.send("**KILLA QUEEN! BITES ZA DUSTO**");
