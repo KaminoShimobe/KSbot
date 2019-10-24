@@ -929,6 +929,35 @@ return;
 		});
 	}
 	
+	function clearUp(){
+		con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].kcrimson;
+		let trigger2 = rows[0].kqueen;	
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		}	else {
+
+			
+			sql = `UPDATE server SET kcrimson = ${false}, kqueen = '${undefined}' WHERE id = '${message.guild.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Reset server");
+			message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+			
+		}
+
+
+		});
+	}
+	
 	if (message.guild.id == '456956416377225218') {
 	 	bitesTheDust();
 		justWorks();
@@ -5653,6 +5682,7 @@ function give(){
 				if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
 				 message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.addRole(kakyoin));
+				 message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.setVoiceChannel(null));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**TOKI WA TOMARE**");
 			
@@ -5729,6 +5759,7 @@ function give(){
 			 
 			 
 			 message.guild.members.filter(m =>  StarPlatinumCD.has(m.id) == false ).forEach(m => m.addRole(kakyoin));
+			 message.guild.members.filter(m =>  StarPlatinumCD.has(m.id) == false ).forEach(m => m.setVoiceChannel(null));
 				console.log("Everyone has been frozen in time.")
 				message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
 			 
@@ -5826,7 +5857,7 @@ function give(){
 
       message.channel.bulkDelete(botMessages)
 
-  			 message.channel.send("**KILLA QUEEN**")
+  			 message.channel.send("**KILLA QUEEN** has already turned this message into a bomb!")
 
   			
   
@@ -6459,7 +6490,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands")
-			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n ${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
+			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(stands);
@@ -6498,7 +6529,7 @@ function admin(){
 
 			
 			.setTitle("KS-Bot Admin commands")
-			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server.`)
+			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -6668,7 +6699,15 @@ if(command === `!update`){
 
 	}
 
-}	
+}
+	
+if(command === `!clearUp`){
+	if(message.author.id == '242118931769196544'){
+		clearUp();
+
+	}
+
+}		
 
 	
 
