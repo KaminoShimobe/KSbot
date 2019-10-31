@@ -4730,7 +4730,7 @@ function unoCancel(){
 		if(err) throw err;
 		let sql;
 		
-		let sql;
+		
 		if(rows.length < 1) {
 			message.reply("No Uno Game going on right now to cancel.");
 			
