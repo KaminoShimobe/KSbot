@@ -1043,7 +1043,7 @@ function treasure(){
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'halloween rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1053,9 +1053,9 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setTitle(`Trick or Treat! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#a57400");
+			.setColor("#ff920d");
 
 		room.sendEmbed(item);
  		
