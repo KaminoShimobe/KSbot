@@ -996,9 +996,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 100) + 1;
+		var appear = Math.floor(Math.random() * 50) + 1;
 		
-		if(appear == 100){
+		if(appear == 50){
 			
 			
 			chest();	
@@ -1012,7 +1012,7 @@ function treasure(){
 	function chest(){
 		var karma = "";
 		var type = Math.floor(Math.random() * 10) + 1;
-		if(type > 2){
+		if(type > 5){
 			karma = "good";
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -1038,7 +1038,7 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The chest mysteriously disappeared!");
+				room.send("The halloween goodie eerily disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
@@ -1091,13 +1091,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The chest mysteriously disappeared!");
+				room.send("The halloween goodie eerily disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'halloween rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1107,9 +1107,11 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared, type ${prefix}open to open it!`)
+			.setTitle(`Trick or Treat! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#a57400");
+			.setColor("#ff920d");
+			//#a57400 brown 
+			//
 
 		room.sendEmbed(item);
  		
@@ -1159,7 +1161,7 @@ function collect(){
 
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost} WHERE id = '${message.author.id}'`;
 				con.query(sql);
-				message.reply(" found $" + cost + " in the chest!");
+				message.reply(" got $" + cost + " as a treat!");
 				
 				lostChest();	
 				});	
@@ -1192,7 +1194,7 @@ function collect(){
 
 				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
 				con.query(sql);
-				message.reply(" lost $" + penalty + " from a trap in the chest!");
+				message.reply(" lost $" + penalty + " from a trick!");
 				
 				lostChest();	
 				});
@@ -1212,7 +1214,7 @@ function lostChest(){
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
 		if(!channel) return message.channel.send("A chest mysteriously disappeared!");
-		channel.send("The chest mysteriously disappeared!");
+		channel.send("The halloween goodie eerily disappeared!");
 		return;	
 		});
 	}		  
