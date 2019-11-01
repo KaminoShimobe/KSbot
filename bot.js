@@ -4813,7 +4813,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
 	var yay = Math.floor((upVote / total) * 100);    
 	var nay = Math.floor((downVote / total) * 100);     
 	whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");    
-        collector.end()   
+        collector.stop("Done.")   
 	 
 	    return;
     }
