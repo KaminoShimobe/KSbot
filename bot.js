@@ -4804,8 +4804,9 @@ bot.on('messageReactionAdd', (reaction, user) => {
         downVote += 10;
 	total += 10;
     } else if(reaction.emoji.name === "✅") {
+	whereIam.send(upVote + " of people agree with \ **" + msg +  "** while " + downVote + " of people disagree.");    
         collector.end()   
-	 whereIam.send(upVote + " of people agree with \ **" + msg +  "** while " + downVote + " of people disagree.");
+	 
 	    return;
     }
 });	
