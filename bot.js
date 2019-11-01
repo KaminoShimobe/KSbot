@@ -4776,12 +4776,12 @@ function whom(){
 }	
 	
 function poll(){
-	message.channel.send('Imma react to this YEET')
-  	.then(function (message) {
-		message.react('✔️')
-	})
-
-  	.catch(function() {console.error });
+	const whereIam = message.channel;
+	
+whereIam.send("Boi just react god damn.").then(sentEmbed => {
+    sentEmbed.react("👍")
+    sentEmbed.react("👎")
+})
 	
 	
 	
