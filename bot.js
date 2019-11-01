@@ -4806,7 +4806,7 @@ bot.on('messageReactionAdd', (reaction, user) => {
     } else if(reaction.emoji.name === "✅") {
 	var yay = Math.floor((upVote / total) * 100);    
 	var nay = Math.floor((downVote / total) * 100);     
-	whereIam.send(yay + "% out of" + total + "people agree with \ **" + msg +  "** while " + nay + "% disagree.");    
+	whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");    
         collector.end()   
 	 
 	    return;
