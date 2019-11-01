@@ -4781,7 +4781,7 @@ function poll(){
 	var msg = poll.replace(prefix +"poll", "");
 	var upVote = -1;
 	var downVote = -1;
-	var total = 0;
+	var total = -2;
 	let note = new Discord.RichEmbed()
 
 			
