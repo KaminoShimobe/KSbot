@@ -996,9 +996,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 50) + 1;
+		var appear = Math.floor(Math.random() * 100) + 1;
 		
-		if(appear == 50){
+		if(appear == 100){
 			
 			
 			chest();	
@@ -1012,7 +1012,7 @@ function treasure(){
 	function chest(){
 		var karma = "";
 		var type = Math.floor(Math.random() * 10) + 1;
-		if(type > 5){
+		if(type > 2){
 			karma = "good";
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
