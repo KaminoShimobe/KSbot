@@ -4804,8 +4804,8 @@ bot.on('messageReactionAdd', (reaction, user) => {
         downVote += 1;
 	total += 1;
     } else if(reaction.emoji.name === "✅") {
-	var yay = (upVote / total) * 100;    
-	var nay = (downVote / total) * 100;     
+	var yay = Math.floor((upVote / total) * 100);    
+	var nay = Math.floor((downVote / total) * 100);     
 	whereIam.send(yay + "% of people agree with \ **" + msg +  "** while " + nay + "% of people disagree.");    
         collector.end()   
 	 
@@ -6753,13 +6753,13 @@ if(command === `!clearUp`){
 
 }		
 	
-if(command === `!poll`){
-	if(message.author.id == '242118931769196544'){
-		poll();
+// if(command === `!poll`){
+// 	if(message.author.id == '242118931769196544'){
+// 		poll();
 
-	}
+// 	}
 
-}	
+// }	
 
 	
 
@@ -7518,6 +7518,35 @@ if(command === `${prefix}duel`){
 	}	
 	
 //MISC
+	
+if(command === `${prefix}poll` && messageArray[1] != undefined){
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		poll();
+	}
+} else {
+// insert function here.
+	poll();
+}
+
+
+
+	}	
 	
 if(command === `${prefix}who` && messageArray[1] != undefined){
 
