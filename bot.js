@@ -4781,7 +4781,7 @@ function poll(){
 		message.react('✔️')
 	})
 
-  	.catch(console.error);
+  	.catch(function() {console.error });
 	
 	
 	
