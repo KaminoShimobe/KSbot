@@ -4779,13 +4779,13 @@ function poll(){
 	const whereIam = message.channel;
 	var poll = message.content;
 	var msg = poll.replace(prefix +"poll", "");
-	var upVote = 0;
-	var downVote = 0;
+	var upVote = -10;
+	var downVote = -10;
 	var total = 0;
 	let note = new Discord.RichEmbed()
 
 			
-			.setTitle(message.author.username + "asks")
+			.setTitle(message.author.username + " asks:")
 			.setDescription(msg)
 			.setColor("#af25f5")
 			.setFooter("React with ✅ to stop", message.author.avatarURL)
@@ -4798,16 +4798,17 @@ whereIam.send(note).then(sentEmbed => {
 const collector = new Discord.ReactionCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });	
 bot.on('messageReactionAdd', (reaction, user) => {
     if(reaction.emoji.name === "👍") {
-        upVote += 1;
-	total += 1;
+        upVote += 10;
+	total += 10;
     } else if(reaction.emoji.name === "👎") {
-        downVote += 1;
-	total += 1;
+        downVote += 10;
+	total += 10;
     } else if(reaction.emoji.name === "✅") {
         collector.stop('Creator ended Poll.')
 	var yay = upVote / total;
 	var nay = downVote / total;    
 	 whereIam.send(yay + "% of people agree with \ **" + msg +  "** while " + nay + "% of people disagree.");
+	    return;
     }
 });	
 	
