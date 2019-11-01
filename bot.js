@@ -4776,6 +4776,12 @@ function whom(){
 }	
 	
 function poll(){
+	 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+	
 	const whereIam = message.channel;
 	var poll = message.content;
 	var msg = poll.replace(prefix +"poll", "");
