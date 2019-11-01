@@ -4812,14 +4812,13 @@ bot.on('messageReactionAdd', (reaction, user) => {
     } else if(reaction.emoji.name === "✅") {
 	var yay = Math.floor((upVote / total) * 100);    
 	var nay = Math.floor((downVote / total) * 100);     
-	
-        collector.stop()   
-	 
-	collector.on('end', (reaction, user) => {
-    
+	collector.stop()
     whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");    
-		  return;
-});    
+      
+	collector.on('end', collected => {
+		console.log(`Collected ${collected.size}`);
+		return;
+	})	     
 	  
     }
 });	
