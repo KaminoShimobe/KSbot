@@ -4802,7 +4802,7 @@ whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👎")
 })
 const collector = new Discord.ReactionCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });	
-collector.on('messageReactionAdd', (reaction, user) => {
+bot.on('messageReactionAdd', (reaction, user) => {
     if(reaction.emoji.name === "👍") {
         upVote += 1;
 	total += 1;
