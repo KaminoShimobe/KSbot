@@ -4779,8 +4779,8 @@ function poll(){
 	const whereIam = message.channel;
 	var poll = message.content;
 	var msg = poll.replace(prefix +"poll", "");
-	var upVote = -10;
-	var downVote = -10;
+	var upVote = -1;
+	var downVote = -1;
 	var total = 0;
 	let note = new Discord.RichEmbed()
 
@@ -4798,13 +4798,15 @@ whereIam.send(note).then(sentEmbed => {
 const collector = new Discord.ReactionCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });	
 bot.on('messageReactionAdd', (reaction, user) => {
     if(reaction.emoji.name === "👍") {
-        upVote += 10;
-	total += 10;
+        upVote += 1;
+	total += 1;
     } else if(reaction.emoji.name === "👎") {
-        downVote += 10;
-	total += 10;
+        downVote += 1;
+	total += 1;
     } else if(reaction.emoji.name === "✅") {
-	whereIam.send(upVote + " of people agree with \ **" + msg +  "** while " + downVote + " of people disagree.");    
+	var yay = (upVote / total) * 100;    
+	var nay = (downVote / total) * 100;     
+	whereIam.send(yay + "% of people agree with \ **" + msg +  "** while " + nay + "% of people disagree.");    
         collector.end()   
 	 
 	    return;
