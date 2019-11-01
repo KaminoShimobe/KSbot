@@ -4776,14 +4776,15 @@ function whom(){
 }	
 	
 function poll(){
-	message.channel.send('Imma react to this YEET');
-  	
+	message.channel.send('Imma react to this YEET')
+  	.then(function (message) {
+		message.react('✔️')
+	})
+
+  	.catch(console.error);
 	
-	bot.user.lastMessage.react('✔️')
-
-  	.then(console.log("Reacted."))
-
-  	.catch(console.error);	
+	
+	
 	
 }	
 	
