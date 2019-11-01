@@ -4804,10 +4804,8 @@ bot.on('messageReactionAdd', (reaction, user) => {
         downVote += 10;
 	total += 10;
     } else if(reaction.emoji.name === "✅") {
-        collector.stop('Creator ended Poll.')
-	var yay = upVote / total;
-	var nay = downVote / total;    
-	 whereIam.send(yay + "% of people agree with \ **" + msg +  "** while " + nay + "% of people disagree.");
+        collector.end()   
+	 whereIam.send(upVote + " of people agree with \ **" + msg +  "** while " + downVote + " of people disagree.");
 	    return;
     }
 });	
