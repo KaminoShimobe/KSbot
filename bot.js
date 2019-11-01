@@ -4775,6 +4775,19 @@ function whom(){
 	}
 }	
 	
+function poll(){
+	message.channel.send('Imma react to this YEET')
+  	.then(message => message.react('✔️'))
+ 	 .catch(console.error);
+	
+// 	message.react('🕒')
+
+//   	.then(console.log("Reacted."))
+
+//   	.catch(console.error);	
+	
+}	
+	
 function ball8(){
 	
 	let fortune = Math.floor(Math.random() * 40) + 1;
@@ -6710,6 +6723,14 @@ if(command === `!clearUp`){
 	}
 
 }		
+	
+if(command === `!poll`){
+	if(message.author.id == '242118931769196544'){
+		poll();
+
+	}
+
+}	
 
 	
 
