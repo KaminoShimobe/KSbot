@@ -4796,17 +4796,20 @@ function poll(){
 			.setColor("#af25f5")
 			.setFooter("React with ✅ to stop", message.author.avatarURL)
 			.setTimestamp();
-	
-whereIam.send(note).then(sentEmbed => {
-    sentEmbed.react("👍")
-    sentEmbed.react("👎")
-})
 
 const filter = (reaction, user) => {
     return ['👍', '👎', '✅'].includes(reaction.emoji.name) && user.id === message.author.id;
 };
 
-const collector = new Discord.ReactionCollector(filter, { time: 60000 });	
+	
+whereIam.send(note).then(sentEmbed => {
+    sentEmbed.react("👍")
+    sentEmbed.react("👎")
+    const collector = sentEmbed.ReactionCollector(filter, { time: 60000 });	
+})
+
+
+
 collector.on('collect', reaction => {
     if(reaction.emoji.name === "👍") {
         upVote += 1;
