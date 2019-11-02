@@ -4806,11 +4806,8 @@ whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("👎")
     const collector = sentEmbed.ReactionCollector(filter, { time: 60000 });	
-})
 
-
-
-collector.on('collect', reaction => {
+    collector.on('collect', reaction => {
     if(reaction.emoji.name === "👍") {
         upVote += 1;
 	total += 1;
@@ -4831,6 +4828,11 @@ collector.on('end', collected => {
 		console.log(`Collected ${collected.size}`);
 		return;
 	});
+})
+
+
+
+
 
 	
 }
