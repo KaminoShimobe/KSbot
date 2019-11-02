@@ -4801,7 +4801,12 @@ whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("👎")
 })
-const collector = new Discord.ReactionCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });	
+
+const filter = (reaction, user) => {
+    return ['👍', '👎', '✅'].includes(reaction.emoji.name) && user.id === message.author.id;
+};
+
+const collector = new Discord.ReactionCollector(filter, { time: 60000 });	
 collector.on('collect', reaction => {
     if(reaction.emoji.name === "👍") {
         upVote += 1;
@@ -4813,16 +4818,17 @@ collector.on('collect', reaction => {
 	var yay = Math.floor((upVote / total) * 100);    
 	var nay = Math.floor((downVote / total) * 100);     
 	collector.stop()
-    whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");    
-      
-	collector.on('end', collected => {
-		console.log(`Collected ${collected.size}`);
-		return;
-	})	     
+    whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");  
+		     
 	  
     }
 });	
 	
+collector.on('end', collected => {
+		console.log(`Collected ${collected.size}`);
+		return;
+	});
+
 	
 }
 
