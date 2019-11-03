@@ -4797,38 +4797,41 @@ function poll(){
 			.setFooter("React with ✅ to stop", message.author.avatarURL)
 			.setTimestamp();
 
-const filter = (reaction, user) => {
-    return ['👍', '👎', '✅'].includes(reaction.emoji.name) && user.id === message.author.id;
-};
-
 	
 whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("👎")
-    const collector = sentEmbed.ReactionCollector(filter, { time: 60000 });	
+   
 
-    collector.on('collect', reaction => {
-    if(reaction.emoji.name === "👍") {
-        upVote += 1;
+
+    client.on('messageReactionAdd', (messageReaction, user) => {
+if(user.bot)  return;
+const { message, emoji } = messageReaction;
+
+if(emoji.name === "👍" && message.id === sentEmbed.id) {
+	upVote += 1;
 	total += 1;
-    } else if(reaction.emoji.name === "👎") {
-        downVote += 1;
+
+ } else if(emoji.name === "👎" && message.id === sentEmbed.id) {
+ 	downVote += 1;
 	total += 1;
-    } else if(reaction.emoji.name === "✅") {
-	var yay = Math.floor((upVote / total) * 100);    
-	var nay = Math.floor((downVote / total) * 100);     
-	collector.stop()
-    whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");  
-		     
-	  
-    }
-});	
-	
-collector.on('end', collected => {
-		console.log(`Collected ${collected.size}`);
+
+
+ } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
+ 		 sentEmbed.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+ 		var yay = Math.floor((upVote / total) * 100);    
+		var nay = Math.floor((downVote / total) * 100); 
+		whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");  
 		return;
-	});
+
+ }
 })
+});
+    
 
 
 
