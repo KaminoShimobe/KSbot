@@ -4785,9 +4785,9 @@ function poll(){
 	const whereIam = message.channel;
 	var poll = message.content;
 	var msg = poll.replace(prefix +"poll", "");
-	var upVote = -1;
-	var downVote = -1;
-	var total = -2;
+	var upVote = 0;
+	var downVote = 0;
+	var total = 0;
 	let note = new Discord.RichEmbed()
 
 			
