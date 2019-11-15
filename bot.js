@@ -7048,7 +7048,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			
-			.setImage(output[comList.indexOf(messageArray[0])])
+			.setImage(output[comList.indexOf(command)])
 			.setColor("#00b561");
 				  
 		message.channel.send(thing);	
