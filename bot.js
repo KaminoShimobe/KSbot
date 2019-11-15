@@ -4279,16 +4279,16 @@ function customCommand(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(message.attachments.size > 0 && messageArray[0] != undefined && messageArray[0].indexOf(messageArray[0]) != -1){
+	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
 					
-					var commands = prefix + messageArray[0];
-					var commandP = prefix + messageArray[0] + ",";
+					var commands = prefix + message.content;
+					var commandP = prefix + message.content + ",";
 					var img = message.attachments.first().url;
 					var imgP = message.attachments.first().url +",";
 					
 							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql);
-							message.channel.send(`Custom command set for **${prefix}`+ commands + `**`);
+							message.channel.send(`Custom command set for **`+ commands + `**`);
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
