@@ -4271,10 +4271,7 @@ function customCommand(){
 		if(err) throw err;
 		let sql;
 		
-		if(rows.length < 1) {
-			
-			return;
-		} else {
+		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -4284,14 +4281,14 @@ function customCommand(){
 	                		return;
 	            		}  else if(message.attachments.size > 0 && messageArray[0] != undefined && messageArray[0].indexOf(messageArray[0]) != -1){
 					
-					var command = prefix + messageArray[0];
+					var commands = prefix + messageArray[0];
 					var commandP = prefix + messageArray[0] + ",";
 					var img = message.attachments.first().url;
 					var imgP = message.attachments.first().url +",";
 					
-							sql = `UPDATE server SET command = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql);
-							message.channel.send(`Custom command set for **${prefix}`+ command + `**`);
+							message.channel.send(`Custom command set for **${prefix}`+ commands + `**`);
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
@@ -4302,7 +4299,7 @@ function customCommand(){
 			
 			con.query(sql);	
 			
-		}	
+			
 		
 		});
 }	
@@ -6862,7 +6859,7 @@ if(command === `!image`){
 
 }
 	
-if(command === `!create`){
+if(command === `!command`){
 	if(message.author.id == '242118931769196544'){
 		customCommand();
 
