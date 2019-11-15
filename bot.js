@@ -6860,6 +6860,14 @@ if(command === `!image`){
 
 	}
 
+}
+	
+if(command === `!create`){
+	if(message.author.id == '242118931769196544'){
+		customCommand();
+
+	}
+
 }	
 
 	
