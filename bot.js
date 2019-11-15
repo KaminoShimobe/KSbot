@@ -4270,6 +4270,7 @@ function customCommand(){
 	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
+		let sql2;
 		
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
@@ -7041,7 +7042,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	var comList = commands.split(",");
 	var output = comOutput.split(",");
 	
-	if(comList.indexOf(messageArray[0]) != -1){
+	if(comList.indexOf(command) != -1 && command != undefined){
 		let thing = new Discord.RichEmbed()
 
 			
