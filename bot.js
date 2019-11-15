@@ -4271,7 +4271,8 @@ function customCommand(){
 		if(err) throw err;
 		let sql;
 		let sql2;
-		
+		let co = rows[0].commands;
+		let ou = rows[0].comOutput;
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -4287,7 +4288,7 @@ function customCommand(){
 					var img = message.attachments.first().url;
 					var imgP = message.attachments.first().url +",";
 					
-							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							sql = `UPDATE server SET commands = '${co + commandP}', comOutput = '${ou + imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							return;
