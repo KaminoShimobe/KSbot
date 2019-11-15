@@ -226,8 +226,11 @@ bot.on("message", async message => {
 	var sql10 = "ALTER TABLE uno ADD turn VARCHAR(1)";
 	var sql11 = "ALTER TABLE user ADD unoLead VARCHAR(30)";	
 	var sql12 = "ALTER TABLE server ADD farewell VARCHAR(255)";	
-	var sql12 = "ALTER TABLE pet ALTER COLUMN id TEXT";		
-			
+	var sql13 = "ALTER TABLE pet ALTER COLUMN id TEXT";		
+	var sql14 = "ALTER TABLE server ADD commands TEXT";
+	var sql15 = "ALTER TABLE global ADD commands TEXT";
+	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
+	var sql17 = "ALTER TABLE global ADD comOutput TEXT";	
 		
   	con.query(sql12, function (err, result) {
     	if (err) throw err;
@@ -4231,6 +4234,28 @@ function getPet(){
 	
 //MISC	
 	
+function imageObtain(){
+	if(message.attachments.size > 0){
+	var img = message.attachments.first().url;
+	
+	let thing = new Discord.RichEmbed()
+
+			
+			.setTitle(message.author.username + "'s cool image")
+			.setImage(img)
+			.setColor("#00b561")
+			.setTimestamp();
+				  
+		message.channel.send(thing);		  
+				  
+	  }	else {
+		  
+		  message.reply("There's no image attached!");
+	  }	  
+				  
+
+}	
+	
 function uno(){
 		
 		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -6778,13 +6803,13 @@ if(command === `!clearUp`){
 
 }		
 	
-// if(command === `!poll`){
-// 	if(message.author.id == '242118931769196544'){
-// 		poll();
+if(command === `!image`){
+	if(message.author.id == '242118931769196544'){
+		imageObtain();
 
-// 	}
+	}
 
-// }	
+}	
 
 	
 
