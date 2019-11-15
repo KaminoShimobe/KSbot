@@ -7043,12 +7043,12 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	var comList = commands.split(",");
 	var output = comOutput.split(",");
 	
-	if(comList.indexOf(command) != -1 && command != undefined){
+	if(comList.indexOf(message.content) != -1 && command != undefined){
 		let thing = new Discord.RichEmbed()
 
 			
 			
-			.setImage(output[comList.indexOf(command)])
+			.setImage(output[comList.indexOf(message.content)])
 			.setColor("#00b561");
 				  
 		message.channel.send(thing);	
