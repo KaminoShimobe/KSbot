@@ -1,4 +1,4 @@
-hm const Discord = require("discord.js");
+const Discord = require("discord.js");
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
@@ -28,7 +28,7 @@ const bot = new Discord.Client({disableEveryone: true})
 
 //TODO: Add stands, fix marriage, add pets
 
-//Issue Nov 15?? crash
+
 
 
 var con_fig = {
