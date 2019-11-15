@@ -81,7 +81,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.4.0", bot.user.avatarURL);
+			.setFooter("Version 1.5.0", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -232,31 +232,41 @@ bot.on("message", async message => {
 	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";	
 		
-  	con.query(sql12, function (err, result) {
+  	con.query(sql14, function (err, result) {
     	if (err) throw err;
-    	message.author.send("id in Pet table changed to TEXT datatype!");
+    	message.author.send("commands table added to server!");
   	});
-	
-	
+	con.query(sql15, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("commands table added to global!");
+  	});
+	con.query(sql16, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("comOutput table added to server!");
+  	});	
+	con.query(sql17, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("comOutput table added to global!");
+  	});
   		}
   	}
 
 
 
-	if(command === `!drop`){
-	if(message.author.id == '242118931769196544'){
-	var sql = "DROP TABLE server";
-  	con.query(sql, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("Table dropped for server!");
-  	});
-  	// var sql2 = "DROP TABLE user";
-  	// con.query(sql2, function (err, result) {
-   //  	if (err) throw err;
-   //  	message.author.send("Table dropped for user!");
-  	// });
-	}
-	}
+// 	if(command === `!drop`){
+// 	if(message.author.id == '242118931769196544'){
+// 	var sql = "DROP TABLE server";
+//   	con.query(sql, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("Table dropped for server!");
+//   	});
+//   	// var sql2 = "DROP TABLE user";
+//   	// con.query(sql2, function (err, result) {
+//    //  	if (err) throw err;
+//    //  	message.author.send("Table dropped for user!");
+//   	// });
+// 	}
+// 	}
 
 function bio(){
 
@@ -4254,6 +4264,47 @@ function imageObtain(){
 	  }	  
 				  
 
+}
+	
+function customCommand(){
+	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+		if(rows.length < 1) {
+			
+			return;
+		} else {
+			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(message.attachments.size > 0 && messageArray[0] != undefined && messageArray[0].indexOf(messageArray[0]) != -1){
+					
+					var command = prefix + messageArray[0];
+					var commandP = prefix + messageArray[0] + ",";
+					var img = message.attachments.first().url;
+					var imgP = message.attachments.first().url +",";
+					
+							sql = `UPDATE server SET command = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							con.query(sql);
+							message.channel.send(`Custom command set for **${prefix}`+ command + `**`);
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
+	                		return;
+						}
+				});
+			
+			
+			con.query(sql);	
+			
+		}	
+		
+		});
 }	
 	
 function uno(){
@@ -6979,6 +7030,22 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	let exposeSet = rows[0].exposeSet;
 	let canvas = rows[0].canvas;
 	let stands = rows[0].stands;
+	let commands = rows[0].commands;
+	let comOutput = rows[0].comOutput;
+	
+	var comList = commands.split(",");
+	var output = comOutput.split(",");
+	
+	if(comList.indexOf(messageArray[0]) != -1){
+		let thing = new Discord.RichEmbed()
+
+			
+			
+			.setImage(output[comList.indexOf(messageArray[0])])
+			.setColor("#00b561");
+				  
+		message.channel.send(thing);	
+	}	
 	
 	if(command === `${prefix}STARPLATINUM` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
