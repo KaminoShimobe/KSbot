@@ -236,37 +236,32 @@ bot.on("message", async message => {
     	if (err) throw err;
     	message.author.send("commands table added to server!");
   	});
-	con.query(sql15, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("commands table added to global!");
-  	});
 	con.query(sql16, function (err, result) {
     	if (err) throw err;
     	message.author.send("comOutput table added to server!");
   	});	
-	con.query(sql17, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("comOutput table added to global!");
-  	});
+	
   		}
   	}
 
 
 
-// 	if(command === `!drop`){
-// 	if(message.author.id == '242118931769196544'){
-// 	var sql = "DROP TABLE server";
-//   	con.query(sql, function (err, result) {
-//     	if (err) throw err;
-//     	message.author.send("Table dropped for server!");
-//   	});
-//   	// var sql2 = "DROP TABLE user";
-//   	// con.query(sql2, function (err, result) {
-//    //  	if (err) throw err;
-//    //  	message.author.send("Table dropped for user!");
-//   	// });
-// 	}
-// 	}
+	if(command === `!drop`){
+	if(message.author.id == '242118931769196544'){
+	var sql =  "ALTER TABLE server DROP COLUMN commands";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("column commands dropped in table server!");
+  	});
+
+  	var sql2 =  "ALTER TABLE server DROP COLUMN comOutput";
+  	con.query(sql2, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("column comOutput dropped in table server!");
+  	});
+  	
+	}
+	}
 
 function bio(){
 
@@ -4270,9 +4265,12 @@ function customCommand(){
 	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		let sql2;
+		
 		let co = rows[0].commands;
 		let ou = rows[0].comOutput;
+
+		console.log(co);
+		console.log(ou);
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -4284,13 +4282,15 @@ function customCommand(){
 	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
 					
 					var commands = prefix + message.content;
-					var commandP = prefix + message.content + ",";
+					var commandP = co + "," + prefix + message.content;
 					var img = message.attachments.first().url;
-					var imgP = message.attachments.first().url +",";
+					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql = `UPDATE server SET commands = '${co + commandP}', comOutput = '${ou + imgP}' WHERE id = '${message.channel.id}'`;
+							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
+							console.log(commandP + "<<<<<<<<");
+							console.log(imgP + "<<<<<<<<");
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
@@ -7040,6 +7040,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	let commands = rows[0].commands;
 	let comOutput = rows[0].comOutput;
 	
+
 	var comList = commands.split(",");
 	var output = comOutput.split(",");
 	
