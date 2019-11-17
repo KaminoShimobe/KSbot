@@ -7053,7 +7053,9 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 			.setColor("#00b561");
 				  
 		message.channel.send(thing);	
-	}	
+	}	 else {
+		return;
+	}
 	
 	if(command === `${prefix}STARPLATINUM` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
