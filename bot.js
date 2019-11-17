@@ -4269,8 +4269,7 @@ function customCommand(){
 		let co = rows[0].commands;
 		let ou = rows[0].comOutput;
 
-		console.log(co);
-		console.log(ou);
+		
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
