@@ -4269,7 +4269,7 @@ function customCommand(){
 		let co = rows[0].commands;
 		let ou = rows[0].comOutput;
 
-		
+		if(co != undefined || ou != undefined){
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -4298,9 +4298,36 @@ function customCommand(){
 				});
 			
 			
-			con.query(sql);	
 			
 			
+		} else {
+			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
+					
+					var commands = prefix + message.content;
+					var commandP = "," + prefix + message.content;
+					var img = message.attachments.first().url;
+					var imgP = "," + message.attachments.first().url;
+					
+							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							con.query(sql);
+							message.channel.send(`Custom command set for **`+ commands + `**`);
+							console.log(commandP + "<<<<<<<<");
+							console.log(imgP + "<<<<<<<<");
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
+	                		return;
+						}
+				});
+			
+		}	
 		
 		});
 }	
