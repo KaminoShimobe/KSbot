@@ -7046,8 +7046,8 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	let comO = rows[0].comOutput;
 	
 
-	var comList = comm.split(",");
-	var output = comO.split(",");
+	var comList = comm.split("\n");
+	var output = comO.split("\n");
 	
 	if(command != undefined){
 
