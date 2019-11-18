@@ -4284,10 +4284,10 @@ function customCommand(){
 	                		return;
 	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
 					
-					var commands = prefix + message.content;
-					var commandP = co + "\n" + prefix + message.content;
+					var commands = prefix + messageArray[0];
+					var commandP = co + "," + prefix + messageArray[0];
 					var img = message.attachments.first().url;
-					var imgP = ou + "\n" + message.attachments.first().url;
+					var imgP = ou + "," + message.attachments.first().url;
 					
 							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql2);
