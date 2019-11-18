@@ -4234,6 +4234,25 @@ function getPet(){
 	
 	
 //MISC	
+
+function resetCommands(){
+	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply(`You have no commands in this server!`);
+			
+			return;
+		} else {
+			sql = `DELETE FROM global WHERE id = '${message.guild.id}'`;
+			con.query(sql, console.log);
+			message.reply(`Commands Reset!`);
+		}
+
+
+	});
+
+}	
 	
 function imageObtain(){
 	if(message.attachments.size > 0){
@@ -7065,6 +7084,15 @@ if(command === `!command`){
 	}
 
 }	
+
+if(command === `!resetCommands`){
+	if(message.author.id == '242118931769196544'){
+		resetCommands();
+
+	}
+
+}	
+
 
 	
 
