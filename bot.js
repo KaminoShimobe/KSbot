@@ -7055,6 +7055,8 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	if(command != undefined){
 
+		console.log(comList);
+		console.log(output);
 	if(comList.indexOf(message.content) != -1 && comm != undefined){
 		let thing = new Discord.RichEmbed()
 
