@@ -7320,7 +7320,7 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	if(command != undefined){
 
 		
-	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != ""){
+	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
 		let thing = new Discord.RichEmbed()
 
 			
@@ -7358,7 +7358,7 @@ con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
 	if(command != undefined){
 
 		
-	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != ""){
+	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
 		let thing = new Discord.RichEmbed()
 
 			
