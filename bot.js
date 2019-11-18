@@ -231,7 +231,7 @@ bot.on("message", async message => {
 	var sql15 = "ALTER TABLE global ADD commands TEXT";
 	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
-	var sql8 = "CREATE TABLE global (id VARCHAR(30), commands VARCHAR(100), comOutput VARCHAR(1000))";	
+	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands VARCHAR(100), comOutput VARCHAR(1000))";	
 		
   	con.query(sql18, function (err, result) {
     	if (err) throw err;
