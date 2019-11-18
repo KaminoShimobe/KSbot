@@ -4275,7 +4275,7 @@ function viewCommands(){
 			var comList = co.split(",");
 			var output = ou.split(",");
 
-			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send(`List of global commands: \n **` + co + `**`);
 		}	
 	});	
 }	
@@ -4298,7 +4298,7 @@ function localCommands(){
 			var comList = co.split(",");
 			var output = ou.split(",");
 
-			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send(`List of commands: \n **` + co + `**`);
 		}	
 	});	
 }	
@@ -4410,6 +4410,7 @@ function globalCommand(){
 		let ou = rows[0].comOutput;
 		var comList = co.split(",");
 		var output = ou.split(",");
+
 		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands"];
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
@@ -4419,7 +4420,7 @@ function globalCommand(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.indexOf(message.content) == -1 && banned.indexOf(message.content) == -1){
+	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1){
 					
 					var commands = prefix + message.content;
 					var commandP = co + "," + prefix + message.content;
@@ -4428,7 +4429,7 @@ function globalCommand(){
 					
 							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = 'GLOBAL'`;
 							con.query(sql2);
-							message.channel.send(`Custom command set for **`+ commands + `**`);
+							message.channel.send(`Global command set for **`+ commands + `**`);
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
@@ -4472,7 +4473,7 @@ function customCommand(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.indexOf(message.content) == -1 && banned.indexOf(message.content) == -1){
+	            		}   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1){
 					
 					var commands = prefix + message.content;
 					var commandP = co + "," + prefix + message.content;
