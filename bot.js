@@ -4268,6 +4268,7 @@ function customCommand(){
 	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
+		let sql2;
 		if(rows.length < 1) {
 			
 			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
@@ -4295,8 +4296,8 @@ function customCommand(){
 					var img = message.attachments.first().url;
 					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
-							con.query(sql);
+							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							con.query(sql2);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
 							console.log(imgP + "<<<<<<<<");
