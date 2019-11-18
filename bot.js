@@ -4296,7 +4296,7 @@ function customCommand(){
 					var img = message.attachments.first().url;
 					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql2 = `UPDATE global SET commands = "${commandP}", comOutput = "${imgP}" WHERE id = '${message.channel.id}'`;
+							sql2 = `UPDATE global SET commands = ${commandP}, comOutput = ${imgP} WHERE id = '${message.channel.id}'`;
 							con.query(sql2);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
