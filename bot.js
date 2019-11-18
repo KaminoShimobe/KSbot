@@ -81,7 +81,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.5.0", bot.user.avatarURL);
+			.setFooter("Version 1.5.5", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -231,7 +231,7 @@ bot.on("message", async message => {
 	var sql15 = "ALTER TABLE global ADD commands TEXT";
 	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
-	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands VARCHAR(100), comOutput VARCHAR(1000))";	
+	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands TEXT, comOutput TEXT)";	
 		
   	con.query(sql18, function (err, result) {
     	if (err) throw err;
@@ -4094,7 +4094,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 60 seconds will be cut by 33% \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled). \n $50,000 | **standDisc** \n Purchases a mysterious stand disc with a 10% chance to receive a stand ability. Only allowed if stands are allowed.")
+			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 60 seconds will be cut by 33% \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled). \n $50,000 | **standDisc** \n Purchases a mysterious stand disc with a 10% chance to receive a stand ability. Only allowed if stands are allowed. \n $1,000,000 | **globalCommand** \n Purchases a custom command that can be used in any server \n $2,000,000 | **globalRemove** \n Purchases the rights to remove a globalCommand.")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -4256,6 +4256,194 @@ function imageObtain(){
 				  
 
 }
+
+function viewCommands(){
+	con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let sql2;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('GLOBAL', '', '')`;
+			con.query(sql, console.log);
+			
+			
+		} else {
+
+			let co = rows[0].commands;
+			let ou = rows[0].comOutput;
+			var comList = co.split(",");
+			var output = ou.split(",");
+
+			message.channel.send(`List of commands: \n ` + co);
+		}	
+	});	
+}	
+
+function localCommands(){
+	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let sql2;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
+			con.query(sql, console.log);
+			
+			
+		} else {
+
+			let co = rows[0].commands;
+			let ou = rows[0].comOutput;
+			var comList = co.split(",");
+			var output = ou.split(",");
+
+			message.channel.send(`List of commands: \n ` + co);
+		}	
+	});	
+}	
+
+function deleteCommands(){
+	con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let sql2;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('GLOBAL', '', '')`;
+			con.query(sql, console.log);
+			message.reply("There were no commands!");
+			
+		} else {
+
+			let co = rows[0].commands;
+			let ou = rows[0].comOutput;
+			var comList = co.split(",");
+			var output = ou.split(",");
+			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send("What command do you want to delete? \n !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != ""){
+							
+							var repl = "," + message.content
+							var commandP = co.replace(repl, "");
+							var img = "," + output[comList.indexOf(message.content)];
+							var imgP = ou.replace(img, "");
+							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = 'GLOBAL'`;
+							con.query(sql2);
+							message.channel.send("Command deleted successfully.")
+							
+						}	 else {
+							message.reply("Invalid command.")
+							return;
+						}	
+				});
+		}	
+	});	
+
+}	
+
+function deleteLocalCommands(){
+	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let sql2;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
+			con.query(sql, console.log);
+			message.reply("There were no commands!");
+			
+		} else {
+
+			let co = rows[0].commands;
+			let ou = rows[0].comOutput;
+			var comList = co.split(",");
+			var output = ou.split(",");
+			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send("What command do you want to delete? \n !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != ""){
+							
+							var repl = "," + message.content
+							var commandP = co.replace(repl, "");
+							var img = "," + output[comList.indexOf(message.content)];
+							var imgP = ou.replace(img, "");
+							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
+							con.query(sql2);
+							message.channel.send("Command deleted successfully.")
+							
+						}	 else {
+							message.reply("Invalid command.")
+							return;
+						}	
+				});
+		}	
+	});	
+}	
+
+function globalCommand(){
+	con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let sql2;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('GLOBAL', '', '')`;
+			con.query(sql, console.log);
+			
+			
+		} else {
+
+		
+		let co = rows[0].commands;
+		let ou = rows[0].comOutput;
+		var comList = co.split(",");
+		var output = ou.split(",");
+		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands"];
+		
+			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.indexOf(message.content) == -1 && banned.indexOf(message.content) == -1){
+					
+					var commands = prefix + message.content;
+					var commandP = co + "," + prefix + message.content;
+					var img = message.attachments.first().url;
+					var imgP = ou + "," + message.attachments.first().url;
+					
+							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = 'GLOBAL'`;
+							con.query(sql2);
+							message.channel.send(`Custom command set for **`+ commands + `**`);
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
+	                		return;
+						}
+				});
+			
+			
+			
+			
+		
+			
+		}
+		});
+}	
 	
 function customCommand(){
 	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -4273,7 +4461,9 @@ function customCommand(){
 		
 		let co = rows[0].commands;
 		let ou = rows[0].comOutput;
-
+		var comList = co.split(",");
+		var output = ou.split(",");
+		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands"];
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -4282,7 +4472,7 @@ function customCommand(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
+	            		}   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.indexOf(message.content) == -1 && banned.indexOf(message.content) == -1){
 					
 					var commands = prefix + message.content;
 					var commandP = co + "," + prefix + message.content;
@@ -6653,7 +6843,7 @@ function help(){
 
 			
 			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **${prefix}shop**: \n DMs a list of the current shop items.\n **${prefix}channel**: \n Sends the ID of the current channel \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. Depending on your rank/patreon you may be additional benefits. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. Requires manage message permissions for full effect. \n **${prefix}channel**: \n Sends the ID of the current channel \n **${prefix}customCommand** \n Creates a custom command for use in this server! \n **${prefix}deleteCommand** \n Deletes a custom command in this server. \n **${prefix}localCommands**\n Views the commands set to this server. \n **${prefix}globalCommands**\n Views the global commands usable in any server. \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -6990,6 +7180,55 @@ if(command === `${prefix}user`){
 	}
 
 
+	if(command === `${prefix}buy` && messageArray[1] === `globalCommand`){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 1000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		globalCommand();
+		
+		});
+	}
+
+	if(command === `${prefix}buy` && messageArray[1] === `globalRemove`){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 2000000) {
+			message.reply("Insufficient Funds.");
+			return;
+		}
+		sql = `UPDATE user SET money = ${money - 2000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		deleteCommands();
+		
+		});
+	}
+
+
 // 	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
 // 		if(err) throw err;
 		
@@ -7051,10 +7290,45 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	if(command != undefined){
 
-		console.log(comm + " <<<");
-		console.log(comO + " <<<");
-		console.log(comList);
-		console.log(output);
+		
+	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != ""){
+		let thing = new Discord.RichEmbed()
+
+			
+			
+			.setImage(output[comList.indexOf(message.content)])
+			.setColor("#00b561");
+				  
+		message.channel.send(thing);	
+	}	 else {
+		return;
+	}	
+	}
+}
+
+});	
+
+con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('GLOBAL', '', '')`;
+			con.query(sql, console.log);
+			
+			
+		} else {
+	
+	let comm = rows[0].commands;
+	let comO = rows[0].comOutput;
+	
+
+	var comList = comm.split(",");
+	var output = comO.split(",");
+	
+	if(command != undefined){
+
+		
 	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != ""){
 		let thing = new Discord.RichEmbed()
 
@@ -7453,7 +7727,160 @@ if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands 
 	
 	}
 
-});		
+});	
+
+
+
+if(command === `${prefix}customCommand`){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		customCommand();
+	}
+} else {
+// insert function here.
+	customCommand();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+if(command === `${prefix}deleteCommand`){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		deleteLocalCommands();
+	}
+} else {
+// insert function here.
+	deleteLocalCommands();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
+
+if(command === `${prefix}localCommands`){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		localCommands();
+	}
+} else {
+// insert function here.
+	localCommands();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
+
+
+
+
+if(command === `${prefix}globalCommands`){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		viewCommands();
+	}
+} else {
+// insert function here.
+	viewCommands();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
