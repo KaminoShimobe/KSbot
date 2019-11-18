@@ -4289,7 +4289,7 @@ function customCommand(){
 					var img = message.attachments.first().url;
 					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql2 = `UPDATE global SET commands = ',soft', comOutput = ',https://cdn.discordapp.com/attachments/496322410627203082/646075616130498572/image0.png' WHERE id = '${message.channel.id}'`;
+							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
 							con.query(sql2);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
