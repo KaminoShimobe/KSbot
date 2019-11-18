@@ -248,17 +248,20 @@ bot.on("message", async message => {
 
 	if(command === `!drop`){
 	if(message.author.id == '242118931769196544'){
-	var sql =  "ALTER TABLE server DROP COLUMN commands";
+	var sql =  "ALTER TABLE global DROP COLUMN serverCt";
   	con.query(sql, function (err, result) {
     	if (err) throw err;
-    	message.author.send("column commands dropped in table server!");
+    	message.author.send("column serverCt dropped in table global!");
   	});
 
-  	var sql2 =  "ALTER TABLE server DROP COLUMN comOutput";
+  	var sql2 =  "ALTER TABLE global DROP COLUMN version";
   	con.query(sql2, function (err, result) {
     	if (err) throw err;
-    	message.author.send("column comOutput dropped in table server!");
+    	message.author.send("column version dropped in table server!");
   	});
+
+
+  	
   	
 	}
 	}
@@ -1358,7 +1361,7 @@ function lostChest(){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, commands, comOutput) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!', '', '')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!')`;
 			con.query(sql, console.log);
 			
 			
@@ -4262,13 +4265,18 @@ function imageObtain(){
 }
 	
 function customCommand(){
-	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
+			con.query(sql, console.log);
+			
+			
+		} else {
 
-		if(rows[0].commands == undefined || rows[0].comOutput == undefined) {
-			con.query(`UPDATE server SET commands = '', comOutput = '' WHERE id = '${message.channel.id}'`);
-		}
+		
 		var co = rows[0].commands;
 		var ou = rows[0].comOutput;
 
@@ -4304,7 +4312,7 @@ function customCommand(){
 			
 		
 			
-		
+		}
 		});
 }	
 	
@@ -7027,19 +7035,11 @@ if(command === `${prefix}user`){
 
 			
 	// 	}	
-
-	
-	
-	
-
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-
-	let exposeSet = rows[0].exposeSet;
-	let canvas = rows[0].canvas;
-	let stands = rows[0].stands;
-	let commands = rows[0].commands;
+	
+let commands = rows[0].commands;
 	let comOutput = rows[0].comOutput;
 	
 
@@ -7057,7 +7057,18 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		message.channel.send(thing);	
 	}	 else {
 		return;
-	}
+	}	
+	
+});	
+
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+
+	let exposeSet = rows[0].exposeSet;
+	let canvas = rows[0].canvas;
+	let stands = rows[0].stands;
+	
 	
 	if(command === `${prefix}STARPLATINUM` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
