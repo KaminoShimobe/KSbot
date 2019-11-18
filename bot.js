@@ -1358,7 +1358,7 @@ function lostChest(){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, commands, comOutput) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!', '', '')`;
 			con.query(sql, console.log);
 			
 			
@@ -4265,11 +4265,13 @@ function customCommand(){
 	con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		
-		let co = rows[0].commands;
-		let ou = rows[0].comOutput;
 
-		if(co != undefined || ou != undefined){
+		if(rows[0].commands.length < 1 || rows[0].comOutput.length < 1) {
+			con.query(`UPDATE server SET commands = '', comOutput = '' WHERE id = '${message.channel.id}'`);
+		}
+		var co = rows[0].commands;
+		var ou = rows[0].comOutput;
+
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -4300,34 +4302,8 @@ function customCommand(){
 			
 			
 			
-		} else {
-			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		
-	            		if (message.content == `!cancel`) {
-	               		 message.channel.send("Cancelled.");
-	                		return;
-	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
-					
-					var commands = prefix + message.content;
-					var commandP = "," + prefix + message.content;
-					var img = message.attachments.first().url;
-					var imgP = "," + message.attachments.first().url;
-					
-							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
-							con.query(sql);
-							message.channel.send(`Custom command set for **`+ commands + `**`);
-							console.log(commandP + "<<<<<<<<");
-							console.log(imgP + "<<<<<<<<");
-							return;
-						} else {
-							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
-	                		return;
-						}
-				});
+		
 			
-		}	
 		
 		});
 }	
