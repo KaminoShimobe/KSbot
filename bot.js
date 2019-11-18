@@ -4271,8 +4271,8 @@ function customCommand(){
 		} else {
 
 		
-		var co = rows[0].commands;
-		var ou = rows[0].comOutput;
+		let co = rows[0].commands;
+		let ou = rows[0].comOutput;
 
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
