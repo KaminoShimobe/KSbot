@@ -4300,6 +4300,8 @@ function customCommand(){
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
 							console.log(imgP + "<<<<<<<<");
+							console.log(commands + "<<<<<<<<");
+							console.log(img + "<<<<<<<<");
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
