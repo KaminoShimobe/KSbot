@@ -4284,12 +4284,12 @@ function customCommand(){
 	                		return;
 	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
 					
-					var commands = prefix + messageArray[0];
-					var commandP = co + "," + prefix + messageArray[0];
+					var commands = prefix + message.content;
+					var commandP = co + "," + prefix + message.content;
 					var img = message.attachments.first().url;
 					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							sql2 = `UPDATE global SET commands = ',soft', comOutput = ',https://cdn.discordapp.com/attachments/496322410627203082/646075616130498572/image0.png' WHERE id = '${message.channel.id}'`;
 							con.query(sql2);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
@@ -7046,8 +7046,8 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	let comO = rows[0].comOutput;
 	
 
-	var comList = comm.split("\n");
-	var output = comO.split("\n");
+	var comList = comm.split(",");
+	var output = comO.split(",");
 	
 	if(command != undefined){
 
