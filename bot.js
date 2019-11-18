@@ -7046,6 +7046,8 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	var comList = comm.split(",");
 	var output = comO.split(",");
 	
+	if(command != undefined){
+
 	if(comList.indexOf(message.content) != -1 && comm != undefined){
 		let thing = new Discord.RichEmbed()
 
@@ -7058,6 +7060,7 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 	}	 else {
 		return;
 	}	
+	}
 
 });	
 
