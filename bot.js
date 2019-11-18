@@ -7729,7 +7729,14 @@ if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands 
 
 });	
 
+	
 
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+	
+	let cooldown = rows[0].cooldown;
+	let waifu = rows[0].waifu;
 
 if(command === `${prefix}customCommand`){
 			
@@ -7880,16 +7887,7 @@ if(command === `${prefix}globalCommands`){
 
 		
 
-	}	
-
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-	
-	let cooldown = rows[0].cooldown;
-	let waifu = rows[0].waifu;
-
-
+	}
 
 if(command === `${prefix}view` && messageArray[1] === undefined){
 			
