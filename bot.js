@@ -230,16 +230,14 @@ bot.on("message", async message => {
 	var sql14 = "ALTER TABLE server ADD commands TEXT";
 	var sql15 = "ALTER TABLE global ADD commands TEXT";
 	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
-	var sql17 = "ALTER TABLE global ADD comOutput TEXT";	
+	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
+	var sql8 = "CREATE TABLE global (id VARCHAR(30), commands VARCHAR(100), comOutput VARCHAR(1000))";	
 		
-  	con.query(sql14, function (err, result) {
+  	con.query(sql18, function (err, result) {
     	if (err) throw err;
-    	message.author.send("commands table added to server!");
+    	message.author.send("global table added!");
   	});
-	con.query(sql16, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("comOutput table added to server!");
-  	});	
+		
 	
   		}
   	}
@@ -248,18 +246,13 @@ bot.on("message", async message => {
 
 	if(command === `!drop`){
 	if(message.author.id == '242118931769196544'){
-	var sql =  "ALTER TABLE global DROP COLUMN serverCt";
+	var sql =  "DROP TABLE global";
   	con.query(sql, function (err, result) {
     	if (err) throw err;
-    	message.author.send("column serverCt dropped in table global!");
+    	message.author.send("dropped table global!");
   	});
 
-  	var sql2 =  "ALTER TABLE global DROP COLUMN version";
-  	con.query(sql2, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("column version dropped in table server!");
-  	});
-
+  	
 
   	
   	
@@ -4292,9 +4285,9 @@ function customCommand(){
 	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1){
 					
 					var commands = prefix + message.content;
-					var commandP = co + "," + prefix + message.content;
+					var commandP = co + "\n" + prefix + message.content;
 					var img = message.attachments.first().url;
-					var imgP = ou + "," + message.attachments.first().url;
+					var imgP = ou + "\n" + message.attachments.first().url;
 					
 							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql2);
