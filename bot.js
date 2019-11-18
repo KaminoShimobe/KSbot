@@ -4318,9 +4318,9 @@ function deleteCommands(){
 
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
-			var comList = co.split(",");
+			var comList = co.replace(",", "\n");
 			var output = ou.split(",");
-			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send(`List of Global Commands: \n **` + comList + `**`);
 			message.channel.send("What command do you want to delete? \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
@@ -4363,9 +4363,9 @@ function deleteLocalCommands(){
 
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
-			var comList = co.split(",");
+			var comList = co.replace(",", "\n");
 			var output = ou.split(",");
-			message.channel.send(`List of commands: \n ` + co);
+			message.channel.send(`List of commands: \n **` + comList + `**`);
 			message.channel.send("What command do you want to delete? \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
