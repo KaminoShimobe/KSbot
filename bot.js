@@ -7039,14 +7039,14 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 		if(err) throw err;
 		let sql;
 	
-let commands = rows[0].commands;
-	let comOutput = rows[0].comOutput;
+	let comm = rows[0].commands;
+	let comO = rows[0].comOutput;
 	
 
-	var comList = commands.split(",");
-	var output = comOutput.split(",");
+	var comList = comm.split(",");
+	var output = comO.split(",");
 	
-	if(comList.indexOf(message.content) != -1 && command != undefined){
+	if(comList.indexOf(message.content) != -1 && comm != undefined){
 		let thing = new Discord.RichEmbed()
 
 			
