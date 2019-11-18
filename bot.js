@@ -4272,10 +4272,10 @@ function viewCommands(){
 
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
-			var comList = co.split(",");
+			var comList = co.replace(",", "\n");
 			var output = ou.split(",");
 
-			message.channel.send(`List of global commands: \n **` + co + `**`);
+			message.channel.send(`List of global commands: \n **` + comList + `**`);
 		}	
 	});	
 }	
@@ -4295,10 +4295,10 @@ function localCommands(){
 
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
-			var comList = co.split(",");
+			var comList = co.replace(",", "\n");
 			var output = ou.split(",");
 
-			message.channel.send(`List of commands: \n **` + co + `**`);
+			message.channel.send(`List of commands: \n **` + comList + `**`);
 		}	
 	});	
 }	
