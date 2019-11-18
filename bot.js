@@ -4295,7 +4295,7 @@ function customCommand(){
 					var img = message.attachments.first().url;
 					var imgP = ou + "," + message.attachments.first().url;
 					
-							sql = `UPDATE server SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
+							sql = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.channel.id}'`;
 							con.query(sql);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
 							console.log(commandP + "<<<<<<<<");
@@ -7058,7 +7058,7 @@ let commands = rows[0].commands;
 	}	 else {
 		return;
 	}	
-	
+
 });	
 
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
