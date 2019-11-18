@@ -4266,7 +4266,7 @@ function customCommand(){
 		if(err) throw err;
 		let sql;
 
-		if(rows[0].commands.length < 1 || rows[0].comOutput.length < 1) {
+		if(rows[0].commands == undefined || rows[0].comOutput == undefined) {
 			con.query(`UPDATE server SET commands = '', comOutput = '' WHERE id = '${message.channel.id}'`);
 		}
 		var co = rows[0].commands;
