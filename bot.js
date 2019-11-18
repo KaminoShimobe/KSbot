@@ -7041,13 +7041,13 @@ if(command === `${prefix}user`){
 con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		// if(rows.length < 1) {
+		if(rows.length < 1) {
 			
-		// 	sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
-		// 	con.query(sql, console.log);
+			sql = `INSERT INTO global (id, commands, comOutput) VALUES ('${message.guild.id}', '', '')`;
+			con.query(sql, console.log);
 			
 			
-		// } else {
+		} else {
 	
 	let comm = rows[0].commands;
 	let comO = rows[0].comOutput;
@@ -7062,7 +7062,7 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 		console.log(comO + " <<<");
 		console.log(comList);
 		console.log(output);
-	if(comList.indexOf(message.content) != -1 && comm != undefined){
+	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != ""){
 		let thing = new Discord.RichEmbed()
 
 			
@@ -7075,7 +7075,7 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 		return;
 	}	
 	}
-// }
+}
 
 });	
 
