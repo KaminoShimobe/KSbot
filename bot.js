@@ -6141,7 +6141,7 @@ function give(){
 		if(err) throw err;
 		let sql;
 		let money = rows[0].money;
-			
+		var dmg = rows[0].lasttrans;
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
@@ -6171,7 +6171,7 @@ function give(){
           // Removes the user from the set after a minute
           HarvestCD.delete(message.author.id);
         }, (1000*60*30));
-			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
+			sql = `UPDATE user SET money = ${money + lastInt}, lasttrans = ${lastInt} WHERE id = '${message.author.id}'`;
 			con.query(sql);			
 			message.channel.send("Harvest collected $" + lastInt + "!");			
 		}	
