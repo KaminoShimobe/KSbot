@@ -6165,7 +6165,7 @@ function give(){
             message.reply("Harvest must wait about 30 mins from when you first used it!");
             return;
    		 } else{
-			 		if(toBeat.lastMessage.content.indexOf(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt < 10000000){	
+			 		if(toBeat.lastMessage.content.indexOf(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt <= 10000000){	
 			HarvestCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
