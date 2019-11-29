@@ -20,6 +20,7 @@ const boomCD = new Set();
 const shameCD = new Set();
 const insuranceCD = new Set();
 const amuletCoinCD = new Set();
+const questCD = new Set();
 
 
 
@@ -231,11 +232,18 @@ bot.on("message", async message => {
 	var sql15 = "ALTER TABLE global ADD commands TEXT";
 	var sql16 = "ALTER TABLE server ADD comOutput TEXT";
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
-	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands TEXT, comOutput TEXT)";	
-		
-  	con.query(sql18, function (err, result) {
+	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands TEXT, comOutput TEXT)";
+	var sql19 = "ALTER TABLE server ADD level TINYINT";
+	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
+	var sql21 = "ALTER TABLE server ADD weather VARCHAR(10)";
+	var sql22 = "ALTER TABLE server ADD exp INT";
+	var sql23 = "ALTER TABLE user ADD achievements SMALLINT";
+	// var sql20 = "CREATE TABLE plant (owner VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
+	
+
+  	con.query(sql19, function (err, result) {
     	if (err) throw err;
-    	message.author.send("global table added!");
+    	message.author.send("level table added to server!");
   	});
 		
 	
@@ -246,10 +254,10 @@ bot.on("message", async message => {
 
 	if(command === `!drop`){
 	if(message.author.id == '242118931769196544'){
-	var sql =  "DROP TABLE global";
+	var sql =  "DROP TABLE pet";
   	con.query(sql, function (err, result) {
     	if (err) throw err;
-    	message.author.send("dropped table global!");
+    	message.author.send("dropped table pet!");
   	});
 
   	
@@ -6876,11 +6884,11 @@ function utilityHelp(){
 
 			
 			.setTitle("KS-Bot Utility commands ⚙️")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
+			.setDescription(`**${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-		
+		message.reply(" sent you a dm of the utility help list!");
 }
 
 function userHelp(){
@@ -6893,7 +6901,7 @@ function userHelp(){
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-		
+		message.reply(" sent you a dm of the user help list!");
 }
 
 function moneyHelp(){
@@ -6906,7 +6914,7 @@ function moneyHelp(){
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-		
+		message.reply(" sent you a dm of the monetary help list!");
 }
 
 function funHelp(){
@@ -6919,7 +6927,7 @@ function funHelp(){
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-		
+		message.reply(" sent you a dm of the fun help list!");
 }
 
 function socialHelp(){
@@ -6932,7 +6940,7 @@ function socialHelp(){
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
-		
+		message.reply(" sent you a dm of the social help list!");
 }
 
 function channelCheck(){
