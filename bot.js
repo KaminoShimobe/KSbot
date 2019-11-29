@@ -6849,7 +6849,7 @@ function standHelp(){
 	let stands = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Stand Commands")
+			.setTitle("KS-Bot Stand Commands 🐞")
 			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
 			.setColor("#1d498e"); 
 
@@ -6862,12 +6862,77 @@ function help(){
 	let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot commands")
-			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server \n **${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}channel**: \n Sends the ID of the current channel \n **${prefix}customCommand** \n Creates a custom command! \n **${prefix}deleteCommand** \n Deletes a custom command! \n **${prefix}localCommands**\n Views the custom commands. \n **${prefix}globalCommands**\n Views the global commands. \n **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **__ADMIN ONLY__** \n **${prefix}admin**: \n DMs owner admin command list. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server.`)
+			.setTitle("KS-Bot Command Directory")
+			.setDescription(`**${prefix}help** :gear: \n Pulls up utility commands. \n **${prefix}help** :warning: \n Pulls up admin commands. \n **${prefix}help** :bust_in_silhouette: \n Pulls up user commands. \n **${prefix}help** :busts_in_silhouette: \n Pulls up social commands. \n **${prefix}help** :dollar: \n Pulls up monetary commands.\n **${prefix}help** :tada: \n Pulls up fun commands! \n **${prefix}help** :beetle: \n Pulls up stand commands.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the help list!");
+}
+
+function utilityHelp(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Utility commands ⚙️")
+			.setDescription(`**${prefix}help**: \n Pulls up this list. \n **${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		
+}
+
+function userHelp(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot User commands 👤")
+			.setDescription(`**${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. `)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		
+}
+
+function moneyHelp(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Monetary commands 💵")
+			.setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list.`)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		
+}
+
+function funHelp(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Fun commands 🎉")
+			.setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand** \n Creates a custom command! \n **${prefix}deleteCommand** \n Deletes a custom command! \n **${prefix}localCommands**\n Views the custom commands. \n **${prefix}globalCommands**\n Views the global commands.`)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		
+}
+
+function socialHelp(){
+
+	let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Social commands 👥")
+			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message.\n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user.`)
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(help);
+		
 }
 
 function channelCheck(){
@@ -6888,7 +6953,7 @@ function admin(){
 	let help = new Discord.RichEmbed()
 
 			
-			.setTitle("KS-Bot Admin commands")
+			.setTitle("KS-Bot Admin commands ⚠️")
 			.setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
 			.setColor("#1d498e"); 
 
@@ -7097,11 +7162,34 @@ if(command === `!resetCommands`){
 	
 
 	
-
-if(command === `${prefix}help` || command === `KS!help`){
-		help();
+if(messageArray[1] == undefined){
+	if(command === `${prefix}help` || command === `KS!help`){
+			help();
+	}
 }
-	
+
+if(command === `${prefix}help`&& messageArray[1] == ":gear:"){
+			utilityHelp();
+	}
+if(command === `${prefix}help`&& messageArray[1] == ":bust_in_silhouette:"){
+			userHelp();
+	}	
+if(command === `${prefix}help`&& messageArray[1] == ":busts_in_silhouette:"){
+			socialHelp();
+	}	
+if(command === `${prefix}help`&& messageArray[1] == ":dollar:"){
+			moneyHelp();
+	}	
+if(command === `${prefix}help`&& messageArray[1] == ":tada:"){
+			funHelp();
+	}	
+if(command === `${prefix}help`&& messageArray[1] == ":beetle:"){
+			standHelp();
+	}	
+if(command === `${prefix}help`&& messageArray[1] == ":warning:"){
+			admin();
+	}	
+
 if(command === `${prefix}invite` || command === `KS!invite`){
 		invite();
 }	
