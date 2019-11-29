@@ -7168,25 +7168,25 @@ if(messageArray[1] == undefined){
 	}
 }
 
-if(command === `${prefix}help`&& messageArray[1] == ":gear:"){
+if(command === `${prefix}help`&& messageArray[1] == "⚙️"){
 			utilityHelp();
 	}
-if(command === `${prefix}help`&& messageArray[1] == ":bust_in_silhouette:"){
+if(command === `${prefix}help`&& messageArray[1] == "👤"){
 			userHelp();
 	}	
-if(command === `${prefix}help`&& messageArray[1] == ":busts_in_silhouette:"){
+if(command === `${prefix}help`&& messageArray[1] == "👥"){
 			socialHelp();
 	}	
-if(command === `${prefix}help`&& messageArray[1] == ":dollar:"){
+if(command === `${prefix}help`&& messageArray[1] == "💵"){
 			moneyHelp();
 	}	
-if(command === `${prefix}help`&& messageArray[1] == ":tada:"){
+if(command === `${prefix}help`&& messageArray[1] == "🎉"){
 			funHelp();
 	}	
-if(command === `${prefix}help`&& messageArray[1] == ":beetle:"){
+if(command === `${prefix}help`&& messageArray[1] == "🐞"){
 			standHelp();
 	}	
-if(command === `${prefix}help`&& messageArray[1] == ":warning:"){
+if(command === `${prefix}help`&& messageArray[1] == "⚠️"){
 			admin();
 	}	
 
