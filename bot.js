@@ -237,13 +237,34 @@ bot.on("message", async message => {
 	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
 	var sql21 = "ALTER TABLE server ADD weather VARCHAR(10)";
 	var sql22 = "ALTER TABLE server ADD exp INT";
-	var sql23 = "ALTER TABLE user ADD achievements SMALLINT";
-	// var sql20 = "CREATE TABLE plant (owner VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
-	
+	var sql23 = `UPDATE server SET level = ${0}, weather = '', exp = ${0}`;
+	var sql24 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
+	var sql25 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
+
 
   	con.query(sql19, function (err, result) {
     	if (err) throw err;
-    	message.author.send("level table added to server!");
+    	message.author.send("level column added to server!");
+  	});
+
+  	con.query(sql20, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("achievements table created !");
+  	});
+
+  	con.query(sql21, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("weather column added to server!");
+  	});
+
+  	con.query(sql22, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("exp column added to server!");
+  	});
+
+  	con.query(sql23, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("level, weather, and exp columns updated in table server!");
   	});
 		
 	
@@ -266,6 +287,31 @@ bot.on("message", async message => {
   	
 	}
 	}
+
+	// con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+	// 	if(err) throw err;
+	// 	let sql;
+	// 	if(rows.length < 1 && message.author.id == '242118931769196544') {
+			
+	// 		sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, '', '')`;
+	// 		con.query(sql, console.log);
+			
+			
+	// 	}
+
+
+
+
+		
+	// 		let achievements = rows[0].completed;
+	// 		var tasks = rows[0].tasks;
+	// 		let todo = task.split(",");
+	// 		var status = rows[0].status;
+	// 		let achieved = status.split(",");
+			
+		
+		 
+	// });
 
 function bio(){
 
@@ -986,7 +1032,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'nothing')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'nothing', ${0}, '', ${0})`;
 			con.query(sql, console.log);
 			
 			
@@ -1362,7 +1408,7 @@ function lostChest(){
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!')`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'has left the server!', ${0}, '', ${0})`;
 			con.query(sql, console.log);
 			
 			
