@@ -237,9 +237,11 @@ bot.on("message", async message => {
 	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
 	var sql21 = "ALTER TABLE server ADD weather VARCHAR(10)";
 	var sql22 = "ALTER TABLE server ADD exp INT";
-	var sql23 = `UPDATE server SET level = ${0}, weather = '', exp = ${0}`;
-	var sql24 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
-	var sql25 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
+	var sql23 = "ALTER TABLE user ADD gift INT";
+	var sql24 = `UPDATE server SET level = ${0}, weather = '', exp = ${0}`;
+	var sql25 = `UPDATE user SET gift =  ${0}`;
+	var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
+	var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
 
 
   	con.query(sql19, function (err, result) {
@@ -261,13 +263,21 @@ bot.on("message", async message => {
     	if (err) throw err;
     	message.author.send("exp column added to server!");
   	});
+		
+	con.query(sql23, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("gift column added to user!");
+  	});
 
-  	con.query(sql23, function (err, result) {
+  	con.query(sql24, function (err, result) {
     	if (err) throw err;
     	message.author.send("level, weather, and exp columns updated in table server!");
   	});
 		
-	
+	con.query(sql23, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("gift column updated in table user!");
+  	});
   		}
   	}
 
@@ -288,30 +298,7 @@ bot.on("message", async message => {
 	}
 	}
 
-	// con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-	// 	if(err) throw err;
-	// 	let sql;
-	// 	if(rows.length < 1 && message.author.id == '242118931769196544') {
-			
-	// 		sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, '', '')`;
-	// 		con.query(sql, console.log);
-			
-			
-	// 	}
-
-
-
-
-		
-	// 		let achievements = rows[0].completed;
-	// 		var tasks = rows[0].tasks;
-	// 		let todo = task.split(",");
-	// 		var status = rows[0].status;
-	// 		let achieved = status.split(",");
-			
-		
-		 
-	// });
+	
 
 function bio(){
 
@@ -469,6 +456,30 @@ if(command === `!color`){
 }
 	
 if(command === `!whisper` && messageArray[1] != undefined){
+// 	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		if(rows.length < 1 && message.author.id == '242118931769196544') {
+			
+// 			sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', '')`;
+// 			con.query(sql, console.log);
+			
+			
+// 		}
+
+
+
+
+		
+// 			let achievements = rows[0].completed;
+// 			var tasks = rows[0].tasks;
+// 			let todo = tasks.split(",");
+// 			var status = rows[0].status;
+// 			let achieved = status.split(",");
+			
+		
+		 
+	
 		con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -507,7 +518,7 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 			 message.author.send("Whispers are not allowed in that server.");
 			  }
 			});
-		
+// 		});
 	}	
 
 function rps(){
