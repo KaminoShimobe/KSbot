@@ -82,7 +82,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.5.7", bot.user.avatarURL);
+			.setFooter("Version 1.5.8", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -5200,7 +5200,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	
 function ball8(){
 	
-	let fortune = Math.floor(Math.random() * 40) + 1;
+	let fortune = Math.floor(Math.random() * 41) + 1;
 
 		if(fortune === 1 ){
 
@@ -5356,6 +5356,10 @@ function ball8(){
 		} else if(fortune === 39 ){
 
 			message.reply(`That's the tea sis`);
+
+		} else if(fortune === 40 ){
+
+			message.reply(`Are you in a headspace to receive information which could possibly hurt you?`);
 
 		} else {
 
