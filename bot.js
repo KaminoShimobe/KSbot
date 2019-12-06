@@ -312,10 +312,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		if(err) throw err;
 		let sql2;
 		
-			let mission;
-			let achievements = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;
+			
 		
 		if(rows.length < 1) {
 			
@@ -6084,7 +6081,8 @@ con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, 
 			let mission;
 			let achievement = rows[0].completed;
 			let tasks = rows[0].tasks;
-			let status = rows[0].status;			
+			let status = rows[0].status;	
+	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -8211,9 +8209,20 @@ if(command === `${prefix}toggle`){
 
 	
 
-if(command === `${prefix}user`){
+if(command === `${prefix}user` && messageArray[1] == undefined){
 
 		addUser();
+		 
+
+
+
+		 return;
+
+
+
+	} if(command === `${prefix}user` && messageArray[1] != undefined){
+
+		referUser();
 		 
 
 
