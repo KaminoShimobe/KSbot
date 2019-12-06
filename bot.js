@@ -1915,7 +1915,8 @@ function referUser(){
 			message.reply("That ID is invalid!");
 			return;
 		}
-			
+		con.query(`UPDATE user gift = ${theirGift + 1}  WHERE id = '${messageArray[1]}'`);
+				
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;		
@@ -1923,7 +1924,7 @@ function referUser(){
 				if(rows.length < 1) {
 			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1})`;
 			con.query(sql, console.log);
-			con.query(`UPDATE user gift = ${theirGift + 1}  WHERE id = '${messageArray[1]}'`);
+			
 			message.channel.send(`User account created! You and your friend also got a gift! ${prefix}view to view your account!`)
 			//Achievement 1
 					con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
