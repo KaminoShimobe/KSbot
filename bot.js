@@ -234,7 +234,7 @@ bot.on("message", async message => {
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
 	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands TEXT, comOutput TEXT)";
 	var sql19 = "ALTER TABLE server ADD level TINYINT";
-	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status INT)";
+	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status INT, credits INT)";
 	var sql21 = "ALTER TABLE server ADD weather VARCHAR(10)";
 	var sql22 = "ALTER TABLE server ADD exp INT";
 	var sql23 = "ALTER TABLE user ADD gift INT";
@@ -298,7 +298,39 @@ bot.on("message", async message => {
 	}
 	}
 
-	
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+
+		if(rows.length < 1) {
+			
+			
+			return;
+		} else {
+			con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql2;
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+		
+		if(rows.length < 1) {
+			
+			sql2 = `INSERT INTO achievements (id, completed, tasks, status, credits) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', ${0}, ${0})`;
+			con.query(sql, console.log);
+			
+		}	else {
+			return;
+		}
+			});	
+		}	
+
+		
+
+});	
 
 function bio(){
 
@@ -458,26 +490,13 @@ if(command === `!color`){
 if(command === `!whisper` && messageArray[1] != undefined){
 	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
-		let sql;
-		if(rows.length < 1 && message.author.id == '242118931769196544') {
-			
-			sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', ${0})`;
-			con.query(sql, console.log);
-			
-			
-		}
-
-
-
-
+		
+		
 			let mission;
 			let achievements = rows[0].completed;
 			let tasks = rows[0].tasks;
-			//var todo = tasks.split(",");
 			let status = rows[0].status;
-			
-			
-		
+	
 		 
 	
 		con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
@@ -505,11 +524,12 @@ if(command === `!whisper` && messageArray[1] != undefined){
 
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
-				//Achievement 3
+					//Achievement 3
 				if(tasks.indexOf("Send a whisper") != -1){
 					var done = tasks.replace("Send a whisper", "complete");
-					mission = `UPDATE achievements SET tasks = '${done}' WHERE id = '${message.author.id}'`;
-					message.author.send("**ACHIEVEMENT UNLOCKED**: \n Sneaky Sneaky :eyes:");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.author.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Sneaky Sneaky` :eyes:");
 				}	
 		var you = message.author.username;	
 
@@ -522,15 +542,20 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 			else {
 			 message.author.send("Whispers are not allowed in that server.");
 			  }
+			}); 
 			});
- 		});
-	}	
+		}
+ 		
 
 function rps(){
 	let other = message.mentions.users.first();
 	var num = parseInt(messageArray[2]); 
 	let them = bot.users.get(message.author.id);
 	let results = message.channel;
+	
+	
+	
+		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 
 		if(err) throw err;
@@ -897,7 +922,7 @@ function rps(){
 		}
 		 });
 	});
-
+	
 }	
 
 
@@ -1103,6 +1128,7 @@ function treasure(){
 			amount = Math.floor(Math.random() * 9999999) + 100000;
 			return;
 		}
+			
 		let chest = rows[0].chest;
 		let channel = rows[0].channel;
 		const room = bot.channels.get(channel);
@@ -1209,12 +1235,21 @@ function treasure(){
 	}	
 
 function collect(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		
 		if(err) throw err;
 		let type = rows[0].karma;
 		let cost = rows[0].chest;
+		let yay = rows[0];	
 			if(rows.length < 1) {
 			
 			message.reply(" nothing to collect!");
@@ -1230,14 +1265,41 @@ function collect(){
 			
 				return;
 				}
-
+				var gift = Math.floor(Math.random() * 5) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-
-				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost} WHERE id = '${message.author.id}'`;
+				if(gift == 5){
+				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+				message.channel.send("**!!!**");
+				} else {
+				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;	
+				}	
 				con.query(sql);
+				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
 				message.reply(" found $" + cost + " in the chest!");
-				
+					//Achievement 6
+				if(tasks.indexOf("Open a chest") != -1 && status == 1){
+					var done = tasks.replace("Open a chest", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `owo what's this?`");
+				}	
+					//Achievement 7
+				if(tasks.indexOf("Open 100 Chests") != -1 && status == 100){
+					var done = tasks.replace("Open 100 Chests", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `I lurk for these`");
+				}	
+					
+					//Achievement 8
+				if(tasks.indexOf("Open 1000 Chests") != -1 && status == 1000){
+					var done = tasks.replace("Open 1000 Chests", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Gotta open 'em all!`");
+				}	
+					
 				lostChest();	
 				});	
 			} else if(type == "bad"){
@@ -1269,8 +1331,31 @@ function collect(){
 
 				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
 				con.query(sql);
+				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
 				message.reply(" lost $" + penalty + " from a trap!");
 				
+				//Achievement 6
+				if(tasks.indexOf("Open a chest") != -1 && status == 1){
+					var done = tasks.replace("Open a chest", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ewe what's this?`");
+				}	
+					//Achievement 7
+				if(tasks.indexOf("Open 100 Chests") != -1 && status == 100){
+					var done = tasks.replace("Open 100 Chests", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `I lurk for these to no avail`");
+				}	
+					
+					//Achievement 8
+				if(tasks.indexOf("Open 1000 Chests") != -1 && status == 1000){
+					var done = tasks.replace("Open 1000 Chests", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Gotta open 'em all just not these ones!`");
+				}	
 				lostChest();	
 				});
 			}	
@@ -1278,6 +1363,7 @@ function collect(){
 			
 			return;
 		}
+		});
 		});
 	}	
 
@@ -1773,20 +1859,40 @@ function lostChest(){
 	}	
 
 	function addUser(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4')`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${0})`;
 			con.query(sql, console.log);
 			message.channel.send(`User account created! ${prefix}view to view your account!`)
+			//Achievement 1
+				if(tasks.indexOf("Make an account") != -1){
+					var done = tasks.replace("Make an account", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
+				}	
 			return;
 		}	else {
 
 			message.reply(` You have a user! Do ${prefix}view to see your user`);
-			
+			if(tasks.indexOf("Make an account") != -1){
+					var done = tasks.replace("Make an account", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `We BEEN knew.`");
+				}
 
 			
 			return;
@@ -1794,8 +1900,69 @@ function lostChest(){
 
 
 		});
+		});	
 		
 	}
+	
+function referUser(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		let theirGift = rows[0].gift;	
+		if(rows.length < 1) {
+			message.reply("That ID is invalid!");
+			return;
+		}
+			
+			
+			
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1})`;
+			con.query(sql, console.log);
+			con.query(`UPDATE user gift = ${theirGift + 1}  WHERE id = '${messageArray[1]}'`);
+			message.channel.send(`User account created! You and your friend also got a gift! ${prefix}view to view your account!`)
+			//Achievement 1
+				if(tasks.indexOf("Make an account") != -1){
+					var done = tasks.replace("Make an account", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
+				}	
+			return;
+		}	else {
+
+			message.reply(` You have a user! Do ${prefix}view to see your user`);
+			if(tasks.indexOf("Make an account") != -1){
+					var done = tasks.replace("Make an account", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `We BEEN knew.`");
+				}
+
+			
+			return;
+		}
+		});
+
+		});
+		});	
+		
+	}	
 	
 function aboutServer(){
 		
@@ -1976,7 +2143,15 @@ function divorce(){
 
 	
 function daily(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -2035,6 +2210,12 @@ function daily(){
         con.query(sql); 
 	   			 
            message.reply(" got $" + check + "!");
+	   if(tasks.indexOf("Collect a daily") != -1){
+					var done = tasks.replace("Collect a daily", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Let's get that bread.`");
+				} 
         // Adds the user to the set so that they can't talk for a minute
        dailyCD.add(message.author.id);
         setTimeout(() => {
@@ -2043,10 +2224,19 @@ function daily(){
         }, (1000*60*60*24));
 
     }
-	});
+	}); 
+		});
 	}
 	
 function gambleFlip(){
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
 		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2080,6 +2270,20 @@ function gambleFlip(){
 			sql = `UPDATE user SET money = ${money + bet}, lasttrans = ${bet}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);	
 			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
+			
+			  if(tasks.indexOf("Get 5+ streak") != -1 && streak == 5){
+					var done = tasks.replace("Get 5+ streak", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `This gotta be a fluke.`");
+				} 	
+				
+				 if(tasks.indexOf("Get 10+ streak") != -1 && streak == 10){
+					var done = tasks.replace("Get 10+ streak", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `RNGsus is my lord.`");
+				} 
 				
 			}
 			else {
@@ -2114,10 +2318,19 @@ function gambleFlip(){
 	}
 
 	});
+		
+	});
 }	
 	
 function gambleSlots(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
 		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -2219,7 +2432,12 @@ function gambleSlots(){
 			
 			message.channel.send(box1 + box2 + box3);
 			message.reply("**JACKPOTTTTTT** You made $" + prize + "!!");
-			
+			 if(tasks.indexOf("Win Jackpot") != -1){
+					var done = tasks.replace("Win Jackpot", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `The whims of fate got your back.`");
+				} 
 			
 		} else if(slot1 === slot2 && slot1 === slot3 && slot1 != 7){
 			prize = (slot1 + (10 * slot2) + (100 * slot3));
@@ -2285,9 +2503,19 @@ function gambleSlots(){
 	}
 
 	});
+		});
 }	
 	
 function midnight(){
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+	
 	var PixelArt = require('pixel-art');	
 const { createCanvas } = require('canvas')
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -3097,6 +3325,12 @@ let prize;
 				con.query(sql);	
 				message.reply("won $" + prize + "!!!");	
 				
+				if(tasks.indexOf("Win Midnight") != -1 ){
+					var done = tasks.replace("Win Midnight", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Suddenly you have a strange urge to order tartar sauce.`");
+				} 
 			
 			}	else {
 				if(message.content == 1){
@@ -4144,6 +4378,7 @@ let prize;
 	
 		
 	});
+	});
 }	
 	
 
@@ -4174,6 +4409,15 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 function customRole(){
 	const member = message.member;
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -4208,10 +4452,16 @@ function customRole(){
   		.catch(console.error);
 		
   		message.reply("Unique Role Purchased!");
-
+					if(tasks.indexOf("Buy a customRole") != -1){
+					var done = tasks.replace("Buy a customRole", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Look MA I'm UNIQUE!!`");
+				} 
 		
   	}
   	 });
+	});
 }
 
 function customItem(){
@@ -4482,6 +4732,15 @@ function deleteLocalCommands(){
 }	
 
 function globalCommand(){
+con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;		
+		
 	con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -4519,6 +4778,12 @@ function globalCommand(){
 							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = 'GLOBAL'`;
 							con.query(sql2);
 							message.channel.send(`Global command set for **`+ commands + `**`);
+							  if(tasks.indexOf("Create a global command") != -1){
+					var done = tasks.replace("Create a global command", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `@everyone look at my cat!`");
+				} 
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
@@ -4533,9 +4798,19 @@ function globalCommand(){
 			
 		}
 		});
+	});
 }	
 	
 function customCommand(){
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;		
+		
 	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -4572,10 +4847,12 @@ function customCommand(){
 							sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
 							con.query(sql2);
 							message.channel.send(`Custom command set for **`+ commands + `**`);
-							console.log(commandP + "<<<<<<<<");
-							console.log(imgP + "<<<<<<<<");
-							console.log(commands + "<<<<<<<<");
-							console.log(img + "<<<<<<<<");
+							if(tasks.indexOf("Create a custom command") != -1){
+					var done = tasks.replace("Create a custom command", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Hey, look at my cat!`");
+				} 
 							return;
 						} else {
 							message.channel.send("Invalid Input. Must be a new command and include an attachment.");
@@ -4590,6 +4867,7 @@ function customCommand(){
 			
 		}
 		});
+	});
 }	
 	
 function uno(){
@@ -5400,7 +5678,16 @@ function justSaiyan(){
 }
 	
 function flip(){
-	
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			let counter = rows[0].credits;
+		
 	let coin = Math.floor(Math.random() * 101) + 1;
 
 		console.log(coin);
@@ -5415,13 +5702,20 @@ function flip(){
 
 		} else {
 
-			message.reply(`flipped a coin and it landed in the middle?!?!?!`); 
+			message.reply(`flipped a coin and it landed in the middle?!?!?!`);
+			if(tasks.indexOf("Flip a coin that lands in the middle") != -1){
+					var done = tasks.replace("Flip a coin that lands in the middle", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Was this really worth it???`");
+				} 
 
 		}
 
 		
 
 		return;
+	});
 }	
 	
 //Waifu related
@@ -5727,6 +6021,15 @@ function jk(){
 		 return;
 }	
 function expose(){
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;		
+		
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -5761,13 +6064,27 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 
 		 setTimeout(message.channel.send("```"+ expose + "```"), wait);
+		if(tasks.indexOf("Expose a whisper") != -1){
+					var done = tasks.replace("Expose a whisper", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `HA! GOTCHA BITCH`");
+				} 	 
 		}
 			
 		});	
+	});
 }
 
 function viewUser(){
+con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;			
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -5787,6 +6104,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let wins = rows[0].wins;
 		let losses = rows[0].losses;
 		var spouse = '';
+		let gifts = rows[0].gift;
 
 		if(wins == undefined){
 			wins = 0;
@@ -5814,19 +6132,48 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
 		message.channel.sendEmbed(stats);
+		if(tasks.indexOf("Get 10 Ws with 0 Ls") != -1 && wins == 10 && losses == 0){
+					var done = tasks.replace("Get 10 Ws with 0 Ls", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `You think this is a game??`");
+				} 	
 
-
+		if(tasks.indexOf("Get 100 Ws with 0 Ls") != -1 && wins == 100 && losses == 0){
+					var done = tasks.replace("Get 100 Ws with 0 Ls", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Certified G.O.A.T of Rock Paper Scissors.`");
+				} 	
 		
+		if(tasks.indexOf("Get $1M") != -1 && money == 1000000){
+					var done = tasks.replace("Get $1M", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Millionaire gang!`");
+				} 
+		if(tasks.indexOf("Get $10M") != -1 && money == 10000000){
+					var done = tasks.replace("Get $10M", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Multimillionaire squad!`");
+				} 
+		if(tasks.indexOf("Get $100M") != -1 && money == 100000000){
+					var done = tasks.replace("Get $100M", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Capitalism!!!`");
+				} 
 		
-
+		});
 	});
-
 }
+	
 
 function viewLeaderboard(){
 		
@@ -5929,7 +6276,15 @@ let leaderboard = new Discord.RichEmbed()
 
 function viewOtherUser(){
 	let other = message.mentions.users.first();
-
+con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+	
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -5950,6 +6305,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		let wins = rows[0].wins;
 		let losses = rows[0].losses;
 		var spouse = '';
+		let gifts = rows[0].gift;
 
 		if(wins == undefined){
 			wins = 0;
@@ -5978,7 +6334,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
@@ -5989,10 +6345,21 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		
 
 	});
+});
 }	
 
 function deleteUser(){
-
+con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+	
+			con.query(`DELETE FROM achievements WHERE id = '${message.author.id}'`);
+	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -6009,11 +6376,22 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 	});
 	return;
+	
+});
 }
 
 function give(){
 	let other = message.mentions.users.first();
 	var num = parseInt(messageArray[2]); 
+	
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 
@@ -6051,13 +6429,20 @@ function give(){
 				console.log("Received $" + num);
 				con.query(sql, console.log);
 				message.reply(`gave ${other} $` + num + `!`);
+				
+				if(tasks.indexOf("Give someone $1M") != -1 && num == 1000000){
+					var done = tasks.replace("Give someone $1M", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Kindness vibes`");
+				} 
 	});	
 		} else{
 			message.reply(" You cannot give *all* of your currency, and you may have the order mixed up.");
 		}
 	});
 
-	
+	});
 
 	return;
 }	
@@ -6147,7 +6532,15 @@ function give(){
 		let kakyoin = message.guild.roles.find('name', 'kakyoin');
 		var standUsers = [];
 		
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
 		if(err) throw err;
@@ -6204,13 +6597,28 @@ function give(){
         }, (1000*60*1));	
 			 
 		}	
-	
+		
+			if(tasks.indexOf("Use STAR PLATINUM") != -1){
+					var done = tasks.replace("Use STAR PLATINUM", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ORA ORA ORA ORA ORA!`");
+				} 
+		});
 		
 }
 	
 	function harvest(){
 		
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+			
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -6247,7 +6655,13 @@ function give(){
         }, (1000*60*30));
 			sql = `UPDATE user SET money = ${money + lastInt} WHERE id = '${message.author.id}'`;
 			con.query(sql);			
-			message.channel.send("Harvest collected $" + lastInt + "!");			
+			message.channel.send("Harvest collected $" + lastInt + "!");	
+			if(tasks.indexOf("Use HARVEST") != -1){
+					var done = tasks.replace("Use HARVEST", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Harvest is invincible!`");
+				} 			
 		}	
 			
 		else {
@@ -6263,7 +6677,7 @@ function give(){
 
 		});
 		
-		
+		});
 	}
 	
 	
@@ -6342,7 +6756,14 @@ function give(){
 	
 	
 	function thirdBomb(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
 
 
 
@@ -6373,15 +6794,29 @@ function give(){
 
   			.catch(console.error);
 			message.channel.send("**KILLA QUEEN! DAISAN NO BAKUDAN!**");
+			if(tasks.indexOf("Activate Bites The Dust") != -1){
+					var done = tasks.replace("Activate Bites The Dust", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `YES, I DID IT! IT ACTIVATED!`");
+				} 	
 			return;
 		
 	});
-		
+	
+		});
 	}
 	
 	
 	function kingCrimson(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
 	
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -6406,19 +6841,33 @@ function give(){
 			setTimeout(() => {
         var sql2 = `UPDATE server SET kcrimson = ${false} WHERE id = '${message.guild.id}'`;
 			con.query(sql2, console.log);
-			message.channel.send("`It just works.`");	
+			message.channel.send("`It just works.`");
+			if(tasks.indexOf("Use KING CRIMSON") != -1){
+					var done = tasks.replace("Use KING CRIMSON", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `I DON'T GET IT HOW DOES KING CRIMSON WORK?!`");
+				} 	
         }, (1000*30));	
 			return;
 		}
 
 	});
-		
+		});
 	}
 	
 	
 	
 	function echoesAct1(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+			
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 	if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
@@ -6437,12 +6886,28 @@ function give(){
     
 		message.guild.members.get(them.id).setNickname(messageArray[2]);
 			message.channel.send("**ECHOES ACT 1 !**");
+			 
+			if(tasks.indexOf("Use ECHOES") != -1){
+					var done = tasks.replace("Use ECHOES", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `How courageous!`");
+				} 
 		 }
 		
+		});
 	}
 	
 	function echoesAct3(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
+			
 			if (act3CD.has(message.author.id)) {
             message.reply("Echoes must wait about 30 minutes from when you first used act !");
             return;
@@ -6463,17 +6928,30 @@ function give(){
  		.catch(console.error);
 
   			 message.channel.send("**ECHOES ACT 3 FREEZE! S-H-I-T!**")
-
+			if(tasks.indexOf("Use ECHOES") != -1){
+					var done = tasks.replace("Use ECHOES", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `You are a reliable person.`");
+				} 
   			
   
 })
 .catch(console.error); }
 		
-		
+		});
 	}
 
 	function crazyDiamond(){
+		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			
 		let member = message.mentions.members.first();
 		
 		if(member.id == message.author.id){
@@ -6505,15 +6983,29 @@ function give(){
 		
 		
 			message.channel.send("**CRAZY DIAMOND**");
-				
+			if(tasks.indexOf("Use CRAZY DIAMOND") != -1){
+					var done = tasks.replace("Use CRAZY DIAMOND", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Imma fix that SPAGHET.`");
+				} 	
 			return;
 		}
 
 	});
-
+		});
 	}
 	
 function heavensDoor(){
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+		
 		let member = message.mentions.members.first();
 		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -6584,7 +7076,12 @@ function heavensDoor(){
 
 			});
 	
-			
+			if(tasks.indexOf("Use HEAVENS DOOR") != -1){
+					var done = tasks.replace("Use HEAVENS DOOR", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Spiders may taste good.`");
+				} 
 		
 			
 			
@@ -6597,7 +7094,7 @@ function heavensDoor(){
 
 
 		});
-		
+	});
 	}	
 
 function standDisc(){
@@ -7008,6 +7505,7 @@ function socialHelp(){
 		message.author.sendEmbed(help);
 		message.reply(" sent you a dm of the social help list!");
 }
+		
 
 function channelCheck(){
 
@@ -7036,19 +7534,418 @@ function admin(){
 }
 
 function credits(){
-
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
+			let counter = rows[0].credits;
+		
+		var msg1 = "I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!";
+		var msg2 = "You're looking at the credits again? Interesting you must be a little bored.";
+		var msg3 = "You reallllly must be bored.";
+		var msg4 = "Barely anyone checks these so I actually am surprised you keep doing this";
+		var msg5 = "You know these messages have to stop eventually.";
+		var msg6 = "Keep this a secret between us....";
+		var msg7 = "Promise?";
+		var msg8 = "okay I'm trusting you...."
+		var msg9 = "I actually really enjoyed making this bot. I've spent over thousands of hours of work. Some of my best friends don't even appreciate my work.";
+		var msg10 = "I'm not bitter or anything, I just really want to share this with everyone special to me. A lot of people don't understand a lot about this bot.";
+		var msg11 = "Your dedication to get this far is admirable. I really do appreciate it!!";
+		var msg12 = "I will keep working hard to make this bot the best! Thanks for all of your support!";
+		var msg13 = "I aspire to be a software engineer. College sucks ass tho LOL";
+		var msg14 = "Tbh I actually am surprised you're still here.";
+		var msg15 = "You probably broke our promise by now...";
+		var msg16 = "...";
+		var msg17 = "Sorry about that I was just testing your patience or to see if you were just mashing.";
+		var msg18 = "You've probably made it past a point that many don't even notice. But that's okay. You're special.";
+		var msg19 = "If you did break our promise, I forgive you.";
+		var msg20 = "I love each and every one of my users, and I am glad if I made discord a little more interesting for you (:";
+		var msg21 = "Alrighty fam you've used me all up. I'll give you this as proof of your patience and sincerity.";
+		var msg22 = "**SIKE YOU REALLY THOUGHT THAT WAS THE LAST MESSAGE LMFAOOOO**";
+		var msg23 = "Alright now scram buddy get outta here.";
+		var msg24 = "You might as well slide in my dms at this point @KaminoShimobe#1190 Who knows I may even do somethin for your KS account :eyes:"
+		var msg25 = "Send me something dumb and I may just delete your account :no_mouth:"
+		var msg26 = "Maybe you should stop..."
+		var msg27 = "...Unless?";
+		var msg28 = "<3 Come back when the next update is live and I'll have something special for you";
+		
+		if(counter <= 1){
 		let credits = new Discord.RichEmbed()
 
 			
 			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
-			.setDescription(`I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!`)
+			.setDescription(msg1)
 			.setColor("#1f3c5b"); 
 			
 
 		message.channel.sendEmbed(credits);
+	
+					mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					
+		} else if(counter == 2){
+		let credits = new Discord.RichEmbed()
 
-		 
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg2)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		}	else if(counter == 3){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg3)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 4){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg4)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 5){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg5)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 6){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg6)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 7){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg7)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 8){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg8)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 9){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg9)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 9){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg9)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 10){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg10)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 11){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg2)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 12){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg12)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 13){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg13)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 14){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg14)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 15){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg15)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter >= 16 || counter <= 21 ){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg16)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 22){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg17)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 23){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg18)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 24){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg19)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 25){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg20)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 26){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg21)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+			if(tasks.indexOf("???") != -1){
+					var done = tasks.replace("???", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+					message.author.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Yo we lonely af.`");
+				} 
+		} else if(counter == 27){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg22)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 28){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg23)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 29){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg24)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 30){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg25)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 31){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg25)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 32){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg26)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else if(counter == 33){
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg27)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
+					con.query(mission);
+		} else {
+		let credits = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot ©️ KaminoShimobe#1190")
+			.setDescription(msg28)
+			.setColor("#1f3c5b"); 
+			
+
+		message.channel.sendEmbed(credits);
+		}
+
+	});
 
 		 			
 }
