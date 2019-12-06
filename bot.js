@@ -82,7 +82,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.5.8", bot.user.avatarURL);
+			.setFooter("Version 1.5.9", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -234,7 +234,7 @@ bot.on("message", async message => {
 	var sql17 = "ALTER TABLE global ADD comOutput TEXT";
 	var sql18 = "CREATE TABLE global (id VARCHAR(30), commands TEXT, comOutput TEXT)";
 	var sql19 = "ALTER TABLE server ADD level TINYINT";
-	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status TEXT)";
+	var sql20 = "CREATE TABLE achievements (id VARCHAR(30), completed SMALLINT, tasks TEXT, status INT)";
 	var sql21 = "ALTER TABLE server ADD weather VARCHAR(10)";
 	var sql22 = "ALTER TABLE server ADD exp INT";
 	var sql23 = "ALTER TABLE user ADD gift INT";
@@ -456,26 +456,26 @@ if(command === `!color`){
 }
 	
 if(command === `!whisper` && messageArray[1] != undefined){
-// 	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		if(rows.length < 1 && message.author.id == '242118931769196544') {
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1 && message.author.id == '242118931769196544') {
 			
-// 			sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', '')`;
-// 			con.query(sql, console.log);
+			sql = `INSERT INTO achievements (id, completed, tasks, status) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', ${0})`;
+			con.query(sql, console.log);
 			
 			
-// 		}
+		}
 
 
 
 
-		
-// 			let achievements = rows[0].completed;
-// 			var tasks = rows[0].tasks;
-// 			let todo = tasks.split(",");
-// 			var status = rows[0].status;
-// 			let achieved = status.split(",");
+			let mission;
+			let achievements = rows[0].completed;
+			var tasks = rows[0].tasks;
+			let todo = tasks.split(",");
+			let status = rows[0].status;
+			
 			
 		
 		 
@@ -505,7 +505,12 @@ if(command === `!whisper` && messageArray[1] != undefined){
 
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
-				//BOI
+				//Achievement 3
+				if(todo[3] == "Send a whisper"){
+					var done = tasks.replace("Send a whisper", "complete");
+					mission = `UPDATE achievements SET tasks = '${done}' WHERE id = '${message.author.id}'`;
+					message.author.send("**ACHIEVEMENT UNLOCKED**: \n Sneaky Sneaky :eyes:");
+				}	
 		var you = message.author.username;	
 
 
@@ -518,7 +523,7 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 			 message.author.send("Whispers are not allowed in that server.");
 			  }
 			});
-// 		});
+ 		});
 	}	
 
 function rps(){
@@ -6919,7 +6924,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
+			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(stands);
