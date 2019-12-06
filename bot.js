@@ -6087,14 +6087,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 }
 
 function viewUser(){
-con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		
-		
-			let mission;
-			let achievement = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;	
+
 	
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -6138,6 +6131,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 			supporter = "";
 		}
 			
+	
+	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;	
 
 		let stats = new Discord.RichEmbed()
 
@@ -6287,20 +6289,7 @@ let leaderboard = new Discord.RichEmbed()
 
 function viewOtherUser(){
 	let other = message.mentions.users.first();
-con.query(`SELECT * FROM achievements WHERE id = '${other.id}'`, (err, rows) => {
-		if(err) throw err;
-		
-		
-			let mission;
-			let achievement = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;
-	
-	if(rows.length < 1) {
-			message.reply(`They have no user! \n Type ${prefix}user to create one!`);
-			
-			return;
-		}
+
 	
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -6344,7 +6333,14 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 			supporter = "";
 		}
 			
+		con.query(`SELECT * FROM achievements WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
 		
+		
+			let mission;
+			let achievement = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
 		
 
 		let stats = new Discord.RichEmbed()
