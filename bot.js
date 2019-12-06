@@ -244,40 +244,40 @@ bot.on("message", async message => {
 	var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
 
 
-  	con.query(sql19, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("level column added to server!");
-  	});
+//   	con.query(sql19, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("level column added to server!");
+//   	});
 
   	con.query(sql20, function (err, result) {
     	if (err) throw err;
     	message.author.send("achievements table created !");
   	});
 
-  	con.query(sql21, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("weather column added to server!");
-  	});
+//   	con.query(sql21, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("weather column added to server!");
+//   	});
 
-  	con.query(sql22, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("exp column added to server!");
-  	});
+//   	con.query(sql22, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("exp column added to server!");
+//   	});
 		
-	con.query(sql23, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("gift column added to user!");
-  	});
+// 	con.query(sql23, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("gift column added to user!");
+//   	});
 
-  	con.query(sql24, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("level, weather, and exp columns updated in table server!");
-  	});
+//   	con.query(sql24, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("level, weather, and exp columns updated in table server!");
+//   	});
 		
-	con.query(sql25, function (err, result) {
-    	if (err) throw err;
-    	message.author.send("gift column updated in table user!");
-  	});
+// 	con.query(sql25, function (err, result) {
+//     	if (err) throw err;
+//     	message.author.send("gift column updated in table user!");
+//   	});
   		}
   	}
 
@@ -285,10 +285,10 @@ bot.on("message", async message => {
 
 	if(command === `!drop`){
 	if(message.author.id == '242118931769196544'){
-	var sql =  "DROP TABLE pet";
+	var sql =  "DROP TABLE achievements";
   	con.query(sql, function (err, result) {
     	if (err) throw err;
-    	message.author.send("dropped table pet!");
+    	message.author.send("dropped table achievements!");
   	});
 
   	
@@ -506,6 +506,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//Achievement 3
+				console.log(todo[3]);
 				if(todo[3] == "Send a whisper"){
 					var done = tasks.replace("Send a whisper", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}' WHERE id = '${message.author.id}'`;
