@@ -472,8 +472,8 @@ if(command === `!whisper` && messageArray[1] != undefined){
 
 			let mission;
 			let achievements = rows[0].completed;
-			var tasks = rows[0].tasks;
-			let todo = tasks.split(",");
+			let tasks = rows[0].tasks;
+			//var todo = tasks.split(",");
 			let status = rows[0].status;
 			
 			
@@ -506,8 +506,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 				channel.send(setting[chance]);
 				message.author.send("Message Sent.");
 				//Achievement 3
-				console.log(todo[3]);
-				if(todo[3] == "Send a whisper"){
+				if(tasks.indexOf("Send a whisper") != -1){
 					var done = tasks.replace("Send a whisper", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}' WHERE id = '${message.author.id}'`;
 					message.author.send("**ACHIEVEMENT UNLOCKED**: \n Sneaky Sneaky :eyes:");
