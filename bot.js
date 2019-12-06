@@ -82,7 +82,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.2", bot.user.avatarURL);
+			.setFooter("Version 1.6.3", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1915,7 +1915,13 @@ function referUser(){
 		if(err) throw err;
 		let sql;
 			
-		con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
+		
+			
+			
+			
+		if(rows.length < 1) {
+			
+			con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 			
@@ -1924,10 +1930,6 @@ function referUser(){
 			message.reply("That ID is invalid!");
 			return;
 		}
-			
-			
-			
-		if(rows.length < 1) {
 			
 			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1})`;
 			con.query(sql, console.log);
@@ -1941,7 +1943,7 @@ function referUser(){
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
 				}	
 			return;
-		}	else {
+		}); }	else {
 
 			message.reply(` You have a user! Do ${prefix}view to see your user`);
 			if(tasks.indexOf("Make an account") != -1){
@@ -1954,12 +1956,12 @@ function referUser(){
 			
 			return;
 		}
-		});
+		
 
 		});
 		});	
 		
-	}	
+	}		
 	
 function aboutServer(){
 		
