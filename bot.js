@@ -6296,6 +6296,12 @@ con.query(`SELECT * FROM achievements WHERE id = '${other.id}'`, (err, rows) => 
 			let tasks = rows[0].tasks;
 			let status = rows[0].status;
 	
+	if(rows.length < 1) {
+			message.reply(`They have no user! \n Type ${prefix}user to create one!`);
+			
+			return;
+		}
+	
 con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 
