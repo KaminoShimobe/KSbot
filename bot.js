@@ -274,7 +274,7 @@ bot.on("message", async message => {
     	message.author.send("level, weather, and exp columns updated in table server!");
   	});
 		
-	con.query(sql23, function (err, result) {
+	con.query(sql25, function (err, result) {
     	if (err) throw err;
     	message.author.send("gift column updated in table user!");
   	});
