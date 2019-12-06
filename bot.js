@@ -1856,14 +1856,7 @@ function lostChest(){
 	}	
 
 	function addUser(){
-		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
 		
-		
-			let mission;
-			let achievements = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;
 			
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -1874,12 +1867,21 @@ function lostChest(){
 			con.query(sql, console.log);
 			message.channel.send(`User account created! ${prefix}view to view your account!`)
 			//Achievement 1
+			con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
 				if(tasks.indexOf("Make an account") != -1){
 					var done = tasks.replace("Make an account", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
-				}	
+				}
+				});	
 			return;
 		}	else {
 
@@ -1897,27 +1899,12 @@ function lostChest(){
 
 
 		});
-		});	
+		
 		
 	}
 	
 function referUser(){
-		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		
-		
-			let mission;
-			let achievements = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;
-			
-		
-			
-		
-			
-			
-			
-		
+	
 			
 			con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
@@ -1939,18 +1926,35 @@ function referUser(){
 			con.query(`UPDATE user gift = ${theirGift + 1}  WHERE id = '${messageArray[1]}'`);
 			message.channel.send(`User account created! You and your friend also got a gift! ${prefix}view to view your account!`)
 			//Achievement 1
+					con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
 				if(tasks.indexOf("Make an account") != -1){
 					var done = tasks.replace("Make an account", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
 				}	
+					});
 			return;
 		
 		
 		} else {
 
 			message.reply(` You have a user! Do ${prefix}view to see your user`);
+			con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		
+		
+			let mission;
+			let achievements = rows[0].completed;
+			let tasks = rows[0].tasks;
+			let status = rows[0].status;
 			if(tasks.indexOf("Make an account") != -1){
 					var done = tasks.replace("Make an account", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
@@ -1958,14 +1962,14 @@ function referUser(){
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `We BEEN knew.`");
 				}
 
-			
+			});
 			return;
 		}
 		
 
 		});
 		});
-		});
+		
 		
 	}	
 	
@@ -6282,7 +6286,7 @@ let leaderboard = new Discord.RichEmbed()
 
 function viewOtherUser(){
 	let other = message.mentions.users.first();
-con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+con.query(`SELECT * FROM achievements WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 		
 		
@@ -7550,7 +7554,7 @@ function credits(){
 			let status = rows[0].status;
 			let counter = rows[0].credits;
 		
-		var msg1 = "I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!";
+		var msg1 = `I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!`;
 		var msg2 = "You're looking at the credits again? Interesting you must be a little bored.";
 		var msg3 = "You reallllly must be bored.";
 		var msg4 = "Barely anyone checks these so I actually am surprised you keep doing this";
@@ -8227,7 +8231,7 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 
 
 
-	} if(command === `${prefix}user` && messageArray[1] != undefined){
+	} else if(command === `${prefix}user` && messageArray[1] != undefined){
 
 		referUser();
 		 
