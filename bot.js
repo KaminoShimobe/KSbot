@@ -6149,19 +6149,19 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Certified G.O.A.T of Rock Paper Scissors.`");
 				} 	
 		
-		if(tasks.indexOf("Get $1M") != -1 && money == 1000000){
+		if(tasks.indexOf("Get $1M") != -1 && money >= 1000000){
 					var done = tasks.replace("Get $1M", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Millionaire gang!`");
 				} 
-		if(tasks.indexOf("Get $10M") != -1 && money == 10000000){
+		if(tasks.indexOf("Get $10M") != -1 && money >= 10000000){
 					var done = tasks.replace("Get $10M", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Multimillionaire squad!`");
 				} 
-		if(tasks.indexOf("Get $100M") != -1 && money == 100000000){
+		if(tasks.indexOf("Get $100M") != -1 && money >= 100000000){
 					var done = tasks.replace("Get $100M", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
@@ -6428,7 +6428,7 @@ function give(){
 				con.query(sql, console.log);
 				message.reply(`gave ${other} $` + num + `!`);
 				
-				if(tasks.indexOf("Give someone $1M") != -1 && num == 1000000){
+				if(tasks.indexOf("Give someone $1M") != -1 && num >= 1000000){
 					var done = tasks.replace("Give someone $1M", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
