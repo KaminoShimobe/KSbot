@@ -1911,15 +1911,13 @@ function referUser(){
 			let tasks = rows[0].tasks;
 			let status = rows[0].status;
 			
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
+		
 			
 		
 			
 			
 			
-		if(rows.length < 1) {
+		
 			
 			con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
 		if(err) throw err;
@@ -1931,6 +1929,11 @@ function referUser(){
 			return;
 		}
 			
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;		
+		
+				if(rows.length < 1) {
 			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1})`;
 			con.query(sql, console.log);
 			con.query(`UPDATE user gift = ${theirGift + 1}  WHERE id = '${messageArray[1]}'`);
@@ -1943,7 +1946,9 @@ function referUser(){
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `ONE OF US! ONE OF US`");
 				}	
 			return;
-		}); }	else {
+		
+		
+		} else {
 
 			message.reply(` You have a user! Do ${prefix}view to see your user`);
 			if(tasks.indexOf("Make an account") != -1){
@@ -1959,9 +1964,10 @@ function referUser(){
 		
 
 		});
-		});	
+		});
+		});
 		
-	}		
+	}	
 	
 function aboutServer(){
 		
@@ -7582,7 +7588,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 	
 					mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
@@ -7596,7 +7602,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
@@ -7609,7 +7615,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 4){
@@ -7621,7 +7627,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 5){
@@ -7633,7 +7639,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 6){
@@ -7645,7 +7651,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 7){
@@ -7657,7 +7663,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 8){
@@ -7669,7 +7675,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 9){
@@ -7681,7 +7687,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 9){
@@ -7693,7 +7699,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 10){
@@ -7705,7 +7711,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 11){
@@ -7717,7 +7723,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 12){
@@ -7729,7 +7735,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 13){
@@ -7741,7 +7747,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 14){
@@ -7753,7 +7759,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 15){
@@ -7765,7 +7771,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter >= 16 || counter <= 21 ){
@@ -7777,7 +7783,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 22){
@@ -7789,7 +7795,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 23){
@@ -7801,7 +7807,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 24){
@@ -7813,7 +7819,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 25){
@@ -7825,7 +7831,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 26){
@@ -7836,8 +7842,7 @@ function credits(){
 			.setDescription(msg21)
 			.setColor("#1f3c5b"); 
 			
-
-		message.channel.sendEmbed(credits);
+message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 			if(tasks.indexOf("???") != -1){
@@ -7857,7 +7862,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
@@ -7870,7 +7875,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 29){
@@ -7882,7 +7887,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 30){
@@ -7894,7 +7899,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 31){
@@ -7906,7 +7911,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 32){
@@ -7918,7 +7923,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else if(counter == 33){
@@ -7930,7 +7935,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
 		} else {
@@ -7942,7 +7947,7 @@ function credits(){
 			.setColor("#1f3c5b"); 
 			
 
-		message.channel.sendEmbed(credits);
+		message.author.sendEmbed(credits);
 		}
 
 	});
