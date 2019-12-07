@@ -6338,7 +6338,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		
 		
 			
-			var achievement = rows[0].completed;
+			
 		
 		if(rows.length < 1) {
 			
@@ -6355,6 +6355,8 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		message.channel.sendEmbed(stats);
 			
 		}	else {
+			var achievement = rows[0].completed;
+
 			let stats = new Discord.RichEmbed()
 
 			
