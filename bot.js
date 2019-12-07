@@ -1265,7 +1265,7 @@ function collect(){
 				var gift = Math.floor(Math.random() * 5) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-				if(gift == 5){
+				if(gift == 2){
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
 				message.channel.send("**!!!**");
 				} else {
@@ -6370,19 +6370,6 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		}	
 		
 
-		let stats = new Discord.RichEmbed()
-
-			
-			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
-			.setFooter("ID:" + other.id, other.avatarURL)
-			.setColor(color); 
-
-		message.channel.sendEmbed(stats);
-
-
-		
-		
 
 	});
 });
