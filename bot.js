@@ -6337,10 +6337,9 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		if(err) throw err;
 		
 		
-			let mission;
+			
 			let achievement = rows[0].completed;
-			let tasks = rows[0].tasks;
-			let status = rows[0].status;
+			
 		
 
 		let stats = new Discord.RichEmbed()
