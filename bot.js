@@ -82,7 +82,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.3", bot.user.avatarURL);
+			.setFooter("Version 1.6.4", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -6340,8 +6340,31 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 			
 			var achievement = rows[0].completed;
 		
-		if(achievement == undefined){
-			achievement = 0;
+		if(rows.length < 1) {
+			
+			sql2 = `INSERT INTO achievements (id, completed, tasks, status, credits) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', ${0}, ${0})`;
+			con.query(sql2, console.log);
+			let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(other.username + supporter)
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setFooter("ID:" + other.id, other.avatarURL)
+			.setColor(color); 
+
+		message.channel.sendEmbed(stats);
+			
+		}	else {
+			let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(other.username + supporter)
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setFooter("ID:" + other.id, other.avatarURL)
+			.setColor(color); 
+
+		message.channel.sendEmbed(stats);
+			return;
 		}	
 		
 
