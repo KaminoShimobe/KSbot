@@ -6338,8 +6338,11 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 		
 		
 			
-			let achievement = rows[0].completed;
-			
+			var achievement = rows[0].completed;
+		
+		if(achievement == undefined){
+			achievement = 0;
+		}	
 		
 
 		let stats = new Discord.RichEmbed()
