@@ -2288,7 +2288,7 @@ function gambleFlip(){
 					message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `This gotta be a fluke.`");
 				} 	
 				
-				 if(tasks.indexOf("Get 10+ streak") != -1 && streak == 10){
+				 if(tasks.indexOf("Get 10+ streak") != -1 && streak == 7){
 					var done = tasks.replace("Get 10+ streak", "complete");
 					mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievements + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
@@ -7795,7 +7795,7 @@ function credits(){
 		message.author.sendEmbed(credits);
 			mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
 					con.query(mission);
-		} else if(counter >= 16 || counter <= 21 ){
+		} else if(counter >= 16 && counter <= 21 ){
 		let credits = new Discord.RichEmbed()
 
 			
