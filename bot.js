@@ -7969,6 +7969,8 @@ message.author.sendEmbed(credits);
 			
 
 		message.author.sendEmbed(credits);
+		mission = `UPDATE achievements SET credits = ${0} WHERE id = '${message.author.id}'`;
+					con.query(mission);
 		}
 
 	});
