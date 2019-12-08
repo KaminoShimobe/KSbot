@@ -6191,7 +6191,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 function viewLeaderboard(){
 		
 	
-con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 9999999999 ORDER BY money DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
 		
