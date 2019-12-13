@@ -1246,7 +1246,7 @@ function collect(){
 		if(err) throw err;
 		let type = rows[0].karma;
 		let cost = rows[0].chest;
-		let yay = rows[0];	
+		let yay = rows[0].gift;	
 			if(rows.length < 1) {
 			
 			message.reply(" nothing to collect!");
