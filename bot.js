@@ -6281,7 +6281,7 @@ let leaderboard = new Discord.RichEmbed()
 function viewAchievements(){
 		
 	
-con.query(`SELECT DISTINCT id FROM achievements ORDER BY completed DESC LIMIT 10`, (err, rows) => {
+con.query(`SELECT DISTINCT * FROM achievements WHERE completed BETWEEN 0 AND 50 ORDER BY completed DESC LIMIT 10`, (err, rows) => {
 		if(err) throw err;
 		
 		
