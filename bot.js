@@ -6290,7 +6290,7 @@ con.query(`SELECT * FROM achievements WHERE completed BETWEEN 0 AND 50 ORDER BY 
 		let rank = [rows[0].completed, rows[1].completed, rows[2].completed, rows[3].completed, rows[4].completed, rows[5].completed, rows[6].completed, rows[7].completed, rows[8].completed, rows[9].completed];
 		let user = [rows[0].id, rows[1].id, rows[2].id, rows[3].id, rows[4].id, rows[5].id, rows[6].id, rows[7].id, rows[8].id, rows[9].id];
 		
-con.query(`SELECT * FROM user`, (err, rows) => {
+con.query(`SELECT DISTINCT id FROM user`, (err, rows) => {
 		if(err) throw err;	
 	
 			
