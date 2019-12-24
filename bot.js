@@ -3,7 +3,7 @@ const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
 const pixel = require('pixel-art');
-const jimp = require('jimp');
+const Jimp = require('jimp');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -4442,6 +4442,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 }	
 	
 function holidayCard(){
+	
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -4484,12 +4485,22 @@ function holidayCard(){
 // 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 // 						con.query(sql);		
 						var img = message.attachments.first().url;
-						let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK) 
-						let welcome = await jimp.read(img) //We load the image from that link
-						welcome.print(font, 20, 20, message.content + `\n - ${message.author.username}`) 
-						welcome.write('holidayCard.png') //We create a png file called Welcome2
-						message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
-						message.author.send("Holiday Card sent to " + person.username + "!");
+						Jimp.read(img)
+						  .then(image => {
+						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
+							 image.write('holidayCard.png') //We create a png file called Welcome2
+							message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
+							message.author.send("Holiday Card sent to " + person.username + "!");		
+						    });
+						  })
+						  .catch(err => {
+							message.reply("Lacking image/message")
+						    // Handle an exception.
+						  });
+						
+						
+						
 					}
 					});
 					} else {
