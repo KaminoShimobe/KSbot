@@ -474,11 +474,11 @@ function holidayCard(){
     						}
 
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
- 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_PNG, onBuffer)
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 var theCard = "holidayCard."+ image.getExtension();
 							 console.log(theCard);
 							 image.write(theCard);
-							 message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
+							 message.person.send(`You got a holiday card!`, { files: ["holidayCard.jpeg"] })
 							 message.author.send("Holiday Card sent to " + person.username + "!");
 						    });
 						  })
