@@ -469,7 +469,9 @@ function holidayCard(){
 						  .then(image => {
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
  							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
-							 image.write('holidayCard.png') //We create a png file 		
+							 image.write('holidayCard.png') //We create a png file 	
+							 message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
+							 message.author.send("Holiday Card sent to " + person.username + "!");
 						    });
 						  })
 						  .catch(err => {
@@ -477,8 +479,6 @@ function holidayCard(){
 						    // Handle an exception.
 						  });
 						
-						message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
-							message.author.send("Holiday Card sent to " + person.username + "!");
 						
 					}
 					});
