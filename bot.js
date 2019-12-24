@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const http = require('http');
 const pixel = require('pixel-art');
 const Jimp = require('jimp');
+const fs = require('fs'); // file manager
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -475,9 +476,9 @@ function holidayCard(){
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
  							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 var theCard = "holidayCard."+ image.getExtension();
-
-
-							 message.person.sendFile(theCard);
+							 console.log(theCard);
+							 image.write(theCard);
+							 message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
 							 message.author.send("Holiday Card sent to " + person.username + "!");
 						    });
 						  })
