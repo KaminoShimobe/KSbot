@@ -420,6 +420,86 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	});
 
 }	
+	
+function holidayCard(){
+	
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let gift = rows[0].gift;
+		
+// 		if(gift < 10) {
+// 			message.reply("Not enough gifts!");
+// 			return;
+// 		}
+
+		
+		message.author.send("Who would you like your card to go to? \n Send their id or !cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.author.send("Cancelled.");
+	                		return;
+	            		}   else {
+					var person = bot.users.get(message.content);
+					if(person != undefined){
+		message.author.send("Would you like to send a holiday card to " + person.username + "? \n Yes or No");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
+	               		message.author.send("Send the image and message for the card! !cancel to cancel.");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					if (message.content == `!cancel`) {
+	               		 		message.channel.send("Cancelled.");
+	                			return;
+	            			}   else {
+// 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+// 						con.query(sql);		
+						var img = message.attachments.first().url;
+						Jimp.read(img)
+						  .then(image => {
+						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
+							 image.write('holidayCard.png') //We create a png file called Welcome2
+							message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
+							message.author.send("Holiday Card sent to " + person.username + "!");		
+						    });
+						  })
+						  .catch(err => {
+							message.reply("Lacking image/message")
+						    // Handle an exception.
+						  });
+						
+						
+						
+					}
+					});
+					} else {
+					message.author.send("Cancelled.");
+	                		return;
+				}
+				});	
+		} else {
+			message.author.send("User not found!.");
+			return;
+			}
+		}
+		
+		
+		});
+		
+	});	
+	
+}		
 
 function notifications(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -4441,85 +4521,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 });	
 }	
 	
-function holidayCard(){
-	
-	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
 
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
-
-		let gift = rows[0].gift;
-		
-// 		if(gift < 10) {
-// 			message.reply("Not enough gifts!");
-// 			return;
-// 		}
-
-		
-		message.author.send("Who would you like your card to go to? \n Send their id or !cancel");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		
-	            		if (message.content == `!cancel`) {
-	               		 message.author.send("Cancelled.");
-	                		return;
-	            		}   else {
-					var person = bot.users.get(message.content);
-					if(person != undefined){
-		message.author.send("Would you like to send a holiday card to " + person.username + "? \n Yes or No");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-	            		
-	            		if (message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
-	               		message.author.send("Send the image and message for the card! !cancel to cancel.");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-					if (message.content == `!cancel`) {
-	               		 		message.channel.send("Cancelled.");
-	                			return;
-	            			}   else {
-// 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
-// 						con.query(sql);		
-						var img = message.attachments.first().url;
-						Jimp.read(img)
-						  .then(image => {
-						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
- 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
-							 image.write('holidayCard.png') //We create a png file called Welcome2
-							message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
-							message.author.send("Holiday Card sent to " + person.username + "!");		
-						    });
-						  })
-						  .catch(err => {
-							message.reply("Lacking image/message")
-						    // Handle an exception.
-						  });
-						
-						
-						
-					}
-					});
-					} else {
-					message.author.send("Cancelled.");
-	                		return;
-				}
-				});	
-		} else {
-			message.author.send("User not found!.");
-			return;
-			}
-		}
-		
-		
-		});
-		
-	});	
-	
-}	
 
 function customRole(){
 	const member = message.member;
