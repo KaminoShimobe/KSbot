@@ -467,15 +467,22 @@ function holidayCard(){
 						var img = message.attachments.first().url;
 						Jimp.read(img)
 						  .then(image => {
+						  	function onBuffer(err, buffer) {
+      							if (err) throw err;
+      							console.log(buffer);
+    						}
+
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
- 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
-							 image.write('holidayCard.png') //We create a png file 	
-							 message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
+							 var theCard = "holidayCard."+ image.getExtension();
+
+
+							 message.person.send(`You got a holiday card!`, { files: [theCard] })
 							 message.author.send("Holiday Card sent to " + person.username + "!");
 						    });
 						  })
 						  .catch(err => {
-							message.reply("Lacking image/message")
+							console.error(err);
 						    // Handle an exception.
 						  });
 						
