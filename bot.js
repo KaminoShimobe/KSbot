@@ -477,7 +477,7 @@ function holidayCard(){
 							 var theCard = "holidayCard."+ image.getExtension();
 
 
-							 message.person.send(`You got a holiday card!`, { files: [theCard] })
+							 message.person.sendFile(theCard);
 							 message.author.send("Holiday Card sent to " + person.username + "!");
 						    });
 						  })
