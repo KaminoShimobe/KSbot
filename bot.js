@@ -711,7 +711,7 @@ function notifications(){
 
 
 	
-if(command === `${prefix}buy` && messageArray[1] === `holidayCard`){
+if(command === `!buy` && messageArray[1] === `holidayCard`){
 		holidayCard();
 	}	
 
