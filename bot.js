@@ -474,7 +474,7 @@ function holidayCard(){
     						}
 
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
- 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_PNG, onBuffer)
 							 var theCard = "holidayCard."+ image.getExtension();
 							 console.log(theCard);
 							 image.write(theCard);
