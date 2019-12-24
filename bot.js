@@ -3,6 +3,7 @@ const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
 const pixel = require('pixel-art');
+var jimp = require('jimp');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -82,7 +83,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.5", bot.user.avatarURL);
+			.setFooter("Version 1.6.7", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1093,9 +1094,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 100) + 1;
+		var appear = Math.floor(Math.random() * 50) + 1;
 		
-		if(appear == 100){
+		if(appear == 50){
 			
 			
 			chest();	
@@ -1136,12 +1137,12 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The chest mysteriously disappeared!");
+				room.send("The present mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1151,7 +1152,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A present has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 
@@ -1189,13 +1190,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The chest mysteriously disappeared!");
+				room.send("The present mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1205,7 +1206,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A present has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 			//#a57400 brown 
@@ -1274,7 +1275,7 @@ function collect(){
 				}	
 				con.query(sql);
 				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
-				message.reply(" found $" + cost + " in the chest!");
+				message.reply(" found $" + cost + " in the present!");
 					//Achievement 6
 				if(tasks.indexOf("Open a chest") != -1 && status == 1){
 					var done = tasks.replace("Open a chest", "complete");
@@ -1372,8 +1373,8 @@ function lostChest(){
 		let channel = bot.channels.get(rows[0].channel);
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
-		if(!channel) return message.channel.send("A chest mysteriously disappeared!");
-		channel.send("The chest mysteriously disappeared!");
+		if(!channel) return message.channel.send("A present mysteriously disappeared!");
+		channel.send("The present mysteriously disappeared!");
 		return;	
 		});
 	}		  
@@ -4416,6 +4417,97 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		message.author.sendEmbed(shop);
 	message.reply(" Shop list sent to you!");
 });	
+}	
+	
+function giftShop(){
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			
+			
+			return;
+		}	
+	
+	let shop = new Discord.RichEmbed()
+
+			
+			.setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
+			.setDescription("10 :gift:| **holidayCard**: \n Make a gift card to send to your friends! \n 25 :gift: | **holidayPfp** \n Give your avatar a holiday makeover! \n 50 :gift: | **stand** \n Choose which stand you want!")
+			.setColor("#1d498e"); 
+
+		message.author.sendEmbed(shop);
+	message.reply(" Gift Shop list sent to you!");
+});	
+}	
+	
+function holidayCard(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let gift = rows[0].gift;
+		
+// 		if(gift < 10) {
+// 			message.reply("Not enough gifts!");
+// 			return;
+// 		}
+
+		
+		message.author.send("Who would you like your card to go to? \n Send their id or !cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.author.send("Cancelled.");
+	                		return;
+	            		}   else {
+					var person = bot.users.get(message.content);
+					if(person != undefined){
+		message.author.send("Would you like to send a holiday card to " + person.username + "? \n Yes or No");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
+	               		message.author.send("Send the image and message for the card! !cancel to cancel.");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					if (message.content == `!cancel`) {
+	               		 		message.channel.send("Cancelled.");
+	                			return;
+	            			}   else {
+// 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+// 						con.query(sql);		
+						var img = message.attachments.first().url;
+						let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK) 
+						let welcome = await jimp.read(img) //We load the image from that link
+						welcome.print(font, 20, 20, message.content + `\n - ${message.author.username}`) 
+						welcome.write('holidayCard.png') //We create a png file called Welcome2
+						message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
+						message.author.send("Holiday Card sent to " + person.username + "!");
+					}
+					});
+					} else {
+					message.author.send("Cancelled.");
+	                		return;
+				}
+				});	
+		} else {
+			message.author.send("User not found!.");
+			return;
+			}
+		}
+		
+		
+		});
+		
+	});	
+	
 }	
 
 function customRole(){
@@ -8204,6 +8296,14 @@ if(command === `!achievements`){
 	}
 
 }
+	
+if(command === `!card`){
+	if(message.author.id == '242118931769196544'){
+		holidayCard();
+
+	}
+
+}	
 
 
 	
@@ -8244,6 +8344,10 @@ if(command === `${prefix}invite` || command === `KS!invite`){
 if(command === `${prefix}shop` || command === `KS!shop`){
 		shop();
 }	
+	
+if(command === `${prefix}giftShop`){
+			giftShop();
+	}	
 	
 if(command === `${prefix}admin` || command === `KS!admin`){
 		if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR")){
@@ -8349,6 +8453,18 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 		customRole();
 
 	}	
+	
+	if(command === `${prefix}buy` && messageArray[1] === `holidayCard`){
+		holidayCard();
+	}
+	
+// 	if(command === `${prefix}buy` && messageArray[1] === `holidayPfp`){
+// 		holidayAvatar();
+// 	}
+	
+// 	if(command === `${prefix}buy` && messageArray[1] === `stand`){
+// 		giftStand();
+// 	}
 
 	if(command === `${prefix}buy` && messageArray[1] === `insurance`){
 		insure();
