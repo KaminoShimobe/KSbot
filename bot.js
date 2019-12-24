@@ -468,10 +468,15 @@ function holidayCard(){
 						var img = message.attachments.first().url;
 						Jimp.read(img)
 						  .then(image => {
-						  
+						  	function onBuffer(err, buffer) {
+      							if (err) throw err;
+      							console.log(buffer);
+    						}
 
-						    Jimp.loadFont(Jimp.FONT_SANS_64_WHITE).then(font => {
- 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`)
+						    Jimp.loadFont(Jimp.FONT_SANS_64_BLACK).then(font => {
+ 							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_PNG, onBuffer)
+							 // var theCard = "holidayCard."+ image.getExtension();
+							 // console.log(theCard);
 							 image.write("holidayCard.png");
 							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
 							 message.author.send("Holiday Card sent to " + person.username + "!");
