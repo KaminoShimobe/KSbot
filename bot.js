@@ -473,7 +473,7 @@ function holidayCard(){
       							console.log(buffer);
     						}
 
-						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
+						    Jimp.loadFont(Jimp.FONT_SANS_8_BLACK).then(font => {
 						     image.resize(250, 250); 
  							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 image.write("holidayCard.png");
