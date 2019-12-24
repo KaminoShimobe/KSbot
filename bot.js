@@ -469,8 +469,19 @@ function holidayCard(){
 						  .then(image => {
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
  							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
-							 image.write('holidayCard.png') //We create a png file called Welcome2
-							message.person.send(`You received a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
+							 image.write('holidayCard.png') //We create a png file 
+							 const pic = new Discord.Attachment(image, "holidayCard.png");   
+							    
+							  let thing = new Discord.RichEmbed()
+
+			
+							.setTitle("You got a holiday card!")
+							.attachFile(pic)
+							.setColor("#009e3f")
+							.setTimestamp();
+
+					
+							message.person.send(thing) //We sent the file to the person
 							message.author.send("Holiday Card sent to " + person.username + "!");		
 						    });
 						  })
@@ -499,7 +510,15 @@ function holidayCard(){
 		
 	});	
 	
-}		
+}	
+	
+if(command === `!card`){
+	if(message.author.id == '242118931769196544'){
+		holidayCard();
+
+	}
+
+}	
 
 function notifications(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -8310,13 +8329,7 @@ if(command === `!achievements`){
 
 }
 	
-if(command === `!card`){
-	if(message.author.id == '242118931769196544'){
-		holidayCard();
-
-	}
-
-}	
+	
 
 
 	
