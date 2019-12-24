@@ -469,20 +469,7 @@ function holidayCard(){
 						  .then(image => {
 						    Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
  							 image.print(font, 20, 20, message.content + `\n - ${message.author.username}`);
-							 image.write('holidayCard.png') //We create a png file 
-							 const pic = new Discord.Attachment(image, "holidayCard.png");   
-							    
-							  let thing = new Discord.RichEmbed()
-
-			
-							.setTitle("You got a holiday card!")
-							.attachFile(pic)
-							.setColor("#009e3f")
-							.setTimestamp();
-
-					
-							message.person.send(thing) //We sent the file to the person
-							message.author.send("Holiday Card sent to " + person.username + "!");		
+							 image.write('holidayCard.png') //We create a png file 		
 						    });
 						  })
 						  .catch(err => {
@@ -490,7 +477,8 @@ function holidayCard(){
 						    // Handle an exception.
 						  });
 						
-						
+						message.person.send(`You got a holiday card!`, { files: ["holidayCard.png"] }) //We sent the file to the person
+							message.author.send("Holiday Card sent to " + person.username + "!");
 						
 					}
 					});
