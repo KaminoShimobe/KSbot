@@ -475,8 +475,8 @@ function holidayCard(){
 
 						    Jimp.loadFont(Jimp.FONT_SANS_16_WHITE).then(font => {
 						     image.resize(Jimp.AUTO, 250);
- 							 image.print(font, 20, 20, message.content).getBuffer(Jimp.MIME_JPEG, onBuffer)
- 							 image.print(font, 200, 200, `- ${message.author.username}`).getBuffer(Jimp.MIME_JPEG, onBuffer)
+ 							 image.print(font, 20, 20, message.content, 250).getBuffer(Jimp.MIME_JPEG, onBuffer)
+ 							 image.print(font, 150, 230, `- ${message.author.username}`, 250).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 image.write("holidayCard.png");
 							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
 							 message.author.send("Holiday Card sent to " + person.username + "!");
