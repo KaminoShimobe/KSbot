@@ -537,13 +537,7 @@ function holidayPfp(){
 // 		}
 
 		
-	message.author.send("Send the image and message for the card! !cancel to cancel.");
-				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-	        		collector.once('collect', message => {
-					if (message.content == `!cancel`) {
-	               		 		message.channel.send("Cancelled.");
-	                			return;
-	            			}   else {
+	
 // 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 // 						con.query(sql);		
 						var gif = 'https://media1.giphy.com/media/tIHktzgRi8yjIplFVI/giphy_s.gif?cid=790b7611988a2c0c7bcdde449e03501ccdd50203f044ec2e&rid=giphy_s.gif'
@@ -580,8 +574,8 @@ function holidayPfp(){
 						  });
 						
 						
-					}
-					});
+					
+					
 					});
 		
 		
