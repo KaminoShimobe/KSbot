@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.7", bot.user.avatarURL);
+			.setFooter("Version 1.6.8", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1378,9 +1378,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 50) + 1;
+		var appear = Math.floor(Math.random() * 30) + 1;
 		
-		if(appear == 50){
+		if(appear == 30){
 			
 			
 			chest();	
@@ -1548,10 +1548,10 @@ function collect(){
 			
 				return;
 				}
-				var gift = Math.floor(Math.random() * 5) + 1;
+				var gift = Math.floor(Math.random() * 1) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-				if(gift == 2){
+				if(gift == 1){
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
 				message.channel.send("**You received a gift!!!**");
 				} else {
