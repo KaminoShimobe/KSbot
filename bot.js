@@ -23,6 +23,7 @@ const shameCD = new Set();
 const insuranceCD = new Set();
 const amuletCoinCD = new Set();
 const questCD = new Set();
+const thothCD = new Set();
 
 
 
@@ -439,7 +440,7 @@ function kaminoCard(){
 // 			message.reply("Not enough gifts!");
 // 			return;
 // 		}
-
+	
 		
 		message.author.send("Who would you like your card to go to? \n Send their id or !cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -498,7 +499,7 @@ function kaminoCard(){
 				}
 				});	
 		} else {
-			message.author.send("User not found!.");
+			message.author.send("User not found!");
 			return;
 			}
 		}
@@ -508,7 +509,7 @@ function kaminoCard(){
 		
 	});	
 	
-}	
+}
 	
 if(command === `!card`){
 	if(message.author.id == '242118931769196544'){
@@ -518,79 +519,7 @@ if(command === `!card`){
 
 }	
 
-function holidayPfp(){
-	
-	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
 
-		if(rows.length < 1) {
-			message.reply("You have no user!");
-			console.log(rows);
-			return;
-		}
-
-		let gift = rows[0].gift;
-		
-// 		if(gift < 10) {
-// 			message.reply("Not enough gifts!");
-// 			return;
-// 		}
-
-		
-	
-// 	            		sql = `UPDATE user SET gift = ${gift - 10} WHERE id = '${message.author.id}'`;
-// 						con.query(sql);		
-						var gif = 'https://media1.giphy.com/media/tIHktzgRi8yjIplFVI/giphy_s.gif?cid=790b7611988a2c0c7bcdde449e03501ccdd50203f044ec2e&rid=giphy_s.gif'
-						var pfp = message.author.avatarURL;
-						Jimp.read(pfp)
-						  .then(image => {
-						  	function onBuffer(err, buffer) {
-      							if (err) throw err;
-      							console.log(buffer);
-    						}
-    							
-
-    						image.resize(480, 480);	
-
-						    Jimp.read(gif)
-						  .then(overlay => {
-						   overlay.composite(image, 0, 0)
-						   overlay.write("holidayAvatar.gif");
-						   message.author.send(`Here's your holiday avatar!`, { files: ["holidayAvatar.gif"] })
- 							})
-						  .catch(err => {
-							console.error(err);
-						    // Handle an exception.
-						  });
-							
-							 
-							 
-							 
-						   
-						  })
-						  .catch(err => {
-							console.error(err);
-						    // Handle an exception.
-						  });
-						
-						
-					
-					
-					});
-		
-		
-		
-		
-		
-		
-	
-}
-
-if(command === `!pfp`){
-	if(message.author.id == '242118931769196544'){
-		holidayPfp();
-
-	}
 
 function holidayCard(){
 	
@@ -668,7 +597,7 @@ function holidayCard(){
 				}
 				});	
 		} else {
-			message.author.send("User not found!.");
+			message.author.send("User not found!");
 			return;
 			}
 		}
@@ -679,7 +608,95 @@ function holidayCard(){
 	});	
 	
 }	
+
+function anonCard(){
+	
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let gift = rows[0].gift;
+		
+		if(gift < 5) {
+			message.reply("Not enough gifts!");
+			return;
+		}
+
+		
+		message.author.send("Who would you like your card to go to? \n Send their id or !cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.author.send("Cancelled.");
+	                		return;
+	            		}   else {
+					var person = bot.users.get(message.content);
+					if(person != undefined){
+		message.author.send("Would you like to send an anonymous holiday card to " + person.username + "? \n Yes or No");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
+	               		message.author.send("Send the image and message for the card! !cancel to cancel.");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					if (message.content == `!cancel`) {
+	               		 		message.channel.send("Cancelled.");
+	                			return;
+	            			}   else {
+	            		sql = `UPDATE user SET gift = ${gift - 5} WHERE id = '${message.author.id}'`;
+						con.query(sql);		
+						var img = message.attachments.first().url;
+						Jimp.read(img)
+						  .then(image => {
+						  	function onBuffer(err, buffer) {
+      							if (err) throw err;
+      							console.log(buffer);
+    						}
+    							var lngth = message.author.username.length;
+
+
+						    Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
+						     image.resize(Jimp.AUTO, 250);
+ 							 image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
+ 							 //image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
+							 image.write("holidayCard.png");
+							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
+							 message.author.send("Holiday Card sent to " + person.username + "!");
+						    });
+						  })
+						  .catch(err => {
+							console.error(err);
+						    // Handle an exception.
+						  });
+						
+						
+					}
+					});
+					} else {
+					message.author.send("Cancelled.");
+	                		return;
+				}
+				});	
+		} else {
+			message.author.send("User not found!");
+			return;
+			}
+		}
+		
+		
+		});
+		
+	});	
+	
 }
+
 
 function notifications(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -713,6 +730,10 @@ function notifications(){
 	
 if(command === `!buy` && messageArray[1] === `holidayCard`){
 		holidayCard();
+	}	
+
+if(command === `!buy` && messageArray[1] === `anonCard`){
+		anonCard();
 	}	
 
 
@@ -764,7 +785,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
 		let sql;
 		let channel = bot.channels.get(rows[0].channel);
 		let whisper = rows[0].whisper;
-		var id = messageArray[1];
+		var id = messageArray[1]; 
 		if(whisper == true){	
 		message.author.send("What secret would you like to share? (!cancel to cancel)");
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -802,6 +823,7 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 			else {
 			 message.author.send("Whispers are not allowed in that server.");
 			  }
+			  
 			}); 
 			});
 		}
@@ -4695,7 +4717,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("1 :gift:| **holidayCard**: \n Make a gift card to send to your friends! \n 25 :gift: | **holidayPfp** \n Give your avatar a holiday makeover! \n 50 :gift: | **stand** \n Choose which stand you want!")
+			.setDescription("1 :gift:| **holidayCard**: \n Make a gift card to send to your friends! \n 5 :gift: | **anonCard** \n Send a holiday card..... But anonymously! \n 10 :gift: | **stand** \n Choose which stand you want!")
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(shop);
@@ -7451,6 +7473,218 @@ function heavensDoor(){
 	});
 	}	
 
+function thoth(){
+
+		
+		let member = message.mentions.members.first();
+		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let bio = rows[0].bio;
+		var name = bot.users.get(member.id);
+			
+		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
+		var bad = ["|| was jumped by some thugs!||", "|| got a deduction for slacking off at work!||", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity!||", "|| dropped their money down a sewer pipe!||", "|| was fined for parking in front of a fire hydrant!||", "|| lost a highstake bet!||", "|| invested their money in a volitable market!||", "|| bought to many waifu pillows and anime merch!||"];
+			
+
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" They have no user!");
+			return;
+		}	else {
+			
+			
+			if (thothCD.has(message.author.id)) {
+				
+            message.channel.send("Thoth must wait about 60 mins from when you first used it!");
+            return;
+   		 } 
+			 			
+			
+			 
+				
+			 else {
+				var msg = message.content;
+				thothCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HeavensDoorCD.delete(message.author.id);
+        }, (1000*60*60));
+				
+				
+				
+				var wait = Math.floor(Math.random() * 200) + 1;
+			var chance = Math.floor(Math.random() * 10) + 1;
+			var percent = Math.floor(Math.random() * 10) + 5;
+			var condition = Math.floor(Math.random() * 9);
+			
+			if(chance > 4){
+				var loss = money / percent;
+			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
+			con.query(sql, console.log);
+			
+			 message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(other.username +  bad[condition]), wait);
+			
+			} else {
+			var gain = money / percent;
+			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
+			con.query(sql, console.log)
+
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			setTimeout(message.channel.send(other.username +  good[condition]), wait);		
+				
+			}
+
+			}		
+
+			
+	
+			
+			
+			
+			
+			
+			
+			return;
+		
+		}
+
+
+		});
+	
+	}	
+
+function getStand(){
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let gift = rows[0].gift;
+		
+		if(gift < 10) {
+			message.reply("Not enough gifts!");
+			return;
+		}
+
+		message.channel.send("Which Stand Do you want: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `ECHOES`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");
+							sql = `UPDATE user SET stand = "「ECHOES」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「ECHOES」||"), 200);
+							return;
+	            		}   else if (message.content == `KILLER QUEEN`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");
+							sql = `UPDATE user SET stand = "「KILLER QUEEN」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KILLER QUEEN」||"), 200);
+							return;
+	            		} 	else if (message.content == `KING CRIMSON`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");
+							sql = `UPDATE user SET stand = "「KING CRIMSON」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KING CRIMSON」||"), 200);
+							return;
+	            		} 	else if (message.content == `CRAZY DIAMOND`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「CRAZY DIAMOND」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「CRAZY DIAMOND」||"), 200);
+							return;
+	            		} 	else if (message.content == `HEAVENS DOOR`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「HEAVENS DOOR」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「HEAVEN'S DOOR」||"), 200);
+							return;
+	            		} 	else if (message.content == `HARVEST`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");
+							sql = `UPDATE user SET stand = "「HARVEST」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「HARVEST」||"), 200);
+							return;
+	            		} 	else if (message.content == `STAR PLATINUM`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「STAR PLATINUM」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「STAR PLATINUM」||"), 200);
+							return;
+	            		} 	else if (message.content == `THOTH`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「THOTH」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「THOTH」||"), 200);
+							return;
+	            		}  else {
+	            			message.channel.send("Invalid selection.");
+	            			return;
+	            		}
+
+
+	            	});	
+
+
+	});
+
+
+}
+
 function standDisc(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -7464,7 +7698,7 @@ function standDisc(){
 		let stand = rows[0].stand;
 		
 
-		var chance = Math.floor(Math.random() * 7) + 1;
+		var chance = Math.floor(Math.random() * 8) + 1;
 		var ability = Math.floor(Math.random() * 10) + 1;
 		
 
@@ -7533,9 +7767,18 @@ function standDisc(){
 			sql = `UPDATE user SET stand = "「CRAZY DIAMOND」" WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED 「CRAZY DIAMOND」||"), 200);
+		} else if(chance == 8){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			sql = `UPDATE user SET stand = "「THOTH」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED 「THOTH」||"), 200);
 		}
 	} else {
-		message.channel.send(".");
+			message.channel.send(".");
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
@@ -7775,7 +8018,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes.`)
+			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}1STBOMB**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}2NDBOMB [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}3RDBOMB [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(stands);
@@ -8645,13 +8888,11 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 	
 	
 	
-// 	if(command === `${prefix}buy` && messageArray[1] === `holidayPfp`){
-// 		holidayAvatar();
-// 	}
+
 	
-// 	if(command === `${prefix}buy` && messageArray[1] === `stand`){
-// 		giftStand();
-// 	}
+	if(command === `${prefix}buy` && messageArray[1] === `stand`){
+		getStand();
+	}
 
 	if(command === `${prefix}buy` && messageArray[1] === `insurance`){
 		insure();
@@ -8982,6 +9223,21 @@ if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands 
 			
 		});		
 }	
+
+if(command === `${prefix}THOTH` && messageArray[1] != undefined && stands == true){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stand = rows[0].stand;
+			
+		if(stand == "「THOTH」"){
+		thoth();
+	}		else {
+		message.reply(" You do not have the power of 「THOTH」.")
+	}
+			
+		});		
+}	
 	
 	if(command === `${prefix}ZAWARUDO` && stands == true){
 		if(message.author.id == message.guild.ownerID){
@@ -9056,6 +9312,12 @@ if(command === `${prefix}CRAZYDIAMOND` && messageArray[1] != undefined && stands
 }	
 	
 if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands == false){
+		message.reply("Stand Abilities are disabled in this server!");
+			
+			return;		
+}	
+
+if(command === `${prefix}THOTH` && messageArray[1] != undefined && stands == false){
 		message.reply("Stand Abilities are disabled in this server!");
 			
 			return;		
