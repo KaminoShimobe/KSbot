@@ -332,11 +332,11 @@ function directory(){
 // 				let losses = rows.losses;
 				
 				var output = "";
-				message.author.send("Indexing 0/" + (rows.length + 1))
-				function addEm(persons, index){
+				message.author.send("Indexing 0/" + (rows.length)).then((msg)=>{
+  					function addEm(persons, index){
 					output += index + `: **`+ rows[index].uname + `** \n`;
-					message.edit("Indexing " + index + "/" + (rows.length + 1))
-					.then(msg => console.log(`New message content: ${msg}`))
+					msg.edit("Indexing " + index + "/" + (rows.length))
+					.then(msge => console.log(`New message content: ${msge}`))
 					.catch(console.error);
 				}	
 				 
@@ -349,7 +349,9 @@ function directory(){
 				.setDescription(output)
 				.setColor("#114dad"); 
 
-				message.author.send(list); 
+				message.author.send(list);
+				})
+				 
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `!cancel`) {
@@ -377,7 +379,7 @@ function directory(){
 
 			
 				.setTitle(uname + `'s account`)
-				.setDescription(`Money: ` + money + `\n Rank: ` + rank + `\n Patreon: ` + patreon + `\n Bio: \n` + bio + `\n Marriage: ` + marriage + `\n Stand: ` + stand + `\n Streak: ` + streak + `\n Last Transaction: ` + lasttrans + `\n Pet: ` + pet + `\n :gift: 's: ` + gift + `\n RPS: ` + rps + `\n Win ratio: ` + wins + `/` + losses)
+				.setDescription(`Money: $` + money + `\n Rank: ` + rank + `\n Patreon: ` + patreon + `\n Bio: \n` + bio + `\n Marriage: ` + marriage + `\n Stand: ` + stand + `\n Streak: ` + streak + `\n Last Transaction: $` + lasttrans + `\n Pet: ` + pet + `\n :gift: 's: ` + gift + `\n RPS: ` + rps + `\n Win ratio: ` + wins + `/` + losses)
 				.setFooter("ID:" + id)
 				.setColor(hue);
 				
