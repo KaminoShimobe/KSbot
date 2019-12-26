@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.8", bot.user.avatarURL);
+			.setFooter("Version 1.6.9", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -300,6 +300,109 @@ bot.on("message", async message => {
   	
 	}
 	}
+	
+function directory(){
+	
+	
+	message.author.send("What directory would you like access to? \n - **user** \n - **server** \n - **global** \n - **achievements** \n !cancel to cancel.");
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `!cancel`) {
+               		 message.channel.send("Query cancelled.");
+                		return;
+            		} else if (message.content == `user`) {
+               		 con.query(`SELECT * FROM user`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+// 				let id = rows.id;
+// 				let uname = rows.uname;
+// 				let money = rows.money;
+// 				let rank = rows.rank;
+// 				let patreon = rows.patreon;
+// 				let bio = rows.bio;
+// 				let marriage = rows.marriage;
+// 				let stand = rows.stand;
+// 				let streak = rows.streak;
+// 				let lasttrans = rows.lasttrans;
+// 				let pet = rows.pet;
+// 				let gift = rows.gift;
+// 				let color = rows.hue;
+// 				let rps = rows.rps;
+// 				let wins = rows.wins;
+// 				let losses = rows.losses;
+				
+				var output = "";
+				var i; 
+				for(i = 0; i < rows.length; i++){
+					output += i + ": **" + rows[i].uname + "** \n";
+				}
+				
+				let list = new Discord.RichEmbed()
+
+			
+				.setTitle(`KS User Directory: Select an account with a number or !cancel to cancel.`)
+				.setDescription(output)
+				.setColor("#114dad"); 
+
+				message.author.send(list); 
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `!cancel`) {
+               		 message.channel.send("Query cancelled.");
+                		return;
+            		} else if (message.content <= rows.length) {
+				let id = rows[message.content].id;
+				let uname = rows[message.content].uname;
+				let money = rows[message.content].money;
+				let rank = rows[message.content].rank;
+				let patreon = rows[message.content].patreon;
+				let bio = rows[message.content].bio;
+				let marriage = rows[message.content].marriage;
+				let stand = rows[message.content].stand;
+				let streak = rows[message.content].streak;
+				let lasttrans = rows[message.content].lasttrans;
+				let pet = rows[message.content].pet;
+				let gift = rows[message.content].gift;
+				let hue = rows[message.content].hue;
+				let rps = rows[message.content].rps;
+				let wins = rows[message.content].wins;
+				let losses = rows[message.content].losses;
+				
+				let person = new Discord.RichEmbed()
+
+			
+				.setTitle(uname + `'s account`)
+				.setDescription(`Money: ` + money + `\n Rank: ` + rank + `\n Patreon: ` + patreon + `\n Bio: \n` + bio + `\n Marriage: ` + marriage + `\n Stand: ` + stand + `\n Streak: ` + streak + `\n Last Transaction: ` + lasttrans + `\n Pet: ` + pet + `\n :gift: 's: ` + gift + `\n RPS: ` + rps + `\n Win ratio: ` + wins + `/` + losses)
+				.setFooter("ID:" + id)
+				.setColor(hue);
+				
+
+				message.author.send(person)
+				
+			} else {
+				message.channel.send("Query cancelled.");
+                		return;
+			}	
+			
+			
+			
+			});	
+			 });	 
+            		} else {
+				 message.channel.send("Query cancelled.");
+                		return;
+				
+				
+		}
+			});			
+	
+}
+	
+if(command === `!directory`){
+	if(message.author.id == '242118931769196544'){	
+		directory();
+	}
+}	
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -4698,7 +4801,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 			.setDescription("$50,000 | **customRole [string] #hexcolor**: \n Creates a custom role with it's own color. Limited to 1 word. \n 10% of your money | **insurance**: \n Your losses for the next 60 seconds will be cut by 33% \n $100 | **waifuPic**: \n Sends a random waifu pic. \n $100 | **husbandoPic** \n Sends a random husbando pic. \n $1000 | **lewdWaifu** \n DMs a random lewd waifu pic. \n $1000 | **lewdHusbando** \n DMs a random lewd husbando pic. \n $5000 | **customPic [tag1 tag2]** \n DMs a random pic with specific tags to your liking. \n $100 | **canvas** \n Purchases a 8x8 pixel art canvas to draw on(can be cancelled). \n $1000 | **medCanvas** \n Purchases a 32x32 pixel art canvas to draw on(can be cancelled). \n $10,000 | **bigCanvas** \n Purchases a 16x16 pixel art canvas to draw on(can be cancelled). \n $50,000 | **standDisc** \n Purchases a mysterious stand disc with a 10% chance to receive a stand ability. Only allowed if stands are allowed. \n $1,000,000 | **globalCommand** \n Purchases a custom command that can be used in any server \n $2,000,000 | **globalRemove** \n Purchases the rights to remove a globalCommand.")
 			.setColor("#1d498e"); 
 
-		message.author.sendEmbed(shop);
+		message.author.send(shop);
 	message.reply(" Shop list sent to you!");
 });	
 }	
@@ -4720,7 +4823,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 			.setDescription("1 :gift:| **holidayCard**: \n Make a gift card to send to your friends! \n 5 :gift: | **anonCard** \n Send a holiday card..... But anonymously! \n 10 :gift: | **stand** \n Choose which stand you want!")
 			.setColor("#1d498e"); 
 
-		message.author.sendEmbed(shop);
+		message.author.send(shop);
 	message.reply(" Gift Shop list sent to you!");
 });	
 }	
