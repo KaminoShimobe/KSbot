@@ -332,10 +332,12 @@ function directory(){
 // 				let losses = rows.losses;
 				
 				var output = "";
-				var i; 
-				for(i = 0; i < rows.length; i++){
-					output += i + ": **" + rows[i].uname + "** \n";
-				}
+				
+				function addEm(person, index){
+					output += index + `: **`+ person[index].uname + `** \n`;	
+				}	
+				 
+				rows.forEach(addEm);
 				
 				let list = new Discord.RichEmbed()
 
