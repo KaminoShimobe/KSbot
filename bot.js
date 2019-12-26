@@ -310,70 +310,56 @@ function directory(){
             		if (message.content == `!cancel`) {
                		 message.channel.send("Query cancelled.");
                 		return;
-            		} else if (message.content == `user`) {
+            		} else if (command == `user` && messageArray[1] != undefined) {
                		 con.query(`SELECT * FROM user`, (err, rows) => {
 				if(err) throw err;
 				let sql;
-// 				let id = rows.id;
-// 				let uname = rows.uname;
-// 				let money = rows.money;
-// 				let rank = rows.rank;
-// 				let patreon = rows.patreon;
-// 				let bio = rows.bio;
-// 				let marriage = rows.marriage;
-// 				let stand = rows.stand;
-// 				let streak = rows.streak;
-// 				let lasttrans = rows.lasttrans;
-// 				let pet = rows.pet;
-// 				let gift = rows.gift;
-// 				let color = rows.hue;
-// 				let rps = rows.rps;
-// 				let wins = rows.wins;
-// 				let losses = rows.losses;
+
 				
-				var output = "";
-				message.author.send("Indexing 0/" + (rows.length)).then((msg)=>{
-  					function addEm(persons, index){
-					output += index + `: **`+ rows[index].uname + `** \n`;
-					msg.edit("Indexing " + index + "/" + (rows.length))
-					.then(msge => console.log(`New message content: ${msge}`))
-					.catch(console.error);
-				}	
+// 				var output = "";
+// 				message.author.send("Indexing 0/" + (rows.length)).then((msg)=>{
+//   					function addEm(persons, index){
+// 					output += index + `: **`+ rows[index].uname + `** \n`;
+// 					msg.edit("Indexing " + index + "/" + (rows.length))
+// 					.then(msge => console.log(`New message content: ${msge}`))
+// 					.catch(console.error);
+// 				}	
 				 
-				rows.forEach(addEm);
+// 				rows.forEach(addEm);
 				
-				let list = new Discord.RichEmbed()
+// 				let list = new Discord.RichEmbed()
 
 			
-				.setTitle(`KS User Directory: Select an account with a number or !cancel to cancel.`)
-				.setDescription(output)
-				.setColor("#114dad"); 
+// 				.setTitle(`KS User Directory: Select an account with a number or !cancel to cancel.`)
+// 				.setDescription(output)
+// 				.setColor("#114dad"); 
 
-				message.author.send(list);
-				})
-				 
+// 				message.author.send(list);
+// 				})
+				 var index = messageArray[1];
+				 message.author.send(`You want to see the data of **` + rows[index].uname + `**? \n Yes or No.`);
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `!cancel`) {
+            		if (message.content == `No` || message.content == `N` || message.content == `n` || message.content == `no`) {
                		 message.channel.send("Query cancelled.");
                 		return;
-            		} else if (message.content <= rows.length) {
-				let id = rows[message.content].id;
-				let uname = rows[message.content].uname;
-				let money = rows[message.content].money;
-				let rank = rows[message.content].rank;
-				let patreon = rows[message.content].patreon;
-				let bio = rows[message.content].bio;
-				let marriage = rows[message.content].marriage;
-				let stand = rows[message.content].stand;
-				let streak = rows[message.content].streak;
-				let lasttrans = rows[message.content].lasttrans;
-				let pet = rows[message.content].pet;
-				let gift = rows[message.content].gift;
-				let hue = rows[message.content].hue;
-				let rps = rows[message.content].rps;
-				let wins = rows[message.content].wins;
-				let losses = rows[message.content].losses;
+            		} else if (message.content == `Yes` || message.content == `Y` || message.content == `y` || message.content == `yes`) {
+				let id = rows[index].id;
+				let uname = rows[index].uname;
+				let money = rows[index].money;
+				let rank = rows[index].rank;
+				let patreon = rows[index].patreon;
+				let bio = rows[index].bio;
+				let marriage = rows[index].marriage;
+				let stand = rows[index].stand;
+				let streak = rows[index].streak;
+				let lasttrans = rows[index].lasttrans;
+				let pet = rows[index].pet;
+				let gift = rows[index].gift;
+				let hue = rows[index].hue;
+				let rps = rows[index].rps;
+				let wins = rows[index].wins;
+				let losses = rows[index].losses;
 				
 				let person = new Discord.RichEmbed()
 
