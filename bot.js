@@ -310,7 +310,7 @@ function directory(){
             		if (message.content == `!cancel`) {
                		 message.channel.send("Query cancelled.");
                 		return;
-            		} else if (messageArray[0] == `user` && messageArray[1] != undefined) {
+            		} else if (command === `user` && messageArray[1] != undefined) {
                		 con.query(`SELECT * FROM user`, (err, rows) => {
 				if(err) throw err;
 				let sql;
