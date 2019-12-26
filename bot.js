@@ -332,9 +332,12 @@ function directory(){
 // 				let losses = rows.losses;
 				
 				var output = "";
-				
-				function addEm(uname, index){
-					message.author.send(index + `: **`+ uname + `** \n`);	
+				message.author.send("Indexing 0/" + (rows.length + 1))
+				function addEm(persons, index){
+					output += index + `: **`+ rows[index].uname + `** \n`;
+					message.edit("Indexing " + index + "/" + (rows.length + 1))
+					.then(msg => console.log(`New message content: ${msg}`))
+					.catch(console.error);
 				}	
 				 
 				rows.forEach(addEm);
