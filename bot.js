@@ -307,7 +307,7 @@ function directory(){
 	message.author.send("What directory would you like access to? \n - **user** \n - **server** \n - **global** \n - **achievements** \n !cancel to cancel.");
 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (message.content == `!cancel`) {
+            		if (command === `!cancel`) {
                		 message.channel.send("Query cancelled.");
                 		return;
             		} else if (command === `user` && messageArray[1] != undefined) {
