@@ -333,8 +333,8 @@ function directory(){
 				
 				var output = "";
 				
-				function addEm(person, index){
-					output += index + `: **`+ person[index].uname + `** \n`;	
+				function addEm(uname, index){
+					output += index + `: **`+ uname + `** \n`;	
 				}	
 				 
 				rows.forEach(addEm);
