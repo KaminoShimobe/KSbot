@@ -307,10 +307,10 @@ function directory(){
 	message.author.send("What directory would you like access to? \n - **user** \n - **server** \n - **global** \n - **achievements** \n !cancel to cancel.");
 	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
-            		if (command === `!cancel`) {
-               		 message.channel.send("Query cancelled.");
+            		if (message.content == `!cancel`) {
+               		 message.author.send("Query cancelled.");
                 		return;
-            		} else if (command === `user`) {
+            		} else if (message.content == `user`) {
                		 con.query(`SELECT * FROM user`, (err, rows) => {
 				if(err) throw err;
 				let sql;
@@ -391,7 +391,7 @@ function directory(){
 	
 }
 	
-if(command === `!directory`){
+if(command === `!directory` && messageArray[1] != undefined){
 	if(message.author.id == '242118931769196544'){	
 		directory();
 	}
