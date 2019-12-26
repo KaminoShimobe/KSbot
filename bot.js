@@ -334,7 +334,7 @@ function directory(){
 				var output = "";
 				
 				function addEm(uname, index){
-					output += index + `: **`+ uname + `** \n`;	
+					message.author.send(index + `: **`+ uname + `** \n`);	
 				}	
 				 
 				rows.forEach(addEm);
