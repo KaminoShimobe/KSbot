@@ -1354,7 +1354,7 @@ function rps(){
 			
 
 			message.channel.fetchMessages({ limit: 100 }).then(messages => {
-  const botMessages = messages.filter(msg => msg.content.length >= 1 );
+  const botMessages = messages.filter(msg => msg.id != undefined );
 
 
 
@@ -1391,16 +1391,38 @@ return;
 			
 			return;
 		}	else if(trigger == true) {
+			
+			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+			if(err) throw err;
+				
+			let stand = rows[0].stand;	
+				
+			if(rows.length < 1) {
+				message.delete()
 
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+			
+			
+			return;
+			}	
+			
+			if(stand != "「KING CRIMSON」"){
 			
 			message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(console.error);
-
-
 			
+			
+			} else {
+				console.log("has king crimson!");
+				  return;
+			}	  
+
+			});
 		}
 
 
@@ -1627,7 +1649,9 @@ function collect(){
 		if(err) throw err;
 		let type = rows[0].karma;
 		let cost = rows[0].chest;
-		
+		let trigger = rows[0].kcrimson;
+			
+			
 			if(rows.length < 1) {
 			
 			message.reply(" nothing to collect!");
@@ -1638,12 +1662,19 @@ function collect(){
 				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
-				let yay = rows[0].gift;		
+				let yay = rows[0].gift;	
+				let stand = rows[0].stand;	
 				if(rows.length < 1) {
 				message.reply(`You have no user! \n Type ${prefix}user to create one!`);
 			
 				return;
 				}
+				
+				if(trigger == true && stand != "「KING CRIMSON」"){
+					console.log("Can't get chest cus of King Crimson!");
+					return;
+				}	
+					
 				var gift = Math.floor(Math.random() * 1) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
@@ -8226,7 +8257,7 @@ function socialHelp(){
 
 			
 			.setTitle("KS-Bot Social commands 👥")
-			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message.\n **${prefix}marry [mention]**: \n Proposes to a user to be married! \n **${prefix}divorce**: \n Divorces a user!\n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. Requires marriage! \n **${prefix}handhold [mention]**: \n Hold your spouses hand. Requires marriage!`)
+			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
