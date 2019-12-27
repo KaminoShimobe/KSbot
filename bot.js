@@ -7697,7 +7697,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(uname +  bad[condition]), wait);
+			setTimeout(message.channel.send(uname +  bad[condition] + "|| and lost $" + loss + "!||"), wait);
 			
 			} else {
 			var gain = money / percent;
@@ -7709,7 +7709,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(uname+  good[condition]), wait);		
+			setTimeout(message.channel.send(uname+  good[condition] + "|| and gained $" + gain + "!||"), wait);		
 				
 			}
 
