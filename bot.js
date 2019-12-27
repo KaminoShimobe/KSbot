@@ -10506,10 +10506,10 @@ if(command === `${prefix}pat`){
 }
 	
 	
-
-		return;
+return;
 
 	}
+	
 		
 if(command === `${prefix}kiss`){
 
@@ -10536,6 +10536,9 @@ if(command === `${prefix}kiss`){
 // insert function here.
 	kiss();
 }
+return;
+
+	}
 	
 if(command === `${prefix}handhold`){
 
@@ -10562,6 +10565,9 @@ if(command === `${prefix}handhold`){
 // insert function here.
 	handhold();
 }	
+return;
+
+	}
 
 if(command === `${prefix}marry`){
 
@@ -10588,6 +10594,9 @@ if(command === `${prefix}marry`){
 // insert function here.
 	marriage();
 }	
+return;
+
+	}
 	
 if(command === `${prefix}divorce`){
 
