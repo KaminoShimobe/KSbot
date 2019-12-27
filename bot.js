@@ -2526,7 +2526,7 @@ function divorce(){
 					con.query(sql);
 					sql2 = `UPDATE user SET marriage = '' WHERE id = '${potential.id}`
 					con.query(sql2);
-					message.channel.send("You are now a free spirit!")
+					message.reply("You are now a free spirit!")
 				}
 
 	});		
@@ -6881,7 +6881,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
