@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.6.9", bot.user.avatarURL);
+			.setFooter("Version 1.7.0", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -6628,7 +6628,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
@@ -6868,7 +6868,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
