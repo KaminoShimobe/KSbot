@@ -2452,7 +2452,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 function marriage(){
 	let potential = message.mentions.users.first();
 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "Yes" to accept.)`);
-		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content === "Yes" || message.content === "yes") {
             	let free;
@@ -2511,9 +2511,11 @@ function marriage(){
 }
 
 function divorce(){
+	let potential = message.mentions.users.first();
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
+				let sql2;
 			
 				let spouse = rows[0].marriage;
 
@@ -2522,6 +2524,8 @@ function divorce(){
 				}	else {
 					sql = `UPDATE user SET marriage = '' WHERE id = '${message.author.id}`
 					con.query(sql);
+					sql2 = `UPDATE user SET marriage = '' WHERE id = '${potential.id}`
+					con.query(sql2);
 					message.channel.send("You are now a free spirit!")
 				}
 
@@ -6225,6 +6229,22 @@ function kiss(){
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+	
+		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		let marriage = rows[0].marriage;
+		let you = rows[0].uname;	
+			
+		con.query(`SELECT * FROM uno WHERE id = '${toBeat.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		let consent = rows[0].marriage;	
+		let them = rows[0].uname;	
+			
+		if(marriage == them && consent == you){	
 
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
@@ -6246,6 +6266,61 @@ function kiss(){
   		 })
 
 		return message.reply(`kissed ` + toBeat  + `!` || `kissed ` + toBeat.user + `!` );
+			
+		} else {
+			message.reply("You need to be married for consent!")
+		}	
+		
+		});
+		});		
+}
+	
+function handhold(){
+		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+		
+		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		let marriage = rows[0].marriage;
+		let you = rows[0].uname;	
+			
+		con.query(`SELECT * FROM uno WHERE id = '${toBeat.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+			
+		let consent = rows[0].marriage;	
+		let them = rows[0].uname;	
+			
+		if(marriage == them && consent == you){	
+		const booru = new Danbooru()
+		booru.posts({ tags: 'rating:safe holding_hands couple', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 		
+		 let pic = new Discord.RichEmbed()
+
+			
+			.setImage(url.href)
+			.setColor("#d80a0a"); 
+
+		message.channel.sendEmbed(pic);
+ 		
+  		 })	
+
+		return message.reply(`held ` + toBeat  + `'s hand!` || `held ` + toBeat.user + `'s hand!` );
+		} else {
+			message.reply("You need to be married for consent!")
+		}	
+		
+		});
+		});	
 }	
 
 function waifuPic(){
@@ -8192,7 +8267,7 @@ function socialHelp(){
 
 			
 			.setTitle("KS-Bot Social commands 👥")
-			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message.\n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user.`)
+			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message.\n **${prefix}marry [mention]**: \n Proposes to a user to be married! \n **${prefix}divorce**: \n Divorces a user!\n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. Requires marriage! \n **${prefix}handhold [mention]**: \n Hold your spouses hand. Requires marriage!`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -10461,7 +10536,84 @@ if(command === `${prefix}kiss`){
 // insert function here.
 	kiss();
 }
+	
+if(command === `${prefix}handhold`){
 
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		handhold();
+	}
+} else {
+// insert function here.
+	handhold();
+}	
+
+if(command === `${prefix}marry`){
+
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		marriage();
+	}
+} else {
+// insert function here.
+	marriage();
+}	
+	
+if(command === `${prefix}divorce`){
+
+
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+		commandCD.add(message.author.id);
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		divorce();
+	}
+} else {
+// insert function here.
+	divorce();
+}	
 
 	
 
@@ -10477,6 +10629,8 @@ if(command === `${prefix}kiss`){
 	} else if(command === `${prefix}pat`){
 	message.reply("Waifu's and husbando's are disabled in this server!");
 	} else if(command === `${prefix}kiss`){
+	message.reply("Waifu's and husbando's are disabled in this server!");
+	} else if(command === `${prefix}handhold`){
 	message.reply("Waifu's and husbando's are disabled in this server!");
 	}
 }	
