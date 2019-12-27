@@ -7645,8 +7645,8 @@ function thoth(){
 		let uname = rows[0].uname;
 		var name = bot.users.get(member.id);
 			
-		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
-		var bad = ["|| was jumped by some thugs!||", "|| got a deduction for slacking off at work!||", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity!||", "|| dropped their money down a sewer pipe!||", "|| was fined for parking in front of a fire hydrant!||", "|| lost a highstake bet!||", "|| invested their money in a volitable market!||", "|| bought to many waifu pillows and anime merch!||"];
+		var good = ["|| was featured in a magazine,", "|| got a bonus check,", "|| found a rare gem,", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry,", "|| redeemed a ticket of collectable stamps,", "|| won the lottery,", "|| found some money in an corner,", "|| profited from a great business idea,"];
+		var bad = ["|| was jumped by some thugs,", "|| got a deduction for slacking off at work,", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity,", "|| dropped their money down a sewer pipe,", "|| was fined for parking in front of a fire hydrant,", "|| lost a highstake bet,", "|| invested their money in a volitable market,", "|| bought to many waifu pillows and anime merch,"];
 			
 
 		
@@ -7688,7 +7688,7 @@ function thoth(){
 			var condition = Math.floor(Math.random() * 9);
 			
 			if(chance > 4){
-				var loss = money / percent;
+				var loss = Math.floor(money / percent);
 			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
@@ -7697,10 +7697,10 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(uname +  bad[condition] + "|| and lost $" + loss + "!||"), wait);
+			setTimeout(message.channel.send(uname +  bad[condition] + " and lost $" + loss + "!||"), wait);
 			
 			} else {
-			var gain = money / percent;
+			var gain = Math.floor(money / percent);
 			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${member.id}'`;
 			con.query(sql, console.log)
 
@@ -7709,7 +7709,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(uname+  good[condition] + "|| and gained $" + gain + "!||"), wait);		
+			setTimeout(message.channel.send(uname+  good[condition] + " and gained $" + gain + "!||"), wait);		
 				
 			}
 
