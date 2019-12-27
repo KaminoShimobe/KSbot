@@ -7642,7 +7642,7 @@ function thoth(){
 		if(err) throw err;
 		let sql;
 		let money = rows[0].money;
-		
+		let uname = rows[0].uname;
 		var name = bot.users.get(member.id);
 			
 		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
@@ -7697,7 +7697,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(member.username +  bad[condition]), wait);
+			setTimeout(message.channel.send(uname +  bad[condition]), wait);
 			
 			} else {
 			var gain = money / percent;
@@ -7709,7 +7709,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(member.username +  good[condition]), wait);		
+			setTimeout(message.channel.send(uname+  good[condition]), wait);		
 				
 			}
 
