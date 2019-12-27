@@ -6228,22 +6228,6 @@ function kiss(){
 		let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
-	
-		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-			
-		let marriage = rows[0].marriage;
-		let you = rows[0].uname;	
-			
-		con.query(`SELECT * FROM uno WHERE id = '${toBeat.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-			
-		let consent = rows[0].marriage;	
-		let them = rows[0].uname;	
-			
-		if(marriage == them && consent == you){	
 
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
@@ -6266,12 +6250,7 @@ function kiss(){
 
 		return message.reply(`kissed ` + toBeat  + `!` || `kissed ` + toBeat.user + `!` );
 			
-		} else {
-			message.reply("You need to be married for consent!")
-		}	
-		
-		});
-		});		
+				
 }
 	
 function handhold(){
@@ -6279,21 +6258,7 @@ function handhold(){
 
 		if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 		
-		con.query(`SELECT * FROM uno WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-			
-		let marriage = rows[0].marriage;
-		let you = rows[0].uname;	
-			
-		con.query(`SELECT * FROM uno WHERE id = '${toBeat.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-			
-		let consent = rows[0].marriage;	
-		let them = rows[0].uname;	
-			
-		if(marriage == them && consent == you){	
+		
 		const booru = new Danbooru()
 		booru.posts({ tags: 'rating:safe holding_hands couple', random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -6314,12 +6279,7 @@ function handhold(){
   		 })	
 
 		return message.reply(`held ` + toBeat  + `'s hand!` || `held ` + toBeat.user + `'s hand!` );
-		} else {
-			message.reply("You need to be married for consent!")
-		}	
 		
-		});
-		});	
 }	
 
 function waifuPic(){
@@ -6867,7 +6827,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
@@ -6880,7 +6840,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
@@ -10568,66 +10528,9 @@ return;
 
 	}
 
-if(command === `${prefix}marry`){
-
-
-		if(cooldown > 0){
-	if (commandCD.has(message.author.id)) {
-	message.react('🕒')
-
-  	.then(console.log("Reacted."))
-
-  	.catch(console.error);	
-	
-		return;
-	} else {
-		commandCD.add(message.author.id);
-	  setTimeout(() => {
-          // Removes the user from the set after however long the cooldown is.
-          commandCD.delete(message.author.id);
-        }, (cooldown));	
-	//insert function here.
-		marriage();
-	}
-} else {
-// insert function here.
-	marriage();
-}	
-return;
-
-	}
-	
-if(command === `${prefix}divorce`){
-
-
-		if(cooldown > 0){
-	if (commandCD.has(message.author.id)) {
-	message.react('🕒')
-
-  	.then(console.log("Reacted."))
-
-  	.catch(console.error);	
-	
-		return;
-	} else {
-		commandCD.add(message.author.id);
-	  setTimeout(() => {
-          // Removes the user from the set after however long the cooldown is.
-          commandCD.delete(message.author.id);
-        }, (cooldown));	
-	//insert function here.
-		divorce();
-	}
-} else {
-// insert function here.
-	divorce();
-}	
 
 	
-
-		return;
-
-	}		
+		
 
 } else {
 	if(command === `${prefix}beat`){
