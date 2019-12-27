@@ -6618,7 +6618,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**" + "\n Married to: :heart:" + marriage + ":ring:")
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
@@ -7641,7 +7641,8 @@ function thoth(){
 		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		let bio = rows[0].bio;
+		let money = rows[0].money;
+		
 		var name = bot.users.get(member.id);
 			
 		var good = ["|| was featured in a magazine!||", "|| got a bonus check!||", "|| found a rare gem!||", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry!||", "|| redeemed a ticket of collectable stamps!||", "|| won the lottery!||", "|| found some money in an corner!||", "|| profited from a great business idea!||"];
@@ -7676,7 +7677,7 @@ function thoth(){
 				thothCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
-          HeavensDoorCD.delete(message.author.id);
+          thothCD.delete(message.author.id);
         }, (1000*60*60));
 				
 				
@@ -7688,7 +7689,7 @@ function thoth(){
 			
 			if(chance > 4){
 				var loss = money / percent;
-			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${other.id}'`;
+			sql = `UPDATE user SET money = ${money - loss} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
 			 message.channel.send(".");
@@ -7696,11 +7697,11 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(other.username +  bad[condition]), wait);
+			setTimeout(message.channel.send(member.username +  bad[condition]), wait);
 			
 			} else {
 			var gain = money / percent;
-			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${other.id}'`;
+			sql = `UPDATE user SET money = ${money + gain} WHERE id = '${member.id}'`;
 			con.query(sql, console.log)
 
 			message.channel.send(".");
@@ -7708,7 +7709,7 @@ function thoth(){
 			message.channel.send(".");	
 			message.channel.send(".");	
 			message.channel.send(".");	
-			setTimeout(message.channel.send(other.username +  good[condition]), wait);		
+			setTimeout(message.channel.send(member.username +  good[condition]), wait);		
 				
 			}
 
