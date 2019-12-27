@@ -2467,7 +2467,7 @@ function marriage(){
 					return;
 				}	
             	
-            	});
+            	
 				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql2;
@@ -2493,7 +2493,7 @@ function marriage(){
 		
 			});
 
-		
+		});
 			}
 
 	
