@@ -2455,13 +2455,12 @@ function marriage(){
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content === "Yes" || message.content === "yes") {
-            	let free;
-            	let them;		
+            			
             	con.query(`SELECT * FROM user WHERE id = '${potential.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
-				free = rows[0].marriage;
-				them = rows[0].uname;		
+				let free = rows[0].marriage;
+				let them = rows[0].uname;		
 				if(rows.length < 1) {
 					message.reply(" They don't have an account!");
 					return;
