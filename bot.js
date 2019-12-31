@@ -1539,12 +1539,12 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The present mysteriously disappeared!");
+				room.send("The New Year gift mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'new_year gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1554,7 +1554,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A present has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A New Year gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 
@@ -1592,13 +1592,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The present mysteriously disappeared!");
+				room.send("The New Year gift mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'new_year gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1608,7 +1608,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A present has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A New Year gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 			//#a57400 brown 
@@ -1671,7 +1671,7 @@ function collect(){
 				}
 				
 				if(trigger == true && stand != "「KING CRIMSON」"){
-					console.log("Can't get chest cus of King Crimson!");
+					console.log("Can't get New Year gift cus of King Crimson!");
 					return;
 				}	
 					
@@ -1785,7 +1785,7 @@ function lostChest(){
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
 		if(!channel) return message.channel.send("A present mysteriously disappeared!");
-		channel.send("The present mysteriously disappeared!");
+		channel.send("The New Year gift mysteriously disappeared!");
 		return;	
 		});
 	}		  
