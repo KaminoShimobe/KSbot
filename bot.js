@@ -1496,9 +1496,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 30) + 1;
+		var appear = Math.floor(Math.random() * 100) + 1;
 		
-		if(appear == 30){
+		if(appear == 100){
 			
 			
 			chest();	
@@ -1539,12 +1539,12 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The New Year gift mysteriously disappeared!");
+				room.send("The chest mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'new_year gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1554,7 +1554,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A New Year gift has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 
@@ -1592,13 +1592,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The New Year gift mysteriously disappeared!");
+				room.send("The chest mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'new_year gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1608,7 +1608,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A New Year gift has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 			//#a57400 brown 
@@ -1671,22 +1671,22 @@ function collect(){
 				}
 				
 				if(trigger == true && stand != "「KING CRIMSON」"){
-					console.log("Can't get New Year gift cus of King Crimson!");
+					console.log("Can't get chest cus of King Crimson!");
 					return;
 				}	
 					
 				var gift = Math.floor(Math.random() * 1) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-				if(gift == 1){
-				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
-				message.channel.send("**You received a gift!!!**");
-				} else {
+// 				if(gift == 1){
+// 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+// 				message.channel.send("**You received a gift!!!**");
+// 				} else {
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;	
-				}	
+// 				}	
 				con.query(sql);
 				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
-				message.reply(" found $" + cost + " in the present!");
+				message.reply(" found $" + cost + " in the chest!");
 					//Achievement 6
 				if(tasks.indexOf("Open a chest") != -1 && status == 1){
 					var done = tasks.replace("Open a chest", "complete");
@@ -1739,7 +1739,7 @@ function collect(){
 				message.channel.send("Insurance Kicked in!");
 				}	
 
-				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${penalty} WHERE id = '${message.author.id}'`;
+				sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${-1 * penalty} WHERE id = '${message.author.id}'`;
 				con.query(sql);
 				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
 				message.reply(" lost $" + penalty + " from a trap!");
@@ -1784,8 +1784,8 @@ function lostChest(){
 		let channel = bot.channels.get(rows[0].channel);
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
-		if(!channel) return message.channel.send("A present mysteriously disappeared!");
-		channel.send("The New Year gift mysteriously disappeared!");
+		if(!channel) return message.channel.send("A chest mysteriously disappeared!");
+		channel.send("The chest mysteriously disappeared!");
 		return;	
 		});
 	}		  
