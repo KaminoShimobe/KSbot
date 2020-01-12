@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.0", bot.user.avatarURL);
+			.setFooter("Version 1.7.2", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1803,6 +1803,7 @@ function lostChest(){
 		let patreon = rows[0].patreon;
 		let stand = rows[0].stand;
 		let them = messageArray[1];
+		let gift = rows[0].gift;
 		function alterMoney(){
 			message.channel.send("What monetary changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -1876,6 +1877,25 @@ function lostChest(){
 						} 
 				});
 		}
+		function alterGift(){
+			message.channel.send("What gift changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		var num = parseInt(message.content);
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}  else if(Number.isInteger(num) == true && num >= 0) {
+							sql = `UPDATE user SET gift = ${num} WHERE id = '${them}'`;
+							con.query(sql);
+							message.channel.send("Gift amount set to " + num + " for the User: " + name + "!");
+							return;
+						} else {
+							message.channel.send("Invalid Input. Must be a value >= 0.");
+	                		return;
+						}
+				});
+		}
 
 		if(rows.length < 1) {
 			
@@ -1884,7 +1904,7 @@ function lostChest(){
 			
 		}	
 
-					message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand) !cancel to cancel");
+					message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift) !cancel to cancel");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		if (message.content == `${prefix}cancel`) {
@@ -1905,6 +1925,10 @@ function lostChest(){
 				} else if(message.content == "stand"){
 					
 					alterStand();
+					return;
+				} else if(message.content == "gift"){
+					
+					alterGift();
 					return;
 				} else {
 					message.channel.send("Invalid selection.")
@@ -7761,7 +7785,7 @@ function getStand(){
 							message.channel.send(".");
 							sql = `UPDATE user SET stand = "「ECHOES」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「ECHOES」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「ECHOES」||")
 							return;
 	            		}   else if (message.content == `KILLER QUEEN`) {
 	               			message.channel.send(".");
@@ -7771,7 +7795,7 @@ function getStand(){
 							message.channel.send(".");
 							sql = `UPDATE user SET stand = "「KILLER QUEEN」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KILLER QUEEN」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「KILLER QUEEN」||")
 							return;
 	            		} 	else if (message.content == `KING CRIMSON`) {
 	               			message.channel.send(".");
@@ -7781,7 +7805,7 @@ function getStand(){
 							message.channel.send(".");
 							sql = `UPDATE user SET stand = "「KING CRIMSON」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KING CRIMSON」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「KING CRIMSON」||")
 							return;
 	            		} 	else if (message.content == `CRAZY DIAMOND`) {
 	               			message.channel.send(".");
@@ -7791,7 +7815,7 @@ function getStand(){
 							message.channel.send(".");	
 							sql = `UPDATE user SET stand = "「CRAZY DIAMOND」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「CRAZY DIAMOND」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「CRAZY DIAMOND」||")
 							return;
 	            		} 	else if (message.content == `HEAVENS DOOR`) {
 	               			message.channel.send(".");
@@ -7801,7 +7825,7 @@ function getStand(){
 							message.channel.send(".");	
 							sql = `UPDATE user SET stand = "「HEAVENS DOOR」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「HEAVEN'S DOOR」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「HEAVEN'S DOOR」||")
 							return;
 	            		} 	else if (message.content == `HARVEST`) {
 	               			message.channel.send(".");
@@ -7811,7 +7835,7 @@ function getStand(){
 							message.channel.send(".");
 							sql = `UPDATE user SET stand = "「HARVEST」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「HARVEST」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「HARVEST」||")
 							return;
 	            		} 	else if (message.content == `STAR PLATINUM`) {
 	               			message.channel.send(".");
@@ -7821,7 +7845,7 @@ function getStand(){
 							message.channel.send(".");	
 							sql = `UPDATE user SET stand = "「STAR PLATINUM」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「STAR PLATINUM」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「STAR PLATINUM」||")
 							return;
 	            		} 	else if (message.content == `THOTH`) {
 	               			message.channel.send(".");
@@ -7831,7 +7855,7 @@ function getStand(){
 							message.channel.send(".");	
 							sql = `UPDATE user SET stand = "「THOTH」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
-							setTimeout(message.channel.send("||YOU HAVE RECEIVED 「THOTH」||"), 200);
+							message.channel.send("||YOU HAVE RECEIVED 「THOTH」||");
 							return;
 	            		}  else {
 	            			message.channel.send("Invalid selection.");
