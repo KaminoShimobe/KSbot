@@ -85,7 +85,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.2", bot.user.avatarURL);
+			.setFooter("Version 1.7.3", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -245,16 +245,17 @@ bot.on("message", async message => {
 	var sql25 = `UPDATE user SET gift =  ${0}`;
 	var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
 	var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
-
+	var fix = `UPDATE achievements SET tasks = 'complete, complete, Refer Someone, complete, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, complete, Open 100 Chests, Open 1000 Chests, Get Married, complete, complete, Get 10+ streak, complete, complete, complete, complete, complete, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, ???, Complete Achievements Set 1', completed = ${20}, status = ${1} WHERE id = '193045612302827520'`;
+	
 
 //   	con.query(sql19, function (err, result) {
 //     	if (err) throw err;
 //     	message.author.send("level column added to server!");
 //   	});
 
-  	con.query(sql20, function (err, result) {
+  	con.query(fix, function (err, result) {
     	if (err) throw err;
-    	message.author.send("achievements table created !");
+    	message.author.send("Cow Achievements fixed!");
   	});
 
 //   	con.query(sql21, function (err, result) {
@@ -6910,8 +6911,13 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 }	
 
 function deleteUser(){
-con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
+message.channel.send(":warning: WARNING :warning: \n All of your data may be potentially lost forever! \n Proceed? (yes or no)");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `yes` || message.content == `Yes` || message.content == `y`|| message.content == `Y`) {
+	               		 con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
+				 if(err) throw err;
 		
 		
 			let mission;
@@ -6939,6 +6945,14 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	return;
 	
 });
+	                		return;
+	            		}   else {	
+					message.reply("Account deletion cancelled");
+					return;
+				}
+					
+				});		
+
 }
 
 function give(){
