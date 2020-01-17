@@ -5088,13 +5088,14 @@ function viewCommands(){
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
 			var comList = co.replace(",", "\n");
+			var coutput = co.split(",");
 			var output = ou.split(",");
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of global commands: \n **` + comList + `**`);
 			if(message.author.id == '242118931769196544'){
-			message.channel.send(`List of global links: \n **` + ou + `**`);
-			message.channel.send(`amount of global links: \n **` + output.length + `**`);	
+			message.channel.send(`Amount of global commands: \n **` + coutput.length + `**`);
+			message.channel.send(`amount of global links: \n **` + output.length + `**`);		
 
 			}
 		}	
@@ -5117,13 +5118,14 @@ function localCommands(){
 			let co = rows[0].commands;
 			let ou = rows[0].comOutput;
 			var comList = co.replace(",", "\n");
+			var coutput = co.split(",");
 			var output = ou.split(",");
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of commands: \n **` + comList + `**`);
 			if(message.author.id == '242118931769196544'){
-			message.channel.send(`List of global links: \n **` + ou + `**`);
-			message.channel.send(`amount of global links: \n **` + output.length + `**`);	
+			message.channel.send(`Amount of commands: \n **` + coutput.length + `**`);
+			message.channel.send(`amount of links: \n **` + output.length + `**`);	
 
 			}
 		}	
