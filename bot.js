@@ -25,6 +25,9 @@ const amuletCoinCD = new Set();
 const questCD = new Set();
 const thothCD = new Set();
 const ballot = new Set();
+const osirisCD = new Set();
+const wagered = new Set();
+const soulless = new Set();
 
 
 
@@ -86,7 +89,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.4", bot.user.avatarURL);
+			.setFooter("Version 1.7.5", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -953,6 +956,11 @@ function rps(){
 		var losses = rows[0].losses;
 		var mName = rows[0].uname;
 		var rank = rows[0].rank;
+		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
@@ -2688,19 +2696,25 @@ function gambleFlip(){
 			let mission;
 			let achievements = rows[0].completed;
 			let tasks = rows[0].tasks;
-			let status = rows[0].status;
+			
 		
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		var money = rows[0].money;
 		var streak = rows[0].streak;
+		let stand = rows[0].stand;
 		
 		var rank = rows[0].rank;
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
 			return;
 		}
+		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}	
 
 
 	var num = parseInt(messageArray[1]); 
@@ -2751,7 +2765,28 @@ function gambleFlip(){
 				num *= .66;
 				message.channel.send("Insurance Kicked in!");
 			}	
-
+			if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 }  
+		
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
+				}	
+			
 			sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-num}, streak = ${0} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			if(streak >= 2){
@@ -2789,9 +2824,15 @@ function gambleSlots(){
 		let sql;
 		var money = rows[0].money;
 		var rank = rows[0].rank;
+		let stand = rows[0].stand;
 		
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+			return;
+		}
+		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
 			return;
 		}
 	
@@ -2939,6 +2980,26 @@ function gambleSlots(){
 				message.channel.send("Insurance Kicked in!");
 			}	
 			
+			if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+			 if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
+				}
 			sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize}  WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 		
@@ -2975,14 +3036,14 @@ const { createCanvas } = require('canvas')
 		let sql;
 		var money = rows[0].money;
 		
-		
+		let stand = rows[0].stand;
 		var rank = rows[0].rank;
 		
-		if(rank == "midnight"){
-			message.reply("You're already playing midnight!");
+		
+	if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
 			return;
 		}
-
 
 	var num = parseInt(messageArray[1]); 
 	if(Number.isInteger(num) === true && money >= num && num > 0){
@@ -3796,6 +3857,7 @@ let prize;
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
+					
 				} else 	if(message.content == 2){
 					var art = topMidBad.toBuffer() // defaults to PNG
 					const win = new Discord.Attachment(art, "midnight.png");
@@ -3884,6 +3946,27 @@ let prize;
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
+				}
+				if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+				
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
 				}
 				sql = `UPDATE user SET money = ${money - prize}, , lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
@@ -4116,6 +4199,26 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
+				if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
+				}
 				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
@@ -4347,6 +4450,26 @@ let prize;
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
 				}
+				if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
+				}
 				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
 				message.reply("lost $" + prize + "!\n Try again!");
@@ -4577,6 +4700,26 @@ let prize;
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
+				}
+				if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
 				}
 				sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
@@ -4811,6 +4954,26 @@ let prize;
 			.attachFile(win)
 			.setColor("#1f3c5b");	
 			message.channel.send(reveal);
+				}
+				if (wagered.has(message.author.id)) {
+		wagered.delete(message.author.id);			
+            message.channel.send("OSIRIS will collect" + message.author.username + "'s soul! \n **GOOD!**");
+	soulless.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+         soulless.delete(message.author.id);
+	  message.channel.send(message.author.username + "'s soul has been released");
+        }, (1000*60*60));			
+        
+   		 } 
+				if(stand == "「OSIRIS」"){
+					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+					soulless.add(message.author.id);
+					setTimeout(() => {
+					  // Removes the user from the set after a minute
+					 soulless.delete(message.author.id);
+					  message.channel.send(message.author.username + "'s soul has been released");
+					}, (1000*60*60));
 				}
 				sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-prize} WHERE id = '${message.author.id}'`;
 				con.query(sql);	
@@ -7147,7 +7310,10 @@ function give(){
 		if(err) throw err;
 		
 	
-		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 
 			function userInfo(users, index){
 				
@@ -7233,7 +7399,10 @@ function give(){
 		var lastMsg = toBeat.lastMessage.content.replace(/[^\d.-]/g, '');
 		var lastInt = parseInt(lastMsg);
 		
-		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 		
 		if(rows.length < 1) {
@@ -7286,7 +7455,10 @@ function give(){
 	function firstBomb(){
 		
 		
-
+if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 
 			if (Bomb1CD.has(message.author.id)) {
             message.reply("Killer Queen must wait about 30 seconds from when you first used the first bomb!");
@@ -7320,7 +7492,10 @@ function give(){
 	
 	function secondBomb(){
 		
-		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 		let member = message.mentions.members.first();
 
@@ -7360,6 +7535,10 @@ function give(){
 		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7413,6 +7592,10 @@ function give(){
 		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7463,6 +7646,10 @@ function give(){
 		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7503,6 +7690,10 @@ function give(){
 		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7547,6 +7738,10 @@ function give(){
 		con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7601,6 +7796,10 @@ function heavensDoor(){
 	con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 			let mission;
 			let achievement = rows[0].completed;
@@ -7714,7 +7913,10 @@ function thoth(){
 			
 
 		
-		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
 		
 		
 		if(rows.length < 1) {
@@ -7794,6 +7996,203 @@ function thoth(){
 
 		});
 	
+	}
+	
+function osirisWager(){
+
+		
+		let member = message.mentions.members.first();
+		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+		
+		var name = bot.users.get(member.id);
+		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
+			
+
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" They have no user!");
+			return;
+		}	else {
+			
+			
+			if (osirisCD.has(message.author.id)) {
+				
+            message.channel.send("OSIRIS must wait about 5 minutes from when you first used it!");
+            return;
+   		 } 
+			 			
+			
+			 
+				
+			 else {
+				var msg = message.content;
+				osirisCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          osirisCD.delete(message.author.id);
+        }, (1000*60*5));
+			}
+				
+				
+				
+			
+		
+			
+			wagered.add(member.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          wagered.delete(member.id);
+	  message.channel.send(member.username + "'s soul has been released");
+        }, (1000*60*60));
+
+			message.channel.send(member.username + "'s soul has been wagered for 60 minutes!");
+				
+
+			
+	
+			
+			
+			
+			
+			
+			
+			return;
+		
+		}
+
+
+});
+		
+	
+	}
+	
+function oSpin(){
+
+		
+		let member = message.mentions.members.first();
+		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+		
+		var money = rows[0].money;
+		var streak = rows[0].streak;
+		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
+			
+
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" They have no user!");
+			return;
+		}	else {
+			
+			
+			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		
+		
+		var Omoney = rows[0].money;
+			 			
+			var num = parseInt(messageArray[2]); 
+	if(Number.isInteger(num) === true && money >= num && num > 0){
+
+	var bet;
+	var chance;
+		
+		
+			chance = Math.floor(Math.random() * 2) + 1;
+			
+		
+		
+		
+		if(chance == 1 ){
+
+			if(streak >= 2){
+			bet = num + Math.floor((streak / 10) * num );
+			sql = `UPDATE user SET money = ${Omoney + bet}, lasttrans = ${bet}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);	
+			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
+				
+			}
+			else {
+			sql = `UPDATE user SET money = ${Omoney + num}, lasttrans = ${num}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+		
+			message.reply("*CHA~CHING!* You made $" + num + "!");
+		}
+			
+		} else {
+			
+				
+			 
+			sql = `UPDATE user SET money = ${money - num} WHERE id = '${member.id}'`;
+			con.query(sql, console.log);
+			
+			message.reply("*CHA~CHING!* You lost $" + num + "!");
+			
+		}
+
+
+		
+	return;
+	} else{
+		message.reply("Can't bet that...");
+		return;
+	}
+
+	});
+			 
+			
+			
+				
+				
+				
+			
+		
+			
+	
+
+			
+	
+			
+			
+			
+			
+			
+			
+			return;
+		
+		}
+
+});
+		
+	
 	}	
 
 function getStand(){
@@ -7813,7 +8212,7 @@ function getStand(){
 			return;
 		}
 
-		message.channel.send("Which Stand Do you want: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH");
+		message.channel.send("Which Stand Do you want: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		
@@ -7897,7 +8296,17 @@ function getStand(){
 							con.query(sql, console.log);
 							message.channel.send("||YOU HAVE RECEIVED 「THOTH」||");
 							return;
-	            		}  else {
+	            		} 	else if (message.content == `OSIRIS`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「OSIRIS」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							message.channel.send("||YOU HAVE RECEIVED 「OSIRIS」||");
+							return;
+	            		} else {
 	            			message.channel.send("Invalid selection.");
 	            			return;
 	            		}
@@ -7923,8 +8332,13 @@ function standDisc(){
 		let sql;
 		let stand = rows[0].stand;
 		
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
+		
 
-		var chance = Math.floor(Math.random() * 8) + 1;
+		var chance = Math.floor(Math.random() * 9) + 1;
 		var ability = Math.floor(Math.random() * 10) + 1;
 		
 
@@ -8002,6 +8416,15 @@ function standDisc(){
 			sql = `UPDATE user SET stand = "「THOTH」" WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 			setTimeout(message.channel.send("||YOU HAVE RECEIVED 「THOTH」||"), 200);
+		} else if(chance == 9){
+			message.channel.send(".");
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			message.channel.send(".");	
+			sql = `UPDATE user SET stand = "「OSIRIS」" WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			setTimeout(message.channel.send("||YOU HAVE RECEIVED 「OSIRIS」||"), 200);
 		}
 	} else {
 			message.channel.send(".");
@@ -8244,7 +8667,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n __Thoth__ \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune.`)
+			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n __Thoth__ \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune. \n __Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(stands);
@@ -9464,6 +9887,36 @@ if(command === `${prefix}THOTH` && messageArray[1] != undefined && stands == tru
 			
 		});		
 }	
+	
+if(command === `${prefix}OSIRIS` && messageArray[1] != undefined && stands == true){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stand = rows[0].stand;
+			
+		if(stand == "「OSIRIS」"){
+		osirisWager();
+	}		else {
+		message.reply(" You do not have the power of 「OSIRIS」.")
+	}
+			
+		});		
+}	
+	
+if(command === `${prefix}OSPIN` && messageArray[1] != undefined && messageArray[2] != undefined && stands == true){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stand = rows[0].stand;
+			
+		if(stand == "「OSIRIS」"){
+		oSpin();
+	}		else {
+		message.reply(" You do not have the power of 「OSIRIS」.")
+	}
+			
+		});		
+}		
 	
 	if(command === `${prefix}ZAWARUDO` && stands == true){
 		if(message.author.id == message.guild.ownerID){
