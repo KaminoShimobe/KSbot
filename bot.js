@@ -5932,6 +5932,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	} else {
 	upVote += 1;
 	total += 1;
+	message.channel.send(user.username + " voted yes!");	
 	ballot.add(user.id)
 	}	
 
@@ -5941,10 +5942,11 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	} else {
 	 downVote += 1;
 	total += 1;
+	message.channel.send(user.username + " voted no!");
 	ballot.add(user.id)	
 	}
 
- } else if(emoji.name === "✅" && message.id === sentEmbed.id && user.id === message.author.id) {
+ } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
  		 sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
