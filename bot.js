@@ -24,6 +24,7 @@ const insuranceCD = new Set();
 const amuletCoinCD = new Set();
 const questCD = new Set();
 const thothCD = new Set();
+const ballot = new Set();
 
 
 
@@ -5926,15 +5927,24 @@ if(user.bot)  return;
 const { message, emoji } = messageReaction;
 
 if(emoji.name === "👍" && message.id === sentEmbed.id) {
+	if(ballot.has(user.id)){
+		console.log("Already voted!");
+	} else {
 	upVote += 1;
 	total += 1;
+	ballot.add(user.id)
+	}	
 
  } else if(emoji.name === "👎" && message.id === sentEmbed.id) {
- 	downVote += 1;
+ 	if(ballot.has(user.id)){
+		console.log("Already voted!");	
+	} else {
+	 downVote += 1;
 	total += 1;
+	ballot.add(user.id)	
+	}
 
-
- } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
+ } else if(emoji.name === "✅" && message.id === sentEmbed.id && user.id === message.author.id) {
  		 sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -5942,6 +5952,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
   			.catch(console.error);
  		var yay = Math.floor((upVote / total) * 100);    
 		var nay = Math.floor((downVote / total) * 100); 
+	 	ballot.clear();
 		whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");  
 		return;
 
