@@ -9237,14 +9237,14 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 
 		
 	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
-		let thing = new Discord.RichEmbed()
+// 		let thing = new Discord.RichEmbed()
 
 			
 			
-			.setImage(output[comList.indexOf(message.content)])
-			.setColor("#00b561");
+// 			.setImage(output[comList.indexOf(message.content)])
+// 			.setColor("#00b561");
 				  
-		message.channel.send(thing);	
+		message.channel.send(output[comList.indexOf(message.content)]);	
 	}	 else {
 		return;
 	}	
@@ -9275,14 +9275,14 @@ con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
 
 		
 	if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
-		let thing = new Discord.RichEmbed()
+// 		let thing = new Discord.RichEmbed()
 
 			
 			
-			.setImage(output[comList.indexOf(message.content)])
-			.setColor("#00b561");
+// 			.setImage(output[comList.indexOf(message.content)])
+// 			.setColor("#00b561");
 				  
-		message.channel.send(thing);	
+		message.channel.send(output[comList.indexOf(message.content)]);	
 	}	 else {
 		return;
 	}	
