@@ -5092,6 +5092,11 @@ function viewCommands(){
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of global commands: \n **` + comList + `**`);
+			if(message.author.id == '242118931769196544'){
+			message.channel.send(`List of global links: \n **` + ou + `**`);
+			message.channel.send(`amount of global links: \n **` + output.length + `**`);	
+
+			}
 		}	
 	});	
 }	
@@ -5116,6 +5121,11 @@ function localCommands(){
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of commands: \n **` + comList + `**`);
+			if(message.author.id == '242118931769196544'){
+			message.channel.send(`List of global links: \n **` + ou + `**`);
+			message.channel.send(`amount of global links: \n **` + output.length + `**`);	
+
+			}
 		}	
 	});	
 }	
