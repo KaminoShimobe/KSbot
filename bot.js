@@ -86,7 +86,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.3", bot.user.avatarURL);
+			.setFooter("Version 1.7.4", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -5062,7 +5062,8 @@ function imageObtain(){
 			.setColor("#00b561")
 			.setTimestamp();
 				  
-		message.channel.send(thing);		  
+		message.channel.send(thing);	
+		message.channel.send(img);	
 				  
 	  }	else {
 		  
