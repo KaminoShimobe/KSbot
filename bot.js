@@ -2710,7 +2710,7 @@ function gambleFlip(){
 	var chance;
 		
 		
-			chance = Math.floor(Math.random() * 5) + 1;
+			chance = Math.floor(Math.random() * 2) + 1;
 			
 		
 		
