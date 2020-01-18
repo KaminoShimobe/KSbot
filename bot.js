@@ -8051,7 +8051,7 @@ function osirisWager(){
 				
 			
 		
-			console.log(member.username);
+			
 			wagered.add(member.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
@@ -8088,6 +8088,7 @@ function oSpin(){
 		if(err) throw err;
 		let sql;
 		
+		var name = bot.users.get(member.id);
 		
 		var money = rows[0].money;
 		var streak = rows[0].streak;
@@ -8154,7 +8155,7 @@ function oSpin(){
 			sql = `UPDATE user SET money = ${money - num} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
-			message.reply("*CHA~CHING!* You lost $" + num + "!");
+			message.reply(`**GOOD!**\n ${name} lost $${num} due to OSIRIS!`);
 			
 		}
 
