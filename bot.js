@@ -8056,10 +8056,10 @@ function osirisWager(){
         setTimeout(() => {
           // Removes the user from the set after a minute
           wagered.delete(member.id);
-	  message.channel.send(${name} + `'s soul has been released`);
+	  message.channel.send(`${name}'s soul has been released`);
         }, (1000*60*60));
 
-			message.channel.send(${name} + `'s soul has been wagered for 60 minutes!`);
+			message.channel.send(`${name}'s soul has been wagered for 60 minutes!`);
 				
 
 			
