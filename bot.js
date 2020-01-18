@@ -8664,15 +8664,123 @@ const artPiece = new Discord.Attachment(art, fileName);
 }		
 
 function standHelp(){
-	let stands = new Discord.RichEmbed()
+
+	let stand1 = new Discord.RichEmbed()
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins. \n __Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes. \n __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes. \n __Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n __Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes. \n __Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n __King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n __Thoth__ \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune. \n __Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
+			.setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins.`)
 			.setColor("#1d498e"); 
 
-		message.author.sendEmbed(stands);
-		message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+	let stand2 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes.`)
+			.setColor("#1d498e"); 		
+	
+	let stand3 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(` __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes.`)
+			.setColor("#1d498e"); 
+
+	let stand4 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes.`)
+			.setColor("#1d498e"); 	
+
+	let stand5 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes.`)
+			.setColor("#1d498e"); 	
+
+	let stand6 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours.`)
+			.setColor("#1d498e");
+
+	let stand7 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. `)
+			.setColor("#1d498e"); 	
+
+	let stand8 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`\n __Thoth__ \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune. `)
+			.setColor("#1d498e"); 
+
+	let stand9 = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
+			.setColor("#1d498e"); 					 				
+
+	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `STAR PLATINUM`) {
+	            			message.author.sendEmbed(stand1);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `HARVEST`) {
+	            			message.author.sendEmbed(stand2);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `ECHOES`) {
+	            			message.author.sendEmbed(stand3);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `HEAVENS DOOR`) {
+	            			message.author.sendEmbed(stand4);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `CRAZY DIAMOND`) {
+	            			message.author.sendEmbed(stand5);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `KILLER QUEEN`) {
+	            			message.author.sendEmbed(stand6);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `KING CRIMSON`) {
+	            			message.author.sendEmbed(stand7);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `THOTH`) {
+	            			message.author.sendEmbed(stand8);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else if (message.content == `OSIRIS`) {
+	            			message.author.sendEmbed(stand9);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		}	else {
+	            			message.channel.send("Invalid Selection.")
+	            			return;
+	            		}
+
+
+
+
+
+});
+
+	            			
+	
 }
 
 function help(){
@@ -10002,6 +10110,18 @@ if(command === `${prefix}THOTH` && messageArray[1] != undefined && stands == fal
 			
 			return;		
 }	
+
+if(command === `${prefix}OSIRIS` && messageArray[1] != undefined && stands == false){
+	message.reply("Stand Abilities are disabled in this server!");
+			
+			return;
+}	
+	
+if(command === `${prefix}OSPIN` && messageArray[1] != undefined && messageArray[2] != undefined && stands == false){
+	message.reply("Stand Abilities are disabled in this server!");
+			
+			return;	
+}
 	
 	
 	
