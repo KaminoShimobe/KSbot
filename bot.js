@@ -5203,7 +5203,7 @@ function resetCommands(){
 			
 			return;
 		} else {
-			sql = `DELETE FROM global WHERE id = '${message.guild.id}'`;
+			sql = `DELETE * FROM global'`;
 			con.query(sql, console.log);
 			message.reply(`Commands Reset!`);
 		}
@@ -5257,11 +5257,11 @@ function viewCommands(){
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of global commands: \n **` + comList + `**`);
-			if(message.author.id == '242118931769196544'){
-			message.channel.send(`Amount of global commands: \n **` + coutput.length + `**`);
-			message.channel.send(`amount of global links: \n **` + output.length + `**`);		
+			// if(message.author.id == '242118931769196544'){
+			// message.channel.send(`Amount of global commands: \n **` + coutput.length + `**`);
+			// message.channel.send(`amount of global links: \n **` + output.length + `**`);		
 
-			}
+			// }
 		}	
 	});	
 }	
@@ -5287,11 +5287,11 @@ function localCommands(){
 			console.log(co);
 			console.log(ou);
 			message.channel.send(`List of commands: \n **` + comList + `**`);
-			if(message.author.id == '242118931769196544'){
-			message.channel.send(`Amount of commands: \n **` + coutput.length + `**`);
-			message.channel.send(`amount of links: \n **` + output.length + `**`);	
+			// if(message.author.id == '242118931769196544'){
+			// message.channel.send(`Amount of commands: \n **` + coutput.length + `**`);
+			// message.channel.send(`amount of links: \n **` + output.length + `**`);	
 
-			}
+			// }
 		}	
 	});	
 }	
@@ -8725,7 +8725,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}OSPIN [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
+			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
 			.setColor("#1d498e"); 					 				
 
 	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
