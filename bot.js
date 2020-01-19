@@ -5203,7 +5203,7 @@ function resetCommands(){
 			
 			return;
 		} else {
-			sql = `DELETE * FROM global'`;
+			sql = `DELETE * FROM global`;
 			con.query(sql, console.log);
 			message.reply(`Commands Reset!`);
 		}
