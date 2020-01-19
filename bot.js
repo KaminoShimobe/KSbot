@@ -5195,7 +5195,7 @@ function getPet(){
 //MISC	
 
 function resetCommands(){
-	con.query(`SELECT * FROM global'`, (err, rows) => {
+	con.query(`SELECT * FROM global`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
