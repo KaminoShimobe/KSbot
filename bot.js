@@ -5195,7 +5195,7 @@ function getPet(){
 //MISC	
 
 function resetCommands(){
-	con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) => {
+	con.query(`SELECT * FROM global'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
 		if(rows.length < 1) {
@@ -5203,7 +5203,7 @@ function resetCommands(){
 			
 			return;
 		} else {
-			sql = `DELETE * FROM global`;
+			sql = `DELETE FROM global`;
 			con.query(sql, console.log);
 			message.reply(`Commands Reset!`);
 		}
