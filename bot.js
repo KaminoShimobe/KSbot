@@ -6172,7 +6172,7 @@ function tierlist(){
 	               		
 				}	else {
 					
-					var sTier = [message.guild.members.get(message.content).avatarURL];
+					
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
 						  .then(image => {
@@ -6182,7 +6182,7 @@ function tierlist(){
     						}
     					
     					  image.resize(900, 700)
-    					  Jimp.read(sTier[0])
+    					  Jimp.read(message.author.avatarURL)
 						  .then(s1 => { 
 						  s1.resize(100, 100); 
 						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
