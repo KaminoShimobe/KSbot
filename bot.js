@@ -6182,19 +6182,19 @@ function tierlist(){
     						}
     					
     					  image.resize(900, 700)
-    					  index = 0;
-    					  sTier.forEach(function(user){
-    					  	console.log(user); // This should log every mentioned user
-						  	 Jimp.read(user.avatarURL)
+    					  
+    					
+						  	 Jimp.read(sTier[0].avatarURL)
 						  .then(s1 => { 
 						  s1.resize(90, 90); 
-						  image.composite(s1, 25 + index, 10 + index, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
-						  index += 100;
-						})
-						image.write("tierlist.png");
+						  image.composite(125, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
-						  });
+						})
+						
     					  
+    					  
+						 
 //    					  if(sTier[0] != undefined){
 //    					  	Jimp.read(sTier[0])
 //						  .then(s1 => { 
