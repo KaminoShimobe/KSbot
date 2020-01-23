@@ -6182,16 +6182,18 @@ function tierlist(){
     						}
     					
     					  image.resize(900, 700);
-    					  if(sTier[0] != undefined){
-    					  	Jimp.read(sTier[0])
-						  .then(s1 => { 
-						  s1.resize(100, 100); 
-						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0])
-						  image.write("tierlist.png");
+    					   image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
-						
-						  })
-    					  }
+//    					  if(sTier[0] != undefined){
+//    					  	Jimp.read(sTier[0])
+//						  .then(s1 => { 
+//						  s1.resize(100, 100); 
+//						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0])
+//						  image.write("tierlist.png");
+//						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+//						
+//						  })
+//    					  }
     					   }).catch(err => {
 							console.error(err);
 						    // Handle an exception.
