@@ -6159,7 +6159,7 @@ function tierlist(){
 	               		 message.channel.send("Cancelled.");
 	                		return;
 	            		}   else {
-					var listName = message.content
+					var listName = message.content;
 					
 			message.channel.send("Mention 1 - 8 users for **S tier** \n Type !skip to skip or !cancel to cancel?");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -6187,12 +6187,15 @@ function tierlist(){
 						  .then(s1 => { 
 						  s1.resize(100, 100); 
 						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0])
-						  
+						  image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						
 						  })
     					  }
-    					  image.write("tierlist.png");
-							 message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
-						  })
+    					   }).catch(err => {
+							console.error(err);
+						    // Handle an exception.
+						  });
     					
 
 					
