@@ -6168,13 +6168,62 @@ function tierlist(){
 				if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		} 	else if (message.content == `!skip`) {
-	               		
-				}	else {
+	            		} 		else {
 					var sTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **A tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
 					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var aTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **B tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
 					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var bTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **C tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
 					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var cTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **D tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var dTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **E tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var eTier = message.mentions.users.array();
+					message.channel.send("Mention 1 - 9 users for **F tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 		else {
+					var fTier = message.mentions.users.array();
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
 						  .then(image => {
 						  	function onBuffer(err, buffer) {
@@ -6194,8 +6243,78 @@ function tierlist(){
 						  .then(s2 => { 
 						  s2.resize(85, 85); 
 						  image.composite(s2, 220, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[2] != undefined){
+						   Jimp.read(sTier[2].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 305, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[3] != undefined){
+						   Jimp.read(sTier[3].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 390, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[4] != undefined){
+						   Jimp.read(sTier[4].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 475, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[5] != undefined){
+						   Jimp.read(sTier[5].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 560, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[6] != undefined){
+						   Jimp.read(sTier[6].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 645, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[7] != undefined){
+						   Jimp.read(sTier[7].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 730, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  if(sTier[8] != undefined){
+						   Jimp.read(sTier[8].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 815, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
 						  image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
 						})
 						} else {
 						image.write("tierlist.png");
@@ -6207,6 +6326,21 @@ function tierlist(){
 							console.error(err);
 						    // Handle an exception.
 						  });
+				}
+				});
+				}
+				});
+				}
+				});
+				}
+				});
+				}
+				});
+				}
+				});
+					
+					
+					
     					
 
 					
