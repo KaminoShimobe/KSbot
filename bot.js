@@ -10235,13 +10235,13 @@ if(command === `!achievements`){
 
 }
 	
-if(command === `!tierlist`){
-	if(message.author.id == '242118931769196544'){
-		tierlist();
+// if(command === `!tierlist`){
+// 	if(message.author.id == '242118931769196544'){
+// 		tierlist();
 
-	}
+// 	}
 
-}	
+// }	
 	
 	
 
@@ -11412,6 +11412,36 @@ if(command === `${prefix}poll` && messageArray[1] != undefined){
 
 
 
+	}
+	
+if(command === `${prefix}tierlist`){
+	
+
+
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		tierlist();
+	}
+} else {
+// insert function here.
+	tierlist();
+}
+		
 	}	
 	
 if(command === `${prefix}who` && messageArray[1] != undefined){
