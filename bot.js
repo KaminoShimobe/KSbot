@@ -6172,6 +6172,7 @@ function tierlist(){
 	               		
 				}	else {
 					var sTier = message.mentions.users;
+					message.channel.send(sTier[0].username);
 					
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
