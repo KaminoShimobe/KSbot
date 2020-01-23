@@ -6171,7 +6171,7 @@ function tierlist(){
 	            		} 	else if (message.content == `!skip`) {
 	               		
 				}	else {
-					var sTier = message.mentions.users;
+					var sTier = message.mentions.users.array();
 					message.channel.send(sTier[0].username);
 					
 					
