@@ -6184,16 +6184,25 @@ function tierlist(){
     					
     					  image.resize(900, 700)
     					  
-    					
+    					if(sTier[0] != undefined){
 						  	 Jimp.read(sTier[0].avatarURL)
 						  .then(s1 => { 
 						  s1.resize(85, 85); 
 						  image.composite(s1, 135, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
-					
-						}).then(image => {
-						image.write("tierlist.png");
-						  message.channel.send(`${message.author.username}'s **${listName}** tierlist:`, { files: ["tierlist.png"] })
+						  if(sTier[1] != undefined){
+						   Jimp.read(sTier[1].avatarURL)
+						  .then(s2 => { 
+						  s2.resize(85, 85); 
+						  image.composite(s2, 220, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
 						})
+						} else {
+						image.write("tierlist.png");
+						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
+						}
+						})
+						}
 						}).catch(err => {
 							console.error(err);
 						    // Handle an exception.
