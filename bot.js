@@ -6145,6 +6145,65 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 	
 }
+	
+function tierlist(){
+	
+
+	
+		
+		message.channel.send("What's the name of your tierlist? \n Type !cancel to cancel");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+	            		
+	            		if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}   else {
+					var listName = message.content
+					
+			message.channel.send("Mention 1 - 8 users for **S tier** \n Type !skip to skip or !cancel to cancel?");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					
+				if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		} 	else if (message.content == `!skip`) {
+	               		
+				}	else {
+					var list = message.content.split(' ');
+					var sTier = [message.guild.members.get(list[0]).avatarURL, message.guild.members.get(list[1]).avatarURL, message.guild.members.get(list[2]).avatarURL, message.guild.members.get(list[3]).avatarURL, message.guild.members.get(list[4]).avatarURL, message.guild.members.get(list[5]).avatarURL, message.guild.members.get(list[6]).avatarURL, message.guild.members.get(list[7]).avatarURL];
+					
+					Jimp.read('https://i.imgflip.com/32g9sn.png')
+						  .then(image => {
+						  	function onBuffer(err, buffer) {
+      							if (err) throw err;
+      							console.log(buffer);
+    						}
+    					
+    					  image.resize(900, 700);
+    					  if(sTier[0] != undefined){
+    					  	Jimp.read(sTier[0])
+						  .then(s1 => { 
+						  s1.resize(100, 100); 
+						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0])
+						  })
+    					  }
+    					  image.write("tierlist.png");
+							 person.send(`${message.author.username}'s **${listname}** tierlist`, { files: ["tierlist.png"] })
+						  })
+    					
+
+					
+				}
+		
+			});
+			}
+		});		
+		
+	
+	
+}	
 
 	
 function ball8(){
@@ -9492,6 +9551,14 @@ if(command === `!achievements`){
 	}
 
 }
+	
+if(command === `!tierlist`){
+	if(message.author.id == '242118931769196544'){
+		tierlist();
+
+	}
+
+}	
 	
 	
 
