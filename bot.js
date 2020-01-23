@@ -6161,7 +6161,7 @@ function tierlist(){
 	            		}   else {
 					var listName = message.content;
 					
-			message.channel.send("Mention 1 - 8 users for **S tier** \n Type !skip to skip or !cancel to cancel?");
+			message.channel.send("Mention 1 - 9 users for **S tier** \n Type !skip to skip or !cancel to cancel?");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 					
@@ -6171,7 +6171,7 @@ function tierlist(){
 	            		} 	else if (message.content == `!skip`) {
 	               		
 				}	else {
-					
+					var sTier = message.mentions.members.array();
 					
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
@@ -6182,10 +6182,10 @@ function tierlist(){
     						}
     					
     					  image.resize(900, 700)
-    					  Jimp.read(message.author.avatarURL)
+    					  Jimp.read(sTier[0].avatarURL)
 						  .then(s1 => { 
-						  s1.resize(100, 100); 
-						  image.composite(s1, 110, 110, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  s1.resize(90, 90); 
+						  image.composite(s1, 125, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
 						  image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
 						})
