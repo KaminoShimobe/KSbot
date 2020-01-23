@@ -6190,9 +6190,10 @@ function tierlist(){
 						  s1.resize(85, 85); 
 						  image.composite(s1, 135, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
 					
-						})
+						}).then(image => {
 						image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist:`, { files: ["tierlist.png"] })
+						})
 						}).catch(err => {
 							console.error(err);
 						    // Handle an exception.
