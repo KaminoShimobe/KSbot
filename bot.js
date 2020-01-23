@@ -6171,8 +6171,8 @@ function tierlist(){
 	            		} 	else if (message.content == `!skip`) {
 	               		
 				}	else {
-					var list = message.content.split(' ');
-					var sTier = [message.guild.members.get(list[0]).avatarURL, message.guild.members.get(list[1]).avatarURL, message.guild.members.get(list[2]).avatarURL, message.guild.members.get(list[3]).avatarURL, message.guild.members.get(list[4]).avatarURL, message.guild.members.get(list[5]).avatarURL, message.guild.members.get(list[6]).avatarURL, message.guild.members.get(list[7]).avatarURL];
+					
+					var sTier = [message.guild.members.get(message.content).avatarURL];
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
 						  .then(image => {
@@ -6181,7 +6181,7 @@ function tierlist(){
       							console.log(buffer);
     						}
     					
-    					  image.resize(900, 700).getBuffer(Jimp.MIME_JPEG, onBuffer);
+    					  image.resize(900, 700)
     					  Jimp.read(sTier[0])
 						  .then(s1 => { 
 						  s1.resize(100, 100); 
