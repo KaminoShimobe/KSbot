@@ -6171,7 +6171,7 @@ function tierlist(){
 	            		} 	else if (message.content == `!skip`) {
 	               		
 				}	else {
-					var sTier = message.mentions.members.array();
+					var sTier = message.mentions.users;
 					
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
