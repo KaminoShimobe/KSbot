@@ -6171,7 +6171,7 @@ function tierlist(){
 	            		} 	else if (message.content == `!skip`) {
 	               		
 				}	else {
-					var sTier = message.mentions.users.array();
+					var sTier = message.mentions.users;
 					
 					
 					Jimp.read('https://i.imgflip.com/32g9sn.png')
@@ -6187,7 +6187,7 @@ function tierlist(){
 						  	 Jimp.read(sTier[0].avatarURL)
 						  .then(s1 => { 
 						  s1.resize(90, 90); 
-						  image.composite(125, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  image.composite(s1, 125, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
 						  image.write("tierlist.png");
 						  message.channel.send(`${message.author.username}'s **${listName}** tierlist`, { files: ["tierlist.png"] })
 						})
