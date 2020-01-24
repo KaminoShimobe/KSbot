@@ -34,7 +34,7 @@ const soulless = new Set();
 const bot = new Discord.Client({disableEveryone: true})
 
 
-//TODO: Fix Achievement Leaderboard, Custom Command mismatch bug, Achievement Counter
+//TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
 
 
 
@@ -179,7 +179,7 @@ bot.on("guildDelete", guild => {
 			return;
 			
 		} else {
-			sql = `DELETE FROM server WHERE id = '$guild.id}'`;
+			sql = `DELETE FROM server WHERE id = '${guild.id}'`;
 			con.query(sql, console.log);
 			me.send(`SOMEBODY HATES KS BOT ):`);
 			return;
