@@ -6794,7 +6794,7 @@ function tierlist(){
 						   Jimp.read(aTier[5].avatarURL)
 						  .then(s2 => { 
 						  s2.resize(85, 85); 
-						  image.composite(s2, 560, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+						  image.composite(s2, 560, 112, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
 						  if(aTier[6] != undefined){
 						   Jimp.read(aTier[6].avatarURL)
 						  .then(s2 => { 
