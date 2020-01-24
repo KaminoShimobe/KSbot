@@ -179,9 +179,10 @@ bot.on("guildDelete", guild => {
 			return;
 			
 		} else {
-			sql = `DELETE FROM user WHERE id = '$guild.id}'`;
+			sql = `DELETE FROM server WHERE id = '$guild.id}'`;
 			con.query(sql, console.log);
-			me.reply(`SOMEBODY HATES KS BOT ):`)
+			me.send(`SOMEBODY HATES KS BOT ):`);
+			return;
 		}	
 
 
