@@ -135,7 +135,7 @@ bot.on("guildCreate", guild => {
 		var me = bot.users.get('242118931769196544');	    
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, ${undefined}, ${false}, 'nothing', ${0}, '', ${0})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, ${undefined}, ${false}, 'nothing', ${0}, '', ${0})`;
 			con.query(sql, console.log);
 			me.send(guild.name + " has been set up properly.")
 			
@@ -181,7 +181,7 @@ bot.on("guildDelete", guild => {
 		} else {
 			sql = `DELETE FROM server WHERE id = '${guild.id}'`;
 			con.query(sql, console.log);
-			me.send(`SOMEBODY HATES KS BOT ):`);
+			me.send(`I was kicked from ${guild.name} and that server's id was ${guild.id}`);
 			return;
 		}	
 
