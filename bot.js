@@ -128,6 +128,66 @@ onlineUpdate();
 
 });
 
+bot.on("guildCreate", guild => {
+    con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var me = bot.users.get('242118931769196544');	    
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, ${undefined}, ${false}, 'nothing', ${0}, '', ${0})`;
+			con.query(sql, console.log);
+			me.send(guild.name + " has been set up properly.")
+			
+		}
+
+
+		 
+	});			
+    console.log("Joined a guild: " + guild.name);
+    let generalChannel = guild.channels.find(channel => channel.name === "general");
+    var homie = bot.users.get(guild.ownerID);
+	let yeet = new Discord.RichEmbed()
+
+			
+			.setTitle("Welcome to KS-Bot!")
+			.setColor("#1f3c5b")
+			.setDescription(`To get started, a channel designated for bot messages is recommended. \n !help gives a directory of all the commands \n !help :warning: shows admin commands \n To enable chests you need to designate a channel first! \n Any other concerns/questions please contact @KaminoShimobe#1190`)
+			.setTimestamp()
+			.setFooter("Thank you for Inviting me!", bot.user.avatarURL);
+		
+	if(generalChannel){
+		generalChannel.send(yeet);	
+	} else {
+		homie.send(yeet);	
+	}	
+		
+   
+
+    
+});
+
+//removed from a server
+bot.on("guildDelete", guild => {
+    console.log("Left a guild: " + guild.name);
+    con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		var me = bot.users.get('242118931769196544');	    
+		if(rows.length < 1) {
+			
+			return;
+			
+		} else {
+			sql = `DELETE FROM user WHERE id = '$guild.id}'`;
+			con.query(sql, console.log);
+			me.reply(`SOMEBODY HATES KS BOT ):`)
+		}	
+
+
+		 
+	});
+})
 
 
 
@@ -1483,7 +1543,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '', ${false}, 'nothing', ${0}, '', ${0})`;
+			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, ${undefined}, ${false}, 'nothing', ${0}, '', ${0})`;
 			con.query(sql, console.log);
 			
 			
@@ -1653,6 +1713,11 @@ function collect(){
 			let achievements = rows[0].completed;
 			let tasks = rows[0].tasks;
 			let status = rows[0].status;
+			if(rows.length < 1) {
+				message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+			
+				return;
+				}
 			
 		con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
 		
