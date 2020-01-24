@@ -89,7 +89,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.7", bot.user.avatarURL);
+			.setFooter("Version 1.7.8", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -129,22 +129,8 @@ onlineUpdate();
 });
 
 bot.on("guildCreate", guild => {
-    con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		var me = bot.users.get('242118931769196544');	    
-		if(rows.length < 1) {
-			
-			sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, ${undefined}, ${false}, 'nothing', ${0}, '', ${0})`;
-			con.query(sql, console.log);
-			me.send(guild.name + " has been set up properly.")
-			
-		}
-
-
-		 
-	});			
-    console.log("Joined a guild: " + guild.name);
+    var me = bot.users.get('242118931769196544');			
+    me.send("Joined a guild: " + guild.name);
     let generalChannel = guild.channels.find(channel => channel.name === "general");
     var homie = bot.users.get(guild.ownerID);
 	let yeet = new Discord.RichEmbed()
