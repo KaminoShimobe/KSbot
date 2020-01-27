@@ -28,6 +28,7 @@ const ballot = new Set();
 const osirisCD = new Set();
 const wagered = new Set();
 const soulless = new Set();
+const mafiaPlayers = new Set();
 
 
 
@@ -1000,6 +1001,69 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 			}); 
 			});
 		}
+
+function mafia(){
+	mafiaPlayers.add(message.author.id)
+	message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+	
+	const whereIam = message.channel;
+	let note = new Discord.RichEmbed()
+
+			
+			.setTitle(message.author.username + " is looking to play mafia!")
+			.setDescription("You need at least 5 players to play mafia! React with 👍 to join!")
+			.setColor("#8a673d")
+			.setFooter("Owner must react with ✅ to start!", message.author.avatarURL)
+			.setTimestamp();
+
+	
+whereIam.send(note).then(sentEmbed => {
+    sentEmbed.react("👍")
+    sentEmbed.react("✅")
+   
+
+
+    bot.on('messageReactionAdd', (messageReaction, user) => {
+if(user.bot)  return;
+const { message, emoji } = messageReaction;
+
+if(emoji.name === "👍" && message.id === sentEmbed.id) {
+	if(mafiaPlayers.has(user.id)){
+		console.log("Already voted!");
+	} else {
+	message.channel.send(user.username + " signed up!");	
+	mafiaPlayers.add(user.id)
+	}	
+
+ }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
+ 		 if(mafiaPlayers.has(message.author.id)){
+ 		 let players = Array.from(mafiaPlayers);
+ 		 if(players.length < 5){
+ 		 	whereIam.send("Not enough players to start a game!");
+ 		 	return;
+ 		 } else {
+ 		 	mafiaPlayers.clear();
+			whereIam.send("The game of mafia is starting! All participants check your DMs!");  
+			return;
+ 		 }
+ 		 	
+		console.log("Already voted!");
+	} else {
+		console.log("Not the owner")
+	}
+	 	
+
+ }
+})
+});
+
+
+	
+}		
  		
 
 function rps(){
@@ -6203,7 +6267,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	} else {
 	upVote += 1;
 	total += 1;
-	message.channel.send(user.username + " voted yes!");	
+	//message.channel.send(user.username + " voted yes!");	
 	ballot.add(user.id)
 	}	
 
@@ -6213,7 +6277,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	} else {
 	 downVote += 1;
 	total += 1;
-	message.channel.send(user.username + " voted no!");
+	//message.channel.send(user.username + " voted no!");
 	ballot.add(user.id)	
 	}
 
