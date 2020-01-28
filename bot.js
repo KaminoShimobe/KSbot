@@ -1048,7 +1048,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}	
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 		 if(mafiaPlayers.has(owner)){
+ 		 if(mafiaPlayers.has(owner) && owner != user.id){
  		 var players = Array.from(mafiaPlayers);
  		 if(players.length < 6){
  		 	sentEmbed.delete()
