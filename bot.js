@@ -1022,7 +1022,7 @@ function mafia(){
 			.setTitle(message.author.username + " is looking to play!")
 			.setDescription("You need at least 6 players to play! React with 👍 to join!")
 			.setColor("#8a673d")
-			.setFooter("Owner must react with ✅ to start!", message.author.avatarURL)
+			.setFooter("must react with ✅ to start!", message.author.avatarURL)
 			.setTimestamp();
 
 
@@ -1047,8 +1047,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}	
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 		 if(mafiaPlayers.has(message.author.id)){
- 		 let players = Array.from(mafiaPlayers);
+ 		 if(user.id == message.author.id){
+ 		 var players = Array.from(mafiaPlayers);
  		 if(players.length < 6){
 			mafiaPlayers.clear(); 
  		 	whereIam.send("Not enough players to start a game!");
@@ -1092,9 +1092,9 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			return;
  		 }
  		 	
-		console.log("Already voted!");
+		console.log(user.username + " already voted!");
 	} else {
-		console.log("Not the owner")
+		console.log(user.username + " is Not the owner")
 	}
 	 	
 
