@@ -1008,7 +1008,7 @@ function mafia(){
 	const detectives = new Set();
 	const doctors = new Set();
 	const villagers = new Set();
-	mafiaPlayers.add(message.author.id)
+	mafiaPlayers.add(message.author.id);
 	message.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -1047,13 +1047,23 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}	
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 		 if(user.id == message.author.id){
+ 		 if(mafiaPlayers.has(message.author.id)){
  		 var players = Array.from(mafiaPlayers);
  		 if(players.length < 6){
+ 		 	sentEmbed.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
 			mafiaPlayers.clear(); 
  		 	whereIam.send("Not enough players to start a game!");
  		 	return;
  		 } else {
+ 		 	sentEmbed.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
 			whereIam.send("The game is starting! All participants thanks for helping!");
 			 
 			var attac = Math.floor(players.length / 3)
