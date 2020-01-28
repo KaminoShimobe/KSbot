@@ -1008,6 +1008,7 @@ function mafia(){
 	const detectives = new Set();
 	const doctors = new Set();
 	const villagers = new Set();
+	var owner = message.author.id;
 	mafiaPlayers.add(message.author.id);
 	message.delete()
 
@@ -1047,7 +1048,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}	
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 		 if(mafiaPlayers.has(message.author.id)){
+ 		 if(mafiaPlayers.has(owner)){
  		 var players = Array.from(mafiaPlayers);
  		 if(players.length < 6){
  		 	sentEmbed.delete()
