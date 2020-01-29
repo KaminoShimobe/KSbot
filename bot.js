@@ -10990,7 +10990,7 @@ if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == t
 		let stand = rows[0].stand;
 			
 		if(stand == "「KING CRIMSON」"){
-		thoth();
+		epitaph();
 	}		else {
 		message.reply(" You do not have the power of 「KING CRIMSON」.")
 	}
