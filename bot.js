@@ -1517,6 +1517,7 @@ function rps(){
 
 	function fateChange(){
 	let member = message.mentions.members.first();
+		if(member.id != undefined){
 		if(Epitaph.has(member.id)){
 		if(eChannel.has(message.channel.id)){
 		eChannel.remove(message.channel.id);
@@ -1528,6 +1529,7 @@ function rps(){
 				}	
 				
 				message.channel.send("*There has been a shift in fate!*");
+		}
 		}
 		}
 	
