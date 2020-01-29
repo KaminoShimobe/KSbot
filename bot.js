@@ -11026,20 +11026,20 @@ if(command === `${prefix}KINGCRIMSON` && stands == true){
 		});		
 }	
 	
-if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == true){
-		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-		if(err) throw err;
-		let sql;
-		let stand = rows[0].stand;
+// if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == true){
+// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+// 		if(err) throw err;
+// 		let sql;
+// 		let stand = rows[0].stand;
 			
-		if(stand == "「KING CRIMSON」"){
-		epitaph();
-	}		else {
-		message.reply(" You do not have the power of 「KING CRIMSON」.")
-	}
+// 		if(stand == "「KING CRIMSON」"){
+// 		epitaph();
+// 	}		else {
+// 		message.reply(" You do not have the power of 「KING CRIMSON」.")
+// 	}
 			
-		});		
-}	
+// 		});		
+// }	
 	
 if(command === `${prefix}ACT1` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -11200,11 +11200,11 @@ if(command === `${prefix}KINGCRIMSON` && stands == false){
 			return;		
 }	
 	
-if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == false){
-	message.reply("Stand Abilities are disabled in this server!");
+// if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == false){
+// 	message.reply("Stand Abilities are disabled in this server!");
 			
-			return;	
-}	
+// 			return;	
+// }	
 	
 if(command === `${prefix}ACT1` && stands == false){
 		message.reply("Stand Abilities are disabled in this server!");
