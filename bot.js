@@ -9191,7 +9191,7 @@ function oSpin(){
 	var chance;
 		
 			if(num > Omoney){
-				chance = Math.floor(Math.random() * 4) + 1;
+				chance = Math.floor(Math.random() * 10) + 1;
 			} else {
 				chance = Math.floor(Math.random() * 2) + 1;
 			}	
@@ -9216,14 +9216,23 @@ function oSpin(){
 			
 		} else {
 			
-				
-			 
-			sql = `UPDATE user SET money = ${money - num} WHERE id = '${member.id}'`;
+			var half = (money / 2)
+			
+			if(num >= half){ 
+			sql = `UPDATE user SET money = ${money - half} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
 			message.reply(`**GOOD!**\n ${name} lost $${num} due to OSIRIS!`);
 			soulless.delete(member.id);
 	  		message.channel.send(member.username + "'s soul has been freed from OSIRIS");
+			} else {
+			 sql = `UPDATE user SET money = ${money - num} WHERE id = '${member.id}'`;
+			con.query(sql, console.log);
+			
+			message.reply(`**GOOD!**\n ${name} lost $${half} due to OSIRIS!`);
+			soulless.delete(member.id);
+	  		message.channel.send(member.username + "'s soul has been freed from OSIRIS");	
+			}	
 				
 		}
 
@@ -9793,7 +9802,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 25%. Once you lose, the target's soul is released.`)
+			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 10%. Once you lose, the target's soul is released. Victim cannot lose more than half per OSPIN.`)
 			.setColor("#1d498e"); 					 				
 
 	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
