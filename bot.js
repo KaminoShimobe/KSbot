@@ -1604,9 +1604,9 @@ function rps(){
 	
 	boom();
 	
-	if (message.guild.id == '456956416377225218') {
-		fateChange();
-	}
+// 	if (message.guild.id == '456956416377225218') {
+// 		fateChange();
+// 	}
 
 	function bitesTheDust(){
 		
@@ -11049,7 +11049,8 @@ if(command === `${prefix}KINGCRIMSON` && stands == true){
  		let stand = rows[0].stand;
 			
  		if(stand == "「KING CRIMSON」"){
- 		epitaph();
+//  		epitaph();
+			message.reply("This command is under investigation at the present time. My apologies!");
  	}		else {
  		message.reply(" You do not have the power of 「KING CRIMSON」.")
  	}
