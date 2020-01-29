@@ -2988,6 +2988,7 @@ function gambleFlip(){
 			chance = fated.value;	
 			
 		}
+
 		
 		
 		
@@ -3019,6 +3020,12 @@ function gambleFlip(){
 			con.query(sql, console.log);
 		
 			message.reply("*CHA~CHING!* You made $" + num + "!");
+			if (Epitaph.has(message.author.id)) {
+						fate.clear()
+						Epitaph.clear()
+						eChannel.clear()
+				message.channel.send("*Fate has been altered!*");
+			}	
 		}
 			
 		} else {
@@ -3053,8 +3060,20 @@ function gambleFlip(){
 			con.query(sql, console.log);
 			if(streak >= 2){
 			message.reply("*CHA~CHING!* You lost $" + num + "! \n Streak Lost!");
+			if (Epitaph.has(message.author.id)) {
+						fate.clear()
+						Epitaph.clear()
+						eChannel.clear()
+				message.channel.send("*Fate has been altered!*");
+			}	
 			} else {
 			message.reply("*CHA~CHING!* You lost $" + num + "!");
+			if (Epitaph.has(message.author.id)) {
+						fate.clear()
+						Epitaph.clear()
+						eChannel.clear()
+				message.channel.send("*Fate has been altered!*");
+			}	
 			}
 		}
 
@@ -8661,22 +8680,24 @@ if (soulless.has(message.author.id)) {
 		var whereIam = message.channel;
 		eChannel.add(whereIam);
 		
+		
 			if (soulless.has(message.author.id)) {
 		message.reply(" 's soul has been stolen by OSIRIS");
 			return;
 		}
 		
 		let member = message.mentions.members.first();
+		var name = bot.users.get(member.id);
 		
 		Epitaph.add(member.id);
 		var chance = Math.floor(Math.random() * 2) + 1;
 		
 		fate.add(chance);
 		if(chance == 1){
-       	 	message.channel.send("**EPITAPH**! \n " + member.username + "'s next spin is a WIN");
+       	 	message.channel.send("**EPITAPH**! \n " + name.username + "'s next spin is a WIN");
      		return;
      	} else {
-     		message.channel.send("**EPITAPH**! \n " + member.username + "'s next spin is a LOSS");
+     		message.channel.send("**EPITAPH**! \n " + name.username + "'s next spin is a LOSS");
      		return;
      	}	
 		
