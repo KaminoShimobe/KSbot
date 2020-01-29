@@ -29,6 +29,9 @@ const osirisCD = new Set();
 const wagered = new Set();
 const soulless = new Set();
 const mafiaPlayers = new Set();
+const Epitaph = new Set();
+const fate = new Set();
+const eChannel = new Set();
 
 
 
@@ -91,7 +94,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.9", bot.user.avatarURL);
+			.setFooter("Version 1.7.10", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1511,7 +1514,44 @@ function rps(){
 	
 
 
-
+	function fateChange(){
+		if (Epitaph.has(message.author.id)) {
+		
+			return;
+		} else {
+			if(eChannel.has(message.channel.id)){
+				con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let trigger = rows[0].kcrimson;
+		if(rows.length < 1) {
+			
+			
+			
+			return;
+		} else {
+			if(trigger == false){
+				eChannel.clear();
+				fate.clear();
+				Epitaph.clear();
+				
+				message.channel.send("*There has been a shift in fate!*");
+			} else {
+				
+				return;
+				
+			}	
+		}		
+				});		
+			}	else {
+				
+				return;
+			}	
+			
+		}	
+		
+		
+	}
 
 
 
@@ -1537,6 +1577,7 @@ function rps(){
 	}	
 	
 	boom();
+	fateChange();
 
 	function bitesTheDust(){
 		
@@ -2926,6 +2967,11 @@ function gambleFlip(){
 		message.reply(" 's soul has been stolen by OSIRIS");
 			return;
 		}	
+		
+		if (boomCD.has(message.author.id)) {
+		
+			return;
+		}
 
 
 	var num = parseInt(messageArray[1]); 
@@ -2936,7 +2982,12 @@ function gambleFlip(){
 		
 		
 			chance = Math.floor(Math.random() * 2) + 1;
+			if (Epitaph.has(message.author.id)) {
+			var luck = fate.values();
+			var fated = luck.next();
+			chance = fated.value;	
 			
+		}
 		
 		
 		
@@ -3039,6 +3090,11 @@ function gambleSlots(){
 		
 		if(rank == "rps"){
 			message.reply("You cannot gamble while playing Rock Paper Scissors!");
+			return;
+		}
+		
+		if (boomCD.has(message.author.id)) {
+		
 			return;
 		}
 		
@@ -3250,6 +3306,10 @@ const { createCanvas } = require('canvas')
 		let stand = rows[0].stand;
 		var rank = rows[0].rank;
 		
+	if (boomCD.has(message.author.id)) {
+		
+			return;
+		}	
 		
 	if (soulless.has(message.author.id)) {
 		message.reply(" 's soul has been stolen by OSIRIS");
@@ -8593,6 +8653,36 @@ if (soulless.has(message.author.id)) {
 		});
 	}
 	
+	function epitaph(){
+		fate.clear()
+		Epitaph.clear()
+		eChannel.clear()
+		
+		var whereIam = message.channel;
+		eChannel.add(whereIam);
+		
+			if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
+		
+		let member = message.mentions.members.first();
+		
+		Epitaph.add(member.id);
+		var chance = Math.floor(Math.random() * 2) + 1;
+		
+		fate.add(chance);
+		if(chance == 1){
+       	 	message.channel.send("**EPITAPH**! \n " + member.username + "'s next spin is a WIN");
+     		return;
+     	} else {
+     		message.channel.send("**EPITAPH**! \n " + member.username + "'s next spin is a LOSS");
+     		return;
+     	}	
+		
+		
+	}
+	
 	
 	
 	function echoesAct1(){
@@ -9079,9 +9169,11 @@ function oSpin(){
 	var bet;
 	var chance;
 		
-		
-			chance = Math.floor(Math.random() * 2) + 1;
-			
+			if(num > Omoney){
+				chance = Math.floor(Math.random() * 4) + 1;
+			} else {
+				chance = Math.floor(Math.random() * 2) + 1;
+			}	
 		
 		
 		
@@ -9109,7 +9201,9 @@ function oSpin(){
 			con.query(sql, console.log);
 			
 			message.reply(`**GOOD!**\n ${name} lost $${num} due to OSIRIS!`);
-			
+			soulless.delete(member.id);
+	  		message.channel.send(member.username + "'s soul has been freed from OSIRIS");
+				
 		}
 
 
@@ -9664,7 +9758,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. `)
+			.setDescription(`__King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n **${prefix}EPITAPH [mention]**:\n Predicts the next outcome of a spin exactly. No cooldown, but if someone speaks in that channel fate is altered.`)
 			.setColor("#1d498e"); 	
 
 	let stand8 = new Discord.RichEmbed()
@@ -9678,7 +9772,7 @@ function standHelp(){
 
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
-			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account.`)
+			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 25%. Once you lose, the target's soul is released.`)
 			.setColor("#1d498e"); 					 				
 
 	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
@@ -10889,6 +10983,21 @@ if(command === `${prefix}KINGCRIMSON` && stands == true){
 		});		
 }	
 	
+if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == true){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stand = rows[0].stand;
+			
+		if(stand == "「KING CRIMSON」"){
+		thoth();
+	}		else {
+		message.reply(" You do not have the power of 「KING CRIMSON」.")
+	}
+			
+		});		
+}	
+	
 if(command === `${prefix}ACT1` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -11046,6 +11155,12 @@ if(command === `${prefix}KINGCRIMSON` && stands == false){
 		message.reply("Stand Abilities are disabled in this server!");
 			
 			return;		
+}	
+	
+if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == false){
+	message.reply("Stand Abilities are disabled in this server!");
+			
+			return;	
 }	
 	
 if(command === `${prefix}ACT1` && stands == false){
