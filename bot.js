@@ -1544,12 +1544,18 @@ function rps(){
 		}		
 				});		
 			}	else {
-				eChannel.clear();
+				if(fate.size == 0){
+					return;
+				} else {
+					eChannel.clear();
 				fate.clear();
 				Epitaph.clear();
 				
 				message.channel.send("*There has been a shift in fate!*");
-				return;
+				return;	
+				}	
+				
+				
 			}	
 			
 		}	
@@ -1581,7 +1587,10 @@ function rps(){
 	}	
 	
 	boom();
-	//fateChange();
+	
+	if (message.guild.id == '456956416377225218') {
+		fateChange();
+	}
 
 	function bitesTheDust(){
 		
