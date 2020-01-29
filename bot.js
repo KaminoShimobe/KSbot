@@ -1517,12 +1517,26 @@ function rps(){
 
 	function fateChange(){
 	let member = message.mentions.members.first();
+		if(Epitaph.has(member.id)){
+		if(eChannel.has(message.channel.id)){
+		eChannel.remove(message.channel.id);
+				Epitaph.remove(member.id);
+				if(fateWin.has(member.id)){
+					fateWin.remove(member.id);
+					} else { 
+					fateLose.remove(member.id);	
+				}	
+				
+				message.channel.send("*There has been a shift in fate!*");
+		}
+		}
+	
 		if (Epitaph.has(message.author.id)) {
 		
 			return;
 		} else {
 			if(eChannel.has(message.channel.id)){
-			if(Epitaph.has(member.id)){
+			
 				con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1554,10 +1568,7 @@ function rps(){
 				
 				return;	
 				}	
-				} else {
 				
-				return;
-				}
 				
 			}	
 			
