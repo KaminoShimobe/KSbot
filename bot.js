@@ -1581,7 +1581,7 @@ function rps(){
 	}	
 	
 	boom();
-	fateChange();
+	//fateChange();
 
 	function bitesTheDust(){
 		
