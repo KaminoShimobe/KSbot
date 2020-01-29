@@ -30,7 +30,8 @@ const wagered = new Set();
 const soulless = new Set();
 const mafiaPlayers = new Set();
 const Epitaph = new Set();
-const fate = new Set();
+const fateWin = new Set();
+const fateLose = new Set();
 const eChannel = new Set();
 
 
@@ -1515,11 +1516,13 @@ function rps(){
 
 
 	function fateChange(){
+	let member = message.mentions.members.first();
 		if (Epitaph.has(message.author.id)) {
 		
 			return;
 		} else {
 			if(eChannel.has(message.channel.id)){
+			if(Epitaph.has(member.id)){
 				con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
 		if(err) throw err;
 		let sql;
@@ -1531,9 +1534,13 @@ function rps(){
 			return;
 		} else {
 			if(trigger == false){
-				eChannel.clear();
-				fate.clear();
-				Epitaph.clear();
+				eChannel.remove(message.channel.id);
+				Epitaph.remove(message.author.id);
+				if(fateWin.has(message.author.id)){
+					fateWin.remove(message.author.id);
+					} else { 
+					fateLose.remove(message.author.id);	
+				}	
 				
 				message.channel.send("*There has been a shift in fate!*");
 			} else {
@@ -1544,21 +1551,17 @@ function rps(){
 		}		
 				});		
 			}	else {
-				if(fate.size == 0){
-					return;
-				} else {
-					eChannel.clear();
-				fate.clear();
-				Epitaph.clear();
 				
-				message.channel.send("*There has been a shift in fate!*");
 				return;	
 				}	
+				} else {
 				
+				return;
+				}
 				
 			}	
 			
-		}	
+			
 		
 		
 	}
@@ -2995,12 +2998,15 @@ function gambleFlip(){
 		
 		
 			chance = Math.floor(Math.random() * 2) + 1;
-			if (Epitaph.has(message.author.id)) {
-			var luck = fate.values();
-			var fated = luck.next();
-			chance = fated.value;	
+			if (fateWin.has(message.author.id)) {
+			chance = 1;
+			fateWin.remove(message.author.id);
+			} 
 			
-		}
+			if (fateLose.has(message.author.id)) {
+			chance = 2;
+			fateWin.remove(message.author.id);
+			} 
 
 		
 		
@@ -3034,9 +3040,8 @@ function gambleFlip(){
 		
 			message.reply("*CHA~CHING!* You made $" + num + "!");
 			if (Epitaph.has(message.author.id)) {
-						fate.clear()
-						Epitaph.clear()
-						eChannel.clear()
+						eChannel.remove(message.channel.id);
+						Epitaph.remove(message.author.id);
 				message.channel.send("*Fate has been altered!*");
 			}	
 		}
@@ -3074,17 +3079,15 @@ function gambleFlip(){
 			if(streak >= 2){
 			message.reply("*CHA~CHING!* You lost $" + num + "! \n Streak Lost!");
 			if (Epitaph.has(message.author.id)) {
-						fate.clear()
-						Epitaph.clear()
-						eChannel.clear()
+						eChannel.remove(message.channel.id);
+						Epitaph.remove(message.author.id);
 				message.channel.send("*Fate has been altered!*");
 			}	
 			} else {
 			message.reply("*CHA~CHING!* You lost $" + num + "!");
 			if (Epitaph.has(message.author.id)) {
-						fate.clear()
-						Epitaph.clear()
-						eChannel.clear()
+						eChannel.remove(message.channel.id);
+						Epitaph.remove(message.author.id);
 				message.channel.send("*Fate has been altered!*");
 			}	
 			}
@@ -8686,11 +8689,9 @@ if (soulless.has(message.author.id)) {
 	}
 	
 	function epitaph(){
-		fate.clear()
-		Epitaph.clear()
-		eChannel.clear()
 		
-		var whereIam = message.channel;
+		
+		var whereIam = message.channel.id;
 		eChannel.add(whereIam);
 		
 		
@@ -8705,12 +8706,14 @@ if (soulless.has(message.author.id)) {
 		Epitaph.add(member.id);
 		var chance = Math.floor(Math.random() * 2) + 1;
 		
-		fate.add(chance);
+		
 		if(chance == 1){
        	 	message.channel.send("**EPITAPH**! \n " + name.username + "'s next spin is a WIN");
+		fateWin.add(member.id);	
      		return;
      	} else {
      		message.channel.send("**EPITAPH**! \n " + name.username + "'s next spin is a LOSS");
+		fateLose.add(member.id);	
      		return;
      	}	
 		
@@ -11026,20 +11029,20 @@ if(command === `${prefix}KINGCRIMSON` && stands == true){
 		});		
 }	
 	
-// if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == true){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let stand = rows[0].stand;
+ if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == true){
+ 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+ 		if(err) throw err;
+ 		let sql;
+ 		let stand = rows[0].stand;
 			
-// 		if(stand == "「KING CRIMSON」"){
-// 		epitaph();
-// 	}		else {
-// 		message.reply(" You do not have the power of 「KING CRIMSON」.")
-// 	}
+ 		if(stand == "「KING CRIMSON」"){
+ 		epitaph();
+ 	}		else {
+ 		message.reply(" You do not have the power of 「KING CRIMSON」.")
+ 	}
 			
-// 		});		
-// }	
+ 		});		
+ }	
 	
 if(command === `${prefix}ACT1` && stands == true){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -11200,11 +11203,11 @@ if(command === `${prefix}KINGCRIMSON` && stands == false){
 			return;		
 }	
 	
-// if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == false){
-// 	message.reply("Stand Abilities are disabled in this server!");
+ if(command === `${prefix}EPITAPH` && messageArray[1] != undefined && stands == false){
+ 	message.reply("Stand Abilities are disabled in this server!");
 			
-// 			return;	
-// }	
+			return;	
+ }	
 	
 if(command === `${prefix}ACT1` && stands == false){
 		message.reply("Stand Abilities are disabled in this server!");
