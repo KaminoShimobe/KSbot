@@ -1544,7 +1544,11 @@ function rps(){
 		}		
 				});		
 			}	else {
+				eChannel.clear();
+				fate.clear();
+				Epitaph.clear();
 				
+				message.channel.send("*There has been a shift in fate!*");
 				return;
 			}	
 			
