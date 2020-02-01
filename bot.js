@@ -44,7 +44,7 @@ const bot = new Discord.Client({disableEveryone: true})
 //TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
 
 const Bot = new TwitchBot({
-  username: 'KS_Streamer',
+  username: 'ks_streamer',
   oauth: process.env.TWITCH,
   channels: ['Kamino_Shimobe']
 })
@@ -64,7 +64,7 @@ Bot.on('error', err => {
 
 Bot.on('message', chatter => {
   if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-    Bot.say('Commands: !help \n !discord \n !bracket \n !dice');
+    Bot.say('Commands: !help | !discord | !bracket | !dice');
    
   }	
 	
