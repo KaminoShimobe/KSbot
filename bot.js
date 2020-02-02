@@ -6482,6 +6482,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}
 
  } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
+ 	if(message.author){
  		 sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -6490,8 +6491,12 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
  		var yay = Math.floor((upVote / total) * 100);    
 		var nay = Math.floor((downVote / total) * 100); 
 	 	ballot.clear();
-		whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree.");  
+		whereIam.send(yay + "% out of " + total + " person(s) agree with \ **" + msg +  "** while " + nay + "% disagree."); 
+
 		return;
+	} else {
+		console.log("Not the owner.")
+	}
 
  }
 })
