@@ -63,18 +63,18 @@ Bot.on('error', err => {
 })
 
 Bot.on('message', chatter => {
-  if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-    Bot.say('Commands: !help | !discord | !bracket | !dice');
+  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
+  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
    
-  }	
+  // }	
 	
   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
     Bot.say('Join our discord here: https://discord.gg/ueSXpJ')
   }
 
-  if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/oi91570t')
-  }
+  // if(chatter.message === '!bracket') {
+  //   Bot.say('Check out the bracket here: https://challonge.com/oi91570t')
+  // }
 
   if(chatter.message === '!dice') {
 	  var die1 = Math.floor(Math.random() * 6) + 1;
