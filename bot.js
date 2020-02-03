@@ -1148,6 +1148,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					console.log(bot.users.get(list[duty]).username + " is a villager!");
 				}	
    			} 
+   			console.log("simulation: " + i);
 			return;
  		 }
  		 	
