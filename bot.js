@@ -2128,6 +2128,13 @@ function lostChest(){
 		let stand = rows[0].stand;
 		let them = messageArray[1];
 		let gift = rows[0].gift;
+		
+		if(rows.length < 1) {
+			
+			message.reply(" KS account does not exist for this ID!");
+			
+			return;
+		}
 		function alterMoney(){
 			message.channel.send("What monetary changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -2221,12 +2228,7 @@ function lostChest(){
 				});
 		}
 
-		if(rows.length < 1) {
-			
-			message.reply(" They don't have a KS-user account!")
-			
-			
-		}	
+		
 
 					message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift) !cancel to cancel");
 					const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -7797,6 +7799,7 @@ function waifuPic(){
 	
 function jk(){
 	var heh = Math.floor(Math.random() * 4) + 1;
+	var msg = poll.replace(prefix +"jk", "");
 		
 		function delet(){
 			
@@ -7817,7 +7820,7 @@ function jk(){
 
 		} else {
 				
-			 message.channel.send("Were you *REALLY* joking tho? :smirk:");;
+			 message.channel.send( message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :smirk:");;
 			
 		}
 
