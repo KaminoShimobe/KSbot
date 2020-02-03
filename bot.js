@@ -43,6 +43,8 @@ const bot = new Discord.Client({disableEveryone: true})
 
 //TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
 
+// STREAM STUFF 
+/*
 const Bot = new TwitchBot({
   username: 'ks_streamer',
   oauth: process.env.TWITCH,
@@ -83,7 +85,7 @@ Bot.on('message', chatter => {
   }	
 
  }); 
-
+*/
 
 var con_fig = {
 	host: "us-cdbr-iron-east-01.cleardb.net",
@@ -1092,7 +1094,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}	
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 		 if(mafiaPlayers.has(owner) && owner != user.id){
+ 		 if(user.id == owner){
  		 var players = Array.from(mafiaPlayers);
  		 if(players.length < 6){
  		 	sentEmbed.delete()
@@ -1147,7 +1149,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			return;
  		 }
  		 	
-		console.log(user.username + " already voted!");
+		console.log(user.username + " is starting!");
 	} else {
 		console.log(user.username + " is Not the owner")
 	}
@@ -6455,6 +6457,7 @@ function poll(){
 whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("👎")
+    		
    
 
 
