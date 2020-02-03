@@ -1120,30 +1120,31 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			var ppl = Math.floor((players.length * 2) / 3)
 			var list;
 			for ( var i = 0; i < players.length; i++ ) {
-				list = Array.from(mafiaPlayers);
+				// list = Array.from(mafiaPlayers);
+				list = ["321361732239097857", "242118931769196544", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
 				var duty = Math.floor(Math.random() * list.length);
 				if(attac > 0){
 					mafia.add(list[duty])
 					attac -= 1;
-					mafiaPlayers.remove(list[duty])
+					// mafiaPlayers.remove(list[duty])
 					console.log(bot.users.get(list[duty]).username + " is a mafioso!");
 				} else if(detec > 0){
 					detectives.add(list[duty])
 					villagers.add(list[duty])
 					detec -=1;
 					ppl -=1;
-					mafiaPlayers.remove(list[duty])
+					// mafiaPlayers.remove(list[duty])
 					console.log(bot.users.get(list[duty]).username + " is a detective!");
 				} else if(protec > 0){
 					doctors.add(list[duty])
 					villagers.add(list[duty])
 					protec -=1;
 					ppl -=1;
-					mafiaPlayers.remove(list[duty])
+					// mafiaPlayers.remove(list[duty])
 					console.log(bot.users.get(list[duty]).username + " is a doctor!");
 				}	else {
 					villagers.add(list[duty])
-					mafiaPlayers.remove(list[duty])
+					// mafiaPlayers.remove(list[duty])
 					console.log(bot.users.get(list[duty]).username + " is a villager!");
 				}	
    			} 
