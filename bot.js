@@ -1095,7 +1095,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
  		 if(user.id == owner){
- 		 var players = Array.from(mafiaPlayers);
+ 		 // var players = Array.from(mafiaPlayers);
+ 		 var players = ["321361732239097857", "242118931769196544", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
  		 if(players.length < 6){
  		 	sentEmbed.delete()
 
