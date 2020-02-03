@@ -6441,6 +6441,7 @@ function poll(){
 	var upVote = 0;
 	var downVote = 0;
 	var total = 0;
+	var owner = message.author.id;
 	let note = new Discord.RichEmbed()
 
 			
@@ -6482,7 +6483,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}
 
  } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 	if(message.author){
+ 	if(user.id == owner){
  		 sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
