@@ -9185,7 +9185,7 @@ function osirisWager(){
 			
 			if (osirisCD.has(message.author.id)) {
 				
-            message.channel.send("OSIRIS must wait about 5 minutes from when you first used it!");
+            message.channel.send("OSIRIS must wait about 30 minutes from when you first used it!");
             return;
    		 } 
 			 			
@@ -9198,7 +9198,7 @@ function osirisWager(){
         setTimeout(() => {
           // Removes the user from the set after a minute
           osirisCD.delete(message.author.id);
-        }, (1000*60*5));
+        }, (1000*60*30));
 			}
 				
 				
@@ -9312,16 +9312,16 @@ function oSpin(){
 			sql = `UPDATE user SET money = ${money - half} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
-			message.reply(`**GOOD!**\n ${name} lost $${num} due to OSIRIS!`);
+			message.reply(`**GOOD!**\n ${name} lost $${half} due to OSIRIS!`);
 			soulless.delete(member.id);
-	  		message.channel.send(member.username + "'s soul has been freed from OSIRIS");
+	  		message.channel.send(name.username + "'s soul has been freed from OSIRIS");
 			} else {
 			 sql = `UPDATE user SET money = ${money - num} WHERE id = '${member.id}'`;
 			con.query(sql, console.log);
 			
-			message.reply(`**GOOD!**\n ${name} lost $${half} due to OSIRIS!`);
+			message.reply(`**GOOD!**\n ${name} lost $${num} due to OSIRIS!`);
 			soulless.delete(member.id);
-	  		message.channel.send(member.username + "'s soul has been freed from OSIRIS");	
+	  		message.channel.send(name.username + "'s soul has been freed from OSIRIS");	
 			}	
 				
 		}
