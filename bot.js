@@ -3082,7 +3082,7 @@ function gambleFlip(){
 			if(streak >= 2){
 			bet = num + Math.floor((streak / 10) * num );
 			sql = `UPDATE user SET money = ${money + bet}, lasttrans = ${bet}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
-			con.query(sql, console.log);	
+			con.query(sql);	
 			message.reply("*CHA~CHING!* You made a streak boosted $" + bet + "! \n You have streak of " + streak + "!");	
 			
 			  if(tasks.indexOf("Get 5+ streak") != -1 && streak == 5){
@@ -3102,7 +3102,7 @@ function gambleFlip(){
 			}
 			else {
 			sql = `UPDATE user SET money = ${money + num}, lasttrans = ${num}, streak = ${streak + 1} WHERE id = '${message.author.id}'`;
-			con.query(sql, console.log);
+			con.query(sql);
 		
 			message.reply("*CHA~CHING!* You made $" + num + "!");
 			if (Epitaph.has(message.author.id)) {
