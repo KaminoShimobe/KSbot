@@ -7808,7 +7808,7 @@ function waifuPic(){
 	
 function jk(){
 	var heh = Math.floor(Math.random() * 4) + 1;
-	var msg = poll.replace(prefix +"jk", "");
+	var msg = message.content.replace(prefix +"jk", "");
 		
 		function delet(){
 			
@@ -7829,7 +7829,7 @@ function jk(){
 
 		} else {
 				
-			 message.channel.send( message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :smirk:");;
+			 message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :smirk:");;
 			
 		}
 
