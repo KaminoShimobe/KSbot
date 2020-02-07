@@ -6663,8 +6663,7 @@ function timerPlace(){
 			.setTimestamp();
 	
 	whereIam.send(note)
-	const collector = new Discord.MessageCollector(target, m =>  m.author.id != person.id , { time: 100000000 });
-	if(user.bot)  return;
+	const collector = new Discord.MessageCollector(target, m =>  m.author.id != bot.user.id , { time: 100000000 });
 	        		collector.once('collect', message => {
 					Reminders.delete(person.id)
 					whereIam.send("Reminding " + person + " because \n **someone spoke in**" + target); 
