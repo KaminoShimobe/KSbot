@@ -6568,16 +6568,11 @@ function timerReminder(){
 			.setFooter("in " + limit + " minute(s)", message.author.avatarURL)
 			.setTimestamp();
 	
-	whereIam.send(note).then(sent =>{
+	whereIam.send(note)
 	const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
 	        		collectorer.once('collect', message => {
 					if(message.content == "!cancelReminder"){
 						Reminders.delete(person.id)
-						sent.delete()
-
-  						.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  						.catch(console.error);
 						whereIam.send("Reminder cancelled!"); 
 						return;
 					}	
@@ -6585,7 +6580,7 @@ function timerReminder(){
 	
 	
 	});
-	});
+	
 	
 }
 	
@@ -6621,15 +6616,10 @@ function timerChat(){
 			.setFooter("!cancelReminder to cancel", message.author.avatarURL)
 			.setTimestamp();
 	
-	whereIam.send(note).then(sent =>{
+	whereIam.send(note)
 	const collector = new Discord.MessageCollector(whereIam, m => m.author.id === target.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 					Reminders.delete(person.id)
-					sent.delete()
-
-  						.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  						.catch(console.error);
 					whereIam.send("Reminding " + person + " because \n **" + target.username + " spoke**"); 
 					return;
 				});
@@ -6646,7 +6636,7 @@ function timerChat(){
 						return;
 					}	
 				});
-				});
+				
 }
 	
 function timerPlace(){
@@ -6682,15 +6672,10 @@ function timerPlace(){
 			.setFooter("!cancelReminder to cancel", message.author.avatarURL)
 			.setTimestamp();
 	
-	whereIam.send(note).then(sent =>{
+	whereIam.send(note)
 	const collector = new Discord.MessageCollector(target, m =>  m.author.id != bot.user.id , { time: 100000000 });
 	        		collector.once('collect', message => {
 					Reminders.delete(person.id)
-					sent.delete()
-
-  						.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  						.catch(console.error);
 					whereIam.send("Reminding " + person + " because \n **someone spoke in**" + target); 
 					return;
 				});
@@ -6707,7 +6692,7 @@ function timerPlace(){
 						return;
 					}	
 				});
-	});
+	
 }	
 	
 	
