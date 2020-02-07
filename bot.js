@@ -6631,34 +6631,43 @@ function timerPlace(){
 		return;
 	} 
 	
+	var person = message.author;
 	const whereIam = message.channel;
-	var limit = parseInt(messageArray[2]);
-	var msg = message.content;
-	var index = msg.search("to");
-	var piece = msg.slice(index);
-	var reason = piece.replace("to", "");
+	const target = bot.channels.get(messageArray[2]);
 	
-	if(Number.isInteger(limit) === false || limit <= 0){
-		message.reply(" You need to set a time greater than 0!");
+	
+	if(target == undefined){
+		message.reply(" that channel doesn't exist!");
 		return;
-	}	
+	}
 	
-	var reminder = setTimeout(() => {
-         Reminders.delete(message.author.id) 
-         whereIam.send("Reminding " + message.author + " to \n **" + reason + "**"); 
-        }, (1000*60*limit));	
+	
 	
 	Reminders.add(message.author.id)
 	let note = new Discord.RichEmbed()
 
 			
-			.setTitle("Reminding " + message.author.username + " to")
-			.setDescription(reason)
+			.setTitle("Reminding " + message.author.username)
+			.setDescription("if someone speaks in " + target)
 			.setColor("#fa2323")
-			.setFooter("in " + limit + " minute(s)", message.author.avatarURL)
+			.setFooter("!cancelReminder to cancel", message.author.avatarURL)
 			.setTimestamp();
 	
-	whereIam.send(note);
+	whereIam.send(note)
+	const collector = new Discord.MessageCollector(target, m => m.author !=  user.bot , { time: 100000000 });
+	        		collector.once('collect', message => {
+					Reminders.delete(person.id)
+					whereIam.send("Reminding " + person + " because \n **someone spoke in** + target"); 
+					return;
+				});
+	const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
+	        		collectorer.once('collect', message => {
+					if(message.content == "!cancelReminder"){
+						Reminders.delete(person.id)
+						whereIam.send("Reminder cancelled!"); 
+						return;
+					}	
+				});
 }	
 	
 	
@@ -10913,6 +10922,19 @@ if(command === `${prefix}toggle`){
 	if(command === `${prefix}remind` && messageArray[1] == "when" && messageArray[2] != undefined && messageArray[3] == "talks"){
 
 		timerChat();
+		 
+
+
+
+		 return;
+
+
+
+	}
+	
+	if(command === `${prefix}remind` && messageArray[1] == "at" && messageArray[2] != undefined){
+
+		timerPlace();
 		 
 
 
