@@ -6597,8 +6597,8 @@ function timerChat(){
 	let note = new Discord.RichEmbed()
 
 			
-			.setTitle("Reminding " + message.author.username + " to")
-			.setDescription(reason)
+			.setTitle("Reminding " + message.author.username)
+			.setDescription("when " + target.username + " talks.")
 			.setColor("#fa2323")
 			.setFooter("!cancelReminder to cancel", message.author.avatarURL)
 			.setTimestamp();
