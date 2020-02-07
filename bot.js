@@ -6553,7 +6553,7 @@ function timerReminder(){
 	}	
 	
 	var reminder = setTimeout(() => {
-         Reminders.remove(message.author.id) 
+         Reminders.delete(message.author.id) 
          whereIam.send("Reminding " + message.author + " to **" + reason + "**"); 
         }, (1000*60*limit));	
 	
