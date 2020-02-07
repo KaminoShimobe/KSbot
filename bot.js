@@ -6454,7 +6454,7 @@ function poll(){
 	var upVote = 0;
 	var downVote = 0;
 	var total = 0;
-	var owner = message.author.id;
+	var owner = message.author;
 	let note = new Discord.RichEmbed()
 
 			
@@ -6469,7 +6469,11 @@ whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("👎")
     		
-   
+    var reminder = setTimeout(() => {
+          
+         whereIam.send(owner + " This poll has been running for a minute. \n Close it by reacting with ✅!") 
+        }, (1000*60*1));	
+    
 
 
     bot.on('messageReactionAdd', (messageReaction, user) => {
@@ -6497,12 +6501,13 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 	}
 
  } else if(emoji.name === "✅" && message.id === sentEmbed.id) {
- 	if(user.id == owner){
+ 	if(user.id == owner.id){
  		 sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
   			.catch(console.error);
+		clearTimeout(reminder);
  		var yay = Math.floor((upVote / total) * 100);    
 		var nay = Math.floor((downVote / total) * 100); 
 	 	ballot.clear();
