@@ -6544,6 +6544,7 @@ function timerReminder(){
 	const whereIam = message.channel;
 	var limit = parseInt(messageArray[2]);
 	var msg = message.content;
+	var person = message.author;
 	var index = msg.search("to");
 	var piece = msg.slice(index);
 	var reason = piece.replace("to", "");
@@ -6627,11 +6628,6 @@ function timerChat(){
 	        		collectorer.once('collect', message => {
 					if(message.content == "!cancelReminder"){
 						Reminders.delete(person.id)
-						sent.delete()
-
-  						.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  						.catch(console.error);
 						whereIam.send("Reminder cancelled!"); 
 						return;
 					}	
@@ -6683,11 +6679,6 @@ function timerPlace(){
 	        		collectorer.once('collect', message => {
 					if(message.content == "!cancelReminder"){
 						Reminders.delete(person.id)
-						sent.delete()
-
-  						.then(msg => console.log(`Deleted message from ${msg.author.username}`))
-
-  						.catch(console.error);
 						whereIam.send("Reminder cancelled!"); 
 						return;
 					}	
