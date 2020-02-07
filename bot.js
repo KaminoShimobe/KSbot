@@ -6606,14 +6606,14 @@ function timerChat(){
 	whereIam.send(note)
 	const collector = new Discord.MessageCollector(whereIam, m => m.author.id === target.id, { time: 100000000 });
 	        		collector.once('collect', message => {
-					Reminders.delete(message.author.id)
+					Reminders.delete(person.id)
 					whereIam.send("Reminding " + person + " because \n **" + target.username + " spoke**"); 
 					return;
 				});
 	const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
 	        		collectorer.once('collect', message => {
 					if(message.content == "!cancelReminder"){
-						Reminders.delete(message.author.id)
+						Reminders.delete(person.id)
 						whereIam.send("Reminder cancelled!"); 
 						return;
 					}	
