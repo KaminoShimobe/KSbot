@@ -6544,7 +6544,8 @@ function timerReminder(){
 	var limit = parseInt(messageArray[2]);
 	var msg = message.content;
 	var index = msg.search("to");
-	var reason = msg.slice(index);
+	var piece = msg.slice(index);
+	var reason = piece.replace("to", "");
 	
 	if(Number.isInteger(limit) === false || limit <= 0){
 		message.reply(" You need to set a time greater than 0!");
