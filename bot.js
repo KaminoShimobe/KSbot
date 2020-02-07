@@ -6543,10 +6543,12 @@ function timerReminder(){
 	const whereIam = message.channel;
 	var limit = parseInt(messageArray[2]);
 	var msg = message.content;
-	var reason = msg.replace("!remind in " + limit + " to", "");
+	var index = msg.search("to");
+	var reason = msg.slice(index);
 	
 	if(Number.isInteger(limit) === false || limit <= 0){
-		message.reply(" You need to set a time greater than 0!")
+		message.reply(" You need to set a time greater than 0!");
+		return;
 	}	
 	
 	var reminder = setTimeout(() => {
