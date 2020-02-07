@@ -6539,7 +6539,7 @@ function timerReminder(){
 		message.reply("You have a reminder set already!");
 		return;
 	} 
-	Reminders.add(message.author.id)
+	
 	const whereIam = message.channel;
 	var limit = parseInt(messageArray[2]);
 	var msg = message.content;
@@ -6556,6 +6556,7 @@ function timerReminder(){
          whereIam.send("Reminding " + message.author + " to **" + reason + "**"); 
         }, (1000*60*limit));	
 	
+	Reminders.add(message.author.id)
 	let note = new Discord.RichEmbed()
 
 			
@@ -6566,6 +6567,7 @@ function timerReminder(){
 			.setTimestamp();
 	
 	whereIam.send(note);
+	
 }
 	
 function timerChat(){
