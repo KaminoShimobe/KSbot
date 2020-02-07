@@ -6554,7 +6554,7 @@ function timerReminder(){
 	
 	var reminder = setTimeout(() => {
          Reminders.delete(message.author.id) 
-         whereIam.send("Reminding " + message.author + " to **" + reason + "**"); 
+         whereIam.send("Reminding " + message.author + " to \n **" + reason + "**"); 
         }, (1000*60*limit));	
 	
 	Reminders.add(message.author.id)
@@ -6572,11 +6572,93 @@ function timerReminder(){
 }
 	
 function timerChat(){
-		
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+	if(Reminders.has(message.author.id)){
+		message.reply("You have a reminder set already!");
+		return;
+	} 
+	
+	const whereIam = message.channel;
+	var person = message.author;
+	var target = bot.users.get(messageArray[2]);
+	
+	if(target == undefined){
+		message.reply(" that user doesn't exist!");
+		return;
+	}
+	
+	
+	
+	Reminders.add(message.author.id)
+	let note = new Discord.RichEmbed()
+
+			
+			.setTitle("Reminding " + message.author.username + " to")
+			.setDescription(reason)
+			.setColor("#fa2323")
+			.setFooter("!cancelReminder to cancel", message.author.avatarURL)
+			.setTimestamp();
+	
+	whereIam.send(note)
+	const collector = new Discord.MessageCollector(whereIam, m => m.author.id === target.id, { time: 100000000 });
+	        		collector.once('collect', message => {
+					Reminders.delete(message.author.id)
+					whereIam.send("Reminding " + person + " because \n **" + target.username + " spoke**"); 
+					return;
+				});
+	const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
+	        		collectorer.once('collect', message => {
+					if(message.content == "!cancelReminder"){
+						Reminders.delete(message.author.id)
+						whereIam.send("Reminder cancelled!"); 
+						return;
+					}	
+				});
 }
 	
 function timerPlace(){
-		
+		message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+	if(Reminders.has(message.author.id)){
+		message.reply("You have a reminder set already!");
+		return;
+	} 
+	
+	const whereIam = message.channel;
+	var limit = parseInt(messageArray[2]);
+	var msg = message.content;
+	var index = msg.search("to");
+	var piece = msg.slice(index);
+	var reason = piece.replace("to", "");
+	
+	if(Number.isInteger(limit) === false || limit <= 0){
+		message.reply(" You need to set a time greater than 0!");
+		return;
+	}	
+	
+	var reminder = setTimeout(() => {
+         Reminders.delete(message.author.id) 
+         whereIam.send("Reminding " + message.author + " to \n **" + reason + "**"); 
+        }, (1000*60*limit));	
+	
+	Reminders.add(message.author.id)
+	let note = new Discord.RichEmbed()
+
+			
+			.setTitle("Reminding " + message.author.username + " to")
+			.setDescription(reason)
+			.setColor("#fa2323")
+			.setFooter("in " + limit + " minute(s)", message.author.avatarURL)
+			.setTimestamp();
+	
+	whereIam.send(note);
 }	
 	
 	
@@ -10818,6 +10900,19 @@ if(command === `${prefix}toggle`){
 	if(command === `${prefix}remind` && messageArray[1] == "in" && messageArray[2] != undefined && messageArray[3] == "to" && messageArray[4] != undefined){
 
 		timerReminder();
+		 
+
+
+
+		 return;
+
+
+
+	}
+	
+	if(command === `${prefix}remind` && messageArray[1] == "when" && messageArray[2] != undefined && messageArray[3] == "talks"){
+
+		timerChat();
 		 
 
 
