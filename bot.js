@@ -34,6 +34,7 @@ const Epitaph = new Set();
 const fateWin = new Set();
 const fateLose = new Set();
 const eChannel = new Set();
+const Reminders = new Set();
 
 
 
@@ -137,7 +138,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.10", bot.user.avatarURL);
+			.setFooter("Version 1.7.11", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -978,6 +979,7 @@ if(command === `!notifs`){
 		 return; 	
 
 } 
+	
 
 if(command === `!color`){
 		
@@ -6471,8 +6473,8 @@ whereIam.send(note).then(sentEmbed => {
     		
     var reminder = setTimeout(() => {
           
-         whereIam.send(owner + " This poll has been running for a minute. \n Close it by reacting with ✅!") 
-        }, (1000*60*1));	
+         whereIam.send(owner + " This poll has been running for an hour. \n Close it by reacting with ✅!") 
+        }, (1000*60*60));	
     
 
 
@@ -6524,11 +6526,54 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
     
 
 
-
-
-
 	
 }
+
+function timerReminder(){
+	 message.delete()
+
+  			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+  			.catch(console.error);
+	if(Reminders.has(message.author.id)){
+		message.reply("You have a reminder set already!");
+		return;
+	} 
+	Reminders.add(message.author.id)
+	const whereIam = message.channel;
+	var limit = parseInt(messageArray[2]);
+	var msg = message.content;
+	var reason = msg.replace(messageArray[0] + messageArray[1] + messageArray[2] + messageArray[3], "");
+	
+	if(Number.isInteger(limit) === false || limit <= 0){
+		message.reply(" You need to set a time greater than 0!")
+	}	
+	
+	var reminder = setTimeout(() => {
+          
+         whereIam.send("Reminding " + message.author + " to **" + reason + "**"); 
+        }, (1000*60*limit));	
+	
+	let note = new Discord.RichEmbed()
+
+			
+			.setTitle("Reminding " + message.author.username + " to")
+			.setDescription(reason)
+			.setColor("#fa2323")
+			.setFooter("in " + limit + " minute(s)", message.author.avatarURL)
+			.setTimestamp();
+	
+	whereIam.send(note);
+}
+	
+function timerChat(){
+		
+}
+	
+function timerPlace(){
+		
+}	
+	
 	
 function tierlist(){
 	
@@ -10000,7 +10045,7 @@ function moneyHelp(){
 
 			
 			.setTitle("KS-Bot Monetary commands 💵")
-			.setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**\n DMs you the shop list.`)
+			.setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -10013,7 +10058,7 @@ function funHelp(){
 
 			
 			.setTitle("KS-Bot Fun commands 🎉")
-			.setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand** \n Creates a custom command! \n **${prefix}deleteCommand** \n Deletes a custom command! \n **${prefix}localCommands**\n Views the custom commands. \n **${prefix}globalCommands**\n Views the global commands.`)
+			.setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! `)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -10765,6 +10810,18 @@ if(command === `${prefix}toggle`){
 	}
 }
 
+	if(command === `${prefix}remind` && messageArray[1] == "in" && messageArray[2] != undefined && messageArray[3] == "to" && messageArray[4] != undefined){
+
+		timerReminder();
+		 
+
+
+
+		 return;
+
+
+
+	}
 	
 
 if(command === `${prefix}user` && messageArray[1] == undefined){
