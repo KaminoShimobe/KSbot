@@ -1052,6 +1052,7 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
 		}
 
 function mafia(){
+	var me = bot.users.get('242118931769196544');
 	const mafia = new Set();
 	const detectives = new Set();
 	const doctors = new Set();
@@ -1130,7 +1131,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					attac -= 1;
 					players.splice(list[duty], 1);
 					// mafiaPlayers.remove(list[duty])
-					console.log(bot.users.get(list[duty]).username + " is a mafioso!");
+					me.send(bot.users.get(list[duty]).username + " is a mafioso!");
 				} else if(detec > 0){
 					detectives.add(list[duty])
 					villagers.add(list[duty])
@@ -1138,8 +1139,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					ppl -=1;
 					players.splice(list[duty], 1);
 					// mafiaPlayers.remove(list[duty])
-					console.log(bot.users.get(list[duty]).username + " is a detective!");
-					console.log(bot.users.get(list[duty]).username + " is also a villager!");
+					me.send(bot.users.get(list[duty]).username + " is a detective!");
+					me.send(bot.users.get(list[duty]).username + " is also a villager!");
 				} else if(protec > 0){
 					doctors.add(list[duty])
 					villagers.add(list[duty])
@@ -1147,13 +1148,13 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					ppl -=1;
 					players.splice(list[duty], 1);
 					// mafiaPlayers.remove(list[duty])
-					console.log(bot.users.get(list[duty]).username + " is a doctor!");
-					console.log(bot.users.get(list[duty]).username + " is also a villager!");
+					me.send(bot.users.get(list[duty]).username + " is a doctor!");
+					me.send(bot.users.get(list[duty]).username + " is also a villager!");
 				}	else {
 					villagers.add(list[duty])
 					players.splice(list[duty], 1);
 					// mafiaPlayers.remove(list[duty])
-					console.log(bot.users.get(list[duty]).username + " is a villager!");
+					me.send(bot.users.get(list[duty]).username + " is a villager!");
 				}	
    			} 
    			console.log("simulation: " + i);
@@ -6657,7 +6658,7 @@ function timerPlace(){
 	const collector = new Discord.MessageCollector(target, m =>  m.author.id != person.id , { time: 100000000 });
 	        		collector.once('collect', message => {
 					Reminders.delete(person.id)
-					whereIam.send("Reminding " + person + " because \n **someone spoke in** + target"); 
+					whereIam.send("Reminding " + person + " because \n **someone spoke in**" + target); 
 					return;
 				});
 	const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
