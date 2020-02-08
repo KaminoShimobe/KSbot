@@ -45,7 +45,7 @@ const bot = new Discord.Client({disableEveryone: true})
 //TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
 
 // STREAM STUFF 
-/*
+
 const Bot = new TwitchBot({
   username: 'ks_streamer',
   oauth: process.env.TWITCH,
@@ -75,6 +75,10 @@ Bot.on('message', chatter => {
     Bot.say('Join our discord here: https://discord.gg/ueSXpJ')
   }
 
+   if(chatter.message === '!arena') {
+    Bot.say('ID: 1KVYD | PASS: 126');
+  }	
+
   // if(chatter.message === '!bracket') {
   //   Bot.say('Check out the bracket here: https://challonge.com/oi91570t')
   // }
@@ -86,7 +90,7 @@ Bot.on('message', chatter => {
   }	
 
  }); 
-*/
+
 
 var con_fig = {
 	host: "us-cdbr-iron-east-01.cleardb.net",
