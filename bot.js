@@ -243,9 +243,9 @@ bot.on("guildDelete", guild => {
 			return;
 			
 		} else {
-			sql = `DELETE FROM server WHERE id = '${guild.id}'`;
-			con.query(sql, console.log);
-			me.send(`I was kicked from ${guild.name} and that server's id was ${guild.id}`);
+// 			sql = `DELETE FROM server WHERE id = '${guild.id}'`;
+// 			con.query(sql, console.log);
+			me.send(`I was kicked from ${guild.name} and that server's id was ${guild.id} \n Code a function to delete server's manually.`);
 			return;
 		}	
 
