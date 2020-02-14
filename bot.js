@@ -1837,7 +1837,8 @@ function treasure(){
 		if(appear == 50){
 			
 			
-			chest();	
+			chest();
+			//OG CHEST COLOR #a57400
 		} else {
 			
 			
@@ -1892,7 +1893,7 @@ function treasure(){
 
 			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#a57400");
+			.setColor("#ff6969");
 
 		room.sendEmbed(item);
  		
@@ -1946,7 +1947,7 @@ function treasure(){
 
 			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#a57400");
+			.setColor("#ff6969");
 			//#a57400 brown 
 			
 
