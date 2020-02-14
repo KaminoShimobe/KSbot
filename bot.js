@@ -35,7 +35,6 @@ const fateWin = new Set();
 const fateLose = new Set();
 const eChannel = new Set();
 const Reminders = new Set();
-const loversCD = new Set();
 const kissCD = new Set();
 
 
@@ -144,7 +143,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.11", bot.user.avatarURL);
+			.setFooter("Version 1.7.13", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -709,8 +708,8 @@ function kaminoCard(){
  							 image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
  							 image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 image.write("holidayCard.png");
-							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
-							 message.author.send("Holiday Card sent to " + person.username + "!");
+							 person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
+							 message.author.send("Valentine Card sent to " + person.username + "!");
 						    });
 						  })
 						  .catch(err => {
@@ -778,7 +777,7 @@ function holidayCard(){
 	            		}   else {
 					var person = bot.users.get(message.content);
 					if(person != undefined){
-		message.author.send("Would you like to send a holiday card to " + person.username + "? \n Yes or No");
+		message.author.send("Would you like to send a valentine card to " + person.username + "? \n Yes or No");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		
@@ -807,8 +806,8 @@ function holidayCard(){
  							 image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
  							 image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 image.write("holidayCard.png");
-							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
-							 message.author.send("Holiday Card sent to " + person.username + "!");
+							 person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
+							 message.author.send("Valentine Card sent to " + person.username + "!");
 						    });
 						  })
 						  .catch(err => {
@@ -866,7 +865,7 @@ function anonCard(){
 	            		}   else {
 					var person = bot.users.get(message.content);
 					if(person != undefined){
-		message.author.send("Would you like to send an anonymous holiday card to " + person.username + "? \n Yes or No");
+		message.author.send("Would you like to send an anonymous valentine card to " + person.username + "? \n Yes or No");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		
@@ -895,8 +894,8 @@ function anonCard(){
  							 image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
  							 //image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
 							 image.write("holidayCard.png");
-							 person.send(`You got a holiday card!`, { files: ["holidayCard.png"] })
-							 message.author.send("Holiday Card sent to " + person.username + "!");
+							 person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
+							 message.author.send("Valentine Card sent to " + person.username + "!");
 						    });
 						  })
 						  .catch(err => {
@@ -956,7 +955,7 @@ function notifications(){
 
 
 	
-if(command === `!buy` && messageArray[1] === `holidayCard`){
+if(command === `!buy` && messageArray[1] === `valentineCard`){
 		holidayCard();
 	}	
 
@@ -1833,9 +1832,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 100) + 1;
+		var appear = Math.floor(Math.random() * 50) + 1;
 		
-		if(appear == 100){
+		if(appear == 50){
 			
 			
 			chest();	
@@ -1881,7 +1880,7 @@ function treasure(){
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'valentine gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1891,7 +1890,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 
@@ -1929,13 +1928,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The chest mysteriously disappeared!");
+				room.send("The valentine gift mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'valentine gift rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1945,7 +1944,7 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
 			.setColor("#a57400");
 			//#a57400 brown 
@@ -2013,19 +2012,19 @@ function collect(){
 				}
 				
 				if(trigger == true && stand != "「KING CRIMSON」"){
-					console.log("Can't get chest cus of King Crimson!");
+					console.log("Can't get gift cus of King Crimson!");
 					return;
 				}	
 					
-				var gift = Math.floor(Math.random() * 1) + 1;
+				var gift = Math.floor(Math.random() * 4) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-// 				if(gift == 1){
-// 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
-// 				message.channel.send("**You received a gift!!!**");
-// 				} else {
+				if(gift == 1){
+				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+				message.channel.send("**You received a :gift:!!!**");
+				} else {
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;	
-// 				}	
+				}	
 				con.query(sql);
 				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
 				message.reply(" found $" + cost + " in the chest!");
@@ -2126,8 +2125,8 @@ function lostChest(){
 		let channel = bot.channels.get(rows[0].channel);
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
-		if(!channel) return message.channel.send("A chest mysteriously disappeared!");
-		channel.send("The chest mysteriously disappeared!");
+		if(!channel) return message.channel.send("A valentine gift mysteriously disappeared!");
+		channel.send("The valentine gift mysteriously disappeared!");
 		return;	
 		});
 	}		  
@@ -2859,6 +2858,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 function marriage(){
 	let potential = message.mentions.users.first();
+	let first = message.author;
 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "Yes" to accept.)`);
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
         		collector.once('collect', message => {
@@ -2868,23 +2868,28 @@ function marriage(){
 				if(err) throw err;
 				let sql;
 				let free = rows[0].marriage;
-				let them = rows[0].uname;		
+				let them = bot.users.get(potential.id);		
 				if(rows.length < 1) {
 					message.reply(" They don't have an account!");
 					return;
 				}	
+			
+				if(potential.id == message.author.id){
+					message.reply("You can't marry yourself!");
+					return;
+				}	
             	
             	
-				con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				con.query(`SELECT * FROM user WHERE id = '${first.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql2;
 				let you = rows[0].uname;
 				let spouse = rows[0].marriage;
 
 				if(spouse == '' && free == ''){
-					sql = `UPDATE user SET marriage = '${them}' WHERE id = '${message.author.id}`;
+					sql = `UPDATE user SET marriage = '${them.username}' WHERE id = '${first.id}`;
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '${you}' WHERE id = '${potential.id}`;
+					sql2 = `UPDATE user SET marriage = '${first.username}' WHERE id = '${potential.id}`;
 					con.query(sql2);
 					message.reply(" Congrats on getting married!")
 				} else if(spouse != ''){
@@ -3139,15 +3144,15 @@ function gambleFlip(){
         
    		 }  
 		
-				if(stand == "「OSIRIS」"){
-					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
-					soulless.add(message.author.id);
-					setTimeout(() => {
-					  // Removes the user from the set after a minute
-					 soulless.delete(message.author.id);
-					  message.channel.send(message.author.username + "'s soul has been released");
-					}, (1000*60*60));
-				}	
+// 				if(stand == "「OSIRIS」"){
+// 					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+// 					soulless.add(message.author.id);
+// 					setTimeout(() => {
+// 					  // Removes the user from the set after a minute
+// 					 soulless.delete(message.author.id);
+// 					  message.channel.send(message.author.username + "'s soul has been released");
+// 					}, (1000*60*60));
+// 				}	
 			
 			sql = `UPDATE user SET money = ${money - num}, lasttrans = ${-num}, streak = ${0} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
@@ -3368,15 +3373,15 @@ function gambleSlots(){
         }, (1000*60*60));			
         
    		 } 
-			 if(stand == "「OSIRIS」"){
-					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
-					soulless.add(message.author.id);
-					setTimeout(() => {
-					  // Removes the user from the set after a minute
-					 soulless.delete(message.author.id);
-					  message.channel.send(message.author.username + "'s soul has been released");
-					}, (1000*60*60));
-				}
+// 			 if(stand == "「OSIRIS」"){
+// 					message.channel.send("Your sense of defeat in your heart has caused you to lose your soul!")
+// 					soulless.add(message.author.id);
+// 					setTimeout(() => {
+// 					  // Removes the user from the set after a minute
+// 					 soulless.delete(message.author.id);
+// 					  message.channel.send(message.author.username + "'s soul has been released");
+// 					}, (1000*60*60));
+// 				}
 			sql = `UPDATE user SET money = ${money - prize}, lasttrans = ${-prize}  WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
 		
@@ -5417,7 +5422,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("1 :gift:| **holidayCard**: \n Make a gift card to send to your friends! \n 5 :gift: | **anonCard** \n Send a holiday card..... But anonymously! \n 10 :gift: | **stand** \n Choose which stand you want!")
+			.setDescription("1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n 10 :gift: | **stand** \n Choose which stand you want! \n 50 :gift: | **???** \n Check back later :eyes:")
 			.setColor("#1d498e"); 
 
 		message.author.send(shop);
@@ -9529,7 +9534,90 @@ function oSpin(){
 });
 		
 	
-	}	
+	}
+	
+	
+	function kissStand(){
+
+		
+		let member = message.mentions.members.first();
+		con.query(`SELECT * FROM user WHERE id = '${member.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		let uname = rows[0].uname;
+		let lasttrans = rows[0].lasttrans;
+		var name = bot.users.get(member.id);
+			
+			
+		if (soulless.has(message.author.id)) {
+		message.reply(" 's soul has been stolen by OSIRIS");
+			return;
+		}
+		
+		
+		
+		
+		if(rows.length < 1) {
+			
+			
+			
+			
+			message.reply(" They have no user!");
+			return;
+		}	else {
+			
+			
+			if (kissCD.has(message.author.id)) {
+				
+            message.channel.send("KISS must wait about 60 mins from when you first used it!");
+            return;
+   		 } 
+			 			
+			
+			 
+				
+			 else {
+				
+				kissCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          kissCD.delete(message.author.id);
+        }, (1000*60*60));
+				
+			var effect = lasttrans * 2;	
+			var outcome = money + effect;	
+			if(outcome >= 0){	
+			sql = `UPDATE user SET money = ${money + effect} WHERE id = '${member.id}'`;
+			con.query(sql, console.log);
+			message.channel.send("KISS has doubled the monetary effect for " + name.username + "!!!");
+			} else {
+				sql = `UPDATE user SET money = ${0} WHERE id = '${member.id}'`;
+			con.query(sql, console.log);
+			message.channel.send("KISS has doubled the monetary effect for " + name.username + ", but the remaining target was left with 0!!!");	
+			}
+					
+
+			
+	
+			
+			
+			
+			
+			
+			
+			return;
+		
+		}
+
+
+		
+	
+	}
+	});
+	
+	}
+			 
 
 function getStand(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -9548,7 +9636,7 @@ function getStand(){
 			return;
 		}
 
-		message.channel.send("Which Stand Do you want: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
+		message.channel.send("Which Stand Do you want: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS \N KISS");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		
@@ -9641,6 +9729,16 @@ function getStand(){
 							sql = `UPDATE user SET stand = "「OSIRIS」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
 							con.query(sql, console.log);
 							message.channel.send("||YOU HAVE RECEIVED 「OSIRIS」||");
+							return;
+	            		} else if (message.content == `KISS`) {
+	               			message.channel.send(".");
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							message.channel.send(".");	
+							sql = `UPDATE user SET stand = "「KISS」", gift = ${gift - 10} WHERE id = '${message.author.id}'`;
+							con.query(sql, console.log);
+							message.channel.send("||YOU HAVE RECEIVED 「KISS」||");
 							return;
 	            		} else {
 	            			message.channel.send("Invalid selection.");
@@ -10061,9 +10159,16 @@ function standHelp(){
 			
 			.setTitle("KS-Bot Stand Commands 🐞")
 			.setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 10%. Once you lose, the target's soul is released. Victim cannot lose more than half per OSPIN.`)
-			.setColor("#1d498e"); 					 				
+			.setColor("#1d498e"); 
+	
+	let stand10 = new Discord.RichEmbed()
 
-	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS");
+			
+			.setTitle("KS-Bot Stand Commands 🐞")
+			.setDescription(`__KISS__ \n **${prefix}KISS [mention]** \n Doubles the monetary gain or loss of someone's last transaction.`)
+			.setColor("#1d498e"); 
+
+	message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS \N KISS");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
 	        		collector.once('collect', message => {
 	            		
@@ -10101,6 +10206,10 @@ function standHelp(){
 							return;
 	            		}	else if (message.content == `OSIRIS`) {
 	            			message.author.sendEmbed(stand9);
+							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+							return;
+	            		} 	else if (message.content == `KISS`) {
+	            			message.author.sendEmbed(stand10);
 							message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
 							return;
 	            		}	else {
@@ -11428,7 +11537,22 @@ if(command === `${prefix}OSPIN` && messageArray[1] != undefined && messageArray[
 	}
 			
 		});		
-}		
+}
+	
+if(command === `${prefix}KISS` && messageArray[1] != undefined && stands == true){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stand = rows[0].stand;
+			
+		if(stand == "「KISS」"){
+		kissStand();
+	}		else {
+		message.reply(" You do not have the power of 「KISS」.")
+	}
+			
+		});		
+}	
 	
 	if(command === `${prefix}ZAWARUDO` && stands == true){
 		if(message.author.id == message.guild.ownerID){
@@ -11530,6 +11654,12 @@ if(command === `${prefix}OSPIN` && messageArray[1] != undefined && messageArray[
 	message.reply("Stand Abilities are disabled in this server!");
 			
 			return;	
+}
+	
+	if(command === `${prefix}KISS` && messageArray[1] != undefined && stands == false){
+		message.reply("Stand Abilities are disabled in this server!");
+			
+			return;		
 }
 	
 	
