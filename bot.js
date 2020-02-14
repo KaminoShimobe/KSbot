@@ -2017,7 +2017,7 @@ function collect(){
 					return;
 				}	
 					
-				var gift = Math.floor(Math.random() * 4) + 1;
+				var gift = Math.floor(Math.random() * 2) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
 				if(gift == 1){
