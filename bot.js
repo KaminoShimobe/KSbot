@@ -9586,7 +9586,7 @@ function oSpin(){
           kissCD.delete(message.author.id);
         }, (1000*60*60));
 				
-			var effect = lasttrans * 2;	
+			var effect = lasttrans;	
 			var outcome = money + effect;	
 			if(outcome >= 0){	
 			sql = `UPDATE user SET money = ${money + effect} WHERE id = '${member.id}'`;
