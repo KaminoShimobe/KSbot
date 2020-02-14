@@ -5423,7 +5423,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n 10 :gift: | **stand** \n Choose which stand you want! \n 50 :gift: | **???** \n Check back later :eyes:")
+			.setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 50 :gift: | **???** \n Check back later :eyes:")
 			.setColor("#1d498e"); 
 
 		message.author.send(shop);
