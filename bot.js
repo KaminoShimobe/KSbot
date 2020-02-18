@@ -376,16 +376,16 @@ bot.on("message", async message => {
 	var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
 	var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
 	var fix = `UPDATE achievements SET tasks = 'complete, complete, Refer Someone, complete, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, complete, Open 100 Chests, Open 1000 Chests, Get Married, complete, complete, Get 10+ streak, complete, complete, complete, complete, complete, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, ???, Complete Achievements Set 1', completed = ${20}, status = ${1} WHERE id = '193045612302827520'`;
-	
+	var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT)";
 
 //   	con.query(sql19, function (err, result) {
 //     	if (err) throw err;
 //     	message.author.send("level column added to server!");
 //   	});
 
-  	con.query(fix, function (err, result) {
+  	con.query(sql28, function (err, result) {
     	if (err) throw err;
-    	message.author.send("Cow Achievements fixed!");
+    	message.author.send("Table marriedAcc added!");
   	});
 
 //   	con.query(sql21, function (err, result) {
