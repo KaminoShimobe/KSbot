@@ -2870,7 +2870,7 @@ function marriage(){
 				if(err) throw err;
 				let sql;
 				let free = rows[0].marriage;
-				let them = bot.users.get(potential.id);		
+				
 				if(rows.length < 1) {
 					message.reply(" They don't have an account!");
 					return;
@@ -2889,7 +2889,7 @@ function marriage(){
 				let spouse = rows[0].marriage;
 
 				if(spouse == '' && free == ''){
-					sql = `UPDATE user SET marriage = '${them.username}' WHERE id = '${first.id}`;
+					sql = `UPDATE user SET marriage = '${potential.username}' WHERE id = '${first.id}`;
 					con.query(sql);
 					sql2 = `UPDATE user SET marriage = '${first.username}' WHERE id = '${potential.id}`;
 					con.query(sql2);
