@@ -376,7 +376,8 @@ bot.on("message", async message => {
 	var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT)";
 	var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
 	var fix = `UPDATE achievements SET tasks = 'complete, complete, Refer Someone, complete, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, complete, Open 100 Chests, Open 1000 Chests, Get Married, complete, complete, Get 10+ streak, complete, complete, complete, complete, complete, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, ???, Complete Achievements Set 1', completed = ${20}, status = ${1} WHERE id = '193045612302827520'`;
-	var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT)";
+	var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT, prenup BOOLEAN)";
+	var sql29 = "ALTER TABLE user ADD marryKey VARCHAR(40)";	
 
 //   	con.query(sql19, function (err, result) {
 //     	if (err) throw err;
@@ -387,6 +388,11 @@ bot.on("message", async message => {
     	if (err) throw err;
     	message.author.send("Table marriedAcc added!");
   	});
+		
+	con.query(sql29, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Row marryKey added to table user!");
+  	});	
 
 //   	con.query(sql21, function (err, result) {
 //     	if (err) throw err;
@@ -2653,7 +2659,7 @@ var boop = makeid(30);
 		let sql;
 		if(rows.length < 1) {
 			
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${0})`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift, marryKey) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${0}, '')`;
 			con.query(sql, console.log);
 			message.channel.send(`User account created! ${prefix}view to view your account!`)
 			//Achievement 1
@@ -2712,7 +2718,7 @@ function referUser(){
 		let sql;		
 		
 				if(rows.length < 1) {
-			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1})`;
+			sql = `INSERT INTO user (id, money, rank, patreon, bio, marriage, stand, uname, streak, lasttrans, pet, hue, gift, marryKey) VALUES ('${message.author.id}', ${0}, 'None', ${0}, 'DM KS-Bot !bio to set your bio', '', '', '${message.author.username}', ${0}, ${0}, ${true}, '#4286f4', ${1}, '')`;
 			con.query(sql, console.log);
 			
 			message.channel.send(`User account created! You and your friend also got a gift! ${prefix}view to view your account!`)
@@ -2870,6 +2876,7 @@ function marriage(){
 				if(err) throw err;
 				let sql;
 				let free = rows[0].marriage;
+				let key1 = rows[0].marryKey;
 				
 				if(rows.length < 1) {
 					message.reply(" They don't have an account!");
@@ -2887,11 +2894,14 @@ function marriage(){
 				let sql2;
 				let you = rows[0].uname;
 				let spouse = rows[0].marriage;
+				let key2 = rows[0].marryKey;
+					
+				var key = potential.id + first.id;	
 
 				if(spouse == '' && free == ''){
-					sql = `UPDATE user SET marriage = '${potential.username}' WHERE id = '${first.id}'`;
+					sql = `UPDATE user SET marriage = '${potential.username}', marryKey = '${key}'  WHERE id = '${first.id}'`;
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '${first.username}' WHERE id = '${potential.id}'`;
+					sql2 = `UPDATE user SET marriage = '${first.username}', marryKey = '${key}' WHERE id = '${potential.id}'`;
 					con.query(sql2);
 					message.reply(" Congrats on getting married!")
 				} else if(spouse != ''){
@@ -2936,9 +2946,9 @@ function divorce(){
 			if(rows.length < 1) {
 					message.reply(" You don't have an account!");
 				}	else {
-					sql = `UPDATE user SET marriage = '' WHERE id = '${message.author.id}'`
+					sql = `UPDATE user SET marriage = '', marryKey = '' WHERE id = '${message.author.id}'`
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '' WHERE id = '${potential.id}'`
+					sql2 = `UPDATE user SET marriage = '', marryKey = ''  WHERE id = '${potential.id}'`
 					con.query(sql2);
 					message.reply("You are now a free spirit!")
 					return;
@@ -2947,6 +2957,80 @@ function divorce(){
 	});		
 }
 	
+function addMarriedAccount()	{
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let marryKey = rows[0].marryKey;
+				let marriage = rows[0].marriage;
+		
+		if(rows.length < 1) {
+					message.reply(` You don't have user! ${prefix}user to create one!`);
+					return;
+				}
+		
+		if(marryKey == '' || marryKey == undefined || marriage == ''){
+			message.reply(` You are not married! You need to be married to create a joint account.`);
+			return;
+	
+		} else {
+			let potential = message.mentions.users.first();
+			if(!potential) return message.channel.send("You did not specify a user mention!");
+			let first = message.author;
+			message.channel.send(`${potential}, do you consent to creating a **joint account** with ${message.author}, ? (respond with "Yes" to accept.)`);
+			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content === "Yes" || message.content === "yes") {
+			message.channel.send(`Do you want a prenuptial agreement? (upon divorce the account will evenly split proceeds between both parties) \n Respond with "Yes", "No" or !cancel to cancel the process in its entirety.`);
+			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
+        		collector.once('collect', message => {	
+				if (message.content === "Yes" || message.content === "yes") {	
+			con.query(`SELECT * FROM user WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+		
+				if(rows.length < 1) {
+					sql2 = `INSERT INTO server (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
+					con.query(sql2, console.log);
+				} else{
+					message.reply(" You already have a joint account!")
+					return
+				}	
+		
+			});
+				} else if (message.content === "No" || message.content === "no") {
+					con.query(`SELECT * FROM user WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+		
+				if(rows.length < 1) {
+					sql2 = `INSERT INTO server (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
+					con.query(sql2, console.log);
+				} else{
+					message.reply(" You already have a joint account!")
+					return
+				}	
+		
+			});
+				} else if (message.content == `!cancel`) {
+	               		 message.channel.send("Cancelled.");
+	                		return;
+	            		}
+		});
+		} else {
+			
+	               		 message.channel.send("Process cancelled.");
+	                		return;
+	            
+		}
+		
+	});	
+	
+	}
+	
+	});
+	
+}		
 //MONEY MONEY MONEY
 
 
