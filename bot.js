@@ -2889,9 +2889,9 @@ function marriage(){
 				let spouse = rows[0].marriage;
 
 				if(spouse == '' && free == ''){
-					sql = `UPDATE user SET marriage = '${potential.username}' WHERE id = '${first.id}`;
+					sql = `UPDATE user SET marriage = '${potential.username}' WHERE id = '${first.id}'`;
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '${first.username}' WHERE id = '${potential.id}`;
+					sql2 = `UPDATE user SET marriage = '${first.username}' WHERE id = '${potential.id}'`;
 					con.query(sql2);
 					message.reply(" Congrats on getting married!")
 				} else if(spouse != ''){
