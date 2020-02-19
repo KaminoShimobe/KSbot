@@ -2876,7 +2876,7 @@ function marriage(){
 					return;
 				}	
 			
-				if(potential.id == message.author.id){
+				if(potential.id == first.id){
 					message.reply("You can't marry yourself!");
 					return;
 				}	
