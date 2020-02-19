@@ -143,7 +143,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.13", bot.user.avatarURL);
+			.setFooter("Version 1.7.14", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -2859,6 +2859,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 function marriage(){
 	let potential = message.mentions.users.first();
+	if(!potential) return message.channel.send("You did not specify a user mention!");
 	let first = message.author;
 		message.channel.send(`${potential}, do you accept ${message.author}, to be your lawful spouse? (respond with "Yes" to accept.)`);
 		const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
@@ -8128,7 +8129,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 			
 			.setAuthor(message.author.username + supporter)
-			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
 			.setFooter("ID:" + message.author.id, message.author.avatarURL)
 			.setColor(color); 
 
@@ -8381,7 +8382,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
 			
 			.setAuthor(other.username + supporter)
-			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
+			.setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage )
 			.setFooter("ID:" + other.id, other.avatarURL)
 			.setColor(color); 
 
@@ -10949,6 +10950,22 @@ if(command === `!achievements`){
 if(command === `!testGame`){
 	if(message.author.id == '242118931769196544'){
 		mafia();
+
+	}
+
+}	
+	
+if(command === `!marry` && messageArray[1] != undefined){
+	if(message.author.id == '242118931769196544'){
+		marriage();
+
+	}
+
+}	
+	
+if(command === `!divorce` && messageArray[1] != undefined){
+	if(message.author.id == '242118931769196544'){
+		divorce();
 
 	}
 
