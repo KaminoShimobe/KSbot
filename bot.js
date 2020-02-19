@@ -2936,11 +2936,12 @@ function divorce(){
 			if(rows.length < 1) {
 					message.reply(" You don't have an account!");
 				}	else {
-					sql = `UPDATE user SET marriage = '' WHERE id = '${message.author.id}`
+					sql = `UPDATE user SET marriage = '' WHERE id = '${message.author.id}'`
 					con.query(sql);
-					sql2 = `UPDATE user SET marriage = '' WHERE id = '${potential.id}`
+					sql2 = `UPDATE user SET marriage = '' WHERE id = '${potential.id}'`
 					con.query(sql2);
 					message.reply("You are now a free spirit!")
+					return;
 				}
 
 	});		
