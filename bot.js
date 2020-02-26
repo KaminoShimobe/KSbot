@@ -2939,19 +2939,47 @@ function divorce(){
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
-				let sql2;
+				
 			
 				let spouse = rows[0].marriage;
+				let marryKey = rows[0].marryKey;
+				let money = rows[0].money
 
 			if(rows.length < 1) {
 					message.reply(" You don't have an account!");
 				}	else {
+					con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				
+				let funds = rows[0].funds;
+				let prenup = rows[0].prenup;
+				var split = Math.floor(funds / 2);		
+						
+					con.query(`SELECT * FROM user WHERE id = '${potential.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql3;	
+				let theirMoney = rows[0].money;
+					
+					if(prenup == true){	
+					sql = `UPDATE user SET money = ${money + split}, marriage = '', marryKey = '' WHERE id = '${message.author.id}'`
+					con.query(sql);
+					sql2 = `UPDATE user SET money = ${theirMoney + split}, marriage = '', marryKey = ''  WHERE id = '${potential.id}'`
+					con.query(sql2);
+					message.reply("You are now a free spirit!")
+					} else {
 					sql = `UPDATE user SET marriage = '', marryKey = '' WHERE id = '${message.author.id}'`
 					con.query(sql);
 					sql2 = `UPDATE user SET marriage = '', marryKey = ''  WHERE id = '${potential.id}'`
 					con.query(sql2);
-					message.reply("You are now a free spirit!")
-					return;
+					message.reply("You are now a free spirit!")	
+					}	
+						
+					sql3 = `DELETE FROM marriedAcc WHERE id = '${marryKey}'`;
+					con.query(sql3, console.log);
+			message.reply(`Joint Account Deleted! Get married to create a new one!`);	
+						
+					});	
 				}
 
 	});		
@@ -2985,12 +3013,12 @@ function addMarriedAccount()	{
 			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === potential.id, { time: 100000000 });
         		collector.once('collect', message => {	
 				if (message.content === "Yes" || message.content === "yes") {	
-			con.query(`SELECT * FROM user WHERE id = '${marryKey}'`, (err, rows) => {
+			con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
 				if(err) throw err;
 				let sql2;
 		
 				if(rows.length < 1) {
-					sql2 = `INSERT INTO server (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
+					sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
 					con.query(sql2, console.log);
 				} else{
 					message.reply(" You already have a joint account!")
@@ -2999,12 +3027,12 @@ function addMarriedAccount()	{
 		
 			});
 				} else if (message.content === "No" || message.content === "no") {
-					con.query(`SELECT * FROM user WHERE id = '${marryKey}'`, (err, rows) => {
+					con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
 				if(err) throw err;
 				let sql2;
 		
 				if(rows.length < 1) {
-					sql2 = `INSERT INTO server (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
+					sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
 					con.query(sql2, console.log);
 				} else{
 					message.reply(" You already have a joint account!")
@@ -3027,6 +3055,177 @@ function addMarriedAccount()	{
 	});	
 	
 	}
+	
+	});
+	
+}
+	
+	function depositMarriedAccount()	{
+		var num = parseInt(messageArray[2]); 
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let marryKey = rows[0].marryKey;
+				let marriage = rows[0].marriage;
+				let money = rows[0].money;
+				var rank = rows[0].rank;
+		
+		if(rank == "rps"){
+			message.reply("You cannot deposit money while playing Rock Paper Scissors!");
+			return;
+		}
+		
+		if(rows.length < 1) {
+					message.reply(` You don't have user! ${prefix}user to create one!`);
+					return;
+				}
+		
+		if(marryKey == '' || marryKey == undefined || marriage == ''){
+			message.reply(` You are not married! You need to be married to create a joint account.`);
+			return;
+	
+		} else {
+			con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				
+				let funds = rows[0].funds;
+		
+				if(rows.length < 1) {
+					message.reply(" You don't have a joint account!")
+					return;
+				} else{
+					if(funds <= 1000000000){
+					if(money > 0 && money > num && num > 0){
+					sql2 = `UPDATE user SET money = ${money - num}  WHERE id = '${message.author.id}'`
+					con.query(sql2);
+					sql2 = `UPDATE marriedAcc SET funds = ${funds + num}  WHERE id = '${marryKey}'`
+					con.query(sql2);
+					message.channel.send(message.author.username + " deposited $" + num + " to their joint account with " + marriage + "!";	
+						
+					} else {
+						message.reply("You can't deposit all of your money and it must be greater than 0!");
+						return;
+				}	
+					} else {
+						message.reply("Your joint account is full!");
+						return;
+					}
+		
+			});
+			
+			
+		}	
+	
+	});
+	
+}
+	
+function withdrawMarriedAccount()	{
+	var num = parseInt(messageArray[2]); 
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let marryKey = rows[0].marryKey;
+				let marriage = rows[0].marriage;
+				let money = rows[0].money;
+				var rank = rows[0].rank;
+		
+		if(rank == "rps"){
+			message.reply("You cannot withdraw money while playing Rock Paper Scissors!");
+			return;
+		}
+		
+		if(rows.length < 1) {
+					message.reply(` You don't have user! ${prefix}user to create one!`);
+					return;
+				}
+		
+		if(marryKey == '' || marryKey == undefined || marriage == ''){
+			message.reply(` You are not married! You need to be married to create a joint account.`);
+			return;
+	
+		} else {
+			con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				
+				let funds = rows[0].funds;
+		
+				if(rows.length < 1) {
+					message.reply(" You don't have a joint account!")
+					return;
+				} else{
+					if(num > 0 && num <= funds){
+					sql2 = `UPDATE user SET money = ${money + num}  WHERE id = '${message.author.id}'`
+					con.query(sql2);
+					sql2 = `UPDATE marriedAcc SET funds = ${funds - num}  WHERE id = '${marryKey}'`
+					con.query(sql2);
+					message.channel.send(message.author.username + " withdrew $" + num + " from their joint account with " + marriage + "!";	
+						
+					} else {
+						message.reply("You can't withdraw what you don't have and it must be greater than 0!");
+						return;
+					}
+				}	
+		
+			});
+			
+			
+		}	
+	
+	});
+	
+}	
+		
+function viewMarriedAccount()	{
+	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let marryKey = rows[0].marryKey;
+				let marriage = rows[0].marriage;
+				let money = rows[0].money;
+				let hue = rows[0].hue;
+				var rank = rows[0].rank;
+		
+		if(rank == "rps"){
+			message.reply("You cannot withdraw money while playing Rock Paper Scissors!");
+			return;
+		}
+		
+		if(rows.length < 1) {
+					message.reply(` You don't have user! ${prefix}user to create one!`);
+					return;
+				}
+		
+		if(marryKey == '' || marryKey == undefined || marriage == ''){
+			message.reply(` You are not married! You need to be married to create a joint account.`);
+			return;
+	
+		} else {
+			con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				
+				let funds = rows[0].funds;
+		
+				if(rows.length < 1) {
+					message.reply(" You don't have a joint account!")
+					return;
+				} else{
+					let jointAccount = new Discord.RichEmbed()
+
+			
+			.setTitle(message.author.username + " & " marriage + "'s joint account:")
+			.setDescription("$" + funds)		
+			.setColor(hue);	
+			message.channel.send(jointAccount);
+				}	
+		
+			});
+			
+			
+		}	
 	
 	});
 	
