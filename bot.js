@@ -1140,33 +1140,37 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 				if(attac > 0){
 					//mafia.add(list[duty])
 					attac -= 1;
-					list.splice(list[duty], 1);
+					
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a mafioso!");
+					list.splice(list[duty], 1);
 				} else if(detec > 0){
 					//detectives.add(list[duty])
 					//villagers.add(list[duty])
 					detec -=1;
 					ppl -=1;
-					list.splice(list[duty], 1);
+					
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a detective!");
 					me.send(bot.users.get(list[duty]).username + " is also a villager!");
+					list.splice(list[duty], 1);
 				} else if(protec > 0){
 					//doctors.add(list[duty])
 					//villagers.add(list[duty])
 					protec -=1;
 					ppl -=1;
-					list.splice(list[duty], 1);
+					
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a doctor!");
 					me.send(bot.users.get(list[duty]).username + " is also a villager!");
+					list.splice(list[duty], 1);
 				}	else {
 					//villagers.add(list[duty])
-					list.splice(list[duty], 1);
+					
 					ppl -=1
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a villager!");
+					list.splice(list[duty], 1);
 				}	
 				console.log("Mafioso: " + attac + "\n Detectives: " + detec + "\n Doctors: " + protec + "\n Villagers: " + ppl);
    			} 
