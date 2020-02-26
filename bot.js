@@ -2947,6 +2947,7 @@ function divorce(){
 
 			if(rows.length < 1) {
 					message.reply(" You don't have an account!");
+					return
 				}	else {
 					con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
 				if(err) throw err;
@@ -2977,12 +2978,16 @@ function divorce(){
 						
 					sql3 = `DELETE FROM marriedAcc WHERE id = '${marryKey}'`;
 					con.query(sql3, console.log);
-			message.reply(`Joint Account Deleted! Get married to create a new one!`);	
+			message.reply(`Joint Account Deleted! Get married to create a new one!`);
+			return;
 						
 					});	
-				}
-
+					
+				});
+				
+}
 	});		
+ 	
 }
 	
 function addMarriedAccount()	{
@@ -3101,7 +3106,7 @@ function addMarriedAccount()	{
 					con.query(sql2);
 					sql2 = `UPDATE marriedAcc SET funds = ${funds + num}  WHERE id = '${marryKey}'`
 					con.query(sql2);
-					message.channel.send(message.author.username + " deposited $" + num + " to their joint account with " + marriage + "!";	
+					message.channel.send(message.author.username + " deposited $" + num + " to their joint account with " + marriage + "!");	
 						
 					} else {
 						message.reply("You can't deposit all of your money and it must be greater than 0!");
@@ -3110,6 +3115,7 @@ function addMarriedAccount()	{
 					} else {
 						message.reply("Your joint account is full!");
 						return;
+					}
 					}
 		
 			});
@@ -3161,7 +3167,7 @@ function withdrawMarriedAccount()	{
 					con.query(sql2);
 					sql2 = `UPDATE marriedAcc SET funds = ${funds - num}  WHERE id = '${marryKey}'`
 					con.query(sql2);
-					message.channel.send(message.author.username + " withdrew $" + num + " from their joint account with " + marriage + "!";	
+					message.channel.send(message.author.username + " withdrew $" + num + " from their joint account with " + marriage + "!");	
 						
 					} else {
 						message.reply("You can't withdraw what you don't have and it must be greater than 0!");
@@ -3216,7 +3222,7 @@ function viewMarriedAccount()	{
 					let jointAccount = new Discord.RichEmbed()
 
 			
-			.setTitle(message.author.username + " & " marriage + "'s joint account:")
+			.setTitle(message.author.username + " & " + marriage + "'s joint account:")
 			.setDescription("$" + funds)		
 			.setColor(hue);	
 			message.channel.send(jointAccount);
