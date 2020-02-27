@@ -1136,7 +1136,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			for ( var i = 0; i < players.length; i++ ) {
 				// list = Array.from(mafiaPlayers);
 				list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-				var duty = Math.floor((Math.random() * list.length) - 1);
+				var duty = Math.floor((Math.random() * list.length));
 				if(attac > 0){
 					//mafia.add(list[duty])
 					attac -= 1;
