@@ -73,7 +73,7 @@ Bot.on('message', chatter => {
   // }	
 	
   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/ueSXpJ')
+    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
   }
 
   //  if(chatter.message === '!arena') {
