@@ -47,50 +47,54 @@ const bot = new Discord.Client({disableEveryone: true})
 
 // STREAM STUFF 
 
-// const Bot = new TwitchBot({
-//   username: 'ks_streamer',
-//   oauth: process.env.TWITCH,
-//   channels: ['Kamino_Shimobe']
-// })
+const Bot = new TwitchBot({
+  username: 'ks_streamer',
+  oauth: process.env.TWITCH,
+  channels: ['Kamino_Shimobe']
+})
 
-// Bot.on('join', channel => {
-//   console.log(`Joined channel: ${channel}`)
-//   Bot.say('KAMINO REALLY OUT HERE BRUH!');
-//   });
+Bot.on('join', channel => {
+  console.log(`Joined channel: ${channel}`)
+  Bot.say('KAMINO REALLY OUT HERE BRUH!');
+  });
   
-//   Bot.on('part', channel => {
-//   console.log(`Bot left ${channel}`);
-// })
+  Bot.on('part', channel => {
+  console.log(`Bot left ${channel}`);
+})
 
-// Bot.on('error', err => {
-//   console.log(err)
-// })
+Bot.on('error', err => {
+  console.log(err)
+})
 
-// Bot.on('message', chatter => {
-//   // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-//   //   Bot.say('Commands: !help | !discord | !bracket | !dice');
+Bot.on('message', chatter => {
+  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
+  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
    
-//   // }	
+  // }	
 	
-//   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-//     Bot.say('Join our discord here: https://discord.gg/ueSXpJ')
-//   }
+  if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
+    Bot.say('Join our discord here: https://discord.gg/ueSXpJ')
+  }
 
-//    if(chatter.message === '!arena') {
-//     Bot.say('ID: 1KVYD | PASS: 126');
-//   }	
+  //  if(chatter.message === '!arena') {
+  //   Bot.say('ID: 1KVYD | PASS: 126');
+  // }	
 
-//   // if(chatter.message === '!bracket') {
-//   //   Bot.say('Check out the bracket here: https://challonge.com/oi91570t')
-//   // }
+  if(chatter.message === '!bracket') {
+    Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
+  }
 
-//   if(chatter.message === '!dice') {
-// 	  var die1 = Math.floor(Math.random() * 6) + 1;
-// 	  var die2 = Math.floor(Math.random() * 6) + 1;
-//     Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
-//   }	
+  if(chatter.message === '!twitter') {
+    Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
+  }
 
-//  }); 
+  if(chatter.message === '!dice') {
+	  var die1 = Math.floor(Math.random() * 6) + 1;
+	  var die2 = Math.floor(Math.random() * 6) + 1;
+    Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
+  }	
+
+ }); 
 
 
 var con_fig = {
