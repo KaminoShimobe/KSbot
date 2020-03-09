@@ -187,10 +187,11 @@ onlineUpdate();
 });
 
 bot.on("guildCreate", guild => {
+	var me = bot.users.get('242118931769196544');	
       con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		var me = bot.users.get('242118931769196544');	    
+		    
 		if(rows.length < 1) {
 			function makeid(length) {
    var result           = '';
