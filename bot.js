@@ -1182,6 +1182,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 				}	
 				console.log("Mafioso: " + attac + "\n Detectives: " + detec + "\n Doctors: " + protec + "\n Villagers: " + ppl);
+				console.log(list);
    			} 
    			console.log("simulation: " + i);
 
