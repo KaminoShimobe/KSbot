@@ -1137,7 +1137,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			var detec = Math.floor(list.length / 6) 
 			var protec = Math.floor(list.length / 6) 
 			var ppl = Math.floor((list.length * 2) / 3)
-			var list;
+			// var list;
 			for ( var i = list.length-1; i >= 0 ; i-- ) {
 				// list = Array.from(mafiaPlayers);
 				//list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
@@ -1148,7 +1148,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a mafioso!");
-					list.splice(list[duty], 1);
+					list.splice(duty, 1);
 					
 				} else if(detec > 0){
 					//detectives.add(list[duty])
@@ -1159,7 +1159,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a detective!");
 					me.send(bot.users.get(list[duty]).username + " is also a villager!");
-					list.splice(list[duty], 1);
+					list.splice(duty, 1);
 					
 				} else if(protec > 0){
 					//doctors.add(list[duty])
@@ -1170,7 +1170,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a doctor!");
 					me.send(bot.users.get(list[duty]).username + " is also a villager!");
-					list.splice(list[duty], 1);
+					list.splice(duty, 1);
 					
 				}	else {
 					//villagers.add(list[duty])
@@ -1178,7 +1178,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 					ppl -=1
 					// mafiaPlayers.remove(list[duty])
 					me.send(bot.users.get(list[duty]).username + " is a villager!");
-					list.splice(list[duty], 1);
+					list.splice(duty, 1);
 
 				}	
 				console.log("Mafioso: " + attac + "\n Detectives: " + detec + "\n Doctors: " + protec + "\n Villagers: " + ppl);
