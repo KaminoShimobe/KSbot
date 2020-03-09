@@ -12195,7 +12195,7 @@ if(command === `${prefix}view` && messageArray[1] === undefined){
 
 	}	
 	
-if(command === `${prefix}marry` && messageArray[1] === undefined){
+if(command === `${prefix}marry` && messageArray[1] != undefined){
 			
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
@@ -12232,7 +12232,7 @@ if(command === `${prefix}marry` && messageArray[1] === undefined){
 
 	}		
 	
-if(command === `${prefix}divorce` && messageArray[1] === undefined){
+if(command === `${prefix}divorce` && messageArray[1] != undefined){
 			
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
@@ -12306,7 +12306,7 @@ if(command === `${prefix}mView`){
 
 	}
 	
-if(command === `${prefix}mWithdraw` && messageArray[1] === undefined){
+if(command === `${prefix}mWithdraw` && messageArray[1] != undefined){
 			
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
@@ -12343,7 +12343,7 @@ if(command === `${prefix}mWithdraw` && messageArray[1] === undefined){
 
 	}
 	
-if(command === `${prefix}mDeposit` && messageArray[1] === undefined){
+if(command === `${prefix}mDeposit` && messageArray[1] != undefined){
 			
 		if(cooldown > 0){
 	if (commandCD.has(message.author.id)) {
