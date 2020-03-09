@@ -47,54 +47,54 @@ const bot = new Discord.Client({disableEveryone: true})
 
 // STREAM STUFF 
 
-const Bot = new TwitchBot({
-  username: 'ks_streamer',
-  oauth: process.env.TWITCH,
-  channels: ['Kamino_Shimobe']
-})
+// const Bot = new TwitchBot({
+//   username: 'ks_streamer',
+//   oauth: process.env.TWITCH,
+//   channels: ['Kamino_Shimobe']
+// })
 
-Bot.on('join', channel => {
-  console.log(`Joined channel: ${channel}`)
-  Bot.say('KAMINO REALLY OUT HERE BRUH!');
-  });
+// Bot.on('join', channel => {
+//   console.log(`Joined channel: ${channel}`)
+//   Bot.say('KAMINO REALLY OUT HERE BRUH!');
+//   });
   
-  Bot.on('part', channel => {
-  console.log(`Bot left ${channel}`);
-})
+//   Bot.on('part', channel => {
+//   console.log(`Bot left ${channel}`);
+// })
 
-Bot.on('error', err => {
-  console.log(err)
-})
+// Bot.on('error', err => {
+//   console.log(err)
+// })
 
-Bot.on('message', chatter => {
-  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
+// Bot.on('message', chatter => {
+//   // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
+//   //   Bot.say('Commands: !help | !discord | !bracket | !dice');
    
-  // }	
+//   // }	
 	
-  if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
-  }
+//   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
+//     Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
+//   }
 
-  //  if(chatter.message === '!arena') {
-  //   Bot.say('ID: 1KVYD | PASS: 126');
-  // }	
+//   //  if(chatter.message === '!arena') {
+//   //   Bot.say('ID: 1KVYD | PASS: 126');
+//   // }	
 
-  if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
-  }
+//   if(chatter.message === '!bracket') {
+//     Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
+//   }
 
-  if(chatter.message === '!twitter') {
-    Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
-  }
+//   if(chatter.message === '!twitter') {
+//     Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
+//   }
 
-  if(chatter.message === '!dice') {
-	  var die1 = Math.floor(Math.random() * 6) + 1;
-	  var die2 = Math.floor(Math.random() * 6) + 1;
-    Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
-  }	
+//   if(chatter.message === '!dice') {
+// 	  var die1 = Math.floor(Math.random() * 6) + 1;
+// 	  var die2 = Math.floor(Math.random() * 6) + 1;
+//     Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
+//   }	
 
- }); 
+//  }); 
 
 
 var con_fig = {
@@ -147,7 +147,7 @@ bot.on("ready", async () => {
 			.setTitle("Update Live!")
 			.setColor("#1f3c5b")
 			.setTimestamp()
-			.setFooter("Version 1.7.14", bot.user.avatarURL);
+			.setFooter("Version 1.8.0", bot.user.avatarURL);
 	me.send(yeet);
 	
 	con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1853,9 +1853,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-		var appear = Math.floor(Math.random() * 50) + 1;
+		var appear = Math.floor(Math.random() * 100) + 1;
 		
-		if(appear == 50){
+		if(appear == 100){
 			
 			
 			chest();
@@ -1902,7 +1902,7 @@ function treasure(){
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
 		con.query(sql);
 		const booru = new Danbooru()
-		booru.posts({ tags: 'valentine gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1912,9 +1912,9 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#ff6969");
+			.setColor("#a57400");
 
 		room.sendEmbed(item);
  		
@@ -1950,13 +1950,13 @@ function treasure(){
 			
 		}	else {
 			if(chest != 0){
-				room.send("The valentine gift mysteriously disappeared!");
+				room.send("The chest mysteriously disappeared!");
 			}
 			sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
 			con.query(sql);
 
 			const booru = new Danbooru()
-		booru.posts({ tags: 'valentine gift rating:safe', random: true }).then(posts => {
+		booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
   		const index = Math.floor(Math.random() * posts.length)
   		const post = posts[index]
@@ -1966,9 +1966,9 @@ function treasure(){
  			
 		let item = new Discord.RichEmbed()
 
-			.setTitle(`A valentine gift has appeared! Type ${prefix}open to open it!`)
+			.setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
 			.setImage(url.href)
-			.setColor("#ff6969");
+			.setColor("#a57400");
 			//#a57400 brown 
 			
 
@@ -2034,19 +2034,19 @@ function collect(){
 				}
 				
 				if(trigger == true && stand != "「KING CRIMSON」"){
-					console.log("Can't get gift cus of King Crimson!");
+					console.log("Can't get chest cus of King Crimson!");
 					return;
 				}	
 					
 				var gift = Math.floor(Math.random() * 2) + 1;
 				let money = rows[0].money;
 				let lasttrans = rows[0].lasttrans;
-				if(gift == 1){
-				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
-				message.channel.send("**You received a :gift:!!!**");
-				} else {
+// 				if(gift == 1){
+// 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+// 				message.channel.send("**You received a :gift:!!!**");
+// 				} else {
 				sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;	
-				}	
+// 				}	
 				con.query(sql);
 				con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);	
 				message.reply(" found $" + cost + " in the chest!");
@@ -2147,8 +2147,8 @@ function lostChest(){
 		let channel = bot.channels.get(rows[0].channel);
 		sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
 		con.query(sql);
-		if(!channel) return message.channel.send("A valentine gift mysteriously disappeared!");
-		channel.send("The valentine gift mysteriously disappeared!");
+		if(!channel) return message.channel.send("The chest mysteriously disappeared!");
+		channel.send("The chest mysteriously disappeared!");
 		return;	
 		});
 	}		  
@@ -3011,6 +3011,12 @@ function addMarriedAccount()	{
 				let sql;
 				let marryKey = rows[0].marryKey;
 				let marriage = rows[0].marriage;
+				let gift = rows[0].gift;
+		
+		if(gift < 25) {
+			message.reply("Not enough gifts!");
+			return;
+		}
 		
 		if(rows.length < 1) {
 					message.reply(` You don't have user! ${prefix}user to create one!`);
@@ -3040,6 +3046,9 @@ function addMarriedAccount()	{
 				if(rows.length < 1) {
 					sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
 					con.query(sql2, console.log);
+					sql = `UPDATE user gift = ${gift - 25} WHERE id = '${message.author.id}'`;
+					con.query(sql, console.log);
+					message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
 				} else{
 					message.reply(" You already have a joint account!")
 					return
@@ -3049,11 +3058,14 @@ function addMarriedAccount()	{
 				} else if (message.content === "No" || message.content === "no") {
 					con.query(`SELECT * FROM marriedAcc WHERE id = '${marryKey}'`, (err, rows) => {
 				if(err) throw err;
-				let sql2;
+				let sql3;
 		
 				if(rows.length < 1) {
-					sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
-					con.query(sql2, console.log);
+					sql3 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
+					con.query(sql3, console.log);
+					sql = `UPDATE user gift = ${gift - 25} WHERE id = '${message.author.id}'`;
+					con.query(sql, console.log);
+					message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
 				} else{
 					message.reply(" You already have a joint account!")
 					return
@@ -3081,7 +3093,7 @@ function addMarriedAccount()	{
 }
 	
 	function depositMarriedAccount()	{
-		var num = parseInt(messageArray[2]); 
+		var num = parseInt(messageArray[1]); 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
@@ -3143,7 +3155,7 @@ function addMarriedAccount()	{
 }
 	
 function withdrawMarriedAccount()	{
-	var num = parseInt(messageArray[2]); 
+	var num = parseInt(messageArray[1]); 
 	con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
@@ -3238,8 +3250,10 @@ function viewMarriedAccount()	{
 
 			
 			.setTitle(message.author.username + " & " + marriage + "'s joint account:")
-			.setDescription("$" + funds)		
-			.setColor(hue);	
+			.setDescription("$" + funds)
+			.setFooter(`${prefix}mWithdraw or ${prefix}mDeposit to add or take funds!`)		
+			.setColor(hue)
+			.setTimestamp();		
 			message.channel.send(jointAccount);
 				}	
 		
@@ -5729,7 +5743,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
 			
 			.setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-			.setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 50 :gift: | **???** \n Check back later :eyes:")
+			.setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
 			.setColor("#1d498e"); 
 
 		message.author.send(shop);
@@ -10605,7 +10619,7 @@ function socialHelp(){
 
 			
 			.setTitle("KS-Bot Social commands 👥")
-			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand`)
+			.setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **{prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
 			.setColor("#1d498e"); 
 
 		message.author.sendEmbed(help);
@@ -11260,21 +11274,21 @@ if(command === `!testGame`){
 
 }	
 	
-if(command === `!marry` && messageArray[1] != undefined){
-	if(message.author.id == '242118931769196544'){
-		marriage();
+// if(command === `!marry` && messageArray[1] != undefined){
+// 	if(message.author.id == '242118931769196544'){
+// 		marriage();
 
-	}
+// 	}
 
-}	
+// }	
 	
-if(command === `!divorce` && messageArray[1] != undefined){
-	if(message.author.id == '242118931769196544'){
-		divorce();
+// if(command === `!divorce` && messageArray[1] != undefined){
+// 	if(message.author.id == '242118931769196544'){
+// 		divorce();
 
-	}
+// 	}
 
-}	
+// }	
 
 
 	
@@ -11453,9 +11467,9 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 
 	}
 
-	if(command === `${prefix}divorce`){
-		divorce();
-	}
+// 	if(command === `${prefix}divorce`){
+// 		divorce();
+// 	}
 
 	if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
 		
@@ -11469,6 +11483,10 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 	
 	if(command === `${prefix}buy` && messageArray[1] === `stand`){
 		getStand();
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `marriageAccount` && messageArray[2] === `with` && messageArray[3] != undefined){
+		addMarriedAccount();
 	}
 
 	if(command === `${prefix}buy` && messageArray[1] === `insurance`){
@@ -12139,6 +12157,228 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 	
 	let cooldown = rows[0].cooldown;
 	let waifu = rows[0].waifu;
+	
+if(command === `${prefix}view` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		viewUser();
+	}
+} else {
+// insert function here.
+	viewUser();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
+	
+if(command === `${prefix}marry` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		marriage();
+	}
+} else {
+// insert function here.
+	marriage();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}		
+	
+if(command === `${prefix}divorce` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		divorce();
+	}
+} else {
+// insert function here.
+	divorce();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
+	
+if(command === `${prefix}mView`){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		viewMarriedAccount();
+	}
+} else {
+// insert function here.
+	viewMarriedAccount();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+if(command === `${prefix}mWithdraw` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		withdrawMarriedAccount();
+	}
+} else {
+// insert function here.
+	withdrawMarriedAccount();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+if(command === `${prefix}mDeposit` && messageArray[1] === undefined){
+			
+		if(cooldown > 0){
+	if (commandCD.has(message.author.id)) {
+	message.react('🕒')
+
+  	.then(console.log("Reacted."))
+
+  	.catch(console.error);	
+	
+		return;
+	} else {
+	commandCD.add(message.author.id);		
+	  setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown));	
+	//insert function here.
+		depositMarriedAccount();
+	}
+} else {
+// insert function here.
+	depositMarriedAccount();
+}
+		
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}	
 
 if(command === `${prefix}customCommand`){
 			
@@ -13112,6 +13352,9 @@ return;
 	
 
 	});
+	
+
+	
 	
 
 	}  
