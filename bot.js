@@ -1115,8 +1115,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
  		 if(user.id == owner){
  		 // var players = Array.from(mafiaPlayers);
- 		 var players = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
- 		 if(players.length < 6){
+ 		 var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
+ 		 if(list.length < 6){
  		 	sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -1133,14 +1133,14 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
   			.catch(console.error);
 			whereIam.send("The game is starting! All participants thanks for helping!");
 			 
-			var attac = Math.floor(players.length / 3)
-			var detec = Math.floor(players.length / 6) 
-			var protec = Math.floor(players.length / 6) 
-			var ppl = Math.floor((players.length * 2) / 3)
+			var attac = Math.floor(list.length / 3)
+			var detec = Math.floor(list.length / 6) 
+			var protec = Math.floor(list.length / 6) 
+			var ppl = Math.floor((list.length * 2) / 3)
 			var list;
-			for ( var i = players.length-1; i >= 0 ; i-- ) {
+			for ( var i = list.length-1; i >= 0 ; i-- ) {
 				// list = Array.from(mafiaPlayers);
-				list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
+				//list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
 				var duty = Math.floor((Math.random() * list.length));
 				if(attac > 0){
 					//mafia.add(list[duty])
