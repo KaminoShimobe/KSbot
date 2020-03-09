@@ -1138,7 +1138,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			var protec = Math.floor(players.length / 6) 
 			var ppl = Math.floor((players.length * 2) / 3)
 			var list;
-			for ( var i = 0; i < players.length-1; i-- ) {
+			for ( var i = players.length-1; i >= 0 ; i-- ) {
 				// list = Array.from(mafiaPlayers);
 				list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
 				var duty = Math.floor((Math.random() * list.length));
