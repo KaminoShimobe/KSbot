@@ -1091,7 +1091,15 @@ function mafia(){
 			.setFooter("must react with ✅ to start!", message.author.avatarURL)
 			.setTimestamp();
 
+function gamePhase(){
 
+	var werewolves = Array.from(mafia);
+	var people = Array.from(villagers);
+	var healers = Array.from(doctors);
+	var lookers = Array.from(detectives);
+	
+
+}
 	
 	
 whereIam.send(note).then(sentEmbed => {
@@ -1114,9 +1122,9 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
  		 if(user.id == owner){
- 		 // var players = Array.from(mafiaPlayers);
- 		 var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
- 		 if(list.length < 6){
+ 		 var players = Array.from(mafiaPlayers);
+ 		 //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
+ 		 if(players.length < 6){
  		 	sentEmbed.delete()
 
   			.then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -1138,53 +1146,51 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			var protec = Math.floor(list.length / 6) 
 			var ppl = Math.floor((list.length * 2) / 3)
 			// var list;
-			for ( var i = list.length-1; i >= 0 ; i-- ) {
-				// list = Array.from(mafiaPlayers);
-				//list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-				var duty = Math.floor((Math.random() * list.length));
+			for ( var i = players.length-1; i >= 0 ; i-- ) {
+				
+				var duty = Math.floor((Math.random() * players.length));
 				if(attac > 0){
-					//mafia.add(list[duty])
+					mafia.add(players[duty])
 					attac -= 1;
 					
-					// mafiaPlayers.remove(list[duty])
-					me.send(bot.users.get(list[duty]).username + " is a mafioso!");
-					list.splice(duty, 1);
+					
+					me.send(bot.users.get(players[duty]).username + " is a mafioso!");
+					players.splice(duty, 1);
 					
 				} else if(detec > 0){
-					//detectives.add(list[duty])
-					//villagers.add(list[duty])
+					detectives.add(players[duty])
+					villagers.add(players[duty])
 					detec -=1;
 					ppl -=1;
 					
-					// mafiaPlayers.remove(list[duty])
-					me.send(bot.users.get(list[duty]).username + " is a detective!");
-					me.send(bot.users.get(list[duty]).username + " is also a villager!");
-					list.splice(duty, 1);
+					
+					me.send(bot.users.get(players[duty]).username + " is a detective!");
+					me.send(bot.users.get(players[duty]).username + " is also a villager!");
+					players.splice(duty, 1);
 					
 				} else if(protec > 0){
-					//doctors.add(list[duty])
-					//villagers.add(list[duty])
+					doctors.add(players[duty])
+					villagers.add(players[duty])
 					protec -=1;
 					ppl -=1;
 					
-					// mafiaPlayers.remove(list[duty])
-					me.send(bot.users.get(list[duty]).username + " is a doctor!");
-					me.send(bot.users.get(list[duty]).username + " is also a villager!");
-					list.splice(duty, 1);
+					
+					me.send(bot.users.get(players[duty]).username + " is a doctor!");
+					me.send(bot.users.get(players[duty]).username + " is also a villager!");
+					players.splice(duty, 1);
 					
 				}	else {
-					//villagers.add(list[duty])
+					villagers.add(players[duty])
 					
 					ppl -=1
-					// mafiaPlayers.remove(list[duty])
-					me.send(bot.users.get(list[duty]).username + " is a villager!");
-					list.splice(duty, 1);
+					
+					me.send(bot.users.get(players[duty]).username + " is a villager!");
+					players.splice(duty, 1);
 
 				}	
-				console.log("Mafioso: " + attac + "\n Detectives: " + detec + "\n Doctors: " + protec + "\n Villagers: " + ppl);
-				console.log(list);
+				
    			} 
-   			console.log("simulation: " + i);
+   			
 
 			return;
  		 }
