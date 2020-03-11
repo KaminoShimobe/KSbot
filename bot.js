@@ -1097,7 +1097,65 @@ function gamePhase(){
 	var people = Array.from(villagers);
 	var healers = Array.from(doctors);
 	var lookers = Array.from(detectives);
+	var quota = werewolves.length + healers.length + lookers.length;
+	var votes = amount;
+	var list = Array.from(mafiaPlayers);
+	var mafiaList = "";
 	
+	for ( var i = 0; i < werewolves.length ; i++ ) {
+			mafiaList += bot.users.get(werewolves[i]).username + " \n";
+	}
+	
+	
+	function night(){
+	
+		//DM all participants with task
+		function nightAction(users, index){
+				let mafiaAction = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 NIGHT TIME 🌙")
+			.setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: " + mafiaList)
+			.setColor("#8a673d")
+			.setTimestamp()
+			.setFooter("Respond with the id of your target!");
+		
+		let doctorAction = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 NIGHT TIME 🌙")
+			.setDescription("__You are a Doctor!__ \n Selecting a target will ensure they live this night!")
+			.setColor("#8a673d")
+			.setTimestamp()
+			.setFooter("Respond with the id of your target!");
+			
+		let detectiveAction = new Discord.RichEmbed()
+
+			
+			.setTitle("🌙 NIGHT TIME 🌙")
+			.setDescription("__You are a Detective!__ \n Selecting a target will reveal their true identity!")
+			.setColor("#8a673d")
+			.setTimestamp()
+			.setFooter("Respond with the id of your target!");
+			
+		let villagerAction = "Sleep tight!";
+				
+		
+		var person = bot.users.get(list[index]);
+				
+		if(person != undefined){		
+			if(rows[index].updates != false){	
+				person.sendEmbed(yeet);
+				console.log("Patch Notes sent to " + person.username);
+			} else {
+				console.log(person.username + " has disabled notifications of patch notes.")
+			}
+		} else {
+			message.reply("Not connected to the member, " + rows[index].uname + " by a server");		
+		}	
+			}
+	
+	}
 
 }
 	
@@ -1123,6 +1181,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
  }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
  		 if(user.id == owner){
  		 var players = Array.from(mafiaPlayers);
+ 		 var amount = players.length;
  		 //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
  		 if(players.length < 6){
  		 	sentEmbed.delete()
@@ -1141,10 +1200,10 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
   			.catch(console.error);
 			whereIam.send("The game is starting! All participants thanks for helping!");
 			 
-			var attac = Math.floor(list.length / 3)
-			var detec = Math.floor(list.length / 6) 
-			var protec = Math.floor(list.length / 6) 
-			var ppl = Math.floor((list.length * 2) / 3)
+			var attac = Math.floor(amount / 3)
+			var detec = Math.floor(amount / 6) 
+			var protec = Math.floor(amount / 6) 
+			var ppl = Math.floor((amount * 2) / 3)
 			// var list;
 			for ( var i = players.length-1; i >= 0 ; i-- ) {
 				
@@ -1191,7 +1250,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 				
    			} 
    			
-
+			gamePhase();
 			return;
  		 }
  		 	
@@ -1207,7 +1266,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
 	
-}		
+}			
  		
 
 function rps(){
