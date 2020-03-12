@@ -3290,9 +3290,9 @@ function addMarriedAccount()	{
 				let sql;
 				let marryKey = rows[0].marryKey;
 				let marriage = rows[0].marriage;
-				let gift = rows[0].gift;
+				let gifts = rows[0].gift;
 		
-		if(gift < 25) {
+		if(gifts < 25) {
 			message.reply("Not enough gifts!");
 			return;
 		}
@@ -3325,7 +3325,7 @@ function addMarriedAccount()	{
 				if(rows.length < 1) {
 					sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
 					con.query(sql2, console.log);
-					sql = `UPDATE user gift = ${gift - 25} WHERE id = '${message.author.id}'`;
+					sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${message.author.id}'`;
 					con.query(sql, console.log);
 					message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
 				} else{
@@ -3342,7 +3342,7 @@ function addMarriedAccount()	{
 				if(rows.length < 1) {
 					sql3 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
 					con.query(sql3, console.log);
-					sql = `UPDATE user gift = ${gift - 25} WHERE id = '${message.author.id}'`;
+					sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${message.author.id}'`;
 					con.query(sql, console.log);
 					message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
 				} else{
@@ -6199,6 +6199,25 @@ function resetCommands(){
 
 }	
 	
+function resetCommandsL(){
+	con.query(`SELECT * FROM global'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			message.reply(`You have no commands in this server!`);
+			
+			return;
+		} else {
+			sql = `DELETE FROM global where id = '${message.guild.id}'`;
+			con.query(sql, console.log);
+			message.reply(`Local Commands Reset!`);
+		}
+
+
+	});
+
+}	
+	
 function imageObtain(){
 	if(message.attachments.size > 0){
 	var img = message.attachments.first().url;
@@ -6307,7 +6326,7 @@ function deleteCommands(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != ""){
+	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith("!") == true){
 							
 							var repl = "," + message.content
 							var commandP = co.replace(repl, "");
@@ -6318,7 +6337,7 @@ function deleteCommands(){
 							message.channel.send("Command deleted successfully.")
 							
 						}	 else {
-							message.reply("Invalid command.")
+							message.reply("Invalid command. Must start with **!**")
 							return;
 						}	
 				});
@@ -6352,9 +6371,9 @@ function deleteLocalCommands(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != ""){
+	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith(prefix)) == true ){
 							
-							var repl = "," + message.content
+							var repl = "," + prefix + message.content
 							var commandP = co.replace(repl, "");
 							var img = "," + output[comList.indexOf(message.content)];
 							var imgP = ou.replace(img, "");
@@ -6363,7 +6382,7 @@ function deleteLocalCommands(){
 							message.channel.send("Command deleted successfully.")
 							
 						}	 else {
-							message.reply("Invalid command.")
+							message.reply("Invalid command. Must start with **" + prefix + "**")
 							return;
 						}	
 				});
@@ -6399,7 +6418,7 @@ con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, 
 		var comList = co.split(",");
 		var output = ou.split(",");
 
-		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands"];
+		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands", "tierlist", "marry", "divorce"];
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -6408,7 +6427,7 @@ con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, 
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1){
+	            		}  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1 && message.content.startsWith("!") == true){
 					
 					var commands = prefix + message.content;
 					var commandP = co + "," + prefix + message.content;
@@ -6468,7 +6487,7 @@ function customCommand(){
 		let ou = rows[0].comOutput;
 		var comList = co.split(",");
 		var output = ou.split(",");
-		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands"];
+		var banned = ["help", "user", "view", "delete", "daily", "slots", "give", "shop", "server", "toggle", "server", "8ball", "flip", "who", "poll", "just", "jk", "channel", "credits", "hug", "kiss", "pat", "beat", "admin", "bio", "whisper", "color", "expose", "customCommand", "deleteCommand", "localCommands", "globalCommands", "tierlist", "marry", "divorce"];
 		
 			message.channel.send("send the string and image for your custom command. \n !cancel to cancel");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -6477,7 +6496,7 @@ function customCommand(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1){
+	            		}   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1 && message.content.startsWith(prefix) == true){
 					
 					var commands = prefix + message.content;
 					var commandP = co + "," + prefix + message.content;
@@ -11524,6 +11543,14 @@ if(command === `!command`){
 if(command === `!resetCommands`){
 	if(message.author.id == '242118931769196544'){
 		resetCommands();
+
+	}
+
+}
+	
+if(command === `!resetCommandsL`){
+	if(message.author.id == '242118931769196544'){
+		resetCommandsL();
 
 	}
 
