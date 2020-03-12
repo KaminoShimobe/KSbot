@@ -6371,7 +6371,7 @@ function deleteLocalCommands(){
 	            		if (message.content == `!cancel`) {
 	               		 message.channel.send("Cancelled.");
 	                		return;
-	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith(prefix)) == true ){
+	            		}  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith(prefix) == true ){
 							
 							var repl = "," + prefix + message.content
 							var commandP = co.replace(repl, "");
