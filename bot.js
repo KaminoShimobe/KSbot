@@ -8062,9 +8062,8 @@ function tierlist(){
 	
 function ball8(){
 	
-   //Ks bot abuse
-   var fortune = 33;
-	//let fortune = Math.floor(Math.random() * 41) + 1;
+   
+	let fortune = Math.floor(Math.random() * 41) + 1;
 
 		if(fortune === 1 ){
 
