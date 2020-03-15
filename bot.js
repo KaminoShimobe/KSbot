@@ -1298,13 +1298,14 @@ m = 0;
                         mafiaVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
+                        console.log(person.username + "voted");
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                    
+                    	console.log(person.username + "voted randomly");
                     }
                     
                     });
@@ -1316,13 +1317,14 @@ m = 0;
                         doctorVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
+                        console.log(person.username + "voted");
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    
+                    	console.log(person.username + "voted randomly");
                     }
                     
                     });
@@ -1334,6 +1336,7 @@ m = 0;
                         detectiveVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
+                        console.log(person.username + "voted");
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
@@ -1349,17 +1352,20 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
+                        console.log(person.username + "voted randomly");
                     
                     }
                     
                     });
             }  else {
                 person.send(villagerAction);
-            }
-            if(tally == quota){
+                console.log(">>>>>>>Quota: " + tally)
+                if(tally == quota){
                 voteTallyN();           
             }
-        } else {
+
+            }
+                    } else {
             message.reply("Not connected to the member, " + rows[index].uname + " by a server");        
         }   
             }
