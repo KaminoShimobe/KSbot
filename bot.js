@@ -1298,14 +1298,22 @@ m = 0;
                         mafiaVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
-                        console.log(person.username + "voted");
+                        console.log(person.username + " voted");
+			                        console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + "voted randomly");
+                    	console.log(person.username + " voted randomly");
+			                    	console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     }
                     
                     });
@@ -1317,14 +1325,22 @@ m = 0;
                         doctorVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
-                        console.log(person.username + "voted");
+                        console.log(person.username + " voted");
+			                        console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + "voted randomly");
+                    	console.log(person.username + " voted randomly");
+		                    	console.log(">>>>>>>Quota: " + tally)
+		                if(tally == quota){
+		                voteTallyN();           
+		            }
                     }
                     
                     });
@@ -1336,7 +1352,11 @@ m = 0;
                         detectiveVotes.push(message.content);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
-                        console.log(person.username + "voted");
+                        console.log(person.username + " voted");
+			                        console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
@@ -1352,7 +1372,11 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
-                        console.log(person.username + "voted randomly");
+                        console.log(person.username + " voted randomly");
+                        console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     
                     }
                     
