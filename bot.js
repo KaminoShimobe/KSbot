@@ -1200,7 +1200,7 @@ m = 0;
         if(person != undefined){        
             
                 person.send(voteTime);
-                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === person.id, { time: 100000000 });
                 collector.once('collect', message => {
                     if (list.indexOf(message.content) != -1) {
                         dayVotes.push(message.content);
@@ -1292,7 +1292,7 @@ m = 0;
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction);
-                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === person.id, { time: 100000000 });
                 collector.once('collect', message => {
                     if (list.indexOf(message.content) != -1) {
                         mafiaVotes.push(message.content);
@@ -1319,7 +1319,7 @@ m = 0;
                     });
             } else if(doctors.has(list[index])){    
                 person.send(doctorAction);
-                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === person.id, { time: 100000000 });
                 collector.once('collect', message => {
                     if (list.indexOf(message.content) != -1) {
                         doctorVotes.push(message.content);
@@ -1346,7 +1346,7 @@ m = 0;
                     });
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction);
-                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                const collector = new Discord.MessageCollector(person.channel, m => m.author.id === person.id, { time: 100000000 });
                 collector.once('collect', message => {
                     if (list.indexOf(message.content) != -1) {
                         detectiveVotes.push(message.content);
