@@ -1208,7 +1208,7 @@ m = 0;
                         person.send("You have selected to condemn **" + bot.users.get(message.content).username + "**");
                     
                     } else {
-                        var rando = newList[Math.floor(Math.random * newList.length)];
+                        var rando = newList[Math.floor(Math.random() * newList.length) - 1];
                         dayVotes.push(rando);
                         dayTally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
@@ -1300,7 +1300,7 @@ m = 0;
                         person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
                     
                     } else {
-                        var rando = list[Math.floor(Math.random * list.length)];
+                        var rando = list[Math.floor(Math.random() * list.length) - 1];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
@@ -1318,7 +1318,7 @@ m = 0;
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
                     
                     } else {
-                        var rando = list[Math.floor(Math.random * list.length)];
+                        var rando = list[Math.floor(Math.random() * list.length) - 1];
                         doctorVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
@@ -1336,7 +1336,7 @@ m = 0;
                         person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
                     
                     } else {
-                        var rando = list[Math.floor(Math.random * list.length)];
+                        var rando = list[Math.floor(Math.random() * list.length) - 1];
                         detectiveVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
