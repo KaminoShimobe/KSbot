@@ -6403,7 +6403,7 @@ function deleteLocalCommands(){
                             return;
                         }  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith(prefix) == true ){
                             
-                            var repl = "," + prefix + message.content
+                            var repl = "," + message.content
                             var commandP = co.replace(repl, "");
                             var img = "," + output[comList.indexOf(message.content)];
                             var imgP = ou.replace(img, "");
@@ -6460,7 +6460,7 @@ con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, 
                         }  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1 && message.content.startsWith("!") == true){
                     
                     var commands = prefix + message.content;
-                    var commandP = co + "," + prefix + message.content;
+                    var commandP = co + "," + message.content;
                     var img = message.attachments.first().url;
                     var imgP = ou + "," + message.attachments.first().url;
                     
