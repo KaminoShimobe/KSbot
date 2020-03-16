@@ -10422,7 +10422,7 @@ function standDisc(){
         }
         
 
-        var chance = Math.floor(Math.random() * 9) + 1;
+        var chance = Math.floor(Math.random() * 10) + 1;
         var ability = Math.floor(Math.random() * 10) + 1;
         
 
@@ -10509,6 +10509,15 @@ function standDisc(){
             sql = `UPDATE user SET stand = "「OSIRIS」" WHERE id = '${message.author.id}'`;
             con.query(sql, console.log);
             setTimeout(message.channel.send("||YOU HAVE RECEIVED 「OSIRIS」||"), 200);
+        } else if(chance == 10){
+            message.channel.send(".");
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            sql = `UPDATE user SET stand = "「KISS」" WHERE id = '${message.author.id}'`;
+            con.query(sql, console.log);
+            setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KISS」||"), 200);
         }
     } else {
             message.channel.send(".");
