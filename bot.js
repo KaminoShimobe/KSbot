@@ -147,7 +147,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.0", bot.user.avatarURL);
+            .setFooter("Version 1.8.1", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -6459,7 +6459,7 @@ con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, 
                             return;
                         }  else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1 && message.content.startsWith("!") == true){
                     
-                    var commands = prefix + message.content;
+                    var commands = message.content;
                     var commandP = co + "," + message.content;
                     var img = message.attachments.first().url;
                     var imgP = ou + "," + message.attachments.first().url;
@@ -6528,8 +6528,8 @@ function customCommand(){
                             return;
                         }   else if(message.attachments.size > 0 && message.content != undefined && message.content.indexOf(message.content) != -1 && comList.includes(message.content) == false && banned.indexOf(message.content) == -1 && message.content.startsWith(prefix) == true){
                     
-                    var commands = prefix + message.content;
-                    var commandP = co + "," + prefix + message.content;
+                    var commands = message.content;
+                    var commandP = co + "," + message.content;
                     var img = message.attachments.first().url;
                     var imgP = ou + "," + message.attachments.first().url;
                     
