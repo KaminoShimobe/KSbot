@@ -1442,10 +1442,14 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             .catch(console.error);
             whereIam.send("The game is starting! All participants thanks for helping!");
              
-           var attac = Math.floor(amount / 3)
-           var detec = Math.floor(amount / 6) 
-           var protec = Math.floor(amount / 6) 
-           var ppl = Math.floor((amount * 2) / 3)
+            // ratio : 1/3 
+           var attac = Math.floor(amount / 2)
+           // ratio : 1/6
+           var detec = Math.floor(amount / 4) 
+           // ratio : 1/6
+           var protec = Math.floor(amount / 4) 
+           // ratio : 2/3
+           var ppl = Math.floor((amount * 3) / 4)
 
 			
             // var list;
@@ -1510,7 +1514,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
     
-}                  
+}                 
         
 
 function rps(){
