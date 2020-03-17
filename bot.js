@@ -1086,7 +1086,7 @@ function mafia(){
 
             
             .setTitle(message.author.username + " is looking to play MAFIA!")
-            .setDescription("You need at least 6 players to play! React with 👍 to join!")
+            .setDescription("You need at least 4 players to play! React with 👍 to join!")
             .setColor("#8a673d")
             .setFooter("must react with ✅ to start!", message.author.avatarURL)
             .setTimestamp();
@@ -1425,7 +1425,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
          var players = Array.from(mafiaPlayers);
          var amount = players.length;
          //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-         if(players.length < 6){
+         if(players.length < 4){
             sentEmbed.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
