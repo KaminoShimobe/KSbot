@@ -1086,7 +1086,7 @@ function mafia(){
 
             
             .setTitle(message.author.username + " is looking to play MAFIA!")
-            .setDescription("You need at least 4 players to play! React with 👍 to join!")
+            .setDescription("You need at least 6 players to play! React with 👍 to join!")
             .setColor("#8a673d")
             .setFooter("must react with ✅ to start!", message.author.avatarURL)
             .setTimestamp();
@@ -1425,7 +1425,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
          var players = Array.from(mafiaPlayers);
          var amount = players.length;
          //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-         if(players.length < 4){
+         if(players.length < 6){
             sentEmbed.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -1443,13 +1443,13 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             whereIam.send("The game is starting! All participants thanks for helping!");
              
             // ratio : 1/3 
-           var attac = Math.floor(amount / 4)
+           var attac = Math.floor(amount / 3)
            // ratio : 1/6
-           var detec = Math.floor(amount / 4) 
+           var detec = Math.floor(amount / 3) 
            // ratio : 1/6
-           var protec = Math.floor(amount / 4) 
+           var protec = Math.floor(amount / 6) 
            // ratio : 2/3
-           var ppl = Math.floor((amount * 3) / 4)
+           var ppl = Math.floor((amount * 2) / 3)
 
 			
             // var list;
@@ -1514,7 +1514,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
     
-}                
+}            
         
 
 function rps(){
