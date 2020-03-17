@@ -1442,10 +1442,15 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             .catch(console.error);
             whereIam.send("The game is starting! All participants thanks for helping!");
              
-            var attac = Math.floor(amount / 3)
-            var detec = Math.floor(amount / 6) 
-            var protec = Math.floor(amount / 6) 
-            var ppl = Math.floor((amount * 2) / 3)
+//            var attac = Math.floor(amount / 3)
+//            var detec = Math.floor(amount / 6) 
+//            var protec = Math.floor(amount / 6) 
+//            var ppl = Math.floor((amount * 2) / 3)
+
+			var attac = 1;
+			var detec = 1;
+			var protec = 1;
+			var ppl = 1;
             // var list;
             for ( var i = players.length-1; i >= 0 ; i-- ) {
                 
