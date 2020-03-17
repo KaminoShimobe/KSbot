@@ -1086,7 +1086,7 @@ function mafia(){
 
             
             .setTitle(message.author.username + " is looking to play MAFIA!")
-            .setDescription("You need at least 6 players to play! React with 👍 to join!")
+            .setDescription("You need at least 4 players to play! React with 👍 to join!")
             .setColor("#8a673d")
             .setFooter("must react with ✅ to start!", message.author.avatarURL)
             .setTimestamp();
@@ -1198,28 +1198,57 @@ m = 0;
             var person = bot.users.get(newlist[index]);
                 
         if(person != undefined){        
-            
-                person.send(voteTime);
-                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (list.indexOf(message.content) != -1) {
-                        dayVotes.push(message.content);
+            	
+            	person.send(voteTime).then(() => {
+	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			if (list.indexOf(collected) != -1) {
+                        dayVotes.push(collected);
                         dayTally += 1;                  
-                        person.send("You have selected to condemn **" + bot.users.get(message.content).username + "**");
-                    
+                        person.send("You have selected to condemn **" + bot.users.get(collected).username + "**");
+                    	if(dayTally == newList.length){
+                voteTallyD();           
+            }
                     } else {
                         var rando = newList[Math.floor(Math.random() * newList.length)];
                         dayVotes.push(rando);
                         dayTally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-                    
-                    }
-                    
-                    });
-                
-                if(dayTally == newList.length){
+                        if(dayTally == newList.length){
                 voteTallyD();           
             }
+                    
+                    }
+		})
+		.catch(collected => {
+			 var rando = newList[Math.floor(Math.random() * newList.length)];
+                        dayVotes.push(rando);
+                        dayTally += 1;
+                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        if(dayTally == newList.length){
+                voteTallyD();           
+            }
+		});
+});
+//                person.send(voteTime);
+//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
+//                collector.once('collect', message => {
+//                    if (list.indexOf(message.content) != -1) {
+//                        dayVotes.push(message.content);
+//                        dayTally += 1;                  
+//                        person.send("You have selected to condemn **" + bot.users.get(message.content).username + "**");
+//                    
+//                    } else {
+//                        var rando = newList[Math.floor(Math.random() * newList.length)];
+//                        dayVotes.push(rando);
+//                        dayTally += 1;
+//                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+//                    
+//                    }
+//                    
+//                    });
+                
+                
             
             }
         
@@ -1291,13 +1320,13 @@ m = 0;
                 
         if(person != undefined){        
             if(mafia.has(list[index])){ 
-                person.send(mafiaAction);
-                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (list.indexOf(message.content) != -1) {
-                        mafiaVotes.push(message.content);
+            	person.send(mafiaAction).then(() => {
+	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			if (list.indexOf(collected) != -1) {
+                        mafiaVotes.push(collected);
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(collected).username + "**");
                         console.log(person.username + " voted");
 			                        console.log(">>>>>>>Quota: " + tally)
 			                if(tally == quota){
@@ -1315,16 +1344,55 @@ m = 0;
 			                voteTallyN();           
 			            }
                     }
-                    
-                    });
-            } else if(doctors.has(list[index])){    
-                person.send(doctorAction);
-                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (list.indexOf(message.content) != -1) {
-                        doctorVotes.push(message.content);
+		})
+		.catch(collected => {
+			 var rando = list[Math.floor(Math.random() * list.length)];
+                        mafiaVotes.push(rando);
+                        tally += 1;
+                        person.send("Time is up, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+                    	console.log(person.username + " ran out of time");
+			                    	console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
+		});
+});
+            
+//                person.send(mafiaAction);
+//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
+//                collector.once('collect', message => {
+//                    if (list.indexOf(message.content) != -1) {
+//                        mafiaVotes.push(message.content);
+//                        tally += 1;                 
+//                        person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
+//                        console.log(person.username + " voted");
+//			                        console.log(">>>>>>>Quota: " + tally)
+//			                if(tally == quota){
+//			                voteTallyN();           
+//			            }
+//                    
+//                    } else {
+//                        var rando = list[Math.floor(Math.random() * list.length)];
+//                        mafiaVotes.push(rando);
+//                        tally += 1;
+//                        person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+//                    	console.log(person.username + " voted randomly");
+//			                    	console.log(">>>>>>>Quota: " + tally)
+//			                if(tally == quota){
+//			                voteTallyN();           
+//			            }
+//                    }
+//                    
+//                    });
+            } else if(doctors.has(list[index])){
+				
+				person.send(doctorAction).then(() => {
+	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			if (list.indexOf(collected) != -1) {
+                        doctorVotes.push(collected);
                         tally += 1;                 
-                        person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
+                        person.send("You have selected to protect **" + bot.users.get(collected).username + "**");
                         console.log(person.username + " voted");
 			                        console.log(">>>>>>>Quota: " + tally)
 			                if(tally == quota){
@@ -1335,24 +1403,71 @@ m = 0;
                         var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
                     	console.log(person.username + " voted randomly");
-		                    	console.log(">>>>>>>Quota: " + tally)
-		                if(tally == quota){
-		                voteTallyN();           
-		            }
+			                    	console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
                     }
-                    
-                    });
+		})
+		.catch(collected => {
+			 var rando = list[Math.floor(Math.random() * list.length)];
+                        doctorVotes.push(rando);
+                        tally += 1;
+                        person.send("Time is up, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
+                    	console.log(person.username + " ran out of time");
+			                    	console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
+		});
+});
+            
+//                person.send(doctorAction);
+//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
+//                collector.once('collect', message => {
+//                    if (list.indexOf(message.content) != -1) {
+//                        doctorVotes.push(message.content);
+//                        tally += 1;                 
+//                        person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
+//                        console.log(person.username + " voted");
+//			                        console.log(">>>>>>>Quota: " + tally)
+//			                if(tally == quota){
+//			                voteTallyN();           
+//			            }
+//                    
+//                    } else {
+//                        var rando = list[Math.floor(Math.random() * list.length)];
+//                        doctorVotes.push(rando);
+//                        tally += 1;
+//                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+//                    	console.log(person.username + " voted randomly");
+//		                    	console.log(">>>>>>>Quota: " + tally)
+//		                if(tally == quota){
+//		                voteTallyN();           
+//		            }
+//                    }
+//                    
+//                    });
             } else if(detectives.has(list[index])){ 
-                person.send(detectiveAction);
-                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (list.indexOf(message.content) != -1) {
-                        detectiveVotes.push(message.content);
+				person.send(detectiveAction).then(() => {
+	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			if (list.indexOf(collected) != -1) {
+                        detectiveVotes.push(collected);
                         tally += 1;                 
-                        person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
+                        person.send("You have selected to identify **" + bot.users.get(collected).username + "**");
                         console.log(person.username + " voted");
+                        if(doctors.has(collected)){
+                            person.send("This person is a **doctor**!");
+                        } else if(mafia.has(collected)){
+                            person.send("This person is a **mafioso**!");
+                        } else if(detectives.has(collected)){
+                            person.send("This person is a **detective**!");
+                        } else {
+                            person.send("This person is a **villager**");
+                        }
 			                        console.log(">>>>>>>Quota: " + tally)
 			                if(tally == quota){
 			                voteTallyN();           
@@ -1363,7 +1478,8 @@ m = 0;
                         detectiveVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                        if(doctors.has(rando)){
+                    	console.log(person.username + " voted randomly");
+                    	if(doctors.has(rando)){
                             person.send("This person is a **doctor**!");
                         } else if(mafia.has(rando)){
                             person.send("This person is a **mafioso**!");
@@ -1372,15 +1488,71 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
-                        console.log(person.username + " voted randomly");
-                        console.log(">>>>>>>Quota: " + tally)
+			                    	console.log(">>>>>>>Quota: " + tally)
 			                if(tally == quota){
 			                voteTallyN();           
 			            }
-                    
                     }
-                    
-                    });
+		})
+		.catch(collected => {
+			 var rando = list[Math.floor(Math.random() * list.length)];
+                        detectiveVotes.push(rando);
+                        tally += 1;
+                        person.send("Time is up, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+                    	console.log(person.username + " ran out of time");
+                    	if(doctors.has(rando)){
+                            person.send("This person is a **doctor**!");
+                        } else if(mafia.has(rando)){
+                            person.send("This person is a **mafioso**!");
+                        } else if(detectives.has(rando)){
+                            person.send("This person is a **detective**!");
+                        } else {
+                            person.send("This person is a **villager**");
+                        }
+			                    	console.log(">>>>>>>Quota: " + tally)
+			                if(tally == quota){
+			                voteTallyN();           
+			            }
+		});
+});            
+            
+//                person.send(detectiveAction);
+//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
+//                collector.once('collect', message => {
+//                    if (list.indexOf(message.content) != -1) {
+//                        detectiveVotes.push(message.content);
+//                        tally += 1;                 
+//                        person.send("You have selected to identify **" + bot.users.get(message.content).username + "**");
+//                        
+//                        console.log(person.username + " voted");
+//			                        console.log(">>>>>>>Quota: " + tally)
+//			                if(tally == quota){
+//			                voteTallyN();           
+//			            }
+//                    
+//                    } else {
+//                        var rando = list[Math.floor(Math.random() * list.length)];
+//                        detectiveVotes.push(rando);
+//                        tally += 1;
+//                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+//                        if(doctors.has(rando)){
+//                            person.send("This person is a **doctor**!");
+//                        } else if(mafia.has(rando)){
+//                            person.send("This person is a **mafioso**!");
+//                        } else if(detectives.has(rando)){
+//                            person.send("This person is a **detective**!");
+//                        } else {
+//                            person.send("This person is a **villager**");
+//                        }
+//                        console.log(person.username + " voted randomly");
+//                        console.log(">>>>>>>Quota: " + tally)
+//			                if(tally == quota){
+//			                voteTallyN();           
+//			            }
+//                    
+//                    }
+//                    
+//                    });
             }  else {
                 person.send(villagerAction);
                 console.log(">>>>>>>Quota: " + tally)
@@ -1514,7 +1686,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
     
-}            
+}             
         
 
 function rps(){
