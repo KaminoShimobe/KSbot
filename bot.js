@@ -1450,7 +1450,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 			var attac = 1;
 			var detec = 1;
 			var protec = 1;
-			var ppl = 1;
+			var ppl = 6;
             // var list;
             for ( var i = players.length-1; i >= 0 ; i-- ) {
                 
@@ -1513,7 +1513,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
     
-}               
+}                  
         
 
 function rps(){
