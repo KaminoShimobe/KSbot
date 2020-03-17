@@ -147,7 +147,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.1", bot.user.avatarURL);
+            .setFooter("Version 1.8.2", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1086,7 +1086,7 @@ function mafia(){
 
             
             .setTitle(message.author.username + " is looking to play MAFIA!")
-            .setDescription("You need at least 4 players to play! React with 👍 to join!")
+            .setDescription("You need at least 6 players to play! React with 👍 to join!")
             .setColor("#8a673d")
             .setFooter("must react with ✅ to start!", message.author.avatarURL)
             .setTimestamp();
