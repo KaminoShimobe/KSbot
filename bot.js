@@ -1443,7 +1443,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             whereIam.send("The game is starting! All participants thanks for helping!");
              
             // ratio : 1/3 
-           var attac = Math.floor(amount / 2)
+           var attac = Math.floor(amount / 4)
            // ratio : 1/6
            var detec = Math.floor(amount / 4) 
            // ratio : 1/6
@@ -1514,7 +1514,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
 
     
-}                 
+}                
         
 
 function rps(){
