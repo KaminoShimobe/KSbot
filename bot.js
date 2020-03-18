@@ -2483,7 +2483,12 @@ function collect(){
         con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         
-        
+            if(rows[0].id == undefined) {
+                message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+            
+                return;
+                }
+
             let mission;
             let achievements = rows[0].completed;
             let tasks = rows[0].tasks;
