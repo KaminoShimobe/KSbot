@@ -11859,7 +11859,7 @@ if(command === `${prefix}giftShop`){
     }   
     
 if(command === `${prefix}admin` || command === `KS!admin`){
-        if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR" || message.author.id == '242118931769196544')){
+        if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR") || message.author.id == '242118931769196544')){
         admin();
     }       else {
         message.reply(" You don't have the credentials to perform this function.")
@@ -11891,7 +11891,7 @@ if(command === `${prefix}server` || command === `KS!server`){
 }   
 
 if(command === `${prefix}toggle`){
-        if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR" || message.author.id == '242118931769196544')){
+        if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR") || message.author.id == '242118931769196544')){
         toggle();
     }       else {
         message.reply(" You don't have the credentials to perform this function.")
