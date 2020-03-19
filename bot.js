@@ -1198,15 +1198,15 @@ m = 0;
             var person = bot.users.get(newlist[index]);
                 
         if(person != undefined){        
-            	
-            	person.send(voteTime).then(() => {
-	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			if (list.indexOf(collected) != -1) {
+                
+                person.send(voteTime).then(() => {
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+        .then(collected => {
+            if (list.indexOf(collected) != -1) {
                         dayVotes.push(collected);
                         dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(collected).username + "**");
-                    	if(dayTally == newList.length){
+                        if(dayTally == newList.length){
                 voteTallyD();           
             }
                     } else {
@@ -1219,16 +1219,16 @@ m = 0;
             }
                     
                     }
-		})
-		.catch(collected => {
-			 var rando = newList[Math.floor(Math.random() * newList.length)];
+        })
+        .catch(collected => {
+             var rando = newList[Math.floor(Math.random() * newList.length)];
                         dayVotes.push(rando);
                         dayTally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
-		});
+        });
 });
 //                person.send(voteTime);
 //                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
@@ -1320,42 +1320,42 @@ m = 0;
                 
         if(person != undefined){        
             if(mafia.has(list[index])){ 
-            	person.send(mafiaAction).then(() => {
-	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			if (list.indexOf(collected) != -1) {
+                person.send(mafiaAction).then(() => {
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+        .then(collected => {
+            if (list.indexOf(collected) != -1) {
                         mafiaVotes.push(collected);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected).username + "**");
                         console.log(person.username + " voted");
-			                        console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " voted randomly");
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                        console.log(person.username + " voted randomly");
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     }
-		})
-		.catch(collected => {
-			 var rando = list[Math.floor(Math.random() * list.length)];
+        })
+        .catch(collected => {
+             var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("Time is up, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " ran out of time");
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
-		});
+                        console.log(person.username + " ran out of time");
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
+        });
 });
             
 //                person.send(mafiaAction);
@@ -1366,62 +1366,62 @@ m = 0;
 //                        tally += 1;                 
 //                        person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
 //                        console.log(person.username + " voted");
-//			                        console.log(">>>>>>>Quota: " + tally)
-//			                if(tally == quota){
-//			                voteTallyN();           
-//			            }
+//                                  console.log(">>>>>>>Quota: " + tally)
+//                          if(tally == quota){
+//                          voteTallyN();           
+//                      }
 //                    
 //                    } else {
 //                        var rando = list[Math.floor(Math.random() * list.length)];
 //                        mafiaVotes.push(rando);
 //                        tally += 1;
 //                        person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-//                    	console.log(person.username + " voted randomly");
-//			                    	console.log(">>>>>>>Quota: " + tally)
-//			                if(tally == quota){
-//			                voteTallyN();           
-//			            }
+//                      console.log(person.username + " voted randomly");
+//                                  console.log(">>>>>>>Quota: " + tally)
+//                          if(tally == quota){
+//                          voteTallyN();           
+//                      }
 //                    }
 //                    
 //                    });
             } else if(doctors.has(list[index])){
-				
-				person.send(doctorAction).then(() => {
-	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			if (list.indexOf(collected) != -1) {
+                
+                person.send(doctorAction).then(() => {
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+        .then(collected => {
+            if (list.indexOf(collected) != -1) {
                         doctorVotes.push(collected);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(collected).username + "**");
                         console.log(person.username + " voted");
-			                        console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " voted randomly");
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                        console.log(person.username + " voted randomly");
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     }
-		})
-		.catch(collected => {
-			 var rando = list[Math.floor(Math.random() * list.length)];
+        })
+        .catch(collected => {
+             var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
                         person.send("Time is up, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " ran out of time");
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
-		});
+                        console.log(person.username + " ran out of time");
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
+        });
 });
             
 //                person.send(doctorAction);
@@ -1432,29 +1432,29 @@ m = 0;
 //                        tally += 1;                 
 //                        person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
 //                        console.log(person.username + " voted");
-//			                        console.log(">>>>>>>Quota: " + tally)
-//			                if(tally == quota){
-//			                voteTallyN();           
-//			            }
+//                                  console.log(">>>>>>>Quota: " + tally)
+//                          if(tally == quota){
+//                          voteTallyN();           
+//                      }
 //                    
 //                    } else {
 //                        var rando = list[Math.floor(Math.random() * list.length)];
 //                        doctorVotes.push(rando);
 //                        tally += 1;
 //                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-//                    	console.log(person.username + " voted randomly");
-//		                    	console.log(">>>>>>>Quota: " + tally)
-//		                if(tally == quota){
-//		                voteTallyN();           
-//		            }
+//                      console.log(person.username + " voted randomly");
+//                              console.log(">>>>>>>Quota: " + tally)
+//                      if(tally == quota){
+//                      voteTallyN();           
+//                  }
 //                    }
 //                    
 //                    });
             } else if(detectives.has(list[index])){ 
-				person.send(detectiveAction).then(() => {
-	person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			if (list.indexOf(collected) != -1) {
+                person.send(detectiveAction).then(() => {
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+        .then(collected => {
+            if (list.indexOf(collected) != -1) {
                         detectiveVotes.push(collected);
                         tally += 1;                 
                         person.send("You have selected to identify **" + bot.users.get(collected).username + "**");
@@ -1468,18 +1468,18 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
-			                        console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     
                     } else {
                         var rando = list[Math.floor(Math.random() * list.length)];
                         detectiveVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " voted randomly");
-                    	if(doctors.has(rando)){
+                        console.log(person.username + " voted randomly");
+                        if(doctors.has(rando)){
                             person.send("This person is a **doctor**!");
                         } else if(mafia.has(rando)){
                             person.send("This person is a **mafioso**!");
@@ -1488,19 +1488,19 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     }
-		})
-		.catch(collected => {
-			 var rando = list[Math.floor(Math.random() * list.length)];
+        })
+        .catch(collected => {
+             var rando = list[Math.floor(Math.random() * list.length)];
                         detectiveVotes.push(rando);
                         tally += 1;
                         person.send("Time is up, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    	console.log(person.username + " ran out of time");
-                    	if(doctors.has(rando)){
+                        console.log(person.username + " ran out of time");
+                        if(doctors.has(rando)){
                             person.send("This person is a **doctor**!");
                         } else if(mafia.has(rando)){
                             person.send("This person is a **mafioso**!");
@@ -1509,11 +1509,11 @@ m = 0;
                         } else {
                             person.send("This person is a **villager**");
                         }
-			                    	console.log(">>>>>>>Quota: " + tally)
-			                if(tally == quota){
-			                voteTallyN();           
-			            }
-		});
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
+        });
 });            
             
 //                person.send(detectiveAction);
@@ -1525,10 +1525,10 @@ m = 0;
 //                        person.send("You have selected to identify **" + bot.users.get(message.content).username + "**");
 //                        
 //                        console.log(person.username + " voted");
-//			                        console.log(">>>>>>>Quota: " + tally)
-//			                if(tally == quota){
-//			                voteTallyN();           
-//			            }
+//                                  console.log(">>>>>>>Quota: " + tally)
+//                          if(tally == quota){
+//                          voteTallyN();           
+//                      }
 //                    
 //                    } else {
 //                        var rando = list[Math.floor(Math.random() * list.length)];
@@ -1546,9 +1546,9 @@ m = 0;
 //                        }
 //                        console.log(person.username + " voted randomly");
 //                        console.log(">>>>>>>Quota: " + tally)
-//			                if(tally == quota){
-//			                voteTallyN();           
-//			            }
+//                          if(tally == quota){
+//                          voteTallyN();           
+//                      }
 //                    
 //                    }
 //                    
@@ -1623,7 +1623,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
            // ratio : 2/3
            var ppl = Math.floor((amount * 2) / 3)
 
-			
+            
             // var list;
             for ( var i = players.length-1; i >= 0 ; i-- ) {
                 
@@ -10066,7 +10066,7 @@ function thoth(){
         var name = bot.users.get(member.id);
             
         var good = ["|| was featured in a magazine,", "|| got a bonus check,", "|| found a rare gem,", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry,", "|| redeemed a ticket of collectable stamps,", "|| won the lottery,", "|| found some money in an corner,", "|| profited from a great business idea,"];
-        var bad = ["|| was jumped by some thugs,", "|| got a deduction for slacking off at work,", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity,", "|| dropped their money down a sewer pipe,", "|| was fined for parking in front of a fire hydrant,", "|| lost a highstake bet,", "|| invested their money in a volitable market,", "|| bought to many waifu pillows and anime merch,"];
+        var bad = ["|| was jumped by some thugs,", "|| got a deduction for slacking off at work,", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity,", "|| dropped their money down a sewer pipe,", "|| was fined for parking in front of a fire hydrant,", "|| lost a highstake bet,", "|| invested their money in a volitable market,", "|| bought too many waifu pillows and anime merch,"];
             
 
         
