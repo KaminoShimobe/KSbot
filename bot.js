@@ -147,7 +147,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.2", bot.user.avatarURL);
+            .setFooter("Version 1.8.3", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -382,27 +382,34 @@ bot.on("message", async message => {
     var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT)";
     var fix = `UPDATE achievements SET tasks = 'complete, complete, Refer Someone, complete, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, complete, Open 100 Chests, Open 1000 Chests, Get Married, complete, complete, Get 10+ streak, complete, complete, complete, complete, complete, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, ???, Complete Achievements Set 1', completed = ${20}, status = ${1} WHERE id = '193045612302827520'`;
     var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT, prenup BOOLEAN)";
-    var sql29 = "ALTER TABLE user ADD marryKey VARCHAR(40)";    
+    var sql29 = "ALTER TABLE user ADD marryKey VARCHAR(40)"; 
+    var sql30 = "ALTER TABLE server ADD customRole BOOLEAN";  
+    var sql31 = `UPDATE server SET customRoles =  ${false}`; 
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
 //      });
 
-    con.query(sql28, function (err, result) {
-        if (err) throw err;
-        message.author.send("Table marriedAcc added!");
-    });
+    // con.query(sql28, function (err, result) {
+    //     if (err) throw err;
+    //     message.author.send("Table marriedAcc added!");
+    // });
         
-    con.query(sql29, function (err, result) {
-        if (err) throw err;
-        message.author.send("Row marryKey added to table user!");
-    }); 
+    // con.query(sql29, function (err, result) {
+    //     if (err) throw err;
+    //     message.author.send("Row marryKey added to table user!");
+    // }); 
 
-//      con.query(sql21, function (err, result) {
-//      if (err) throw err;
-//      message.author.send("weather column added to server!");
-//      });
+     con.query(sql30, function (err, result) {
+     if (err) throw err;
+     message.author.send("customRole column added to server!");
+     });
+
+     con.query(sql31, function (err, result) {
+     if (err) throw err;
+     message.author.send("customRole set to FALSE in all servers");
+     });
 
 //      con.query(sql22, function (err, result) {
 //      if (err) throw err;
@@ -2317,7 +2324,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
    return result;
 }
 var boop = makeid(30);
-            sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0})`;
+            sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp, customRole) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0}, ${false})`;
             con.query(sql, console.log);
             
             
@@ -2809,7 +2816,7 @@ function lostChest(){
    return result;
 }
 var boop = makeid(30);
-            sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'has left the server!', ${0}, '', ${0})`;
+            sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp, customRole) VALUES ('${message.guild.id}', "default", 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'has left the server!', ${0}, '', ${0}, ${false})`;
             con.query(sql, console.log);
             
             
@@ -3143,7 +3150,32 @@ var boop = makeid(30);
                     
                         }
                 }); 
-                }  else {
+                } else if(messageArray[1] == "customRole"){
+                    message.channel.send("Do you want to allow the creation of custom roles in your server?(yes or no) \n !cancel to cancel.");
+                    const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        if (message.content == `${prefix}cancel`) {
+                         message.channel.send("Custom Roles Toggle cancelled.");
+                            return;
+                        } else if (message.content == `yes` || message.content == `Yes` || message.content == `Y`) {
+
+                        sql = `UPDATE server SET customRole = ${true} WHERE id = '${message.guild.id}'`;
+                            con.query(sql);
+                            message.channel.send("Custom Role creation enabled!");
+                            return;
+                        } else if (message.content == `no` || message.content == `No` || message.content == `N`) {
+
+                        sql = `UPDATE server SET customRole = ${false} WHERE id = '${message.guild.id}'`;
+                            con.query(sql);
+                            message.channel.send("Custom Role creation disabled!");
+                            return;
+                        } else {
+                            message.channel.send("Invalid Input.");
+                            return;
+                    
+                        }
+                }); 
+                } else {
                     message.channel.send(`Read **${prefix}admin** for more details on how to manage KS-Bot in your server.`);
                     return;
                 }
@@ -3302,6 +3334,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
         let RPG = rows[0].rpg;
         let chests = rows[0].chests;
         let canvas = rows[0].canvas;
+        let customRoles = rows[0].customRole;
         var w;
         var e;
         var s;
@@ -3309,6 +3342,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
         var r;
         var ch;
         var ca;
+        var cr;
         if(whisper == true){
             w = "Yes";
         } else {
@@ -3344,6 +3378,11 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
         } else {
             ch = "No";
         }
+        if(customRoles == true){
+            cr = "Yes";
+        } else {
+            cr = "No";
+        }
     
         var owner = bot.users.get(message.guild.ownerID);
         
@@ -3356,7 +3395,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
             
             .setAuthor(message.guild.name + " KS Bot-settings")
-            .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s)
+            .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
             .setColor("#1f3c5b"); 
 
         message.channel.sendEmbed(stats);
@@ -12008,11 +12047,11 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 //      divorce();
 //  }
 
-    if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
+    // if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined){
         
-        customRole();
+    //     customRole();
 
-    }   
+    // }   
     
     
     
@@ -12204,6 +12243,17 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
     let exposeSet = rows[0].exposeSet;
     let canvas = rows[0].canvas;
     let stands = rows[0].stands;
+    let customRoles = rows[0].customRole;
+
+    if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined && customRoles == true){
+        
+        customRole();
+
+    } else if(command === `${prefix}buy` && messageArray[1] === `customRole` && messageArray[2] != undefined && messageArray[3] != undefined && customRoles == false){
+        
+        message.reply(" custom role creation is disabled in this server!")
+
+    } 
     
     
     if(command === `${prefix}STARPLATINUM` && stands == true){
