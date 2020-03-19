@@ -384,7 +384,7 @@ bot.on("message", async message => {
     var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT, prenup BOOLEAN)";
     var sql29 = "ALTER TABLE user ADD marryKey VARCHAR(40)"; 
     var sql30 = "ALTER TABLE server ADD customRole BOOLEAN";  
-    var sql31 = `UPDATE server SET customRoles =  ${false}`; 
+    var sql31 = `UPDATE server SET customRole =  ${false}`; 
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -401,10 +401,10 @@ bot.on("message", async message => {
     //     message.author.send("Row marryKey added to table user!");
     // }); 
 
-     con.query(sql30, function (err, result) {
-     if (err) throw err;
-     message.author.send("customRole column added to server!");
-     });
+     // con.query(sql30, function (err, result) {
+     // if (err) throw err;
+     // message.author.send("customRole column added to server!");
+     // });
 
      con.query(sql31, function (err, result) {
      if (err) throw err;
