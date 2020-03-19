@@ -2483,11 +2483,7 @@ function collect(){
         con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         
-        if(rows.length < 1) {
-                message.reply(`You have no user! \n Type ${prefix}user to create one!`);
-            
-                return;
-                }
+        
             
 
             let mission;
@@ -2539,6 +2535,8 @@ function collect(){
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
                 message.reply(" found $" + cost + " in the chest!");
+
+                if(achievements.length > 1){
                     //Achievement 6
                 if(tasks.indexOf("Open a chest") != -1 && status == 1){
                     var done = tasks.replace("Open a chest", "complete");
@@ -2561,6 +2559,8 @@ function collect(){
                     con.query(mission);
                     message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Gotta open 'em all!`");
                 }   
+
+            }
                     
                 lostChest();    
                 }); 
@@ -2596,6 +2596,7 @@ function collect(){
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
                 message.reply(" lost $" + penalty + " from a trap!");
                 
+                if(achievements.length > 1){
                 //Achievement 6
                 if(tasks.indexOf("Open a chest") != -1 && status == 1){
                     var done = tasks.replace("Open a chest", "complete");
@@ -2618,6 +2619,7 @@ function collect(){
                     con.query(mission);
                     message.channel.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Gotta open 'em all just not these ones!`");
                 }   
+            }
                 lostChest();    
                 });
             }   
@@ -11981,7 +11983,16 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
     }
 
     if(command === `${prefix}open`){
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+                if(err) throw err;
+                
 
+                if(rows.length < 1) {
+                message.reply(`You have no user! \n Type ${prefix}user to create one!`);
+            
+                return;
+                }
+                
         collect();
          
 
@@ -11989,7 +12000,7 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 
          return;
 
-
+     });
 
     }
 
