@@ -47,54 +47,54 @@ const bot = new Discord.Client({disableEveryone: true})
 
 // STREAM STUFF 
 
-const Bot = new TwitchBot({
-  username: 'ks_streamer',
-  oauth: process.env.TWITCH,
-  channels: ['Kamino_Shimobe']
-})
+// const Bot = new TwitchBot({
+//   username: 'ks_streamer',
+//   oauth: process.env.TWITCH,
+//   channels: ['Kamino_Shimobe']
+// })
 
-Bot.on('join', channel => {
-  console.log(`Joined channel: ${channel}`)
-  Bot.say('Kamino is a pro OSFE player dawg.');
-  });
+// Bot.on('join', channel => {
+//   console.log(`Joined channel: ${channel}`)
+//   Bot.say('Kamino is a pro OSFE player dawg.');
+//   });
   
-  Bot.on('part', channel => {
-  console.log(`Bot left ${channel}`);
-})
+//   Bot.on('part', channel => {
+//   console.log(`Bot left ${channel}`);
+// })
 
-Bot.on('error', err => {
-  console.log(err)
-})
+// Bot.on('error', err => {
+//   console.log(err)
+// })
 
-Bot.on('message', chatter => {
-  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
+// Bot.on('message', chatter => {
+//   // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
+//   //   Bot.say('Commands: !help | !discord | !bracket | !dice');
    
-  // }   
+//   // }   
     
-  if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
-  }
-
-  //  if(chatter.message === '!arena') {
-  //   Bot.say('ID: 1KVYD | PASS: 126');
-  // }   
-
-//   if(chatter.message === '!bracket') {
-//     Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
+//   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
+//     Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
 //   }
 
-  if(chatter.message === '!twitter') {
-    Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
-  }
+//   //  if(chatter.message === '!arena') {
+//   //   Bot.say('ID: 1KVYD | PASS: 126');
+//   // }   
 
-  if(chatter.message === '!dice') {
-   var die1 = Math.floor(Math.random() * 6) + 1;
-   var die2 = Math.floor(Math.random() * 6) + 1;
-    Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
-  }  
+// //   if(chatter.message === '!bracket') {
+// //     Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
+// //   }
 
- }); 
+//   if(chatter.message === '!twitter') {
+//     Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
+//   }
+
+//   if(chatter.message === '!dice') {
+//    var die1 = Math.floor(Math.random() * 6) + 1;
+//    var die2 = Math.floor(Math.random() * 6) + 1;
+//     Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
+//   }  
+
+//  }); 
 
 
 var con_fig = {
@@ -8962,6 +8962,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
         let losses = rows[0].losses;
         var spouse = '';
         let gifts = rows[0].gift;
+        var fools = Math.floor((Math.random() * 144)) + 1;
 
         if(wins == undefined){
             wins = 0;
@@ -8998,7 +8999,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
             
             .setAuthor(message.author.username + supporter)
-            .setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
+            .setDescription("Money: Broke as fuck. \n" + "Kamino's hoe #" + fools + "\n Ws: " + wins + " \n Ls: 999+ \n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + message.author.username + "'s left hand")
             .setFooter("ID:" + message.author.id, message.author.avatarURL)
             .setColor(color); 
 
@@ -9202,6 +9203,8 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
         let losses = rows[0].losses;
         var spouse = '';
         let gifts = rows[0].gift;
+  
+  var fools = Math.floor((Math.random() * 144)) + 1;
 
         if(wins == undefined){
             wins = 0;
@@ -9251,7 +9254,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
             
             .setAuthor(other.username + supporter)
-            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage )
+            .setDescription("Money: Broke as fuck. \n" + "Kamino's hoe #" + fools + "\n Ws: " + wins + " \n Ls: 999+ \n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + other.username + "'s left hand")
             .setFooter("ID:" + other.id, other.avatarURL)
             .setColor(color); 
 
@@ -11856,6 +11859,9 @@ if(command === `!testGame`){
 //  }
 
 // }    
+  
+  
+  
 
 
     
