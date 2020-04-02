@@ -8962,7 +8962,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
         let losses = rows[0].losses;
         var spouse = '';
         let gifts = rows[0].gift;
-        var fools = Math.floor((Math.random() * 144)) + 1;
+        
 
         if(wins == undefined){
             wins = 0;
@@ -8999,7 +8999,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
             
             .setAuthor(message.author.username + supporter)
-            .setDescription("Money: Broke as fuck. \n" + "Kamino's hoe #" + fools + "\n Ws: " + wins + " \n Ls: 999+ \n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + message.author.username + "'s left hand")
+            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
             .setFooter("ID:" + message.author.id, message.author.avatarURL)
             .setColor(color); 
 
@@ -9254,7 +9254,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
             
             .setAuthor(other.username + supporter)
-            .setDescription("Money: Broke as fuck. \n" + "Kamino's hoe #" + fools + "\n Ws: " + wins + " \n Ls: 999+ \n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + other.username + "'s left hand")
+            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
             .setFooter("ID:" + other.id, other.avatarURL)
             .setColor(color); 
 
