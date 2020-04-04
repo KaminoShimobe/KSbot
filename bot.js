@@ -342,21 +342,24 @@ Bot.on('message', chatter => {
   		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
+
+        if(rows.length < 1) {
+         	Bot.say(chatter.username + ' create an account with !user');
+         	return;
+
+         }
+        
         let money = rows[0].money;
         let bid = rows[0].bid;
         let bet = rows[0].bet;
        	let streak = rows[0].streak;
 
 
-         if(rows.length < 1) {
-         	Bot.say(chatter.username + ' create an account with !user');
-         	return;
-
-         } else {
+          
 
          	Bot.say(chatter.username + ' funds: $' + money + ' | Bid: ' + bid + ' for $' + bet + ' | Streak: ' + streak);
          	return;
-         }
+        
 
          });
   	}	 
@@ -365,7 +368,7 @@ Bot.on('message', chatter => {
   		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
-        let money = rows[0].money;
+        
 
          if(rows.length < 1) {
          	Bot.say(chatter.username + ' create an account with !user');
@@ -386,7 +389,7 @@ Bot.on('message', chatter => {
         }, (1000*60*10));
 
 
-        sql = `UPDATE twitchBeta SET  money = ${money + 100} WHERE id = '${chatter.user_id}'`;
+        sql = `UPDATE twitchBeta SET  money = ${rows[0].money + 100} WHERE id = '${chatter.user_id}'`;
         			con.query(sql, console.log);
          	Bot.say(chatter.username + ' collected $100');
          	return;
