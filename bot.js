@@ -36,6 +36,7 @@ const fateLose = new Set();
 const eChannel = new Set();
 const Reminders = new Set();
 const kissCD = new Set();
+const twitchDaily = new Set();
 
 
 
@@ -45,56 +46,6 @@ const bot = new Discord.Client({disableEveryone: true})
 
 //TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
 
-// STREAM STUFF 
-
-// const Bot = new TwitchBot({
-//   username: 'ks_streamer',
-//   oauth: process.env.TWITCH,
-//   channels: ['Kamino_Shimobe']
-// })
-
-// Bot.on('join', channel => {
-//   console.log(`Joined channel: ${channel}`)
-//   Bot.say('Kamino is a pro OSFE player dawg.');
-//   });
-  
-//   Bot.on('part', channel => {
-//   console.log(`Bot left ${channel}`);
-// })
-
-// Bot.on('error', err => {
-//   console.log(err)
-// })
-
-// Bot.on('message', chatter => {
-//   // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-//   //   Bot.say('Commands: !help | !discord | !bracket | !dice');
-   
-//   // }   
-    
-//   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-//     Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
-//   }
-
-//   //  if(chatter.message === '!arena') {
-//   //   Bot.say('ID: 1KVYD | PASS: 126');
-//   // }   
-
-// //   if(chatter.message === '!bracket') {
-// //     Bot.say('Check out the bracket here: https://challonge.com/dlg66a95')
-// //   }
-
-//   if(chatter.message === '!twitter') {
-//     Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
-//   }
-
-//   if(chatter.message === '!dice') {
-//    var die1 = Math.floor(Math.random() * 6) + 1;
-//    var die2 = Math.floor(Math.random() * 6) + 1;
-//     Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
-//   }  
-
-//  }); 
 
 
 var con_fig = {
@@ -147,7 +98,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.3", bot.user.avatarURL);
+            .setFooter("Version 1.8.5", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -327,6 +278,179 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 
 });
 
+// STREAM STUFF 
+
+const Bot = new TwitchBot({
+  username: 'ks_streamer',
+  oauth: process.env.TWITCH,
+  channels: ['Kamino_Shimobe']
+})
+
+Bot.on('join', channel => {
+  console.log(`Joined channel: ${channel}`)
+  Bot.say('Kamino is streaming! HYPE IN THE CHAT!!');
+  });
+  
+  Bot.on('part', channel => {
+  console.log(`Bot left ${channel}`);
+})
+
+Bot.on('error', err => {
+  console.log(err)
+})
+
+Bot.on('message', chatter => {
+  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
+  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
+   
+  // }   
+
+  let twitchArray = chatter.message.split(" ");
+    
+  if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
+    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
+  }
+
+  //  if(chatter.message === '!arena') {
+  //   Bot.say('ID: 1KVYD | PASS: 126');
+  // }   
+
+  if(chatter.message === '!bracket') {
+    Bot.say('Check out the bracket here: https://challonge.com/jaiblsm0')
+  }
+
+  if(chatter.message === '!user') {
+  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+
+         if(rows.length < 1) {
+         	sql = `INSERT INTO twitchBeta (id, username, money, bid, bet INT, streak INT) VALUES ('${chatter.user_id}', '${chatter.username}', ${0}, '' ${0}, ${0})`;
+            con.query(sql, console.log);
+
+         } else {
+         	Bot.say(chatter.username + ' view your account with !view')
+         	return;
+         }
+
+    
+
+	});
+  }
+
+  if(twitchArray[0] == '!view') {
+  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let money = rows[0].money;
+        let bid = rows[0].bid;
+        let bet = rows[0].bet;
+       	let streak = rows[0].streak;
+
+
+         if(rows.length < 1) {
+         	Bot.say(chatter.username + ' create an account with !user');
+         	return;
+
+         } else {
+
+         	Bot.say(chatter.username + ' funds: $' + money + ' | Bid: ' + bid + ' for $' + bet + ' | Streak: ' + streak);
+         	return;
+         }
+
+         });
+  	}	 
+
+  	if(twitchArray[0] == '!collect'){
+  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let money = rows[0].money;
+
+         if(rows.length < 1) {
+         	Bot.say(chatter.username + ' create an account with !user');
+         	return;
+
+         } else {
+
+
+         	if (twitchDaily.has(chatter.user_id)) {
+            message.reply("You must wait 10 minutes after collecting!");
+            return;
+    } else {
+
+         	twitchDaily.add(chatter.user_id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          twitchDaily.delete(chatter.user_id);
+        }, (1000*60*10));
+
+
+        sql = `UPDATE twitchBeta SET  money = ${money + 100} WHERE id = '${chatter.user_id}'`;
+        			con.query(sql, console.log);
+         	Bot.say(chatter.username + ' collected $100');
+         	return;
+         }
+		}
+  		
+
+    	});
+
+  	}
+
+  	if(twitchArray[0] == '!leaderboard'){
+  		con.query(`SELECT * FROM twitchBeta WHERE money BETWEEN 0 AND 9223372036854775807 ORDER BY money DESC LIMIT 3`, (err, rows) => {
+        if(err) throw err;
+
+        Bot.say('1. ' + rows[0].username + ' 2. ' + rows[1].username + ' 3. ' + rows[2].username);
+
+    });
+
+  	}
+
+  if(twitchArray[0] == '!bet' && twitchArray[1] != undefined && twitchArray[2] != undefined) {
+  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let money = rows[0].money;
+        var guess = twitchArray[1];
+
+
+         if(rows.length < 1) {
+         	Bot.say(chatter.username + ' create an account with !user');
+         	return;
+
+         } else {
+         	var num = parseInt(twitchArray[2]); 
+    		if(Number.isInteger(num) === true && money >= num && num > 0){
+    				sql = `UPDATE twitchBeta SET  bid = '${guess}' WHERE id = '${chatter.user_id}'`;
+        			con.query(sql, console.log);
+        			Bot.say(chatter.username + ' is betting on ' + guess + ' for $' + num +'!');
+        			return;
+			} else {
+				Bot.say(chatter.username + ', you cannot place that bet!');
+				return;
+			}
+         }
+
+    
+
+	});
+  }
+
+
+  if(chatter.message === '!twitter') {
+    Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
+  }
+
+  if(chatter.message === '!dice') {
+   var die1 = Math.floor(Math.random() * 6) + 1;
+   var die2 = Math.floor(Math.random() * 6) + 1;
+    Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
+  }  
+
+ }); 
+
 bot.on("message", async message => {
     
     let messageArray = message.content.split(" ");
@@ -385,7 +509,8 @@ bot.on("message", async message => {
     var sql29 = "ALTER TABLE user ADD marryKey VARCHAR(40)"; 
     var sql30 = "ALTER TABLE server ADD customRole BOOLEAN";  
     var sql31 = `UPDATE server SET customRole =  ${false}`; 
-
+    var sql32 = "CREATE TABLE twitchBeta (id VARCHAR(30), username VARCHAR(50), money INT, bid VARCHAR(50), bet INT, streak INT)";
+    
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
@@ -406,10 +531,17 @@ bot.on("message", async message => {
      // message.author.send("customRole column added to server!");
      // });
 
-     con.query(sql31, function (err, result) {
+     // con.query(sql31, function (err, result) {
+     // if (err) throw err;
+     // message.author.send("customRole set to FALSE in all servers");
+     // });
+
+     con.query(sql32, function (err, result) {
      if (err) throw err;
-     message.author.send("customRole set to FALSE in all servers");
+     message.author.send("Created table twitchBeta!");
      });
+
+    
 
 //      con.query(sql22, function (err, result) {
 //      if (err) throw err;
@@ -449,6 +581,52 @@ bot.on("message", async message => {
     
     }
     }
+
+//Twitch Betting (BETA)
+
+function twitchBet(){
+con.query(`SELECT * FROM twitchBeta'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+
+function collectBid(users, index){
+let money = rows[index].money;
+let streak = rows[index].streak;
+let bet = rows[index].bet;
+	if(rows[index].bid == messageArray[1]){
+		if(streak >= 1){
+		let bonus = bet + Math.floor((streak / 10) * bet);
+			sql = `UPDATE twitchBeta SET money = ${money + bonus}, streak = ${streak + 1}, bid = '' WHERE id = '${rows[index].id}'`;
+        	con.query(sql, console.log);	
+        	message.author.id(rows[index].username + " won $" + bonus + "!");
+        } else {
+        	sql = `UPDATE twitchBeta SET money = ${money + bet}, streak = ${streak + 1}, bid = '' WHERE id = '${rows[index].id}'`;
+        	con.query(sql, console.log);
+        	message.author.id(rows[index].username + " won $" + bet + "!");
+        }
+	} else if(rows[index].bid != messageArray[1] && rows[index].bid != undefined && rows[index].bid != '') {
+			sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='' WHERE id = '${rows[index].id}'`;
+        con.query(sql, console.log);	
+        message.author.id(rows[index].username + " lost $" + bonus + "!");
+	}
+	
+
+}
+
+rows.forEach(collectBid); 
+
+});
+}
+
+
+
+if(command === `!end` && messageArray[1] != undefined){
+    if(message.author.id == '242118931769196544'){  
+        twitchBet();
+    }
+}     
+
+
     
 function directory(){
     
@@ -8962,7 +9140,6 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
         let losses = rows[0].losses;
         var spouse = '';
         let gifts = rows[0].gift;
-        
 
         if(wins == undefined){
             wins = 0;
@@ -8999,7 +9176,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
             
             .setAuthor(message.author.username + supporter)
-            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
+            .setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
             .setFooter("ID:" + message.author.id, message.author.avatarURL)
             .setColor(color); 
 
@@ -9203,8 +9380,6 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
         let losses = rows[0].losses;
         var spouse = '';
         let gifts = rows[0].gift;
-  
-  var fools = Math.floor((Math.random() * 144)) + 1;
 
         if(wins == undefined){
             wins = 0;
@@ -9254,7 +9429,7 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
 
             
             .setAuthor(other.username + supporter)
-            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
+            .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage )
             .setFooter("ID:" + other.id, other.avatarURL)
             .setColor(color); 
 
@@ -11859,9 +12034,6 @@ if(command === `!testGame`){
 //  }
 
 // }    
-  
-  
-  
 
 
     
