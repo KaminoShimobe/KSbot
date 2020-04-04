@@ -411,20 +411,20 @@ Bot.on('message', chatter => {
         let second;
         let third;
 
-        if(row[0].username != undefined){
-        	first = row[0].username;
+        if(rows[0].username != undefined){
+        	first = rows[0].username;
         } else {
         	first = "";
         }
 
-        if(row[1].username != undefined){
-        	second = row[1].username;
+        if(rows[1].username != undefined){
+        	second = rows[1].username;
         } else {
         	second = "";
         }
 
-        if(row[2].username != undefined){
-        	third = row[2].username;
+        if(rows[2].username != undefined){
+        	third = rows[2].username;
         } else {
         	third = "";
         }
