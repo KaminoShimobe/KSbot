@@ -407,7 +407,30 @@ Bot.on('message', chatter => {
   		con.query(`SELECT * FROM twitchBeta WHERE money BETWEEN 0 AND 9223372036854775807 ORDER BY money DESC LIMIT 3`, (err, rows) => {
         if(err) throw err;
 
-        Bot.say('1. ' + rows[0].username + ' 2. ' + rows[1].username + ' 3. ' + rows[2].username);
+        let first;
+        let second;
+        let third;
+
+        if(row[0].username != undefined){
+        	first = row[0].username;
+        } else {
+        	first = "";
+        }
+
+        if(row[1].username != undefined){
+        	second = row[1].username;
+        } else {
+        	second = "";
+        }
+
+        if(row[2].username != undefined){
+        	third = row[2].username;
+        } else {
+        	third = "";
+        }
+
+
+        Bot.say('1. ' + first + ' 2. ' + second + ' 3. ' + third);
 
     });
 
