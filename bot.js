@@ -618,6 +618,7 @@ bot.on("message", async message => {
 //Twitch Betting (BETA)
 
 function twitchBet(){
+	
 con.query(`SELECT * FROM twitchBeta`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -647,7 +648,7 @@ let bet = rows[index].bet;
 }
 
 rows.forEach(collectBid); 
-Bot.say('The winner is ' + messageArray[1 + '!']);
+Bot.say('The winner is ' + messageArray[1] + '! Check with !view to see your results!');
 });
 }
 
