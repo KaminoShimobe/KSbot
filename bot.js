@@ -325,9 +325,10 @@ Bot.on('message', chatter => {
         let sql;
 
          if(rows.length < 1) {
-         	sql = `INSERT INTO twitchBeta (id, username, money, bid, bet, streak) VALUES ('${chatter.user_id}', '${chatter.username}', ${0}, '' ${0}, ${0})`;
+         	sql = `INSERT INTO twitchBeta (id, username, money, bid, bet, streak) VALUES ('${chatter.user_id}', '${chatter.username}', ${0}, '', ${0}, ${0})`;
             con.query(sql, console.log);
             Bot.say(chatter.username + ' view your account with !view')
+            return;
 
          } else {
          	Bot.say(chatter.username + ' view your account with !view')
