@@ -647,7 +647,7 @@ let bet = rows[index].bet;
 }
 
 rows.forEach(collectBid); 
-
+Bot.say('The winner is ' + messageArray[1 + '!']);
 });
 }
 
