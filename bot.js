@@ -629,18 +629,18 @@ let bet = rows[index].bet;
 	if(rows[index].bid == messageArray[1]){
 		if(streak >= 1){
 		let bonus = bet + Math.floor((streak / 10) * bet);
-			sql = `UPDATE twitchBeta SET money = ${money + bonus}, streak = ${streak + 1}, bid = '' WHERE id = '${rows[index].id}'`;
+			sql = `UPDATE twitchBeta SET money = ${money + bonus}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
         	con.query(sql, console.log);	
-        	message.author.id(rows[index].username + " won $" + bonus + "!");
+        	message.author.send(rows[index].username + " won $" + bonus + "!");
         } else {
-        	sql = `UPDATE twitchBeta SET money = ${money + bet}, streak = ${streak + 1}, bid = '' WHERE id = '${rows[index].id}'`;
+        	sql = `UPDATE twitchBeta SET money = ${money + bet}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
         	con.query(sql, console.log);
-        	message.author.id(rows[index].username + " won $" + bet + "!");
+        	message.author.send(rows[index].username + " won $" + bet + "!");
         }
 	} else if(rows[index].bid != messageArray[1] && rows[index].bid != undefined && rows[index].bid != '') {
-			sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='' WHERE id = '${rows[index].id}'`;
+			sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='', bet = ${0} WHERE id = '${rows[index].id}'`;
         con.query(sql, console.log);	
-        message.author.id(rows[index].username + " lost $" + bonus + "!");
+        message.author.send(rows[index].username + " lost $" + bonus + "!");
 	}
 	
 
