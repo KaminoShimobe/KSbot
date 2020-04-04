@@ -452,10 +452,11 @@ Bot.on('message', chatter => {
         var guess = twitchArray[1];
 
 
+
           
          	var num = parseInt(twitchArray[2]); 
     		if(Number.isInteger(num) === true && money >= num && num > 0){
-    				sql = `UPDATE twitchBeta SET  bid = '${guess}' WHERE id = '${chatter.user_id}'`;
+    				sql = `UPDATE twitchBeta SET  bid = '${guess}', bet = ${num}  WHERE id = '${chatter.user_id}'`;
         			con.query(sql, console.log);
         			Bot.say(chatter.username + ' is betting on ' + guess + ' for $' + num +'!');
         			return;
@@ -617,7 +618,7 @@ bot.on("message", async message => {
 //Twitch Betting (BETA)
 
 function twitchBet(){
-con.query(`SELECT * FROM twitchBeta'`, (err, rows) => {
+con.query(`SELECT * FROM twitchBeta`, (err, rows) => {
         if(err) throw err;
         let sql;
 
