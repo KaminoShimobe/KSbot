@@ -640,7 +640,7 @@ let bet = rows[index].bet;
 	} else if(rows[index].bid != messageArray[1] && rows[index].bid != undefined && rows[index].bid != '') {
 			sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='', bet = ${0} WHERE id = '${rows[index].id}'`;
         con.query(sql, console.log);	
-        message.author.send(rows[index].username + " lost $" + bonus + "!");
+        message.author.send(rows[index].username + " lost $" + bet + "!");
 	}
 	
 
