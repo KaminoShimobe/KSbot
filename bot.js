@@ -380,7 +380,7 @@ Bot.on('message', chatter => {
 
 
          	if (twitchDaily.has(chatter.user_id)) {
-            message.reply("You must wait 10 minutes after collecting!");
+            Bot.say(chatter.username + ", You must wait 10 minutes after collecting!");
             return;
     } else {
 
