@@ -348,7 +348,7 @@ Bot.on('message', chatter => {
          	return;
 
          }
-        
+
         let money = rows[0].money;
         let bid = rows[0].bid;
         let bet = rows[0].bet;
@@ -415,15 +415,19 @@ Bot.on('message', chatter => {
   		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
+
+
+        if(rows.length < 1) {
+         	Bot.say(chatter.username + ' create an account with !user');
+         	return;
+
+         }
+         
         let money = rows[0].money;
         var guess = twitchArray[1];
 
 
-         if(rows.length < 1) {
-         	Bot.say(chatter.username + ' create an account with !user');
-         	return;
-
-         } else {
+          
          	var num = parseInt(twitchArray[2]); 
     		if(Number.isInteger(num) === true && money >= num && num > 0){
     				sql = `UPDATE twitchBeta SET  bid = '${guess}' WHERE id = '${chatter.user_id}'`;
@@ -434,7 +438,7 @@ Bot.on('message', chatter => {
 				Bot.say(chatter.username + ', you cannot place that bet!');
 				return;
 			}
-         }
+         
 
     
 
