@@ -316,7 +316,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/jaiblsm0')
+    Bot.say('Check out the bracket here: https://challonge.com/m59x3h5x')
   }
 
   if(chatter.message === '!user') {
