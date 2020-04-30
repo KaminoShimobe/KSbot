@@ -4475,7 +4475,7 @@ function midnight(){
             let status = rows[0].status;    
     
     var PixelArt = require('pixel-art');    
-const { createCanvas } = require('canvas')
+const { createCanvas } = require('node-canvas')
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -10967,7 +10967,7 @@ function standDisc(){
 
 function artSmol(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('canvas')
+const { createCanvas } = require('node-canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -11042,7 +11042,7 @@ const artPiece = new Discord.Attachment(art, fileName);
     
 function artMed(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('canvas')
+const { createCanvas } = require('node-canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -11115,7 +11115,7 @@ const artPiece = new Discord.Attachment(art, fileName);
     
 function artBeeg(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('canvas')
+const { createCanvas } = require('node-canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
