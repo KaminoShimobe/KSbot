@@ -298,7 +298,7 @@ Bot.on('error', err => {
 
 Bot.on('message', chatter => {
   if(chatter.message === '!help') {
-    Bot.say('Shoot me a whisper for bot help!');
+    Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
    
   }   
 
@@ -479,11 +479,11 @@ Bot.on('message', chatter => {
 
  }); 
 
-Bot.on('whisper', chatter => {
-  if(chatter.message === '!help') {
-    Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
-  }
-})
+// Bot.on('whisper', chatter => {
+//   if(chatter.message === '!help') {
+//     Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
+//   }
+// })
 
 bot.on("message", async message => {
     
