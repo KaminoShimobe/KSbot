@@ -44,9 +44,6 @@ const twitchDaily = new Set();
 const bot = new Discord.Client({disableEveryone: true})
 
 
-//TODO: Fix Achievement Leaderboard, Achievement Counter, Make tierlist command pretty
-
-
 
 var con_fig = {
     host: "us-cdbr-iron-east-01.cleardb.net",
@@ -300,15 +297,15 @@ Bot.on('error', err => {
 })
 
 Bot.on('message', chatter => {
-  // if(chatter.message === '!help' || chatter.message.indexOf("help") != -1 || chatter.message.indexOf("Help") != -1) {
-  //   Bot.say('Commands: !help | !discord | !bracket | !dice');
+  if(chatter.message === '!help') {
+    Bot.say('Shoot me a whisper for bot help!');
    
-  // }   
+  }   
 
   let twitchArray = chatter.message.split(" ");
     
   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/CFMjYBu')
+    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
   }
 
   //  if(chatter.message === '!arena') {
@@ -316,7 +313,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/m59x3h5x')
+    Bot.say('Check out the bracket here: https://challonge.com/ogvnug7w')
   }
 
   if(chatter.message === '!user') {
@@ -472,9 +469,7 @@ Bot.on('message', chatter => {
   }
 
 
-  if(chatter.message === '!twitter') {
-    Bot.say('Kamino hates twitter but follow him anyway: https://twitter.com/Kamino_Shimobe')
-  }
+  
 
   if(chatter.message === '!dice') {
    var die1 = Math.floor(Math.random() * 6) + 1;
@@ -483,6 +478,12 @@ Bot.on('message', chatter => {
   }  
 
  }); 
+
+Bot.on('whisper', chatter => {
+  if(chatter.message === '!help') {
+    Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
+  }
+})
 
 bot.on("message", async message => {
     
@@ -2292,7 +2293,7 @@ function rps(){
 }   
 
 
-
+	//After this commands are not compatible with DMs
     if(message.channel.type === "dm") return;
 
 
@@ -3748,6 +3749,7 @@ function divorce(){
 }
     
 function addMarriedAccount()    {
+	var firstPerson = message.author.id;
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
                 if(err) throw err;
                 let sql;
@@ -3788,7 +3790,7 @@ function addMarriedAccount()    {
                 if(rows.length < 1) {
                     sql2 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${true})`;
                     con.query(sql2, console.log);
-                    sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${message.author.id}'`;
+                    sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${firstPerson}'`;
                     con.query(sql, console.log);
                     message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
                 } else{
@@ -3805,7 +3807,7 @@ function addMarriedAccount()    {
                 if(rows.length < 1) {
                     sql3 = `INSERT INTO marriedAcc (id, funds, prenup) VALUES ('${marryKey}', ${0}, ${false})`;
                     con.query(sql3, console.log);
-                    sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${message.author.id}'`;
+                    sql = `UPDATE user gift = ${gifts - 25} WHERE id = '${firstPerson}'`;
                     con.query(sql, console.log);
                     message.reply(`:heart: Congratulations! View your joint acocount with ${potential} by doing ${prefix}mView :heart:`);
                 } else{
@@ -4475,7 +4477,7 @@ function midnight(){
             let status = rows[0].status;    
     
     var PixelArt = require('pixel-art');    
-const { createCanvas } = require('node-canvas')
+const { createCanvas } = require('canvas')
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -10967,7 +10969,7 @@ function standDisc(){
 
 function artSmol(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('node-canvas')
+const { createCanvas } = require('canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -11042,7 +11044,7 @@ const artPiece = new Discord.Attachment(art, fileName);
     
 function artMed(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('node-canvas')
+const { createCanvas } = require('canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -11115,7 +11117,7 @@ const artPiece = new Discord.Attachment(art, fileName);
     
 function artBeeg(){
 var PixelArt = require('pixel-art');    
-const { createCanvas } = require('node-canvas')
+const { createCanvas } = require('canvas')
 
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
