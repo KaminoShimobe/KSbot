@@ -20,7 +20,6 @@
     "pixel-art": "^1.2.0",
     "jimp": "^0.9.3",
     "canvas" : "^2.6.5",
-    "pango" : "^0.0.3",
     "twitch-bot": "https://github.com/Hammster/twitch-bot.git"
   }
 }
