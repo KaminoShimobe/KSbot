@@ -1864,7 +1864,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     attac -= 1;
                     
                     
-                    //me.send(bot.users.get(players[duty]).username + " is a mafioso!");
+                    me.send(bot.users.get(players[duty]).username + " is a mafioso!");
                     players.splice(duty, 1);
                     
                 } else if(detec > 0){
@@ -1874,8 +1874,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     ppl -=1;
                     
                     
-                    //me.send(bot.users.get(players[duty]).username + " is a detective!");
-                    //me.send(bot.users.get(players[duty]).username + " is also a villager!");
+                    me.send(bot.users.get(players[duty]).username + " is a detective!");
+                    me.send(bot.users.get(players[duty]).username + " is also a villager!");
                     players.splice(duty, 1);
                     
                 } else if(protec > 0){
@@ -1885,8 +1885,8 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     ppl -=1;
                     
                     
-                    //me.send(bot.users.get(players[duty]).username + " is a doctor!");
-                    //me.send(bot.users.get(players[duty]).username + " is also a villager!");
+                    me.send(bot.users.get(players[duty]).username + " is a doctor!");
+                    me.send(bot.users.get(players[duty]).username + " is also a villager!");
                     players.splice(duty, 1);
                     
                 }   else {
@@ -1894,7 +1894,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     
                     ppl -=1
                     
-                    //me.send(bot.users.get(players[duty]).username + " is a villager!");
+                    me.send(bot.users.get(players[duty]).username + " is a villager!");
                     players.splice(duty, 1);
 
                 }   
