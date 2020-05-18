@@ -1486,7 +1486,7 @@ m = 0;
         }
     
         function voteTallyN(){
-            var killed = mafiaVotes[Math.floor(Math.random() * mafiaVotes.length) - 1];
+            var killed = mafiaVotes[Math.floor(Math.random() * mafiaVotes.length)];
             if(mafia.has(killed)){
             mafia.delete(killed);
             }
@@ -1552,7 +1552,7 @@ m = 0;
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected) != -1) {
                         mafiaVotes.push(collected);
@@ -1618,7 +1618,7 @@ m = 0;
             } else if(doctors.has(list[index])){
                 
                 person.send(doctorAction).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected) != -1) {
                         doctorVotes.push(collected);
@@ -1683,7 +1683,7 @@ m = 0;
 //                    });
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected) != -1) {
                         detectiveVotes.push(collected);
