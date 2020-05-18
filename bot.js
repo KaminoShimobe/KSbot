@@ -6,6 +6,7 @@ const pixel = require('pixel-art');
 const Jimp = require('jimp');
 const fs = require('fs'); // file manager
 const TwitchBot = require('twitch-bot');
+const Twitter = require('twitter');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -313,7 +314,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/bbw4ba98')
+    Bot.say('Check out the bracket here: https://challonge.com/ogvnug7w')
   }
 
   if(chatter.message === '!user') {
@@ -544,7 +545,8 @@ bot.on("message", async message => {
     var sql30 = "ALTER TABLE server ADD customRole BOOLEAN";  
     var sql31 = `UPDATE server SET customRole =  ${false}`; 
     var sql32 = "CREATE TABLE twitchBeta (id VARCHAR(30), username VARCHAR(50), money INT, bid VARCHAR(50), bet INT, streak INT)";
-    
+    var sql33 = "ALTER TABLE server ALTER COLUMN shop TEXT"; 
+    var sql34 = "ALTER TABLE server ALTER COLUMN prices TEXT";
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
@@ -570,11 +572,20 @@ bot.on("message", async message => {
      // message.author.send("customRole set to FALSE in all servers");
      // });
 
-     con.query(sql32, function (err, result) {
+     // con.query(sql32, function (err, result) {
+     // if (err) throw err;
+     // message.author.send("Created table twitchBeta!");
+     // });
+
+con.query(sql33, function (err, result) {
      if (err) throw err;
-     message.author.send("Created table twitchBeta!");
+     message.author.send("Updated table shop in server to TEXT!");
      });
 
+con.query(sql34, function (err, result) {
+     if (err) throw err;
+     message.author.send("Updated table prices in server to TEXT!");
+     });
     
 
 //      con.query(sql22, function (err, result) {
@@ -1817,7 +1828,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
          var players = Array.from(mafiaPlayers);
          var amount = players.length;
          //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-         if(players.length < 6){
+         if(players.length < 1){
             sentEmbed.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -6565,10 +6576,23 @@ function customItem(){
 
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
-        var cost = parseInt(customPrice);
-        var item = message.guild.roles.find("name", customItem);
+        var roleList = customItem.replace(",", "\n");
+       	var roleOutput = customItem.split(",");
+       	var priceList = customPrice.replace(",", "\n");
+       	var priceOutput = customPrice.split(",");
+        //var cost = parseInt(customPrice);
+        //var item = message.guild.roles.find("name", customItem);
 
-        if(!item) return message.reply(" There is no role for " + customItem);
+       message.channel.send("Which role would you like to purchase(!cancel to cancel): ");
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Cancelled.");
+                            return;
+                        }  else if(message.content != undefined && message.content.indexOf(message.content) != -1 && roleList.includes(message.content) == true){
+                    
+
 
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -6604,7 +6628,11 @@ function customItem(){
     }
      });
 
+}
      });
+
+
+                
 }   
 
 function insure(){
