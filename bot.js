@@ -1554,10 +1554,10 @@ m = 0;
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(collected.content) != -1) {
-                        mafiaVotes.push(collected);
+            if (list.indexOf(collected[0]) != -1) {
+                        mafiaVotes.push(collected[0]);
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(collected).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(collected[0]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
