@@ -1844,15 +1844,28 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
             .catch(console.error);
             whereIam.send("The game is starting! All participants thanks for helping!");
-             
-            // ratio : 1/3 
-           var attac = Math.floor(amount / 3)
-           // ratio : 1/6
-           var detec = Math.floor(amount / 3) 
-           // ratio : 1/6
-           var protec = Math.floor(amount / 6) 
-           // ratio : 2/3
-           var ppl = Math.floor((amount * 2) / 3)
+           
+           var attac;
+           var detec;
+           var protec;
+           var ppl;
+
+           if(amount > 6){  
+
+	            // ratio : 1/3 
+	           var attac = Math.floor(amount / 3)
+	           // ratio : 1/6
+	           var detec = Math.floor(amount / 3) 
+	           // ratio : 1/6
+	           var protec = Math.floor(amount / 6) 
+	           // ratio : 2/3
+	           var ppl = Math.floor((amount * 2) / 3)
+       	   }	else {
+       	   		var attac = Math.floor(amount / 2)
+       	   		var detec = 0
+       	   		var protec = 0
+       	   		var ppl = Math.floor(amount / 2)
+       	   }
 
             
             // var list;
