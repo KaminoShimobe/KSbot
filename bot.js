@@ -1426,7 +1426,7 @@ m = 0;
             .setTimestamp()
             .setFooter("Respond with the id of your target!");
             
-            var person = bot.users.get(newlist[index]);
+            var person = bot.users.get(newList[index]);
                 
         if(person != undefined){        
                 
@@ -1555,7 +1555,7 @@ m = 0;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected[0].content) != -1) {
-            	console.log(collected[0].content);
+            	console.log("COLLECTED: " + collected[0].content);
                         mafiaVotes.push(collected[0].content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected[0].content).username + "**");
