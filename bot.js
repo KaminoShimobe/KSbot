@@ -1565,6 +1565,7 @@ m = 0;
                         }
                     
                     } else {
+                    	console.log(collected);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
