@@ -1421,7 +1421,7 @@ m = 0;
 
             
             .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: " + peepsList)
+            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: " + peepList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the id of your target!");
@@ -1555,6 +1555,7 @@ m = 0;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected[0].content) != -1) {
+            	console.log(collected[0].content);
                         mafiaVotes.push(collected[0].content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected[0].content).username + "**");
