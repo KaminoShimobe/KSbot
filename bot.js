@@ -1552,7 +1552,7 @@ m = 0;
                 
         
         var person = bot.users.get(list[index]);
-        console.log(list);        
+        console.log(list[0] + list[1]);        
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
