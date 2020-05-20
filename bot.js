@@ -1508,6 +1508,7 @@ m = 0;
             for ( var i = 0; i < newList.length - 1; i++ ) {
             peepList += bot.users.get(newList[i]).username + " \n";
         }
+        console.log(newList);
             newList.forEach(dayAction);
             
         }
@@ -1566,7 +1567,7 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log(collected[0].content);
+                    	console.log("COLLECTED: " + collected[0].content);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1579,6 +1580,7 @@ m = 0;
                     }
         })
         .catch(collected => {
+        	console.log("COLLECTED: " + collected[0].content);
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
