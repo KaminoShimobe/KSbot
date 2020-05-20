@@ -1558,6 +1558,7 @@ m = 0;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(person.lastMessage) != -1) {
+            	console.log("Terms:" + list.indexOf(person.lastMessage));
             	console.log("COLLECTED: " + person.lastMessage);
                         mafiaVotes.push(person.lastMessage);
                         tally += 1;                 
@@ -1569,6 +1570,7 @@ m = 0;
                         }
                     
                     } else {
+                    	console.log("Terms:" + list.indexOf(person.lastMessage));
                     	console.log("COLLECTED: " + person.lastMessage);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
@@ -1582,6 +1584,7 @@ m = 0;
                     }
         })
         .catch(collected => {
+        	console.log("Terms:" + list.indexOf(person.lastMessage));
         	console.log("COLLECTED: " + person.lastMessage);
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
