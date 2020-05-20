@@ -1341,6 +1341,7 @@ function gamePhase(){
     var dayVotes = [];
     var list = Array.from(mafiaPlayers);
     var votes = list.length;
+    var newList;
     
     var peepList = "";
     
@@ -1503,7 +1504,7 @@ m = 0;
             }
             mafiaPlayers.delete(killed);
             whereIam.send("**It appears that ||" + bot.users.get(killed).username + "|| has been killed.**");
-            var newList = Array.from(mafiaPlayers);
+            newList = Array.from(mafiaPlayers);
             var dayTally = 0;
             for ( var i = 0; i < newList.length - 1; i++ ) {
             peepList += bot.users.get(newList[i]).username + " \n";
@@ -1556,7 +1557,7 @@ m = 0;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected[0].content) != -1) {
-            	console.log("COLLECTED: " + collected.content);
+            	console.log("COLLECTED: " + collected._content);
                         mafiaVotes.push(collected[0].content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected[0].content).username + "**");
@@ -1567,7 +1568,7 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("COLLECTED: " + collected.content);
+                    	console.log("COLLECTED: " + collected._content);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1580,7 +1581,7 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("COLLECTED: " + collected.content);
+        	console.log("COLLECTED: " + collected._content);
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
