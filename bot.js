@@ -1557,9 +1557,9 @@ m = 0;
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(collected[0].content) != -1) {
-            	console.log("COLLECTED: " + collected);
-                        mafiaVotes.push(collected[0].content);
+            if (list.indexOf(m.content) != -1) {
+            	console.log("COLLECTED: " + m.content);
+                        mafiaVotes.push(m.content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected[0].content).username + "**");
                         console.log(person.username + " voted");
@@ -1569,7 +1569,7 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("COLLECTED: " + collected);
+                    	console.log("COLLECTED: " + m.content);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1582,7 +1582,7 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("COLLECTED: " + collected);
+        	console.log("COLLECTED: " + m.content);
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
