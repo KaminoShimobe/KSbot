@@ -1580,7 +1580,7 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("COLLECTED: " + collected[0].content);
+        	console.log("COLLECTED: " + collected.content);
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
