@@ -1340,6 +1340,7 @@ function gamePhase(){
     var detectiveVotes = [];
     var dayVotes = [];
     var list = Array.from(mafiaPlayers);
+    console.log(list);
     var votes = list.length;
     var newList;
     var dayTally;
@@ -1551,7 +1552,7 @@ m = 0;
                 
         
         var person = bot.users.get(list[index]);
-                
+        console.log(list);        
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
