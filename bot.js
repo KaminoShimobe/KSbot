@@ -1415,7 +1415,7 @@ m = 0;
         }
     
         function dayAction(users, index){
-                    
+                  console.log("New List: " + newList);  
         
             let voteTime = new Discord.RichEmbed()
 
@@ -1556,7 +1556,7 @@ m = 0;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
             if (list.indexOf(collected[0].content) != -1) {
-            	console.log("COLLECTED: " + collected[0].content);
+            	console.log("COLLECTED: " + collected.content);
                         mafiaVotes.push(collected[0].content);
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(collected[0].content).username + "**");
@@ -1567,7 +1567,7 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("COLLECTED: " + collected[0].content);
+                    	console.log("COLLECTED: " + collected.content);
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
