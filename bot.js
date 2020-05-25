@@ -1483,6 +1483,7 @@ m = 0;
     
         function voteTallyN(){
             var killed = mafiaVotes[Math.floor(Math.random() * mafiaVotes.length)];
+            console.log("Killed: " + killed);
             if(mafia.has(killed)){
             mafia.delete(killed);
             }
@@ -1504,7 +1505,7 @@ m = 0;
             for ( var i = 0; i < newList.length - 1; i++ ) {
             peepList += bot.users.get(newList[i]).username + " \n";
         }
-        console.log(newList);
+        console.log("New list: " + newList);
             newList.forEach(dayAction);
             
         }
