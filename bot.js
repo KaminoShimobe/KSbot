@@ -1558,13 +1558,13 @@ m = 0;
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-        	console.log("BEFORE COLLECTED: " + collected.first());
-            if (list.indexOf(collected.first()) != -1) {
-            	console.log("Terms:" + list.indexOf(collected.first()));
-            	console.log("COLLECTED: " + collected.first());
+        	console.log("BEFORE COLLECTED: " + String(collected.first()));
+            if (list.indexOf(String(collected.first())) != -1) {
+            	console.log("Terms:" + list.indexOf(String(collected.first())));
+            	console.log("COLLECTED: " + String(collected.first()));
                         mafiaVotes.push(collected.first());
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(collected.first()).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(String(collected.first())).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1572,8 +1572,8 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("Terms:" + list.indexOf(collected.first()));
-                    	console.log("COLLECTED: " + collected.first());
+                    	console.log("Terms:" + list.indexOf(String(collected.first())));
+                    	console.log("COLLECTED: " + String(collected.first()));
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1586,8 +1586,8 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("Terms:" + list.indexOf(collected.first()));
-        	console.log("COLLECTED: " + collected.first());
+        	console.log("Terms:" + list.indexOf(String(collected.first())));
+        	console.log("COLLECTED: " + String(collected.first()));
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
