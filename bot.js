@@ -1584,7 +1584,7 @@ m = 0;
                         }
                     }
         })
-        .catch(collected => {
+        .catch(time => {
         	console.log("Invalid Input!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
