@@ -1438,10 +1438,12 @@ m = 0;
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
+        	console.log("BEFORE COLLECTED: " + String(collected.first()));
             if (newList.indexOf(String(collected.first())) != -1) {
                         dayVotes.push(String(collected.first()));
                         dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(String(collected.first())).username + "**");
+                        console.log(">>>>>>>New List Quota: " + dayTally)
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
@@ -1452,6 +1454,7 @@ m = 0;
                         dayVotes.push(rando);
                         dayTally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        console.log(">>>>>>>New List Quota: " + dayTally)
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
