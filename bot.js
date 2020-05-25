@@ -1368,11 +1368,13 @@ function gamePhase(){
             }
             
         }
-    
-        function voteTallyD(){
-            var mf = 1;
+
+         var mf = 1;
             var m = 0;
             var killed;
+    
+        function voteTallyD(){
+           
 
 for (var i = 0; i < newList.length; i++) {
   for (var j = i; j < newList.length; j++) {
