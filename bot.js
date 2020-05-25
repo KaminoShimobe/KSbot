@@ -1562,7 +1562,7 @@ m = 0;
             if (list.indexOf(String(collected.first())) != -1) {
             	console.log("Terms:" + list.indexOf(String(collected.first())));
             	console.log("COLLECTED: " + String(collected.first()));
-                        mafiaVotes.push(collected.first());
+                        mafiaVotes.push(String(collected.first()));
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(String(collected.first())).username + "**");
                         console.log(person.username + " voted");
@@ -1584,8 +1584,8 @@ m = 0;
                         }
                     }
         })
-        .catch(time => {
-        	console.log("Invalid Input!")
+        .catch(collected => {
+        	console.log("TIMEOUT!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
