@@ -1556,15 +1556,15 @@ m = 0;
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-        	console.log("BEFORE COLLECTED: " + person.lastMessage);
-            if (list.indexOf(person.lastMessage) != -1) {
-            	console.log("Terms:" + list.indexOf(person.lastMessage));
-            	console.log("COLLECTED: " + person.lastMessage);
-                        mafiaVotes.push(person.lastMessage);
+        	console.log("BEFORE COLLECTED: " + collected.first());
+            if (list.indexOf(collected.first()) != -1) {
+            	console.log("Terms:" + list.indexOf(collected.first()));
+            	console.log("COLLECTED: " + collected.first());
+                        mafiaVotes.push(collected.first());
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(person.lastMessage).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(collected.first()).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1572,8 +1572,8 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("Terms:" + list.indexOf(person.lastMessage));
-                    	console.log("COLLECTED: " + person.lastMessage);
+                    	console.log("Terms:" + list.indexOf(collected.first()));
+                    	console.log("COLLECTED: " + collected.first());
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1586,8 +1586,8 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("Terms:" + list.indexOf(person.lastMessage));
-        	console.log("COLLECTED: " + person.lastMessage);
+        	console.log("Terms:" + list.indexOf(collected.first()));
+        	console.log("COLLECTED: " + collected.first());
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
