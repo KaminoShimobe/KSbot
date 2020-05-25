@@ -1369,19 +1369,19 @@ function gamePhase(){
             
         }
 
-         var mf = 1;
+          var mf = 1;
             var m = 0;
-            var killed;
+            var killede;  
+
     
         function voteTallyD(){
-           
-
+        
 for (var i = 0; i < newList.length; i++) {
   for (var j = i; j < newList.length; j++) {
     if (newList[i] == newList[j]) m++;
     if (mf < m) {
       mf = m;
-      killed = arr[i];
+      killede = arr[i];
     }
   }
 
@@ -1389,27 +1389,27 @@ m = 0;
 }       
         
             var status;
-            if(villagers.has(killed)){
-            villagers.delete(killed);
+            if(villagers.has(killede)){
+            villagers.delete(killede);
             status = "villager";
             }
-            if(mafia.has(killed)){
-            mafia.delete(killed);
+            if(mafia.has(killede)){
+            mafia.delete(killede);
             status = "mafia";
             }
-            if(doctors.has(killed)){
-            doctors.delete(killed);
-            villagers.delete(killed);
+            if(doctors.has(killede)){
+            doctors.delete(killede);
+            villagers.delete(killede);
             status = "doctor";
             }
-            if(detectives.has(killed)){
-            detectives.delete(killed);
-            villagers.delete(killed);
+            if(detectives.has(killede)){
+            detectives.delete(killede);
+            villagers.delete(killede);
             status = "detective";
             }
             
-            mafiaPlayers.delete(killed);
-            whereIam.send("**||" + bot.users.get(killed).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
+            mafiaPlayers.delete(killede);
+            whereIam.send("**||" + bot.users.get(killede).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
             
             if(mafia == 0 || villagers == 0){
                 mafiaEnd();
