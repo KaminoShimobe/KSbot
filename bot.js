@@ -1438,29 +1438,20 @@ m = 0;
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(collected) != -1) {
-                        dayVotes.push(collected);
+            if (list.indexOf(String(collected.first())) != -1) {
+                        dayVotes.push(String(collected.first()));
                         dayTally += 1;                  
-                        person.send("You have selected to condemn **" + bot.users.get(collected).username + "**");
+                        person.send("You have selected to condemn **" + bot.users.get(String(collected.first())).username + "**");
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
-                    } else {
-                        var rando = newList[Math.floor(Math.random() * newList.length)];
-                        dayVotes.push(rando);
-                        dayTally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-                        if(dayTally == newList.length){
-                voteTallyD();           
-            }
-                    
-                    }
+                    } 
         })
         .catch(collected => {
              var rando = newList[Math.floor(Math.random() * newList.length)];
                         dayVotes.push(rando);
                         dayTally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
@@ -1573,25 +1564,14 @@ m = 0;
                             voteTallyN();           
                         }
                     
-                    } else {
-                    	console.log("Invalid Input!")
-                        var rando = list[Math.floor(Math.random() * list.length)];
-                        mafiaVotes.push(rando);
-                        tally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                        console.log(person.username + " voted randomly");
-                                    console.log(">>>>>>>Quota: " + tally)
-                            if(tally == quota){
-                            voteTallyN();           
-                        }
-                    }
+                    } 
         })
         .catch(collected => {
-        	console.log("TIMEOUT!")
+        	console.log("TIMEOUT/INVALID INPUT!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
-                        person.send("Time is up, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
