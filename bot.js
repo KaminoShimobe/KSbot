@@ -1369,47 +1369,56 @@ function gamePhase(){
             
         }
 
-          var mf = 1;
-            var m = 0;
-            var killede;  
+           
 
     
         function voteTallyD(){
-        
-for (var i = 0; i < newList.length; i++) {
-  for (var j = i; j < newList.length; j++) {
-    if (newList[i] == newList[j]) m++;
-    if (mf < m) {
-      mf = m;
-      killede = arr[i];
-    }
-  }
+       
 
-m = 0;
-}       
+       var mode = function(newList)
+{
+    if(newList.length == 0)
+        return null;
+    var modeMap = {};
+    var maxEl = newList[0], maxCount = 1;
+    for(var i = 0; i < newList.length; i++)
+    {
+        var el = newList[i];
+        if(modeMap[el] == null)
+            modeMap[el] = 1;
+        else
+            modeMap[el]++;  
+        if(modeMap[el] > maxCount)
+        {
+            maxEl = el;
+            maxCount = modeMap[el];
+        }
+    }
+    return maxEl;
+}     
         
             var status;
-            if(villagers.has(killede)){
-            villagers.delete(killede);
+            if(villagers.has(mode)){
+            villagers.delete(mode);
             status = "villager";
             }
-            if(mafia.has(killede)){
-            mafia.delete(killede);
+            if(mafia.has(mode)){
+            mafia.delete(mode);
             status = "mafia";
             }
-            if(doctors.has(killede)){
-            doctors.delete(killede);
-            villagers.delete(killede);
+            if(doctors.has(mode)){
+            doctors.delete(mode);
+            villagers.delete(mode);
             status = "doctor";
             }
-            if(detectives.has(killede)){
-            detectives.delete(killede);
-            villagers.delete(killede);
+            if(detectives.has(mode)){
+            detectives.delete(mode);
+            villagers.delete(mode);
             status = "detective";
             }
             
-            mafiaPlayers.delete(killede);
-            whereIam.send("**||" + bot.users.get(killede).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
+            mafiaPlayers.delete(mode);
+            whereIam.send("**||" + bot.users.get(mode).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
             
             if(mafia == 0 || villagers == 0){
                 mafiaEnd();
