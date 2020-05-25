@@ -1572,8 +1572,7 @@ m = 0;
                         }
                     
                     } else {
-                    	console.log("Terms:" + list.indexOf(String(collected.first())));
-                    	console.log("COLLECTED: " + String(collected.first()));
+                    	console.log("Invalid Input!")
                         var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1586,8 +1585,7 @@ m = 0;
                     }
         })
         .catch(collected => {
-        	console.log("Terms:" + list.indexOf(String(collected.first())));
-        	console.log("COLLECTED: " + String(collected.first()));
+        	console.log("Invalid Input!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
