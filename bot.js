@@ -1420,7 +1420,7 @@ m = 0;
         }
     
         function dayAction(users, index){
-                  console.log("New List: " + newList);  
+                  console.log("Day Action| New List: " + newList);  
         
             let voteTime = new Discord.RichEmbed()
 
@@ -1438,7 +1438,7 @@ m = 0;
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(String(collected.first())) != -1) {
+            if (newList.indexOf(String(collected.first())) != -1) {
                         dayVotes.push(String(collected.first()));
                         dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(String(collected.first())).username + "**");
