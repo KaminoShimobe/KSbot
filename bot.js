@@ -1396,6 +1396,8 @@ function gamePhase(){
     }
     return maxEl;
 }     
+
+console.log(mode);
         
             var status;
             if(villagers.has(mode)){
