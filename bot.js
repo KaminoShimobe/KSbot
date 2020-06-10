@@ -1374,6 +1374,9 @@ function gamePhase(){
     
         function voteTallyD(){
        
+             if(mafia.size == 0 || villagers.size == 0){
+                mafiaEnd();
+            } else {
 
        var mode = a => {
   a.sort((x, y) => x - y);
@@ -1411,24 +1414,21 @@ function gamePhase(){
             mafia.delete(mode(newList));
             status = "mafia";
             }
-            // if(doctors.has(mode(newList))){
-            // doctors.delete(mode(newList));
-            // villagers.delete(mode(newList));
-            // status = "doctor";
-            // }
-            // if(detectives.has(mode(newList))){
-            // detectives.delete(mode(newList));
-            // villagers.delete(mode(newList));
-            // status = "detective";
-            // }
+            if(doctors.has(mode(newList))){
+            doctors.delete(mode(newList));
+            villagers.delete(mode(newList));
+            status = "doctor";
+            }
+            if(detectives.has(mode(newList))){
+            detectives.delete(mode(newList));
+            villagers.delete(mode(newList));
+            status = "detective";
+            }
             
             mafiaPlayers.delete(mode(newList));
             whereIam.send("**||" + bot.users.get(mode(newList)).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
             console.log("Mafia: " + mafia.size + " Villagers: " + villagers.size);
-            if(mafia.size == 0 || villagers.size == 0){
-                mafiaEnd();
-            } else {
-                gamePhase();            
+                         gamePhase();            
             }
             
         }
