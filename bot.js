@@ -1375,29 +1375,22 @@ function gamePhase(){
         function voteTallyD(){
        
 
-       var mode = function(newList)
-{
-    if(newList.length == 0)
-        return null;
-    var modeMap = {};
-    var maxEl = newList[0], maxCount = 1;
-    for(var i = 0; i < newList.length; i++)
-    {
-        var el = newList[i];
-        if(modeMap[el] == null)
-            modeMap[el] = 1;
-        else
-            modeMap[el]++;  
-        if(modeMap[el] > maxCount)
-        {
-            maxEl = el;
-            maxCount = modeMap[el];
-        }
-    }
-    return maxEl;
-}     
+       var mode = function mode(newList) {
+    var numMapping = {};
+    var greatestFreq = 0;
+    var mode;
+    newList.forEach(function findMode(index) {
+        numMapping[index] = (numMapping[index] || 0) + 1;
 
-console.log(maxEl);
+        if (greatestFreq < numMapping[index]) {
+            greatestFreq = numMapping[index];
+            mode = index;
+        }
+    });
+    return +mode;
+}
+
+console.log(mode);
         
             var status;
             if(villagers.has(mode)){
