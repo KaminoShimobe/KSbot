@@ -1470,18 +1470,18 @@ console.log(mode);
             }
                     }
         })
-        .catch(collected => {
+        // .catch(collected => {
 
-             var rando = newList[Math.floor(Math.random() * newList.length)];
-             console.log("catch " + rando);
-                        dayVotes.push(rando);
-                        dayTally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-                        console.log(">>>>>>>New List Quota: " + dayTally)
-                        if(dayTally == newList.length){
-                voteTallyD();           
-            }
-        });
+        //      var rando = newList[Math.floor(Math.random() * newList.length)];
+        //      console.log("catch " + rando);
+        //                 dayVotes.push(rando);
+        //                 dayTally += 1;
+        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+        //                 console.log(">>>>>>>New List Quota: " + dayTally)
+        //                 if(dayTally == newList.length){
+        //         voteTallyD();           
+        //     }
+        // });
 });
 //                person.send(voteTime);
 //                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
