@@ -1375,22 +1375,22 @@ function gamePhase(){
         function voteTallyD(){
        
 
-       var mode = function mode(newList) {
+       var mode = function mode(arr) {
     var numMapping = {};
     var greatestFreq = 0;
     var mode;
-    newList.forEach(function findMode(index) {
-        numMapping[index] = (numMapping[index] || 0) + 1;
+    arr.forEach(function findMode(number) {
+        numMapping[number] = (numMapping[number] || 0) + 1;
 
-        if (greatestFreq < numMapping[index]) {
-            greatestFreq = numMapping[index];
-            mode = index;
+        if (greatestFreq < numMapping[number]) {
+            greatestFreq = numMapping[number];
+            mode = number;
         }
     });
     return +mode;
 }
 
-console.log(mode);
+console.log(mode([1,1,1,2,3,4,1]));
         
             var status;
             if(villagers.has(mode)){
