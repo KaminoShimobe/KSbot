@@ -1375,20 +1375,30 @@ function gamePhase(){
         function voteTallyD(){
        
 
-       var mode = function mode(arr) {
-    var numMapping = {};
-    var greatestFreq = 0;
-    var mode;
-    arr.forEach(function findMode(number) {
-        numMapping[number] = (numMapping[number] || 0) + 1;
+       var mode = a => {
+  a.sort((x, y) => x - y);
 
-        if (greatestFreq < numMapping[number]) {
-            greatestFreq = numMapping[number];
-            mode = number;
-        }
-    });
-    return +mode;
-}
+  var bestStreak = 1;
+  var bestElem = a[0];
+  var currentStreak = 1;
+  var currentElem = a[0];
+
+  for (let i = 1; i < a.length; i++) {
+    if (a[i-1] !== a[i]) {
+      if (currentStreak > bestStreak) {
+        bestStreak = currentStreak;
+        bestElem = currentElem;
+      }
+
+      currentStreak = 0;
+      currentElem = a[i];
+    }
+
+    currentStreak++;
+  }
+
+  return currentStreak > bestStreak ? currentElem : bestElem;
+};
 
 console.log(mode([1,1,1,2,3,4,1]));
         
