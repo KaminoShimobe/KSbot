@@ -1349,7 +1349,7 @@ function gamePhase(){
     
     function mafiaEnd(){
     
-            if(mafia == 0){
+            if(mafia.size == 0){
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -1357,7 +1357,7 @@ function gamePhase(){
                 detectives.clear();
                 whereIam.send("**THE VILLAGERS HAVE SUCCESSFULLY WON!**");      
                 return;
-            } else if(villagers == 0){
+            } else if(villagers.size == 0){
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -1411,21 +1411,21 @@ function gamePhase(){
             mafia.delete(mode(newList));
             status = "mafia";
             }
-            if(doctors.has(mode(newList))){
-            doctors.delete(mode(newList));
-            villagers.delete(mode(newList));
-            status = "doctor";
-            }
-            if(detectives.has(mode(newList))){
-            detectives.delete(mode(newList));
-            villagers.delete(mode(newList));
-            status = "detective";
-            }
+            // if(doctors.has(mode(newList))){
+            // doctors.delete(mode(newList));
+            // villagers.delete(mode(newList));
+            // status = "doctor";
+            // }
+            // if(detectives.has(mode(newList))){
+            // detectives.delete(mode(newList));
+            // villagers.delete(mode(newList));
+            // status = "detective";
+            // }
             
             mafiaPlayers.delete(mode(newList));
             whereIam.send("**||" + bot.users.get(mode(newList)).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
-            console.log("Mafia: " + mafia + " Villagers: " + villagers);
-            if(mafia == 0 || villagers == 0){
+            console.log("Mafia: " + mafia.size + " Villagers: " + villagers.size);
+            if(mafia.size == 0 || villagers.size == 0){
                 mafiaEnd();
             } else {
                 gamePhase();            
