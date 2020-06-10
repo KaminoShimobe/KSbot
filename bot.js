@@ -318,71 +318,71 @@ Bot.on('message', chatter => {
   }
 
   if(chatter.message === '!user') {
-  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+      con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
 
          if(rows.length < 1) {
-         	sql = `INSERT INTO twitchBeta (id, username, money, bid, bet, streak) VALUES ('${chatter.user_id}', '${chatter.username}', ${0}, '', ${0}, ${0})`;
+          sql = `INSERT INTO twitchBeta (id, username, money, bid, bet, streak) VALUES ('${chatter.user_id}', '${chatter.username}', ${0}, '', ${0}, ${0})`;
             con.query(sql, console.log);
             Bot.say(chatter.username + ' view your account with !view')
             return;
 
          } else {
-         	Bot.say(chatter.username + ' view your account with !view')
-         	return;
+          Bot.say(chatter.username + ' view your account with !view')
+          return;
          }
 
     
 
-	});
+  });
   }
 
   if(twitchArray[0] == '!view') {
-  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+      con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
 
         if(rows.length < 1) {
-         	Bot.say(chatter.username + ' create an account with !user');
-         	return;
+          Bot.say(chatter.username + ' create an account with !user');
+          return;
 
          }
 
         let money = rows[0].money;
         let bid = rows[0].bid;
         let bet = rows[0].bet;
-       	let streak = rows[0].streak;
+        let streak = rows[0].streak;
 
 
           
 
-         	Bot.say(chatter.username + ' funds: $' + money + ' | Bid: ' + bid + ' for $' + bet + ' | Streak: ' + streak);
-         	return;
+          Bot.say(chatter.username + ' funds: $' + money + ' | Bid: ' + bid + ' for $' + bet + ' | Streak: ' + streak);
+          return;
         
 
          });
-  	}	 
+    }  
 
-  	if(twitchArray[0] == '!collect'){
-  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+    if(twitchArray[0] == '!collect'){
+      con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
         
 
          if(rows.length < 1) {
-         	Bot.say(chatter.username + ' create an account with !user');
-         	return;
+          Bot.say(chatter.username + ' create an account with !user');
+          return;
 
          } else {
 
 
-         	if (twitchDaily.has(chatter.user_id)) {
+          if (twitchDaily.has(chatter.user_id)) {
             Bot.say(chatter.username + ", You must wait 10 minutes after collecting!");
             return;
     } else {
 
-         	twitchDaily.add(chatter.user_id);
+          twitchDaily.add(chatter.user_id);
         setTimeout(() => {
           // Removes the user from the set after a minute
           twitchDaily.delete(chatter.user_id);
@@ -390,19 +390,19 @@ Bot.on('message', chatter => {
 
 
         sql = `UPDATE twitchBeta SET  money = ${rows[0].money + 100} WHERE id = '${chatter.user_id}'`;
-        			con.query(sql, console.log);
-         	Bot.say(chatter.username + ' collected $100');
-         	return;
+              con.query(sql, console.log);
+          Bot.say(chatter.username + ' collected $100');
+          return;
          }
-		}
-  		
+    }
+      
 
-    	});
+      });
 
-  	}
+    }
 
-  	if(twitchArray[0] == '!leaderboard'){
-  		con.query(`SELECT * FROM twitchBeta WHERE money BETWEEN 0 AND 9223372036854775807 ORDER BY money DESC LIMIT 3`, (err, rows) => {
+    if(twitchArray[0] == '!leaderboard'){
+      con.query(`SELECT * FROM twitchBeta WHERE money BETWEEN 0 AND 9223372036854775807 ORDER BY money DESC LIMIT 3`, (err, rows) => {
         if(err) throw err;
 
         let first;
@@ -410,21 +410,21 @@ Bot.on('message', chatter => {
         let third;
 
         if(rows[0].username != undefined){
-        	first = rows[0].username;
+          first = rows[0].username;
         } else {
-        	first = "";
+          first = "";
         }
 
         if(rows[1].username != undefined){
-        	second = rows[1].username;
+          second = rows[1].username;
         } else {
-        	second = "";
+          second = "";
         }
 
         if(rows[2].username != undefined){
-        	third = rows[2].username;
+          third = rows[2].username;
         } else {
-        	third = "";
+          third = "";
         }
 
 
@@ -432,17 +432,17 @@ Bot.on('message', chatter => {
 
     });
 
-  	}
+    }
 
   if(twitchArray[0] == '!bet' && twitchArray[1] != undefined && twitchArray[2] != undefined) {
-  		con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
+      con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
 
 
         if(rows.length < 1) {
-         	Bot.say(chatter.username + ' create an account with !user');
-         	return;
+          Bot.say(chatter.username + ' create an account with !user');
+          return;
 
          }
 
@@ -452,21 +452,21 @@ Bot.on('message', chatter => {
 
 
           
-         	var num = parseInt(twitchArray[2]); 
-    		if(Number.isInteger(num) === true && money >= num && num > 0){
-    				sql = `UPDATE twitchBeta SET  bid = '${guess}', bet = ${num}  WHERE id = '${chatter.user_id}'`;
-        			con.query(sql, console.log);
-        			Bot.say(chatter.username + ' is betting on ' + guess + ' for $' + num +'!');
-        			return;
-			} else {
-				Bot.say(chatter.username + ', you cannot place that bet!');
-				return;
-			}
+          var num = parseInt(twitchArray[2]); 
+        if(Number.isInteger(num) === true && money >= num && num > 0){
+            sql = `UPDATE twitchBeta SET  bid = '${guess}', bet = ${num}  WHERE id = '${chatter.user_id}'`;
+              con.query(sql, console.log);
+              Bot.say(chatter.username + ' is betting on ' + guess + ' for $' + num +'!');
+              return;
+      } else {
+        Bot.say(chatter.username + ', you cannot place that bet!');
+        return;
+      }
          
 
     
 
-	});
+  });
   }
 
 
@@ -630,7 +630,7 @@ con.query(sql34, function (err, result) {
 //Twitch Betting (BETA)
 
 function twitchBet(){
-	
+  
 con.query(`SELECT * FROM twitchBeta`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -639,23 +639,23 @@ function collectBid(users, index){
 let money = rows[index].money;
 let streak = rows[index].streak;
 let bet = rows[index].bet;
-	if(rows[index].bid == messageArray[1]){
-		if(streak >= 1){
-		let bonus = bet + Math.floor((streak / 10) * bet);
-			sql = `UPDATE twitchBeta SET money = ${money + bonus}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
-        	con.query(sql, console.log);	
-        	message.author.send(rows[index].username + " won $" + bonus + "!");
+  if(rows[index].bid == messageArray[1]){
+    if(streak >= 1){
+    let bonus = bet + Math.floor((streak / 10) * bet);
+      sql = `UPDATE twitchBeta SET money = ${money + bonus}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
+          con.query(sql, console.log);  
+          message.author.send(rows[index].username + " won $" + bonus + "!");
         } else {
-        	sql = `UPDATE twitchBeta SET money = ${money + bet}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
-        	con.query(sql, console.log);
-        	message.author.send(rows[index].username + " won $" + bet + "!");
+          sql = `UPDATE twitchBeta SET money = ${money + bet}, streak = ${streak + 1}, bid = '', bet = ${0} WHERE id = '${rows[index].id}'`;
+          con.query(sql, console.log);
+          message.author.send(rows[index].username + " won $" + bet + "!");
         }
-	} else if(rows[index].bid != messageArray[1] && rows[index].bid != undefined && rows[index].bid != '') {
-			sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='', bet = ${0} WHERE id = '${rows[index].id}'`;
-        con.query(sql, console.log);	
+  } else if(rows[index].bid != messageArray[1] && rows[index].bid != undefined && rows[index].bid != '') {
+      sql = `UPDATE twitchBeta SET money = ${money - bet}, streak = ${0}, bid ='', bet = ${0} WHERE id = '${rows[index].id}'`;
+        con.query(sql, console.log);  
         message.author.send(rows[index].username + " lost $" + bet + "!");
-	}
-	
+  }
+  
 
 }
 
@@ -1449,7 +1449,7 @@ console.log(mode);
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
-        	console.log("BEFORE COLLECTED: " + String(collected.first()));
+          console.log("BEFORE COLLECTED: " + String(collected.first()));
             if (newList.indexOf(String(collected.first())) != -1) {
                         dayVotes.push(String(collected.first()));
                         dayTally += 1;                  
@@ -1461,7 +1461,9 @@ console.log(mode);
                     } 
         })
         .catch(collected => {
+
              var rando = newList[Math.floor(Math.random() * newList.length)];
+             console.log("catch " + rando);
                         dayVotes.push(rando);
                         dayTally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
@@ -1566,10 +1568,10 @@ console.log(mode);
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-        	console.log("BEFORE COLLECTED: " + String(collected.first()));
+          console.log("BEFORE COLLECTED: " + String(collected.first()));
             if (list.indexOf(String(collected.first())) != -1) {
-            	console.log("Terms:" + list.indexOf(String(collected.first())));
-            	console.log("COLLECTED: " + String(collected.first()));
+              console.log("Terms:" + list.indexOf(String(collected.first())));
+              console.log("COLLECTED: " + String(collected.first()));
                         mafiaVotes.push(String(collected.first()));
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(String(collected.first())).username + "**");
@@ -1582,7 +1584,7 @@ console.log(mode);
                     } 
         })
         .catch(collected => {
-        	console.log("TIMEOUT/INVALID INPUT!")
+          console.log("TIMEOUT/INVALID INPUT!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
@@ -1858,20 +1860,20 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
            if(amount > 6){  
 
-	            // ratio : 1/3 
-	           var attac = Math.floor(amount / 3)
-	           // ratio : 1/6
-	           var detec = Math.floor(amount / 3) 
-	           // ratio : 1/6
-	           var protec = Math.floor(amount / 6) 
-	           // ratio : 2/3
-	           var ppl = Math.floor((amount * 2) / 3)
-       	   }	else {
-       	   		var attac = Math.floor(amount / 2)
-       	   		var detec = 0
-       	   		var protec = 0
-       	   		var ppl = Math.floor(amount / 2)
-       	   }
+              // ratio : 1/3 
+             var attac = Math.floor(amount / 3)
+             // ratio : 1/6
+             var detec = Math.floor(amount / 3) 
+             // ratio : 1/6
+             var protec = Math.floor(amount / 6) 
+             // ratio : 2/3
+             var ppl = Math.floor((amount * 2) / 3)
+           }  else {
+              var attac = Math.floor(amount / 2)
+              var detec = 0
+              var protec = 0
+              var ppl = Math.floor(amount / 2)
+           }
 
             
             // var list;
@@ -2323,7 +2325,7 @@ function rps(){
 }   
 
 
-	//After this commands are not compatible with DMs
+  //After this commands are not compatible with DMs
     if(message.channel.type === "dm") return;
 
 
@@ -3779,7 +3781,7 @@ function divorce(){
 }
     
 function addMarriedAccount()    {
-	var firstPerson = message.author.id;
+  var firstPerson = message.author.id;
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
                 if(err) throw err;
                 let sql;
@@ -6596,9 +6598,9 @@ function customItem(){
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
         var roleList = customItem.replace(",", "\n");
-       	var roleOutput = customItem.split(",");
-       	var priceList = customPrice.replace(",", "\n");
-       	var priceOutput = customPrice.split(",");
+        var roleOutput = customItem.split(",");
+        var priceList = customPrice.replace(",", "\n");
+        var priceOutput = customPrice.split(",");
         //var cost = parseInt(customPrice);
         //var item = message.guild.roles.find("name", customItem);
 
