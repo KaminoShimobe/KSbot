@@ -1400,7 +1400,7 @@ function gamePhase(){
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
 
-console.log(mode(newList));
+
         
             var status;
             if(villagers.has(mode(newList))){
@@ -1424,7 +1424,7 @@ console.log(mode(newList));
             
             mafiaPlayers.delete(mode(newList));
             whereIam.send("**||" + bot.users.get(mode(newList)).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
-            
+            console.log("Mafia: " + mafia + " Villagers: " + villagers);
             if(mafia == 0 || villagers == 0){
                 mafiaEnd();
             } else {
