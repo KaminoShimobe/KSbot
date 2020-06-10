@@ -1458,7 +1458,17 @@ console.log(mode);
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
-                    } 
+                    } else {
+                      var rando = newList[Math.floor(Math.random() * newList.length)];
+             console.log("catch " + rando);
+                        dayVotes.push(rando);
+                        dayTally += 1;
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        console.log(">>>>>>>New List Quota: " + dayTally)
+                        if(dayTally == newList.length){
+                voteTallyD();           
+            }
+                    }
         })
         .catch(collected => {
 
