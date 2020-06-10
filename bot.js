@@ -1535,8 +1535,11 @@ function gamePhase(){
             peepList += bot.users.get(newList[i]).username + " \n";
         }
         console.log("New list: " + newList);
+        if(mafia.size == 0 || villagers.size == 0){
+                mafiaEnd();
+            } else {
             newList.forEach(dayAction);
-            
+            }
         }
         
         
