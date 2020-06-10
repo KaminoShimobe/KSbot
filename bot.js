@@ -1400,30 +1400,30 @@ function gamePhase(){
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
 
-console.log(mode([1,1,1,2,3,4,1]));
+console.log(mode(newList));
         
             var status;
-            if(villagers.has(mode)){
-            villagers.delete(mode);
+            if(villagers.has(mode(newList))){
+            villagers.delete(mode(newList));
             status = "villager";
             }
-            if(mafia.has(mode)){
-            mafia.delete(mode);
+            if(mafia.has(mode(newList))){
+            mafia.delete(mode(newList));
             status = "mafia";
             }
-            if(doctors.has(mode)){
-            doctors.delete(mode);
-            villagers.delete(mode);
+            if(doctors.has(mode(newList))){
+            doctors.delete(mode(newList));
+            villagers.delete(mode(newList));
             status = "doctor";
             }
-            if(detectives.has(mode)){
-            detectives.delete(mode);
-            villagers.delete(mode);
+            if(detectives.has(mode(newList))){
+            detectives.delete(mode(newList));
+            villagers.delete(mode(newList));
             status = "detective";
             }
             
-            mafiaPlayers.delete(mode);
-            whereIam.send("**||" + bot.users.get(mode).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
+            mafiaPlayers.delete(mode(newList));
+            whereIam.send("**||" + bot.users.get(mode(newList)).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**");
             
             if(mafia == 0 || villagers == 0){
                 mafiaEnd();
