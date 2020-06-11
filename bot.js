@@ -7,7 +7,6 @@ const Jimp = require('jimp');
 const fs = require('fs'); // file manager
 const TwitchBot = require('twitch-bot');
 const Twitter = require('twitter');
-const screenshot = require('screenshot-desktop');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
