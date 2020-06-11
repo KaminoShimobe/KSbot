@@ -7,6 +7,7 @@ const Jimp = require('jimp');
 const fs = require('fs'); // file manager
 const TwitchBot = require('twitch-bot');
 const Twitter = require('twitter');
+const screenshot = require('screenshot-desktop');
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -987,7 +988,16 @@ if(command === `!card`){
     }
 
 }   
-
+    
+  if(command === `!clip`){
+      if(message.author.id == '242118931769196544'){
+      screenshot({format: 'png', filename: 'demo.png'}).then((img) => {
+    message.author.send(`Sreenshot test:`, { files: ["demo.png"] })
+}).catch((err) => {
+  // ...
+})
+      }
+  }
 
 
 function holidayCard(){
