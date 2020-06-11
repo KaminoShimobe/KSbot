@@ -21,7 +21,6 @@
     "canvas": "https://github.com/suti/node-canvas.git",
     "jimp": "^0.9.3",
     "twitch-bot": "https://github.com/Hammster/twitch-bot.git",
-    "twitter": "^1.7.1",
-    "screenshot-desktop": "^1.12.1"
+    "twitter": "^1.7.1"
   }
 }
