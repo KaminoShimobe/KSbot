@@ -1687,7 +1687,7 @@ function gamePhase(){
                         }
         });
 });
-            
+            //beep
 //                person.send(doctorAction);
 //                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
 //                collector.once('collect', message => {
