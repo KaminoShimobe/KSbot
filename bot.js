@@ -1542,7 +1542,7 @@ function gamePhase(){
             whereIam.send("**It appears that ||" + bot.users.get(killed).username + "|| has been killed.**");
             newList = Array.from(mafiaPlayers);
             dayTally = 0;
-            for ( var i = 0; i < newList.length - 1; i++ ) {
+            for ( var i = 0; i < newList.length; i++ ) {
             peepList += bot.users.get(newList[i]).username + " \n";
         }
         console.log("New list: " + newList);
