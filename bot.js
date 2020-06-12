@@ -1589,7 +1589,7 @@ function gamePhase(){
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
           console.log(person.username + "'s night collected value: ' " + String(collected.first()));
-            if (list.indexOf(String(collected.first())) != -1) {
+            if (list.indexOf(String(collected.first())) != -1 && list.indexOf(" ") == -1) {
               console.log("Terms:" + list.indexOf(String(collected.first())));
               console.log("COLLECTED: " + String(collected.first()));
                         mafiaVotes.push(String(collected.first()));
