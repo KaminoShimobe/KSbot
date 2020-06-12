@@ -1339,7 +1339,7 @@ function gamePhase(){
     var lookers = Array.from(detectives);
     var quota = werewolves.length + healers.length + lookers.length;
     var mafiaList = "";
-    for ( var i = 0; i < werewolves.length - 1; i++ ) {
+    for ( var i = 0; i < werewolves.length; i++ ) {
             mafiaList += bot.users.get(werewolves[i]).username + " \n";
     }
     
@@ -1459,7 +1459,7 @@ function gamePhase(){
         if(person != undefined){        
                 
                 person.send(voteTime).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000000000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000000, errors: ['time'] })
         .then(collected => {
           console.log(person.username + "'s day collected value: ' " + String(collected.first()));
             if (newList.indexOf(String(collected.first())) != -1) {
