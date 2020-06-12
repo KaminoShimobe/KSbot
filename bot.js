@@ -1386,7 +1386,7 @@ function gamePhase(){
              if(mafia.size == 0 || villagers.size == 0){
                 mafiaEnd();
             } else {
-
+              console.log("Remaining Mafia: " + mafia.size + " Remaining Villagers: " + villagers.size);
        var mode = a => {
   a.sort((x, y) => x - y);
 
@@ -1461,22 +1461,24 @@ function gamePhase(){
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
-          console.log("BEFORE COLLECTED: " + String(collected.first()));
+          console.log(person.username + "'s day collected value: ' " + String(collected.first()));
             if (newList.indexOf(String(collected.first())) != -1) {
                         dayVotes.push(String(collected.first()));
                         dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(String(collected.first())).username + "**");
-                        console.log(">>>>>>>New List Quota: " + dayTally)
+                        console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
+                        console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
                     } else {
                       var rando = newList[Math.floor(Math.random() * newList.length)];
-             console.log("catch " + rando);
+             console.log(person.username + "'s daytime randomly collected value: ' " + rando);
                         dayVotes.push(rando);
                         dayTally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-                        console.log(">>>>>>>New List Quota: " + dayTally)
+                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
+                        console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
@@ -1593,7 +1595,7 @@ function gamePhase(){
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-          console.log("BEFORE COLLECTED: " + String(collected.first()));
+          console.log(person.username + "'s night collected value: ' " + String(collected.first()));
             if (list.indexOf(String(collected.first())) != -1) {
               console.log("Terms:" + list.indexOf(String(collected.first())));
               console.log("COLLECTED: " + String(collected.first()));
