@@ -1411,7 +1411,7 @@ function gamePhase(){
 
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
-            var convict = mode(newList);
+            var convict = mode(dayVotes);
 
         
             var status;
