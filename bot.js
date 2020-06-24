@@ -1413,6 +1413,7 @@ function gamePhase(){
 };
             var convict = mode(dayVotes);
 
+            console.log("Day Votes: " + dayVotes + " | Mode: " + convict);
         
             var status;
             if(villagers.has(convict)){
