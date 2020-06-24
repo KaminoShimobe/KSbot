@@ -1411,36 +1411,36 @@ function gamePhase(){
 
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
-
+            var convict = mode(newList);
 
         
             var status;
-            if(villagers.has(mode(newList))){
-            villagers.delete(mode(newList));
+            if(villagers.has(convict)){
+            villagers.delete(convict);
             status = "villager";
             }
-            if(mafia.has(mode(newList))){
-            mafia.delete(mode(newList));
+            if(mafia.has(convict)){
+            mafia.delete(convict);
             status = "mafia";
             }
-            if(doctors.has(mode(newList))){
-            doctors.delete(mode(newList));
-            villagers.delete(mode(newList));
+            if(doctors.has(convict)){
+            doctors.delete(convict);
+            villagers.delete(convict);
             status = "doctor";
             }
-            if(detectives.has(mode(newList))){
-            detectives.delete(mode(newList));
-            villagers.delete(mode(newList));
+            if(detectives.has(convict)){
+            detectives.delete(convict);
+            villagers.delete(convict);
             status = "detective";
             }
             
-            mafiaPlayers.delete(mode(newList));
+            mafiaPlayers.delete(convict);
 
             let results = new Discord.RichEmbed()
 
             
             .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("**||" + bot.users.get(mode(newList)).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**")
+            .setDescription("**||" + bot.users.get(convict).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**")
             .setColor("#8a673d")
             .setTimestamp();
             
