@@ -1354,6 +1354,7 @@ function gamePhase(){
     var newList;
     var dayTally;
     
+    
     var peepList = "";
     
     function mafiaEnd(){
@@ -1366,7 +1367,7 @@ function gamePhase(){
                 detectives.clear();
                 whereIam.send("**THE VILLAGERS HAVE SUCCESSFULLY WON!**");      
                 return;
-            } else if(villagers.size == 0){
+            } else if(villagers.size == 0 || mafia.size > villager.size){
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -1383,7 +1384,7 @@ function gamePhase(){
     
         function voteTallyD(){
        
-             if(mafia.size == 0 || villagers.size == 0){
+             if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             } else {
               console.log("Remaining Mafia: " + mafia.size + " Remaining Villagers: " + villagers.size);
@@ -1444,14 +1445,18 @@ function gamePhase(){
             .setDescription("**||" + bot.users.get(convict).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**")
             .setColor("#8a673d")
             .setTimestamp();
+
+
             
 
             whereIam.send(results);
             console.log("Mafia: " + mafia.size + " Villagers: " + villagers.size);
-            if(mafia.size == 0 || villagers.size == 0){
+            if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             }
-                         gamePhase();            
+                        mafiaVotes = [];
+                        doctorVotes = [];
+                        gamePhase();            
             }
             
         }
@@ -1529,7 +1534,47 @@ function gamePhase(){
         }
     
         function voteTallyN(){
-            var killed = mafiaVotes[Math.floor(Math.random() * mafiaVotes.length)];
+             var mode = a => {
+                a.sort((x, y) => x - y);
+
+                  var bestStreak = 1;
+                  var bestElem = a[0];
+                  var currentStreak = 1;
+                  var currentElem = a[0];
+
+              for (let i = 1; i < a.length; i++) {
+                if (a[i-1] !== a[i]) {
+                  if (currentStreak > bestStreak) {
+                    bestStreak = currentStreak;
+                    bestElem = currentElem;
+                  }
+
+                  currentStreak = 0;
+                  currentElem = a[i];
+                }
+
+                currentStreak++;
+              }
+
+              return currentStreak > bestStreak ? currentElem : bestElem;
+          };
+
+            var killed = mode(mafiaVotes);
+            var saved = mode(doctorVotes);
+
+            if (saved == killed){
+              let gResults = new Discord.RichEmbed()
+
+            
+            .setTitle("🌙 NIGHT TIME 🌙")
+            .setDescription("**It appears that ||" + bot.users.get(killed).username + "|| was supposed to have been killed.... but have lived???**")
+            .setColor("#8a673d")
+            .setTimestamp();
+
+            whereIam.send(gResults);
+            
+            } else {
+
             console.log("Killed: " + killed);
             if(mafia.has(killed)){
             mafia.delete(killed);
@@ -1547,6 +1592,7 @@ function gamePhase(){
             }
             mafiaPlayers.delete(killed);
 
+
             let nResults = new Discord.RichEmbed()
 
             
@@ -1556,13 +1602,15 @@ function gamePhase(){
             .setTimestamp();
 
             whereIam.send(nResults);
+          }
+
             newList = Array.from(mafiaPlayers);
             dayTally = 0;
             for ( var i = 0; i < newList.length; i++ ) {
             peepList += (i+1) + ". " + bot.users.get(newList[i]).username + ", \n";
         }
         console.log("New list: " + newList);
-        if(mafia.size == 0 || villagers.size == 0){
+        if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             } else {
             newList.forEach(dayAction);
@@ -1620,8 +1668,7 @@ function gamePhase(){
         .then(collected => {
           console.log(person.username + "'s night collected value: ' " + String(collected.first()));
             if (list.indexOf(String(collected.first())) != -1) {
-              console.log("Terms:" + list.indexOf(String(collected.first())));
-              console.log("COLLECTED: " + String(collected.first()));
+              
                         mafiaVotes.push(String(collected.first()));
                         tally += 1;                 
                         person.send("You have selected to kill **" + bot.users.get(String(collected.first())).username + "**");
@@ -1647,41 +1694,18 @@ function gamePhase(){
         });
 });
             
-//                person.send(mafiaAction);
-//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-//                collector.once('collect', message => {
-//                    if (list.indexOf(message.content) != -1) {
-//                        mafiaVotes.push(message.content);
-//                        tally += 1;                 
-//                        person.send("You have selected to kill **" + bot.users.get(message.content).username + "**");
-//                        console.log(person.username + " voted");
-//                                  console.log(">>>>>>>Quota: " + tally)
-//                          if(tally == quota){
-//                          voteTallyN();           
-//                      }
-//                    
-//                    } else {
-//                        var rando = list[Math.floor(Math.random() * list.length)];
-//                        mafiaVotes.push(rando);
-//                        tally += 1;
-//                        person.send("That input is invalid, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-//                      console.log(person.username + " voted randomly");
-//                                  console.log(">>>>>>>Quota: " + tally)
-//                          if(tally == quota){
-//                          voteTallyN();           
-//                      }
-//                    }
-//                    
-//                    });
+
             } else if(doctors.has(list[index])){
                 
                 person.send(doctorAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(collected) != -1) {
-                        doctorVotes.push(collected);
+            console.log(person.username + "'s night collected value: ' " + String(collected.first()));
+            if (list.indexOf(String(collected.first())) != -1) {
+              
+                        doctorVotes.push(String(collected.first()));
                         tally += 1;                 
-                        person.send("You have selected to protect **" + bot.users.get(collected).username + "**");
+                        person.send("You have selected to protect **" + bot.users.get(String(collected.first())).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1689,17 +1713,7 @@ function gamePhase(){
                         }
                     
                     }
-                    //  else {
-                    //     var rando = list[Math.floor(Math.random() * list.length)];
-                    //     doctorVotes.push(rando);
-                    //     tally += 1;
-                    //     person.send("That input is invalid, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
-                    //     console.log(person.username + " voted randomly");
-                    //                 console.log(">>>>>>>Quota: " + tally)
-                    //         if(tally == quota){
-                    //         voteTallyN();           
-                    //     }
-                    // }
+                   
         })
         .catch(collected => {
              var rando = list[Math.floor(Math.random() * list.length)];
@@ -1713,47 +1727,23 @@ function gamePhase(){
                         }
         });
 });
-            //beep
-//                person.send(doctorAction);
-//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-//                collector.once('collect', message => {
-//                    if (list.indexOf(message.content) != -1) {
-//                        doctorVotes.push(message.content);
-//                        tally += 1;                 
-//                        person.send("You have selected to protect **" + bot.users.get(message.content).username + "**");
-//                        console.log(person.username + " voted");
-//                                  console.log(">>>>>>>Quota: " + tally)
-//                          if(tally == quota){
-//                          voteTallyN();           
-//                      }
-//                    
-//                    } else {
-//                        var rando = list[Math.floor(Math.random() * list.length)];
-//                        doctorVotes.push(rando);
-//                        tally += 1;
-//                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-//                      console.log(person.username + " voted randomly");
-//                              console.log(">>>>>>>Quota: " + tally)
-//                      if(tally == quota){
-//                      voteTallyN();           
-//                  }
-//                    }
-//                    
-//                    });
+           
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-            if (list.indexOf(collected) != -1) {
-                        detectiveVotes.push(collected);
+          console.log(person.username + "'s night collected value: ' " + String(collected.first()));
+            if (list.indexOf(String(collected.first())) != -1) {
+             
+                        detectiveVotes.push(String(collected.first()));
                         tally += 1;                 
-                        person.send("You have selected to identify **" + bot.users.get(collected).username + "**");
+                        person.send("You have selected to identify **" + bot.users.get(String(collected.first())).username + "**");
                         console.log(person.username + " voted");
-                        if(doctors.has(collected)){
+                        if(doctors.has(String(collected.first()))){
                             person.send("This person is a **doctor**!");
-                        } else if(mafia.has(collected)){
+                        } else if(mafia.has(String(collected.first()))){
                             person.send("This person is a **mafioso**!");
-                        } else if(detectives.has(collected)){
+                        } else if(detectives.has(String(collected.first()))){
                             person.send("This person is a **detective**!");
                         } else {
                             person.send("This person is a **villager**");
@@ -1764,26 +1754,7 @@ function gamePhase(){
                         }
                     
                     } 
-                    // else {
-                    //     var rando = list[Math.floor(Math.random() * list.length)];
-                    //     detectiveVotes.push(rando);
-                    //     tally += 1;
-                    //     person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    //     console.log(person.username + " voted randomly");
-                    //     if(doctors.has(rando)){
-                    //         person.send("This person is a **doctor**!");
-                    //     } else if(mafia.has(rando)){
-                    //         person.send("This person is a **mafioso**!");
-                    //     } else if(detectives.has(rando)){
-                    //         person.send("This person is a **detective**!");
-                    //     } else {
-                    //         person.send("This person is a **villager**");
-                    //     }
-                    //                 console.log(">>>>>>>Quota: " + tally)
-                    //         if(tally == quota){
-                    //         voteTallyN();           
-                    //     }
-                    // }
+                   
         })
         .catch(collected => {
              var rando = list[Math.floor(Math.random() * list.length)];
@@ -1807,43 +1778,7 @@ function gamePhase(){
         });
 });            
             
-//                person.send(detectiveAction);
-//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-//                collector.once('collect', message => {
-//                    if (list.indexOf(message.content) != -1) {
-//                        detectiveVotes.push(message.content);
-//                        tally += 1;                 
-//                        person.send("You have selected to identify **" + bot.users.get(message.content).username + "**");
-//                        
-//                        console.log(person.username + " voted");
-//                                  console.log(">>>>>>>Quota: " + tally)
-//                          if(tally == quota){
-//                          voteTallyN();           
-//                      }
-//                    
-//                    } else {
-//                        var rando = list[Math.floor(Math.random() * list.length)];
-//                        detectiveVotes.push(rando);
-//                        tally += 1;
-//                        person.send("That input is invalid, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-//                        if(doctors.has(rando)){
-//                            person.send("This person is a **doctor**!");
-//                        } else if(mafia.has(rando)){
-//                            person.send("This person is a **mafioso**!");
-//                        } else if(detectives.has(rando)){
-//                            person.send("This person is a **detective**!");
-//                        } else {
-//                            person.send("This person is a **villager**");
-//                        }
-//                        console.log(person.username + " voted randomly");
-//                        console.log(">>>>>>>Quota: " + tally)
-//                          if(tally == quota){
-//                          voteTallyN();           
-//                      }
-//                    
-//                    }
-//                    
-//                    });
+
             }  else {
                 person.send(villagerAction);
                 console.log(">>>>>>>Quota: " + tally)
@@ -1937,7 +1872,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     attac -= 1;
                     
                     
-                    me.send(bot.users.get(players[duty]).username + " is a mafioso!");
+                    
                     players.splice(duty, 1);
                     
                 } else if(detec > 0){
@@ -1947,8 +1882,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     ppl -=1;
                     
                     
-                    me.send(bot.users.get(players[duty]).username + " is a detective!");
-                    me.send(bot.users.get(players[duty]).username + " is also a villager!");
+                    
                     players.splice(duty, 1);
                     
                 } else if(protec > 0){
@@ -1958,8 +1892,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     ppl -=1;
                     
                     
-                    me.send(bot.users.get(players[duty]).username + " is a doctor!");
-                    me.send(bot.users.get(players[duty]).username + " is also a villager!");
+                    
                     players.splice(duty, 1);
                     
                 }   else {
@@ -1967,7 +1900,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
                     
                     ppl -=1
                     
-                    me.send(bot.users.get(players[duty]).username + " is a villager!");
+                    
                     players.splice(duty, 1);
 
                 }   
