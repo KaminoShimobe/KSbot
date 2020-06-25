@@ -1845,7 +1845,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
            var protec;
            var ppl;
 
-           if(amount > 6){  
+           if(amount >= 6){  
 
               // ratio : 1/3 
              var attac = Math.floor(amount / 3)
