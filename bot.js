@@ -1754,26 +1754,26 @@ function gamePhase(){
                         }
                     
                     } 
-                    // else {
-                    //   var rando = list[Math.floor(Math.random() * list.length)];
-                    //     detectiveVotes.push(rando);
-                    //     tally += 1;
-                    //     person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                    //     console.log(person.username + " ran out of time");
-                    //     if(doctors.has(rando)){
-                    //         person.send("This person is a **doctor**!");
-                    //     } else if(mafia.has(rando)){
-                    //         person.send("This person is a **mafioso**!");
-                    //     } else if(detectives.has(rando)){
-                    //         person.send("This person is a **detective**!");
-                    //     } else {
-                    //         person.send("This person is a **villager**");
-                    //     }
-                    //                 console.log(">>>>>>>Quota: " + tally)
-                    //         if(tally == quota){
-                    //         voteTallyN();           
-                    //     }
-                    // }
+                    else {
+                      var rando = list[Math.floor(Math.random() * list.length)];
+                        detectiveVotes.push(rando);
+                        tally += 1;
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+                        console.log(person.username + " ran out of time");
+                        if(doctors.has(rando)){
+                            person.send("This person is a **doctor**!");
+                        } else if(mafia.has(rando)){
+                            person.send("This person is a **mafioso**!");
+                        } else if(detectives.has(rando)){
+                            person.send("This person is a **detective**!");
+                        } else {
+                            person.send("This person is a **villager**");
+                        }
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
+                    }
                    
         })
         .catch(collected => {
