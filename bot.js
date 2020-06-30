@@ -6843,11 +6843,14 @@ function localCommands(){
 
             let co = rows[0].commands;
             let ou = rows[0].comOutput;
-            var comList = co.replace(/,/g, "\n");
+            var comList;
             var coutput = co.split(",");
             var output = ou.split(",");
             console.log(co);
             console.log(ou);
+            for(i = 0; i < coutput.length; i++);{
+              comList += (i+1) + ". " + coutput[i] + "\n";
+            } 
             console.log("Command List: >>>>" + comList);
             message.channel.send(`List of commands: \n **` + comList + `**`);
             // if(message.author.id == '242118931769196544'){
