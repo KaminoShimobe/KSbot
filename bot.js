@@ -1672,7 +1672,7 @@ function gamePhase(){
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
           
-            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
               
                         mafiaVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
@@ -1706,7 +1706,7 @@ function gamePhase(){
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
            
-            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
               
                         doctorVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
@@ -1738,7 +1738,7 @@ function gamePhase(){
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
           
-            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
              
                         detectiveVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
