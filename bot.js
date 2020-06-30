@@ -1674,9 +1674,9 @@ function gamePhase(){
           console.log(person.username + "'s night collected value: " + String(collected.first()));
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length + 1)) {
               
-                        mafiaVotes.push(list[parseInt(collected.first())]);
+                        mafiaVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())]).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())  - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
