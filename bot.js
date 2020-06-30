@@ -6846,9 +6846,9 @@ function localCommands(){
             var comList;
             var coutput = co.split(",");
             var output = ou.split(",");
-            console.log(coutput[2]);
-            for(var i = 0; i < coutput.length; i++){
-              comList += (i+1) + ". " + coutput[i] + "\n";
+            console.log(coutput[0]);
+            for(var i = 1; i < coutput.length; i++){
+              comList += (i) + ". " + coutput[i] + "\n";
             } 
             console.log("Command List: >>>>" + comList);
             message.channel.send(`List of commands: \n **` + comList + `**`);
