@@ -1485,11 +1485,11 @@ function gamePhase(){
                 person.send(voteTime).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000000, errors: ['time'] })
         .then(collected => {
-          console.log(person.username + "'s day collected value: ' " + String(collected.first()));
-            if (newList.indexOf(String(collected.first())) != -1) {
-                        dayVotes.push(String(collected.first()));
+         
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
+                        dayVotes.push(parseInt(collected.first()));
                         dayTally += 1;                  
-                        person.send("You have selected to condemn **" + bot.users.get(String(collected.first())).username + "**");
+                        person.send("You have selected to condemn **" + bot.users.get(parseInt(collected.first())).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
@@ -6813,11 +6813,13 @@ function viewCommands(){
 
             let co = rows[0].commands;
             let ou = rows[0].comOutput;
-            var comList = co.replace(",", "\n");
+            var comList;
             var coutput = co.split(",");
             var output = ou.split(",");
-            console.log(co);
-            console.log(ou);
+            for(var i = 1; i < coutput.length; i++){
+              comList += (i) + ". " + coutput[i] + "\n";
+            } 
+            comList = comList.replace(undefined, "");
             message.channel.send(`List of global commands: \n **` + comList + `**`);
             // if(message.author.id == '242118931769196544'){
             // message.channel.send(`Amount of global commands: \n **` + coutput.length + `**`);
@@ -6846,12 +6848,10 @@ function localCommands(){
             var comList;
             var coutput = co.split(",");
             var output = ou.split(",");
-            console.log("Index 0: " + coutput[0]);
             for(var i = 1; i < coutput.length; i++){
               comList += (i) + ". " + coutput[i] + "\n";
             } 
             comList = comList.replace(undefined, "");
-            console.log("Command List: >>>>" + comList);
             message.channel.send(`List of commands: \n **` + comList + `**`);
             // if(message.author.id == '242118931769196544'){
             // message.channel.send(`Amount of commands: \n **` + coutput.length + `**`);
@@ -6877,28 +6877,34 @@ function deleteCommands(){
 
             let co = rows[0].commands;
             let ou = rows[0].comOutput;
-            var comList = co.replace(",", "\n");
+            var comList;
+            var coutput = co.split(",");
             var output = ou.split(",");
+            for(var i = 1; i < coutput.length; i++){
+              comList += (i) + ". " + coutput[i] + "\n";
+            } 
+            comList = comList.replace(undefined, "");
+
             message.channel.send(`List of Global Commands: \n **` + comList + `**`);
-            message.channel.send("What command do you want to delete? \n !cancel to cancel");
+            message.channel.send("What command do you want to delete? Select via numerical index. \n !cancel to cancel");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith("!") == true){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (coutput.length + 1) ){
                             
-                            var repl = "," + message.content
+                            var repl = "," + coutput[parseInt(message.content)];
                             var commandP = co.replace(repl, "");
-                            var img = "," + output[comList.indexOf(message.content)];
+                            var img = "," + output[parseInt(message.content)];
                             var imgP = ou.replace(img, "");
                             sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = 'GLOBAL'`;
                             con.query(sql2);
                             message.channel.send("Command deleted successfully.")
                             
                         }    else {
-                            message.reply("Invalid command. Must start with **!**")
+                            message.reply("Invalid input, must be a number between 1 and" + coutput.length )
                             return;
                         }   
                 });
@@ -6922,8 +6928,13 @@ function deleteLocalCommands(){
 
             let co = rows[0].commands;
             let ou = rows[0].comOutput;
-            var comList = co.replace(",", "\n");
+            var comList;
+            var coutput = co.split(",");
             var output = ou.split(",");
+            for(var i = 1; i < coutput.length; i++){
+              comList += (i) + ". " + coutput[i] + "\n";
+            } 
+            comList = comList.replace(undefined, "");
             message.channel.send(`List of commands: \n **` + comList + `**`);
             message.channel.send("What command do you want to delete? \n !cancel to cancel");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -6932,18 +6943,18 @@ function deleteLocalCommands(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(comList.indexOf(message.content) != -1 && co != undefined && co != "" && message.content.startsWith(prefix) == true ){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (coutput.length + 1) ){
                             
-                            var repl = "," + message.content
+                            var repl = "," + coutput[parseInt(message.content)];
                             var commandP = co.replace(repl, "");
-                            var img = "," + output[comList.indexOf(message.content)];
+                            var img = "," + output[parseInt(message.content)];
                             var imgP = ou.replace(img, "");
                             sql2 = `UPDATE global SET commands = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
                             con.query(sql2);
                             message.channel.send("Command deleted successfully.")
                             
                         }    else {
-                            message.reply("Invalid command. Must start with **" + prefix + "**")
+                            message.reply("Invalid input, must be a number between 1 and" + coutput.length )
                             return;
                         }   
                 });
