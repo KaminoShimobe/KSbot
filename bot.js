@@ -6893,7 +6893,7 @@ function deleteCommands(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (coutput.length + 1) ){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < coutput.length ){
                             
                             var repl = "," + coutput[parseInt(message.content)];
                             var commandP = co.replace(repl, "");
@@ -6904,7 +6904,7 @@ function deleteCommands(){
                             message.channel.send("Command deleted successfully.")
                             
                         }    else {
-                            message.reply("Invalid input, must be a number between 1 and" + coutput.length )
+                            message.reply("Invalid input, must be a number between 1 and " + (coutput.length - 1));
                             return;
                         }   
                 });
@@ -6943,7 +6943,7 @@ function deleteLocalCommands(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (coutput.length + 1) ){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < coutput.length ){
                             
                             var repl = "," + coutput[parseInt(message.content)];
                             var commandP = co.replace(repl, "");
@@ -6954,7 +6954,7 @@ function deleteLocalCommands(){
                             message.channel.send("Command deleted successfully.")
                             
                         }    else {
-                            message.reply("Invalid input, must be a number between 1 and" + coutput.length )
+                            message.reply("Invalid input, must be a number between 1 and" + (coutput.length - 1))
                             return;
                         }   
                 });
