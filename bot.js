@@ -6848,6 +6848,7 @@ function localCommands(){
             var output = ou.split(",");
             console.log(co);
             console.log(ou);
+            console.log("Command List: >>>>" + comList);
             message.channel.send(`List of commands: \n **` + comList + `**`);
             // if(message.author.id == '242118931769196544'){
             // message.channel.send(`Amount of commands: \n **` + coutput.length + `**`);
