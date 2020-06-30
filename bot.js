@@ -1683,6 +1683,16 @@ function gamePhase(){
                             voteTallyN();           
                         }
                     
+                    } else {
+                      var rando = list[Math.floor(Math.random() * list.length)];
+                        mafiaVotes.push(rando);
+                        tally += 1;
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+                        console.log(person.username + " ran out of time");
+                                    console.log(">>>>>>>Quota: " + tally)
+                            if(tally == quota){
+                            voteTallyN();           
+                        }
                     } 
         })
         .catch(collected => {
