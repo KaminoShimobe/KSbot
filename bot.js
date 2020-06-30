@@ -1631,7 +1631,7 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: " + mafiaList + " Vote which target to kill from this list: " + pList)
+            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: **" + mafiaList + "** Vote which target to kill from this list: \n " + pList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
@@ -1640,7 +1640,7 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Doctor!__ \n Vote which target to kill from this list: " + pList)
+            .setDescription("__You are a Doctor!__ \n Vote which target to kill from this list: \n " + pList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
@@ -1649,7 +1649,7 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Detective!__ \n Vote which target to identify from this list: " + pList)
+            .setDescription("__You are a Detective!__ \n Vote which target to identify from this list: \n" + pList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
@@ -1671,8 +1671,8 @@ function gamePhase(){
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-          console.log(person.username + "'s night collected value: " + String(collected.first()));
-            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length + 1)) {
+          
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
               
                         mafiaVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
@@ -1705,12 +1705,12 @@ function gamePhase(){
                 person.send(doctorAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-            console.log(person.username + "'s night collected value: " + String(collected.first()));
-            if (list.indexOf(String(collected.first())) != -1) {
+           
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
               
-                        doctorVotes.push(String(collected.first()));
+                        doctorVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
-                        person.send("You have selected to protect **" + bot.users.get(String(collected.first())).username + "**");
+                        person.send("You have selected to protect **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1737,12 +1737,12 @@ function gamePhase(){
                 person.send(detectiveAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-          console.log(person.username + "'s night collected value: " + String(collected.first()));
-            if (list.indexOf(String(collected.first())) != -1) {
+          
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length)) {
              
-                        detectiveVotes.push(String(collected.first()));
+                        detectiveVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
-                        person.send("You have selected to identify **" + bot.users.get(String(collected.first())).username + "**");
+                        person.send("You have selected to identify **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                         if(doctors.has(String(collected.first()))){
                             person.send("This person is a **doctor**!");
