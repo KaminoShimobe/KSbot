@@ -6843,7 +6843,7 @@ function localCommands(){
 
             let co = rows[0].commands;
             let ou = rows[0].comOutput;
-            var comList = co.replace(",", "\n");
+            var comList = co.replace(/,/g, "\n");
             var coutput = co.split(",");
             var output = ou.split(",");
             console.log(co);
