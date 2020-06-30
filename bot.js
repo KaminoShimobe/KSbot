@@ -314,7 +314,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/fbpm3yh2')
+    Bot.say('Check out the bracket here: https://challonge.com/ogvnug7w')
   }
 
   if(chatter.message === '!user') {
@@ -1338,6 +1338,7 @@ function gamePhase(){
     var healers = Array.from(doctors);
     var lookers = Array.from(detectives);
     var quota = werewolves.length + healers.length + lookers.length;
+  
     var mafiaList = "";
     for ( var i = 0; i < werewolves.length; i++ ) {
             mafiaList += bot.users.get(werewolves[i]).username + ", \n";
@@ -1346,9 +1347,12 @@ function gamePhase(){
     var tally = 0;
     var mafiaVotes = [];
     var doctorVotes = [];
-    var detectiveVotes = [];
     var dayVotes = [];
     var list = Array.from(mafiaPlayers);
+    var pList = ""
+     for ( var i = 0; i < list.length; i++ ) {
+            pList += (i+1) + ". - " + bot.users.get(list[i]).username + "\n";
+    }
     console.log(list);
     var votes = list.length;
     var newList;
@@ -1456,6 +1460,7 @@ function gamePhase(){
             }
                         mafiaVotes = [];
                         doctorVotes = [];
+                        dayVotes = [];
                         gamePhase();            
             }
             
@@ -1607,7 +1612,7 @@ function gamePhase(){
             newList = Array.from(mafiaPlayers);
             dayTally = 0;
             for ( var i = 0; i < newList.length; i++ ) {
-            peepList += (i+1) + ". " + bot.users.get(newList[i]).username + ", \n";
+            peepList += (i+1) + ". - " + bot.users.get(newList[i]).username + ", \n";
         }
         console.log("New list: " + newList);
         if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
@@ -1626,28 +1631,28 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: " + mafiaList)
+            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: " + mafiaList + " Vote which target to kill from this list: " + pList)
             .setColor("#8a673d")
             .setTimestamp()
-            .setFooter("Respond with the id of your target!");
+            .setFooter("Respond with the number corresponding with your target!");
         
         let doctorAction = new Discord.RichEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Doctor!__ \n Selecting a target will ensure they live this night!")
+            .setDescription("__You are a Doctor!__ \n Vote which target to kill from this list: " + pList)
             .setColor("#8a673d")
             .setTimestamp()
-            .setFooter("Respond with the id of your target!");
+            .setFooter("Respond with the number corresponding with your target!");
             
         let detectiveAction = new Discord.RichEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Detective!__ \n Selecting a target will reveal their true identity!")
+            .setDescription("__You are a Detective!__ \n Vote which target to identify from this list: " + pList)
             .setColor("#8a673d")
             .setTimestamp()
-            .setFooter("Respond with the id of your target!");
+            .setFooter("Respond with the number corresponding with your target!");
             
         let villagerAction = new Discord.RichEmbed()
 
@@ -1660,18 +1665,18 @@ function gamePhase(){
                 
         
         var person = bot.users.get(list[index]);
-        console.log(list[0] + list[1]);        
+              
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
           console.log(person.username + "'s night collected value: " + String(collected.first()));
-            if (list.indexOf(String(collected.first())) != -1) {
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length + 1)) {
               
-                        mafiaVotes.push(String(collected.first()));
+                        mafiaVotes.push(list[parseInt(collected.first())]);
                         tally += 1;                 
-                        person.send("You have selected to kill **" + bot.users.get(String(collected.first())).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1858,7 +1863,16 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
 
             .catch(console.error);
-            whereIam.send("The game is starting! All participants thanks for helping!");
+
+            let firstNight = new Discord.RichEmbed()
+
+            
+            .setTitle("🌙 NIGHT TIME 🌙")
+            .setDescription("Good night! Sleep well...")
+            .setColor("#8a673d")
+            .setTimestamp()
+            .setFooter("Check your dms!");
+            whereIam.send(firstNight);
            
            var attac;
            var detec;
@@ -11310,7 +11324,7 @@ function standHelp(){
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
-            .setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}Ospin [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 10%. Once you lose, the target's soul is released. Victim cannot lose more than half per OSPIN.`)
+            .setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}OSPIN [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 10%. Once you lose, the target's soul is released. Victim cannot lose more than half per OSPIN.`)
             .setColor("#1d498e"); 
     
     let stand10 = new Discord.RichEmbed()
