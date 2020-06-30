@@ -6846,8 +6846,7 @@ function localCommands(){
             var comList;
             var coutput = co.split(",");
             var output = ou.split(",");
-            console.log(co);
-            console.log(ou);
+            console.log(coutput[0]);
             for(i = 0; i < coutput.length; i++);{
               comList += (i+1) + ". " + coutput[i] + "\n";
             } 
