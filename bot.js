@@ -6850,6 +6850,7 @@ function localCommands(){
             for(var i = 1; i < coutput.length; i++){
               comList += (i) + ". " + coutput[i] + "\n";
             } 
+            comList = comList.replace(undefined, "");
             console.log("Command List: >>>>" + comList);
             message.channel.send(`List of commands: \n **` + comList + `**`);
             // if(message.author.id == '242118931769196544'){
