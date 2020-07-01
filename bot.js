@@ -1486,7 +1486,7 @@ function gamePhase(){
         if(person != undefined){        
                 
                 person.send(voteTime).then(() => {
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 30000000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000000, errors: ['time'] })
         .then(collected => {
          
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
@@ -1512,7 +1512,17 @@ function gamePhase(){
                     }
         })
         .catch(collected => {
-
+              var rando = newList[Math.floor(Math.random() * newList.length)];
+             console.log(person.username + "'s daytime randomly collected value: ' " + rando);
+                        dayVotes.push(rando);
+                        dayTally += 1;
+                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
+                        console.log(person.username + " voted for the day porton.");
+                        if(dayTally == newList.length){
+                voteTallyD();           
+            }
+                    
              console.log(person.username + "'s input has been caught.")
              
         });
