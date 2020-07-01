@@ -1348,6 +1348,7 @@ function gamePhase(){
     var tally = 0;
     var mafiaVotes = [];
     var doctorVotes = [];
+    var detectiveVotes = [];
     var dayVotes = [];
     var list = Array.from(mafiaPlayers);
     var pList = ""
@@ -1461,6 +1462,7 @@ function gamePhase(){
             }
                         mafiaVotes = [];
                         doctorVotes = [];
+                        detectiveVotes = [];
                         dayVotes = [];
                         gamePhase();            
             }
