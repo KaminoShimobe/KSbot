@@ -3191,7 +3191,7 @@ var boop = makeid(30);
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
-            
+            roleList = roleList.replace(undefined, "");
         
         
 
@@ -3212,7 +3212,7 @@ var boop = makeid(30);
                          return;
                      } else {
                       if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
-                    var itemInsert = customItem + message.content + ",";
+                    var itemInsert = customItem + theRole + ",";
                     var priceInsert = customPrice + thePrice + ",";
 
                  sql = `UPDATE server SET shop = '${itemInsert}', price = '${priceInsert}' WHERE id = '${message.guild.id}'`;
@@ -6668,7 +6668,7 @@ function customItem(){
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
-            //roleList = roleList.replace(undefined, "");
+            roleList = roleList.replace(undefined, "");
         
         
 
@@ -6749,7 +6749,7 @@ function removeItem(){
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
-            //roleList = roleList.replace(undefined, "");
+            roleList = roleList.replace(undefined, "");
         
         
 
