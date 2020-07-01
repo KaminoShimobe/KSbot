@@ -1868,7 +1868,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
          var players = Array.from(mafiaPlayers);
          var amount = players.length;
          //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
-         if(players.length < 1){
+         if(players.length < 5){
             sentEmbed.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -3180,28 +3180,54 @@ var boop = makeid(30);
                 } 
             }); 
                 } 
-      //        else if(messageArray[1] == "shop"){
-            //      let shop;
-            //      if (rows[0].shop == ""){
-            //          shop = "";
-            //      } else {
-            //          shop = rows[0].shop;
-            //      }   
-            //      message.channel.send("The current shop item is: \n" + shop + " \n Update your shop item role! Make sure it shares the exact same spelling as the role you want the guild member to purchase. \n !cancel to cancel.");
-            //      const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-      //            collector.once('collect', message => {
-      //                if (message.content == `${prefix}cancel`) {
-      //                     message.channel.send("Shop Item cancelled.");
-      //                    return;
-      //                } else {
-                    
-            //      sql = `UPDATE server SET shop = '${message.content}' WHERE id = '${message.guild.id}'`;
-            //      con.query(sql);
-            //      message.channel.send("Shop item Updated!");
-            //      return;
-            //  } 
-            // }); 
-      //        } else if(messageArray[1] == "price"){
+             else if(messageArray[1] == "roleShop"){
+                 
+
+        let customItem = rows[0].shop;
+        let customPrice = rows[0].prices;
+        var roleList;
+        var roleOutput = customItem.split(",");
+        var priceOutput = customPrice.split(",");
+         for(var i = 1; i < roleOutput.length; i++){
+              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+            } 
+            
+        
+        
+
+       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)\n __Roles in shop__: \n " + roleList);
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        var theRole = message.content;
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Role Shop Item Cancelled.");
+                            return;
+                        }  else if(message.guild.roles.get(theRole) != undefined){
+                 message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
+                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                 collector.once('collect', message => {
+                  var thePrice = message.content;
+                     if (message.content == `${prefix}cancel`) {
+                          message.channel.send("Role Shop Item cancelled.");
+                         return;
+                     } else {
+                      if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
+                    var itemInsert = customItem + message.content + ",";
+                    var priceInsert = customPrice + thePrice + ",";
+
+                 sql = `UPDATE server SET shop = '${itemInsert}', price = '${priceInsert}' WHERE id = '${message.guild.id}'`;
+                 con.query(sql);
+                 message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for " + thePrice);
+                 return;
+               } else {
+                  message.channel.send("That's not a valid price for the role!");
+               }
+             } 
+            }); 
+                            } 
+                          });
+                  }
+             // else if(messageArray[1] == "price"){
             //  let shop;
             //      if (rows[0].shop == ""){
             //          shop = "";
@@ -6636,21 +6662,24 @@ function customItem(){
 
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
-        var roleList = customItem.replace(",", "\n");
+        var roleList;
         var roleOutput = customItem.split(",");
-        var priceList = customPrice.replace(",", "\n");
         var priceOutput = customPrice.split(",");
-        //var cost = parseInt(customPrice);
-        //var item = message.guild.roles.find("name", customItem);
+         for(var i = 1; i < roleOutput.length; i++){
+              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+            } 
+            //roleList = roleList.replace(undefined, "");
+        
+        
 
-       message.channel.send("Which role would you like to purchase(!cancel to cancel): ");
+       message.channel.send("Which role would you like to purchase(!cancel to cancel): " + roleList);
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(message.content != undefined && message.content.indexOf(message.content) != -1 && roleList.includes(message.content) == true){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < roleOutput.length ){
                     
 
 
@@ -6662,6 +6691,9 @@ function customItem(){
             console.log(rows);
             return;
         }
+
+        var cost = parseInt(priceOutput[parseInt(message.content)]);
+        var item = message.guild.roles.get(roleOutput[parseInt(message.content)]);
 
         let money = rows[0].money;
         
@@ -6682,18 +6714,89 @@ function customItem(){
             
         
         
-        message.reply(customItem + " Purchased!");
+        message.reply(item.name + " Role Purchased!");
 
         return;
     }
      });
 
+} else {
+  message.channel.send("Invalid input.");
+  return;
 }
      });
 
 
                 
 });
+
+}
+
+function removeItem(){
+    con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+        if(rows.length < 1) {
+            
+            return;
+        } 
+
+        let customItem = rows[0].shop;
+        let customPrice = rows[0].prices;
+        var roleList;
+        var roleOutput = customItem.split(",");
+        var priceOutput = customPrice.split(",");
+         for(var i = 1; i < roleOutput.length; i++){
+              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
+            } 
+            //roleList = roleList.replace(undefined, "");
+        
+        
+
+       message.channel.send("Which role would you like to remove(!cancel to cancel): " + roleList);
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Cancelled.");
+                            return;
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < roleOutput.length ){
+                    
+
+
+    
+
+        
+        var item = message.guild.roles.get(roleOutput[parseInt(message.content)]);
+
+        
+                    
+        if(message.member.roles.has(roleOutput[parseInt(message.content)])){
+           member.removeRole(item).catch(console.error);
+            
+        
+        
+        message.reply(item.name + " Role Removed!");
+
+        return;
+        } else {
+          message.reply("You do not have such role!");
+          return;
+        }
+        
+       
+    }
+    
+
+ else {
+  message.channel.send("Invalid input.");
+  return;
+}
+     });
+
+
+  });              
+
 
 }
 
@@ -6954,7 +7057,7 @@ function deleteLocalCommands(){
                             message.channel.send("Command deleted successfully.")
                             
                         }    else {
-                            message.reply("Invalid input, must be a number between 1 and" + (coutput.length - 1))
+                            message.reply("Invalid input, must be a number between 1 and " + (coutput.length - 1))
                             return;
                         }   
                 });
@@ -11447,7 +11550,7 @@ function utilityHelp(){
 
             
             .setTitle("KS-Bot Utility commands ⚙️")
-            .setDescription(`**${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
+            .setDescription(`**${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}remind in [number] to [phrase]**:\n Sets a time based reminder using minutes. \n **${prefix}remind when [user id] talks**: \n Sets a reminder to alert the user of when someone speaks in chat. \n **${prefix}remind at [channel id]**: \n Sends a reminder if someone speaks in the channel. \n **${prefix}!cancelReminder**: \n Cancels a reminder.\n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11473,20 +11576,13 @@ function moneyHelp(){
 
             
             .setTitle("KS-Bot Monetary commands 💵")
-            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list.`)
-            .setColor("#1d498e"); 
-
-        message.author.sendEmbed(help);
-        message.reply(" sent you a dm of the monetary help list!");
-}
-
-function funHelp(){
+            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}roleShop**:\n Pulls up the role shop. \n **${prefix}removeRole**: \n Removes a role that's in the shop`);
 
     let help = new Discord.RichEmbed()
 
             
             .setTitle("KS-Bot Fun commands 🎉")
-            .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! `)
+            .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}!mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11499,7 +11595,7 @@ function socialHelp(){
 
             
             .setTitle("KS-Bot Social commands 👥")
-            .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **{prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
+            .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **${prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11526,7 +11622,7 @@ function admin(){
 
             
             .setTitle("KS-Bot Admin commands ⚠️")
-            .setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
+            .setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}toggle roleShop**\n Edits what's avaialable in the role shop. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -12220,7 +12316,19 @@ if(command === `${prefix}shop` || command === `KS!shop`){
     
 if(command === `${prefix}giftShop`){
             giftShop();
-    }   
+    }  
+
+if(command === `${prefix}roleShop`){
+            customItem();
+    } 
+
+if(command === `${prefix}removeRole`){
+            removeItem();
+    } 
+
+if(command === `${prefix}mafia`){
+            mafia();
+    }               
     
 if(command === `${prefix}admin` || command === `KS!admin`){
         if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR") || message.author.id == '242118931769196544'){
