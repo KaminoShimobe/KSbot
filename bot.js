@@ -3191,7 +3191,8 @@ var boop = makeid(30);
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
-            roleList = roleList.replace(undefined, "");
+            console.log(roleList)
+            // roleList = roleList.replace(undefined, "");
         
         
 
@@ -6668,7 +6669,8 @@ function customItem(){
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
-            roleList = roleList.replace(undefined, "");
+            console.log(roleList)
+            //roleList = roleList.replace(undefined, "");
         
         
 
@@ -6749,7 +6751,8 @@ function removeItem(){
          for(var i = 1; i < roleOutput.length; i++){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
-            roleList = roleList.replace(undefined, "");
+            console.log(roleList)
+            //roleList = roleList.replace(undefined, "");
         
         
 
