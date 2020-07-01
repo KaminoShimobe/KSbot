@@ -96,7 +96,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.5", bot.user.avatarURL);
+            .setFooter("Version 1.8.8", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1476,10 +1476,10 @@ function gamePhase(){
 
             
             .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: " + peepList)
+            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: \n " + peepList)
             .setColor("#8a673d")
             .setTimestamp()
-            .setFooter("Respond with the id of your target!");
+            .setFooter("Respond with the number corresponding with your target!");
             
             var person = bot.users.get(newList[index]);
                 
@@ -1490,7 +1490,7 @@ function gamePhase(){
         .then(collected => {
          
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
-                        dayVotes.push(parseInt(collected.first()));
+                        dayVotes.push(newList[parseInt(collected.first()) - 1]);
                         dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(parseInt(collected.first())).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
@@ -1767,11 +1767,11 @@ function gamePhase(){
                         tally += 1;                 
                         person.send("You have selected to identify **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
-                        if(doctors.has(String(collected.first()))){
+                        if(doctors.has(list[parseInt(collected.first()) - 1])){
                             person.send("This person is a **doctor**!");
-                        } else if(mafia.has(String(collected.first()))){
+                        } else if(mafia.has(list[parseInt(collected.first()) - 1])){
                             person.send("This person is a **mafioso**!");
-                        } else if(detectives.has(String(collected.first()))){
+                        } else if(detectives.has(list[parseInt(collected.first()) - 1])){
                             person.send("This person is a **detective**!");
                         } else {
                             person.send("This person is a **villager**");
