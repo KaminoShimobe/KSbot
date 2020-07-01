@@ -11578,6 +11578,9 @@ function moneyHelp(){
             .setTitle("KS-Bot Monetary commands 💵")
             .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}roleShop**:\n Pulls up the role shop. \n **${prefix}removeRole**: \n Removes a role that's in the shop`);
 
+}
+
+function funHelp(){
     let help = new Discord.RichEmbed()
 
             
