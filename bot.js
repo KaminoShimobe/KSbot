@@ -3217,7 +3217,7 @@ var boop = makeid(30);
                     var itemInsert = customItem + theRole + ",";
                     var priceInsert = customPrice + thePrice + ",";
 
-                 sql = `UPDATE server SET shop = '${itemInsert}', price = '${priceInsert}' WHERE id = '${message.guild.id}'`;
+                 sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
                  con.query(sql);
                  message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for " + thePrice);
                  return;
@@ -6671,7 +6671,7 @@ function customItem(){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
-            roleList = roleList.replace(undefined, "");
+            //roleList = roleList.replace(undefined, "");
         
         
 
