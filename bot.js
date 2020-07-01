@@ -547,6 +547,7 @@ bot.on("message", async message => {
     var sql32 = "CREATE TABLE twitchBeta (id VARCHAR(30), username VARCHAR(50), money INT, bid VARCHAR(50), bet INT, streak INT)";
     var sql33 = "ALTER TABLE server ALTER COLUMN shop TEXT"; 
     var sql34 = "ALTER TABLE server ALTER COLUMN prices TEXT";
+    var sql35 = `UPDATE server SET shop =  '', prices = ''`;
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
@@ -577,15 +578,15 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql33, function (err, result) {
+con.query(sql35, function (err, result) {
      if (err) throw err;
-     message.author.send("Updated table shop in server to TEXT!");
+     message.author.send("Set all shop and prices to blank!");
      });
 
-con.query(sql34, function (err, result) {
-     if (err) throw err;
-     message.author.send("Updated table prices in server to TEXT!");
-     });
+// con.query(sql34, function (err, result) {
+//      if (err) throw err;
+//      message.author.send("Updated table prices in server to TEXT!");
+//      });
     
 
 //      con.query(sql22, function (err, result) {
@@ -3196,7 +3197,7 @@ var boop = makeid(30);
         
         
 
-       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)\n __Roles in shop__: \n " + roleList);
+       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         var theRole = message.content;
@@ -6670,7 +6671,7 @@ function customItem(){
               roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
-            //roleList = roleList.replace(undefined, "");
+            roleList = roleList.replace(undefined, "");
         
         
 
@@ -11579,8 +11580,12 @@ function moneyHelp(){
 
             
             .setTitle("KS-Bot Monetary commands 💵")
-            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}roleShop**:\n Pulls up the role shop. \n **${prefix}removeRole**: \n Removes a role that's in the shop`);
+            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}roleShop**:\n Pulls up the role shop. \n **${prefix}removeRole**: \n Removes a role that's in the shop`)
+            .setColor("#1d498e"); 
 
+        message.author.sendEmbed(help);
+        message.reply(" sent you a dm of the user help list!");
+ 
 }
 
 function funHelp(){
@@ -11588,7 +11593,7 @@ function funHelp(){
 
             
             .setTitle("KS-Bot Fun commands 🎉")
-            .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}!mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
+            .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
