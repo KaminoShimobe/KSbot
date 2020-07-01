@@ -3181,54 +3181,54 @@ var boop = makeid(30);
                 } 
             }); 
                 } 
-             else if(messageArray[1] == "roleShop"){
+       //       else if(messageArray[1] == "roleShop"){
                  
 
-        let customItem = rows[0].shop;
-        let customPrice = rows[0].prices;
-        var roleList;
-        var roleOutput = customItem.split(",");
-        var priceOutput = customPrice.split(",");
-         for(var i = 1; i < roleOutput.length; i++){
-              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
-            } 
-            console.log(roleList)
-            // roleList = roleList.replace(undefined, "");
+       //  let customItem = rows[0].shop;
+       //  let customPrice = rows[0].prices;
+       //  var roleList;
+       //  var roleOutput = customItem.split(",");
+       //  var priceOutput = customPrice.split(",");
+       //   for(var i = 1; i < roleOutput.length; i++){
+       //        roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+       //      } 
+       //      console.log(roleList)
+       //      // roleList = roleList.replace(undefined, "");
         
         
 
-       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
-                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    collector.once('collect', message => {
-                        var theRole = message.content;
-                        if (message.content == `!cancel`) {
-                         message.channel.send("Role Shop Item Cancelled.");
-                            return;
-                        }  else if(message.guild.roles.get(theRole) != undefined){
-                 message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
-                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                 collector.once('collect', message => {
-                  var thePrice = message.content;
-                     if (message.content == `${prefix}cancel`) {
-                          message.channel.send("Role Shop Item cancelled.");
-                         return;
-                     } else {
-                      if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
-                    var itemInsert = customItem + theRole + ",";
-                    var priceInsert = customPrice + thePrice + ",";
+       // message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
+       //          const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+       //              collector.once('collect', message => {
+       //                  var theRole = message.content;
+       //                  if (message.content == `!cancel`) {
+       //                   message.channel.send("Role Shop Item Cancelled.");
+       //                      return;
+       //                  }  else if(message.guild.roles.get(theRole) != undefined){
+       //           message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
+       //           const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+       //           collector.once('collect', message => {
+       //            var thePrice = message.content;
+       //               if (message.content == `${prefix}cancel`) {
+       //                    message.channel.send("Role Shop Item cancelled.");
+       //                   return;
+       //               } else {
+       //                if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
+       //              var itemInsert = customItem + theRole + ",";
+       //              var priceInsert = customPrice + thePrice + ",";
 
-                 sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
-                 con.query(sql);
-                 message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for " + thePrice);
-                 return;
-               } else {
-                  message.channel.send("That's not a valid price for the role!");
-               }
-             } 
-            }); 
-                            } 
-                          });
-                  }
+       //           sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
+       //           con.query(sql);
+       //           message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for " + thePrice);
+       //           return;
+       //         } else {
+       //            message.channel.send("That's not a valid price for the role!");
+       //         }
+       //       } 
+       //      }); 
+       //                      } 
+       //                    });
+       //            }
              // else if(messageArray[1] == "price"){
             //  let shop;
             //      if (rows[0].shop == ""){
@@ -11580,7 +11580,7 @@ function moneyHelp(){
 
             
             .setTitle("KS-Bot Monetary commands 💵")
-            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}roleShop**:\n Pulls up the role shop. \n **${prefix}removeRole**: \n Removes a role that's in the shop`)
+            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -12329,13 +12329,13 @@ if(command === `${prefix}giftShop`){
             giftShop();
     }  
 
-if(command === `${prefix}roleShop`){
-            customItem();
-    } 
+// if(command === `${prefix}roleShop`){
+//             customItem();
+//     } 
 
-if(command === `${prefix}removeRole`){
-            removeItem();
-    } 
+// if(command === `${prefix}removeRole`){
+//             removeItem();
+//     } 
 
 if(command === `${prefix}mafia`){
             mafia();
