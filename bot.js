@@ -1460,10 +1460,10 @@ function gamePhase(){
             if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             }
-                        mafiaVotes = [];
-                        doctorVotes = [];
-                        detectiveVotes = [];
-                        dayVotes = [];
+                        // mafiaVotes = [];
+                        // doctorVotes = [];
+                        // detectiveVotes = [];
+                        // dayVotes = [];
                         gamePhase();            
             }
             
