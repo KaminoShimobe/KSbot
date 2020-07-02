@@ -1489,7 +1489,7 @@ function gamePhase(){
 
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000000, errors: ['time'] })
         .then(collected => {
-          
+          console.log(parseInt(collected.first()));
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
                         dayVotes.push(newList[parseInt(collected.first()) - 1]);
                         dayTally += 1;                  
@@ -1687,9 +1687,9 @@ function gamePhase(){
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
              
         .then(collected => {
-          
+          console.log(parseInt(collected.first()));
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
-              
+                //console.log(parseInt(collected.first()));
                         mafiaVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;              
                         person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())  - 1]).username + "**");
@@ -1732,9 +1732,9 @@ function gamePhase(){
                   tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
-            
+            console.log(parseInt(collected.first()));
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
-              
+                        //console.log(parseInt(collected.first()));
                         doctorVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
@@ -1775,7 +1775,7 @@ function gamePhase(){
                   tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
-           
+           console.log(parseInt(collected.first()));
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
              
                         detectiveVotes.push(list[parseInt(collected.first()) - 1]);
