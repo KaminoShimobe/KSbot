@@ -1446,7 +1446,7 @@ function gamePhase(){
             status = "detective";
             } 
 
-            if(convict != undefined){
+          
             
             mafiaPlayers.delete(convict);
 
@@ -1458,18 +1458,7 @@ function gamePhase(){
             .setColor("#8a673d")
             .setTimestamp();
 
-          } else {
-
-
-            let results = new Discord.RichEmbed()
-
-            
-            .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("**No one was condemned...**")
-            .setColor("#8a673d")
-            .setTimestamp();
-          }
-            
+          
 
             whereIam.send(results);
             console.log("Mafia: " + mafia.size + " Villagers: " + villagers.size);
