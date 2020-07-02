@@ -1351,11 +1351,15 @@ function gamePhase(){
     var detectiveVotes = [];
     var dayVotes = [];
     var list = Array.from(mafiaPlayers);
-    var pList = ""
+    var pList = "";
      for ( var i = 0; i < list.length; i++ ) {
             pList += (i+1) + ". - " + bot.users.get(list[i]).username + "\n";
     }
-    console.log(list);
+    var mList = "";
+    for ( var i = 0; i < people.length; i++ ) {
+            mList += (i+1) + ". - " + bot.users.get(people[i]).username + "\n";
+    }
+    console.log(mList);
     var votes = list.length;
     var newList;
     var dayTally;
@@ -1460,13 +1464,13 @@ function gamePhase(){
             if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             }
-                        mafiaVotes = [];
-                        doctorVotes = [];
-                        detectiveVotes = [];
-                        dayVotes = [];
-                        quota = werewolves.length + healers.length + lookers.length;
-                        tally = 0;
-                        dayTally = 0;
+                        // mafiaVotes = [];
+                        // doctorVotes = [];
+                        // detectiveVotes = [];
+                        // dayVotes = [];
+                        // quota = werewolves.length + healers.length + lookers.length;
+                        // tally = 0;
+                        // dayTally = 0;
                         gamePhase();            
             }
             
@@ -1648,7 +1652,7 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: **" + mafiaList + "** Vote which target to kill from this list: \n " + pList)
+            .setDescription("__You are a Mafioso!__ \n Here are a list of mafia members: **" + mafiaList + "** Vote which target to kill from this list: \n " + mList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
@@ -1691,11 +1695,11 @@ function gamePhase(){
              
         .then(collected => {
           console.log(parseInt(collected.first()));
-            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
+            if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (people.length) + 1) {
                 //console.log(parseInt(collected.first()));
-                        mafiaVotes.push(list[parseInt(collected.first()) - 1]);
+                        mafiaVotes.push(people[parseInt(collected.first()) - 1]);
                         tally += 1;              
-                        person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())  - 1]).username + "**");
+                        person.send("You have selected to kill **" + bot.users.get(people[parseInt(collected.first())  - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1703,7 +1707,7 @@ function gamePhase(){
                         }
                     
                     } else {
-                      var rando = list[Math.floor(Math.random() * list.length)];
+                      var rando = list[Math.floor(Math.random() * people.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
@@ -1732,7 +1736,7 @@ function gamePhase(){
             } else if(doctors.has(list[index])){
                 
                 person.send(doctorAction).then(() => {
-                  tally += 1;
+                  //tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
             console.log(parseInt(collected.first()));
@@ -1775,7 +1779,7 @@ function gamePhase(){
            
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction).then(() => {
-                  tally += 1;
+                  //tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
            console.log(parseInt(collected.first()));
@@ -2846,7 +2850,7 @@ function collect(){
              }   
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
-                message.reply(" found $" + cost + " in the chest!");
+                message.reply(" found $" + cost + " in the mystery melon!");
 
                 if(achievements.length > 1){
                     //Achievement 6
