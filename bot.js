@@ -1493,7 +1493,7 @@ function gamePhase(){
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
                         dayVotes.push(newList[parseInt(collected.first()) - 1]);
                         dayTally += 1;                  
-                        person.send("You have selected to condemn **" + bot.users.get(parseInt(collected.first())).username + "**");
+                        person.send("You have selected to condemn **" + bot.users.get(newList[parseInt(collected.first()) - 1]).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
