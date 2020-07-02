@@ -1377,7 +1377,7 @@ function gamePhase(){
                 detectives.clear();
                 whereIam.send("**THE VILLAGERS HAVE SUCCESSFULLY WON!**");      
                 return;
-            } else if(villagers.size == 0 || mafia.size > villager.size){
+            } else if(villagers.size == 0 || mafia.size > villagers.size){
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -1444,7 +1444,9 @@ function gamePhase(){
             detectives.delete(convict);
             villagers.delete(convict);
             status = "detective";
-            }
+            } 
+
+            if(convict != undefined){
             
             mafiaPlayers.delete(convict);
 
@@ -1456,7 +1458,17 @@ function gamePhase(){
             .setColor("#8a673d")
             .setTimestamp();
 
+          } else {
 
+
+            let results = new Discord.RichEmbed()
+
+            
+            .setTitle("☀️ DAY TIME ☀️")
+            .setDescription("**No one was condemned...**")
+            .setColor("#8a673d")
+            .setTimestamp();
+          }
             
 
             whereIam.send(results);
@@ -1483,7 +1495,7 @@ function gamePhase(){
 
             
             .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: \n " + peepList)
+            .setDescription("__Vote for the culprit!__ \n Discuss with the other villagers in " + whereIam.name + "\n Here are a list of remaining villagers: \n " + peepList + "\n Type !skip to not vote!")
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
@@ -1506,7 +1518,17 @@ function gamePhase(){
                         if(dayTally == newList.length){
                 voteTallyD();           
             }
-                    } else {
+                    } else  if (String(collected.first()) == "!skip") {
+                        
+                        dayTally += 1;                  
+                        person.send("You chosen to not condemn anyone this time");
+                        //console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
+                        console.log(person.username + "Chose not to vote.");
+                        if(dayTally == newList.length){
+                voteTallyD();           
+            }
+                    }
+                     else {
                       var rando = newList[Math.floor(Math.random() * newList.length)];
              console.log(person.username + "'s daytime randomly collected value: ' " + rando);
                         dayVotes.push(rando);
