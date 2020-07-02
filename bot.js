@@ -1486,12 +1486,13 @@ function gamePhase(){
         if(person != undefined){        
                 
                 person.send(voteTime).then(() => {
+                  dayTally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000000, errors: ['time'] })
         .then(collected => {
-         
+          
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
                         dayVotes.push(newList[parseInt(collected.first()) - 1]);
-                        dayTally += 1;                  
+                        //dayTally += 1;                  
                         person.send("You have selected to condemn **" + bot.users.get(parseInt(collected.first())).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
@@ -1502,7 +1503,7 @@ function gamePhase(){
                       var rando = newList[Math.floor(Math.random() * newList.length)];
              console.log(person.username + "'s daytime randomly collected value: ' " + rando);
                         dayVotes.push(rando);
-                        dayTally += 1;
+                        //dayTally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
@@ -1515,7 +1516,7 @@ function gamePhase(){
               var rando = newList[Math.floor(Math.random() * newList.length)];
              console.log(person.username + "'s daytime randomly collected value: ' " + rando);
                         dayVotes.push(rando);
-                        dayTally += 1;
+                       // dayTally += 1;
                         person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
@@ -1682,13 +1683,15 @@ function gamePhase(){
         if(person != undefined){        
             if(mafia.has(list[index])){ 
                 person.send(mafiaAction).then(() => {
+                  tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id , { max: 1, time: 300000, errors: ['time'] })
+             
         .then(collected => {
           
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
               
                         mafiaVotes.push(list[parseInt(collected.first()) - 1]);
-                        tally += 1;                 
+                                      
                         person.send("You have selected to kill **" + bot.users.get(list[parseInt(collected.first())  - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1699,7 +1702,7 @@ function gamePhase(){
                     } else {
                       var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
-                        tally += 1;
+                        
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1712,7 +1715,7 @@ function gamePhase(){
           console.log("TIMEOUT/INVALID INPUT!")
              var rando = list[Math.floor(Math.random() * list.length)];
                         mafiaVotes.push(rando);
-                        tally += 1;
+                        
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1726,13 +1729,14 @@ function gamePhase(){
             } else if(doctors.has(list[index])){
                 
                 person.send(doctorAction).then(() => {
+                  tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-           
+            
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
               
                         doctorVotes.push(list[parseInt(collected.first()) - 1]);
-                        tally += 1;                 
+                        //tally += 1;                 
                         person.send("You have selected to protect **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1743,7 +1747,7 @@ function gamePhase(){
                     } else {
                       var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
-                        tally += 1;
+                        //tally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1756,7 +1760,7 @@ function gamePhase(){
         .catch(collected => {
              var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
-                        tally += 1;
+                        //tally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
@@ -1768,13 +1772,14 @@ function gamePhase(){
            
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction).then(() => {
+                  tally += 1;
     person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
         .then(collected => {
-          
+           
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
              
                         detectiveVotes.push(list[parseInt(collected.first()) - 1]);
-                        tally += 1;                 
+                        //tally += 1;                 
                         person.send("You have selected to identify **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                         if(doctors.has(list[parseInt(collected.first()) - 1])){
@@ -1795,7 +1800,7 @@ function gamePhase(){
                     else {
                       var rando = list[Math.floor(Math.random() * list.length)];
                         detectiveVotes.push(rando);
-                        tally += 1;
+                        //tally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                         if(doctors.has(rando)){
@@ -1817,7 +1822,7 @@ function gamePhase(){
         .catch(collected => {
              var rando = list[Math.floor(Math.random() * list.length)];
                         detectiveVotes.push(rando);
-                        tally += 1;
+                        //tally += 1;
                         person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                         if(doctors.has(rando)){
