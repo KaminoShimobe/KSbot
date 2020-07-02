@@ -1464,6 +1464,9 @@ function gamePhase(){
                         doctorVotes = [];
                         detectiveVotes = [];
                         dayVotes = [];
+                        quota = werewolves.length + healers.length + lookers.length;
+                        tally = 0;
+                        dayTally = 0;
                         gamePhase();            
             }
             
@@ -1654,7 +1657,7 @@ function gamePhase(){
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("__You are a Doctor!__ \n Vote which target to kill from this list: \n " + pList)
+            .setDescription("__You are a Doctor!__ \n Vote which target to protect from this list: \n " + pList)
             .setColor("#8a673d")
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
