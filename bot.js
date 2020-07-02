@@ -1460,10 +1460,10 @@ function gamePhase(){
             if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             }
-                        // mafiaVotes = [];
-                        // doctorVotes = [];
-                        // detectiveVotes = [];
-                        // dayVotes = [];
+                        mafiaVotes = [];
+                        doctorVotes = [];
+                        detectiveVotes = [];
+                        dayVotes = [];
                         gamePhase();            
             }
             
@@ -1512,21 +1512,21 @@ function gamePhase(){
             }
                     }
         })
-        .catch(collected => {
-              var rando = newList[Math.floor(Math.random() * newList.length)];
-             console.log(person.username + "'s daytime randomly collected value: ' " + rando);
-                        dayVotes.push(rando);
-                       // dayTally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-                        console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
-                        console.log(person.username + " voted for the day porton.");
-                        if(dayTally == newList.length){
-                voteTallyD();           
-            }
+        // .catch(collected => {
+        //       var rando = newList[Math.floor(Math.random() * newList.length)];
+        //      console.log(person.username + "'s daytime randomly collected value: ' " + rando);
+        //                 dayVotes.push(rando);
+        //                // dayTally += 1;
+        //                 person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+        //                 console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
+        //                 console.log(person.username + " voted for the day porton.");
+        //                 if(dayTally == newList.length){
+        //         voteTallyD();           
+        //     }
                     
-             console.log(person.username + "'s input has been caught.")
+        //      console.log(person.username + "'s input has been caught.")
              
-        });
+        // });
 });
 //                person.send(voteTime);
 //                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
@@ -1711,18 +1711,18 @@ function gamePhase(){
                         }
                     } 
         })
-        .catch(collected => {
-          console.log("TIMEOUT/INVALID INPUT!")
-             var rando = list[Math.floor(Math.random() * list.length)];
-                        mafiaVotes.push(rando);
+        // .catch(collected => {
+        //   console.log("TIMEOUT/INVALID INPUT!")
+        //      var rando = list[Math.floor(Math.random() * list.length)];
+        //                 mafiaVotes.push(rando);
                         
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-                        console.log(person.username + " ran out of time");
-                                    console.log(">>>>>>>Quota: " + tally)
-                            if(tally == quota){
-                            voteTallyN();           
-                        }
-        });
+        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+        //                 console.log(person.username + " ran out of time");
+        //                             console.log(">>>>>>>Quota: " + tally)
+        //                     if(tally == quota){
+        //                     voteTallyN();           
+        //                 }
+        // });
 });
             
 
@@ -1730,7 +1730,7 @@ function gamePhase(){
                 
                 person.send(doctorAction).then(() => {
                   tally += 1;
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
             
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
@@ -1757,23 +1757,23 @@ function gamePhase(){
                     }
                    
         })
-        .catch(collected => {
-             var rando = list[Math.floor(Math.random() * list.length)];
-                        doctorVotes.push(rando);
-                        //tally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
-                        console.log(person.username + " ran out of time");
-                                    console.log(">>>>>>>Quota: " + tally)
-                            if(tally == quota){
-                            voteTallyN();           
-                        }
-        });
+        // .catch(collected => {
+        //      var rando = list[Math.floor(Math.random() * list.length)];
+        //                 doctorVotes.push(rando);
+        //                 //tally += 1;
+        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
+        //                 console.log(person.username + " ran out of time");
+        //                             console.log(">>>>>>>Quota: " + tally)
+        //                     if(tally == quota){
+        //                     voteTallyN();           
+        //                 }
+        // });
 });
            
             } else if(detectives.has(list[index])){ 
                 person.send(detectiveAction).then(() => {
                   tally += 1;
-    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 300000, errors: ['time'] })
+    person.dmChannel.awaitMessages(m => m.author.id === person.id, { max: 1, time: 3000000, errors: ['time'] })
         .then(collected => {
            
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (list.length) + 1) {
@@ -1819,26 +1819,26 @@ function gamePhase(){
                     }
                    
         })
-        .catch(collected => {
-             var rando = list[Math.floor(Math.random() * list.length)];
-                        detectiveVotes.push(rando);
-                        //tally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-                        console.log(person.username + " ran out of time");
-                        if(doctors.has(rando)){
-                            person.send("This person is a **doctor**!");
-                        } else if(mafia.has(rando)){
-                            person.send("This person is a **mafioso**!");
-                        } else if(detectives.has(rando)){
-                            person.send("This person is a **detective**!");
-                        } else {
-                            person.send("This person is a **villager**");
-                        }
-                                    console.log(">>>>>>>Quota: " + tally)
-                            if(tally == quota){
-                            voteTallyN();           
-                        }
-        });
+        // .catch(collected => {
+        //      var rando = list[Math.floor(Math.random() * list.length)];
+        //                 //detectiveVotes.push(rando);
+        //                 //tally += 1;
+        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+        //                 console.log(person.username + " ran out of time");
+        //                 if(doctors.has(rando)){
+        //                     person.send("This person is a **doctor**!");
+        //                 } else if(mafia.has(rando)){
+        //                     person.send("This person is a **mafioso**!");
+        //                 } else if(detectives.has(rando)){
+        //                     person.send("This person is a **detective**!");
+        //                 } else {
+        //                     person.send("This person is a **villager**");
+        //                 }
+        //                             console.log(">>>>>>>Quota: " + tally)
+        //                     if(tally == quota){
+        //                     voteTallyN();           
+        //                 }
+        // });
 });            
             
 
