@@ -3224,10 +3224,10 @@ var boop = makeid(30);
         var roleList;
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
-         for(var i = 1; i < roleOutput.length; i++){
-              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
-            } 
-            console.log(roleList)
+         // for(var i = 1; i < roleOutput.length; i++){
+         //      roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+         //    } 
+         //    console.log(roleList)
             // roleList = roleList.replace(undefined, "");
         
         
