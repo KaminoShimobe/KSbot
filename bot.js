@@ -3216,54 +3216,62 @@ var boop = makeid(30);
                 } 
             }); 
                 } 
-       //       else if(messageArray[1] == "roleShop"){
+             else if(messageArray[1] == "roleShop"){
                  
 
-       //  let customItem = rows[0].shop;
-       //  let customPrice = rows[0].prices;
-       //  var roleList;
-       //  var roleOutput = customItem.split(",");
-       //  var priceOutput = customPrice.split(",");
-       //   for(var i = 1; i < roleOutput.length; i++){
-       //        roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
-       //      } 
-       //      console.log(roleList)
-       //      // roleList = roleList.replace(undefined, "");
+        let customItem = rows[0].shop;
+        let customPrice = rows[0].prices;
+        var roleList;
+        var roleOutput = customItem.split(",");
+        var priceOutput = customPrice.split(",");
+         for(var i = 1; i < roleOutput.length; i++){
+              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+            } 
+            console.log(roleList)
+            // roleList = roleList.replace(undefined, "");
         
         
 
-       // message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
-       //          const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-       //              collector.once('collect', message => {
-       //                  var theRole = message.content;
-       //                  if (message.content == `!cancel`) {
-       //                   message.channel.send("Role Shop Item Cancelled.");
-       //                      return;
-       //                  }  else if(message.guild.roles.get(theRole) != undefined){
-       //           message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
-       //           const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-       //           collector.once('collect', message => {
-       //            var thePrice = message.content;
-       //               if (message.content == `${prefix}cancel`) {
-       //                    message.channel.send("Role Shop Item cancelled.");
-       //                   return;
-       //               } else {
-       //                if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
-       //              var itemInsert = customItem + theRole + ",";
-       //              var priceInsert = customPrice + thePrice + ",";
+       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        var theRole = message.content;
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Role Shop Item Cancelled.");
+                            return;
+                        }  else if(message.guild.roles.get(theRole) != undefined){
+                 message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
+                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                 collector.once('collect', message => {
+                  var thePrice = message.content;
+                     if (message.content == `${prefix}cancel`) {
+                          message.channel.send("Role Shop Item cancelled.");
+                         return;
+                     } else {
+                      if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
+                        var itemInsert;
+                        var priceInsert;
 
-       //           sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
-       //           con.query(sql);
-       //           message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for " + thePrice);
-       //           return;
-       //         } else {
-       //            message.channel.send("That's not a valid price for the role!");
-       //         }
-       //       } 
-       //      }); 
-       //                      } 
-       //                    });
-       //            }
+                        if(customItem == undefined){
+                          itemInsert = "" + theRole + ",";
+                          priceInsert = "" + thePrice + ",";
+                        } else {
+                          itemInsert = customItem + theRole + ",";
+                          priceInsert = customPrice + thePrice + ",";
+                        }
+
+                 sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
+                 con.query(sql);
+                 message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for $" + thePrice);
+                 return;
+               } else {
+                  message.channel.send("That's not a valid price for the role!");
+               }
+             } 
+            }); 
+                            } 
+                          });
+                  }
              // else if(messageArray[1] == "price"){
             //  let shop;
             //      if (rows[0].shop == ""){
@@ -12364,13 +12372,13 @@ if(command === `${prefix}giftShop`){
             giftShop();
     }  
 
-// if(command === `${prefix}roleShop`){
-//             customItem();
-//     } 
+if(command === `${prefix}roleShop`){
+            customItem();
+    } 
 
-// if(command === `${prefix}removeRole`){
-//             removeItem();
-//     } 
+if(command === `${prefix}removeRole`){
+            removeItem();
+    } 
 
 if(command === `${prefix}mafia`){
             mafia();
