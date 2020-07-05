@@ -6984,7 +6984,6 @@ const { createCanvas } = require('canvas')
 
   var art = daisy.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Daisy-Sample.png");
-                    prize = num;
                     let reveal = new Discord.RichEmbed()
 
             
