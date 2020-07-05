@@ -3252,9 +3252,9 @@ var boop = makeid(30);
                         var itemInsert;
                         var priceInsert;
 
-                        if(customItem == undefined){
-                          itemInsert = "" + theRole + ",";
-                          priceInsert = "" + thePrice + ",";
+                        if(customItem == ""){
+                          itemInsert =  theRole + ",";
+                          priceInsert = thePrice + ",";
                         } else {
                           itemInsert = customItem + theRole + ",";
                           priceInsert = customPrice + thePrice + ",";
