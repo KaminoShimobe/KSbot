@@ -6720,7 +6720,7 @@ function customItem(){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
-            //roleList = roleList.replace(undefined, "");
+            roleList = roleList.replace(undefined, "\n");
         
         
 
@@ -6802,7 +6802,7 @@ function removeItem(){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
             console.log(roleList)
-            //roleList = roleList.replace(undefined, "");
+            roleList = roleList.replace(undefined, "\n");
         
         
 
