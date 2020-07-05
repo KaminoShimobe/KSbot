@@ -6700,7 +6700,7 @@ function customRole(){
 }
 
 function customItem(){
-  console.log("running customItem");
+  
     con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         
@@ -6712,10 +6712,10 @@ function customItem(){
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
         var roleList;
-        console.log(customItem);
-        console.log(customPrice);
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
+        console.log(roleOutput);
+        console.log(priceOutput);
          for(var i = 0; i < roleOutput.length; i++){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
