@@ -6704,10 +6704,10 @@ function customItem(){
     con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
         if(err) throw err;
         
-        if(rows.length < 1) {
+        // if(rows.length < 1) {
             
-            return;
-        } 
+        //     return;
+        // } 
 
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
@@ -6788,10 +6788,10 @@ function removeItem(){
     con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
         if(err) throw err;
         
-        if(rows.length < 1) {
+        // if(rows.length < 1) {
             
-            return;
-        } 
+        //     return;
+        // } 
 
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
