@@ -6762,7 +6762,7 @@ function customItem(){
                     
         
         
-        member.addRole(item).catch(console.error);
+        message.member.addRole(item).catch(console.error);
             
         
         
@@ -6825,7 +6825,7 @@ function removeItem(){
         
                     
         if(message.member.roles.has(roleOutput[parseInt(message.content)])){
-           member.removeRole(item).catch(console.error);
+           message.member.removeRole(item).catch(console.error);
             
         
         
