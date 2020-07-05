@@ -6990,10 +6990,167 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
+            .setDescription("Color: #" + petals)
             .setTimestamp();   
             message.channel.send(reveal);
 
 }   
+
+function ksTulip(){
+  var petals = Math.floor(Math.random()*16777215).toString(16);
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
+     const tulip = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-----------o--oo--o-----------HHHH',
+    'HHHH-----------oo-oo-oo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----xxxxxxxooooooxxxxxxx-----HHHH',
+    'HHHH----xxxxxxxxx====xxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxx========xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==========+++++xxx--HHHH',
+    'HHHH-xxx++++++++++==++++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:==:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(tulip.getContext('2d'));
+
+
+  var art = tulip.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Tulip-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+
+}
+
+function ksLily(){
+  var petals = Math.floor(Math.random()*16777215).toString(16);
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
+     const lily = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH--------------oo--------------HHHH',
+    'HHHH---------oo--oooo--oo---------HHHH',
+    'HHHH---------ooo-oooo-ooo---------HHHH',
+    'HHHH----------oooooooooo----------HHHH',
+    'HHHH--------ooooo*oo*ooooo--------HHHH',
+    'HHHH-------oooooooooooooooo-------HHHH',
+    'HHHH------ooooooo*oo*ooooooo------HHHH',
+    'HHHH------ooo--oooooooo--ooo------HHHH',
+    'HHHH----------oooooooooo----------HHHH',
+    'HHHH-----xxxxooooooooooooxxxx-----HHHH',
+    'HHHH----xxxxxooxxooooxxooxxxxx----HHHH',
+    'HHHH---xxxxxxxx===oo===xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==========+++++xxx--HHHH',
+    'HHHH-xxx++++++++++==++++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:==:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(lily.getContext('2d'));
+
+
+  var art = lily.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Lily-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+
+}
     
     
     
@@ -12379,6 +12536,22 @@ if(command === `!image`){
 if(command === `!daisy`){
     if(message.author.id == '242118931769196544'){
         ksDaisy();
+
+    }
+
+}
+
+if(command === `!tulip`){
+    if(message.author.id == '242118931769196544'){
+        ksTulip();
+
+    }
+
+}
+
+if(command === `!lily`){
+    if(message.author.id == '242118931769196544'){
+        ksLily();
 
     }
 
