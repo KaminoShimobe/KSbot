@@ -6919,7 +6919,7 @@ function insure(){
     
 //KS Garden
 function ksDaisy(){
-  var petals = messageArray[1];
+  var petals = Math.floor(Math.random()*16777215).toString(16);
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
      const daisy = createCanvas(380, 380)    
