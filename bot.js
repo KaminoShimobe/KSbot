@@ -6697,6 +6697,7 @@ function customRole(){
 }
 
 function customItem(){
+  console.log("running customItem");
     con.query(`SELECT * FROM server WHERE id = '${message.channel.id}'`, (err, rows) => {
         if(err) throw err;
         
