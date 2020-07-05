@@ -6716,7 +6716,7 @@ function customItem(){
         var priceOutput = customPrice.split(",");
         console.log(roleOutput);
         console.log(priceOutput);
-         for(var i = 0; i < roleOutput.length; i++){
+         for(var i = 0; i < roleOutput.length - 1; i++){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
@@ -6798,7 +6798,7 @@ function removeItem(){
         var roleList;
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
-         for(var i = 0; i < roleOutput.length; i++){
+         for(var i = 0; i < roleOutput.length - 1; i++){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
             console.log(roleList)
