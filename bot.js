@@ -3260,6 +3260,9 @@ var boop = makeid(30);
                           priceInsert = customPrice + thePrice + ",";
                         }
 
+                        console.log(itemInsert);
+                        console.log(priceInsert);
+
                  sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
                  con.query(sql);
                  message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for $" + thePrice);
