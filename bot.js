@@ -6716,8 +6716,8 @@ function customItem(){
         console.log(customPrice);
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
-         for(var i = 1; i < roleOutput.length; i++){
-              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+         for(var i = 0; i < roleOutput.length; i++){
+              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
             //roleList = roleList.replace(undefined, "");
@@ -6798,8 +6798,8 @@ function removeItem(){
         var roleList;
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
-         for(var i = 1; i < roleOutput.length; i++){
-              roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
+         for(var i = 0; i < roleOutput.length; i++){
+              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
             console.log(roleList)
             //roleList = roleList.replace(undefined, "");
