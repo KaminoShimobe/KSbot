@@ -6731,7 +6731,7 @@ function customItem(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < roleOutput.length ){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (roleOutput.length + 1) ){
                     
 
 
@@ -6813,7 +6813,7 @@ function removeItem(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < roleOutput.length ){
+                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (roleOutput.length + 1) ){
                     
 
 
