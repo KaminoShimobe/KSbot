@@ -3216,7 +3216,7 @@ var boop = makeid(30);
                 } 
             }); 
                 } 
-             else if(messageArray[1] == "roleShop"){
+             else if(messageArray[1] == "roleShopAdd"){
                  
 
         let customItem = rows[0].shop;
@@ -3224,20 +3224,20 @@ var boop = makeid(30);
         var roleList;
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
-         // for(var i = 1; i < roleOutput.length; i++){
-         //      roleList += (i) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
-         //    } 
-         //    console.log(roleList)
-            // roleList = roleList.replace(undefined, "");
+         for(var i = 0; i < roleOutput.length - 1; i++){
+              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+            } 
+            console.log(roleList)
+            roleList = roleList.replace(undefined, "\n");
         
         
 
-       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)");
+       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)" + roleList);
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         var theRole = message.content;
                         if (message.content == `!cancel`) {
-                         message.channel.send("Role Shop Item Cancelled.");
+                         message.channel.send("Role Shop Addition Cancelled.");
                             return;
                         }  else if(message.guild.roles.get(theRole) != undefined){
                  message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
@@ -3245,7 +3245,7 @@ var boop = makeid(30);
                  collector.once('collect', message => {
                   var thePrice = message.content;
                      if (message.content == `${prefix}cancel`) {
-                          message.channel.send("Role Shop Item cancelled.");
+                          message.channel.send("Role Shop Addition cancelled.");
                          return;
                      } else {
                       if(Number.isInteger(parseInt(thePrice)) === true && Number.isInteger(parseInt(thePrice)) > -1){
@@ -3275,31 +3275,49 @@ var boop = makeid(30);
                             } 
                           });
                   }
-             // else if(messageArray[1] == "price"){
-            //  let shop;
-            //      if (rows[0].shop == ""){
-            //          shop = "";
-            //      } else {
-            //          shop = rows[0].shop;
-            //      }   
-            //      message.channel.send("How much do you want the shop price to be for " + shop + " ? \n !cancel to cancel.");
-            //      const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-      //            collector.once('collect', message => {
-      //                var num = parseInt(message.content);
-      //                if (message.content == `${prefix}cancel`) {
-      //                     message.channel.send("Price change cancelled.");
-      //                    return;
-      //                }  else if(Number.isInteger(num) == true && num >= 0) {
-            //              sql = `UPDATE server SET prices = '${num}' WHERE id = '${message.guild.id}'`;
-            //              con.query(sql);
-            //              message.channel.send("Price set to " + num + " for the shop item: " + shop + "!");
-            //              return;
-            //          } else {
-            //              message.channel.send("Invalid Input. Must be a value > 0.");
-      //                    return;
-            //          }
-            //  }); 
-      //        } 
+             else if(messageArray[1] == "roleShopRemove"){
+                 
+
+        let customItem = rows[0].shop;
+        let customPrice = rows[0].prices;
+        var roleList;
+        var roleOutput = customItem.split(",");
+        var priceOutput = customPrice.split(",");
+         for(var i = 0; i < roleOutput.length - 1; i++){
+              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+            } 
+            console.log(roleList)
+            roleList = roleList.replace(undefined, "\n");
+        
+        
+
+       message.channel.send("What role would you like to remove? Respond with the number corresponding with the role. (!cancel to cancel)" + roleList);
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                     if (message.content == `${prefix}cancel`) {
+                          message.channel.send("Role Shop Removal cancelled.");
+                         return;
+                     } else {
+                      if(Number.isInteger(parseInt(message.content) - 1) === true && Number.isInteger(parseInt(message.content) - 1) > 0){
+                        
+                      var rolesList = roleOutput[(parseInt(message.content) - 1)] + ",";
+                      var removalR = customItem.replace(rolesList, "");
+                      var pricesList =priceOutput[(parseInt(message.content) - 1)] + ",";
+                      var removalP = customPrice.replace(pricesList, "");
+                       
+
+                 sql = `UPDATE server SET shop = '${removalR}', prices = '${removalP}' WHERE id = '${message.guild.id}'`;
+                 con.query(sql);
+                 message.channel.send(message.guild.roles.get(roleOutput[(parseInt(message.content) - 1)]).name + " removed from the shop!");
+                 return;
+               } else {
+                  message.channel.send("That's not a valid role to remove!");
+               }
+             } 
+            }); 
+                             
+                         
+                  }
                 else if(messageArray[1] == "whisper"){
                     message.channel.send("Do you want to turn the whisper command on or off(yes or no) \n !cancel to cancel.");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -6824,7 +6842,7 @@ function removeItem(){
 
         
                     
-        if(message.member.roles.has(roleOutput[parseInt(message.content)])){
+        if(message.member.roles.has(roleOutput[(parseInt(message.content)-1)])){
            message.member.removeRole(item).catch(console.error);
             
         
