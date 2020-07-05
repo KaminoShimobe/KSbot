@@ -6731,7 +6731,7 @@ function customItem(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (roleOutput.length + 1) ){
+                        }  else if((parseInt(message.content)-1) >= 0 && (parseInt(message.content)-1) < roleOutput.length ){
                     
 
 
@@ -6744,8 +6744,8 @@ function customItem(){
             return;
         }
 
-        var cost = parseInt(priceOutput[parseInt(message.content)]);
-        var item = message.guild.roles.get(roleOutput[parseInt(message.content)]);
+        var cost = parseInt(priceOutput[(parseInt(message.content)-1)]);
+        var item = message.guild.roles.get(roleOutput[(parseInt(message.content)-1)]);
 
         let money = rows[0].money;
         
@@ -6813,14 +6813,14 @@ function removeItem(){
                         if (message.content == `!cancel`) {
                          message.channel.send("Cancelled.");
                             return;
-                        }  else if(parseInt(message.content) > 0 && parseInt(message.content) < (roleOutput.length + 1) ){
+                        }  else if((parseInt(message.content)-1) >= 0 && (parseInt(message.content)-1) < roleOutput.length ){
                     
 
 
     
 
         
-        var item = message.guild.roles.get(roleOutput[parseInt(message.content)]);
+        var item = message.guild.roles.get(roleOutput[(parseInt(message.content)-1)]);
 
         
                     
