@@ -6709,6 +6709,8 @@ function customItem(){
         let customItem = rows[0].shop;
         let customPrice = rows[0].prices;
         var roleList;
+        console.log(customItem);
+        console.log(customPrice);
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
          for(var i = 1; i < roleOutput.length; i++){
