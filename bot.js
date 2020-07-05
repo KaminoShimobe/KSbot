@@ -6970,7 +6970,7 @@ const { createCanvas } = require('canvas')
     '-': '#4b2b13',//Background
     'x': '#602b03',//Pot
     '+': '#3b1a02',//Dirt
-    'o': petals,//petals
+    'o': '#' + petals,//petals
     '=': '#13e409',//Stem
     ':': '#2f1400',//Dark Dirt
     '*': '#eaff03',//Center
