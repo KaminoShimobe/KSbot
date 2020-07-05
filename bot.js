@@ -6739,10 +6739,18 @@ function customItem(){
             } 
             console.log(roleList)
             roleList = roleList.replace(undefined, "\n");
-        
+
+        let shop = new Discord.RichEmbed()
+
+            
+            .setTitle(message.guild.name + `'s Role Shop`)
+            .setDescription("Which role would you like to **purchase**(!cancel to cancel): " + roleList)
+            .setColor("#1d498e"); 
+
+        message.channel.send(shop);
         
 
-       message.channel.send("Which role would you like to purchase(!cancel to cancel): " + roleList);
+       // message.channel.send("Which role would you like to purchase(!cancel to cancel): " + roleList);
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
@@ -6823,8 +6831,15 @@ function removeItem(){
             roleList = roleList.replace(undefined, "\n");
         
         
+            let shop = new Discord.RichEmbed()
 
-       message.channel.send("Which role would you like to remove(!cancel to cancel): " + roleList);
+            
+            .setTitle(message.guild.name + `'s Role Shop`)
+            .setDescription("Which role would you like to **remove** (!cancel to cancel): " + roleList)
+            .setColor("#1d498e"); 
+
+        message.channel.send(shop);
+       //message.channel.send("Which role would you like to remove(!cancel to cancel): " + roleList);
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
@@ -6902,9 +6917,79 @@ function insure(){
             });
     }
     
-//Pets
-function getPet(){
+//KS Garden
+function ksDaisy(){
+     const daisy = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-------------oooo-------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH---------ooooo**ooooo---------HHHH',
+    'HHHH--------ooooo****ooooo--------HHHH',
+    'HHHH--------ooooo****ooooo--------HHHH',
+    'HHHH-----xxxxooooo**oooooxxxx-----HHHH',
+    'HHHH----xxxxxxxxooooooxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxx=oooooo=xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==oooooo==+++++xxx--HHHH',
+    'HHHH-xxx+++++++++oooo+++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++oo+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:oo:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH'
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#ffffff',//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
     
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(daisy.getContext('2d'));
+
+
+  var art = daisy.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Daisy-Sample.png");
+                    prize = num;
+                    let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("KS Daisy")
+            .attachFile(flower)
+            .setColor("#1f3c5b");   
+            message.channel.send(reveal);
+
 }   
     
     
@@ -12287,6 +12372,14 @@ if(command === `!image`){
     }
 
 }
+
+if(command === `!daisy`){
+    if(message.author.id == '242118931769196544'){
+        ksDaisy();
+
+    }
+
+}
     
 if(command === `!command`){
     if(message.author.id == '242118931769196544'){
@@ -12407,6 +12500,8 @@ if(command === `${prefix}removeRole`){
 if(command === `${prefix}mafia`){
             mafia();
     }               
+
+   
     
 if(command === `${prefix}admin` || command === `KS!admin`){
         if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR") || message.author.id == '242118931769196544'){
