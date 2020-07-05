@@ -6919,6 +6919,9 @@ function insure(){
     
 //KS Garden
 function ksDaisy(){
+
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
      const daisy = createCanvas(380, 380)    
     var artwork = PixelArt.art([
     'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
