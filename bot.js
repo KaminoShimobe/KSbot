@@ -6919,15 +6919,15 @@ function insure(){
     
 //KS Garden
 function ksDaisy(){
-
+  var petals = messageArray[1];
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
      const daisy = createCanvas(380, 380)    
     var artwork = PixelArt.art([
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
     'HHHH------------------------------HHHH',
     'HHHH------------------------------HHHH',
     'HHHH------------------------------HHHH',
@@ -6958,10 +6958,10 @@ const { createCanvas } = require('canvas')
     'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
     'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
     'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH',
-    'HHHHHHHHHHHHHHHHHHHHHHHHHHHH'
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
      
         
         
@@ -6970,7 +6970,7 @@ const { createCanvas } = require('canvas')
     '-': '#4b2b13',//Background
     'x': '#602b03',//Pot
     '+': '#3b1a02',//Dirt
-    'o': '#ffffff',//petals
+    'o': petals,//petals
     '=': '#13e409',//Stem
     ':': '#2f1400',//Dark Dirt
     '*': '#eaff03',//Center
@@ -6987,9 +6987,10 @@ const { createCanvas } = require('canvas')
                     let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("KS Daisy")
+      
             .attachFile(flower)
-            .setColor("#1f3c5b");   
+            .setColor(petals)
+            .setTimestamp();   
             message.channel.send(reveal);
 
 }   
