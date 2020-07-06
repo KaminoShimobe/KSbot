@@ -7160,7 +7160,7 @@ function countdown(){
           message.channel.send("Timer over.")
         }, (1000 * timeLimit));
 
-      const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === person.id, { time: (timeLimit * 1000) });
+      const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: (timeLimit * 1000) });
                     collectorer.once('collect', message => {
                     if(message.content == "!time"){
                         
