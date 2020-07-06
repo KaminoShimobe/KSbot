@@ -7151,7 +7151,31 @@ const { createCanvas } = require('canvas')
             message.channel.send(reveal);
 
 }
+
+
+function countdown(){
+
+      message.channel.send("Timer set for " + timeLimit + " seconds!")
+      setTimeout(() => {
+          message.channel.send("Timer over.")
+        }, (1000 * timeLimit));
+
+      const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === person.id, { time: (timeLimit * 1000) });
+                    collectorer.once('collect', message => {
+                    if(message.content == "!time"){
+                        
+                        message.channel.send(timeLimit + " seconds remaining!"); 
+                        return;
+                    }   
+                
     
+    
+    });
+       
+}
+
+
+      
     
     
 //MISC  
@@ -12556,6 +12580,15 @@ if(command === `!lily`){
     }
 
 }
+
+if(command === `!timer`){
+    if(message.author.id == '242118931769196544'){
+        var timeLimit = messageArray[1];
+        countdown();
+
+    }
+
+}  
     
 if(command === `!command`){
     if(message.author.id == '242118931769196544'){
