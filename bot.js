@@ -7161,7 +7161,7 @@ function countdown(){
         }, (1000 * timeLimit));
 
       const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: (timeLimit * 1000) });
-                    collectorer.once('collect', message => {
+                    collectorer.on('collect', message => {
                     if(message.content == "!time"){
                         
                         message.channel.send(timeLimit + " seconds remaining!"); 
@@ -8414,7 +8414,7 @@ function tierlist(){
                           .then(image => {
                             function onBuffer(err, buffer) {
                                 if (err) throw err;
-                                console.log(buffer);
+                                
                             }
                         
                           image.resize(900, 700)
@@ -8625,7 +8625,7 @@ function tierlist(){
                            Jimp.read(dTier[4].avatarURL)
                           .then(s2 => { 
                           s2.resize(85, 85); 
-                          image.composite(s2, 475, 15, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
+                          image.composite(s2, 475, 403, [Jimp.BLEND_SOURCE_OVER, 0, 0]).getBuffer(Jimp.MIME_JPEG, onBuffer);
                           if(dTier[5] != undefined){
                            Jimp.read(dTier[5].avatarURL)
                           .then(s2 => { 
@@ -12558,7 +12558,7 @@ if(command === `!image`){
 }
 
 if(command === `!daisy`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksDaisy();
 
     }
@@ -12566,7 +12566,7 @@ if(command === `!daisy`){
 }
 
 if(command === `!tulip`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksTulip();
 
     }
@@ -12574,7 +12574,7 @@ if(command === `!tulip`){
 }
 
 if(command === `!lily`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksLily();
 
     }
