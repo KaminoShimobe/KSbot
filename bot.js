@@ -7156,11 +7156,11 @@ function ksGarden(){
 
 function cronTest(){
   console.log('Before Test');
-  const job = new CronJob('* 10 * * * *', function() {
+  const job = new CronJob('* 1 * * * *', function() {
   const d = new Date();
   message.channel.send("The Current Date: " + d);
 });
-console.log('After Test');
+message.channel.send("Setting cron for 1 minute");
 job.start();
 }
 
