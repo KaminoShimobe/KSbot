@@ -7,6 +7,7 @@ const Jimp = require('jimp');
 const fs = require('fs'); // file manager
 const TwitchBot = require('twitch-bot');
 const Twitter = require('twitter');
+const CronJob = require('cron').CronJob;
 const dailyCD = new Set();
 const exposeLimit = new Set();
 const HarvestCD = new Set();
@@ -548,6 +549,7 @@ bot.on("message", async message => {
     var sql33 = "ALTER TABLE server ALTER COLUMN shop TEXT"; 
     var sql34 = "ALTER TABLE server ALTER COLUMN prices TEXT";
     var sql35 = `UPDATE server SET shop =  '', prices = ''`;
+
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
@@ -989,15 +991,7 @@ if(command === `!card`){
 
 }   
     
-  if(command === `!clip`){
-      if(message.author.id == '242118931769196544'){
-      screenshot({format: 'png'}).then((img) => {
-    message.author.send(img)
-}).catch((err) => {
-  console.log("Uh oh");
-})
-      }
-  }
+  
 
 
 function holidayCard(){
@@ -6916,6 +6910,8 @@ function insure(){
             return;
             });
     }
+
+
     
 //KS Garden
 function ksDaisy(){
@@ -7153,27 +7149,20 @@ const { createCanvas } = require('canvas')
 }
 
 
-function countdown(){
+function ksGarden(){
 
-      message.channel.send("Timer set for " + timeLimit + " seconds!")
-      setTimeout(() => {
-          message.channel.send("Timer over.")
-        }, (1000 * timeLimit));
-
-      const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: (timeLimit * 1000) });
-                    collectorer.on('collect', message => {
-                    if(message.content == "!time"){
-                        
-                        message.channel.send(timeLimit + " seconds remaining!"); 
-                        return;
-                    }   
-                
-    
-    
-    });
-       
 }
 
+
+function cronTest(){
+  console.log('Before Test');
+  const job = new CronJob('* 10 * * * *', function() {
+  const d = new Date();
+  message.channel.send("The Current Date: " + d);
+});
+console.log('After Test');
+job.start();
+}
 
       
     
@@ -12581,10 +12570,10 @@ if(command === `!lily`){
 
 }
 
-if(command === `!timer`){
+if(command === `!cron`){
     if(message.author.id == '242118931769196544'){
-        var timeLimit = messageArray[1];
-        countdown();
+       
+        cronTest();
 
     }
 
