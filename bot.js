@@ -3222,8 +3222,13 @@ var boop = makeid(30);
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
-            roleList = roleList.replace(undefined, "\n");
-        
+
+            if(roleList == undefined){
+              roleList = "*Nothing here yet!*"
+              
+            } else {
+             roleList = roleList.replace(undefined, "\n");
+            }
         
             let shop = new Discord.RichEmbed()
 
@@ -3287,7 +3292,13 @@ var boop = makeid(30);
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
-            roleList = roleList.replace(undefined, "\n");
+             if(roleList == undefined){
+              roleList = "*Nothing here yet!*"
+              
+            } else {
+             roleList = roleList.replace(undefined, "\n");
+            }
+
         
         let shop = new Discord.RichEmbed()
 
