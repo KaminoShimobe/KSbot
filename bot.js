@@ -97,7 +97,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.8", bot.user.avatarURL);
+            .setFooter("Version 1.8.9", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -953,8 +953,8 @@ function kaminoCard(){
                              image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              image.write("holidayCard.png");
-                             person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
-                             message.author.send("Valentine Card sent to " + person.username + "!");
+                             person.send(`You got a summer card!`, { files: ["holidayCard.png"] })
+                             message.author.send("Summer Card sent to " + person.username + "!");
                             });
                           })
                           .catch(err => {
@@ -1023,7 +1023,7 @@ function holidayCard(){
                         }   else {
                     var person = bot.users.get(message.content);
                     if(person != undefined){
-        message.author.send("Would you like to send a valentine card to " + person.username + "? \n Yes or No");
+        message.author.send("Would you like to send a summer card to " + person.username + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
@@ -1052,8 +1052,8 @@ function holidayCard(){
                              image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              image.write("holidayCard.png");
-                             person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
-                             message.author.send("Valentine Card sent to " + person.username + "!");
+                             person.send(`You got a Summer card!`, { files: ["holidayCard.png"] })
+                             message.author.send("Summer Card sent to " + person.username + "!");
                             });
                           })
                           .catch(err => {
@@ -1111,7 +1111,7 @@ function anonCard(){
                         }   else {
                     var person = bot.users.get(message.content);
                     if(person != undefined){
-        message.author.send("Would you like to send an anonymous valentine card to " + person.username + "? \n Yes or No");
+        message.author.send("Would you like to send an anonymous summer card to " + person.username + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
@@ -1140,8 +1140,8 @@ function anonCard(){
                              image.print(font, 20, 10, message.content, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              //image.print(font, 100 - lngth, 230, `From: ${message.author.username}`, 200).getBuffer(Jimp.MIME_JPEG, onBuffer)
                              image.write("holidayCard.png");
-                             person.send(`You got a valentine card!`, { files: ["holidayCard.png"] })
-                             message.author.send("Valentine Card sent to " + person.username + "!");
+                             person.send(`You got a summer card!`, { files: ["holidayCard.png"] })
+                             message.author.send("Summer Card sent to " + person.username + "!");
                             });
                           })
                           .catch(err => {
@@ -1336,7 +1336,7 @@ function gamePhase(){
   
     var mafiaList = "";
     for ( var i = 0; i < werewolves.length; i++ ) {
-            mafiaList += bot.users.get(werewolves[i]).username + ", \n";
+            mafiaList += bot.users.get(werewolves[i]).username + " \n";
     }
     
     var tally = 0;
@@ -6644,7 +6644,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
             
             .setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a valentine card to send to your friends! \n 5 :gift: | **anonCard** \n Send a valentine card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
+            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a summer holiday card to send to your friends! \n 5 :gift: | **anonCard** \n Send a summer holiday card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
             .setColor("#1d498e"); 
 
         message.author.send(shop);
@@ -9445,6 +9445,64 @@ function handhold(){
         
 }   
 
+function handshake(){
+        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        
+        
+        const booru = new Danbooru()
+        booru.posts({ tags: 'rating:safe handshake', random: true }).then(posts => {
+         // Select a random post from posts array
+        const index = Math.floor(Math.random() * posts.length)
+        const post = posts[index]
+ 
+        // Get post's url 
+         const url = booru.url(post.file_url)
+        
+         let pic = new Discord.RichEmbed()
+
+            
+            .setImage(url.href)
+            .setColor("#d80a0a"); 
+
+        message.channel.sendEmbed(pic);
+        
+         }) 
+
+        return message.reply(`shook ` + toBeat  + `'s hand!` || `shook ` + toBeat.user + `'s hand!` );
+        
+}
+
+function slap(){
+        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        
+        
+        const booru = new Danbooru()
+        booru.posts({ tags: 'rating:safe slapping', random: true }).then(posts => {
+         // Select a random post from posts array
+        const index = Math.floor(Math.random() * posts.length)
+        const post = posts[index]
+ 
+        // Get post's url 
+         const url = booru.url(post.file_url)
+        
+         let pic = new Discord.RichEmbed()
+
+            
+            .setImage(url.href)
+            .setColor("#d80a0a"); 
+
+        message.channel.sendEmbed(pic);
+        
+         }) 
+
+        return message.reply(`slapped ` + toBeat  + `!` || `slapped ` + toBeat.user + `!` );
+        
+}
+
 function waifuPic(){
         
         console.log("waifu");
@@ -11905,7 +11963,7 @@ function moneyHelp(){
 
             
             .setTitle("KS-Bot Monetary commands 💵")
-            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list.`)
+            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}giftShop**: \n DMs you the gift shop. \n **${prefix}roleShop**: \n Sends the role shop for purchasing a role. \n **${prefix}removeRole**: \n Allows you to remove a role assigned from the role shop.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11931,7 +11989,7 @@ function socialHelp(){
 
             
             .setTitle("KS-Bot Social commands 👥")
-            .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **${prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
+            .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}slap [mention]**: \n Slaps a user \n **${prefix}handshake [mention]**: \n Shakes a users hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **${prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11958,7 +12016,7 @@ function admin(){
 
             
             .setTitle("KS-Bot Admin commands ⚠️")
-            .setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}toggle roleShop**\n Edits what's avaialable in the role shop. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
+            .setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}toggle roleShopAdd**\n Adds a role to the roleShop via ID. \n **${prefix}toggle roleShopRemove**\n Removes a role to the roleShop. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -11972,8 +12030,9 @@ function credits(){
         
             let mission;
             let achievement = rows[0].completed;
-            let tasks = rows[0].tasks;
+            let tasks = rows[0].tasks            
             let status = rows[0].status;
+
             let counter = rows[0].credits;
         
         var msg1 = `I've poured my heart and soul into this bot. He is my proud son. \n If you'd like to chat you can do ${prefix}discord to join my discord or ${prefix}patreon to support me on patreon!`;
@@ -14717,6 +14776,64 @@ return;
 
     }
 
+    if(command === `${prefix}handshake`){
+
+
+        if(cooldown > 0){
+    if (commandCD.has(message.author.id)) {
+    message.react('🕒')
+
+    .then(console.log("Reacted."))
+
+    .catch(console.error);  
+    
+        return;
+    } else {
+        commandCD.add(message.author.id);
+      setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown)); 
+    //insert function here.
+        handshake();
+    }
+} else {
+// insert function here.
+    handshake();
+}   
+return;
+
+    }
+
+    if(command === `${prefix}slap`){
+
+
+        if(cooldown > 0){
+    if (commandCD.has(message.author.id)) {
+    message.react('🕒')
+
+    .then(console.log("Reacted."))
+
+    .catch(console.error);  
+    
+        return;
+    } else {
+        commandCD.add(message.author.id);
+      setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown)); 
+    //insert function here.
+        slap();
+    }
+} else {
+// insert function here.
+    slap();
+}   
+return;
+
+    }
+
 
     
         
@@ -14731,6 +14848,10 @@ return;
     } else if(command === `${prefix}kiss`){
     message.reply("Waifu's and husbando's are disabled in this server!");
     } else if(command === `${prefix}handhold`){
+    message.reply("Waifu's and husbando's are disabled in this server!");
+    } else if(command === `${prefix}handshake`){
+    message.reply("Waifu's and husbando's are disabled in this server!");
+    } else if(command === `${prefix}slap`){
     message.reply("Waifu's and husbando's are disabled in this server!");
     }
 }   
