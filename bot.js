@@ -6744,6 +6744,10 @@ function customItem(){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
+            if(roleList.indexOf(undefined) != -1){
+              message.reply(" This role shop is empty!")
+              return;
+            }
             roleList = roleList.replace(undefined, "\n");
 
         let shop = new Discord.RichEmbed()
@@ -6834,6 +6838,10 @@ function removeItem(){
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
             } 
             console.log(roleList)
+            if(roleList.indexOf(undefined) != -1){
+              message.reply(" This role shop is empty!")
+              return;
+            }
             roleList = roleList.replace(undefined, "\n");
         
         
