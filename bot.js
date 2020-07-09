@@ -3289,6 +3289,7 @@ var boop = makeid(30);
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
          for(var i = 0; i < roleOutput.length - 1; i++){
+
               roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
@@ -12635,6 +12636,28 @@ if(command === `!image`){
     }
 
 }
+
+if(command === `!cleanShop`){
+    if(message.author.id == '242118931769196544'){
+con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        let customItem = rows[0].shop;
+        let customPrice = rows[0].prices;
+        var roleList;
+        var roleOutput = customItem.split(",");
+        var priceOutput = customPrice.split(",");
+         
+
+                 sql = `UPDATE server SET shop = '', prices = '' WHERE id = '${message.guild.id}'`;
+                 con.query(sql);
+                // message.channel.send(message.guild.roles.get(roleOutput[(parseInt(message.content) - 1)]).name + " removed from the shop!");
+                
+                     
+
+                  
+                  
+                  });
+        } 
+      }
 
 if(command === `!daisy`){
     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
