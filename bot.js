@@ -3225,8 +3225,14 @@ var boop = makeid(30);
             roleList = roleList.replace(undefined, "\n");
         
         
+            let shop = new Discord.RichEmbed()
 
-       message.channel.send("What role would you like to add? Respond with the id of the role. (!cancel to cancel)" + roleList);
+            
+            .setTitle(message.guild.name + `'s Role Shop`)
+            .setDescription("What role would you like to add? Respond with the id of the role. (!cancel to cancel)" + roleList)
+            .setColor("#1d498e"); 
+
+        message.channel.send(shop);
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         var theRole = message.content;
@@ -3283,9 +3289,15 @@ var boop = makeid(30);
             console.log(roleList)
             roleList = roleList.replace(undefined, "\n");
         
-        
+        let shop = new Discord.RichEmbed()
 
-       message.channel.send("What role would you like to remove? Respond with the number corresponding with the role. (!cancel to cancel)" + roleList);
+            
+            .setTitle(message.guild.name + `'s Role Shop`)
+            .setDescription("What role would you like to remove? Respond with the number corresponding with the role. (!cancel to cancel)" + roleList)
+            .setColor("#1d498e"); 
+
+        message.channel.send(shop);
+
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                      if (message.content == `${prefix}cancel`) {
