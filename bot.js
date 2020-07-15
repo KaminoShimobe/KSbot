@@ -1201,7 +1201,7 @@ function notifications(){
 
 
     
-if(command === `!buy` && messageArray[1] === `valentineCard`){
+if(command === `!buy` && messageArray[1] === `summerCard`){
         holidayCard();
     }   
 
@@ -1303,12 +1303,15 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
         }
 
 function mafia(){
-    var me = bot.users.get('242118931769196544');
     const mafia = new Set();
     const detectives = new Set();
     const doctors = new Set();
     const villagers = new Set();
     var owner = message.author.id;
+    if(mafiaPlayers.has(owner)){
+        message.reply(" You can't join a mafia game if you've already created one!");
+        return;
+    }
     mafiaPlayers.add(message.author.id);
     message.delete()
 
@@ -6668,7 +6671,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
             
             .setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **valentineCard**: \n Make a summer holiday card to send to your friends! \n 5 :gift: | **anonCard** \n Send a summer holiday card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
+            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **summerCard**: \n Make a summer holiday card to send to your friends! \n 5 :gift: | **anonCard** \n Send a summer holiday card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
             .setColor("#1d498e"); 
 
         message.author.send(shop);
