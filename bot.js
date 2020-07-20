@@ -8087,7 +8087,7 @@ function which(){
   var rand = Math.floor(Math.random() * (messageArray.length - 1)) + 1;
   console.log(rand)
 
-  message.reply(" choose " + messageArray[rand] + "!");
+  message.reply(" choose **__" + messageArray[rand] + "__**!");
 } 
     
 function whom(){
