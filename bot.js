@@ -8081,7 +8081,13 @@ function unoCancel(){
         
     });
     
-}   
+}  
+
+function which(){
+  var rand = (Math.random() * messageArray.length) + 1;
+
+  message.reply(" choose " + messageArray[rand] + "!");
+} 
     
 function whom(){
         
@@ -12886,6 +12892,19 @@ if(command === `${prefix}toggle`){
     if(command === `${prefix}remind` && messageArray[1] == "at" && messageArray[2] != undefined){
 
         timerPlace();
+         
+
+
+
+         return;
+
+
+
+    }
+
+    if(command === `${prefix}which` && messageArray.length > 2 ){
+
+        which();
          
 
 
