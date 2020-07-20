@@ -8084,7 +8084,7 @@ function unoCancel(){
 }  
 
 function which(){
-  var rand = (Math.random() * messageArray.length) + 1;
+  var rand = Math.floor(Math.random() * messageArray.length) + 1;
   console.log(rand)
 
   message.reply(" choose " + messageArray[rand] + "!");
