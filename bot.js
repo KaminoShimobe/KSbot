@@ -549,6 +549,9 @@ bot.on("message", async message => {
     var sql33 = "ALTER TABLE server ALTER COLUMN shop TEXT"; 
     var sql34 = "ALTER TABLE server ALTER COLUMN prices TEXT";
     var sql35 = `UPDATE server SET shop =  '', prices = ''`;
+    var sql36 = "ALTER TABLE plant ADD hexcolor VARCHAR(7)"; 
+    var sql37 = "ALTER TABLE plant ALTER COLUMN status SMALLINT"; 
+    var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -580,9 +583,19 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql35, function (err, result) {
+con.query(sql36, function (err, result) {
      if (err) throw err;
-     message.author.send("Set all shop and prices to blank!");
+     message.author.send("COLUMN hexcolor added to TABLE plant!");
+     });
+
+con.query(sql37, function (err, result) {
+     if (err) throw err;
+     message.author.send("COLUMN status altered to SMALLINT!");
+     });
+
+con.query(sql38, function (err, result) {
+     if (err) throw err;
+     message.author.send("COLUMN id added to TABLE garden!");
      });
 
 // con.query(sql34, function (err, result) {
@@ -7184,8 +7197,74 @@ const { createCanvas } = require('canvas')
 }
 
 
-function ksGarden(){
+function ksNewGarden(){
+   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        if(rows.length < 1) {
+            sql = `INSERT INTO garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status SMALLINT, id VARCHAR(30)) VALUES ('${message.author.id}', ${1}, '', ${0}, '${message.guild.id}')`;
+            con.query(sql, console.log);
+            message.reply(" has started a new garden in the " + message.guild.name + " server!");
+        } else{
+          message.reply(" you already have a garden in this server!")
+        }
 
+
+      });
+}
+
+function ksNewSeed(){
+   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = rows[0].status;
+        var plantList = co.split(",");
+        var petals;
+        var seeds = Math.floor(Math.random()*2);
+        var type = ['daisy', 'tulip', 'lily'];
+        var newPlant = type[seeds];
+        function createColor(){
+              petals = Math.floor(Math.random()*16777215).toString(16);
+              if(petals.length < 6){
+                createColor();
+              } 
+            }
+
+            createColor();
+      
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        } else{
+
+            if(status >= slots){
+              message.reply(" doesn't have enough space in their garden!");
+              return;
+            }
+
+           sql = `UPDATE garden SET plants = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
+           con.query(sql);
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+            let sql2;
+            
+            
+            
+            
+
+            if(rows.length < 1) {
+                sql = `INSERT INTO plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT, hexcolor VARCHAR(7)) VALUES ('${message.author.id}', '${message.guild.id}', ${type[seeds]}, 'planted', ${100} '${petals}')`;
+                con.query(sql, console.log);
+                message.reply(` do ${prefix}garden to see the new seed in your garden!`);
+            }
+
+        });
+        }
+
+
+      });
 }
 
 
@@ -8084,10 +8163,20 @@ function unoCancel(){
 }  
 
 function which(){
-  var rand = Math.floor(Math.random() * (messageArray.length - 1)) + 1;
+  var question = message.content.split(":");
+  var ogQuestion = question[0].replace(`${prefix}which`, '')
+  var options = question[1].replace(":", "");
+  var options = options.split(" ")
+  var rand = Math.floor(Math.random() * (options.length - 1)) + 1;
   console.log(rand)
+  // let note = new Discord.RichEmbed()
 
-  message.reply(" choose **__" + messageArray[rand] + "__**!");
+            
+  //           .setTitle(ogQuestion)
+  //           .setDescription("choose **__" + options[rand] + "__**!")
+  //           .setColor("#af25f5")
+  //           .setTimestamp();
+  message.reply(" choose **__" + options[rand] + "__**!");
 } 
     
 function whom(){
