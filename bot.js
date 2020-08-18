@@ -7560,7 +7560,7 @@ function ksGardenCheck(){
             message.channel.send(reveal);
             return;
               } else if(type == "tulip"){
-                var petals = Math.floor(Math.random()*16777215).toString(16);
+                
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
      const tulip = createCanvas(380, 380)    
@@ -7635,7 +7635,7 @@ const { createCanvas } = require('canvas')
             .setTimestamp();   
             message.channel.send(reveal);
               } else if(type == "lily"){
-                var petals = Math.floor(Math.random()*16777215).toString(16);
+               
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
      const lily = createCanvas(380, 380)    
