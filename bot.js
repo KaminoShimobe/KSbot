@@ -7213,7 +7213,12 @@ function ksNewGarden(){
       });
 }
 
-function ksNewSeed(){
+function ksNewMysterySeed(){
+  con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+       let weather = rows[0].weather; 
+
    con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -7227,12 +7232,14 @@ function ksNewSeed(){
         var newPlant = type[seeds];
         function createColor(){
               petals = Math.floor(Math.random()*16777215).toString(16);
-              if(petals.length < 6){
+              if(petals.length < 6 || petals == "5e7500"){
                 createColor();
               } 
             }
 
             createColor();
+
+        var addPlant = plants + "," + newPlant + " " + petals;    
       
         if(rows.length < 1) {
             message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
@@ -7244,27 +7251,474 @@ function ksNewSeed(){
               return;
             }
 
-           sql = `UPDATE garden SET plants = '${commandP}', comOutput = '${imgP}' WHERE id = '${message.guild.id}'`;
+           sql = `UPDATE garden SET plants = '${addPlant}', status = '${status + 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql);
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
             let sql2;
+            let sql3;
             
-            
-            
-            
-
-            if(rows.length < 1) {
-                sql = `INSERT INTO plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT, hexcolor VARCHAR(7)) VALUES ('${message.author.id}', '${message.guild.id}', ${type[seeds]}, 'planted', ${100} '${petals}')`;
-                con.query(sql, console.log);
-                message.reply(` do ${prefix}garden to see the new seed in your garden!`);
+            var seedPhase = 30;
+            var sproutPhase = 30;
+            var weatherFactor;
+            if(weather == "Sunny"){
+              weatherFactor = .5;
+            } else if(weather == "Snowy"){
+              weatherFactor = 2;
+            } else {
+              weatherFactor = 1;
             }
+
+
+            
+                sql2 = `INSERT INTO plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT, hexcolor VARCHAR(7)) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${100} '${petals}')`;
+                con.query(sql2, console.log);
+                message.reply(` do ${prefix}garden to see the new seed in your garden!`);
+                
+                
+                function sproutCountDown(){
+              if(sproutPhase == 0){
+                sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                con.query(sql3);
+                message.channel.send("Your sprout has bloomed!")
+              }
+            }
+
+            function seedCountDown(){
+              if(seedPhase == 0){
+                sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                con.query(sql3);
+                message.channel.send("Your seed has sprouted!")
+                sproutCountDown();
+              }
+              seedPhase -= 1;
+              console.log("Time until sprout: " + seedPhase + " min(s)");
+              setTimeout(seedCountDown(), weatherFactor*60000)
+            }
+
+            seedCountDown();
+
+
+
+                return;
+           
 
         });
         }
 
 
       });
+
+ });
+}
+
+function ksGardenCheck(){
+  con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = rows[0].status;
+        var plantList = co.split(",");
+
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        } else{
+          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+
+            let type = rows[0].type;
+            let stage = rows[0].status;
+            let petals = rows[0].hexcolor;
+
+            if(stage == "seed"){
+                var PixelArt = require('pixel-art');    
+                const { createCanvas } = require('canvas')
+     const seed = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH--xxx++++++++++++++++++++xxx--HHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(seed.getContext('2d'));
+
+
+  var art = seed.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Seed-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+            return;
+            } else if(stage == "sprout"){
+                var PixelArt = require('pixel-art');    
+                const { createCanvas } = require('canvas')
+                const sprout = createCanvas(380, 380)
+     var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxx==xxxx==xxxxxxxx---HHHH',
+    'HHHH--xxx++++++==+++===++++++xxx--HHHH',
+    'HHHH-xxx++++++++==++==++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::=:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(sprout.getContext('2d'));
+
+
+  var art = sprout.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Sprout-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+            return;
+            } else if(stage == "flower"){
+
+              if(type == "daisy"){
+                var PixelArt = require('pixel-art');    
+                const { createCanvas } = require('canvas')
+     const daisy = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-------------oooo-------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH------------oooooo------------HHHH',
+    'HHHH---------ooooo**ooooo---------HHHH',
+    'HHHH--------ooooo****ooooo--------HHHH',
+    'HHHH--------ooooo****ooooo--------HHHH',
+    'HHHH-----xxxxooooo**oooooxxxx-----HHHH',
+    'HHHH----xxxxxxxxooooooxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxx=oooooo=xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==oooooo==+++++xxx--HHHH',
+    'HHHH-xxx+++++++++oooo+++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:==:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(daisy.getContext('2d'));
+
+
+  var art = daisy.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Daisy-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+            return;
+              } else if(type == "tulip"){
+                var petals = Math.floor(Math.random()*16777215).toString(16);
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
+     const tulip = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-----------o--oo--o-----------HHHH',
+    'HHHH-----------oo-oo-oo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----------oooooooo-----------HHHH',
+    'HHHH-----xxxxxxxooooooxxxxxxx-----HHHH',
+    'HHHH----xxxxxxxxx====xxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxx========xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==========+++++xxx--HHHH',
+    'HHHH-xxx++++++++++==++++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:==:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(tulip.getContext('2d'));
+
+
+  var art = tulip.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Tulip-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+              } else if(type == "lily"){
+                var petals = Math.floor(Math.random()*16777215).toString(16);
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
+     const lily = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH--------------oo--------------HHHH',
+    'HHHH---------oo--oooo--oo---------HHHH',
+    'HHHH---------ooo-oooo-ooo---------HHHH',
+    'HHHH----------oooooooooo----------HHHH',
+    'HHHH--------ooooo*oo*ooooo--------HHHH',
+    'HHHH-------oooooooooooooooo-------HHHH',
+    'HHHH------ooooooo*oo*ooooooo------HHHH',
+    'HHHH------ooo--oooooooo--ooo------HHHH',
+    'HHHH----------oo-oooo-oo----------HHHH',
+    'HHHH-----xxxxoooxooooxoooxxxx-----HHHH',
+    'HHHH----xxxxxooxxooooxxooxxxxx----HHHH',
+    'HHHH---xxxxxxxx===oo===xxxxxxxx---HHHH',
+    'HHHH--xxx+++++==========+++++xxx--HHHH',
+    'HHHH-xxx++++++++++==++++++++++xxx-HHHH',
+    'HHHHxxx+++++++++++==+++++++++++xxxHHHH',
+    'HHHHxxx++++++++++:==:++++++++++xxxHHHH',
+    'HHHHxxx++++++++++::::++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#' + petals,//petals
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(lily.getContext('2d'));
+
+
+  var art = lily.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-Lily-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor(petals)
+            .setDescription("Color: #" + petals)
+            .setTimestamp();   
+            message.channel.send(reveal);
+              }
+            }
+
+
+          });  
+
+
+        }
+
+  });      
 }
 
 
@@ -12782,6 +13236,31 @@ if(command === `!lily`){
 
 }
 
+if(command === `!newGarden`){
+    if(message.author.id == '242118931769196544'){
+        ksNewGarden();
+
+    }
+
+}
+
+if(command === `!mysterySeed`){
+    if(message.author.id == '242118931769196544'){
+        ksNewMysterySeed();
+
+    }
+
+}
+
+if(command === `!garden`){
+    if(message.author.id == '242118931769196544'){
+        ksGardenCheck();
+
+    }
+
+}
+
+
 if(command === `!cron`){
     if(message.author.id == '242118931769196544'){
        
@@ -12791,13 +13270,7 @@ if(command === `!cron`){
 
 }  
     
-if(command === `!command`){
-    if(message.author.id == '242118931769196544'){
-        customCommand();
-
-    }
-
-}   
+ 
 
 if(command === `!resetCommands`){
     if(message.author.id == '242118931769196544'){
