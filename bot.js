@@ -7312,15 +7312,15 @@ function ksGardenCheck(){
   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        }
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = rows[0].status;
         var plantList = co.split(",");
 
-        if(rows.length < 1) {
-            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
-            return;
-        } else{
           con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
 
@@ -7712,7 +7712,7 @@ const { createCanvas } = require('canvas')
           });  
 
 
-        }
+        
 
   });      
 }
