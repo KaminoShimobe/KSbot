@@ -7324,9 +7324,16 @@ function ksGardenCheck(){
           con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
 
+            if(rows.length < 1) {
+            message.reply(" doesn't have any plants in their " + message.guild.name + " server garden!\n Buy one in the gift shop!");
+            return;
+        }
+
             let type = rows[0].type;
             let stage = rows[0].status;
             let petals = rows[0].hexcolor;
+
+            
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
