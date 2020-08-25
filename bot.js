@@ -13282,6 +13282,14 @@ if(command === `!mysterySeed`){
 
 }
 
+if(command === `!deleteSeed`){
+    if(message.author.id == '242118931769196544'){
+        ksSeedDelete();
+
+    }
+
+}
+
 if(command === `!garden`){
     if(message.author.id == '242118931769196544'){
         ksGardenCheck();
