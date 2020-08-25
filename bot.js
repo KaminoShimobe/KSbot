@@ -41,7 +41,7 @@ const kissCD = new Set();
 const twitchDaily = new Set();
 
 
-
+//yeet
 
 const bot = new Discord.Client({disableEveryone: true})
 
