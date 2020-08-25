@@ -7286,13 +7286,13 @@ function ksNewMysterySeed(){
                 message.channel.send("Your sprout has bloomed!")
               }
               phase -= weatherFactor;
-              console.log("Time until flower: " + phase + " min(s)");
+              console.log("Time until flower: " + phase + " sec(s)");
               
             }
 
 
 
-            var countdown = setInterval(countDown, 60000)
+            var countdown = setInterval(countDown, 1000)
 
 
 
