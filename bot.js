@@ -7286,6 +7286,7 @@ function ksNewMysterySeed(){
                 con.query(sql3);
                 stage = "flower"
                 message.channel.send("Your sprout has bloomed!")
+                clearInterval(countdown);
               }
               phase -= weatherFactor;
               console.log("Time until flower: " + phase + " sec(s)");
