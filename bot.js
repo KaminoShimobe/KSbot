@@ -7198,9 +7198,9 @@ function ksNewGarden(){
         if(err) throw err;
         let sql;
         if(rows.length < 1) {
-            sql = `INSERT INTO garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status SMALLINT, id VARCHAR(30)) VALUES ('${message.author.id}', ${1}, '', ${0}, '${message.guild.id}')`;
+            sql = `INSERT INTO garden (owner, slots, plants, status, id) VALUES ('${message.author.id}', ${1}, '', ${0}, '${message.guild.id}')`;
             con.query(sql, console.log);
-            message.reply(" has started a new garden in the " + message.guild.name + " server!");
+            message.reply(" has started a new garden in the **" + message.guild.name + "** server!");
         } else{
           message.reply(" you already have a garden in this server!")
         }
@@ -7267,7 +7267,7 @@ function ksNewMysterySeed(){
 
 
             
-                sql2 = `INSERT INTO plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(30), health TINYINT, hexcolor VARCHAR(7)) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${100} '${petals}')`;
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${100} '${petals}')`;
                 con.query(sql2, console.log);
                 message.reply(` do ${prefix}garden to see the new seed in your garden!`);
                 
