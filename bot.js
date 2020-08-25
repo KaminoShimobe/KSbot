@@ -7256,7 +7256,7 @@ function ksNewMysterySeed(){
             
             var phase = 60;
             var weatherFactor;
-            
+            let stage = rows[0].status;
 
 
             
@@ -7276,11 +7276,11 @@ function ksNewMysterySeed(){
                 } else {
                   weatherFactor = 1;
                 }
-              if(phase <= 30 && rows[0].status == "seed"){
+              if(phase <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 message.channel.send("Your seed has sprouted!")
-              } else if(phase <= 0 && rows[0].status == "sprout"){
+              } else if(phase <= 0 && stage == "sprout"){
                 sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 message.channel.send("Your sprout has bloomed!")
