@@ -7254,16 +7254,9 @@ function ksNewMysterySeed(){
             let sql2;
             let sql3;
             
-            var seedPhase = 30;
-            var sproutPhase = 30;
+            var phase = 60;
             var weatherFactor;
-            if(weather == "Sunny"){
-              weatherFactor = .5;
-            } else if(weather == "Snowy"){
-              weatherFactor = 2;
-            } else {
-              weatherFactor = 1;
-            }
+            
 
 
             
@@ -7273,27 +7266,33 @@ function ksNewMysterySeed(){
                 
                 
 
-            //     function sproutCountDown(){
-            //   if(sproutPhase == 0){
-            //     sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-            //     con.query(sql3);
-            //     message.channel.send("Your sprout has bloomed!")
-            //   }
-            // }
+                
 
-            // function seedCountDown(){
-            //   if(seedPhase == 0){
-            //     sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-            //     con.query(sql3);
-            //     message.channel.send("Your seed has sprouted!")
-            //     sproutCountDown();
-            //   }
-            //   seedPhase -= 1;
-            //   console.log("Time until sprout: " + seedPhase + " min(s)");
-            //   setTimeout(seedCountDown(), weatherFactor*60000)
-            // }
+            function countDown(){
+                  if(weather == "Sunny"){
+                  weatherFactor = .5;
+                } else if(weather == "Snowy"){
+                  weatherFactor = 2;
+                } else {
+                  weatherFactor = 1;
+                }
+              if(phase <= 30 && rows[0].status == "seed"){
+                sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                con.query(sql3);
+                message.channel.send("Your seed has sprouted!")
+              } else if(phase <= 0 && rows[0].status == "sprout"){
+                sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                con.query(sql3);
+                message.channel.send("Your sprout has bloomed!")
+              }
+              seedPhase -= weatherFactor;
+              console.log("Time until flower: " + phase + " min(s)");
+              
+            }
 
-            // seedCountDown();
+
+
+            var countdown = setInterval(countDown, 60000)
 
 
 
@@ -7307,6 +7306,16 @@ function ksNewMysterySeed(){
       });
 
  });
+}
+
+function ksGardenDelete(){
+   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+            con.query(`DELETE FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
+            message.reply("Garden deleted!")
+            return;
+         });   
 }
 
 function ksSeedDelete(){
@@ -13288,6 +13297,14 @@ if(command === `!mysterySeed`){
 if(command === `!deleteSeed`){
     if(message.author.id == '242118931769196544'){
         ksSeedDelete();
+
+    }
+
+}
+
+if(command === `!deleteGarden`){
+    if(message.author.id == '242118931769196544'){
+        ksGardenDelete();
 
     }
 
