@@ -7361,7 +7361,7 @@ function ksGardenCheck(){
             let stage = rows[0].status;
             let petals = rows[0].hexcolor;
 
-            message.channel.send("Your seed is at this stage: " + stage)
+            message.channel.send("Type: " + type + " Stage: " + stage + " Petals: " + petals)
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
