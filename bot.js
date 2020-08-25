@@ -7285,7 +7285,7 @@ function ksNewMysterySeed(){
                 con.query(sql3);
                 message.channel.send("Your sprout has bloomed!")
               }
-              seedPhase -= weatherFactor;
+              phase -= weatherFactor;
               console.log("Time until flower: " + phase + " min(s)");
               
             }
@@ -7325,12 +7325,9 @@ function ksSeedDelete(){
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = rows[0].status;
-        if(status == 0){
-          message.reply("you have no plants!")
-          return;
-        }
         
-        sql = `UPDATE garden SET status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        
+        sql = `UPDATE garden SET status = '${0}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql);
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
