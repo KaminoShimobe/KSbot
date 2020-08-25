@@ -7256,7 +7256,7 @@ function ksNewMysterySeed(){
             
             var phase = 60;
             var weatherFactor;
-            let stage = rows[0].status;
+            
 
 
             
@@ -7265,7 +7265,7 @@ function ksNewMysterySeed(){
                 message.reply(` do ${prefix}garden to see the new seed in your garden!`);
                 
                 
-
+            let stage = rows[0].status;
                 
 
             function countDown(){
