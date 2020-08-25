@@ -7267,7 +7267,7 @@ function ksNewMysterySeed(){
 
 
             
-                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${100} '${petals}')`;
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${100}, '${petals}')`;
                 con.query(sql2, console.log);
                 message.reply(` do ${prefix}garden to see the new seed in your garden!`);
                 
@@ -7327,6 +7327,7 @@ function ksSeedDelete(){
             if(err) throw err;
 
             con.query(`DELETE FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
+            message.reply("Seed deleted!")
             return;
          });   
 
