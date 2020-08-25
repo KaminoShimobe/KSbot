@@ -7337,13 +7337,13 @@ function ksSeedDelete(){
 
 
 function ksGardenCheck(){
-  con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        if(rows.length < 1) {
-            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
-            return;
-        }
+  // con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+  //       if(err) throw err;
+        
+        // if(rows.length < 1) {
+        //     message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+        //     return;
+        // }
         // let slots = rows[0].slots;
         // let plants = rows[0].plants;
         // let status = rows[0].status;
@@ -7356,7 +7356,7 @@ function ksGardenCheck(){
             message.reply(" doesn't have any plants in their " + message.guild.name + " server garden!\n Buy one in the gift shop!");
             return;
         }
-
+            let sql;
             let type = rows[0].type;
             let stage = rows[0].status;
             let petals = rows[0].hexcolor;
@@ -7749,7 +7749,7 @@ const { createCanvas } = require('canvas')
 
         
 
-  });      
+  // });      
 }
 
 
