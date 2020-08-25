@@ -538,7 +538,7 @@ bot.on("message", async message => {
     var sql23 = "ALTER TABLE user ADD gift INT";
     var sql24 = `UPDATE server SET level = ${0}, weather = '', exp = ${0}`;
     var sql25 = `UPDATE user SET gift =  ${0}`;
-    var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status SMALLINT, health TINYINT, hexcolor VARCHAR(7))";
+    var sql26 = "CREATE TABLE plant (owner VARCHAR(30), id VARCHAR(30), type VARCHAR(30), status VARCHAR(20), health TINYINT, hexcolor VARCHAR(7))";
     var sql27 = "CREATE TABLE garden (owner VARCHAR(30), slots SMALLINT, plants TEXT, status TEXT, id VARCHAR(30))";
     var fix = `UPDATE achievements SET tasks = 'complete, complete, Refer Someone, complete, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, complete, Open 100 Chests, Open 1000 Chests, Get Married, complete, complete, Get 10+ streak, complete, complete, complete, complete, complete, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, complete, ???, Complete Achievements Set 1', completed = ${20}, status = ${1} WHERE id = '193045612302827520'`;
     var sql28 = "CREATE TABLE marriedAcc (id VARCHAR(40), funds INT, prenup BOOLEAN)";
@@ -588,10 +588,10 @@ con.query(sql26, function (err, result) {
      message.author.send("TABLE plant added!");
      });
 
-con.query(sql27, function (err, result) {
-     if (err) throw err;
-     message.author.send("TABLE garden added!");
-     });
+// con.query(sql27, function (err, result) {
+//      if (err) throw err;
+//      message.author.send("TABLE garden added!");
+//      });
 
 
 // con.query(sql34, function (err, result) {
@@ -626,10 +626,10 @@ con.query(sql27, function (err, result) {
 
     if(command === `!drop`){
     if(message.author.id == '242118931769196544'){
-    var sql =  "DROP TABLE achievements";
+    var sql =  "DROP TABLE plant";
     con.query(sql, function (err, result) {
         if (err) throw err;
-        message.author.send("dropped table achievements!");
+        message.author.send("dropped table plant!");
     });
 
     
@@ -7337,17 +7337,19 @@ function ksSeedDelete(){
 
 
 function ksGardenCheck(){
-  // con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-  //       if(err) throw err;
+  con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
         
-        // if(rows.length < 1) {
-        //     message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
-        //     return;
-        // }
-        // let slots = rows[0].slots;
-        // let plants = rows[0].plants;
-        // let status = rows[0].status;
-        // var plantList = plants.split(",");
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        }
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = rows[0].status;
+        var plantList = plants.split(",");
+
+        message.channel.send("slots: " + slots + " plants:" + plants + " status: " + status)
 
           con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
@@ -7749,7 +7751,7 @@ const { createCanvas } = require('canvas')
 
         
 
-  // });      
+  });      
 }
 
 
