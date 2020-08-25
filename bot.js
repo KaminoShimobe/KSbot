@@ -7272,6 +7272,7 @@ function ksNewMysterySeed(){
                 message.reply(` do ${prefix}garden to see the new seed in your garden!`);
                 
                 
+
             //     function sproutCountDown(){
             //   if(sproutPhase == 0){
             //     sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
@@ -7307,6 +7308,32 @@ function ksNewMysterySeed(){
 
  });
 }
+
+function ksSeedDelete(){
+   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+         let sql;
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = rows[0].status;
+        if(status == 0){
+          message.reply("you have no plants!")
+          return;
+        }
+        
+        sql = `UPDATE garden SET status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+           con.query(sql);
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+
+            con.query(`DELETE FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
+            return;
+         });   
+
+    });
+}
+
+
 
 function ksGardenCheck(){
   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
