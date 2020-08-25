@@ -41,7 +41,7 @@ const kissCD = new Set();
 const twitchDaily = new Set();
 
 
-//yeet
+
 
 const bot = new Discord.Client({disableEveryone: true})
 
@@ -7272,27 +7272,27 @@ function ksNewMysterySeed(){
                 message.reply(` do ${prefix}garden to see the new seed in your garden!`);
                 
                 
-                function sproutCountDown(){
-              if(sproutPhase == 0){
-                sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-                con.query(sql3);
-                message.channel.send("Your sprout has bloomed!")
-              }
-            }
+            //     function sproutCountDown(){
+            //   if(sproutPhase == 0){
+            //     sql3 = `UPDATE plant SET status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+            //     con.query(sql3);
+            //     message.channel.send("Your sprout has bloomed!")
+            //   }
+            // }
 
-            function seedCountDown(){
-              if(seedPhase == 0){
-                sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-                con.query(sql3);
-                message.channel.send("Your seed has sprouted!")
-                sproutCountDown();
-              }
-              seedPhase -= 1;
-              console.log("Time until sprout: " + seedPhase + " min(s)");
-              setTimeout(seedCountDown(), weatherFactor*60000)
-            }
+            // function seedCountDown(){
+            //   if(seedPhase == 0){
+            //     sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+            //     con.query(sql3);
+            //     message.channel.send("Your seed has sprouted!")
+            //     sproutCountDown();
+            //   }
+            //   seedPhase -= 1;
+            //   console.log("Time until sprout: " + seedPhase + " min(s)");
+            //   setTimeout(seedCountDown(), weatherFactor*60000)
+            // }
 
-            seedCountDown();
+            // seedCountDown();
 
 
 
