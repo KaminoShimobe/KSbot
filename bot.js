@@ -7339,12 +7339,17 @@ function waterSeed(){
                 message.channel.send("Your sprout has bloomed!")
                 clearInterval(countdown);
               }
-              sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-              con.query(sql3);
-              console.log("Time until flower: " + phase + " sec(s)");
+              con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+
+              var timer = rows[plant-1].health;
+              sql2 = `UPDATE plant SET health = ${timer- weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+              con.query(sql2);
+              console.log("Time until flower: " + timer + " sec(s)");
                 if(stage == "flower"){
                   countdown = setInterval(plantHealth, 1000)
                 }
+              });  
               });
             }
 
