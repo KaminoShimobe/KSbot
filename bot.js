@@ -7299,18 +7299,35 @@ function waterSeed(){
             var countdown;
 
      function plantHealth(){
+ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+       let weather = rows[0].weather; 
+       var weatherFactor;
+                  if(weather == "Sunny"){
+                  weatherFactor = .5;
+                } else if(weather == "Snowy"){
+                  weatherFactor = 2;
+                } else {
+                  weatherFactor = 1;
+                }
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
 
-      sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+              var timer = rows[plant-1].health;  
+      sql3 = `UPDATE plant SET health = ${timer - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)");
+      console.log("Time until flower dies: " + timer + " sec(s)");
 
-      if(phase <= 0 && stage == "flower"){
+      if(timer <= 0 && stage == "flower"){
         clearInterval(countdown);
         sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
         con.query(sql3);
 
         message.channel.send("Your plant died...")
       }
+      });  
+              });
      }       
           
 
@@ -7327,23 +7344,24 @@ function waterSeed(){
                 } else {
                   weatherFactor = 1;
                 }
-              if(phase <= (phase/2) && stage == "seed"){
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+
+              var timer = rows[plant-1].health;       
+              if(timer <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "sprout";
                 message.channel.send("Your seed has sprouted!")
-              } else if(phase <= 0 && stage == "sprout"){
+              } else if(timer <= 0 && stage == "sprout"){
                 sql3 = `UPDATE plant SET status = 'flower', health = ${100} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
                 message.channel.send("Your sprout has bloomed!")
                 clearInterval(countdown);
               }
-              con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-              if(err) throw err;
-
-              var timer = rows[plant-1].health;
-              sql2 = `UPDATE plant SET health = ${timer- weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+              
+              sql2 = `UPDATE plant SET health = ${timer - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
               con.query(sql2);
               console.log("Time until flower: " + timer + " sec(s)");
                 if(stage == "flower"){
