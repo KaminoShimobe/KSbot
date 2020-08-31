@@ -554,6 +554,7 @@ bot.on("message", async message => {
     var sql37 = "ALTER TABLE plant ALTER COLUMN status SMALLINT"; 
     var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
 
+
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
 //      message.author.send("level column added to server!");
@@ -7291,6 +7292,11 @@ function waterSeed(){
             message.reply(" You dont have any plants in this garden!");
             return;
           }
+
+          if(rows[plant-1].owner == undefined) {
+            message.reply(" You dont have a plants in this garden slot!");
+            return;
+          }
             var life = rows[plant-1].health;
             var plantStage = rows[plant-1].status;
             var shade = rows[plant-1].hexcolor;
@@ -7452,8 +7458,20 @@ function ksGardenCheck(){
         let plants = rows[0].plants;
         let status = rows[0].status;
         var plantList = plants.split(",");
+        var plantOutput;
+        for(var i = 1; i < plantList.length; i++){
+              plantOutput += (i) + ". " + plantList[i] + "\n";
+            } 
+            plantOutput = plantOutput.replace(undefined, "");
 
-        message.channel.send("slots: " + slots + " plants:" + plants + " status: " + status)
+        //message.channel.send("slots: " + slots + " plants:" + plants + " status: " + status)
+        let gardenList = new Discord.RichEmbed()
+
+            
+      
+            .setDescription(plantOutput)
+            .setTimestamp();   
+            message.channel.send(gardenList);
 
           con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
@@ -10703,7 +10721,7 @@ function serverList(users, index){
              // there is a GuildMember with that ID
             rank.push(acc);
         } else {
-            console.log(uname + " isn't in this server");
+            //do nothing
             
         }
         
