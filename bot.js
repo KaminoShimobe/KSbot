@@ -139,10 +139,10 @@ function weatherChange(){
      if(err) throw err;
         let sql;
         
-        var outcome;
+        
 function weather(servers, index){
       
-         
+        var outcome;
         let weather = rows[index].weather;
         
 
@@ -163,7 +163,7 @@ function weather(servers, index){
 
 
          sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${rows[index].id}'`;
-         con.query(sql, console.log);
+         con.query(sql);
          console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
 
         }
