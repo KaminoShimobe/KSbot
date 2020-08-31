@@ -135,7 +135,7 @@ onlineUpdate();
 
     }
 function weatherChange(){
-  con.query(`SELECT * FROM server'`, (err, rows) => {
+  con.query(`SELECT * FROM server`, (err, rows) => {
      if(err) throw err;
         let sql;
         
