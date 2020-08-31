@@ -7326,13 +7326,13 @@ function waterSeed(){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-
+              const d = new Date();
                var phase = rows[plant-1].health;
                var stage = rows[plant-1].status;
                var petals = rows[plant-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)");
+      console.log("Time until flower dies: " + phase + " sec(s)" + "\n Date: " + d);
 
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown);
