@@ -146,7 +146,7 @@ function weather(servers, index){
         let weather = rows[index].weather;
         
 
-        var chance = Math.floor(Math.random * 10) + 1;
+        var chance = Math.floor(Math.random() * 10) + 1;
 
         if(chance == 1 || chance == 2){
           outcome == "sunny";
