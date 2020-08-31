@@ -7295,6 +7295,7 @@ function waterSeed(){
             var plantStage = rows[plant-1].status;
             var shade = rows[plant-1].hexcolor;
             var countdown;
+            var countdown2;
 
       if(plantStage == "flower" && life > 0 && life <= 75){
         sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
@@ -7335,7 +7336,7 @@ function waterSeed(){
       console.log("Time until flower dies: " + phase + " sec(s)" + "\n Date: " + d);
 
       if(phase <= 0 && stage == "flower"){
-        clearInterval(countdown);
+        clearInterval(countdown2);
         sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
         con.query(sql3);
 
@@ -7380,7 +7381,7 @@ function waterSeed(){
                 message.channel.send("Your sprout has bloomed!")
                 console.log()
                 clearInterval(countdown);
-                // countdown = setInterval(plantHealth, 1000)
+                countdown2 = setInterval(plantHealth, 1000)
               } else{
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
