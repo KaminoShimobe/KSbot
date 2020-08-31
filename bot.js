@@ -7846,7 +7846,7 @@ const { createCanvas } = require('canvas')
             message.channel.send(reveal);
               }
              } 
-             if(type == "dead"){
+             if(stage == "dead"){
                
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
