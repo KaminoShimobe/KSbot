@@ -7309,6 +7309,7 @@ function waterSeed(){
 
       if(plantStage == "flower" && life > 0 && life >= 75){ 
         message.channel.send("Your plant is healthy enough!")
+        return;
       } 
 
      function plantHealth(){
@@ -7326,7 +7327,6 @@ function waterSeed(){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-              const d = new Date();
                var phase = rows[plant-1].health;
                var stage = rows[plant-1].status;
                var petals = rows[plant-1].hexcolor; 
@@ -7380,7 +7380,7 @@ function waterSeed(){
                 message.channel.send("Your sprout has bloomed!")
                 console.log()
                 clearInterval(countdown);
-                countdown = setInterval(plantHealth, 1000)
+                // countdown = setInterval(plantHealth, 1000)
               } else{
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
