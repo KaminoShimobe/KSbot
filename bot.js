@@ -7447,6 +7447,7 @@ function ksSeedDelete(){
 
 
 function ksGardenCheck(){
+  var index = parseInt(messageArray[1]);
   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         
@@ -7465,13 +7466,17 @@ function ksGardenCheck(){
             plantOutput = plantOutput.replace(undefined, "");
 
         //message.channel.send("slots: " + slots + " plants:" + plants + " status: " + status)
+        if(messageArray[1] == undefined){
         let gardenList = new Discord.RichEmbed()
 
             
-      
+            .setColor("#91f569")
             .setDescription(plantOutput)
+            .setFooter(`Type '${prefix}garden [number]' to view that plant!`)
             .setTimestamp();   
             message.channel.send(gardenList);
+            return;
+        }    
 
           con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
@@ -7481,9 +7486,9 @@ function ksGardenCheck(){
             return;
         }
             let sql;
-            let type = rows[0].type;
-            let stage = rows[0].status;
-            let petals = rows[0].hexcolor;
+            let type = rows[index - 1].type;
+            let stage = rows[index - 1].status;
+            let petals = rows[index - 1].hexcolor;
 
             message.channel.send("Type: " + type + " Stage: " + stage + " Petals: " + petals)
 
