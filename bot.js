@@ -149,15 +149,15 @@ function weather(servers, index){
         var chance = Math.floor(Math.random() * 10) + 1;
 
         if(chance == 1 || chance == 2){
-          outcome == "sunny";
+          outcome = "sunny";
         } else if(chance == 3 || chance == 4){
-          outcome == "rainy";
+          outcome = "rainy";
         } else if(chance == 5){
-          outcome == "snowy";
+          outcome = "snowy";
         } else if(chance == 6 || chance == 7){
-          outcome == "cloudy";
+          outcome = "cloudy";
         } else if(chance == 8 || chance == 9 || chance == 10){
-          outcome == "clear";
+          outcome = "clear";
         }
 
 
