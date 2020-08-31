@@ -162,7 +162,7 @@ function weather(servers, index){
 
 
 
-         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
+         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${rows[index].id}'`;
          con.query(sql, console.log);
          console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
 
@@ -2535,38 +2535,43 @@ function rps(){
         let sql;
         let weather = rows[0].weather;
         
-        
+        console.log(weather)
         
         if(weather == "sunny"){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("☀️ SUNNY ☀️"); 
+            .setTitle("☀️ SUNNY ☀️")
+            .setDescription("The current weather is:"); 
 
             message.channel.send(reveal);
         } else if(weather == "rainy"){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("🌧️ RAINY 🌧️");  
+            .setTitle("🌧️ RAINY 🌧️")
+            .setDescription("The current weather is:"); 
             message.channel.send(reveal);
         } else if(weather == "cloudy"){
           let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("☁️ CLOUDY ☁️");  
+            .setTitle("☁️ CLOUDY ☁️")
+            .setDescription("The current weather is:");   
             message.channel.send(reveal);
         } else if(weather == "snowy"){
            let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("🌨️ SNOWY 🌨️");  
+            .setTitle("🌨️ SNOWY 🌨️")
+            .setDescription("The current weather is:");   
             message.channel.send(reveal);
         } else if(weather == "clear"){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("✨ CLEAR ✨");  
+            .setTitle("✨ CLEAR ✨")
+            .setDescription("The current weather is:");   
             message.channel.send(reveal);
           } 
           return; 
