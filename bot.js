@@ -7363,13 +7363,14 @@ function waterSeed(){
                 //stage = "flower"
                 message.channel.send("Your sprout has bloomed!")
                 clearInterval(countdown);
+                countdown = setInterval(plantHealth, 1000)
               }
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
               con.query(sql2);
               console.log("Time until flower: " + phase + " sec(s)");
                 if(stage == "flower"){
-                  countdown = setInterval(plantHealth, 1000)
+                  
                 }
               });  
               });
@@ -7829,7 +7830,83 @@ const { createCanvas } = require('canvas')
             .setTimestamp();   
             message.channel.send(reveal);
               }
-            }
+            } else if(type == "dead"){
+               
+  var PixelArt = require('pixel-art');    
+const { createCanvas } = require('canvas')
+     const deadFlower = createCanvas(380, 380)    
+    var artwork = PixelArt.art([
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH------------------------------HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH--xxx++++++++++++++++++++xxx--HHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHHxxx++++++++++++ooooo++++oo+xxxHHHH',
+    'HHHHxxx++++++++++++++++oo++ooooxxxHHHH',
+    'HHHHxxx+++++++++++++++++oooooo+xxxHHHH',
+    'HHHHxxx++++++++++++++++++++++++xxxHHHH',
+    'HHHH-xxx++++++++++++++++++++++xxx-HHHH',
+    'HHHH--xx++++++++++++++++++++++xx--HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH---xxxxxxxxxxxxxxxxxxxxxxxx---HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH----xxxxxxxxxxxxxxxxxxxxxx----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHH-----xxxxxxxxxxxxxxxxxxxx-----HHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+    'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',
+     
+        
+        
+])
+  .palette({
+    '-': '#4b2b13',//Background
+    'x': '#602b03',//Pot
+    '+': '#3b1a02',//Dirt
+    'o': '#5e7500',//DEAD
+    '=': '#13e409',//Stem
+    ':': '#2f1400',//Dark Dirt
+    '*': '#eaff03',//Center
+    'H': '#d9b45d' //Frame
+    
+  })
+  .pos({ x: 0, y: 0 })
+  .scale(10)
+  .draw(deadFlower.getContext('2d'));
+
+
+  var art = deadFlower.toBuffer() // defaults to PNG
+                    const flower = new Discord.Attachment(art, "KS-DeadFlower-Sample.png");
+                    let reveal = new Discord.RichEmbed()
+
+            
+      
+            .attachFile(flower)
+            .setColor('#5e7500')
+            .setDescription("This Plant is Dead")
+            .setTimestamp();   
+            message.channel.send(reveal);
+              }
+            
 
 
           });  
