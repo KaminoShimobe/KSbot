@@ -7301,10 +7301,10 @@ function waterSeed(){
         con.query(sql3);
         if(life < 10){
           message.channel.send("You watered your plant! It looks like it could use some more water...")
-        } else if(life > 50 && life < 75){
+        } else if(life > 10 && life < 75){
           message.channel.send("You watered your plant! It looks great!.")
         }
-        
+        return;
       }    
 
       if(plantStage == "flower" && life > 0 && life >= 75){ 
