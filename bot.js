@@ -7293,10 +7293,11 @@ function waterSeed(){
           }
             var life = rows[plant-1].health;
             var plantStage = rows[plant-1].status;
+            var shade = rows[plant-1].hexcolor;
             var countdown;
 
       if(plantStage == "flower" && life > 0 && life <= 75){
-        sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+        sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
         if(life < 10){
           message.channel.send("You watered your plant! It looks like it could use some more water...")
