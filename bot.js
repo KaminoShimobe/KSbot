@@ -104,7 +104,43 @@ bot.on("ready", async () => {
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
     bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
-        
+    
+
+    function weather(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let weather = rows[0].weather;
+        var outcome;
+
+        var chance = Math.floor(Math.random * 10) + 1;
+
+        if(chance == 1 || chance == 2){
+          outcome == "sunny";
+        } else if(chance == 3 || chance == 4){
+          outcome == "rainy";
+        } else if(chance == 5){
+          outcome == "snowy";
+        } else if(chance == 6 || chance == 7){
+          outcome == "cloudy";
+        } else if(chance == 8 || chance == 9 || chance == 10){
+          outcome == "clear";
+        }
+
+
+
+         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
+         con.query(sql, console.log);
+         console.log("Weather in " + message.guild.id + " changed to " + outcome);
+
+      });  
+    }
+
+    const job = new CronJob('* * * * *', function() {
+      weather();
+    });
+    console.log("Weather change initiated")
+    job.start();      
         
     });
     
@@ -2481,6 +2517,42 @@ function rps(){
         
     }
 
+
+    // function weather(){
+    //   con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+    //     if(err) throw err;
+    //     let sql;
+    //     let weather = rows[0].weather;
+    //     var outcome;
+
+    //     var chance = Math.floor(Math.random * 10) + 1;
+
+    //     if(chance == 1 || chance == 2){
+    //       outcome == "sunny";
+    //     } else if(chance == 3 || chance == 4){
+    //       outcome == "rainy";
+    //     } else if(chance == 5){
+    //       outcome == "snowy";
+    //     } else if(chance == 6 || chance == 7){
+    //       outcome == "cloudy";
+    //     } else if(chance == 8 || chance == 9 || chance == 10){
+    //       outcome == "clear";
+    //     }
+
+
+
+    //      sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
+    //      con.query(sql, console.log);
+    //      console.log("Weather in " + message.guild.id + " changed to " + outcome);
+
+    //   });  
+    // }
+
+    // const job = new CronJob('* * * * *', function() {
+    //   weather();
+    // });
+    // console.log("Weather change initiated")
+    // job.start();
 
 
     function boom(){
@@ -7233,7 +7305,7 @@ function ksNewMysterySeed(){
 
             createColor();
 
-        var addPlant = plants + "," + newPlant + " " + petals;    
+        var addPlant = plants + "," + "???" + " " + "#??????";    
       
         if(rows.length < 1) {
             message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
@@ -7258,7 +7330,7 @@ function ksNewMysterySeed(){
             
                 sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${60}, '${petals}')`;
                 con.query(sql2, console.log);
-                message.reply(` do ${prefix}garden to see the new seed in your garden! \n do ${prefix}water [plant index]`);
+                message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
                 
                 
 
@@ -7416,30 +7488,52 @@ function ksGardenDelete(){
    con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         
+        con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+
+            con.query(`DELETE FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
+         }); 
+
             con.query(`DELETE FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
-            message.reply("Garden deleted!")
+            message.reply("Garden trashed!")
             return;
          });   
 }
 
 function ksSeedDelete(){
+  var index = parseInt(messageArray[1]);
    con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
          let sql;
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = rows[0].status;
+
         
+        if(status <= 0 || index > status || index <= 0){
+          message.reply("You don't have a plant in that slot!");
+          return;
+        }
         
-        sql = `UPDATE garden SET status = '${0}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        sql = `UPDATE garden SET status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql);
-         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+
+        con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
 
-            con.query(`DELETE FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`);
-            message.reply("Seed deleted!")
-            return;
-         });   
+            let type = rows[index - 1].type;
+            let stage = rows[index - 1].status;
+            let petals = rows[index - 1].hexcolor;
+
+              if(rows[index - 1].type == undefined){
+                message.reply("This plant does not exist!")
+              }
+
+            con.query(`DELETE FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`);
+            message.reply("The " + "#" + petals + " colored " + type + " was trashed.")
+
+         });    
+           
 
     });
 }
