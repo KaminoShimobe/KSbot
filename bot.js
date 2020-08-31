@@ -134,9 +134,51 @@ onlineUpdate();
         console.log(e.stack);
 
     }
+function weatherChange(){
+  con.query(`SELECT * FROM server'`, (err, rows) => {
+     if(err) throw err;
+        let sql;
+        
+        var outcome;
+function weather(servers, index){
+      
+         
+        let weather = rows[index].weather;
+        
+
+        var chance = Math.floor(Math.random * 10) + 1;
+
+        if(chance == 1 || chance == 2){
+          outcome == "sunny";
+        } else if(chance == 3 || chance == 4){
+          outcome == "rainy";
+        } else if(chance == 5){
+          outcome == "snowy";
+        } else if(chance == 6 || chance == 7){
+          outcome == "cloudy";
+        } else if(chance == 8 || chance == 9 || chance == 10){
+          outcome == "clear";
+        }
 
 
 
+         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
+         con.query(sql, console.log);
+         console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
+
+        }
+    
+
+    const job = new CronJob('* * * * *', function() {
+      rows.forEach(weather);
+    });
+    console.log("Weather change initiated")
+    job.start();
+    });
+    
+}
+
+weatherChange();
 });
 
 bot.on("guildCreate", guild => {
@@ -2484,41 +2526,7 @@ function rps(){
     }
 
 
-    function weather(){
-      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        let weather = rows[0].weather;
-        var outcome;
-
-        var chance = Math.floor(Math.random * 10) + 1;
-
-        if(chance == 1 || chance == 2){
-          outcome == "sunny";
-        } else if(chance == 3 || chance == 4){
-          outcome == "rainy";
-        } else if(chance == 5){
-          outcome == "snowy";
-        } else if(chance == 6 || chance == 7){
-          outcome == "cloudy";
-        } else if(chance == 8 || chance == 9 || chance == 10){
-          outcome == "clear";
-        }
-
-
-
-         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
-         con.query(sql, console.log);
-         console.log("Weather in " + message.guild.id + " changed to " + outcome);
-
-      });  
-    }
-
-    const job = new CronJob('* * * * *', function() {
-      weather();
-    });
-    console.log("Weather change initiated")
-    job.start();
+    
 
 
     function weatherCheck(){
@@ -2533,31 +2541,32 @@ function rps(){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("☀️ SUNNY ☀️")  
+            .setTitle("☀️ SUNNY ☀️"); 
+
             message.channel.send(reveal);
         } else if(weather == "rainy"){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("🌧️ RAINY 🌧️")  
+            .setTitle("🌧️ RAINY 🌧️");  
             message.channel.send(reveal);
         } else if(weather == "cloudy"){
           let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("☁️ CLOUDY ☁️")  
+            .setTitle("☁️ CLOUDY ☁️");  
             message.channel.send(reveal);
         } else if(weather == "snowy"){
            let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("🌨️ SNOWY 🌨️")  
+            .setTitle("🌨️ SNOWY 🌨️");  
             message.channel.send(reveal);
         } else if(weather == "clear"){
             let reveal = new Discord.RichEmbed()
 
             
-            .setTitle("✨ CLEAR ✨")  
+            .setTitle("✨ CLEAR ✨");  
             message.channel.send(reveal);
           } 
           return; 
