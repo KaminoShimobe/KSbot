@@ -7353,7 +7353,7 @@ function waterSeed(){
                var petals = rows[plant-1].hexcolor; 
 
              if(phase <= 30 && stage == "seed"){
-                sql3 = `UPDATE plant SET status = 'sprout' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "sprout";
                 message.channel.send("Your seed has sprouted!")
@@ -7362,16 +7362,16 @@ function waterSeed(){
                 con.query(sql3);
                 //stage = "flower"
                 message.channel.send("Your sprout has bloomed!")
+                console.log()
                 clearInterval(countdown);
                 countdown = setInterval(plantHealth, 1000)
-              }
+              } else{
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
               con.query(sql2);
               console.log("Time until flower: " + phase + " sec(s)");
-                if(stage == "flower"){
-                  
-                }
+                
+              }
               });  
               });
             }
@@ -7830,7 +7830,7 @@ const { createCanvas } = require('canvas')
             .setTimestamp();   
             message.channel.send(reveal);
               }
-            } else if(type == "dead"){
+             else if(type == "dead"){
                
   var PixelArt = require('pixel-art');    
 const { createCanvas } = require('canvas')
@@ -7906,7 +7906,7 @@ const { createCanvas } = require('canvas')
             .setTimestamp();   
             message.channel.send(reveal);
               }
-            
+            }
 
 
           });  
