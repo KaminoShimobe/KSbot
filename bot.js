@@ -7333,7 +7333,7 @@ function waterSeed(){
                var petals = rows[plant-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)" + "\n Date: " + d);
+      console.log("Time until flower dies: " + phase + " sec(s)");
 
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown2);
