@@ -106,41 +106,7 @@ bot.on("ready", async () => {
     bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
     
 
-    function weather(){
-      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        let weather = rows[0].weather;
-        var outcome;
 
-        var chance = Math.floor(Math.random * 10) + 1;
-
-        if(chance == 1 || chance == 2){
-          outcome == "sunny";
-        } else if(chance == 3 || chance == 4){
-          outcome == "rainy";
-        } else if(chance == 5){
-          outcome == "snowy";
-        } else if(chance == 6 || chance == 7){
-          outcome == "cloudy";
-        } else if(chance == 8 || chance == 9 || chance == 10){
-          outcome == "clear";
-        }
-
-
-
-         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
-         con.query(sql, console.log);
-         console.log("Weather in " + message.guild.id + " changed to " + outcome);
-
-      });  
-    }
-
-    const job = new CronJob('* * * * *', function() {
-      weather();
-    });
-    console.log("Weather change initiated")
-    job.start();      
         
     });
     
@@ -2518,42 +2484,85 @@ function rps(){
     }
 
 
-    // function weather(){
-    //   con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-    //     if(err) throw err;
-    //     let sql;
-    //     let weather = rows[0].weather;
-    //     var outcome;
+    function weather(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let weather = rows[0].weather;
+        var outcome;
 
-    //     var chance = Math.floor(Math.random * 10) + 1;
+        var chance = Math.floor(Math.random * 10) + 1;
 
-    //     if(chance == 1 || chance == 2){
-    //       outcome == "sunny";
-    //     } else if(chance == 3 || chance == 4){
-    //       outcome == "rainy";
-    //     } else if(chance == 5){
-    //       outcome == "snowy";
-    //     } else if(chance == 6 || chance == 7){
-    //       outcome == "cloudy";
-    //     } else if(chance == 8 || chance == 9 || chance == 10){
-    //       outcome == "clear";
-    //     }
+        if(chance == 1 || chance == 2){
+          outcome == "sunny";
+        } else if(chance == 3 || chance == 4){
+          outcome == "rainy";
+        } else if(chance == 5){
+          outcome == "snowy";
+        } else if(chance == 6 || chance == 7){
+          outcome == "cloudy";
+        } else if(chance == 8 || chance == 9 || chance == 10){
+          outcome == "clear";
+        }
 
 
 
-    //      sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
-    //      con.query(sql, console.log);
-    //      console.log("Weather in " + message.guild.id + " changed to " + outcome);
+         sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${message.guild.id}'`;
+         con.query(sql, console.log);
+         console.log("Weather in " + message.guild.id + " changed to " + outcome);
 
-    //   });  
-    // }
+      });  
+    }
 
-    // const job = new CronJob('* * * * *', function() {
-    //   weather();
-    // });
-    // console.log("Weather change initiated")
-    // job.start();
+    const job = new CronJob('* * * * *', function() {
+      weather();
+    });
+    console.log("Weather change initiated")
+    job.start();
 
+
+    function weatherCheck(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let weather = rows[0].weather;
+        
+        
+        
+        if(weather == "sunny"){
+            let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("☀️ SUNNY ☀️")  
+            message.channel.send(reveal);
+        } else if(weather == "rainy"){
+            let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("🌧️ RAINY 🌧️")  
+            message.channel.send(reveal);
+        } else if(weather == "cloudy"){
+          let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("☁️ CLOUDY ☁️")  
+            message.channel.send(reveal);
+        } else if(weather == "snowy"){
+           let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("🌨️ SNOWY 🌨️")  
+            message.channel.send(reveal);
+        } else if(weather == "clear"){
+            let reveal = new Discord.RichEmbed()
+
+            
+            .setTitle("✨ CLEAR ✨")  
+            message.channel.send(reveal);
+          } 
+          return; 
+      });  
+    }
 
     function boom(){
         
@@ -13620,6 +13629,15 @@ if(command === `!cron`){
     if(message.author.id == '242118931769196544'){
        
         cronTest();
+
+    }
+
+}  
+
+if(command === `!weather`){
+    if(message.author.id == '242118931769196544'){
+       
+        weatherCheck();
 
     }
 
