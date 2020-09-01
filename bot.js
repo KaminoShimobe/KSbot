@@ -7484,7 +7484,21 @@ function waterSeed(){
                 sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
-              
+                con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+         let sql;
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = Number(rows[0].status);
+
+        sql = `UPDATE garden SET plants = '${newList}', status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        con.query(sql);
+
+        var plantList = plants.split(",");
+        var newList = plants.replace(plantList[index - 1], type + "#" + hexcolor);
+        console.log(plantList[index-1]);
+
+      });
 
                 message.channel.send("Your sprout has bloomed!")
                 console.log()
@@ -7537,7 +7551,7 @@ function ksSeedDelete(){
          let sql;
         let slots = rows[0].slots;
         let plants = rows[0].plants;
-        let status = Numbwe(rows[0].status);
+        let status = Number(rows[0].status);
 
          if(status <= 0 || index > status || index <= 0 || index == undefined){
           message.reply("You don't have a plant in that slot!");
