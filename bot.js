@@ -7521,7 +7521,7 @@ function waterSeed(){
             }
             
 
-            if(plantStage == "flower" && life > 0 && life <= 75  && KSplants.has(shade + message.author.id) == true){
+            if(plantStage == "flower" && life > 0 && life <= 75  && KSplants.has(shade + message.author.id) == true && messageArray[0] == `${prefix}water`){
         sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
         if(life < 10){
@@ -7532,7 +7532,7 @@ function waterSeed(){
         return;
       }    
 
-      if(plantStage == "flower" && life > 0 && life >= 75 && KSplants.has(shade + message.author.id) == true){ 
+      if(plantStage == "flower" && life > 0 && life >= 75 && KSplants.has(shade + message.author.id) == true && messageArray[0] == `${prefix}water`){ 
         message.channel.send("Your plant is healthy enough!")
         return;
       } 
