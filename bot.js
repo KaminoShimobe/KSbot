@@ -7313,7 +7313,7 @@ function ksNewMysterySeed(){
         let sql;
         let slots = rows[0].slots;
         let plants = rows[0].plants;
-        let status = rows[0].status;
+        let status = Number(rows[0].status);
         var plantList = plants.split(",");
         var petals;
         var seeds = Math.floor(Math.random()*2);
@@ -7537,7 +7537,7 @@ function ksSeedDelete(){
          let sql;
         let slots = rows[0].slots;
         let plants = rows[0].plants;
-        let status = rows[0].status;
+        let status = Numbwe(rows[0].status);
 
          if(status <= 0 || index > status || index <= 0 || index == undefined){
           message.reply("You don't have a plant in that slot!");
@@ -7585,7 +7585,7 @@ function ksGardenCheck(){
         }
         let slots = rows[0].slots;
         let plants = rows[0].plants;
-        let status = rows[0].status;
+        let status = Number(rows[0].status);
         if(status == 0){
           message.reply("You have no plants in your garden!");
           return;
