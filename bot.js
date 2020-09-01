@@ -7467,8 +7467,8 @@ function tradePlant(){
                     });  
 
                  message.channel.send(`${other} You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)`);
-                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
-                    collector.once('collect', message => {
+                 const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
+                    collectorer.once('collect', message => {
                         var types = [type, type2];
                         var newPetals = petals2.subString(0, 3) + petals.subString(3, 7);
                         if (message.content == `no` || message.content == `No`) {
