@@ -164,7 +164,7 @@ function weather(servers, index){
 
          sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${rows[index].id}'`;
          con.query(sql);
-         console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
+         //console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
 
         }
     
@@ -7375,8 +7375,8 @@ function ksNewMysterySeed(){
  
 }
 
-function waterSeed(){
-  var plant = parseInt(messageArray[1]);
+function waterSeed(plant){
+    
   
    con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
@@ -7388,13 +7388,13 @@ function waterSeed(){
             return;
           }
 
-          if(rows[plant-1].owner == undefined) {
+          if(rows[plant].owner == undefined) {
             message.reply(" You dont have a plants in this garden slot!");
             return;
           }
-            var life = rows[plant-1].health;
-            var plantStage = rows[plant-1].status;
-            var shade = rows[plant-1].hexcolor;
+            var life = rows[plant].health;
+            var plantStage = rows[plant].status;
+            var shade = rows[plant].hexcolor;
             var countdown;
             var countdown2;
 
@@ -7433,9 +7433,9 @@ function waterSeed(){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-               var phase = rows[plant-1].health;
-               var stage = rows[plant-1].status;
-               var petals = rows[plant-1].hexcolor; 
+               var phase = rows[plant].health;
+               var stage = rows[plant].status;
+               var petals = rows[plant].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
       console.log("Time until flower dies: " + phase + " sec(s)");
@@ -7470,10 +7470,10 @@ function waterSeed(){
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
 
-               var phase = rows[plant-1].health;
-               var stage = rows[plant-1].status;
-               var petals = rows[plant-1].hexcolor; 
-               var type = rows[plant-1].type;
+               var phase = rows[plant].health;
+               var stage = rows[plant].status;
+               var petals = rows[plant].hexcolor; 
+               var type = rows[plant].type;
 
              if(phase <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
@@ -7491,7 +7491,7 @@ function waterSeed(){
         let plants = rows[0].plants;
         let status = Number(rows[0].status);
         var plantList = plants.split(",");
-        var newList = plants.replace(plantList[status], type + "#" + petals);
+        var newList = plants.replace(plantList[status], type + " #" + petals);
         console.log(plantList[status]);
 
         sql = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
@@ -7560,8 +7560,8 @@ function ksSeedDelete(){
         }
         
         var plantList = plants.split(",");
-        var newList = plants.replace("," + plantList[index - 1], "");
-        console.log(plantList[index-1]);
+        var newList = plants.replace("," + plantList[index], "");
+        console.log(plantList[index]);
        
         
         sql = `UPDATE garden SET plants = '${newList}', status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
@@ -7598,13 +7598,18 @@ function ksGardenCheck(){
             message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
             return;
         }
+
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = Number(rows[0].status);
+
         if(status == 0){
           message.reply("You have no plants in your garden!");
           return;
         }
+
+        
+
         var plantList = plants.split(",");
         var plantOutput;
         for(var i = 1; i < plantList.length; i++){
@@ -7638,7 +7643,12 @@ function ksGardenCheck(){
             let petals = rows[index - 1].hexcolor;
             let time = rows[index - 1].health;
 
-            
+            if(KSplants.has(message.author.id)){
+          //do nothing
+        } else {
+          KSplants.add(message.author.id);
+          rows.forEach(waterSeed);
+        }
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
@@ -13663,6 +13673,7 @@ if(command === `!garden`){
 
 if(command === `!water` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){
+      var plant = parseInt(messageArray[1]) - 1;
         waterSeed();
 
     }
