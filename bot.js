@@ -7309,9 +7309,110 @@ function ksNewGarden(){
       });
 }
 
-function ksNewCrossSeed(){
 
-   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+
+function tradePlant(){
+    let other = message.mentions.users.first();
+    var trade1 = parseInt(messageArray[2]);
+    var trade2 = parseInt(messageArray[4]);
+    if(other.id == message.author.id){
+      message.reply("You can't trade flowers with yourself!")
+      return;
+    }
+   con.query(`SELECT * FROM garden WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let sql2;
+        let sql3;
+        let sql4;
+        if(rows.length < 1){
+          message.reply("They don't have a garden!")
+          return;
+        }
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = Number(rows[0].status);
+        var plantList = plants.split(",");
+        
+        
+
+         con.query(`SELECT * FROM plant WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+              if(rows[trade2-1] == undefined){
+                message.reply("They don't have a plant in that slot!");
+                return;
+              }
+               var type = rows[trade2-1].type;
+               var phase = rows[trade2-1].health;
+               var stage = rows[trade2-1].status;
+               var petals = rows[trade2-1].hexcolor;
+
+               if(stage == "dead"){
+                message.reply("You can't trade for a dead plant!");
+                return;
+               }
+
+               if(stage == "dead"){
+                message.reply("You can't trade for a dead plant!");
+                return;
+               }
+
+        con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+        let slots2 = rows[0].slots;
+        let plants2 = rows[0].plants;
+        let status2 = Number(rows[0].status);
+        var plantList2 = plants2.split(",");
+        
+        
+
+        con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+              if(rows[trade1-1] == undefined){
+                message.reply("You don't have a plant in that slot!");
+                return;
+              }
+               var type2 = rows[trade1-1].type;
+               var phase2 = rows[trade1-1].health;
+               var stage2 = rows[trade1-1].status;
+               var petals2 = rows[trade1-1].hexcolor;
+
+               if(stage2 == "dead"){
+                message.reply("You can't trade a dead plant!");
+                return;
+               }
+
+               if(stage == "dead"){
+                message.reply("You can't trade for a dead plant!");
+                return;
+               }
+
+               var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
+               var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
+
+               sql = `UPDATE plant SET type = '${type2}', status = '${stage2}', health = ${200}, hexcolor = '${petals2}' WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+               con.query(sql);
+               sql2 = `UPDATE plant SET type = '${type}', status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
+               con.query(sql2);
+               sql3 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
+               con.query(sql3);
+               sql4 = `UPDATE garden SET plants = '${newList2}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+               con.query(sql4);
+
+               message.channel.send(`${other} traded their #${petals} ${type} for ` + message.author + `'s #${petals2} ${type2}!`)
+
+               function crossPollenate(){
+                message.reply("You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)")
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        var types = [type, type2];
+                        var newPetals = petals.subString(0, 3) + petals2.subString(3, 7);
+                        if (message.content == `no` || message.content == `No`) {
+                         message.reply("The cross-pollenated seed was trashed.");
+                            return;
+                        } else if (message.content == `yes` || message.content == `Yes`) {
+                          con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
         let slots = rows[0].slots;
@@ -7366,102 +7467,6 @@ function ksNewCrossSeed(){
 
 
       });
-
- 
-}
-
-function tradePlant(){
-    let other = message.mentions.users.first();
-    var trade1 = parseInt(messageArray[2]);
-    var trade2 = parseInt(messageArray[4]);
-    if(other.id == message.author.id){
-      message.reply("You can't trade flowers with yourself!")
-      return;
-    }
-   con.query(`SELECT * FROM garden WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        let sql2;
-        let sql3;
-        let sql4;
-        if(rows.length < 1){
-          message.reply("They don't have a garden!")
-          return;
-        }
-        let slots = rows[0].slots;
-        let plants = rows[0].plants;
-        let status = Number(rows[0].status);
-        var plantList = plants.split(",");
-        
-        
-
-         con.query(`SELECT * FROM plant WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-              if(err) throw err;
-              if(rows[trade2-1] == undefined){
-                message.reply("They don't have a plant in that slot!");
-                return;
-              }
-               var type = rows[trade2-1].type;
-               var phase = rows[trade2-1].health;
-               var stage = rows[trade2-1].status;
-               var petals = rows[trade2-1].hexcolor;
-
-               if(stage == "dead"){
-                message.reply("You can't trade for a dead plant!");
-                return;
-               }
-
-        con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        
-        let slots2 = rows[0].slots;
-        let plants2 = rows[0].plants;
-        let status2 = Number(rows[0].status);
-        var plantList2 = plants2.split(",");
-        
-        
-
-        con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-              if(err) throw err;
-              if(rows[trade1-1] == undefined){
-                message.reply("You don't have a plant in that slot!");
-                return;
-              }
-               var type2 = rows[trade1-1].type;
-               var phase2 = rows[trade1-1].health;
-               var stage2 = rows[trade1-1].status;
-               var petals2 = rows[trade1-1].hexcolor;
-
-               if(stage2 == "dead"){
-                message.reply("You can't trade a dead plant!");
-                return;
-               }
-
-               var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
-               var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
-
-               sql = `UPDATE plant SET type = '${type2}', status = '${stage2}', health = ${200}, hexcolor = '${petals2}' WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-               con.query(sql);
-               sql2 = `UPDATE plant SET type = '${type}', status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
-               con.query(sql2);
-               sql3 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
-               con.query(sql3);
-               sql4 = `UPDATE garden SET plants = '${newList2}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
-               con.query(sql4);
-
-               message.channel.send(`${other} traded their #${petals} ${type} for ` + message.author + `'s #${petals2} ${type2}!`)
-
-               function crossPollenate(){
-                message.reply("You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)")
-                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    collector.once('collect', message => {
-                        var types = [type, type2];
-                        var newPetals = petals.subString(0, 3) + petals2.subString(3, 7);
-                        if (message.content == `no` || message.content == `No`) {
-                         message.reply("The cross-pollenated seed was trashed.");
-                            return;
-                        } else if (message.content == `yes` || message.content == `Yes`) {
-                         ksNewCrossSeed();
                             return;
                         }
                     });  
@@ -7475,7 +7480,60 @@ function tradePlant(){
                          message.reply("The cross-pollenated seed was trashed.");
                             return;
                         } else if (message.content == `yes` || message.content == `Yes`) {
-                         ksNewCrossSeed();
+                          con.query(`SELECT * FROM garden WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = Number(rows[0].status);
+        var plantList = plants.split(",");
+        var petals;
+        var seeds = Math.floor(Math.random()*1);
+        var newPlant = types[seeds];
+        
+
+        var addPlant = plants + "," + "???" + " " + "#??????";    
+      
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        } else{
+
+            if(status >= slots){
+              message.reply(" doesn't have enough space in their garden!");
+              return;
+            }
+
+           sql = `UPDATE garden SET plants = '${addPlant}', status = '${status + 1}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
+           con.query(sql);
+         con.query(`SELECT * FROM plant WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+            
+            
+            
+
+
+            
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${other.id}', '${message.guild.id}', '${types[seeds]}', 'seed', ${120}, '${newPetals}')`;
+                con.query(sql2, console.log);
+                message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
+                
+                
+
+                
+
+            
+
+
+
+                return;
+           
+
+        });
+        }
+
+
+      });
                             return;
                         }
                     }); 
