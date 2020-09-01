@@ -180,60 +180,8 @@ function weather(servers, index){
 
 weatherChange();
 
-function reliven(){ 
 
-         
 
-       con.query(`SELECT * FROM plant`, (err, rows) => {
-              if(err) throw err;
-
-              
-
-            function plantHealth(plant, index){
-                con.query(`SELECT * FROM server`, (err, rows) => {
-        if(err) throw err;
-        let sql3;
-       let weather = rows[index].weather; 
-       var weatherFactor;  
-                  if(weather == "sunny"){
-                  weatherFactor = 2;
-                } else if(weather == "snowy"){
-                  weatherFactor = 4;
-                } else if(weather == "rainy"){
-                  weatherFactor = 0;
-                } else if(weather == "cloudy"){
-                  weatherFactor = 1;
-                } else {
-                  weatherFactor = 2;
-                }
-
-               var phase = rows[index].health;
-               var stage = rows[index].status;
-               var petals = rows[index].hexcolor;
-               if(stage == flower){ 
-               
-      sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE hexcolor = '${petals}'`;
-      con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)");
-      }
-
-      if(phase <= 0 && stage == "flower"){
-        clearInterval(countdown);
-        sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-        con.query(sql3);
-
-        message.channel.send("Your plant died...")
-      }
-      
-       })      
-     }
-     var countdown = setInterval(plantHealth, 1000);
-     rows.forEach(countdown);
-   
-     });
-
-        }    
-        reliven();
 });
 
 bot.on("guildCreate", guild => {
@@ -7453,21 +7401,10 @@ function waterSeed(){
             var countdown;
             var countdown2;
 
-      if(plantStage == "flower" && life > 0 && life <= 75){
-        sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
-        con.query(sql3);
-        if(life < 10){
-          message.channel.send("You watered your plant! It looks like it could use some more water...")
-        } else if(life > 10 && life < 75){
-          message.channel.send("You watered your plant! It looks great!.")
-        }
-        return;
-      }    
 
-      if(plantStage == "flower" && life > 0 && life >= 75){ 
-        message.channel.send("Your plant is healthy enough!")
-        return;
-      } 
+       
+
+      
 
      function plantHealth(){
  con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
@@ -7494,6 +7431,11 @@ function waterSeed(){
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
       console.log("Time until flower dies: " + phase + " sec(s)");
+      if(KSplants.has(shade + message.author.id) == true){
+
+       } else { 
+        KSplants.add(shade + message.author.id)
+       } 
 
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown2);
@@ -7571,14 +7513,33 @@ function waterSeed(){
               });
             }
 
-     
-            
-            if(rows[plant-1].status != "flower"){
+            if(rows[plant-1].status != "flower" && KSplants.has(shade + message.author.id) == false){
 
               countdown = setInterval(countDown, 1000)
-            } else if(rows[plant-1].status == "flower"){
+            } else if(rows[plant-1].status == "flower" && KSplants.has(shade + message.author.id) == false){
               countdown = setInterval(plantHealth, 1000)
             }
+            
+
+            if(plantStage == "flower" && life > 0 && life <= 75  && KSplants.has(shade + message.author.id) == true){
+        sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
+        con.query(sql3);
+        if(life < 10){
+          message.channel.send("You watered your plant! It looks like it could use some more water...")
+        } else if(life > 10 && life < 75){
+          message.channel.send("You watered your plant! It looks great!.")
+        }
+        return;
+      }    
+
+      if(plantStage == "flower" && life > 0 && life >= 75 && KSplants.has(shade + message.author.id) == true){ 
+        message.channel.send("Your plant is healthy enough!")
+        return;
+      } 
+
+     
+            
+            
 
            }); 
  
@@ -7851,7 +7812,7 @@ function ksGardenCheck(){
             message.channel.send(reveal);
             return;
             } else if(stage == "flower"){
-              
+              waterSeed();
               if(type == "daisy"){
                 var PixelArt = require('pixel-art');    
                 const { createCanvas } = require('canvas')
