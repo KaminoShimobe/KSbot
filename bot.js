@@ -179,6 +179,61 @@ function weather(servers, index){
 }
 
 weatherChange();
+
+function reliven(){ 
+
+         
+
+       con.query(`SELECT * FROM plant`, (err, rows) => {
+              if(err) throw err;
+
+              
+
+            function plantHealth(plant, index){
+                con.query(`SELECT * FROM server`, (err, rows) => {
+        if(err) throw err;
+        let sql3;
+       let weather = rows[index].weather; 
+       var weatherFactor;  
+                  if(weather == "sunny"){
+                  weatherFactor = 2;
+                } else if(weather == "snowy"){
+                  weatherFactor = 4;
+                } else if(weather == "rainy"){
+                  weatherFactor = 0;
+                } else if(weather == "cloudy"){
+                  weatherFactor = 1;
+                } else {
+                  weatherFactor = 2;
+                }
+
+               var phase = rows[index].health;
+               var stage = rows[index].status;
+               var petals = rows[index].hexcolor;
+               if(stage == flower){ 
+               
+      sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE hexcolor = '${petals}'`;
+      con.query(sql3);
+      console.log("Time until flower dies: " + phase + " sec(s)");
+      }
+
+      if(phase <= 0 && stage == "flower"){
+        clearInterval(countdown);
+        sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+        con.query(sql3);
+
+        message.channel.send("Your plant died...")
+      }
+      
+       })      
+     }
+     var countdown = setInterval(plantHealth, 1000);
+     rows.forEach(countdown);
+   
+     });
+
+        }    
+        reliven();
 });
 
 bot.on("guildCreate", guild => {
@@ -7643,56 +7698,7 @@ function ksGardenCheck(){
             let petals = rows[index - 1].hexcolor;
             let time = rows[index - 1].health;
 
-           function reliven(){ 
-
-         con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        
-       let weather = rows[0].weather; 
-       var weatherFactor;   
-
-       con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-              if(err) throw err;
-
-              
-
-            function plantHealth(plant, index){
-                
-                  if(weather == "sunny"){
-                  weatherFactor = 2;
-                } else if(weather == "snowy"){
-                  weatherFactor = 4;
-                } else if(weather == "rainy"){
-                  weatherFactor = 0;
-                } else if(weather == "cloudy"){
-                  weatherFactor = 1;
-                } else {
-                  weatherFactor = 2;
-                }
-               var phase = rows[index].health;
-               var stage = rows[index].status;
-               var petals = rows[index].hexcolor; 
-               
-      sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-      con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)");
-
-      if(phase <= 0 && stage == "flower"){
-        clearInterval(countdown);
-        sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
-        con.query(sql3);
-
-        message.channel.send("Your plant died...")
-      }
-      
-             
-     }
-     rows.forEach(setInterval(plantHealth, 1000))
-
-   });
-     });
-
-        }    
+           
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
@@ -7845,7 +7851,7 @@ function ksGardenCheck(){
             message.channel.send(reveal);
             return;
             } else if(stage == "flower"){
-              reliven()
+              
               if(type == "daisy"){
                 var PixelArt = require('pixel-art');    
                 const { createCanvas } = require('canvas')
