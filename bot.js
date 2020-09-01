@@ -7646,7 +7646,7 @@ function ksGardenCheck(){
             function plantHealth(plant, index){
  con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
-        
+        console.log(index)
        let weather = rows[0].weather; 
        var weatherFactor;
                   if(weather == "sunny"){
@@ -7662,9 +7662,9 @@ function ksGardenCheck(){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-               var phase = rows[index].health;
-               var stage = rows[index].status;
-               var petals = rows[index].hexcolor; 
+               var phase = rows[index-1].health;
+               var stage = rows[index-1].status;
+               var petals = rows[index-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
       console.log("Time until flower dies: " + phase + " sec(s)");
