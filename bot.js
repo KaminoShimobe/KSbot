@@ -2542,7 +2542,7 @@ function rps(){
 
             
             .setTitle("☀️ SUNNY ☀️")
-            .setDescription("The current weather is:"); 
+            .setDescription("Plants grow twice as fast in the sun!"); 
 
             message.channel.send(reveal);
         } else if(weather == "rainy"){
@@ -2550,28 +2550,28 @@ function rps(){
 
             
             .setTitle("🌧️ RAINY 🌧️")
-            .setDescription("The current weather is:"); 
+            .setDescription("You don't need to water plants in the rain!"); 
             message.channel.send(reveal);
         } else if(weather == "cloudy"){
           let reveal = new Discord.RichEmbed()
 
             
             .setTitle("☁️ CLOUDY ☁️")
-            .setDescription("The current weather is:");   
+            .setDescription("No effects.");   
             message.channel.send(reveal);
         } else if(weather == "snowy"){
            let reveal = new Discord.RichEmbed()
 
             
             .setTitle("🌨️ SNOWY 🌨️")
-            .setDescription("The current weather is:");   
+            .setDescription("Plants grow slower in snow, and die faster!");   
             message.channel.send(reveal);
         } else if(weather == "clear"){
             let reveal = new Discord.RichEmbed()
 
             
             .setTitle("✨ CLEAR ✨")
-            .setDescription("The current weather is:");   
+            .setDescription("No effects.");   
             message.channel.send(reveal);
           } 
           return; 
@@ -7420,10 +7420,12 @@ function waterSeed(){
         
        let weather = rows[0].weather; 
        var weatherFactor;
-                  if(weather == "Sunny"){
+                  if(weather == "sunny"){
                   weatherFactor = .5;
-                } else if(weather == "Snowy"){
+                } else if(weather == "snowy"){
                   weatherFactor = 2;
+                } else if(weather == "rainy"){
+                  weatherFactor = 0;
                 } else {
                   weatherFactor = 1;
                 }
@@ -7456,10 +7458,10 @@ function waterSeed(){
        var weatherFactor;
        
 
-                  if(weather == "Sunny"){
-                  weatherFactor = .5;
-                } else if(weather == "Snowy"){
+                  if(weather == "sunny"){
                   weatherFactor = 2;
+                } else if(weather == "snowy"){
+                  weatherFactor = .5;
                 } else {
                   weatherFactor = 1;
                 }
