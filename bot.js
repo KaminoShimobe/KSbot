@@ -7407,7 +7407,7 @@ function tradePlant(){
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         var types = [type, type2];
-                        var newPetals = petals.subString(0, 3) + petals2.subString(3, 7);
+                        var newPetals = petals.substring(0, 3) + petals2.substring(3, 7);
                         if (message.content == `no` || message.content == `No`) {
                          message.reply("The cross-pollenated seed was trashed.");
                             return;
@@ -7475,7 +7475,7 @@ function tradePlant(){
                  const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collectorer.once('collect', message => {
                         var types = [type, type2];
-                        var newPetals = petals2.subString(0, 3) + petals.subString(3, 7);
+                        var newPetals = petals2.substring(0, 3) + petals.substring(3, 7);
                         if (message.content == `no` || message.content == `No`) {
                          message.reply("The cross-pollenated seed was trashed.");
                             return;
