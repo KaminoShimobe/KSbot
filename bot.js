@@ -7484,28 +7484,7 @@ function waterSeed(){
                 sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
-                con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
-              if(err) throw err;
-             let sql4;
-            
-            var plantss = rows[0].plants;
-           let stats = rows[0].status;
-           var revealedPlant = type + " #" + petals;
-           var plantList = plantss.split(",");
-           console.log("status: " + stats);
-           console.log("Plant list: " + plantList)
-           console.log("revealed Plant " + revealedPlant)
-           console.log("Plants " + plantss)
-
-           
-           var newList = plantss.replace(plantList[stats], revealedPlant);
-           console.log(newList + " New List")
-
-           sql4 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
-           con.query(sql4);
-
-
-         });
+              
 
                 message.channel.send("Your sprout has bloomed!")
                 console.log()
@@ -7607,6 +7586,10 @@ function ksGardenCheck(){
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = rows[0].status;
+        if(status == 0){
+          message.reply("You have no plants in your garden!");
+          return;
+        }
         var plantList = plants.split(",");
         var plantOutput;
         for(var i = 1; i < plantList.length; i++){
@@ -7638,8 +7621,9 @@ function ksGardenCheck(){
             let type = rows[index - 1].type;
             let stage = rows[index - 1].status;
             let petals = rows[index - 1].hexcolor;
+            let time = rows[index - 1].health;
 
-            message.channel.send("Type: " + type + " Stage: " + stage + " Petals: " + petals)
+            
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
@@ -7711,8 +7695,8 @@ function ksGardenCheck(){
             
       
             .attachFile(flower)
-            .setColor(petals)
-            .setDescription("Color: #" + petals)
+            // .setColor(petals)
+            .setDescription("Time until bloom: " + (time/2) + "min(s)")
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -7786,8 +7770,8 @@ function ksGardenCheck(){
             
       
             .attachFile(flower)
-            .setColor(petals)
-            .setDescription("Color: #" + petals)
+            // .setColor(petals)
+            .setDescription("Time until bloom: " + (time/2) + "min(s)")
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -7864,7 +7848,7 @@ function ksGardenCheck(){
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals)
+            .setDescription("Color: #" + petals + "\n Type: daisy")
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -7940,7 +7924,7 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals)
+            .setDescription("Color: #" + petals + "\n Type: tulip")
             .setTimestamp();   
             message.channel.send(reveal);
               } else if(type == "lily"){
@@ -8015,7 +7999,7 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals)
+            .setDescription("Color: #" + petals + "\n Type: lily")
             .setTimestamp();   
             message.channel.send(reveal);
               }
@@ -8091,7 +8075,8 @@ const { createCanvas } = require('canvas')
             
       
             .attachFile(flower)
-            .setDescription("This Plant is Dead")
+            .setColor(petals)
+            .setDescription("Color: #" + petals + "\n Type: " + type + "\n Status: dead")
             .setTimestamp();   
             message.channel.send(reveal);
               }
