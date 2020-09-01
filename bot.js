@@ -7351,7 +7351,7 @@ function ksNewMysterySeed(){
 
 
             
-                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${60}, '${petals}')`;
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${120}, '${petals}')`;
                 con.query(sql2, console.log);
                 message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
                 
@@ -7438,7 +7438,7 @@ function waterSeed(){
                var petals = rows[plant-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
-      console.log("Time until flower dies: " + (phase/2) + " sec(s)");
+      console.log("Time until flower dies: " + phase + " sec(s)");
 
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown2);
@@ -7473,6 +7473,7 @@ function waterSeed(){
                var phase = rows[plant-1].health;
                var stage = rows[plant-1].status;
                var petals = rows[plant-1].hexcolor; 
+               var type = rows[plant-1].type;
 
              if(phase <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
@@ -7483,6 +7484,22 @@ function waterSeed(){
                 sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
+                con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+             let sql4;
+            
+            let plants = rows[0].plants;
+           let status = rows[0].status;
+
+           var plantList = plants.split(",");
+           var newList = plants.replace(plantList[status - 1], type + " #" + hexcolor );
+
+           sql4 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+           con.query(sql4);
+
+
+         });
+
                 message.channel.send("Your sprout has bloomed!")
                 console.log()
                 clearInterval(countdown);
@@ -7491,7 +7508,7 @@ function waterSeed(){
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
               con.query(sql2);
-              console.log("Time until flower: " + (phase/2) + " sec(s)");
+              console.log("Time until flower: " + phase + " sec(s)");
                 
               }
               });  
@@ -7542,7 +7559,7 @@ function ksSeedDelete(){
         }
         
         var plantList = plants.split(",");
-        var newList = plants.replace(plantList[index], "");
+        var newList = plants.replace("," + plantList[index - 1], "");
         
        
         
