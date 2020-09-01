@@ -7493,7 +7493,7 @@ function waterSeed(){
            var revealedPlant = type + " #" + petals;
            var plantList = plantss.split(",");
            console.log("status: " + stats);
-           console.log("Plant list Length: " + plantList[stats])
+           console.log("Plant list: " + plantList)
            console.log("revealed Plant " + revealedPlant)
            console.log("Plants " + plantss)
 
