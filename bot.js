@@ -7379,9 +7379,9 @@ function tradePlant(){
                var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
                var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
 
-               sql = `UPDATE plant SET type = '${type}' status = '${stage}', health = ${200}, hexcolor = ${petals} WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+               sql = `UPDATE plant SET type = '${type2}' status = '${stage2}', health = ${200}, hexcolor = '${petals2}' WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                con.query(sql);
-               sql2 = `UPDATE plant SET type = '${type2}' status = '${stage2}', health = ${200}, hexcolor = ${petals2} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
+               sql2 = `UPDATE plant SET type = '${type}' status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
                con.query(sql2);
                sql3 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
                con.query(sql3);
