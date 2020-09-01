@@ -7309,6 +7309,67 @@ function ksNewGarden(){
       });
 }
 
+function ksNewCrossSeed(){
+
+   con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = Number(rows[0].status);
+        var plantList = plants.split(",");
+        var petals;
+        var seeds = Math.floor(Math.random()*1);
+        var newPlant = types[seeds];
+        
+
+        var addPlant = plants + "," + "???" + " " + "#??????";    
+      
+        if(rows.length < 1) {
+            message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
+            return;
+        } else{
+
+            if(status >= slots){
+              message.reply(" doesn't have enough space in their garden!");
+              return;
+            }
+
+           sql = `UPDATE garden SET plants = '${addPlant}', status = '${status + 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+           con.query(sql);
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+            if(err) throw err;
+            let sql2;
+            let sql3;
+            
+            
+
+
+            
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${types[seeds]}', 'seed', ${120}, '${newPetals}')`;
+                con.query(sql2, console.log);
+                message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
+                
+                
+
+                
+
+            
+
+
+
+                return;
+           
+
+        });
+        }
+
+
+      });
+
+ 
+}
+
 function tradePlant(){
     let other = message.mentions.users.first();
     var trade1 = parseInt(messageArray[2]);
@@ -7389,6 +7450,38 @@ function tradePlant(){
                con.query(sql4);
 
                message.channel.send(`${other} traded their #${petals} ${type} for ` + message.author + `'s #${petals2} ${type2}!`)
+
+               function crossPollenate(){
+                message.reply("You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)")
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        var types = [type, type2];
+                        var newPetals = petals.subString(0, 3) + petals2.subString(3, 7);
+                        if (message.content == `no` || message.content == `No`) {
+                         message.reply("The cross-pollenated seed was trashed.");
+                            return;
+                        } else if (message.content == `yes` || message.content == `Yes`) {
+                         ksNewCrossSeed();
+                            return;
+                        }
+                    });  
+
+                 message.channel.send(`${other} You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)`);
+                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        var types = [type, type2];
+                        var newPetals = petals2.subString(0, 3) + petals.subString(3, 7);
+                        if (message.content == `no` || message.content == `No`) {
+                         message.reply("The cross-pollenated seed was trashed.");
+                            return;
+                        } else if (message.content == `yes` || message.content == `Yes`) {
+                         ksNewCrossSeed();
+                            return;
+                        }
+                    }); 
+               }
+
+               crossPollenate();
     });
     });  
     });
