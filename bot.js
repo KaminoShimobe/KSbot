@@ -7490,9 +7490,14 @@ function waterSeed(){
             
             let plants = rows[0].plants;
            let status = rows[0].status;
-
+           var revealedPlant = type + " #" + petals;
            var plantList = plants.split(",");
-           var newList = plants.replace(plantList[status - 1], type + " #" + petals );
+           console.log(plantList[status - 1])
+           console.log(revealedPlant)
+           console.log(plants)
+
+           
+           var newList = plants.replace(plantList[status - 1], type + " #" + petals);
 
            sql4 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql4);
@@ -7560,7 +7565,7 @@ function ksSeedDelete(){
         
         var plantList = plants.split(",");
         var newList = plants.replace("," + plantList[index - 1], "");
-        
+        console.log(plantList[index-1]);
        
         
         sql = `UPDATE garden SET plants = '${newList}', status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
