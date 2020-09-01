@@ -7490,13 +7490,14 @@ function waterSeed(){
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = Number(rows[0].status);
+        var plantList = plants.split(",");
+        var newList = plants.replace(plantList[status - 1], type + "#" + hexcolor);
+        console.log(plantList[status-1]);
 
-        sql = `UPDATE garden SET plants = '${newList}', status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        sql = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
         con.query(sql);
 
-        var plantList = plants.split(",");
-        var newList = plants.replace(plantList[index - 1], type + "#" + hexcolor);
-        console.log(plantList[index-1]);
+        
 
       });
 
