@@ -13781,7 +13781,7 @@ if(command === `!tradePlant` && messageArray[1] != undefined && messageArray[2] 
         let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
-        waterSeed();
+        tradePlant();
 
     }
 
