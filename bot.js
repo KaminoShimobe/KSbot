@@ -7488,12 +7488,12 @@ function waterSeed(){
               if(err) throw err;
              let sql4;
             
-            let plantss = rows[0].plants;
+            var plantss = rows[0].plants;
            let stats = rows[0].status;
            var revealedPlant = type + " #" + petals;
            var plantList = plantss.split(",");
            console.log("status: " + stats);
-           console.log("Plant list: " + plantList[stats-1])
+           console.log("Plant list: " + plantList[stats - 1])
            console.log("revealed Plant " + revealedPlant)
            console.log("Plants " + plantss)
 
