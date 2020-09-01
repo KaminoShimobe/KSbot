@@ -7295,7 +7295,7 @@ function ksNewGarden(){
         if(err) throw err;
         let sql;
         if(rows.length < 1) {
-            sql = `INSERT INTO garden (owner, slots, plants, status, id) VALUES ('${message.author.id}', ${1}, '', ${0}, '${message.guild.id}')`;
+            sql = `INSERT INTO garden (owner, slots, plants, status, id) VALUES ('${message.author.id}', ${4}, '', ${0}, '${message.guild.id}')`;
             con.query(sql, console.log);
             message.reply(" has started a new garden in the **" + message.guild.name + "** server!");
         } else{
