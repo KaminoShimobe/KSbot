@@ -7309,6 +7309,92 @@ function ksNewGarden(){
       });
 }
 
+function tradePlant(){
+    let other = message.mentions.users.first();
+    var trade1 = parseInt(messageArray[2]);
+    var trade2 = parseInt(messageArray[4]);
+    if(other.id == message.author.id){
+      message.reply("You can't trade flowers with yourself!")
+      return;
+    }
+   con.query(`SELECT * FROM garden WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let sql2;
+        let sql3;
+        let sql4;
+        if(rows.length < 1){
+          message.reply("They don't have a garden!")
+          return;
+        }
+        let slots = rows[0].slots;
+        let plants = rows[0].plants;
+        let status = Number(rows[0].status);
+        var plantList = plants.split(",");
+        
+        
+
+         con.query(`SELECT * FROM plant WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+              if(rows[trade2] == undefined){
+                message.reply("They don't have a plant in that slot!");
+                return;
+              }
+               var type = rows[trade2-1].type;
+               var phase = rows[trade2-1].health;
+               var stage = rows[trade2-1].status;
+               var petals = rows[trade2-1].hexcolor;
+
+               if(stage == "dead"){
+                message.reply("You can't trade for a dead plant!");
+                return;
+               }
+
+        con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+        let slots2 = rows[0].slots;
+        let plants2 = rows[0].plants;
+        let status2 = Number(rows[0].status);
+        var plantList2 = plants2.split(",");
+        
+        
+
+        con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+              if(rows[trade1] == undefined){
+                message.reply("You don't have a plant in that slot!");
+                return;
+              }
+               var type2 = rows[trade1-1].type;
+               var phase2 = rows[trade1-1].health;
+               var stage2 = rows[trade1-1].status;
+               var petals2 = rows[trade1-1].hexcolor;
+
+               if(stage2 == "dead"){
+                message.reply("You can't trade a dead plant!");
+                return;
+               }
+
+               var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
+               var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
+
+               sql = `UPDATE plant SET type = '${type}' status = '${stage}', health = ${200}, hexcolor = ${petals} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
+               con.query(sql);
+               sql2 = `UPDATE plant SET type = '${type2}' status = '${stage2}', health = ${200}, hexcolor = ${petals2} WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+               con.query(sql2);
+               sql3 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
+               con.query(sql3);
+               sql4 = `UPDATE garden SET plants = '${newList2}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+               con.query(sql4);
+
+               message.channel.send(`${other} traded their #${petals} ${type} for ` + message.author + `'s #${petals2} ${type2}!`)
+    });
+    });  
+    });
+    });  
+}
+
 function ksNewMysterySeed(){
 
    con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
@@ -13643,7 +13729,7 @@ if(command === `!lily`){
 }
 
 if(command === `!newGarden`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksNewGarden();
 
     }
@@ -13651,7 +13737,7 @@ if(command === `!newGarden`){
 }
 
 if(command === `!mysterySeed`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksNewMysterySeed();
 
     }
@@ -13659,7 +13745,7 @@ if(command === `!mysterySeed`){
 }
 
 if(command === `!deleteSeed`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksSeedDelete();
 
     }
@@ -13667,7 +13753,7 @@ if(command === `!deleteSeed`){
 }
 
 if(command === `!deleteGarden`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksGardenDelete();
 
     }
@@ -13675,7 +13761,7 @@ if(command === `!deleteGarden`){
 }
 
 if(command === `!garden`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         ksGardenCheck();
 
     }
@@ -13683,7 +13769,18 @@ if(command === `!garden`){
 }
 
 if(command === `!water` && messageArray[1] != undefined){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        waterSeed();
+
+    }
+
+}
+
+if(command === `!tradePlant` && messageArray[1] != undefined && messageArray[2] != undefined && messageArray[3] == "for" && messageArray[4] != undefined){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         waterSeed();
 
     }
@@ -13702,7 +13799,7 @@ if(command === `!cron`){
 }  
 
 if(command === `!weather`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
        
         weatherCheck();
 
