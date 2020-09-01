@@ -7498,7 +7498,7 @@ function waterSeed(){
            console.log("Plants " + plantss)
 
            
-           var newList = plants.replace(plantList[stats-1], revealedPlant);
+           var newList = plantss.replace(plantList[stats-1], revealedPlant);
            console.log(newList + " New List")
 
            sql4 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
