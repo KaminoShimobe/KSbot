@@ -7598,7 +7598,7 @@ function ksGardenCheck(){
             message.reply(" doesn't have a garden in the " + message.guild.name + " server!\n Buy one in the gift shop!");
             return;
         }
-
+        var countdown;
         let slots = rows[0].slots;
         let plants = rows[0].plants;
         let status = Number(rows[0].status);
@@ -7642,6 +7642,43 @@ function ksGardenCheck(){
             let stage = rows[index - 1].status;
             let petals = rows[index - 1].hexcolor;
             let time = rows[index - 1].health;
+
+            function plantHealth(plant, index){
+ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        
+       let weather = rows[0].weather; 
+       var weatherFactor;
+                  if(weather == "sunny"){
+                  weatherFactor = 2;
+                } else if(weather == "snowy"){
+                  weatherFactor = 4;
+                } else if(weather == "rainy"){
+                  weatherFactor = 0;
+                } else if(weather == "cloudy"){
+                  weatherFactor = 1;
+                } else {
+                  weatherFactor = 2;
+                }
+         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
+              if(err) throw err;
+               var phase = rows[index].health;
+               var stage = rows[index].status;
+               var petals = rows[index].hexcolor; 
+      sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+      con.query(sql3);
+      console.log("Time until flower dies: " + phase + " sec(s)");
+
+      if(phase <= 0 && stage == "flower"){
+        clearInterval(countdown);
+        sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+        con.query(sql3);
+
+        message.channel.send("Your plant died...")
+      }
+      });  
+              });
+     }
 
             
 
@@ -7796,7 +7833,7 @@ function ksGardenCheck(){
             message.channel.send(reveal);
             return;
             } else if(stage == "flower"){
-              waterSeed();
+              rows.forEach(setInterval(plantHealth, 1000))
               if(type == "daisy"){
                 var PixelArt = require('pixel-art');    
                 const { createCanvas } = require('canvas')
