@@ -7336,7 +7336,7 @@ function tradePlant(){
 
          con.query(`SELECT * FROM plant WHERE owner = '${other.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-              if(rows[trade2] == undefined){
+              if(rows[trade2-1] == undefined){
                 message.reply("They don't have a plant in that slot!");
                 return;
               }
@@ -7362,7 +7362,7 @@ function tradePlant(){
 
         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-              if(rows[trade1] == undefined){
+              if(rows[trade1-1] == undefined){
                 message.reply("You don't have a plant in that slot!");
                 return;
               }
