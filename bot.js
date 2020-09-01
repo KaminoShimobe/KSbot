@@ -2542,7 +2542,7 @@ function rps(){
 
             
             .setTitle("☀️ SUNNY ☀️")
-            .setDescription("Plants grow twice as fast in the sun!"); 
+            .setDescription("Plants grow faster in the sun!"); 
 
             message.channel.send(reveal);
         } else if(weather == "rainy"){
@@ -2557,7 +2557,7 @@ function rps(){
 
             
             .setTitle("☁️ CLOUDY ☁️")
-            .setDescription("No effects.");   
+            .setDescription("Plants wilt slower.");   
             message.channel.send(reveal);
         } else if(weather == "snowy"){
            let reveal = new Discord.RichEmbed()
@@ -7421,13 +7421,15 @@ function waterSeed(){
        let weather = rows[0].weather; 
        var weatherFactor;
                   if(weather == "sunny"){
-                  weatherFactor = .5;
-                } else if(weather == "snowy"){
                   weatherFactor = 2;
+                } else if(weather == "snowy"){
+                  weatherFactor = 4;
                 } else if(weather == "rainy"){
                   weatherFactor = 0;
-                } else {
+                } else if(weather == "cloudy"){
                   weatherFactor = 1;
+                } else {
+                  weatherFactor = 2;
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
@@ -7436,7 +7438,7 @@ function waterSeed(){
                var petals = rows[plant-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
-      console.log("Time until flower dies: " + phase + " sec(s)");
+      console.log("Time until flower dies: " + (phase/2) + " sec(s)");
 
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown2);
@@ -7459,11 +7461,11 @@ function waterSeed(){
        
 
                   if(weather == "sunny"){
-                  weatherFactor = 2;
+                  weatherFactor = 4;
                 } else if(weather == "snowy"){
-                  weatherFactor = .5;
-                } else {
                   weatherFactor = 1;
+                } else {
+                  weatherFactor = 2;
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
@@ -7478,7 +7480,7 @@ function waterSeed(){
                 //stage = "sprout";
                 message.channel.send("Your seed has sprouted!")
               } else if(phase <= 0 && stage == "sprout"){
-                sql3 = `UPDATE plant SET status = 'flower', health = ${100} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
                 message.channel.send("Your sprout has bloomed!")
@@ -7489,7 +7491,7 @@ function waterSeed(){
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
               con.query(sql2);
-              console.log("Time until flower: " + phase + " sec(s)");
+              console.log("Time until flower: " + (phase/2) + " sec(s)");
                 
               }
               });  
@@ -7544,7 +7546,7 @@ function ksSeedDelete(){
         
        
         
-        sql = `UPDATE garden SET plants = ${plant} status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        sql = `UPDATE garden SET plants = ${newList} status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql);
 
         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
