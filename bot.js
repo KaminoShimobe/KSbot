@@ -7375,8 +7375,8 @@ function ksNewMysterySeed(){
  
 }
 
-function waterSeed(plant){
-    
+function waterSeed(){
+  var plant = parseInt(messageArray[1]);
   
    con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
             if(err) throw err;
@@ -7388,13 +7388,13 @@ function waterSeed(plant){
             return;
           }
 
-          if(rows[plant].owner == undefined) {
+          if(rows[plant-1].owner == undefined) {
             message.reply(" You dont have a plants in this garden slot!");
             return;
           }
-            var life = rows[plant].health;
-            var plantStage = rows[plant].status;
-            var shade = rows[plant].hexcolor;
+            var life = rows[plant-1].health;
+            var plantStage = rows[plant-1].status;
+            var shade = rows[plant-1].hexcolor;
             var countdown;
             var countdown2;
 
@@ -7433,9 +7433,9 @@ function waterSeed(plant){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
-               var phase = rows[plant].health;
-               var stage = rows[plant].status;
-               var petals = rows[plant].hexcolor; 
+               var phase = rows[plant-1].health;
+               var stage = rows[plant-1].status;
+               var petals = rows[plant-1].hexcolor; 
       sql3 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
       con.query(sql3);
       console.log("Time until flower dies: " + phase + " sec(s)");
@@ -7470,10 +7470,10 @@ function waterSeed(plant){
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
 
-               var phase = rows[plant].health;
-               var stage = rows[plant].status;
-               var petals = rows[plant].hexcolor; 
-               var type = rows[plant].type;
+               var phase = rows[plant-1].health;
+               var stage = rows[plant-1].status;
+               var petals = rows[plant-1].hexcolor; 
+               var type = rows[plant-1].type;
 
              if(phase <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
@@ -7643,12 +7643,7 @@ function ksGardenCheck(){
             let petals = rows[index - 1].hexcolor;
             let time = rows[index - 1].health;
 
-            if(KSplants.has(message.author.id)){
-          //do nothing
-        } else {
-          KSplants.add(message.author.id);
-          rows.forEach(waterSeed);
-        }
+            
 
             if(stage == "seed"){
                 var PixelArt = require('pixel-art');    
@@ -7801,7 +7796,7 @@ function ksGardenCheck(){
             message.channel.send(reveal);
             return;
             } else if(stage == "flower"){
-
+              waterSeed();
               if(type == "daisy"){
                 var PixelArt = require('pixel-art');    
                 const { createCanvas } = require('canvas')
@@ -13673,7 +13668,6 @@ if(command === `!garden`){
 
 if(command === `!water` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){
-      var plant = parseInt(messageArray[1]) - 1;
         waterSeed();
 
     }
