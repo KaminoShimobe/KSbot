@@ -7492,13 +7492,14 @@ function waterSeed(){
            let status = rows[0].status;
            var revealedPlant = type + " #" + petals;
            var plantList = plants.split(",");
-           console.log("Plant list: " + plantList[status - 1])
+           console.log("status: " + status);
+           console.log("Plant list: " + plantList[status])
            console.log("revealed Plant " + revealedPlant)
            console.log("Plants " + plants)
 
            
-           var newList = plants.replace(plantList[status - 1], type + " #" + petals);
-           console.log(newlist + " New List")
+           var newList = plants.replace(plantList[status], type + " #" + petals);
+           console.log(newList + " New List")
 
            sql4 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql4);
