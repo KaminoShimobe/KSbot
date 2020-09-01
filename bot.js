@@ -7534,13 +7534,17 @@ function ksSeedDelete(){
         let plants = rows[0].plants;
         let status = rows[0].status;
 
-        
-        if(status <= 0 || index > status || index <= 0){
+         if(status <= 0 || index > status || index <= 0 || index == undefined){
           message.reply("You don't have a plant in that slot!");
           return;
         }
         
-        sql = `UPDATE garden SET status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+        var plantList = plants.split(",");
+        var newList = plants.replace(plantList[index], "");
+        
+       
+        
+        sql = `UPDATE garden SET plants = ${plant} status = '${status - 1}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
            con.query(sql);
 
         con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
