@@ -13591,7 +13591,7 @@ function gardenHelp(){
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
-        message.reply(" sent you a dm of the fun help list!");
+        message.reply(" sent you a dm of the garden help list!");
 }
 
 function socialHelp(){
