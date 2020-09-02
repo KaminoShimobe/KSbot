@@ -31,7 +31,7 @@ const ballot = new Set();
 const osirisCD = new Set();
 const wagered = new Set();
 const soulless = new Set();
-const mafiaPlayers = new Set();
+// const mafiaPlayers = new Set();
 const Epitaph = new Set();
 const fateWin = new Set();
 const fateLose = new Set();
@@ -40,6 +40,9 @@ const Reminders = new Set();
 const kissCD = new Set();
 const twitchDaily = new Set();
 const KSplants = new Set();
+const goldExpCD = new Set();
+const weatherReportCD = new Set();
+const mafiaServers = new Set();
 
 
 
@@ -169,7 +172,7 @@ function weather(servers, index){
         }
     
 
-    const job = new CronJob('* * * * *', function() {
+    const job = new CronJob('0 */12 * * *', function() {
       rows.forEach(weather);
     });
     console.log("Weather change initiated")
@@ -600,7 +603,7 @@ bot.on("message", async message => {
     var sql36 = "ALTER TABLE plant ADD hexcolor VARCHAR(7)"; 
     var sql37 = "ALTER TABLE plant ALTER COLUMN status SMALLINT"; 
     var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
-
+    var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -632,9 +635,9 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql26, function (err, result) {
+con.query(sql39, function (err, result) {
      if (err) throw err;
-     message.author.send("TABLE plant added!");
+     message.author.send("TABLE gardenShop added!");
      });
 
 // con.query(sql27, function (err, result) {
@@ -1361,6 +1364,7 @@ sql = `UPDATE server SET expose = '${you}' WHERE id = '${id}'`;
         }
 
 function mafia(){
+    const mafiaPlayers = new Set();
     const mafia = new Set();
     const detectives = new Set();
     const doctors = new Set();
@@ -1370,6 +1374,12 @@ function mafia(){
         message.reply(" You can't join a mafia game if you've already created one!");
         return;
     }
+
+    if(mafiaServers.has(message.guild.id)){
+        message.reply(" There's already a game of mafia going on in this server!");
+        return;
+    }
+    mafiaServers.add(message.guild.id);
     mafiaPlayers.add(message.author.id);
     message.delete()
 
@@ -1425,6 +1435,7 @@ function gamePhase(){
     function mafiaEnd(){
     
             if(mafia.size == 0){
+                mafiaServers.delete(message.guild.id);
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -1433,6 +1444,7 @@ function gamePhase(){
                 whereIam.send("**THE VILLAGERS HAVE SUCCESSFULLY WON!**");      
                 return;
             } else if(villagers.size == 0 || mafia.size > villagers.size){
+                mafiaServers.delete(message.guild.id);
                 mafiaPlayers.clear();
                 mafia.clear();
                 villagers.clear();
@@ -2545,6 +2557,7 @@ function rps(){
 
             
             .setTitle("☀️ SUNNY ☀️")
+            .setColor("#fcba03")
             .setDescription("Plants grow faster in the sun!"); 
 
             message.channel.send(reveal);
@@ -2553,6 +2566,7 @@ function rps(){
 
             
             .setTitle("🌧️ RAINY 🌧️")
+            .setColor("#1d77d1")
             .setDescription("You don't need to water plants in the rain!"); 
             message.channel.send(reveal);
         } else if(weather == "cloudy"){
@@ -2560,6 +2574,7 @@ function rps(){
 
             
             .setTitle("☁️ CLOUDY ☁️")
+            .setColor("#93a5b8")
             .setDescription("Plants wilt slower.");   
             message.channel.send(reveal);
         } else if(weather == "snowy"){
@@ -2567,6 +2582,7 @@ function rps(){
 
             
             .setTitle("🌨️ SNOWY 🌨️")
+            .setColor("#cbdff5")
             .setDescription("Plants grow slower in snow, and die faster!");   
             message.channel.send(reveal);
         } else if(weather == "clear"){
@@ -4436,16 +4452,22 @@ function gambleFlip(){
         
         
             chance = Math.floor(Math.random() * 2) + 1;
-            if (fateWin.has(message.author.id)) {
-            chance = 1;
-            fateWin.remove(message.author.id);
-            } 
-            
-            if (fateLose.has(message.author.id)) {
-            chance = 2;
-            fateWin.remove(message.author.id);
-            } 
+            if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == true){
+                if (fateWin.has(message.author.id)) {
+                chance = 1;
+                fateWin.remove(message.author.id);
+                } 
+                
+                if (fateLose.has(message.author.id)) {
+                chance = 2;
+                fateWin.remove(message.author.id);
+                } 
+            } else if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == false){
+                fateWin.clear();
+                fateLose.clear();
 
+                message.channel.send("There has been a shift in fate!")
+            }
         
         
         
@@ -6780,7 +6802,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
 
             
             .setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
-            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **summerCard**: \n Make a summer holiday card to send to your friends! \n 5 :gift: | **anonCard** \n Send a summer holiday card..... But anonymously! \n __**Non-DM compatible**__ \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
+            .setDescription("__**DM Channel compatible**__ \n 1 :gift:| **summerCard**: \n Make a summer holiday card to send to your friends! \n 5 :gift: | **anonCard** \n Send a summer holiday card..... But anonymously! \n __**Non-DM compatible**__ \n 1 :gift: | **mysterySeed** \n Purchases a mystery seed for your garden. \n 5 :gift: | **garden** \n Purchases a garden in this server. \n 10 :gift: | **stand** \n Choose which stand you want! \n 25 :gift: | **marriageAccount with [spouse]** \n Purchases a joint account for your and your spouse!")
             .setColor("#1d498e"); 
 
         message.author.send(shop);
@@ -7391,6 +7413,15 @@ function tradePlant(){
                var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
                var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
 
+               message.channel.send(`${other} do you accept this trade? (yes/no)`);
+                 const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
+                    collectorer.once('collect', message => {
+                        
+                        if (message.content == `no` || message.content == `No`) {
+                         message.reply("Trade declined.");
+                            return;
+                        } else if(message.content == `yes` || message.content == `Yes`) {
+
                sql = `UPDATE plant SET type = '${type2}', status = '${stage2}', health = ${200}, hexcolor = '${petals2}' WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                con.query(sql);
                sql2 = `UPDATE plant SET type = '${type}', status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
@@ -7471,6 +7502,10 @@ function tradePlant(){
                         }
                     });  
 
+                 
+               }
+
+               function crossPollenate2(){
                  message.channel.send(`${other} You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)`);
                  const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collectorer.once('collect', message => {
@@ -7514,7 +7549,7 @@ function tradePlant(){
 
 
             
-                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${other.id}', '${message.guild.id}', '${types[seeds]}', 'seed', ${120}, '${newPetals}')`;
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${other.id}', '${message.guild.id}', '${types[seeds]}', 'seed', ${30}, '${newPetals}')`;
                 con.query(sql2, console.log);
                 message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
                 
@@ -7536,10 +7571,20 @@ function tradePlant(){
       });
                             return;
                         }
-                    }); 
+                    });
                }
 
-               crossPollenate();
+          var chance = Math.floor(Math.random()*4) + 1;
+          var chance2 = Math.floor(Math.random()*4) + 1;
+               if(chance == 1){
+                crossPollenate();
+               }
+               if(chance2 == 1){
+                crossPollenate2();
+               }
+             }
+             });
+               
     });
     });  
     });
@@ -7591,7 +7636,7 @@ function ksNewMysterySeed(){
 
 
             
-                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${120}, '${petals}')`;
+                sql2 = `INSERT INTO plant (owner, id, type, status, health, hexcolor) VALUES ('${message.author.id}', '${message.guild.id}', '${type[seeds]}', 'seed', ${60}, '${petals}')`;
                 con.query(sql2, console.log);
                 message.reply(` do ${prefix}garden to see the new seed in your garden! \n do **${prefix}water ${status + 1}** to start growing this plant!`);
                 
@@ -7662,6 +7707,7 @@ function waterSeed(){
                 }
          con.query(`SELECT * FROM plant WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
               if(err) throw err;
+               var type = rows[plant-1].type;
                var phase = rows[plant-1].health;
                var stage = rows[plant-1].status;
                var petals = rows[plant-1].hexcolor; 
@@ -7674,12 +7720,18 @@ function waterSeed(){
         KSplants.add(shade + message.author.id)
        } 
 
+       if(phase > 10 && phase < 12 && stage == "flower"){
+          message.reply("Your plant #" + plant +" is almost dead!" )
+
+
+       }
+
       if(phase <= 0 && stage == "flower"){
         clearInterval(countdown2);
         sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
         con.query(sql3);
 
-        message.channel.send("Your plant died...")
+        message.reply("Your #" + petals + " " + type  + "died...")
       }
       });  
               });
@@ -7713,7 +7765,7 @@ function waterSeed(){
                 sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "sprout";
-                message.channel.send("Your seed has sprouted!")
+                message.reply("Your seed has sprouted!")
               } else if(phase <= 0 && stage == "sprout"){
                 sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
@@ -7735,10 +7787,10 @@ function waterSeed(){
 
       });
 
-                message.channel.send("Your sprout has bloomed!")
+                message.reply("Your sprout has bloomed!")
                 console.log()
                 clearInterval(countdown);
-                countdown2 = setInterval(plantHealth, 1000)
+                countdown2 = setInterval(plantHealth, 1000*60)
               } else{
               
               sql2 = `UPDATE plant SET health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
@@ -7750,11 +7802,23 @@ function waterSeed(){
               });
             }
 
+            con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+
+        let stand = rows[0].stand;
+      
+      if(plantStage != "flower" && stand == "「GOLD EXPERIENCE」" && messageArray[0] == `${prefix}GOLDEXPERIENCE`){
+          sql3 = `UPDATE plant SET health = ${100}, status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
+        con.query(sql3);
+        message.channel.send("**GOLD EXPERIENCE**")
+      }
+            }); 
+
             if(rows[plant-1].status != "flower" && KSplants.has(shade + message.author.id) == false){
 
-              countdown = setInterval(countDown, 1000)
+              countdown = setInterval(countDown, 1000*60)
             } else if(rows[plant-1].status == "flower" && KSplants.has(shade + message.author.id) == false){
-              countdown = setInterval(plantHealth, 1000)
+              countdown = setInterval(plantHealth, 1000*60)
             }
             
 
@@ -7774,8 +7838,7 @@ function waterSeed(){
         return;
       } 
 
-     
-            
+
             
 
            }); 
@@ -11425,40 +11488,40 @@ function give(){
         
                 
         
-        let kakyoin = message.guild.roles.find('name', 'kakyoin');
-        var standUsers = [];
+    //     let kakyoin = message.guild.roles.find('name', 'kakyoin');
+    //     var standUsers = [];
         
         
     
-    con.query(`SELECT * FROM user`, (err, rows) => {
-        if(err) throw err;
+    // con.query(`SELECT * FROM user`, (err, rows) => {
+    //     if(err) throw err;
         
     
         
 
-            function userInfo(users, index){
+    //         function userInfo(users, index){
                 
         
-        var person = bot.users.get(rows[index].id);
+    //     var person = bot.users.get(rows[index].id);
                 
-        if(person != undefined){        
-            if(rows[index].stand == "「STAR PLATINUM」" || rows[index].id == message.guild.ownerID){  
-                standUsers.push(rows[index].id)
-                console.log("This person had THE WORLD: " + person.username);
-            } else {
-                console.log(person.username + " is not eligible")
-            }
-        } else {
-            //nothing       
-        }   
-            }   
+    //     if(person != undefined){        
+    //         if(rows[index].stand == "「STAR PLATINUM」" || rows[index].id == message.guild.ownerID){  
+    //             standUsers.push(rows[index].id)
+    //             console.log("This person had THE WORLD: " + person.username);
+    //         } else {
+    //             console.log(person.username + " is not eligible")
+    //         }
+    //     } else {
+    //         //nothing       
+    //     }   
+    //         }   
                     
                 
-                rows.forEach(userInfo); 
+    //             rows.forEach(userInfo); 
                 
             
         
-            });
+    //         });
     
         
         
@@ -11467,10 +11530,11 @@ function give(){
         
                 
 
-                if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
+    //             if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-                 message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.addRole(kakyoin));
-                 message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.setVoiceChannel(null));
+    //              message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.addRole(kakyoin));
+    //              message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.setVoiceChannel(null));
+                message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: false });
                 console.log("Everyone has been frozen in time.")
                 message.channel.send("**TOKI WA TOMARE**");
             
@@ -11480,12 +11544,15 @@ function give(){
 
     function zaWarudoDo(){
         
-        let kakyoin = message.guild.roles.find('name', 'kakyoin')
+        // let kakyoin = message.guild.roles.find('name', 'kakyoin')
         
 
-                if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
+        //         if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-                   message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
+        //            message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
+        
+         message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: true });
+                
                 console.log("Time has began to move again.")
                 message.channel.send("**TOKI WA MOKIDASU**");
             
@@ -11498,8 +11565,8 @@ function give(){
     function starPlatinum(){
         
         
-        let kakyoin = message.guild.roles.find('name', 'kakyoin');
-        var standUsers = [];
+        // let kakyoin = message.guild.roles.find('name', 'kakyoin');
+        // var standUsers = [];
         
         con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -11511,8 +11578,8 @@ function give(){
             let status = rows[0].status;    
 
     
-    con.query(`SELECT * FROM user`, (err, rows) => {
-        if(err) throw err;
+    // con.query(`SELECT * FROM user`, (err, rows) => {
+    //     if(err) throw err;
         
     
         if (soulless.has(message.author.id)) {
@@ -11520,29 +11587,29 @@ function give(){
             return;
         }
 
-            function userInfo(users, index){
+        //     function userInfo(users, index){
                 
         
-        var person = bot.users.get(rows[index].id);
+        // var person = bot.users.get(rows[index].id);
                 
-        if(person != undefined){        
-            if(rows[index].stand == "「STAR PLATINUM」" || rows[index].id == message.guild.ownerID){  
-                standUsers.push(rows[index].id)
-                console.log("This person had THE WORLD: " + person.username);
-            } else {
-                console.log(person.username + " is not eligible")
-            }
-        } else {
-            //nothing       
-        }   
-            }   
+        // if(person != undefined){        
+        //     if(rows[index].stand == "「STAR PLATINUM」" || rows[index].id == message.guild.ownerID){  
+        //         standUsers.push(rows[index].id)
+        //         console.log("This person had THE WORLD: " + person.username);
+        //     } else {
+        //         console.log(person.username + " is not eligible")
+        //     }
+        // } else {
+        //     //nothing       
+        // }   
+        //     }   
                     
                 
-                rows.forEach(userInfo); 
+        //         rows.forEach(userInfo); 
                 
             
         
-            });
+        //     });
         
             
             if (StarPlatinumCD.has(message.author.id)) {
@@ -11557,14 +11624,15 @@ function give(){
             
              
              
-             message.guild.members.filter(m =>  StarPlatinumCD.has(m.id) == false ).forEach(m => m.addRole(kakyoin));
-             message.guild.members.filter(m =>  StarPlatinumCD.has(m.id) == false ).forEach(m => m.setVoiceChannel(null));
-                console.log("Everyone has been frozen in time.")
+            message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: false });
+            message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true });
+                
                 message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
              
              setTimeout(() => {
-         message.guild.members.filter(m =>  m.roles.find("name", "kakyoin")).forEach(m => m.removeRole(kakyoin));
-                console.log("Time has been resumed.")
+         message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: true });
+         message.channel.permissionOverwrites.get(message.author.id).delete();       
+                console.log("Time has began to move again.")
                 message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*60*1));    
              
@@ -11792,6 +11860,51 @@ if (soulless.has(message.author.id)) {
         });
     }
     
+    function firstBombChest(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+
+
+        if(rows.length < 1) {
+            
+            
+            return;
+        }
+
+        let type = rows[0].karma;
+        
+
+        if (soulless.has(message.author.id)) {
+        message.reply(" 's soul has been stolen by OSIRIS");
+            return;
+        }
+
+         if (Bomb1CD.has(message.author.id)) {
+            message.reply("Killer Queen must wait about 30 seconds from when you first used the first bomb!");
+            return;
+         } else{
+             Bomb1CD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          Bomb1.delete(message.author.id);
+        }, (1000*30));
+
+        message.delete()
+
+            .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+            .catch(console.error);
+        
+        sql = `UPDATE server SET karma = 'bad' WHERE id = '${message.guild.id}'`
+        con.query(sql)
+        message.author.send("Killer Queen has already turned the chest in " + message.guild.name + " to a bomb!")
+        return;
+
+         }
+       });
+          
+    }
     
     function kingCrimson(){
         con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -12133,6 +12246,59 @@ function heavensDoor(){
         });
     });
     }   
+
+    function heavensDoorChest(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+
+
+
+        if(rows.length < 1) {
+            
+            
+            return;
+        }
+
+        let type = rows[0].karma;
+        
+
+        if (soulless.has(message.author.id)) {
+        message.reply(" 's soul has been stolen by OSIRIS");
+            return;
+        }
+
+         if (HeavensDoorCD.has(message.author.id)) {
+                
+            message.channel.send("Heaven's Door must wait about 30 mins from when you first used it!");
+            return;
+         } else{
+             HeavensDoorCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          HeavensDoorCD.delete(message.author.id);
+        }, (1000*60*30));
+
+        message.delete()
+
+            .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+            .catch(console.error);
+
+        if(type == "bad"){
+          message.author.send("The current chest in " + message.guild.name + " is a **trap**!");
+          return;
+        } else if(type == "good") {
+          message.author.send("The current chest in " + message.guild.name + " is **good**!");
+          return;
+        } else{
+          message.author.send("There is no chest in " + message.guild.name + "!")
+        }
+
+
+         }
+       });
+          
+    }
 
 function thoth(){
 
@@ -12527,6 +12693,152 @@ function oSpin(){
     });
     
     }
+
+    function goldExperience(){
+
+        
+        
+      
+        
+            if (soulless.has(message.author.id)) {
+        message.reply(" 's soul has been stolen by OSIRIS");
+            return;
+        }
+            
+
+        
+        
+        
+        
+        
+             if (goldExpCD.has(message.author.id)) {
+                
+            message.channel.send("GOLD EXPERIENCE must wait about 60 mins from when you first used it!");
+            return;
+         } 
+                        
+            
+             
+                
+             else {
+                
+                goldExpCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          goldExpCD.delete(message.author.id);
+        }, (1000*60*60));
+            
+            
+        waterSeed();
+        message.channel.send("**GOLD EXPERIENCE**");
+       }
+        
+    
+    }
+
+
+    function weatherReport(){
+      con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+        if(err) throw err;
+
+
+
+        if(rows.length < 1) {
+            
+            
+            return;
+        }
+
+        let weather = rows[0].weather;
+
+        if (soulless.has(message.author.id)) {
+        message.reply(" 's soul has been stolen by OSIRIS");
+            return;
+        }
+            
+
+        
+        
+        
+        
+        
+             if (weatherReportCD.has(message.author.id)) {
+                
+            message.channel.send("WEATHER REPORT must wait about 4 hours from when you first used it!");
+            return;
+         } 
+                        
+            
+             
+                
+             else {
+                
+                
+
+         message.channel.send("What do you want the weather to be?: \n sunny \n rainy \n cloudy \n snowy \n clear");
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+
+                      if (message.content == `sunny`) {
+                            weatherReportCD.add(message.author.id);
+                            setTimeout(() => {
+                              // Removes the user from the set after a minute
+                              weatherReportCD.delete(message.author.id);
+                            }, (1000*60*60*4));
+                         sql = `UPDATE server SET weather = '${message.content}' WHERE id = '${message.guild.id}'`;
+                         con.query(sql);
+                         message.channel.send("**WEATHER REPORT**")
+                         return;
+                      } else if (message.content == `rainy`) {
+                            weatherReportCD.add(message.author.id);
+                            setTimeout(() => {
+                              // Removes the user from the set after a minute
+                              weatherReportCD.delete(message.author.id);
+                            }, (1000*60*60*4));
+                         sql = `UPDATE server SET weather = '${message.content}' WHERE id = '${message.guild.id}'`;
+                         con.query(sql);
+                         message.channel.send("**WEATHER REPORT**")
+                         return;
+                      } else if (message.content == `cloudy`) {
+                          weatherReportCD.add(message.author.id);
+                            setTimeout(() => {
+                              // Removes the user from the set after a minute
+                              weatherReportCD.delete(message.author.id);
+                            }, (1000*60*60*4));
+                         sql = `UPDATE server SET weather = '${message.content}' WHERE id = '${message.guild.id}'`;
+                         con.query(sql);
+                         message.channel.send("**WEATHER REPORT**")
+                         return;
+                      } else if (message.content == `snowy`) {
+                            weatherReportCD.add(message.author.id);
+                            setTimeout(() => {
+                              // Removes the user from the set after a minute
+                              weatherReportCD.delete(message.author.id);
+                            }, (1000*60*60*4));
+                         sql = `UPDATE server SET weather = '${message.content}' WHERE id = '${message.guild.id}'`;
+                         con.query(sql);
+                         message.channel.send("**WEATHER REPORT**")
+                         return;
+                      } else if (message.content == `clear`) {
+                          weatherReportCD.add(message.author.id);
+                            setTimeout(() => {
+                              // Removes the user from the set after a minute
+                              weatherReportCD.delete(message.author.id);
+                            }, (1000*60*60*4));
+                         sql = `UPDATE server SET weather = '${message.content}' WHERE id = '${message.guild.id}'`;
+                         con.query(sql);
+                         message.channel.send("**WEATHER REPORT**")
+                         return;
+                      } else {
+                        message.reply("Invalid selection!");
+                        return;
+                      }
+
+                    });
+
+      }
+    });
+    }
              
 
 function getStand(){
@@ -12682,7 +12994,7 @@ function standDisc(){
         }
         
 
-        var chance = Math.floor(Math.random() * 10) + 1;
+        var chance = Math.floor(Math.random() * 12) + 1;
         var ability = Math.floor(Math.random() * 10) + 1;
         
 
@@ -12778,6 +13090,24 @@ function standDisc(){
             sql = `UPDATE user SET stand = "「KISS」" WHERE id = '${message.author.id}'`;
             con.query(sql, console.log);
             setTimeout(message.channel.send("||YOU HAVE RECEIVED 「KISS」||"), 200);
+        } else if(chance == 11){
+            message.channel.send(".");
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            sql = `UPDATE user SET stand = "「GOLD EXPERIENCE」" WHERE id = '${message.author.id}'`;
+            con.query(sql, console.log);
+            setTimeout(message.channel.send("||YOU HAVE RECEIVED 「GOLD EXPERIENCE」||"), 200);
+        } else if(chance == 12){
+            message.channel.send(".");
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            message.channel.send(".");  
+            sql = `UPDATE user SET stand = "「WEATHER REPORT」" WHERE id = '${message.author.id}'`;
+            con.query(sql, console.log);
+            setTimeout(message.channel.send("||YOU HAVE RECEIVED 「WEATHER REPORT」||"), 200);
         }
     } else {
             message.channel.send(".");
@@ -13042,7 +13372,7 @@ function standHelp(){
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
-            .setDescription(`__Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes.`)
+            .setDescription(`__Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n **${prefix}HEAVENSDOOR chest**: \n Tells the user if the current chest is a trap or not.`)
             .setColor("#1d498e");   
 
     let stand5 = new Discord.RichEmbed()
@@ -13056,7 +13386,7 @@ function standHelp(){
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
-            .setDescription(`__Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours.`)
+            .setDescription(`__Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n **${prefix}BOMB1 chest**:\n Changes the current chest to a trap`)
             .setColor("#1d498e");
 
     let stand7 = new Discord.RichEmbed()
@@ -13084,10 +13414,24 @@ function standHelp(){
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
-            .setDescription(`__KISS__ \n **${prefix}KISS [mention]** \n Doubles the monetary gain or loss of someone's last transaction.`)
+            .setDescription(`__Kiss__ \n **${prefix}KISS [mention]** \n Doubles the monetary gain or loss of someone's last transaction.`)
             .setColor("#1d498e"); 
 
-    message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS \n KISS");
+    let stand11 = new Discord.RichEmbed()
+
+            
+            .setTitle("KS-Bot Stand Commands 🐞")
+            .setDescription(`__Gold Experience__ \n **${prefix}GOLDEXPERIENCE [garden slot]** \n Fully grows or revitalizes a plant.`)
+            .setColor("#1d498e"); 
+    
+    let stand12 = new Discord.RichEmbed()
+
+            
+            .setTitle("KS-Bot Stand Commands 🐞")
+            .setDescription(`__Weather Report__ \n **${prefix}WEATHERREPORT** \n Changes the weather in a server.`)
+            .setColor("#1d498e");                 
+
+    message.channel.send("Which Stand Do you want to know more about?: \n ECHOES \n KING CRIMSON \n KILLER QUEEN \n CRAZY DIAMOND \n HEAVENS DOOR \n HARVEST \n STAR PLATINUM \n THOTH \n OSIRIS \n KISS \n GOLD EXPERIENCE \n WEATHER REPORT");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         
@@ -13131,6 +13475,14 @@ function standHelp(){
                             message.author.sendEmbed(stand10);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
+                        }   else if (message.content == `GOLD EXPERIENCE`) {
+                            message.author.sendEmbed(stand11);
+                            message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+                            return;
+                        }   else if (message.content == `WEATHER REPORT`) {
+                            message.author.sendEmbed(stand12);
+                            message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
+                            return;
                         }   else {
                             message.channel.send("Invalid Selection.")
                             return;
@@ -13152,7 +13504,7 @@ function help(){
 
             
             .setTitle("KS-Bot Command Directory")
-            .setDescription(`**${prefix}help** :gear: \n Pulls up utility commands. \n **${prefix}help** :warning: \n Pulls up admin commands. \n **${prefix}help** :bust_in_silhouette: \n Pulls up user commands. \n **${prefix}help** :busts_in_silhouette: \n Pulls up social commands. \n **${prefix}help** :dollar: \n Pulls up monetary commands.\n **${prefix}help** :tada: \n Pulls up fun commands! \n **${prefix}help** :beetle: \n Pulls up stand commands.`)
+            .setDescription(`**${prefix}help** :gear: \n Pulls up utility commands. \n **${prefix}help** :warning: \n Pulls up admin commands. \n **${prefix}help** :bust_in_silhouette: \n Pulls up user commands. \n **${prefix}help** :busts_in_silhouette: \n Pulls up social commands. \n **${prefix}help** :dollar: \n Pulls up monetary commands.\n **${prefix}help** :tada: \n Pulls up fun commands! \n **${prefix}help** :beetle: \n Pulls up stand commands. \n **${prefix}help :seedling: \n Pulls up garden commands.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -13205,6 +13557,18 @@ function funHelp(){
             
             .setTitle("KS-Bot Fun commands 🎉")
             .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
+            .setColor("#1d498e"); 
+
+        message.author.sendEmbed(help);
+        message.reply(" sent you a dm of the fun help list!");
+}
+
+function gardenHelp(){
+    let help = new Discord.RichEmbed()
+
+            
+            .setTitle("KS-Bot Garden commands 🌱")
+            .setDescription(`**${prefix}water [index]**: \n Waters a plant in that garden slot. \n **${prefix}toss [index]**: \n Trashes a plant in that index. \n **${prefix}tradePlant [mention] [index of you plant] for [index of their plant]**: \n Prompts a user to trade plants. \n **${prefix}garden** \n Checks your garden in that server. \n **${prefix}weather**: \n Checks the weather in your server. \n **${prefix}trashGarden**: \n Trashes your garden.`)
             .setColor("#1d498e"); 
 
         message.author.sendEmbed(help);
@@ -13911,21 +14275,21 @@ if(command === `!deleteGarden`){
 
 }
 
-if(command === `!garden`){
-    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
-        ksGardenCheck();
+// if(command === `!garden`){
+//     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+//         ksGardenCheck();
 
-    }
+//     }
 
-}
+// }
 
-if(command === `!water` && messageArray[1] != undefined){
-    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
-        waterSeed();
+// if(command === `!water` && messageArray[1] != undefined){
+//     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+//         waterSeed();
 
-    }
+//     }
 
-}
+// }
 
 if(command === `!tradePlant` && messageArray[1] != undefined && messageArray[2] != undefined && messageArray[3] == "for" && messageArray[4] != undefined){
     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
@@ -14043,7 +14407,11 @@ if(command === `${prefix}help`&& messageArray[1] == "🎉"){
     }   
 if(command === `${prefix}help`&& messageArray[1] == "🐞"){
             standHelp();
-    }   
+    }  
+
+if(command === `${prefix}help`&& messageArray[1] == "🌱"){
+            gardenHelp();
+    }      
 if(command === `${prefix}help`&& messageArray[1] == "⚠️"){
             admin();
     }   
@@ -14070,7 +14438,67 @@ if(command === `${prefix}removeRole`){
 
 if(command === `${prefix}mafia`){
             mafia();
-    }               
+    }   
+
+
+
+
+
+if(command === `${prefix}toss`){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        ksSeedDelete();
+
+    //}
+
+}
+
+if(command === `${prefix}trashGarden`){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        ksGardenDelete();
+
+   // }
+
+}
+
+if(command === `${prefix}garden`){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        ksGardenCheck();
+
+    //}
+
+}
+
+if(command === `${prefix}water` && messageArray[1] != undefined){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        waterSeed();
+
+    //}
+
+}
+
+if(command === `${prefix}tradePlant` && messageArray[1] != undefined && messageArray[2] != undefined && messageArray[3] == "for" && messageArray[4] != undefined){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+
+        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        tradePlant();
+
+    //}
+
+}
+
+
+
+
+
+if(command === `${prefix}weather`){
+    //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+       
+        weatherCheck();
+
+    //}
+
+}              
 
    
     
@@ -14245,6 +14673,54 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
     
     if(command === `${prefix}buy` && messageArray[1] === `stand`){
         getStand();
+    }
+
+    if(command === `${prefix}buy` && messageArray[1] === `mysterySeed`){
+        
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+
+        if(rows.length < 1) {
+            message.reply("You have no user!");
+            console.log(rows);
+            return;
+        }
+
+       let gifts = rows[0].gift;
+        
+        if(gifts < 1) {
+            message.reply("Insufficient Funds.");
+            return;
+        }
+        sql = `UPDATE user SET gift = ${gift - 1} WHERE id = '${message.author.id}'`;
+        con.query(sql);     
+        ksNewMysterySeed();
+        
+        });
+    }
+
+    if(command === `${prefix}buy` && messageArray[1] === `garden`){
+        
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+
+        if(rows.length < 1) {
+            message.reply("You have no user!");
+            console.log(rows);
+            return;
+        }
+
+        let gifts = rows[0].gift;
+        
+        if(gifts < 5) {
+            message.reply("Insufficient Funds.");
+            return;
+        }
+        sql = `UPDATE user SET gift = ${gifts - 5} WHERE id = '${message.author.id}'`;
+        con.query(sql);     
+        ksNewGarden();
+        
+        });
     }
     
     if(command === `${prefix}buy` && messageArray[1] === `marriageAccount` && messageArray[2] === `with` && messageArray[3] != undefined){
@@ -14472,7 +14948,7 @@ if(command === `${prefix}HARVEST` && stands == true){
         });     
 }
     
-if(command === `${prefix}BOMB1` && stands == true){
+if(command === `${prefix}BOMB1` && messageArray[1] != "chest" && stands == true){
         con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -14480,6 +14956,21 @@ if(command === `${prefix}BOMB1` && stands == true){
             
         if(stand == "「KILLER QUEEN」"){
         firstBomb();
+    }       else {
+        message.reply(" You do not have the power of 「KILLER QUEEN」.")
+    }
+            
+        });     
+}   
+
+if(command === `${prefix}BOMB1` && messageArray[1] == "chest" && stands == true){
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let stand = rows[0].stand;
+            
+        if(stand == "「KILLER QUEEN」"){
+        firstBombChest();
     }       else {
         message.reply(" You do not have the power of 「KILLER QUEEN」.")
     }
@@ -14539,8 +15030,8 @@ if(command === `${prefix}KINGCRIMSON` && stands == true){
         let stand = rows[0].stand;
             
         if(stand == "「KING CRIMSON」"){
-//          epitaph();
-            message.reply("This command is under investigation at the present time. My apologies!");
+          epitaph();
+            // message.reply("This command is under investigation at the present time. My apologies!");
     }       else {
         message.reply(" You do not have the power of 「KING CRIMSON」.")
     }
@@ -14593,7 +15084,7 @@ if(command === `${prefix}CRAZYDIAMOND` && messageArray[1] != undefined && stands
         });     
 }   
     
-if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands == true){
+if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && messageArray[1] != "chest" && stands == true){
         con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -14606,7 +15097,22 @@ if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && stands 
     }
             
         });     
-}   
+}  
+
+if(command === `${prefix}HEAVENSDOOR` && messageArray[1] != undefined && messageArray[1] == "chest" && stands == true){
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let stand = rows[0].stand;
+            
+        if(stand == "「HEAVENS DOOR」"){
+        heavensDoorChest();
+    }       else {
+        message.reply(" You do not have the power of 「HEAVEN'S DOOR」.")
+    }
+            
+        });     
+}  
 
 if(command === `${prefix}THOTH` && messageArray[1] != undefined && stands == true){
         con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -14667,6 +15173,37 @@ if(command === `${prefix}KISS` && messageArray[1] != undefined && stands == true
             
         });     
 }   
+
+if(command === `${prefix}GOLDEXPERIENCE` && messageArray[1] != undefined && stands == true){
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let stand = rows[0].stand;
+            
+        if(stand == "「GOLD EXPERIENCE」"){
+        goldExperience();
+    }       else {
+        message.reply(" You do not have the power of 「GOLD EXPERIENCE」.")
+    }
+            
+        });     
+}  
+
+
+if(command === `${prefix}WEATHERREPORT` && stands == true){
+        con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+        let sql;
+        let stand = rows[0].stand;
+            
+        if(stand == "「WEATHER REPORT」"){
+        weatherReport();
+    }       else {
+        message.reply(" You do not have the power of 「WEATHER REPORT」.")
+    }
+            
+        });     
+}  
     
     if(command === `${prefix}ZAWARUDO` && stands == true){
         if(message.author.id == message.guild.ownerID){
