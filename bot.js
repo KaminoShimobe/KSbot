@@ -4468,7 +4468,7 @@ function gambleFlip(){
             } else if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == false){
                 fateWin.clear();
                 fateLose.clear();
-
+                eChannel.delete(message.channel.id)
                 message.channel.send("There has been a shift in fate!")
             }
         
@@ -7585,6 +7585,8 @@ function tradePlant(){
                if(chance2 == 1){
                 crossPollenate2();
                }
+             } else{
+              message.reply("Trade declined!")
              }
              });
                
