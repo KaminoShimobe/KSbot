@@ -605,7 +605,7 @@ bot.on("message", async message => {
     var sql37 = "ALTER TABLE plant ALTER COLUMN status SMALLINT"; 
     var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
-    var sql40 = "ALTER TABLE plant ALTER COLUMN health SMALLINT"; 
+    var sql40 = "ALTER TABLE plant ALTER COLUMN health INT"; 
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
