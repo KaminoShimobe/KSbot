@@ -7415,7 +7415,7 @@ function tradePlant(){
 
                var newList = plants.replace(plantList[trade2], type2 + " #" + petals2);
                var newList2 = plants2.replace(plantList2[trade1], type + " #" + petals);
-
+               var you = message.author
                message.channel.send(`${other} do you accept this trade? (yes/no)`);
                  const collectorer = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collectorer.once('collect', message => {
@@ -7427,18 +7427,18 @@ function tradePlant(){
 
                sql = `UPDATE plant SET type = '${type2}', status = '${stage2}', health = ${200}, hexcolor = '${petals2}' WHERE owner = '${other.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                con.query(sql);
-               sql2 = `UPDATE plant SET type = '${type}', status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
+               sql2 = `UPDATE plant SET type = '${type}', status = '${stage}', health = ${200}, hexcolor = '${petals}' WHERE owner = '${you.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals2}'`;
                con.query(sql2);
                sql3 = `UPDATE garden SET plants = '${newList}' WHERE owner = '${other.id}' AND id = '${message.guild.id}'`;
                con.query(sql3);
-               sql4 = `UPDATE garden SET plants = '${newList2}' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`;
+               sql4 = `UPDATE garden SET plants = '${newList2}' WHERE owner = '${you.id}' AND id = '${message.guild.id}'`;
                con.query(sql4);
 
-               message.channel.send(`${other} traded their #${petals} ${type} for ` + message.author + `'s #${petals2} ${type2}!`)
+               message.channel.send(`${other} traded their #${petals} ${type} for ` + you + `'s #${petals2} ${type2}!`)
 
                function crossPollenate(){
-                message.reply("You got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)")
-                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                message.channel.send(you + " got a cross-pollenated seed from trading! \n Want to plant it? (yes/no)")
+                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === you.id, { time: 100000000 });
                     collector.once('collect', message => {
                         var types = [type, type2];
                         var newPetals = petals.substring(0, 3) + petals2.substring(3, 7);
@@ -7725,7 +7725,7 @@ function waterSeed(){
         KSplants.add(shade + message.author.id)
        } 
 
-       if(phase > 10 && phase < 12 && stage == "flower"){
+       if(phase > 10 && phase < 15 && stage == "flower"){
           message.reply("Your plant #" + plant +" is almost dead!" )
 
 
@@ -7736,7 +7736,7 @@ function waterSeed(){
         sql3 = `UPDATE plant SET status = 'dead', health = ${0} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
         con.query(sql3);
 
-        message.reply("Your #" + petals + " " + type  + "died...")
+        message.reply("Your #" + petals + " " + type  + " died...")
       }
       });  
               });
