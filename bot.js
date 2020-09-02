@@ -605,6 +605,7 @@ bot.on("message", async message => {
     var sql37 = "ALTER TABLE plant ALTER COLUMN status SMALLINT"; 
     var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
+    var sql40 = "ALTER TABLE plant ALTER COLUMN health SMALLINT"; 
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -636,9 +637,9 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql39, function (err, result) {
+con.query(sql40, function (err, result) {
      if (err) throw err;
-     message.author.send("TABLE gardenShop added!");
+     message.author.send("COLUMN health changed to SMALLINT!");
      });
 
 // con.query(sql27, function (err, result) {
@@ -7725,7 +7726,7 @@ function waterSeed(){
         KSplants.add(shade + message.author.id)
        } 
 
-       if(phase > 10 && phase < 15 && stage == "flower"){
+       if(phase > 10 && phase < 14 && stage == "flower"){
           message.reply("Your plant #" + plant +" is almost dead!" )
 
 
@@ -7769,12 +7770,22 @@ function waterSeed(){
              if(phase <= 30 && stage == "seed"){
                 sql3 = `UPDATE plant SET status = 'sprout', health = ${phase - weatherFactor} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
+                  if(KSplants.has(shade + message.author.id) == true){
+
+                   } else { 
+                    KSplants.add(shade + message.author.id)
+                   } 
                 //stage = "sprout";
                 message.reply("Your seed has sprouted!")
               } else if(phase <= 0 && stage == "sprout"){
-                sql3 = `UPDATE plant SET status = 'flower', health = ${200} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
+                sql3 = `UPDATE plant SET status = 'flower', health = ${400} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${petals}'`;
                 con.query(sql3);
                 //stage = "flower"
+                if(KSplants.has(shade + message.author.id) == true){
+                    KSplants.delete(shade + message.author.id)
+                   } else { 
+                    
+                   } 
                 con.query(`SELECT * FROM garden WHERE owner = '${message.author.id}' AND id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
          let sql;
@@ -7813,7 +7824,7 @@ function waterSeed(){
         let stand = rows[0].stand;
       
       if(plantStage != "flower" && stand == "「GOLD EXPERIENCE」" && messageArray[0] == `${prefix}GOLDEXPERIENCE`){
-          sql3 = `UPDATE plant SET health = ${100}, status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
+          sql3 = `UPDATE plant SET health = ${400}, status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
         //message.channel.send("**GOLD EXPERIENCE**")
         countdown = setInterval(plantHealth, 1000*60)
