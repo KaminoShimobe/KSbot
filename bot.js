@@ -43,6 +43,7 @@ const KSplants = new Set();
 const goldExpCD = new Set();
 const weatherReportCD = new Set();
 const mafiaServers = new Set();
+const EpitaphCD = new Set();
 
 
 
@@ -7812,7 +7813,7 @@ function waterSeed(){
       if(plantStage != "flower" && stand == "「GOLD EXPERIENCE」" && messageArray[0] == `${prefix}GOLDEXPERIENCE`){
           sql3 = `UPDATE plant SET health = ${100}, status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
-        message.channel.send("**GOLD EXPERIENCE**")
+        //message.channel.send("**GOLD EXPERIENCE**")
         countdown = setInterval(plantHealth, 1000*60)
         return;
       }
@@ -7821,6 +7822,7 @@ function waterSeed(){
             if(rows[plant-1].status != "flower" && KSplants.has(shade + message.author.id) == false){
 
               countdown = setInterval(countDown, 1000*60)
+              message.reply("Your seed was germinated!")
             } else if(rows[plant-1].status == "flower" && KSplants.has(shade + message.author.id) == false){
               countdown = setInterval(plantHealth, 1000*60)
             }
@@ -7941,7 +7943,7 @@ function ksGardenCheck(){
         if(messageArray[1] == undefined){
         let gardenList = new Discord.RichEmbed()
 
-            
+            .setTitle(message.author.username + "'s garden")
             .setColor("#91f569")
             .setDescription(plantOutput)
             .setFooter(`Type '${prefix}garden [number]' to view that plant!`)
@@ -8033,10 +8035,10 @@ function ksGardenCheck(){
                     let reveal = new Discord.RichEmbed()
 
             
-      
+            
             .attachFile(flower)
             // .setColor(petals)
-            .setDescription("Time until bloom: " + (time/2) + "min(s)")
+            .setDescription("Time until bloom: " + (time/2) + "min(s) \n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -8111,7 +8113,7 @@ function ksGardenCheck(){
       
             .attachFile(flower)
             // .setColor(petals)
-            .setDescription("Time until bloom: " + (time/2) + "min(s)")
+            .setDescription("Time until bloom: " + (time/2) + "min(s)\n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -8188,7 +8190,7 @@ function ksGardenCheck(){
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals + "\n Type: daisy")
+            .setDescription("Color: #" + petals + "\n Type: daisy\n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
             return;
@@ -8264,7 +8266,7 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals + "\n Type: tulip")
+            .setDescription("Color: #" + petals + "\n Type: tulip\n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
               } else if(type == "lily"){
@@ -8339,7 +8341,7 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals + "\n Type: lily")
+            .setDescription("Color: #" + petals + "\n Type: lily\n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
               }
@@ -8416,7 +8418,7 @@ const { createCanvas } = require('canvas')
       
             .attachFile(flower)
             .setColor(petals)
-            .setDescription("Color: #" + petals + "\n Type: " + type + "\n Status: dead")
+            .setDescription("Color: #" + petals + "\n Type: " + type + "\n Status: dead\n Owner: " + message.author.username)
             .setTimestamp();   
             message.channel.send(reveal);
               }
@@ -11977,6 +11979,17 @@ if (soulless.has(message.author.id)) {
         let member = message.mentions.members.first();
         var name = bot.users.get(member.id);
         
+
+        if (EpitaphCD.has(message.author.id)) {
+            message.reply("King Crimson must wait about 10 minutes from when you first used it!");
+            return;
+         } else{
+
+          EpitaphCD.add(message.author.id);
+        setTimeout(() => {
+          // Removes the user from the set after a minute
+          EpitaphCD.delete(message.author.id);
+        }, (1000*60*10)); 
         Epitaph.add(member.id);
         var chance = Math.floor(Math.random() * 2) + 1;
         
@@ -11990,6 +12003,8 @@ if (soulless.has(message.author.id)) {
         fateLose.add(member.id);    
             return;
         }   
+
+      }
         
         
     }
