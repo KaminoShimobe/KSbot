@@ -2789,9 +2789,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-        var appear = Math.floor(Math.random() * 50) + 1;
+        var appear = Math.floor(Math.random() * 100) + 1;
         
-        if(appear == 50){
+        if(appear == 100){
             
             
             chest();
@@ -2833,12 +2833,12 @@ function treasure(){
             
         }   else {
             if(chest != 0){
-                room.send("The mystery melon mysteriously disappeared!");
+                room.send("The chest mysteriously disappeared!");
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
         con.query(sql);
         const booru = new Danbooru()
-        booru.posts({ tags: 'summer watermelon rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -2848,9 +2848,9 @@ function treasure(){
             
         let item = new Discord.RichEmbed()
 
-            .setTitle(`A mystery melon has appeared! Type ${prefix}open to open it!`)
+            .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#16b6fa");
+            .setColor("#a57400");
 
         room.sendEmbed(item);
         
@@ -2892,7 +2892,7 @@ function treasure(){
             con.query(sql);
 
             const booru = new Danbooru()
-        booru.posts({ tags: 'summer watermelon rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -2902,9 +2902,9 @@ function treasure(){
             
         let item = new Discord.RichEmbed()
 
-            .setTitle(`A mystery melon has appeared! Type ${prefix}open to open it!`)
+            .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#16b6fa");
+            .setColor("#a57400");
             //#a57400 brown 
             
 
@@ -2975,15 +2975,15 @@ function collect(){
                 var gift = Math.floor(Math.random() * 4) + 1;
                 let money = rows[0].money;
                 let lasttrans = rows[0].lasttrans;
-             if(gift == 1){
-             sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
-             message.channel.send("**You received a :gift:!!!**");
-             } else {
+             // if(gift == 1){
+             // sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+             // message.channel.send("**You received a :gift:!!!**");
+             // } else {
                 sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;    
-             }   
+             // }   
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
-                message.reply(" found $" + cost + " in the mystery melon!");
+                message.reply(" found $" + cost + " in the chest!");
 
                 if(achievements.length > 1){
                     //Achievement 6
@@ -3088,7 +3088,7 @@ function lostChest(){
         sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
         con.query(sql);
         if(!channel) return message.channel.send("The mystery melon mysteriously disappeared!");
-        channel.send("The mystery melon mysteriously disappeared!");
+        channel.send("The chest mysteriously disappeared!");
         return; 
         });
     }         
@@ -4456,11 +4456,13 @@ function gambleFlip(){
                 if (fateWin.has(message.author.id)) {
                 chance = 1;
                 fateWin.delete(message.author.id);
+                
                 } 
                 
                 if (fateLose.has(message.author.id)) {
                 chance = 2;
                 fateWin.delete(message.author.id);
+
                 } 
             } else if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == false){
                 fateWin.clear();
@@ -4541,14 +4543,14 @@ function gambleFlip(){
             if (Epitaph.has(message.author.id)) {
                         eChannel.remove(message.channel.id);
                         Epitaph.remove(message.author.id);
-                message.channel.send("*Fate has been altered!*");
+                //message.channel.send("*Fate has been altered!*");
             }   
             } else {
             message.reply("*CHA~CHING!* You lost $" + num + "!");
             if (Epitaph.has(message.author.id)) {
                         eChannel.remove(message.channel.id);
                         Epitaph.remove(message.author.id);
-                message.channel.send("*Fate has been altered!*");
+               // message.channel.send("*Fate has been altered!*");
             }   
             }
         }
@@ -14694,7 +14696,7 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
             message.reply("Insufficient Funds.");
             return;
         }
-        sql = `UPDATE user SET gift = ${gift - 1} WHERE id = '${message.author.id}'`;
+        sql = `UPDATE user SET gift = ${gifts - 1} WHERE id = '${message.author.id}'`;
         con.query(sql);     
         ksNewMysterySeed();
         
