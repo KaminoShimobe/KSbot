@@ -101,7 +101,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.8.9", bot.user.avatarURL);
+            .setFooter("Version 1.9.0", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -4455,12 +4455,12 @@ function gambleFlip(){
             if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == true){
                 if (fateWin.has(message.author.id)) {
                 chance = 1;
-                fateWin.remove(message.author.id);
+                fateWin.delete(message.author.id);
                 } 
                 
                 if (fateLose.has(message.author.id)) {
                 chance = 2;
-                fateWin.remove(message.author.id);
+                fateWin.delete(message.author.id);
                 } 
             } else if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == false){
                 fateWin.clear();
@@ -4500,8 +4500,8 @@ function gambleFlip(){
         
             message.reply("*CHA~CHING!* You made $" + num + "!");
             if (Epitaph.has(message.author.id)) {
-                        eChannel.remove(message.channel.id);
-                        Epitaph.remove(message.author.id);
+                        eChannel.delete(message.channel.id);
+                        Epitaph.delete(message.author.id);
                 message.channel.send("*Fate has been altered!*");
             }   
         }
@@ -7811,6 +7811,8 @@ function waterSeed(){
           sql3 = `UPDATE plant SET health = ${100}, status = 'flower' WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
         message.channel.send("**GOLD EXPERIENCE**")
+        countdown = setInterval(plantHealth, 1000*60)
+        return;
       }
             }); 
 
@@ -11887,7 +11889,7 @@ if (soulless.has(message.author.id)) {
              Bomb1CD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
-          Bomb1.delete(message.author.id);
+          Bomb1CD.delete(message.author.id);
         }, (1000*30));
 
         message.delete()
@@ -14313,14 +14315,14 @@ if(command === `!cron`){
 
 }  
 
-if(command === `!weather`){
-    if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
+// if(command === `!weather`){
+//     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
        
-        weatherCheck();
+//         weatherCheck();
 
-    }
+//     }
 
-}  
+// }  
     
  
 
