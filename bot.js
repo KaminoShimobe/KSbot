@@ -606,6 +606,7 @@ bot.on("message", async message => {
     var sql38 = "ALTER TABLE garden ADD id VARCHAR(30)"; 
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
     var sql40 = "ALTER TABLE plant MODIFY health SMALLINT"; 
+    var sql41 = `UPDATE user SET updates =  ${true}`;
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -637,9 +638,9 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql40, function (err, result) {
+con.query(sql41, function (err, result) {
      if (err) throw err;
-     message.author.send("COLUMN health changed to SMALLINT!");
+     message.author.send("COLUMN updates in TABLE user set to true!");
      });
 
 // con.query(sql27, function (err, result) {
