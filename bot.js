@@ -3235,7 +3235,7 @@ function lostChest(){
                          message.channel.send("Cancelled.");
                             return;
                         }  else {
-                            sql = `UPDATE user SET username = '${message.content}' WHERE id = '${them}'`;
+                            sql = `UPDATE user SET uname = '${message.content}' WHERE id = '${them}'`;
                             con.query(sql);
                             message.channel.send("Username set to " + message.content + " for the User: " + name + "!");
                             return;
