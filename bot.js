@@ -1953,6 +1953,7 @@ function gamePhase(){
 whereIam.send(note).then(sentEmbed => {
     sentEmbed.react("👍")
     sentEmbed.react("✅")
+    sentEmbed.react("❌")
    
 
 
@@ -1981,6 +1982,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
             .catch(console.error);
             mafiaPlayers.clear(); 
             whereIam.send("Not enough players to start a game!");
+            mafiaServers.delete(message.guild.id);
             return;
          } else {
             sentEmbed.delete()
@@ -2076,7 +2078,23 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
     }
         
 
- }
+ } else if(emoji.name === "❌" && message.id === sentEmbed.id) {
+         if(user.id == owner){
+          sentEmbed.delete()
+
+            .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+
+            .catch(console.error);
+            mafiaPlayers.clear(); 
+            whereIam.send("Game Cancelled!");
+            mafiaServers.delete(message.guild.id);
+            return;
+
+
+         } else {
+           console.log(user.username + " is Not the owner")
+         }
+       }
 })
 });
 
@@ -3209,9 +3227,25 @@ function lostChest(){
                 });
         }
 
+        function alterUsername(){
+            message.channel.send("What username changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+                    const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Cancelled.");
+                            return;
+                        }  else {
+                            sql = `UPDATE user SET username = '${message.content}' WHERE id = '${them}'`;
+                            con.query(sql);
+                            message.channel.send("Username set to " + message.content + " for the User: " + name + "!");
+                            return;
+                        }
+                });
+        }
+
         
 
-                    message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift) !cancel to cancel");
+                    message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift, username) !cancel to cancel");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         if (message.content == `${prefix}cancel`) {
@@ -3236,6 +3270,10 @@ function lostChest(){
                 } else if(message.content == "gift"){
                     
                     alterGift();
+                    return;
+                } else if(message.content == "username"){
+                    
+                    alterUsername();
                     return;
                 } else {
                     message.channel.send("Invalid selection.")
