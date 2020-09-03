@@ -11994,7 +11994,7 @@ if (soulless.has(message.author.id)) {
         
 
         if (EpitaphCD.has(message.author.id)) {
-            message.reply("King Crimson must wait about 10 minutes from when you first used it!");
+            message.reply("King Crimson must wait about 60 minutes from when you first used it!");
             return;
          } else{
 
@@ -12002,7 +12002,7 @@ if (soulless.has(message.author.id)) {
         setTimeout(() => {
           // Removes the user from the set after a minute
           EpitaphCD.delete(message.author.id);
-        }, (1000*60*10)); 
+        }, (1000*60*60)); 
         Epitaph.add(member.id);
         var chance = Math.floor(Math.random() * 2) + 1;
         
