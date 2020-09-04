@@ -12043,7 +12043,7 @@ if (soulless.has(message.author.id)) {
           EpitaphCD.delete(message.author.id);
         }, (1000*60*60)); 
         Epitaph.add(member.id);
-        var chance = Math.floor(Math.random() * 2) + 1;
+        var chance = Math.floor(Math.random() * 4) + 1;
         
         
         if(chance == 1){
