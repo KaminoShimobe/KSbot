@@ -94,7 +94,7 @@ handleDisconnect();
 bot.on("ready", async () => {
 
     console.log(`Bot is ready bois! ${bot.user.username}`);
-    var me = bot.users.get('242118931769196544');
+    var me = bot.users.cache.get('242118931769196544');
     let yeet = new Discord.RichEmbed()
 
             
