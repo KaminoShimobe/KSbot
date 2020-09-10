@@ -12031,7 +12031,7 @@ if (soulless.has(message.author.id)) {
         }
         
         let member = message.mentions.members.first();
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
         
 
         if (EpitaphCD.has(message.author.id)) {
