@@ -6888,7 +6888,7 @@ function customRole(){
                 con.query(sql);
                     
         var roleName = messageArray[2];
-        message.guild.createRole({
+        message.guild.roles.create({
             name: messageArray[2],
             color: messageArray[3],
         })
