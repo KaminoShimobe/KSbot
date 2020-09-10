@@ -31,7 +31,6 @@ const ballot = new Set();
 const osirisCD = new Set();
 const wagered = new Set();
 const soulless = new Set();
-// const mafiaPlayers = new Set();
 const Epitaph = new Set();
 const fateWin = new Set();
 const fateLose = new Set();
@@ -107,7 +106,8 @@ bot.on("ready", async () => {
     
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-    bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+
+    bot.user.setPresence({ status: 'idle', game: { name: 'Updating...| ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
     
 
 
@@ -117,7 +117,7 @@ bot.on("ready", async () => {
     function onlineUpdate(){
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-    bot.user.setPresence({ status: 'online', game: { name: 'KS!help | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+    bot.user.setPresence({ status: 'idle', game: { name: 'Updating... | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
     
         setTimeout(onlineUpdate, 2000);
     });
@@ -168,7 +168,7 @@ function weather(servers, index){
 
          sql = `UPDATE server SET weather = '${outcome}' WHERE id = '${rows[index].id}'`;
          con.query(sql);
-         //console.log("Weather in " + bot.guilds.get(rows[index].id) + " changed to " + outcome);
+         
 
         }
     
