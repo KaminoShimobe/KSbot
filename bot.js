@@ -6895,7 +6895,7 @@ function customRole(){
         
         
             
-        .then(role => member.addRole(role).catch(console.error))
+        .then(role => member.roles.add(role).catch(console.error))
         .catch(console.error);
         
         message.reply("Unique Role Purchased!");
@@ -6986,7 +6986,7 @@ function customItem(){
                     
         
         
-        message.member.addRole(item).catch(console.error);
+        message.member.roles.add(item).catch(console.error);
             
         
         
@@ -7060,7 +7060,7 @@ function removeItem(){
         
                     
         if(message.member.roles.cache.has(roleOutput[(parseInt(message.content)-1)])){
-           message.member.removeRole(item).catch(console.error);
+           message.member.roles.remove(item).catch(console.error);
             
         
         
@@ -11592,7 +11592,7 @@ function give(){
 
     //             if (!kakyoin) return message.channel.send(`**${message.author.username}**, role not found`);
 
-    //              message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.addRole(kakyoin));
+    //              message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.roles.add(kakyoin));
     //              message.guild.members.filter(m =>  m.id != message.guild.ownerID).forEach(m => m.setVoiceChannel(null));
                 message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: false });
                 console.log("Everyone has been frozen in time.")
