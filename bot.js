@@ -217,8 +217,8 @@ me.send(boop + "is the randomized string for bites the dust");
          
     });                     
     me.send("Joined a guild: " + guild.name);
-    let generalChannel = guild.channels.find(channel => channel.name === "general");
-    var homie = bot.users.get(guild.ownerID);
+    let generalChannel = guild.channels.cache.find(channel => channel.name === "general");
+    var homie = bot.users.cache.get(guild.ownerID);
     let yeet = new Discord.RichEmbed()
 
             
@@ -245,7 +245,7 @@ bot.on("guildDelete", guild => {
     con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
-        var me = bot.users.get('242118931769196544');       
+        var me = bot.users.cache.get('242118931769196544');       
         if(rows.length < 1) {
             
             return;
@@ -284,7 +284,7 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
             
         
     
-        let channel = bot.channels.get(rows[0].gchannel);
+        let channel = bot.channels.cache.get(rows[0].gchannel);
    if(!channel) return;
 
    channel.send(greeting);  
@@ -318,7 +318,7 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
             }
         
     
-        let channel = bot.channels.get(rows[0].gchannel);
+        let channel = bot.channels.cache.get(rows[0].gchannel);
    if(!channel) return;
 
    channel.send(farewell);  
@@ -986,7 +986,7 @@ function kaminoCard(){
                          message.author.send("Cancelled.");
                             return;
                         }   else {
-                    var person = bot.users.get(message.content);
+                    var person = bot.users.cache.get(message.content);
                     if(person != undefined){
         message.author.send("Would you like to send a holiday card to " + person.username + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -1085,7 +1085,7 @@ function holidayCard(){
                          message.author.send("Cancelled.");
                             return;
                         }   else {
-                    var person = bot.users.get(message.content);
+                    var person = bot.users.cache.get(message.content);
                     if(person != undefined){
         message.author.send("Would you like to send a summer card to " + person.username + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -1173,7 +1173,7 @@ function anonCard(){
                          message.author.send("Cancelled.");
                             return;
                         }   else {
-                    var person = bot.users.get(message.content);
+                    var person = bot.users.cache.get(message.content);
                     if(person != undefined){
         message.author.send("Would you like to send an anonymous summer card to " + person.username + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -1321,7 +1321,7 @@ if(command === `!whisper` && messageArray[1] != undefined){
         con.query(`SELECT * FROM server WHERE id = '${messageArray[1]}'`, (err, rows) => {
         if(err) throw err;
         let sql;
-        let channel = bot.channels.get(rows[0].channel);
+        let channel = bot.channels.cache.get(rows[0].channel);
         let whisper = rows[0].whisper;
         var id = messageArray[1]; 
         if(whisper == true){    
@@ -1391,13 +1391,13 @@ function mafia(){
             .catch(console.error);
     
     const whereIam = message.channel;
-    let note = new Discord.RichEmbed()
+    let note = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + " is looking to play MAFIA!")
             .setDescription("You need at least 6 players to play! React with 👍 to join!")
             .setColor("#8a673d")
-            .setFooter("must react with ✅ to start!", message.author.avatarURL)
+            .setFooter("must react with ✅ to start!", message.author.avatarURL())
             .setTimestamp();
 
 function gamePhase(){
@@ -1410,7 +1410,7 @@ function gamePhase(){
   
     var mafiaList = "";
     for ( var i = 0; i < werewolves.length; i++ ) {
-            mafiaList += bot.users.get(werewolves[i]).username + " \n";
+            mafiaList += bot.users.cache.get(werewolves[i]).username + " \n";
     }
     
     var tally = 0;
@@ -1421,11 +1421,11 @@ function gamePhase(){
     var list = Array.from(mafiaPlayers);
     var pList = "";
      for ( var i = 0; i < list.length; i++ ) {
-            pList += (i+1) + ". - " + bot.users.get(list[i]).username + "\n";
+            pList += (i+1) + ". - " + bot.users.cache.get(list[i]).username + "\n";
     }
     var mList = "";
     for ( var i = 0; i < people.length; i++ ) {
-            mList += (i+1) + ". - " + bot.users.get(people[i]).username + "\n";
+            mList += (i+1) + ". - " + bot.users.cache.get(people[i]).username + "\n";
     }
     console.log(mList);
     var votes = list.length;
@@ -1520,11 +1520,11 @@ function gamePhase(){
             
             mafiaPlayers.delete(convict);
 
-            let results = new Discord.RichEmbed()
+            let results = new Discord.MessageEmbed()
 
             
             .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("**||" + bot.users.get(convict).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**")
+            .setDescription("**||" + bot.users.cache.get(convict).username + "|| has been condemned and has been revealed to be a ||" + status +  "||.**")
             .setColor("#8a673d")
             .setTimestamp();
 
@@ -1550,7 +1550,7 @@ function gamePhase(){
         function dayAction(users, index){
                   console.log("Day Action| New List: " + newList);  
         
-            let voteTime = new Discord.RichEmbed()
+            let voteTime = new Discord.MessageEmbed()
 
             
             .setTitle("☀️ DAY TIME ☀️")
@@ -1559,7 +1559,7 @@ function gamePhase(){
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
             
-            var person = bot.users.get(newList[index]);
+            var person = bot.users.cache.get(newList[index]);
                 
         if(person != undefined){        
                 
@@ -1571,7 +1571,7 @@ function gamePhase(){
             if (parseInt(collected.first()) > 0 && parseInt(collected.first()) < (newList.length) + 1) {
                         dayVotes.push(newList[parseInt(collected.first()) - 1]);
                         dayTally += 1;                  
-                        person.send("You have selected to condemn **" + bot.users.get(newList[parseInt(collected.first()) - 1]).username + "**");
+                        person.send("You have selected to condemn **" + bot.users.cache.get(newList[parseInt(collected.first()) - 1]).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
@@ -1592,7 +1592,7 @@ function gamePhase(){
              console.log(person.username + "'s daytime randomly collected value: ' " + rando);
                         dayVotes.push(rando);
                         dayTally += 1;
-                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.cache.get(rando).username + "**");
                         console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
                         console.log(person.username + " voted for the day porton.");
                         if(dayTally == newList.length){
@@ -1670,11 +1670,11 @@ function gamePhase(){
             var saved = mode(doctorVotes);
 
             if (saved == killed){
-              let gResults = new Discord.RichEmbed()
+              let gResults = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("**It appears that ||" + bot.users.get(killed).username + "|| was supposed to have been killed.... but have lived???**")
+            .setDescription("**It appears that ||" + bot.users.cache.get(killed).username + "|| was supposed to have been killed.... but have lived???**")
             .setColor("#8a673d")
             .setTimestamp();
 
@@ -1700,11 +1700,11 @@ function gamePhase(){
             mafiaPlayers.delete(killed);
 
 
-            let nResults = new Discord.RichEmbed()
+            let nResults = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
-            .setDescription("**It appears that ||" + bot.users.get(killed).username + "|| has been killed.**")
+            .setDescription("**It appears that ||" + bot.users.cache.get(killed).username + "|| has been killed.**")
             .setColor("#8a673d")
             .setTimestamp();
 
@@ -1729,7 +1729,7 @@ function gamePhase(){
         //DM all participants with task
         function nightAction(users, index){     
         
-                let mafiaAction = new Discord.RichEmbed()
+                let mafiaAction = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
@@ -1738,7 +1738,7 @@ function gamePhase(){
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
         
-        let doctorAction = new Discord.RichEmbed()
+        let doctorAction = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
@@ -1747,7 +1747,7 @@ function gamePhase(){
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
             
-        let detectiveAction = new Discord.RichEmbed()
+        let detectiveAction = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
@@ -1756,7 +1756,7 @@ function gamePhase(){
             .setTimestamp()
             .setFooter("Respond with the number corresponding with your target!");
             
-        let villagerAction = new Discord.RichEmbed()
+        let villagerAction = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
@@ -1780,7 +1780,7 @@ function gamePhase(){
                 //console.log(parseInt(collected.first()));
                         mafiaVotes.push(people[parseInt(collected.first()) - 1]);
                         tally += 1;              
-                        person.send("You have selected to kill **" + bot.users.get(people[parseInt(collected.first())  - 1]).username + "**");
+                        person.send("You have selected to kill **" + bot.users.cache.get(people[parseInt(collected.first())  - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1791,7 +1791,7 @@ function gamePhase(){
                       var rando = list[Math.floor(Math.random() * people.length)];
                         mafiaVotes.push(rando);
                         tally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.cache.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1825,7 +1825,7 @@ function gamePhase(){
                         //console.log(parseInt(collected.first()));
                         doctorVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
-                        person.send("You have selected to protect **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
+                        person.send("You have selected to protect **" + bot.users.cache.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1836,7 +1836,7 @@ function gamePhase(){
                       var rando = list[Math.floor(Math.random() * list.length)];
                         doctorVotes.push(rando);
                         tally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.cache.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                                     console.log(">>>>>>>Quota: " + tally)
                             if(tally == quota){
@@ -1868,7 +1868,7 @@ function gamePhase(){
              
                         detectiveVotes.push(list[parseInt(collected.first()) - 1]);
                         tally += 1;                 
-                        person.send("You have selected to identify **" + bot.users.get(list[parseInt(collected.first()) - 1]).username + "**");
+                        person.send("You have selected to identify **" + bot.users.cache.get(list[parseInt(collected.first()) - 1]).username + "**");
                         console.log(person.username + " voted");
                         if(doctors.has(list[parseInt(collected.first()) - 1])){
                             person.send("This person is a **doctor**!");
@@ -1889,7 +1889,7 @@ function gamePhase(){
                       var rando = list[Math.floor(Math.random() * list.length)];
                         detectiveVotes.push(rando);
                         tally += 1;
-                        person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
+                        person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.cache.get(rando).username + "**");
                         console.log(person.username + " ran out of time");
                         if(doctors.has(rando)){
                             person.send("This person is a **doctor**!");
@@ -1992,7 +1992,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 
             .catch(console.error);
 
-            let firstNight = new Discord.RichEmbed()
+            let firstNight = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 NIGHT TIME 🌙")
@@ -2107,7 +2107,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 function rps(){
     let other = message.mentions.users.first();
     var num = parseInt(messageArray[2]); 
-    let them = bot.users.get(message.author.id);
+    let them = bot.users.cache.get(message.author.id);
     let results = message.channel;
     
     
@@ -2574,7 +2574,7 @@ function rps(){
         console.log(weather)
         
         if(weather == "sunny"){
-            let reveal = new Discord.RichEmbed()
+            let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("☀️ SUNNY ☀️")
@@ -2583,7 +2583,7 @@ function rps(){
 
             message.channel.send(reveal);
         } else if(weather == "rainy"){
-            let reveal = new Discord.RichEmbed()
+            let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌧️ RAINY 🌧️")
@@ -2591,7 +2591,7 @@ function rps(){
             .setDescription("You don't need to water plants in the rain!"); 
             message.channel.send(reveal);
         } else if(weather == "cloudy"){
-          let reveal = new Discord.RichEmbed()
+          let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("☁️ CLOUDY ☁️")
@@ -2599,7 +2599,7 @@ function rps(){
             .setDescription("Plants wilt slower.");   
             message.channel.send(reveal);
         } else if(weather == "snowy"){
-           let reveal = new Discord.RichEmbed()
+           let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌨️ SNOWY 🌨️")
@@ -2607,7 +2607,7 @@ function rps(){
             .setDescription("Plants grow slower in snow, and die faster!");   
             message.channel.send(reveal);
         } else if(weather == "clear"){
-            let reveal = new Discord.RichEmbed()
+            let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("✨ CLEAR ✨")
