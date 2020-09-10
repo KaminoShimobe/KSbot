@@ -10654,8 +10654,9 @@ function flip(){
     
 function beat(){
     let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
+    var target = bot.users.cache.get(toBeat);
 
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
         booru.posts({ tags: 'rating:safe punching', random: true }).then(posts => {
@@ -10676,14 +10677,14 @@ function beat(){
         
          })
 
-        return message.reply(`beat ` + toBeat.user  + ` up!` || `beat ` + toBeat.user + ` up!` );
+        return message.reply(`beat ` + target + ` up!`);
 
 }
     
 function hug(){
     let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+      var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
         booru.posts({ tags: 'rating:safe hug', random: true }).then(posts => {
@@ -10704,14 +10705,14 @@ function hug(){
         
          })
 
-        return message.reply(`hugged ` + toBeat.user  + `!` || `hugged ` + toBeat.user + `!` );
+        return message.reply(`hugged ` + target  + `!`);
     
 }   
     
 function pat(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+          var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
         booru.posts({ tags: 'rating:safe petting solo', random: true }).then(posts => {
@@ -10732,13 +10733,13 @@ function pat(){
         
          })
 
-        return message.reply(`pat ` + toBeat  + `!` || `pat ` + toBeat.user + `!` );
+        return message.reply(`pat ` + target  + `!`);
 }
     
 function kiss(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+          var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
         booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
@@ -10759,15 +10760,15 @@ function kiss(){
         
          })
 
-        return message.reply(`kissed ` + toBeat.user  + `!` || `kissed ` + toBeat.user + `!` );
+        return message.reply(`kissed ` + target  + `!`);
             
                 
 }
     
 function handhold(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+          var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
         const booru = new Danbooru()
@@ -10789,14 +10790,14 @@ function handhold(){
         
          }) 
 
-        return message.reply(`held ` + toBeat.user  + `'s hand!` || `held ` + toBeat.user + `'s hand!` );
+        return message.reply(`held ` + target  + `'s hand!`);
         
 }   
 
 function handshake(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+          var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
         const booru = new Danbooru()
@@ -10818,14 +10819,14 @@ function handshake(){
         
          }) 
 
-        return message.reply(`shook ` + toBeat.user  + `'s hand!` || `shook ` + toBeat.user + `'s hand!` );
+        return message.reply(`shook ` + target + `'s hand!`);
         
 }
 
 function slap(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
         const booru = new Danbooru()
@@ -10847,7 +10848,7 @@ function slap(){
         
          }) 
 
-        return message.reply(`slapped ` + toBeat.user  + `!` || `slapped ` + toBeat.user + `!` );
+        return message.reply(`slapped ` + target  + `!`);
         
 }
 
@@ -11722,11 +11723,11 @@ function give(){
         let money = rows[0].money;
             
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+          var target = bot.users.cache.get(toBeat);
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
 
-        var lastMsg = toBeat.lastMessage.content.replace(/[^\d.-]/g, '');
+        var lastMsg = target.lastMessage.content.replace(/[^\d.-]/g, '');
         var lastInt = parseInt(lastMsg);
         
         if (soulless.has(message.author.id)) {
@@ -11747,7 +11748,7 @@ function give(){
             message.reply("Harvest must wait about 30 mins from when you first used it!");
             return;
          } else{
-                    if(toBeat.lastMessage.content.indexOf(`${prefix}spin`) != -1 && toBeat.id != message.author.id && lastInt > 0 && lastInt <= 10000000){  
+                    if(target.lastMessage.content.indexOf(`${prefix}spin`) != -1 && target.id != message.author.id && lastInt > 0 && lastInt <= 10000000){  
             HarvestCD.add(message.author.id);
         setTimeout(() => {
           // Removes the user from the set after a minute
@@ -12078,7 +12079,7 @@ if (soulless.has(message.author.id)) {
             
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
-    if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+    if(!toBeat) return message.channel.send("You did not specify a user mention!");
         let them = message.mentions.users.first();
         
             if (act1CD.has(message.author.id)) {
@@ -14365,7 +14366,7 @@ if(command === `!tradePlant` && messageArray[1] != undefined && messageArray[2] 
     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         tradePlant();
 
     }
@@ -14550,7 +14551,7 @@ if(command === `${prefix}tradePlant` && messageArray[1] != undefined && messageA
     //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
-        if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
+        if(!toBeat) return message.channel.send("You did not specify a user mention!");
         tradePlant();
 
     //}
@@ -14869,7 +14870,7 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 
     // if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
     //      let spouse = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-    //      if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
+    //      if(!spouse) return message.channel.send("You did not specify a user mention!");
     //      con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
     //  if(err) throw err;
 
