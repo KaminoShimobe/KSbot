@@ -10654,7 +10654,7 @@ function flip(){
     
 function beat(){
     let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-    var target = bot.users.cache.get(toBeat);
+    
 
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
@@ -10677,13 +10677,13 @@ function beat(){
         
          })
 
-        return message.reply(`beat ` + target + ` up!`);
+        return message.reply(`beat <#` + target + `> up!`);
 
 }
     
 function hug(){
     let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-      var target = bot.users.cache.get(toBeat);
+      
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
@@ -10705,13 +10705,13 @@ function hug(){
         
          })
 
-        return message.reply(`hugged ` + target  + `!`);
+        return message.reply(`hugged <#` + target  + `>!`);
     
 }   
     
 function pat(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-          var target = bot.users.cache.get(toBeat);
+         
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
@@ -10733,12 +10733,12 @@ function pat(){
         
          })
 
-        return message.reply(`pat ` + target  + `!`);
+        return message.reply(`pat <#` + target  + `>!`);
 }
     
 function kiss(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-          var target = bot.users.cache.get(toBeat);
+          
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
         const booru = new Danbooru()
@@ -10760,14 +10760,14 @@ function kiss(){
         
          })
 
-        return message.reply(`kissed ` + target  + `!`);
+        return message.reply(`kissed <#` + target  + `>!`);
             
                 
 }
     
 function handhold(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-          var target = bot.users.cache.get(toBeat);
+          
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
@@ -10790,13 +10790,13 @@ function handhold(){
         
          }) 
 
-        return message.reply(`held ` + target  + `'s hand!`);
+        return message.reply(`held <#` + target  + `>'s hand!`);
         
 }   
 
 function handshake(){
         let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-          var target = bot.users.cache.get(toBeat);
+          
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
@@ -10819,7 +10819,7 @@ function handshake(){
         
          }) 
 
-        return message.reply(`shook ` + target + `'s hand!`);
+        return message.reply(`shook <#` + target + `>'s hand!`);
         
 }
 
@@ -10848,7 +10848,7 @@ function slap(){
         
          }) 
 
-        return message.reply(`slapped ` + target  + `!`);
+        return message.reply(`slapped <#` + target  + `>!`);
         
 }
 
