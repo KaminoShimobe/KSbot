@@ -10677,7 +10677,7 @@ function beat(){
         
          })
 
-        return message.reply(`beat <#` + toBeat + `> up!`);
+        return message.reply(`beat <@` + toBeat + `> up!`);
 
 }
     
@@ -10705,7 +10705,7 @@ function hug(){
         
          })
 
-        return message.reply(`hugged <#` + toBeat  + `>!`);
+        return message.reply(`hugged <@` + toBeat  + `>!`);
     
 }   
     
@@ -10733,7 +10733,7 @@ function pat(){
         
          })
 
-        return message.reply(`pat <#` + toBeat  + `>!`);
+        return message.reply(`pat <@` + toBeat  + `>!`);
 }
     
 function kiss(){
@@ -10760,7 +10760,7 @@ function kiss(){
         
          })
 
-        return message.reply(`kissed <#` + toBeat  + `>!`);
+        return message.reply(`kissed <@` + toBeat  + `>!`);
             
                 
 }
@@ -10790,7 +10790,7 @@ function handhold(){
         
          }) 
 
-        return message.reply(`held <#` + toBeat  + `>'s hand!`);
+        return message.reply(`held <@` + toBeat  + `>'s hand!`);
         
 }   
 
@@ -10819,7 +10819,7 @@ function handshake(){
         
          }) 
 
-        return message.reply(`shook <#` + toBeat + `>'s hand!`);
+        return message.reply(`shook <@` + toBeat + `>'s hand!`);
         
 }
 
@@ -10848,7 +10848,7 @@ function slap(){
         
          }) 
 
-        return message.reply(`slapped <#` + toBeat  + `>!`);
+        return message.reply(`slapped <@` + toBeat  + `>!`);
         
 }
 
