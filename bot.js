@@ -107,7 +107,7 @@ bot.on("ready", async () => {
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
 
-    bot.user.setPresence({ status: 'idle', game: { name: 'Updating...| ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+    bot.user.setPresence({ status: 'idle', activities: { name: 'Updating...| ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
     
 
 
@@ -117,7 +117,7 @@ bot.on("ready", async () => {
     function onlineUpdate(){
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-    bot.user.setPresence({ status: 'idle', game: { name: 'Updating... | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
+    bot.user.setPresence({ status: 'idle', activities: { name: 'Updating... | ' + bot.guilds.size + ' servers | ' + rows.length + ' users'} });
     
         setTimeout(onlineUpdate, 2000);
     });
