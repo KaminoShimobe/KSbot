@@ -27,7 +27,6 @@ const insuranceCD = new Set();
 const amuletCoinCD = new Set();
 const questCD = new Set();
 const thothCD = new Set();
-const ballot = new Set();
 const osirisCD = new Set();
 const wagered = new Set();
 const soulless = new Set();
@@ -219,7 +218,7 @@ me.send(boop + "is the randomized string for bites the dust");
     me.send("Joined a guild: " + guild.name);
     let generalChannel = guild.channels.cache.find(channel => channel.name === "general");
     var homie = bot.users.cache.get(guild.ownerID);
-    let yeet = new Discord.RichEmbed()
+    let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("Welcome to KS-Bot!")
@@ -767,7 +766,7 @@ function directory(){
                  
 //              rows.forEach(addEm);
                 
-//              let list = new Discord.RichEmbed()
+//              let list = new Discord.MessageEmbed()
 
             
 //              .setTitle(`KS User Directory: Select an account with a number or !cancel to cancel.`)
@@ -801,7 +800,7 @@ function directory(){
                 let wins = rows[index].wins;
                 let losses = rows[index].losses;
                 
-                let person = new Discord.RichEmbed()
+                let person = new Discord.MessageEmbed()
 
             
                 .setTitle(uname + `'s account`)
@@ -1605,7 +1604,7 @@ function gamePhase(){
         //      console.log(person.username + "'s daytime randomly collected value: ' " + rando);
         //                 dayVotes.push(rando);
         //                // dayTally += 1;
-        //                 person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
+        //                 person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.cache.get(rando).username + "**");
         //                 console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
         //                 console.log(person.username + " voted for the day porton.");
         //                 if(dayTally == newList.length){
@@ -2658,7 +2657,7 @@ function rps(){
             
             
 
-            message.channel.fetchMessages({ limit: 100 }).then(messages => {
+            message.channel.messages.fetch({ limit: 100 }).then(messages => {
   const botMessages = messages.filter(msg => msg.id != undefined );
 
 
@@ -2846,7 +2845,7 @@ function treasure(){
             
         let chest = rows[0].chest;
         let channel = rows[0].channel;
-        const room = bot.channels.get(channel);
+        const room = bot.channels.cache.get(channel);
         if(rows.length < 1) {
             
             
@@ -2867,13 +2866,13 @@ function treasure(){
         // Get post's url 
          const url = booru.url(post.file_url)
             
-        let item = new Discord.RichEmbed()
+        let item = new Discord.MessageEmbed()
 
             .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
             .setColor("#a57400");
 
-        room.sendEmbed(item);
+        room.send(item);
         
          })
             return;
@@ -2899,7 +2898,7 @@ function treasure(){
         }
         let chest = rows[0].chest;
         let channel = rows[0].channel;
-        const room = bot.channels.get(channel);
+        const room = bot.channels.cache.get(channel);
         if(rows.length < 1) {
             
             
@@ -2921,7 +2920,7 @@ function treasure(){
         // Get post's url 
          const url = booru.url(post.file_url)
             
-        let item = new Discord.RichEmbed()
+        let item = new Discord.MessageEmbed()
 
             .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
@@ -2929,7 +2928,7 @@ function treasure(){
             //#a57400 brown 
             
 
-        room.sendEmbed(item);
+        room.send(item);
         
          })
 
@@ -3105,7 +3104,7 @@ function lostChest(){
         con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
-        let channel = bot.channels.get(rows[0].channel);
+        let channel = bot.channels.cache.get(rows[0].channel);
         sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
         con.query(sql);
         if(!channel) return message.channel.send("The mystery melon mysteriously disappeared!");
@@ -3341,7 +3340,7 @@ var boop = makeid(30);
                     if (rows[0].channel == "default"){
                         channel = "default";
                     } else {
-                        channel = bot.channels.get(rows[0].channel);
+                        channel = bot.channels.cache.get(rows[0].channel);
                     }   
                     message.channel.send("The current bot channel is: \n" + channel + " \n Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -3362,7 +3361,7 @@ var boop = makeid(30);
                     if (rows[0].gchannel == "default"){
                         gChannel = "default";
                     } else {
-                        gChannel = bot.channels.get(rows[0].gchannel);
+                        gChannel = bot.channels.cache.get(rows[0].gchannel);
                     }   
                     message.channel.send("The current greeting channel is: \n" + gChannel + " \n Update your bot channel! Send the id of the channel. Make sure you're in developer mode to see the id of your channel. \n !cancel to cancel.");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -3388,7 +3387,7 @@ var boop = makeid(30);
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
          for(var i = 0; i < roleOutput.length - 1; i++){
-              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+              roleList += (i+1) + ". @" + message.guild.roles.cache.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
 
@@ -3399,7 +3398,7 @@ var boop = makeid(30);
              roleList = roleList.replace(undefined, "\n");
             }
         
-            let shop = new Discord.RichEmbed()
+            let shop = new Discord.MessageEmbed()
 
             
             .setTitle(message.guild.name + `'s Role Shop`)
@@ -3413,8 +3412,8 @@ var boop = makeid(30);
                         if (message.content == `!cancel`) {
                          message.channel.send("Role Shop Addition Cancelled.");
                             return;
-                        }  else if(message.guild.roles.get(theRole) != undefined){
-                 message.channel.send("What's the price for the role **" + message.guild.roles.get(theRole).name + "**? (!cancel to cancel)");
+                        }  else if(message.guild.roles.cache.get(theRole) != undefined){
+                 message.channel.send("What's the price for the role **" + message.guild.roles.cache.get(theRole).name + "**? (!cancel to cancel)");
                  const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                  collector.once('collect', message => {
                   var thePrice = message.content;
@@ -3439,7 +3438,7 @@ var boop = makeid(30);
 
                  sql = `UPDATE server SET shop = '${itemInsert}', prices = '${priceInsert}' WHERE id = '${message.guild.id}'`;
                  con.query(sql);
-                 message.channel.send(message.guild.roles.get(theRole).name + " added to the shop for $" + thePrice);
+                 message.channel.send(message.guild.roles.cache.get(theRole).name + " added to the shop for $" + thePrice);
                  return;
                } else {
                   message.channel.send("That's not a valid price for the role!");
@@ -3459,7 +3458,7 @@ var boop = makeid(30);
         var priceOutput = customPrice.split(",");
          for(var i = 0; i < roleOutput.length - 1; i++){
 
-              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+              roleList += (i+1) + ". @" + message.guild.roles.cache.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
              if(roleList == undefined){
@@ -3470,7 +3469,7 @@ var boop = makeid(30);
             }
 
         
-        let shop = new Discord.RichEmbed()
+        let shop = new Discord.MessageEmbed()
 
             
             .setTitle(message.guild.name + `'s Role Shop`)
@@ -3495,7 +3494,7 @@ var boop = makeid(30);
 
                  sql = `UPDATE server SET shop = '${removalR}', prices = '${removalP}' WHERE id = '${message.guild.id}'`;
                  con.query(sql);
-                 message.channel.send(message.guild.roles.get(roleOutput[(parseInt(message.content) - 1)]).name + " removed from the shop!");
+                 message.channel.send(message.guild.roles.cache.get(roleOutput[(parseInt(message.content) - 1)]).name + " removed from the shop!");
                  return;
                } else {
                   message.channel.send("That's not a valid role to remove!");
@@ -3556,7 +3555,7 @@ var boop = makeid(30);
                         }
                 }); 
                 } else if(messageArray[1] == "RPG"){
-                    message.channel.send("Do you want to allow KSRPG transactions?(yes or no) \n !cancel to cancel.");
+                    message.channel.send("Do you want to allow KSRPG events?(yes or no) \n !cancel to cancel.");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         if (message.content == `${prefix}cancel`) {
@@ -3886,7 +3885,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
         if (rows[0].channel == "default"){
             channel = "default";
         } else {
-            channel = bot.channels.get(rows[0].channel);
+            channel = bot.channels.cache.get(rows[0].channel);
         }
         let whisper = rows[0].whisper;
         let expose = rows[0].exposeSet;
@@ -3947,21 +3946,21 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
             cr = "No";
         }
     
-        var owner = bot.users.get(message.guild.ownerID);
+        var owner = bot.users.cache.get(message.guild.ownerID);
         
 
         var supporter = "";
         
                 
 
-        let stats = new Discord.RichEmbed()
+        let stats = new Discord.MessageEmbed()
 
             
             .setAuthor(message.guild.name + " KS Bot-settings")
             .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: " + channel + "\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
             .setColor("#1f3c5b"); 
 
-        message.channel.sendEmbed(stats);
+        message.channel.send(stats);
 
 
         
@@ -4340,7 +4339,7 @@ function viewMarriedAccount()   {
                     message.reply(" You don't have a joint account!")
                     return;
                 } else{
-                    let jointAccount = new Discord.RichEmbed()
+                    let jointAccount = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + " & " + marriage + "'s joint account:")
@@ -4444,7 +4443,7 @@ function daily(){
         setTimeout(() => {
           // Removes the user from the set after a minute
           dailyCD.delete(message.author.id);
-        }, (1000*60*60*24));
+        }, (1000*60*60*12));
 
     }
     }); 
@@ -4582,15 +4581,15 @@ function gambleFlip(){
             if(streak >= 2){
             message.reply("*CHA~CHING!* You lost $" + num + "! \n Streak Lost!");
             if (Epitaph.has(message.author.id)) {
-                        eChannel.remove(message.channel.id);
-                        Epitaph.remove(message.author.id);
+                        eChannel.delete(message.channel.id);
+                        Epitaph.delete(message.author.id);
                 //message.channel.send("*Fate has been altered!*");
             }   
             } else {
             message.reply("*CHA~CHING!* You lost $" + num + "!");
             if (Epitaph.has(message.author.id)) {
-                        eChannel.remove(message.channel.id);
-                        Epitaph.remove(message.author.id);
+                        eChannel.delete(message.channel.id);
+                        Epitaph.delete(message.author.id);
                // message.channel.send("*Fate has been altered!*");
             }   
             }
@@ -5526,7 +5525,7 @@ const artPiece = new Discord.Attachment(art, "midnight.png");
 
 let prize;      
 
-            let drawing = new Discord.RichEmbed()
+            let drawing = new Discord.MessageEmbed()
 
             
             .setTitle("Respond with a number 1 - 9 for the corresponding grid.")
@@ -5545,7 +5544,7 @@ let prize;
                     var art = topLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5556,7 +5555,7 @@ let prize;
                     var art = topMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5567,7 +5566,7 @@ let prize;
                     var art = topRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5578,7 +5577,7 @@ let prize;
                     var art = midLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5589,7 +5588,7 @@ let prize;
                     var art = midMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5600,7 +5599,7 @@ let prize;
                     var art = midRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5611,7 +5610,7 @@ let prize;
                     var art = botLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5622,7 +5621,7 @@ let prize;
                     var art = botMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5633,7 +5632,7 @@ let prize;
                     var art = botRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
@@ -5659,7 +5658,7 @@ let prize;
                     var art = topLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5671,7 +5670,7 @@ let prize;
                     var art = topMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5682,7 +5681,7 @@ let prize;
                     var art = topRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5693,7 +5692,7 @@ let prize;
                     var art = midLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5704,7 +5703,7 @@ let prize;
                     var art = midMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5715,7 +5714,7 @@ let prize;
                     var art = midRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5726,7 +5725,7 @@ let prize;
                     var art = botLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5737,7 +5736,7 @@ let prize;
                     var art = botMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5748,7 +5747,7 @@ let prize;
                     var art = botRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
@@ -5797,7 +5796,7 @@ let prize;
                     var art = topLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5808,7 +5807,7 @@ let prize;
                     var art = topMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5819,7 +5818,7 @@ let prize;
                     var art = topRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5830,7 +5829,7 @@ let prize;
                     var art = midLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5841,7 +5840,7 @@ let prize;
                     var art = midMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5852,7 +5851,7 @@ let prize;
                     var art = midRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5863,7 +5862,7 @@ let prize;
                     var art = botLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5874,7 +5873,7 @@ let prize;
                     var art = botMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5885,7 +5884,7 @@ let prize;
                     var art = botRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
@@ -5912,7 +5911,7 @@ let prize;
                     var art = topLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5923,7 +5922,7 @@ let prize;
                     var art = topMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5934,7 +5933,7 @@ let prize;
                     var art = topRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5945,7 +5944,7 @@ let prize;
                     var art = midLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5956,7 +5955,7 @@ let prize;
                     var art = midMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5967,7 +5966,7 @@ let prize;
                     var art = midRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5978,7 +5977,7 @@ let prize;
                     var art = botLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -5989,7 +5988,7 @@ let prize;
                     var art = botMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -6000,7 +5999,7 @@ let prize;
                     var art = botRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
@@ -6048,7 +6047,7 @@ let prize;
                     var art = topLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6059,7 +6058,7 @@ let prize;
                     var art = topMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6070,7 +6069,7 @@ let prize;
                     var art = topRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6081,7 +6080,7 @@ let prize;
                     var art = midLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6092,7 +6091,7 @@ let prize;
                     var art = midMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6103,7 +6102,7 @@ let prize;
                     var art = midRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6114,7 +6113,7 @@ let prize;
                     var art = botLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6125,7 +6124,7 @@ let prize;
                     var art = botMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6136,7 +6135,7 @@ let prize;
                     var art = botRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
@@ -6163,7 +6162,7 @@ let prize;
                     var art = topLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6174,7 +6173,7 @@ let prize;
                     var art = topMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6185,7 +6184,7 @@ let prize;
                     var art = topRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6196,7 +6195,7 @@ let prize;
                     var art = midLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6207,7 +6206,7 @@ let prize;
                     var art = midMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6218,7 +6217,7 @@ let prize;
                     var art = midRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6229,7 +6228,7 @@ let prize;
                     var art = botLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6240,7 +6239,7 @@ let prize;
                     var art = botMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6251,7 +6250,7 @@ let prize;
                     var art = botRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
@@ -6299,7 +6298,7 @@ let prize;
                     var art = topLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6310,7 +6309,7 @@ let prize;
                     var art = topMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6321,7 +6320,7 @@ let prize;
                     var art = topRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6332,7 +6331,7 @@ let prize;
                     var art = midLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6343,7 +6342,7 @@ let prize;
                     var art = midMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6354,7 +6353,7 @@ let prize;
                     var art = midRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6365,7 +6364,7 @@ let prize;
                     var art = botLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6376,7 +6375,7 @@ let prize;
                     var art = botMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6387,7 +6386,7 @@ let prize;
                     var art = botRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = prize + num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
@@ -6414,7 +6413,7 @@ let prize;
                     var art = topLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6425,7 +6424,7 @@ let prize;
                     var art = topMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6436,7 +6435,7 @@ let prize;
                     var art = topRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6447,7 +6446,7 @@ let prize;
                     var art = midLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6458,7 +6457,7 @@ let prize;
                     var art = midMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6469,7 +6468,7 @@ let prize;
                     var art = midRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6480,7 +6479,7 @@ let prize;
                     var art = botLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6491,7 +6490,7 @@ let prize;
                     var art = botMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6502,7 +6501,7 @@ let prize;
                     var art = botRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
@@ -6551,7 +6550,7 @@ let prize;
                     var art = topLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6562,7 +6561,7 @@ let prize;
                     var art = topMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6573,7 +6572,7 @@ let prize;
                     var art = topRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6584,7 +6583,7 @@ let prize;
                     var art = midLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6595,7 +6594,7 @@ let prize;
                     var art = midMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6606,7 +6605,7 @@ let prize;
                     var art = midRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6617,7 +6616,7 @@ let prize;
                     var art = botLeftGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6628,7 +6627,7 @@ let prize;
                     var art = botMidGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6639,7 +6638,7 @@ let prize;
                     var art = botRightGood.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num * 1.5;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
@@ -6668,7 +6667,7 @@ let prize;
                     var art = topLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6679,7 +6678,7 @@ let prize;
                     var art = topMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6690,7 +6689,7 @@ let prize;
                     var art = topRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6701,7 +6700,7 @@ let prize;
                     var art = midLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6712,7 +6711,7 @@ let prize;
                     var art = midMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6723,7 +6722,7 @@ let prize;
                     var art = midRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6734,7 +6733,7 @@ let prize;
                     var art = botLeftBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6745,7 +6744,7 @@ let prize;
                     var art = botMidBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");    
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6756,7 +6755,7 @@ let prize;
                     var art = botRightBad.toBuffer() // defaults to PNG
                     const win = new Discord.Attachment(art, "midnight.png");
                     prize = num;
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
@@ -6819,7 +6818,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
     let customItem = rows[0].shop;
     let customPrice = rows[0].prices;
 
-    let shop = new Discord.RichEmbed()
+    let shop = new Discord.MessageEmbed()
 
             
             .setTitle(message.guild.name + `| KS-Bot Shop (${prefix}buy [item] to purchase)`)
@@ -6841,7 +6840,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
             return;
         }   
     
-    let shop = new Discord.RichEmbed()
+    let shop = new Discord.MessageEmbed()
 
             
             .setTitle(`KS-Bot Gift Shop (${prefix}buy [item] to purchase)`)
@@ -6930,7 +6929,7 @@ function customItem(){
         console.log(roleOutput);
         console.log(priceOutput);
          for(var i = 0; i < roleOutput.length - 1; i++){
-              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
+              roleList += (i+1) + ". @" + message.guild.roles.cache.get(roleOutput[i]).name + " - " + "$" + priceOutput[i] + "\n";
             } 
             console.log(roleList)
             if(roleList == undefined){
@@ -6939,7 +6938,7 @@ function customItem(){
             }
             roleList = roleList.replace(undefined, "\n");
 
-        let shop = new Discord.RichEmbed()
+        let shop = new Discord.MessageEmbed()
 
             
             .setTitle(message.guild.name + `'s Role Shop`)
@@ -6970,7 +6969,7 @@ function customItem(){
         }
 
         var cost = parseInt(priceOutput[(parseInt(message.content)-1)]);
-        var item = message.guild.roles.get(roleOutput[(parseInt(message.content)-1)]);
+        var item = message.guild.roles.cache.get(roleOutput[(parseInt(message.content)-1)]);
 
         let money = rows[0].money;
         
@@ -7024,7 +7023,7 @@ function removeItem(){
         var roleOutput = customItem.split(",");
         var priceOutput = customPrice.split(",");
          for(var i = 0; i < roleOutput.length - 1; i++){
-              roleList += (i+1) + ". @" + message.guild.roles.get(roleOutput[i]).name + "\n";
+              roleList += (i+1) + ". @" + message.guild.roles.cache.get(roleOutput[i]).name + "\n";
             } 
             console.log(roleList)
             if(roleList == undefined){
@@ -7034,7 +7033,7 @@ function removeItem(){
             roleList = roleList.replace(undefined, "\n");
         
         
-            let shop = new Discord.RichEmbed()
+            let shop = new Discord.MessageEmbed()
 
             
             .setTitle(message.guild.name + `'s Role Shop`)
@@ -7056,11 +7055,11 @@ function removeItem(){
     
 
         
-        var item = message.guild.roles.get(roleOutput[(parseInt(message.content)-1)]);
+        var item = message.guild.roles.cache.get(roleOutput[(parseInt(message.content)-1)]);
 
         
                     
-        if(message.member.roles.has(roleOutput[(parseInt(message.content)-1)])){
+        if(message.member.roles.cache.has(roleOutput[(parseInt(message.content)-1)])){
            message.member.removeRole(item).catch(console.error);
             
         
@@ -7189,7 +7188,7 @@ const { createCanvas } = require('canvas')
 
   var art = daisy.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Daisy-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -7267,7 +7266,7 @@ const { createCanvas } = require('canvas')
 
   var art = tulip.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Tulip-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -7345,7 +7344,7 @@ const { createCanvas } = require('canvas')
 
   var art = lily.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Lily-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -7881,7 +7880,7 @@ function waterSeed(){
             
 
             if(plantStage == "flower" && life > 0 && life <= 75  && KSplants.has(shade + message.author.id) == true && messageArray[0] == `${prefix}water`){
-        sql3 = `UPDATE plant SET health = ${life + 25} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
+        sql3 = `UPDATE plant SET health = ${400} WHERE owner = '${message.author.id}' AND id = '${message.guild.id}' AND hexcolor = '${shade}'`;
         con.query(sql3);
         if(life < 10){
           message.channel.send("You watered your plant! It looks like it could use some more water...")
@@ -7993,7 +7992,7 @@ function ksGardenCheck(){
 
         //message.channel.send("slots: " + slots + " plants:" + plants + " status: " + status)
         if(messageArray[1] == undefined){
-        let gardenList = new Discord.RichEmbed()
+        let gardenList = new Discord.MessageEmbed()
 
             .setTitle(message.author.username + "'s garden")
             .setColor("#91f569")
@@ -8084,7 +8083,7 @@ function ksGardenCheck(){
 
   var art = seed.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Seed-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
             
@@ -8159,7 +8158,7 @@ function ksGardenCheck(){
 
   var art = sprout.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Sprout-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -8236,7 +8235,7 @@ function ksGardenCheck(){
 
   var art = daisy.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Daisy-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -8312,7 +8311,7 @@ const { createCanvas } = require('canvas')
 
   var art = tulip.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Tulip-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -8387,7 +8386,7 @@ const { createCanvas } = require('canvas')
 
   var art = lily.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-Lily-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -8464,7 +8463,7 @@ const { createCanvas } = require('canvas')
 
   var art = deadFlower.toBuffer() // defaults to PNG
                     const flower = new Discord.Attachment(art, "KS-DeadFlower-Sample.png");
-                    let reveal = new Discord.RichEmbed()
+                    let reveal = new Discord.MessageEmbed()
 
             
       
@@ -8543,7 +8542,7 @@ function imageObtain(){
     if(message.attachments.size > 0){
     var img = message.attachments.first().url;
     
-    let thing = new Discord.RichEmbed()
+    let thing = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + "'s cool image")
@@ -9087,7 +9086,7 @@ function uno(){
                     }   
                     
                 
-                    let notes = new Discord.RichEmbed()
+                    let notes = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + "'s UNO hand:")
@@ -9331,7 +9330,7 @@ function unoJoin(){
                     }   
                     
                 
-                    let notes = new Discord.RichEmbed()
+                    let notes = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + "'s UNO hand:")
@@ -9387,7 +9386,7 @@ function which(){
   var options = options.split(" ")
   var rand = Math.floor(Math.random() * (options.length - 1)) + 1;
   console.log(rand)
-  // let note = new Discord.RichEmbed()
+  // let note = new Discord.MessageEmbed()
 
             
   //           .setTitle(ogQuestion)
@@ -9441,13 +9440,13 @@ function poll(){
     var downVote = 0;
     var total = 0;
     var owner = message.author;
-    let note = new Discord.RichEmbed()
+    let note = new Discord.MessageEmbed()
 
             
             .setTitle(message.author.username + " asks:")
             .setDescription(msg)
             .setColor("#af25f5")
-            .setFooter("React with ✅ to stop", message.author.avatarURL)
+            .setFooter("React with ✅ to stop", message.author.avatarURL())
             .setTimestamp();
 
     
@@ -9543,13 +9542,13 @@ function timerReminder(){
         }, (1000*60*limit));    
     
     Reminders.add(message.author.id)
-    let note = new Discord.RichEmbed()
+    let note = new Discord.MessageEmbed()
 
             
             .setTitle("Reminding " + message.author.username + " to")
             .setDescription(reason)
             .setColor("#fa2323")
-            .setFooter("in " + limit + " minute(s)", message.author.avatarURL)
+            .setFooter("in " + limit + " minute(s)", message.author.avatarURL())
             .setTimestamp();
     
     whereIam.send(note)
@@ -9591,13 +9590,13 @@ function timerChat(){
     
     
     Reminders.add(message.author.id)
-    let note = new Discord.RichEmbed()
+    let note = new Discord.MessageEmbed()
 
             
             .setTitle("Reminding " + message.author.username)
             .setDescription("when " + target.username + " talks.")
             .setColor("#fa2323")
-            .setFooter("!cancelReminder to cancel", message.author.avatarURL)
+            .setFooter("!cancelReminder to cancel", message.author.avatarURL())
             .setTimestamp();
     
     whereIam.send(note)
@@ -9631,7 +9630,7 @@ function timerPlace(){
     
     var person = message.author;
     const whereIam = message.channel;
-    const target = bot.channels.get(messageArray[2]);
+    const target = bot.channels.cache.get(messageArray[2]);
     
     
     if(target == undefined){
@@ -9642,13 +9641,13 @@ function timerPlace(){
     
     
     Reminders.add(message.author.id)
-    let note = new Discord.RichEmbed()
+    let note = new Discord.MessageEmbed()
 
             
             .setTitle("Reminding " + message.author.username)
             .setDescription("if someone speaks in " + target)
             .setColor("#fa2323")
-            .setFooter("!cancelReminder to cancel", message.author.avatarURL)
+            .setFooter("!cancelReminder to cancel", message.author.avatarURL())
             .setTimestamp();
     
     whereIam.send(note)
@@ -10654,7 +10653,7 @@ function flip(){
 //Waifu related
     
 function beat(){
-    let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+    let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
@@ -10667,13 +10666,13 @@ function beat(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
 
@@ -10682,7 +10681,7 @@ function beat(){
 }
     
 function hug(){
-    let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+    let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
@@ -10695,13 +10694,13 @@ function hug(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
 
@@ -10710,7 +10709,7 @@ function hug(){
 }   
     
 function pat(){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
@@ -10723,13 +10722,13 @@ function pat(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
 
@@ -10737,7 +10736,7 @@ function pat(){
 }
     
 function kiss(){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
 
@@ -10750,13 +10749,13 @@ function kiss(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
 
@@ -10766,7 +10765,7 @@ function kiss(){
 }
     
 function handhold(){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         
@@ -10780,13 +10779,13 @@ function handhold(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          }) 
 
@@ -10795,7 +10794,7 @@ function handhold(){
 }   
 
 function handshake(){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         
@@ -10809,13 +10808,13 @@ function handshake(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          }) 
 
@@ -10824,7 +10823,7 @@ function handshake(){
 }
 
 function slap(){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         
@@ -10838,13 +10837,13 @@ function slap(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#d80a0a"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          }) 
 
@@ -10864,13 +10863,13 @@ function waifuPic(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#ff30e0"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
         
@@ -10890,13 +10889,13 @@ function waifuPic(){
         // Get post's url 
          const url = booru.url(post.file_url)
             
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#4327f7"); 
 
-        message.channel.sendEmbed(pic);
+        message.channel.send(pic);
         
          })
             
@@ -10917,16 +10916,16 @@ function waifuPic(){
         // Get post's url 
          const url = booru.url(post.file_url)
         
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#ff30e0"); 
         
         if(message.channel.nsfw == true){
-            message.channel.sendEmbed(pic);
+            message.channel.send(pic);
         } else {
-            message.author.sendEmbed(pic);
+            message.author.send(pic);
             message.channel.send("Check your DMS, your picture was sent there!");
         }   
             
@@ -10950,16 +10949,16 @@ function waifuPic(){
         // Get post's url 
          const url = booru.url(post.file_url)
             
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#4327f7"); 
 
         if(message.channel.nsfw == true){
-            message.channel.sendEmbed(pic);
+            message.channel.send(pic);
         } else {
-            message.author.sendEmbed(pic);
+            message.author.send(pic);
             message.channel.send("Check your DMS, your picture was sent there!");
         }   
         
@@ -10989,16 +10988,16 @@ function waifuPic(){
         // Get post's url 
          const url = booru.url(post.file_url)
             
-         let pic = new Discord.RichEmbed()
+         let pic = new Discord.MessageEmbed()
 
             
             .setImage(url.href)
             .setColor("#7b18a3"); 
 
         if(message.channel.nsfw == true){
-            message.channel.sendEmbed(pic);
+            message.channel.send(pic);
         } else {
-            message.author.sendEmbed(pic);
+            message.author.send(pic);
             message.channel.send("Check your DMS, your picture was sent there!");
         }   
         
@@ -11154,15 +11153,15 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
             let tasks = rows[0].tasks;
             let status = rows[0].status;    
 
-        let stats = new Discord.RichEmbed()
+        let stats = new Discord.MessageEmbed()
 
             
             .setAuthor(message.author.username + supporter)
             .setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
-            .setFooter("ID:" + message.author.id, message.author.avatarURL)
+            .setFooter("ID:" + message.author.id, message.author.avatarURL())
             .setColor(color); 
 
-        message.channel.sendEmbed(stats);
+        message.channel.send(stats);
         if(tasks.indexOf("Get 10 Ws with 0 Ls") != -1 && wins == 10 && losses == 0){
                     var done = tasks.replace("Get 10 Ws with 0 Ls", "complete");
                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
@@ -11219,14 +11218,14 @@ con.query(`SELECT * FROM user WHERE money BETWEEN 0 AND 9223372036854775807 ORDE
         
         
         
-        let leaderboard = new Discord.RichEmbed()
+        let leaderboard = new Discord.MessageEmbed()
         
             
             .setTitle("Global KS Currency Leaderboard")
             .setDescription("1. `" + user[0] + "`\n $" + rank[0] + "\n 2.`" + user[1] + "`\n $" + rank[1] + "\n 3.`" + user[2] + "`\n $" + rank[2] + "\n 4.`" + user[3] + "`\n $" + rank[3] + "\n 5.`" + user[4] + "`\n $" + rank[4] + "\n 6.`" + user[5] + "`\n $" + rank[5] + "\n 7.`" + user[6] + "`\n $" + rank[6] + "\n 8.`" + user[7] + "`\n $" + rank[7] + "\n 9.`" + user[8] + "`\n $" + rank[8] + "\n 10.`" + user[9] + "`\n $" + rank[9])
             .setColor("#00fffa"); 
 
-        message.channel.sendEmbed(leaderboard);
+        message.channel.send(leaderboard);
 
 
         
@@ -11270,14 +11269,14 @@ if(rank.length < 10){
         
             
         
-let leaderboard = new Discord.RichEmbed()
+let leaderboard = new Discord.MessageEmbed()
         
             
             .setTitle(message.guild.name + "'s KS Currency Leaderboard")
             .setDescription("1. `" + rank[0].tname + "`\n $" + rank[0].money + "\n 2.`" + rank[1].tname + "`\n $" + rank[1].money + "\n 3.`" + rank[2].tname + "`\n $" + rank[2].money + "\n 4.`" + rank[3].tname + "`\n $" + rank[3].money + "\n 5.`" + rank[4].tname + "`\n $" + rank[4].money + "\n 6.`" + rank[5].tname + "`\n $" + rank[5].money + "\n 7.`" + rank[6].tname + "`\n $" + rank[6].money + "\n 8.`" + rank[7].tname + "`\n $" + rank[7].money + "\n 9.`" + rank[8].tname + "`\n $" + rank[8].money + "\n 10.`" + rank[9].tname + "`\n $" + rank[9].money)
             .setColor("#00fffa"); 
 
-        message.channel.sendEmbed(leaderboard);
+        message.channel.send(leaderboard);
             
         
         
@@ -11312,14 +11311,14 @@ con.query(`SELECT * FROM user`, (err, rows) => {
         
         
         
-        let leaderboard = new Discord.RichEmbed()
+        let leaderboard = new Discord.MessageEmbed()
         
             
             .setTitle("Global KS Achievements Leaderboard")
             .setDescription("1. `" + bot.users.get(user[0]).username + "`\n $" + rank[0] + "\n 2.`" + bot.users.get(user[1]).username + "`\n $" + rank[1] + "\n 3.`" + bot.users.get(user[2]).username+ "`\n $" + rank[2] + "\n 4.`" + bot.users.get(user[3]).username + "`\n $" + rank[3] + "\n 5.`" + bot.users.get(user[4]).username + "`\n $" + rank[4] + "\n 6.`" + bot.users.get(user[5]).username + "`\n $" + rank[5] + "\n 7.`" + bot.users.get(user[6]).username + "`\n $" + rank[6] + "\n 8.`" + bot.users.get(user[7]).username + "`\n $" + rank[7] + "\n 9.`" + bot.users.get(user[8]).username + "`\n $" + rank[8] + "\n 10.`" + bot.users.get(user[9]).username + "`\n $" + rank[9])
             .setColor("#00fffa"); 
 
-        message.channel.sendEmbed(leaderboard);
+        message.channel.send(leaderboard);
 
 
 }); 
@@ -11394,28 +11393,28 @@ con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
             
             sql2 = `INSERT INTO achievements (id, completed, tasks, status, credits) VALUES ('${message.author.id}', ${0}, 'Make an account, Collect a daily, Refer Someone, Send a whisper, Get 10 Ws with 0 Ls, Get 100 Ws with 0 Ls, Open a chest, Open 100 Chests, Open 1000 Chests, Get Married, Win Jackpot, Get 5+ streak, Get 10+ streak, Win Midnight, Buy a customRole, Create a custom command, Create a global command, Flip a coin that lands in the middle, Expose a whisper, Be on the leaderboard, Be on the localboard, Be on the leaderboard for 7 consecutive days, Give someone $1M, Get $1M, Get $10M, Get $100M, Use HARVEST, Use KING CRIMSON, Activate Bites The Dust, Use ECHOES, Use HEAVENS DOOR, Use CRAZY DIAMOND, Use STAR PLATINUM, Buy A Canvas, ???, Complete Achievements Set 1', ${0}, ${0})`;
             con.query(sql2, console.log);
-            let stats = new Discord.RichEmbed()
+            let stats = new Discord.MessageEmbed()
 
             
             .setAuthor(other.username + supporter)
             .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : \n " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "**")
-            .setFooter("ID:" + other.id, other.avatarURL)
+            .setFooter("ID:" + other.id, other.avatarURL())
             .setColor(color); 
 
-        message.channel.sendEmbed(stats);
+        message.channel.send(stats);
             
         }   else {
             var achievement = rows[0].completed;
 
-            let stats = new Discord.RichEmbed()
+            let stats = new Discord.MessageEmbed()
 
             
             .setAuthor(other.username + supporter)
             .setDescription("Money: $" + money +  "\n " + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage )
-            .setFooter("ID:" + other.id, other.avatarURL)
+            .setFooter("ID:" + other.id, other.avatarURL())
             .setColor(color); 
 
-        message.channel.sendEmbed(stats);
+        message.channel.send(stats);
             return;
         }   
         
@@ -11689,7 +11688,7 @@ function give(){
              
              setTimeout(() => {
          message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: true });
-         message.channel.permissionOverwrites.get(message.author.id).delete();       
+         message.channel.permissionOverwrites.cache.get(message.author.id).delete();       
                 console.log("Time has began to move again.")
                 message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*60*1));    
@@ -11722,7 +11721,7 @@ function give(){
         let sql;
         let money = rows[0].money;
             
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         
@@ -12077,7 +12076,7 @@ if (soulless.has(message.author.id)) {
             let tasks = rows[0].tasks;
             let status = rows[0].status;    
             
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
     if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         let them = message.mentions.users.first();
@@ -12093,7 +12092,7 @@ if (soulless.has(message.author.id)) {
           act1CD.delete(message.author.id);
         }, (1000*60));  
     
-        message.guild.members.get(them.id).setNickname(messageArray[2]);
+        message.guild.members.cache.get(them.id).setNickname(messageArray[2]);
             message.channel.send("**ECHOES ACT 1 !**");
              
             if(tasks.indexOf("Use ECHOES") != -1){
@@ -12232,7 +12231,7 @@ function heavensDoor(){
         if(err) throw err;
         let sql;
         let bio = rows[0].bio;
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
         
 
         
@@ -12380,7 +12379,7 @@ function thoth(){
         let sql;
         let money = rows[0].money;
         let uname = rows[0].uname;
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
             
         var good = ["|| was featured in a magazine,", "|| got a bonus check,", "|| found a rare gem,", "|| was sponsored to promote happiness!||", "|| found some money in their pants while doing laundry,", "|| redeemed a ticket of collectable stamps,", "|| won the lottery,", "|| found some money in an corner,", "|| profited from a great business idea,"];
         var bad = ["|| was jumped by some thugs,", "|| got a deduction for slacking off at work,", "|| lost their money in the laundry||", "|| donated a *little* TOO much money to charity,", "|| dropped their money down a sewer pipe,", "|| was fined for parking in front of a fire hydrant,", "|| lost a highstake bet,", "|| invested their money in a volitable market,", "|| bought too many waifu pillows and anime merch,"];
@@ -12481,7 +12480,7 @@ function osirisWager(){
         let sql;
         
         
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
         
             if (soulless.has(message.author.id)) {
         message.reply(" 's soul has been stolen by OSIRIS");
@@ -12562,7 +12561,7 @@ function oSpin(){
         if(err) throw err;
         let sql;
         
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
         
         var money = rows[0].money;
         var streak = rows[0].streak;
@@ -12694,7 +12693,7 @@ function oSpin(){
         let money = rows[0].money;
         let uname = rows[0].uname;
         let lasttrans = rows[0].lasttrans;
-        var name = bot.users.get(member.id);
+        var name = bot.users.cache.get(member.id);
             
             
         if (soulless.has(message.author.id)) {
@@ -13214,7 +13213,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
         }
             
 
-let rules = new Discord.RichEmbed()
+let rules = new Discord.MessageEmbed()
 
             
             .setTitle("Respond with your 8 x 8 drawing Code.")
@@ -13253,7 +13252,7 @@ var fileName = message.author.username + "-8-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
     
 
-            let drawing = new Discord.RichEmbed()
+            let drawing = new Discord.MessageEmbed()
 
             
             .setTitle("By " + message.author.username)
@@ -13287,7 +13286,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
             message.reply("Insufficient Funds.");
             return;
         }
-let rules = new Discord.RichEmbed()
+let rules = new Discord.MessageEmbed()
 
             
             .setTitle("Respond with your 16 x 16 drawing Code.")
@@ -13326,7 +13325,7 @@ var fileName = message.author.username + "-32-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
     
 
-            let drawing = new Discord.RichEmbed()
+            let drawing = new Discord.MessageEmbed()
 
             
             .setTitle("By " + message.author.username)
@@ -13362,7 +13361,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
         }
             
 
-let rules = new Discord.RichEmbed()
+let rules = new Discord.MessageEmbed()
 
             
             .setTitle("Respond with your 32 x 32 drawing Code.")
@@ -13401,7 +13400,7 @@ var fileName = message.author.username + "-64-art.png";
 const artPiece = new Discord.Attachment(art, fileName);
     
 
-            let drawing = new Discord.RichEmbed()
+            let drawing = new Discord.MessageEmbed()
 
             
             .setTitle("By " + message.author.username)
@@ -13418,84 +13417,84 @@ const artPiece = new Discord.Attachment(art, fileName);
 
 function standHelp(){
 
-    let stand1 = new Discord.RichEmbed()
+    let stand1 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Star Platinum__ \n Can talk during stopped time. Can freeze time for a short period of time. \n **${prefix}STARPLATINUM**: \n Freezes time for a bit. Requires a role named **kakyoin** to take effect. Has a cooldown of 30 mins.`)
             .setColor("#1d498e"); 
 
-    let stand2 = new Discord.RichEmbed()
+    let stand2 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Harvest__ \n **${prefix}HARVEST [mention]**: \n Can collect up to 10 million KS Currency from someone else's ${prefix}spin whether they win or lose. Has to be used immediately after someone spins. Has a cooldown of 30 minutes.`)
             .setColor("#1d498e");       
     
-    let stand3 = new Discord.RichEmbed()
+    let stand3 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(` __Echoes__ \n **${prefix}ACT1 [mention] [nickname]**: \n Changes the nickname of the mentioned user to whatever you set. Limited to 1 word/string without spaces. Has a cooldown of 1 minute. \n **${prefix}ACT3**: \n Pins the last message in the channel sent. Has a cooldown of 30 minutes.`)
             .setColor("#1d498e"); 
 
-    let stand4 = new Discord.RichEmbed()
+    let stand4 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Heaven's Door__ \n **${prefix}HEAVENSDOOR [mention]**: \n Changes someone's bio. Cannot use quotes in bio, but the recipient cannot change their bio for this duration as well. Has a cooldown of 30 minutes. \n **${prefix}HEAVENSDOOR chest**: \n Tells the user if the current chest is a trap or not.`)
             .setColor("#1d498e");   
 
-    let stand5 = new Discord.RichEmbed()
+    let stand5 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Crazy Diamond__ \n **${prefix}CRAZYDIAMOND [mention]**: \n Undo's a monetary act such as ${prefix}daily, ${prefix}spin, ${prefix}slots, and ${prefix}open (for chests). If money was gained it is now undone, and vice versa. Cannot be used on self or for purchases in the shop. Has a cooldown of 30 minutes.`)
             .setColor("#1d498e");   
 
-    let stand6 = new Discord.RichEmbed()
+    let stand6 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Killer Queen__ \n **${prefix}BOMB1**: \n Deletes the most recent message. Has a cooldown of 30 seconds. \n **${prefix}BOMB2 [mention]** Sends a bomb after mentioned user that blows up all of their messages for a short period of time. They cannot perform any actions while having this status. Has a cooldown of 30 minutes. \n **${prefix}BOMB3 [word]**: Sets a bomb based on the trigger word(case sensitive). If the word is said in any channel, the past 100 messages in that channel will be deleted. Has a cooldown of 3 hours. \n **${prefix}BOMB1 chest**:\n Changes the current chest to a trap`)
             .setColor("#1d498e");
 
-    let stand7 = new Discord.RichEmbed()
+    let stand7 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__King Crimson__ \n **${prefix}KINGCRIMSON** \n Deletes all messages said after this command for a short period of time. Has a cooldown of 30 minutes. \n **${prefix}EPITAPH [mention]**:\n Predicts the next outcome of a spin exactly. No cooldown, but if someone speaks in that channel fate is altered.`)
             .setColor("#1d498e");   
 
-    let stand8 = new Discord.RichEmbed()
+    let stand8 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`\n __Thoth__ \n **${prefix}THOTH [mention]** \n Performs a random action fate upon selected user. Can be fortune or misfortune. `)
             .setColor("#1d498e"); 
 
-    let stand9 = new Discord.RichEmbed()
+    let stand9 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Osiris__ \n **${prefix}OSIRIS [mention]** \n For the next hour if the target loses any gamble they lose their soul. Soulless victims cannot gamble or use stand abilities. \n **${prefix}OSPIN [mention] [amount]** \n If the mentioned user's soul has been stolen, you can !spin using their bank account. If you spin more than what you own, your odds are 10%. Once you lose, the target's soul is released. Victim cannot lose more than half per OSPIN.`)
             .setColor("#1d498e"); 
     
-    let stand10 = new Discord.RichEmbed()
+    let stand10 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Kiss__ \n **${prefix}KISS [mention]** \n Doubles the monetary gain or loss of someone's last transaction.`)
             .setColor("#1d498e"); 
 
-    let stand11 = new Discord.RichEmbed()
+    let stand11 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
             .setDescription(`__Gold Experience__ \n **${prefix}GOLDEXPERIENCE [garden slot]** \n Fully grows or revitalizes a plant.`)
             .setColor("#1d498e"); 
     
-    let stand12 = new Discord.RichEmbed()
+    let stand12 = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Stand Commands 🐞")
@@ -13507,51 +13506,51 @@ function standHelp(){
                     collector.once('collect', message => {
                         
                         if (message.content == `STAR PLATINUM`) {
-                            message.author.sendEmbed(stand1);
+                            message.author.send(stand1);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `HARVEST`) {
-                            message.author.sendEmbed(stand2);
+                            message.author.send(stand2);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `ECHOES`) {
-                            message.author.sendEmbed(stand3);
+                            message.author.send(stand3);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `HEAVENS DOOR`) {
-                            message.author.sendEmbed(stand4);
+                            message.author.send(stand4);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `CRAZY DIAMOND`) {
-                            message.author.sendEmbed(stand5);
+                            message.author.send(stand5);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `KILLER QUEEN`) {
-                            message.author.sendEmbed(stand6);
+                            message.author.send(stand6);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `KING CRIMSON`) {
-                            message.author.sendEmbed(stand7);
+                            message.author.send(stand7);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `THOTH`) {
-                            message.author.sendEmbed(stand8);
+                            message.author.send(stand8);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `OSIRIS`) {
-                            message.author.sendEmbed(stand9);
+                            message.author.send(stand9);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `KISS`) {
-                            message.author.sendEmbed(stand10);
+                            message.author.send(stand10);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `GOLD EXPERIENCE`) {
-                            message.author.sendEmbed(stand11);
+                            message.author.send(stand11);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else if (message.content == `WEATHER REPORT`) {
-                            message.author.sendEmbed(stand12);
+                            message.author.send(stand12);
                             message.reply(" sent you a dm of the stand commands list! Stands require admin permissions to be fully functional!");
                             return;
                         }   else {
@@ -13571,118 +13570,118 @@ function standHelp(){
 
 function help(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Command Directory")
             .setDescription(`**${prefix}help** :gear: \n Pulls up utility commands. \n **${prefix}help** :warning: \n Pulls up admin commands. \n **${prefix}help** :bust_in_silhouette: \n Pulls up user commands. \n **${prefix}help** :busts_in_silhouette: \n Pulls up social commands. \n **${prefix}help** :dollar: \n Pulls up monetary commands.\n **${prefix}help** :tada: \n Pulls up fun commands! \n **${prefix}help** :beetle: \n Pulls up stand commands. \n **${prefix}help** :seedling: \n Pulls up garden commands.`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the help list!");
 }
 
 function utilityHelp(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Utility commands ⚙️")
             .setDescription(`**${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}remind in [number] to [phrase]**:\n Sets a time based reminder using minutes. \n **${prefix}remind when [user id] talks**: \n Sets a reminder to alert the user of when someone speaks in chat. \n **${prefix}remind at [channel id]**: \n Sends a reminder if someone speaks in the channel. \n **${prefix}!cancelReminder**: \n Cancels a reminder.\n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the utility help list!");
 }
 
 function userHelp(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot User commands 👤")
             .setDescription(`**${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. `)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the user help list!");
 }
 
 function moneyHelp(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Monetary commands 💵")
             .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}giftShop**: \n DMs you the gift shop. \n **${prefix}roleShop**: \n Sends the role shop for purchasing a role. \n **${prefix}removeRole**: \n Allows you to remove a role assigned from the role shop.`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the user help list!");
  
 }
 
 function funHelp(){
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Fun commands 🎉")
             .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the fun help list!");
 }
 
 function gardenHelp(){
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Garden commands 🌱")
             .setDescription(`**${prefix}water [index]**: \n Waters a plant in that garden slot. \n **${prefix}toss [index]**: \n Trashes a plant in that index. \n **${prefix}tradePlant [mention] [index of you plant] for [index of their plant]**: \n Prompts a user to trade plants. \n **${prefix}garden** \n Checks your garden in that server. \n **${prefix}weather**: \n Checks the weather in your server. \n **${prefix}trashGarden**: \n Trashes your garden.`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the garden help list!");
 }
 
 function socialHelp(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Social commands 👥")
             .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}slap [mention]**: \n Slaps a user \n **${prefix}handshake [mention]**: \n Shakes a users hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **${prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the social help list!");
 }
         
 
 function channelCheck(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("About this channel")
             .setDescription(`ID:` + message.channel.id)
             .setColor("#1d498e"); 
 
-        message.channel.sendEmbed(help);
+        message.channel.send(help);
         
 }
 
 function admin(){
 
-    let help = new Discord.RichEmbed()
+    let help = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Admin commands ⚠️")
             .setDescription(`**${prefix}admin**: \n Pulls up this list. \n **${prefix}toggle greeting**: \n Changes the server greeting for new members \n **${prefix}toggle farewell**: \n Changes the server farwell for members that have left or have been kicked. \n **${prefix}toggle gChannel**: \n Changes the server greeting channel. \n **${prefix}toggle channel**: \n Changes the designated bot channel. \n **${prefix}toggle cooldown**: \n Set's the cooldown for server commands. \n **${prefix}toggle whisper**: \n Toggles the whisper command. \n **${prefix}toggle expose**: \n Toggles the expose command. \n **${prefix}toggle waifus**: \n Toggles the ability for waifu/husbando related commands and shop items. \n **${prefix}toggle RPG**: \n Toggles the ability of KS-RPG transactions \n **${prefix}toggle prefix**: \n Sets the server command prefix. \n **${prefix}toggle chests**: \n Allows or prohibits random chests from spawning in your server. \n **${prefix}toggle art** \n Allows or prohibits artwork being drawn in your server. \n **${prefix}toggle roleShopAdd**\n Adds a role to the roleShop via ID. \n **${prefix}toggle roleShopRemove**\n Removes a role to the roleShop. \n **${prefix}ZAWARUDO** \n Stops time in chat by server muting all. Requires a role named **kakyoin** to take effect. \n **${prefix}ZAWARUDO!** \n Reverses stopped time effect. `)
             .setColor("#1d498e"); 
 
-        message.author.sendEmbed(help);
+        message.author.send(help);
         message.reply(" sent you a dm of the admin help list!");
 }
 
@@ -13728,7 +13727,7 @@ function credits(){
         var msg28 = "<3 Come back when the next update is live and I'll have something special for you";
         
         if(counter <= 1){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13736,13 +13735,13 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
     
                     mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
                     
         } else if(counter == 2){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13750,12 +13749,12 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         }   else if(counter == 3){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13763,11 +13762,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 4){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13775,11 +13774,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 5){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13787,11 +13786,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 6){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13799,11 +13798,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 7){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13811,11 +13810,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 8){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13823,11 +13822,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 9){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13835,11 +13834,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 9){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13847,11 +13846,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 10){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13859,11 +13858,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 11){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13871,11 +13870,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 12){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13883,11 +13882,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 13){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13895,11 +13894,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 14){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13907,11 +13906,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 15){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13919,11 +13918,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter >= 16 && counter <= 21 ){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13931,11 +13930,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 22){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13943,11 +13942,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 23){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13955,11 +13954,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 24){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13967,11 +13966,11 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 25){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -13979,18 +13978,18 @@ function credits(){
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 26){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
             .setDescription(msg21)
             .setColor("#1f3c5b"); 
             
-message.author.sendEmbed(credits);
+message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
             if(tasks.indexOf("???") != -1){
@@ -14002,7 +14001,7 @@ message.author.sendEmbed(credits);
                     message.author.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Yo we lonely af.`");
                 } 
         } else if(counter == 27){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14010,12 +14009,12 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 28){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14023,11 +14022,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 29){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14035,11 +14034,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 30){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14047,11 +14046,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 31){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14059,11 +14058,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 32){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14071,11 +14070,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else if(counter == 33){
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14083,11 +14082,11 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
             mission = `UPDATE achievements SET credits = ${counter + 1} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         } else {
-        let credits = new Discord.RichEmbed()
+        let credits = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot ©️ KaminoShimobe#1190")
@@ -14095,7 +14094,7 @@ message.author.sendEmbed(credits);
             .setColor("#1f3c5b"); 
             
 
-        message.author.sendEmbed(credits);
+        message.author.send(credits);
         mission = `UPDATE achievements SET credits = ${0} WHERE id = '${message.author.id}'`;
                     con.query(mission);
         }
@@ -14107,7 +14106,7 @@ message.author.sendEmbed(credits);
 
 function discordLink(){
 
-        let yeet = new Discord.RichEmbed()
+        let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("Kamino's House || CLICK ME")
@@ -14117,12 +14116,12 @@ function discordLink(){
             .setURL("https://discord.gg/4V4Vch6");
             
 
-        message.author.sendEmbed(yeet);
+        message.author.send(yeet);
 }
 
 function patreon(){
 
-        let yeet = new Discord.RichEmbed()
+        let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("Kamino's Patreon || CLICK ME")
@@ -14132,12 +14131,12 @@ function patreon(){
             .setURL("https://www.patreon.com/kaminoshimobe");
             
 
-        message.author.sendEmbed(yeet);
+        message.author.send(yeet);
 }
     
 function invite(){
 
-        let yeet = new Discord.RichEmbed()
+        let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("Add me to your server! | CLICK HERE")
@@ -14147,7 +14146,7 @@ function invite(){
             .setURL("https://discordapp.com/oauth2/authorize?client_id=427125117542203413&permissions=8&scope=bot");
             
 
-        message.author.sendEmbed(yeet);
+        message.author.send(yeet);
         message.reply("I sent you a link to invite me to your server! Thanks so much!");
 }   
 
@@ -14183,20 +14182,20 @@ function patchNotes(){
                 collector.once('collect', message => {
             var msg = message.content;
             function userInfo(users, index){
-                let yeet = new Discord.RichEmbed()
+                let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("KS-Bot Patch Notes| !notifs to disable future messages")
             .setDescription(msg)
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("- KaminoShimobe", message.author.avatarURL);
+            .setFooter("- KaminoShimobe", message.author.avatarURL());
         
-        var person = bot.users.get(rows[index].id);
+        var person = bot.users.cache.get(rows[index].id);
                 
         if(person != undefined){        
             if(rows[index].updates != false){   
-                person.sendEmbed(yeet);
+                person.send(yeet);
                 console.log("Patch Notes sent to " + person.username);
             } else {
                 console.log(person.username + " has disabled notifications of patch notes.")
@@ -14364,7 +14363,7 @@ if(command === `!deleteGarden`){
 
 if(command === `!tradePlant` && messageArray[1] != undefined && messageArray[2] != undefined && messageArray[3] == "for" && messageArray[4] != undefined){
     if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         tradePlant();
@@ -14549,7 +14548,7 @@ if(command === `${prefix}water` && messageArray[1] != undefined){
 
 if(command === `${prefix}tradePlant` && messageArray[1] != undefined && messageArray[2] != undefined && messageArray[3] == "for" && messageArray[4] != undefined){
     //if(message.author.id == '242118931769196544' || message.channel.id == '496322540579454986'){
-        let toBeat = message.mentions.users.first() || message.guild.members.get(args[0]);
+        let toBeat = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         if(!toBeat) return message.channel.sendMessage("You did not specify a user mention!");
         tradePlant();
@@ -14869,7 +14868,7 @@ if(command === `${prefix}user` && messageArray[1] == undefined){
 // });
 
     // if(command === `${prefix}buy` && messageArray[1] === "weddingRing" && messageArray[2] === "for" && messageArray[3] != undefined){
-    //      let spouse = message.mentions.users.first() || message.guild.members.get(args[0]);
+    //      let spouse = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
     //      if(!spouse) return message.channel.sendMessage("You did not specify a user mention!");
     //      con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
     //  if(err) throw err;
@@ -14915,7 +14914,7 @@ con.query(`SELECT * FROM global WHERE id = '${message.guild.id}'`, (err, rows) =
 
         
     if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
-//      let thing = new Discord.RichEmbed()
+//      let thing = new Discord.MessageEmbed()
 
             
             
@@ -14953,7 +14952,7 @@ con.query(`SELECT * FROM global WHERE id = 'GLOBAL'`, (err, rows) => {
 
         
     if(comList.indexOf(message.content) != -1 && comm != undefined && comm != "" && command != ""){
-//      let thing = new Discord.RichEmbed()
+//      let thing = new Discord.MessageEmbed()
 
             
             
