@@ -95,13 +95,13 @@ bot.on("ready", async () => {
 
     console.log(`Bot is ready bois! ${bot.user.username}`);
     var me = bot.users.cache.get('242118931769196544');
-    let yeet = new Discord.RichEmbed()
+    let yeet = new Discord.MessageEmbed()
 
             
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.9.0", bot.user.avatarURL);
+            .setFooter("Version 1.9.1", bot.user.avatarURL);
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -189,7 +189,7 @@ weatherChange();
 });
 
 bot.on("guildCreate", guild => {
-    var me = bot.users.get('242118931769196544');   
+    var me = bot.users.cache.get('242118931769196544');   
       con.query(`SELECT * FROM server WHERE id = '${guild.id}'`, (err, rows) => {
         if(err) throw err;
         let sql;
