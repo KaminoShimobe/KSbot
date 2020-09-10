@@ -100,13 +100,13 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.9.1", bot.user.avatarURL());
+            .setFooter("Version 1.9.2", bot.user.avatarURL());
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
 
-    bot.user.setPresence({ activity: { name: 'Updating... | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
+    bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
     
 
 
@@ -116,7 +116,7 @@ bot.on("ready", async () => {
     function onlineUpdate(){
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-    bot.user.setPresence({ activity: { name: 'Updating... | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
+    bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
     
         setTimeout(onlineUpdate, 2000);
     });
@@ -9427,6 +9427,8 @@ function whom(){
 }   
     
 function poll(){
+    const ballot = new set();
+
      message.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
