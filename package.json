@@ -14,7 +14,7 @@
   "dependencies": {
     "danbooru": "^3.0.8",
     "discord-anti-spam": "^1.1.6",
-    "discord.js": "^11.3.2",
+    "discord.js": "^12.3.1",
     "mysql": "^2.15.0",
     "twilio": "^3.21.0",
     "pixel-art": "^1.2.0",
