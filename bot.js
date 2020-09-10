@@ -10676,7 +10676,7 @@ function beat(){
         
          })
 
-        return message.reply(`beat ` + toBeat  + ` up!` || `beat ` + toBeat.user + ` up!` );
+        return message.reply(`beat ` + toBeat.user  + ` up!` || `beat ` + toBeat.user + ` up!` );
 
 }
     
@@ -10704,7 +10704,7 @@ function hug(){
         
          })
 
-        return message.reply(`hugged ` + toBeat  + `!` || `hugged ` + toBeat.user + `!` );
+        return message.reply(`hugged ` + toBeat.user  + `!` || `hugged ` + toBeat.user + `!` );
     
 }   
     
@@ -10759,7 +10759,7 @@ function kiss(){
         
          })
 
-        return message.reply(`kissed ` + toBeat  + `!` || `kissed ` + toBeat.user + `!` );
+        return message.reply(`kissed ` + toBeat.user  + `!` || `kissed ` + toBeat.user + `!` );
             
                 
 }
@@ -10789,7 +10789,7 @@ function handhold(){
         
          }) 
 
-        return message.reply(`held ` + toBeat  + `'s hand!` || `held ` + toBeat.user + `'s hand!` );
+        return message.reply(`held ` + toBeat.user  + `'s hand!` || `held ` + toBeat.user + `'s hand!` );
         
 }   
 
@@ -10818,7 +10818,7 @@ function handshake(){
         
          }) 
 
-        return message.reply(`shook ` + toBeat  + `'s hand!` || `shook ` + toBeat.user + `'s hand!` );
+        return message.reply(`shook ` + toBeat.user  + `'s hand!` || `shook ` + toBeat.user + `'s hand!` );
         
 }
 
@@ -10847,7 +10847,7 @@ function slap(){
         
          }) 
 
-        return message.reply(`slapped ` + toBeat  + `!` || `slapped ` + toBeat.user + `!` );
+        return message.reply(`slapped ` + toBeat.user  + `!` || `slapped ` + toBeat.user + `!` );
         
 }
 
@@ -14154,7 +14154,7 @@ function invite(){
 //Use of Kamino ONLY
 function guildCheck(){
     
-    bot.guilds.forEach(guild => console.log("I am in: " + guild.name));
+    bot.guilds.cache.forEach(guild => console.log("I am in: " + guild.name));
     return;
 }
 
