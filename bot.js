@@ -3885,7 +3885,7 @@ con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) =
         if (rows[0].channel == "default"){
             channel = "default";
         } else {
-            channel = bot.channels.cache.get(rows[0].channel);
+            channel = bot.channels.cache.resolve(rows[0].channel);
         }
         let whisper = rows[0].whisper;
         let expose = rows[0].exposeSet;
