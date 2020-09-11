@@ -6889,8 +6889,11 @@ function customRole(){
                     
         var roleName = messageArray[2];
         message.guild.roles.create({
+          data:{
             name: messageArray[2],
             color: messageArray[3],
+          },
+          reason:"custom role",
         })
         
         
