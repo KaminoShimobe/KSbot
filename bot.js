@@ -1491,7 +1491,19 @@ function gamePhase(){
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
             var convict = mode(dayVotes);
+            if(convict  == 'SKIP'){
+              let results = new Discord.MessageEmbed()
 
+            
+            .setTitle("☀️ DAY TIME ☀️")
+            .setDescription("Majority has chosen to skip!")
+            .setColor("#8a673d")
+            .setTimestamp();
+
+            whereIam.send(results);
+            gamePhase();  
+            } else {
+            
             console.log("Day Votes: " + dayVotes + " | Mode: " + convict);
         
             var status;
@@ -1542,6 +1554,7 @@ function gamePhase(){
                         // dayTally = 0;
                         gamePhase();            
             }
+          }
             
         }
     
@@ -1576,7 +1589,7 @@ function gamePhase(){
                 voteTallyD();           
             }
                     } else  if (String(collected.first()) == "!skip") {
-                        
+                        dayVotes.push('SKIP');
                         dayTally += 1;                  
                         person.send("You chosen to not condemn anyone this time");
                         //console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
