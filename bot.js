@@ -34,6 +34,7 @@ const Epitaph = new Set();
 const fateWin = new Set();
 const fateLose = new Set();
 const eChannel = new Set();
+const Reminders = new Set();
 const kissCD = new Set();
 const twitchDaily = new Set();
 const KSplants = new Set();
@@ -357,7 +358,7 @@ Bot.on('message', chatter => {
   let twitchArray = chatter.message.split(" ");
     
   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/qSKbgZ')
+    Bot.say('Join our discord here: https://discord.gg/CFMjYBu')
   }
 
   //  if(chatter.message === '!arena') {
@@ -1491,19 +1492,7 @@ function gamePhase(){
   return currentStreak > bestStreak ? currentElem : bestElem;
 };
             var convict = mode(dayVotes);
-            if(convict  == 'SKIP'){
-              let results = new Discord.MessageEmbed()
 
-            
-            .setTitle("☀️ DAY TIME ☀️")
-            .setDescription("Majority has chosen to skip!")
-            .setColor("#8a673d")
-            .setTimestamp();
-
-            whereIam.send(results);
-            gamePhase();  
-            } else {
-            
             console.log("Day Votes: " + dayVotes + " | Mode: " + convict);
         
             var status;
@@ -1554,7 +1543,6 @@ function gamePhase(){
                         // dayTally = 0;
                         gamePhase();            
             }
-          }
             
         }
     
@@ -1589,7 +1577,7 @@ function gamePhase(){
                 voteTallyD();           
             }
                     } else  if (String(collected.first()) == "!skip") {
-                        dayVotes.push('SKIP');
+                        
                         dayTally += 1;                  
                         person.send("You chosen to not condemn anyone this time");
                         //console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
@@ -9530,7 +9518,6 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
 }
 
 function timerReminder(){
-  const Reminders = new Set();
      message.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -9556,7 +9543,7 @@ function timerReminder(){
     
     var reminder = setTimeout(() => {
          Reminders.delete(message.author.id) 
-         whereIam.send("Reminding <@" + message.author + "> to \n **" + reason + "**"); 
+         whereIam.send("Reminding " + message.author + " to \n **" + reason + "**"); 
         }, (1000*60*limit));    
     
     Reminders.add(message.author.id)
@@ -9586,7 +9573,6 @@ function timerReminder(){
 }
     
 function timerChat(){
-  const Reminders = new Set();
         message.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -9622,7 +9608,7 @@ function timerChat(){
     const collector = new Discord.MessageCollector(whereIam, m => m.author.id === target.id, { time: 100000000 });
                     collector.once('collect', message => {
                     Reminders.delete(person.id)
-                    whereIam.send("Reminding <@" + person + "> because \n **" + target.username + " spoke**"); 
+                    whereIam.send("Reminding " + person + " because \n **" + target.username + " spoke**"); 
                     return;
                 });
     const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
@@ -9637,7 +9623,6 @@ function timerChat(){
 }
     
 function timerPlace(){
-  const Reminders = new Set();
         message.delete()
 
             .then(msg => console.log(`Deleted message from ${msg.author.username}`))
@@ -9674,7 +9659,7 @@ function timerPlace(){
     const collector = new Discord.MessageCollector(target, m =>  m.author.id != bot.user.id , { time: 100000000 });
                     collector.once('collect', message => {
                     Reminders.delete(person.id)
-                    whereIam.send("Reminding <@" + person + "> because \n **someone spoke in**" + target); 
+                    whereIam.send("Reminding " + person + " because \n **someone spoke in**" + target); 
                     return;
                 });
     const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
