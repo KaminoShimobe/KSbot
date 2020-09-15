@@ -2584,7 +2584,7 @@ function choose(){
 if(command === `!ksrpgD`){
         if(message.author.id == '242118931769196544'){
 
-        hexcolor();
+        deleteKSRPG();
     
 
          return;   
