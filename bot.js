@@ -838,7 +838,7 @@ function directory(){
     
 if(command === `!directory` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){  
-        bot.commands.get('directory').execute(message, args);
+        directory();
     }
 }   
 
