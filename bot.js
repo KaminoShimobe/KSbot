@@ -839,7 +839,8 @@ function directory(){
     
 if(command === `!directory` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){  
-        directory();
+        bot.commands.get('jk').execute(message, args, con);
+
     }
 }   
 
@@ -16304,12 +16305,11 @@ if(command === `${prefix}8ball`){
           commandCD.delete(message.author.id);
         }, (cooldown)); 
     //insert function here.
-        bot.commands.get('jk').execute(message, args);
+        justSaiyan();
     }
 } else {
 // insert function here.
-    bot.commands.get('jk').execute(message, args);
-}
+    justSaiyan();
 
 
 
@@ -16335,11 +16335,13 @@ if(command === `${prefix}8ball`){
           commandCD.delete(message.author.id);
         }, (cooldown)); 
     //insert function here.
-        jk();
+        bot.commands.get('jk').execute(message, args);
+
     }
 } else {
 // insert function here.
-    jk();
+    bot.commands.get('jk').execute(message, args);
+
 }
 
 }
