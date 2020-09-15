@@ -47,6 +47,14 @@ const EpitaphCD = new Set();
 
 
 const bot = new Discord.Client({disableEveryone: true})
+bot.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+
 
 
 
@@ -532,11 +540,7 @@ Bot.on('message', chatter => {
 
  }); 
 
-// Bot.on('whisper', chatter => {
-//   if(chatter.message === '!help') {
-//     Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
-//   }
-// })
+
 
 bot.on("message", async message => {
     
@@ -692,6 +696,8 @@ con.query(sql41, function (err, result) {
     
     }
     }
+
+
 
 //Twitch Betting (BETA)
 
@@ -16259,11 +16265,11 @@ if(command === `${prefix}8ball`){
           commandCD.delete(message.author.id);
         }, (cooldown)); 
     //insert function here.
-        justSaiyan();
+        bot.commands.get('jk').execute(message, args);
     }
 } else {
 // insert function here.
-    justSaiyan();
+    bot.commands.get('jk').execute(message, args);
 }
 
 
