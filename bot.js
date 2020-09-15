@@ -747,96 +747,7 @@ if(command === `!end` && messageArray[1] != undefined){
 
 
     
-function directory(){
-    
-    
-    message.author.send("What directory would you like access to? \n - **user** \n - **server** \n - **global** \n - **achievements** \n !cancel to cancel.");
-    const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (message.content == `!cancel`) {
-                     message.author.send("Query cancelled.");
-                        return;
-                    } else if (message.content == `user`) {
-                     con.query(`SELECT * FROM user`, (err, rows) => {
-                if(err) throw err;
-                let sql;
 
-                
-//              var output = "";
-//              message.author.send("Indexing 0/" + (rows.length)).then((msg)=>{
-//                      function addEm(persons, index){
-//                  output += index + `: **`+ rows[index].uname + `** \n`;
-//                  msg.edit("Indexing " + index + "/" + (rows.length))
-//                  .then(msge => console.log(`New message content: ${msge}`))
-//                  .catch(console.error);
-//              }   
-                 
-//              rows.forEach(addEm);
-                
-//              let list = new Discord.MessageEmbed()
-
-            
-//              .setTitle(`KS User Directory: Select an account with a number or !cancel to cancel.`)
-//              .setDescription(output)
-//              .setColor("#114dad"); 
-
-//              message.author.send(list);
-//              })
-                 var index = messageArray[1];
-                 message.author.send(`You want to see the data of **` + rows[index].uname + `**? \n Yes or No.`);
-                const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                collector.once('collect', message => {
-                    if (message.content == `No` || message.content == `N` || message.content == `n` || message.content == `no`) {
-                     message.channel.send("Query cancelled.");
-                        return;
-                    } else if (message.content == `Yes` || message.content == `Y` || message.content == `y` || message.content == `yes`) {
-                let id = rows[index].id;
-                let uname = rows[index].uname;
-                let money = rows[index].money;
-                let rank = rows[index].rank;
-                let patreon = rows[index].patreon;
-                let bio = rows[index].bio;
-                let marriage = rows[index].marriage;
-                let stand = rows[index].stand;
-                let streak = rows[index].streak;
-                let lasttrans = rows[index].lasttrans;
-                let pet = rows[index].pet;
-                let gift = rows[index].gift;
-                let hue = rows[index].hue;
-                let rps = rows[index].rps;
-                let wins = rows[index].wins;
-                let losses = rows[index].losses;
-                
-                let person = new Discord.MessageEmbed()
-
-            
-                .setTitle(uname + `'s account`)
-                .setDescription(`Money: $` + money + `\n Rank: ` + rank + `\n Patreon: ` + patreon + `\n Bio: \n` + bio + `\n Marriage: ` + marriage + `\n Stand: ` + stand + `\n Streak: ` + streak + `\n Last Transaction: $` + lasttrans + `\n Pet: ` + pet + `\n :gift: 's: ` + gift + `\n RPS: ` + rps + `\n Win ratio: ` + wins + `/` + losses)
-                .setFooter("ID:" + id)
-                .setColor(hue);
-                
-
-                message.author.send(person)
-                
-            } else {
-                message.channel.send("Query cancelled.");
-                        return;
-            }   
-            
-            
-            
-            }); 
-             });     
-                    } else {
-                 message.channel.send("Query cancelled.");
-                        return;
-                
-                
-        }
-            });         
-    
-}
-    
 if(command === `!directory` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){  
         bot.commands.get('directory').execute(message, args, con);
@@ -1295,7 +1206,7 @@ if(command === `!notifs`){
         
         
 
-        bio();
+        bot.commands.get('bio').execute(message, args, con);
     
 
          return;    
