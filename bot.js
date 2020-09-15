@@ -610,6 +610,7 @@ bot.on("message", async message => {
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
     var sql40 = "ALTER TABLE plant MODIFY health SMALLINT"; 
     var sql41 = `UPDATE user SET updates =  ${true}`;
+    var sql42 = "CREATE TABLE ksrpg (id VARCHAR(30), class VARCHAR(30), inventory TEXT, location VARCHAR(30), status VARCHAR(30), rank VARCHAR(30), hp INT, atk INT, def INT, matk INT, mdef INT, spd INT, ap INT, luck INT, lvl INT, moves TEXT, party TEXT, turn INT, skillpoints INT)"
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -641,9 +642,9 @@ bot.on("message", async message => {
      // message.author.send("Created table twitchBeta!");
      // });
 
-con.query(sql41, function (err, result) {
+con.query(sql42, function (err, result) {
      if (err) throw err;
-     message.author.send("COLUMN updates in TABLE user set to true!");
+     message.author.send("TABLE ksrpg added!");
      });
 
 // con.query(sql27, function (err, result) {
@@ -684,10 +685,10 @@ con.query(sql41, function (err, result) {
 
     if(command === `!drop`){
     if(message.author.id == '242118931769196544'){
-    var sql =  "DROP TABLE plant";
+    var sql =  "DROP TABLE ksrpg";
     con.query(sql, function (err, result) {
         if (err) throw err;
-        message.author.send("dropped table plant!");
+        message.author.send("dropped table ksrpg!");
     });
 
     
@@ -1540,13 +1541,7 @@ function gamePhase(){
             if(mafia.size == 0 || villagers.size == 0 || mafia.size > villagers.size){
                 mafiaEnd();
             }
-                        // mafiaVotes = [];
-                        // doctorVotes = [];
-                        // detectiveVotes = [];
-                        // dayVotes = [];
-                        // quota = werewolves.length + healers.length + lookers.length;
-                        // tally = 0;
-                        // dayTally = 0;
+                        
                         gamePhase();            
             }
             
@@ -1605,39 +1600,9 @@ function gamePhase(){
             }
                     }
         })
-        // .catch(collected => {
-        //       var rando = newList[Math.floor(Math.random() * newList.length)];
-        //      console.log(person.username + "'s daytime randomly collected value: ' " + rando);
-        //                 dayVotes.push(rando);
-        //                // dayTally += 1;
-        //                 person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.cache.get(rando).username + "**");
-        //                 console.log(">>>>>>>New List Quota: " + dayTally + " via " + person.username);
-        //                 console.log(person.username + " voted for the day porton.");
-        //                 if(dayTally == newList.length){
-        //         voteTallyD();           
-        //     }
-                    
-        //      console.log(person.username + "'s input has been caught.")
-             
-        // });
+        
 });
-//                person.send(voteTime);
-//                const collector = new Discord.MessageCollector(person.dmChannel, m => m.author.id === person.id, { time: 100000000 });
-//                collector.once('collect', message => {
-//                    if (list.indexOf(message.content) != -1) {
-//                        dayVotes.push(message.content);
-//                        dayTally += 1;                  
-//                        person.send("You have selected to condemn **" + bot.users.get(message.content).username + "**");
-//                    
-//                    } else {
-//                        var rando = newList[Math.floor(Math.random() * newList.length)];
-//                        dayVotes.push(rando);
-//                        dayTally += 1;
-//                        person.send("That input is invalid, so You have **randomly** selected to condemn **" + bot.users.get(rando).username + "**");
-//                    
-//                    }
-//                    
-//                    });
+
                 
                 
             
@@ -1804,18 +1769,7 @@ function gamePhase(){
                         }
                     } 
         })
-        // .catch(collected => {
-        //   console.log("TIMEOUT/INVALID INPUT!")
-        //      var rando = list[Math.floor(Math.random() * list.length)];
-        //                 mafiaVotes.push(rando);
-                        
-        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to kill **" + bot.users.get(rando).username + "**");
-        //                 console.log(person.username + " ran out of time");
-        //                             console.log(">>>>>>>Quota: " + tally)
-        //                     if(tally == quota){
-        //                     voteTallyN();           
-        //                 }
-        // });
+      
 });
             
 
@@ -1850,17 +1804,7 @@ function gamePhase(){
                     }
                    
         })
-        // .catch(collected => {
-        //      var rando = list[Math.floor(Math.random() * list.length)];
-        //                 doctorVotes.push(rando);
-        //                 //tally += 1;
-        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to protect **" + bot.users.get(rando).username + "**");
-        //                 console.log(person.username + " ran out of time");
-        //                             console.log(">>>>>>>Quota: " + tally)
-        //                     if(tally == quota){
-        //                     voteTallyN();           
-        //                 }
-        // });
+        
 });
            
             } else if(detectives.has(list[index])){ 
@@ -1912,26 +1856,7 @@ function gamePhase(){
                     }
                    
         })
-        // .catch(collected => {
-        //      var rando = list[Math.floor(Math.random() * list.length)];
-        //                 //detectiveVotes.push(rando);
-        //                 //tally += 1;
-        //                 person.send("That input is invalid or time has run out, so You have **randomly** selected to identify **" + bot.users.get(rando).username + "**");
-        //                 console.log(person.username + " ran out of time");
-        //                 if(doctors.has(rando)){
-        //                     person.send("This person is a **doctor**!");
-        //                 } else if(mafia.has(rando)){
-        //                     person.send("This person is a **mafioso**!");
-        //                 } else if(detectives.has(rando)){
-        //                     person.send("This person is a **detective**!");
-        //                 } else {
-        //                     person.send("This person is a **villager**");
-        //                 }
-        //                             console.log(">>>>>>>Quota: " + tally)
-        //                     if(tally == quota){
-        //                     voteTallyN();           
-        //                 }
-        // });
+        
 });            
             
 
@@ -1979,7 +1904,7 @@ if(emoji.name === "👍" && message.id === sentEmbed.id) {
          if(user.id == owner){
          var players = Array.from(mafiaPlayers);
          var amount = players.length;
-         //var list = ["321361732239097857", "187731596047155200", "134396759471423488", "220395823924510720", "140968958575640576", "242118931769196544"];
+        
          if(players.length < 5){
             sentEmbed.delete()
 
@@ -2492,6 +2417,182 @@ function rps(){
     
 }   
 
+//KS-RPG
+
+function mortal(){
+    
+    con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {
+    if(err) throw err;
+    let sql;
+    if(rows.length < 1) {
+      
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mortal', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${0}, ${1}, ${0})`;
+      con.query(sql, console.log);
+      message.channel.send("Mortal class selected!");
+      return;
+    } else {
+
+      message.reply(" You have a KSRPG account!");
+      
+
+      
+      return;
+    }
+
+
+    });
+    
+
+    
+  }
+  
+  function mage(){
+    
+    con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {
+    if(err) throw err;
+    let sql;
+    if(rows.length < 1) {
+      
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mage', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${0}, ${1}, ${0})`;
+      con.query(sql, console.log);
+      message.channel.send("Mage class selected!");
+      return;
+    } else {
+
+      message.reply(" You have a KSRPG account!");
+      
+
+      
+      return;
+    }
+
+
+    });
+    
+
+    
+  }
+  
+  function martial(){
+    
+    con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {
+    if(err) throw err;
+    let sql;
+    if(rows.length < 1) {
+      
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'martial artist', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${0}, ${1}, ${0})`;
+      con.query(sql, console.log);
+      message.channel.send("Martial Artist class selected!");
+      return;
+    } else {
+
+      message.reply(" You have a KSRPG account!");
+      
+
+      
+      return;
+    }
+
+
+    });
+    
+
+    
+  }
+  
+  function marksman(){
+    
+    con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {
+    if(err) throw err;
+    let sql;
+    if(rows.length < 1) {
+      
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'marksman', '', '', '', ${100}, ${7}, ${2}, ${7}, ${2}, ${7}, ${0}, ${1}, ${0})`;
+      con.query(sql, console.log);
+      message.channel.send("Marksman class selected!");
+      return;
+    } else {
+
+      message.reply(" You have a KSRPG account!");
+      
+
+      
+      return;
+    }
+
+
+    });
+    
+
+    
+  }
+
+function choose(){
+    message.author.send(" which class would you want? \n `>mortal` : \n Balanced stats and can use most weapons \n `>mage` : \n Stronger in magic stats but weak in physical stats \n `>martialArtist` : \n Stronger in physical stats but weak in magic stats \n `>marksman` : Fast. Furious. Frail."); 
+  const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+            collector.once('collect', message => {
+                if (message.content == `${prefix}mortal`) {
+                  mortal();
+                    return;
+                } else if (message.content == `${prefix}mage`) {
+                  mage();
+                    return;
+                } else if (message.content == `${prefix}martialArtist`) {
+                  martial();
+                    return;
+                } else if (message.content == `${prefix}marksman`) {
+                  marksman();
+                    return;
+                }
+        else {
+        message.author.send("Not a valid response!");   
+      }
+      });
+  
+  
+       }
+
+       function deleteKSRPG(){
+        con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {
+    if(err) throw err;
+
+    let sql;
+    if(rows.length < 1) {
+      message.reply("You have no user.");
+      
+    } else {
+      sql = `DELETE FROM ksrpg WHERE id = '${message.author.id}'`;
+      con.query(sql, console.log);
+      message.reply(" KSRPG account deleted!");
+    }
+
+  });
+  return;
+       }
+
+       if(command === `!ksrpg`){
+        if(message.author.id == '242118931769196544'){
+
+        choose();
+    
+
+         return;    
+       }
+
+}
+
+if(command === `!ksrpgD`){
+        if(message.author.id == '242118931769196544'){
+
+        hexcolor();
+    
+
+         return;   
+         } 
+
+}
+
+
 
   //After this commands are not compatible with DMs
     if(message.channel.type === "dm") return;
@@ -2502,69 +2603,7 @@ function rps(){
     
 
 
-    function fateChange(){
-    let member = message.mentions.members.first();
-        if(member.id != undefined){
-        if(Epitaph.has(member.id)){
-        if(eChannel.has(message.channel.id)){
-        eChannel.remove(message.channel.id);
-                Epitaph.remove(member.id);
-                if(fateWin.has(member.id)){
-                    fateWin.remove(member.id);
-                    } else { 
-                    fateLose.remove(member.id); 
-                }   
-                
-                message.channel.send("*There has been a shift in fate!*");
-        }
-        }
-        }
     
-        if (Epitaph.has(message.author.id)) {
-        
-            return;
-        } else {
-            if(eChannel.has(message.channel.id)){
-            
-                con.query(`SELECT * FROM server WHERE id = ${message.guild.id}`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        let trigger = rows[0].kcrimson;
-        if(rows.length < 1) {
-            
-            
-            
-            return;
-        } else {
-            if(trigger == false){
-                eChannel.remove(message.channel.id);
-                Epitaph.remove(message.author.id);
-                if(fateWin.has(message.author.id)){
-                    fateWin.remove(message.author.id);
-                    } else { 
-                    fateLose.remove(message.author.id); 
-                }   
-                
-                message.channel.send("*There has been a shift in fate!*");
-            } else {
-                
-                return;
-                
-            }   
-        }       
-                });     
-            }   else {
-                
-                return; 
-                }   
-                
-                
-            }   
-            
-            
-        
-        
-    }
 
 
     
