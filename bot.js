@@ -1787,7 +1787,7 @@ if(command === `!stats`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('hexcolor').execute(message, args, con, bot);
+    bot.commands.get('stats').execute(message, args, con, bot);
 
          return;    
        }
