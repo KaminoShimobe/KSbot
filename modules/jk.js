@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Deletes your message, has a 25% chance to backfire.',
 	execute(message, args) {
 	var heh = Math.floor(Math.random() * 4) + 1;
-    var msg = message.content.replace(prefix +"jk", "");
+    var msg = message.content.replace("!jk", "");
         
         function delet(){
             
