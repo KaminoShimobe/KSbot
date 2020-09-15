@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = {
 	name: 'directory',
 	description: 'Pulls up a directory of KS Users - KaminoShimobe',
