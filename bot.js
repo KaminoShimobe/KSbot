@@ -15721,11 +15721,11 @@ if(command === `${prefix}duel`){
           commandCD.delete(message.author.id);
         }, (cooldown)); 
     //insert function here.
-        bot.commands.get('rps').execute(message, args, con);
+        bot.commands.get('rps').execute(message, args, con, bot);
     }
 } else {
 // insert function here.
-    bot.commands.get('rps').execute(message, args, con);}
+    bot.commands.get('rps').execute(message, args, con, bot);}
 
         return;
 
