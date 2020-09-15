@@ -2531,16 +2531,16 @@ function choose(){
     message.author.send(" which class would you want? \n `>mortal` : \n Balanced stats and can use most weapons \n `>mage` : \n Stronger in magic stats but weak in physical stats \n `>martialArtist` : \n Stronger in physical stats but weak in magic stats \n `>marksman` : Fast. Furious. Frail."); 
   const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
             collector.once('collect', message => {
-                if (message.content == `${prefix}mortal`) {
+                if (message.content == `!mortal`) {
                   mortal();
                     return;
-                } else if (message.content == `${prefix}mage`) {
+                } else if (message.content == `!mage`) {
                   mage();
                     return;
-                } else if (message.content == `${prefix}martialArtist`) {
+                } else if (message.content == `!martialArtist`) {
                   martial();
                     return;
-                } else if (message.content == `${prefix}marksman`) {
+                } else if (message.content == `!marksman`) {
                   marksman();
                     return;
                 }
