@@ -13844,7 +13844,7 @@ if(command === `${prefix}server` || command === `KS!server`){
 
 if(command === `${prefix}toggle`){
         if(message.author.id == message.guild.ownerID || message.member.hasPermission("ADMINISTRATOR") || message.author.id == '242118931769196544'){
-       bot.commands.get('toggle').execute(message, args, con, bot);
+       bot.commands.get('toggle').execute(message, args, con, bot, prefix);
     }       else {
         message.reply(" You don't have the credentials to perform this function.")
     }
