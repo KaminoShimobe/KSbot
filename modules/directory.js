@@ -14,6 +14,9 @@ con.connect(function(err) {              // The server is either down
       									 
     }                                    
   }); 
+
+let messageArray = message.content.split(" ");
+
 module.exports = {
 	name: 'directory',
 	description: 'Pulls up a directory of KS Users - KaminoShimobe',
