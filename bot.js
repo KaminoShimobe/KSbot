@@ -16314,6 +16314,7 @@ if(command === `${prefix}8ball`){
 
 
     }
+  }
 
 
 
