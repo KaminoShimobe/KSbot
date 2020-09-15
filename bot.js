@@ -935,7 +935,7 @@ if(command === `!color`){
 }
     
 if(command === `!whisper` && messageArray[1] != undefined){
-        bot.commands.get('whisper').execute(message, args, con);
+        bot.commands.get('whisper').execute(message, args, con, bot);
         }
 
 function mafia(){
