@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'rps',
 	description: 'Rock Paper Scissors.',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, soulless) {
 	let messageArray = message.content.split(" ");
     let other = message.mentions.users.first();
     var num = parseInt(messageArray[2]); 
