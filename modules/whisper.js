@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'whisper',
 	description: 'Sends an anonymous message into a channel.',
-	execute(message, args, con) {
+	execute(message, args, con, bot) {
 	let messageArray = message.content.split(" ");
     con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
