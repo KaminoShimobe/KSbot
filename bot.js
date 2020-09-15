@@ -1183,19 +1183,19 @@ function notifications(){
 
 
     
-if(command === `!buy` && messageArray[1] === `summerCard`){
-        holidayCard();
+if(command === `!buy` && messageArray[1] === `holidayCard`){
+        bot.commands.get('holidaycard').execute(message, args, con);
     }   
 
 if(command === `!buy` && messageArray[1] === `anonCard`){
-        anonCard();
+        bot.commands.get('anoncard').execute(message, args, con);
     }   
 
 
 if(command === `!notifs`){
         
 
-        notifications();
+        bot.commands.get('notifications').execute(message, args, con);
     
 
          return;    
@@ -1217,7 +1217,7 @@ if(command === `!notifs`){
 if(command === `!color`){
         
 
-        hexcolor();
+       bot.commands.get('hexcolor').execute(message, args, con);
     
 
          return;    
