@@ -2426,7 +2426,7 @@ function mortal(){
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mortal', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${0}, ${1}, ${0})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mortal', '', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${25}, ${5}, ${1}, 'yeet', '', ${0})`;
       con.query(sql, console.log);
       message.channel.send("Mortal class selected!");
       return;
@@ -2453,7 +2453,7 @@ function mortal(){
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mage', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${0}, ${1}, ${0})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mage', '', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${30}, ${5}, ${1}, 'beam', '', ${0})`;
       con.query(sql, console.log);
       message.channel.send("Mage class selected!");
       return;
@@ -2480,7 +2480,7 @@ function mortal(){
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'martial artist', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${0}, ${1}, ${0})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'martial artist', '', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${20}, ${5}, ${1}, 'punch', '', ${0})`;
       con.query(sql, console.log);
       message.channel.send("Martial Artist class selected!");
       return;
@@ -2507,7 +2507,7 @@ function mortal(){
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'marksman', '', '', '', ${100}, ${7}, ${2}, ${7}, ${2}, ${7}, ${0}, ${1}, ${0})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, moves, party, turn) VALUES ('${message.author.id}', 'mortal', '', '', '', '', ${75}, ${7}, ${2}, ${7}, ${2}, ${7}, ${50}, ${15}, ${1}, 'shot', '', ${0})`;
       con.query(sql, console.log);
       message.channel.send("Marksman class selected!");
       return;
