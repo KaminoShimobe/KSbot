@@ -2,13 +2,13 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 
 
-let messageArray = message.content.split(" ");
+
 
 module.exports = {
 	name: 'directory',
 	description: 'Pulls up a directory of KS Users - KaminoShimobe',
 	execute(message, args, con) {
-
+	let messageArray = message.content.split(" ");
     message.author.send("What directory would you like access to? \n - **user** \n - **server** \n - **global** \n - **achievements** \n !cancel to cancel.");
     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                 collector.once('collect', message => {
