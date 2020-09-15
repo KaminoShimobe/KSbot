@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'toggle',
 	description: 'Admin controls for KS Bot',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, prefix) {
 	let messageArray = message.content.split(" ");
     
     con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
