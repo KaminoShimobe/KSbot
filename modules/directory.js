@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const mysql = require("mysql");
 var con_fig = {
     host: "us-cdbr-iron-east-01.cleardb.net",
     user: "bc9ba9370a9522",
