@@ -10462,14 +10462,14 @@ function give(){
             
              
              
-            message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: false });
-            message.channel.overwritePermissions(message.author, { SEND_MESSAGES: true });
+            message.channel.createOverwrite(message.channel.guild.defaultRole, { SEND_MESSAGES: false });
+            message.channel.createOverwrite(message.author, { SEND_MESSAGES: true });
                 
                 message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA TOMARE**");
              
              setTimeout(() => {
-         message.channel.overwritePermissions(message.channel.guild.defaultRole, { SEND_MESSAGES: true });
-         message.channel.permissionOverwrites.cache.get(message.author.id).delete();       
+         message.channel.createOverwrite(message.channel.guild.defaultRole, { SEND_MESSAGES: true });
+         message.channel.overwritePermissions.cache.get(message.author.id).delete();       
                 console.log("Time has began to move again.")
                 message.channel.send("**STAR PLATINUM: ZA WARUDO! TOKI WA MOKIDASU**");
         }, (1000*60*1));    
