@@ -29,8 +29,8 @@ module.exports = {
 			let hp = rows[0].hp;
 			let atk = rows[0].atk;
 			let def = rows[0].def;
-			let mAtk = rows[0].mAtk;
-			let mDef = rows[0].mDef;
+			let mAtk = rows[0].matk;
+			let mDef = rows[0].mdef;
 			let spd = rows[0].spd;
 			let level = rows[0].lvl;
 			let turn = rows[0].turn;
@@ -43,7 +43,7 @@ module.exports = {
 
 			
 			.setAuthor(message.author.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  mAtk + "\n MDEF: "+ mDef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: " + party)
+			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: " + party)
 			.setColor(hexcolor)
 			.setTimestamp()
             .setFooter("ID: "  + message.author.id, message.author.avatarURL());
