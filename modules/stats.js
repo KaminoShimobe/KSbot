@@ -23,7 +23,6 @@ module.exports = {
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let exp = rows[0].lvl;
-			let cap = level * 100;
 			let clas = rows[0].class;
 			let location = rows[0].location;
 			let status = rows[0].status;
@@ -39,6 +38,7 @@ module.exports = {
 			let luck = rows[0].luck;
 			let moves = rows[0].moves;
 			let party = rows[0].party;
+			let cap = level * 100;
 			let stats = new Discord.MessageEmbed()
 
 			
