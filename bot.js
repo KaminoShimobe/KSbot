@@ -8205,7 +8205,7 @@ function whom(){
 }   
     
 function poll(){
-    const ballot = new set();
+    const ballot = new Set();
 
      message.delete()
 
