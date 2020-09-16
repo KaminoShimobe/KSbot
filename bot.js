@@ -4795,7 +4795,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -4806,7 +4806,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -4817,7 +4817,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -4828,7 +4828,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -4839,7 +4839,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -4850,7 +4850,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -4861,7 +4861,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -4872,7 +4872,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -4883,7 +4883,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -4909,7 +4909,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                     
@@ -4921,7 +4921,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -4932,7 +4932,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -4943,7 +4943,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -4954,7 +4954,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -4965,7 +4965,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -4976,7 +4976,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -4987,7 +4987,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -4998,7 +4998,7 @@ let prize;
 
             
             .setTitle("🌑 MIDNIGHT FAILED 🌑")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5047,7 +5047,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5058,7 +5058,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5069,7 +5069,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5080,7 +5080,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5091,7 +5091,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5102,7 +5102,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5113,7 +5113,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5124,7 +5124,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5135,7 +5135,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5162,7 +5162,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5173,7 +5173,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5184,7 +5184,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5195,7 +5195,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5206,7 +5206,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5217,7 +5217,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5228,7 +5228,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5239,7 +5239,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5250,7 +5250,7 @@ let prize;
 
             
             .setTitle("🌙 Crescent Moon Not Collected 🌙")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5298,7 +5298,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5309,7 +5309,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5320,7 +5320,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5331,7 +5331,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5342,7 +5342,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5353,7 +5353,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5364,7 +5364,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5375,7 +5375,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5386,7 +5386,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5413,7 +5413,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5424,7 +5424,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5435,7 +5435,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5446,7 +5446,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5457,7 +5457,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5468,7 +5468,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5479,7 +5479,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5490,7 +5490,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5501,7 +5501,7 @@ let prize;
 
             
             .setTitle("🌓 First Quarter Moon Not Collected 🌓")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5549,7 +5549,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5560,7 +5560,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5571,7 +5571,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5582,7 +5582,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5593,7 +5593,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5604,7 +5604,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5615,7 +5615,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5626,7 +5626,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5637,7 +5637,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5664,7 +5664,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5675,7 +5675,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5686,7 +5686,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5697,7 +5697,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5708,7 +5708,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5719,7 +5719,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5730,7 +5730,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5741,7 +5741,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5752,7 +5752,7 @@ let prize;
 
             
             .setTitle("🌔 Waxing Moon Not Collected 🌔")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5801,7 +5801,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5812,7 +5812,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5823,7 +5823,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5834,7 +5834,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5845,7 +5845,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5856,7 +5856,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5867,7 +5867,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5878,7 +5878,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -5889,7 +5889,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -5918,7 +5918,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 2){
@@ -5929,7 +5929,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 3){
@@ -5940,7 +5940,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 4){
@@ -5951,7 +5951,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 5){
@@ -5962,7 +5962,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 6){
@@ -5973,7 +5973,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 7){
@@ -5984,7 +5984,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 8){
@@ -5995,7 +5995,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 } else  if(message.content == 9){
@@ -6006,7 +6006,7 @@ let prize;
 
             
             .setTitle("🌕 Full Moon Not Collected 🌕")
-            .attachFile(win)
+            .attachFiles(win)
             .setColor("#1f3c5b");   
             message.channel.send(reveal);
                 }
@@ -6442,7 +6442,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals)
             .setTimestamp();   
@@ -6520,7 +6520,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals)
             .setTimestamp();   
@@ -6598,7 +6598,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals)
             .setTimestamp();   
@@ -7337,7 +7337,7 @@ function ksGardenCheck(){
 
             
             
-            .attachFile(flower)
+            .attachFiles(flower)
             // .setColor(petals)
             .setDescription("Time until bloom: " + (time/2) + "min(s) \n Owner: " + message.author.username)
             .setTimestamp();   
@@ -7412,7 +7412,7 @@ function ksGardenCheck(){
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             // .setColor(petals)
             .setDescription("Time until bloom: " + (time/2) + "min(s)\n Owner: " + message.author.username)
             .setTimestamp();   
@@ -7489,7 +7489,7 @@ function ksGardenCheck(){
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals + "\n Type: daisy\n Owner: " + message.author.username)
             .setTimestamp();   
@@ -7565,7 +7565,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals + "\n Type: tulip\n Owner: " + message.author.username)
             .setTimestamp();   
@@ -7640,7 +7640,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals + "\n Type: lily\n Owner: " + message.author.username)
             .setTimestamp();   
@@ -7717,7 +7717,7 @@ const { createCanvas } = require('canvas')
 
             
       
-            .attachFile(flower)
+            .attachFiles(flower)
             .setColor(petals)
             .setDescription("Color: #" + petals + "\n Type: " + type + "\n Status: dead\n Owner: " + message.author.username)
             .setTimestamp();   
