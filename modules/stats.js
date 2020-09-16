@@ -18,7 +18,7 @@ module.exports = {
 	
 		
 		let money = rows[0].money;
-		let color = rows[0].hexcolor;
+		let hexcolor = rows[0].hue;
 		
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
@@ -43,8 +43,8 @@ module.exports = {
 
 			
 			.setAuthor(message.author.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + level + "\n Exp to next level: \n" + exp + "/" + cap + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n mAtk:" +  mAtk + "\n mDef: "+ mDef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: __" + party + "__")
-			.setColor("#" + color)
+			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  mAtk + "\n MDEF: "+ mDef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: " + party)
+			.setColor(hexcolor)
 			.setTimestamp()
             .setFooter("ID: "  + message.author.id, message.author.avatarURL());
 
