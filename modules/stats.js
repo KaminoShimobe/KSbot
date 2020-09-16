@@ -22,7 +22,7 @@ module.exports = {
 		
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
-			let exp = rows[0].lvl;
+			let exp = rows[0].exp;
 			let clas = rows[0].class;
 			let location = rows[0].location;
 			let status = rows[0].status;
@@ -44,9 +44,9 @@ module.exports = {
 			
 			.setAuthor(message.author.username + "'s KS-RPG stats:")
 			.setDescription("Lvl: " + level + "\n Exp to next level: \n" + exp + "/" + cap + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n mAtk:" +  mAtk + "\n mDef: "+ mDef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: __" + party + "__")
-			.setColor(color)
+			.setColor("#" + color)
 			.setTimestamp()
-            .setFooter(message.author.id, message.author.avatarURL());
+            .setFooter("ID: "  + message.author.id, message.author.avatarURL());
 
 		message.author.send(stats);
 
