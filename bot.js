@@ -8236,7 +8236,7 @@ whereIam.send(note).then(sentEmbed => {
             
     var reminder = setTimeout(() => {
           
-         whereIam.send("<@"owner + "> This poll has been running for an hour. \n Close it by reacting with ✅!") 
+         whereIam.send("<@" + owner + "> This poll has been running for an hour. \n Close it by reacting with ✅!") 
         }, (1000*60*60));   
     
 
