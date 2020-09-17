@@ -8318,7 +8318,7 @@ function timerReminder(){
     
     var reminder = setTimeout(() => {
          Reminders.delete(message.author.id) 
-         whereIam.send("Reminding " + message.author + " to \n **" + reason + "**"); 
+         whereIam.send("Reminding <@" + message.author + "> to \n **" + reason + "**"); 
         }, (1000*60*limit));    
     
     Reminders.add(message.author.id)
@@ -8383,7 +8383,7 @@ function timerChat(){
     const collector = new Discord.MessageCollector(whereIam, m => m.author.id === target.id, { time: 100000000 });
                     collector.once('collect', message => {
                     Reminders.delete(person.id)
-                    whereIam.send("Reminding " + person + " because \n **" + target.username + " spoke**"); 
+                    whereIam.send("Reminding <@" + person + "> because \n **" + target.username + " spoke**"); 
                     return;
                 });
     const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
@@ -8434,7 +8434,7 @@ function timerPlace(){
     const collector = new Discord.MessageCollector(target, m =>  m.author.id != bot.user.id , { time: 100000000 });
                     collector.once('collect', message => {
                     Reminders.delete(person.id)
-                    whereIam.send("Reminding " + person + " because \n **someone spoke in**" + target); 
+                    whereIam.send("Reminding <@" + person + "> because \n **someone spoke in**" + target); 
                     return;
                 });
     const collectorer = new Discord.MessageCollector(whereIam, m => m.author.id === person.id, { time: 100000000 });
