@@ -8360,7 +8360,7 @@ function timerChat(){
     
     const whereIam = message.channel;
     var person = message.author;
-    var target = bot.users.get(messageArray[2]);
+    var target = bot.users.cache.get(messageArray[2]);
     
     if(target == undefined){
         message.reply(" that user doesn't exist!");
