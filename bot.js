@@ -8473,6 +8473,7 @@ function tierlist(){
                             return;
                         }       else {
                     var sTier = message.mentions.users.array();
+                    console.log(sTier);
                     message.channel.send("Mention 1 - 9 users for **A tier** \n Type !skip to skip or !cancel to cancel?");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
