@@ -8473,6 +8473,7 @@ function tierlist(){
                             return;
                         }       else {
                     var sTier = message.mentions.users.array();
+                    console.log(sTier[0].avatarURL())
                     
                     message.channel.send("Mention 1 - 9 users for **A tier** \n Type !skip to skip or !cancel to cancel?");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -9940,7 +9941,7 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
             
             .setAuthor(message.author.username + supporter)
             .setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
-            .setFooter("ID:" + message.author.id, message.author.avatarUrl())
+            .setFooter("ID:" + message.author.id, message.author.avatarURL())
             .setColor(color); 
 
         message.channel.send(stats);
