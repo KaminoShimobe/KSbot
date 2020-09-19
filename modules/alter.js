@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'alter',
 	description: 'Edit KS-Bot Account info - Kamino',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, prefix) {
 	let messageArray = message.content.split(" ");
    con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
         if(err) throw err;
