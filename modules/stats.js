@@ -24,6 +24,8 @@ module.exports = {
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let exp = rows[0].exp;
 			let clas = rows[0].class;
+			let health = rows[0].health;
+			let energy = rows[0].energy;
 			let location = rows[0].location;
 			let status = rows[0].status;
 			let hp = rows[0].hp;
@@ -45,7 +47,7 @@ module.exports = {
 
 			
 			.setAuthor(message.author.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: " + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand + "\n Party: " + party)
+			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: " + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + health + "/" hp + "\n AP:" + energy + "/" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand + "\n Party: " + party)
 			.setColor(hexcolor)
 			.setTimestamp()
             .setFooter("ID: "  + message.author.id, message.author.avatarURL());
