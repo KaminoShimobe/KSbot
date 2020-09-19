@@ -134,9 +134,10 @@ module.exports = {
           message.reply("You don't have an item in that spot!");
           return;
         }	
-        	var name = items[items.indexOf(list[index-1])].name;
-            var desc = items[items.indexOf(list[index-1])].description;
-
+        	let item = items.find(item => item.name === items.indexOf(list[index-1]))
+        	var name = item.name;
+        	var desc = item.description;
+            
 			
 
 		message.author.send('**' + name + '**:\n' + desc );
