@@ -114,8 +114,8 @@ bot.on("ready", async () => {
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
 
-    bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
-    
+    bot.user.setPresence({ activity: { name: 'Road to KS-RPG | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
+    // bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
 
 
         
@@ -124,7 +124,7 @@ bot.on("ready", async () => {
     function onlineUpdate(){
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-    bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
+    bot.user.setPresence({ activity: { name: 'Road to KS-RPG | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
     
         setTimeout(onlineUpdate, 2000);
     });
