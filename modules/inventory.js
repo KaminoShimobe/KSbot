@@ -26,8 +26,8 @@ module.exports = {
 
 			var inven;
             var list = inventory.split(",");
-            for(var i = 1; i < list.length; i++){
-              inven += (i) + ". " + list[i] + "\n";
+            for(var i = 0; i < list.length; i++){
+              inven += (i+1) + ". " + list[i] + "\n";
             } 
             inven = inven.replace(undefined, "");
            
