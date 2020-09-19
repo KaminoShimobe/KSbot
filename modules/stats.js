@@ -38,12 +38,14 @@ module.exports = {
 			let luck = rows[0].luck;
 			let moves = rows[0].moves;
 			let party = rows[0].party;
+			let body = rows[0].bodygear;
+			let hand = rows[0].handgear;
 			let cap = level * 100;
 			let stats = new Discord.MessageEmbed()
 
 			
 			.setAuthor(message.author.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: " + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Party: " + party)
+			.setDescription("Lvl: " + level + "\n __Exp to next level__: \n" + exp + "/" + cap + " \n Class: " + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n Money: $" + money + "\n HP: " + hp + "\n AP:" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand + "\n Party: " + party)
 			.setColor(hexcolor)
 			.setTimestamp()
             .setFooter("ID: "  + message.author.id, message.author.avatarURL());
