@@ -610,7 +610,7 @@ bot.on("message", async message => {
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
     var sql40 = "ALTER TABLE plant MODIFY health SMALLINT"; 
     var sql41 = `UPDATE user SET updates =  ${true}`;
-    var sql42 = "CREATE TABLE ksrpg (id VARCHAR(30), class VARCHAR(30), inventory TEXT, location VARCHAR(30), status VARCHAR(30), rank VARCHAR(30), hp INT, atk INT, def INT, matk INT, mdef INT, spd INT, ap INT, luck INT, lvl INT, exp INT, moves TEXT, party TEXT, turn INT, skillpoints INT, bodygear VARCHAR(30), handgear VARCHAR(30))"
+    var sql42 = "CREATE TABLE ksrpg (id VARCHAR(30), class VARCHAR(30), inventory TEXT, location VARCHAR(30), status VARCHAR(30), rank VARCHAR(30), hp INT, atk INT, def INT, matk INT, mdef INT, spd INT, ap INT, luck INT, lvl INT, exp INT, moves TEXT, party TEXT, turn INT, skillpoints INT, bodygear VARCHAR(30), handgear VARCHAR(30), health INT, energy INT)"
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
@@ -1197,17 +1197,126 @@ if(command === `!stats`){
 
 }
 
-if(command === `!stats`){
+if(command === `!inventory`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('stats').execute(message, args, con, bot);
+    bot.commands.get('inventory').execute(message, args, con, bot);
 
          return;    
        }
 
 }
 
+if(command === `!use` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
+
+        
+    bot.commands.get('useItem').execute(message, args, con, bot);
+
+         return;    
+       }
+
+}
+
+// if(command === `!equip` && messageArray[1] != undefined){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('equipItem').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!toss` && messageArray[1] != undefined){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('tossItem').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!sell` && messageArray[1] != undefined){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('sellItem').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!search` && messageArray[1] != undefined){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('searchKsrpg').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!go`){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('go').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!shop`){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('shopKsrpg').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!purchase` && messageArray[1] != undefined){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('buyKsrpg').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+// if(command === `!leave`){
+//         if(message.author.id == '242118931769196544'){
+
+        
+//     bot.commands.get('leave').execute(message, args, con, bot);
+
+//          return;    
+//        }
+
+// }
+
+if(command === `!info` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
+
+        
+    bot.commands.get('itemInfo').execute(message, args, con, bot);
+
+         return;    
+       }
+
+}
 
 
   //After this commands are not compatible with DMs
