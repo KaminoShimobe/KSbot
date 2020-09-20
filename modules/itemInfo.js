@@ -12,7 +12,7 @@ module.exports = {
 				"name": "potion",
 				"description" : "Heals 50 HP",
 				"sellValue" : 50,
-				"buyValue " : 500,
+				"buyValue" : 500,
 				"equippable" : false,
 				"sellable" : true,
 				"unlockedAt" : 1
@@ -21,7 +21,7 @@ module.exports = {
 				"name": "mega potion",
 				"description" : "Heals 200 HP",
 				"sellValue" : 20,
-				"buyValue " : 2000,
+				"buyValue" : 2000,
 				"equippable" : false,
 				"sellable" : true,
 				"unlockedAt": 15
@@ -30,7 +30,7 @@ module.exports = {
 				"name": "ultimate potion",
 				"description" : "Heals 500 HP",
 				"sellValue" : 50,
-				"buyValue " : 5000,
+				"buyValue" : 5000,
 				"equippable" : false,
 				"sellable" : true,
 				"unlockedAt" : 30
@@ -39,7 +39,7 @@ module.exports = {
 				"name": "energy bar",
 				"description" : "Heals 10 AP",
 				"sellValue" : 50,
-				"buyValue " : 5000,
+				"buyValue" : 5000,
 				"equippable" : false,
 				"sellable" : true,
 				"unlockedAt" : 1
@@ -48,7 +48,7 @@ module.exports = {
 				"name": "mega energy bar",
 				"description" : "Heals 25 AP",
 				"sellValue" : 750,
-				"buyValue " : 75000,
+				"buyValue" : 75000,
 				"equippable" : false,
 				"sellable" : true,
 				"unlockedAt" : 15
@@ -57,7 +57,7 @@ module.exports = {
 				"name": "bat",
 				"description" : "+1 ATK when equipped",
 				"sellValue" : 15,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
@@ -66,7 +66,7 @@ module.exports = {
 				"name": "branch",
 				"description" : "+1 MATK when equipped",
 				"sellValue" : 15,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
@@ -75,7 +75,7 @@ module.exports = {
 				"name": "dusty cap",
 				"description" : "+1 DEF when equipped",
 				"sellValue" : 15,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
@@ -84,7 +84,7 @@ module.exports = {
 				"name": "glasses",
 				"description" : "+1 MDEF when equipped",
 				"sellValue" : 15,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
@@ -93,7 +93,7 @@ module.exports = {
 				"name": "blade",
 				"description" : "+10 ATK when equipped",
 				"sellValue" : 100,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
@@ -102,11 +102,11 @@ module.exports = {
 				"name": "magic wand",
 				"description" : "+10 MATK when equipped",
 				"sellValue" : 100,
-				"buyValue " : 0,
+				"buyValue" : 0,
 				"equippable" : true,
 				"sellable" : true,
 				"unlockedAt" : 0
-			},
+			}
 			
 
 	]
