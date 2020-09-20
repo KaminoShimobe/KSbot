@@ -134,8 +134,8 @@ module.exports = {
           message.reply("You don't have an item in that spot!");
           return;
         }	
-        	console.log(items.indexOf(list[index-1]))
-        	let item = items.find(item => item.name === items.indexOf(list[index-1]))
+        	
+        	let item = items.find(item => item.name === list[index-1])
         	console.log(item)
         	var name = item.name;
         	var desc = item.description;
