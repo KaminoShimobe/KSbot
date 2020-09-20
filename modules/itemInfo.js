@@ -135,9 +135,8 @@ module.exports = {
           return;
         }	
 
-        	console.log(list[index-1])	
+        		
         	let item = items.find(item => item.name === list[index-1])
-        	console.log(item)
         	var name = item.name;
         	var desc = item.description;
             
