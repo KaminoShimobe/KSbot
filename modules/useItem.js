@@ -82,11 +82,14 @@ module.exports = {
           message.reply("You don't have an item in that spot!");
           return;
         }	
-        	var name = items[items.indexOf(list[index-1])].name;
-            var desc = items[items.indexOf(list[index-1])].description;
-            var _hp = items[items.indexOf(list[index-1])].hp;
-            var _ap = items[items.indexOf(list[index-1])].ap;
-            var special = items[items.indexOf(list[index-1])].special;
+
+        	let item = items.find(item => item.name === list[index-1])
+
+        	var name = item.name;
+            var desc = item.description;
+            var _hp = item.hp;
+            var _ap = item.ap;
+            var special = item.special;
 
             var final_hp = health + _hp;
             var final_ap = energy + _ap;
