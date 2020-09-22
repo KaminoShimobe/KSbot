@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 
 module.exports = {
-	name: 'equipItem',
-	description: 'Equip a KS RPG item',
+	name: 'useItem',
+	description: 'Use a KS RPG item',
 	execute(message, args, con, bot) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
@@ -25,7 +25,7 @@ module.exports = {
 			{
 				"name": "ultimate potion",
 				"description" : "Heals 500 HP",
-				"hp": 500,
+				"hp": 500
 				"ap": 0,
 				"special": false
 			},
