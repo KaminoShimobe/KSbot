@@ -2,54 +2,67 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 
 module.exports = {
-	name: 'useItem',
-	description: 'Use a KS RPG item',
+	name: 'equipItem',
+	description: 'Equpi a KS RPG item',
 	execute(message, args, con, bot) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
 	var items = [
 			{
-				"name": "potion",
-				"description" : "Heals 50 HP",
-				"hp": 50,
-				"ap": 0,
-				"special": false
+			{
+				"name": "bat",
+				"description" : "+1 ATK when equipped",
+				"atk" : 1,
+				"def" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
 			},
 			{
-				"name": "mega potion",
-				"description" : "Heals 200 HP",
-				"hp": 200,
-				"ap": 0,
-				"special": false
+				"name": "branch",
+				"description" : "+1 MATK when equipped",
+				"sellValue" : 15,
+				"buyValue " : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
 			},
 			{
-				"name": "ultimate potion",
-				"description" : "Heals 500 HP",
-				"hp": 500,
-				"ap": 0,
-				"special": false
+				"name": "dusty cap",
+				"description" : "+1 DEF when equipped",
+				"sellValue" : 15,
+				"buyValue " : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
 			},
 			{
-				"name": "energy bar",
-				"description" : "Heals 10 AP",
-				"hp": 0,
-				"ap": 10,
-				"special": false
+				"name": "glasses",
+				"description" : "+1 MDEF when equipped",
+				"sellValue" : 15,
+				"buyValue " : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
 			},
 			{
-				"name": "mega energy bar",
-				"description" : "Heals 25 AP",
-				"hp": 0,
-				"ap": 25,
-				"special": false
+				"name": "blade",
+				"description" : "+10 ATK when equipped",
+				"sellValue" : 100,
+				"buyValue " : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
 			},
 			{
-				"name": "cave map",
-				"description" : "Allows Access to the Cave",
-				"hp": 0,
-				"ap": 0,
-				"special": true
-			},
+				"name": "magic wand",
+				"description" : "+10 MATK when equipped",
+				"sellValue" : 100,
+				"buyValue " : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0
+			}
 			
 			
 
@@ -109,11 +122,11 @@ module.exports = {
          	if(list[index-1] == name && _ap == 0){
          		sql = `UPDATE ksrpg SET health = ${final_hp} WHERE id = '${message.author.id}'`
          		con.query(sql);
-         		message.author.send("You healed " + (hp - _hp) + " health points from the " + name +"!")
+         		message.author.send("You healed " + (health - _hp) + " health points from the " + name +"!")
          	} else if(list[index-1] == name && _hp == 0){
          		sql = `UPDATE ksrpg SET energy = ${final_ap} WHERE id = '${message.author.id}'`
          		con.query(sql);
-         		message.author.send("You energy " + (ap - _ap) + " ability points from the " + name +"!")
+         		message.author.send("You energy " + (energy - _ap) + " ability points from the " + name +"!")
          	}
          }   else{
          	message.author.send("Special Item go brrrr.")
