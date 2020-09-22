@@ -102,6 +102,19 @@ module.exports = {
             	final_ap = ap;
             }
 
+            var healthHealed;
+            var energyHealed;
+            if((hp - health) > _hp){
+                healthHealed = ((hp-health) - _hp) * -1;
+            } else {
+                healthHealed = 0
+            }
+
+            if((ap - energy) > _ap){
+                energyHealed = ((ap-energy) - _ap) * -1;
+            } else {
+                energyHealed = 0
+            }
             
 
 
