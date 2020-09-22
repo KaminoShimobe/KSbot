@@ -9,7 +9,7 @@ module.exports = {
 	var index = parseInt(messageArray[1]);
 	var items = [
 			{
-			{
+			
 				"name": "bat",
 				"description" : "+1 ATK when equipped",
 				"atk" : 1,
