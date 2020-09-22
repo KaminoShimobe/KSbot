@@ -25,7 +25,7 @@ module.exports = {
 			{
 				"name": "ultimate potion",
 				"description" : "Heals 500 HP",
-				"hp": 500
+				"hp": 500,
 				"ap": 0,
 				"special": false
 			},
