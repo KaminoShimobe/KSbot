@@ -3,7 +3,7 @@ const mysql = require("mysql");
 
 module.exports = {
 	name: 'equipItem',
-	description: 'Equpi a KS RPG item',
+	description: 'Equip a KS RPG item',
 	execute(message, args, con, bot) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
