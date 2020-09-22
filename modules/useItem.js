@@ -122,11 +122,11 @@ module.exports = {
          	if(list[index-1] == name && _ap == 0){
          		sql = `UPDATE ksrpg SET health = ${final_hp} WHERE id = '${message.author.id}'`
          		con.query(sql);
-         		message.author.send("You healed " + (health - _hp) + " health points from the " + name +"!")
+         		message.author.send("You healed " + (healthHealed) + " health points from the " + name +"!")
          	} else if(list[index-1] == name && _hp == 0){
          		sql = `UPDATE ksrpg SET energy = ${final_ap} WHERE id = '${message.author.id}'`
          		con.query(sql);
-         		message.author.send("You energy " + (energy - _ap) + " ability points from the " + name +"!")
+         		message.author.send("You energy " + (energyHealed) + " ability points from the " + name +"!")
          	}
          }   else{
          	message.author.send("Special Item go brrrr.")
