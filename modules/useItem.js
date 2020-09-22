@@ -9,59 +9,46 @@ module.exports = {
 	var index = parseInt(messageArray[1]);
 	var items = [
 			{
-			
-				"name": "bat",
-				"description" : "+1 ATK when equipped",
-				"atk" : 1,
-				"def" : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "potion",
+				"description" : "Heals 50 HP",
+				"hp": 50,
+				"ap": 0,
+				"special": false
 			},
 			{
-				"name": "branch",
-				"description" : "+1 MATK when equipped",
-				"sellValue" : 15,
-				"buyValue " : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "mega potion",
+				"description" : "Heals 200 HP",
+				"hp": 200,
+				"ap": 0,
+				"special": false
 			},
 			{
-				"name": "dusty cap",
-				"description" : "+1 DEF when equipped",
-				"sellValue" : 15,
-				"buyValue " : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "ultimate potion",
+				"description" : "Heals 500 HP",
+				"hp": 500,
+				"ap": 0,
+				"special": false
 			},
 			{
-				"name": "glasses",
-				"description" : "+1 MDEF when equipped",
-				"sellValue" : 15,
-				"buyValue " : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "energy bar",
+				"description" : "Heals 10 AP",
+				"hp": 0,
+				"ap": 10,
+				"special": false
 			},
 			{
-				"name": "blade",
-				"description" : "+10 ATK when equipped",
-				"sellValue" : 100,
-				"buyValue " : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "mega energy bar",
+				"description" : "Heals 25 AP",
+				"hp": 0,
+				"ap": 25,
+				"special": false
 			},
 			{
-				"name": "magic wand",
-				"description" : "+10 MATK when equipped",
-				"sellValue" : 100,
-				"buyValue " : 0,
-				"equippable" : true,
-				"sellable" : true,
-				"unlockedAt" : 0
+				"name": "cave map",
+				"description" : "Allows Access to the Cave",
+				"hp": 0,
+				"ap": 0,
+				"special": true
 			}
 			
 			
