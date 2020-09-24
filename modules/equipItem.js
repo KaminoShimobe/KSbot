@@ -142,7 +142,7 @@ module.exports = {
          	}
          }   else{
          	if(equippable == true){
-         		sql = `UPDATE ksrpg SET bodygear = ${final_hp} WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET bodygear = ${name} WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send('You equipped the **' + name + '**');
          	} else if(equippable == false){
