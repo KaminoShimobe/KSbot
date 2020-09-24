@@ -135,7 +135,7 @@ module.exports = {
 
 			
 
-		message.author.send('**' + name + '**:\n' + desc );
+		
 
 
 		});
