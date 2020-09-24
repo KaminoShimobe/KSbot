@@ -1219,16 +1219,16 @@ if(command === `!use` && messageArray[1] != undefined){
 
 }
 
-// if(command === `!equip` && messageArray[1] != undefined){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!equip` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('equipItem').execute(message, args, con, bot);
+    bot.commands.get('equipItem').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 // if(command === `!toss` && messageArray[1] != undefined){
 //         if(message.author.id == '242118931769196544'){
