@@ -76,8 +76,18 @@ module.exports = {
 			let hp = rows[0].hp;
 			let ap = rows[0].ap;
 			let sql;
+			
+
 			var inven;
             var list = inventory.split(",");
+            
+            if(index == list.length){
+            	inven = inventory.replace(list[index-1], "")
+            } else {
+            	inven = inventory.replace(list[index-1] + ",", "")
+            }
+            
+            
             if(list[index-1] == undefined){
           message.reply("You don't have an item in that spot!");
           return;
@@ -120,11 +130,11 @@ module.exports = {
 
          if(special != true){
          	if(list[index-1] == name && _ap == 0){
-         		sql = `UPDATE ksrpg SET health = ${final_hp} WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = ${inven} WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You healed " + (healthHealed) + " health points from the " + name +"!")
          	} else if(list[index-1] == name && _hp == 0){
-         		sql = `UPDATE ksrpg SET energy = ${final_ap} WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = ${inven} WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You energy " + (energyHealed) + " ability points from the " + name +"!")
          	}
