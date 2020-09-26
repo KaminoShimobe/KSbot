@@ -87,7 +87,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 's'){
@@ -95,7 +95,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
@@ -121,7 +121,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 'r'){
@@ -129,7 +129,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
@@ -157,7 +157,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 'p'){
@@ -165,7 +165,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
@@ -194,7 +194,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **rock**. \n ${them} chose **paper** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 's'){
@@ -202,7 +202,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **rock**. \n ${them} chose **scissors** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
@@ -228,7 +228,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **paper**. \n ${them} chose **scissors** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 'r'){
@@ -236,7 +236,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **paper**. \n ${them} chose **rock** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
@@ -263,7 +263,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money + num}, wins = ${wins + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} payed ${them} $${num}! `);
+                            results.send(`${other} chose **scissors**. \n ${them} chose **rock** \n ${other} paid ${them} $${num}! `);
                             return; 
                             
                         } else if(pick == 'p'){
@@ -271,7 +271,7 @@ module.exports = {
                             con.query(sql2, console.log);
                             sql3 = `UPDATE user SET rps = '', rank = '', money = ${money - num}, losses = ${losses + 1} WHERE id = '${them.id}'`;
                             con.query(sql3, console.log);
-                            results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} payed ${other} $${num}! `);
+                            results.send(`${other} chose **scissors**. \n ${them} chose **paper** \n ${them} paid ${other} $${num}! `);
                             return; 
 
                             
