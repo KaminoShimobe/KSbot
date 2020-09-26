@@ -15,25 +15,25 @@ module.exports = {
 				"unlockedAt" : 1
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"buyValue" : 2000,
 				"unlockedAt": 15
 			},
 			{
-				"name": "ultimate potion",
+				"name": "ultimate-potion",
 				"description" : "Heals 500 HP",
 				"buyValue" : 5000,
 				"unlockedAt" : 30
 			},
 			{
-				"name": "energy bar",
+				"name": "energy-bar",
 				"description" : "Heals 10 AP",
 				"buyValue" : 5000,
 				"unlockedAt" : 1
 			},
 			{
-				"name": "mega energy bar",
+				"name": "mega-energy-bar",
 				"description" : "Heals 25 AP",
 				"buyValue" : 75000,
 				"unlockedAt" : 15
