@@ -1274,16 +1274,16 @@ if(command === `!sell` && messageArray[1] != undefined){
 
 // }
 
-// if(command === `!shop`){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!shop`){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('shopKsrpg').execute(message, args, con, bot);
+    bot.commands.get('shopKsrpg').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 // if(command === `!purchase` && messageArray[1] != undefined){
 //         if(message.author.id == '242118931769196544'){
