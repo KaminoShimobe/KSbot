@@ -106,10 +106,10 @@ module.exports = {
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
                     		var newInven = inventory;
                     		for(var i = 0; i < amount; i++){
-                    			if(i == amount){
+                    			if(inventory == "" && i == 0){
                     				newInven += item[index-1].name;
                     			} else {
-                    				newInven += item[index-1].name + ",";
+                    				newInven += "," + item[index-1].name;
                     			}
 				            } 
 
