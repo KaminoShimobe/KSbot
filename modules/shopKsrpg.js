@@ -71,10 +71,10 @@ module.exports = {
              
             
             
-            if(list[index-1] == undefined || list[0] == ""){
-          message.reply("You don't have an item in that spot!");
-          return;
-        }	
+        //     if(list[index-1] == undefined || list[0] == ""){
+        //   message.reply("You don't have an item in that spot!");
+        //   return;
+        // }	
 
         	let item = items.filter(item => item.unlockedAt <= level)
  			for(var i = 0; i < item.length; i++){
