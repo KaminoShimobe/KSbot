@@ -88,10 +88,10 @@ module.exports = {
             }
             
             
-            if(list[index-1] == undefined){
+            if(list[index-1] == undefined || list[0] == ""){
           message.reply("You don't have an item in that spot!");
           return;
-        }	
+        }		
 
         	let item = items.find(item => item.name === list[index-1])
 
