@@ -121,7 +121,7 @@ module.exports = {
             
 
 
-         if(tossable != true){
+         if(canToss != true){
          	message.author.send("Are you sure you want to toss the " + name + "? \n Yes or No");
                 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
