@@ -106,7 +106,11 @@ module.exports = {
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
                     		var newInven = inventory;
                     		for(var i = 0; i < amount; i++){
-				              newInven += item[index-1].name + ",";
+                    			if(i == amount){
+                    				newInven += item[index-1].name;
+                    			} else {
+                    				newInven += item[index-1].name + ",";
+                    			}
 				            } 
 
 			            	sql = `UPDATE ksrpg SET inventory = '${newInven}' WHERE id = '${message.author.id}'`
