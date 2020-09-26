@@ -31,7 +31,7 @@ module.exports = {
             } 
             inven = inven.replace(undefined, "");
 	    console.log(inven)
-	    if(inven == undefined){
+	    if(list[0] == ""){
 		    inven = "You have no items!";
 	    }    
            
