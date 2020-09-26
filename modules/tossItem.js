@@ -127,7 +127,7 @@ module.exports = {
                     collector.once('collect', message => {
 
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
-			            	 sql = `UPDATE ksrpg SET health =  inventory = '${inven}' WHERE id = '${message.author.id}'`
+			            	 sql = `UPDATE ksrpg SET inventory = '${inven}' WHERE id = '${message.author.id}'`
          					con.query(sql);
            					message.author.send("You tossed the " + name + "!")
            					return;
