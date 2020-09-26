@@ -1230,16 +1230,16 @@ if(command === `!equip` && messageArray[1] != undefined){
 
 }
 
-// if(command === `!toss` && messageArray[1] != undefined){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!toss` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('tossItem').execute(message, args, con, bot);
+    bot.commands.get('tossItem').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 // if(command === `!sell` && messageArray[1] != undefined){
 //         if(message.author.id == '242118931769196544'){
@@ -7299,7 +7299,7 @@ function whom(){
     }   else if(random === 2){
         message.channel.send("*cough* " + randomBoid + " *cough*");
     }   else if(random === 3){
-        message.channel.send("Definitely, " + randomBoi);
+        message.channel.send("Definitely, <@" + randomBoi+">");
     }   else if(random === 4){
         message.channel.send(":no_mouth: " + randomBoid);
     }   else if(random === 5){
@@ -7312,9 +7312,9 @@ function whom(){
         message.channel.send("It **has** to be " + randomBoid);
     }   else if(random === 9){
         message.channel.send("I am sorry to inform you...");
-        setTimeout(message.channel.send("But it's " + randomBoi), 6000);
+        setTimeout(message.channel.send("But it's <@" + randomBoi +">"), 6000);
     }   else if(random === 10){
-        message.channel.send("It's definitely NOT " + randomBoi);
+        message.channel.send("It's definitely NOT <@" + randomBoi + ">");
     }
 }   
     
