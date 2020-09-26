@@ -1241,16 +1241,16 @@ if(command === `!toss` && messageArray[1] != undefined){
 
 }
 
-// if(command === `!sell` && messageArray[1] != undefined){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!sell` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('sellItem').execute(message, args, con, bot);
+    bot.commands.get('sellItem').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 // if(command === `!search` && messageArray[1] != undefined){
 //         if(message.author.id == '242118931769196544'){
