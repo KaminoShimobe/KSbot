@@ -18,7 +18,7 @@ module.exports = {
 				"unlockedAt" : 1
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"sellValue" : 20,
 				"buyValue" : 2000,
@@ -27,7 +27,7 @@ module.exports = {
 				"unlockedAt": 15
 			},
 			{
-				"name": "ultimate potion",
+				"name": "ultimate-potion",
 				"description" : "Heals 500 HP",
 				"sellValue" : 50,
 				"buyValue" : 5000,
@@ -36,7 +36,7 @@ module.exports = {
 				"unlockedAt" : 30
 			},
 			{
-				"name": "energy bar",
+				"name": "energy-bar",
 				"description" : "Heals 10 AP",
 				"sellValue" : 50,
 				"buyValue" : 5000,
@@ -45,7 +45,7 @@ module.exports = {
 				"unlockedAt" : 1
 			},
 			{
-				"name": "mega energy bar",
+				"name": "mega-energy-bar",
 				"description" : "Heals 25 AP",
 				"sellValue" : 750,
 				"buyValue" : 75000,
@@ -72,7 +72,7 @@ module.exports = {
 				"unlockedAt" : 0
 			},
 			{
-				"name": "dusty cap",
+				"name": "dusty-cap",
 				"description" : "+1 DEF when equipped",
 				"sellValue" : 15,
 				"buyValue" : 0,
@@ -99,7 +99,7 @@ module.exports = {
 				"unlockedAt" : 0
 			},
 			{
-				"name": "magic wand",
+				"name": "magic-wand",
 				"description" : "+10 MATK when equipped",
 				"sellValue" : 100,
 				"buyValue" : 0,
