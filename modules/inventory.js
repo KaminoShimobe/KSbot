@@ -30,6 +30,9 @@ module.exports = {
               inven += (i+1) + ". " + list[i] + "\n";
             } 
             inven = inven.replace(undefined, "");
+	    if(inven == ""){
+		    inven = "You have no items!";
+	    }    
            
 
 			let stats = new Discord.MessageEmbed()
