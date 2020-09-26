@@ -109,7 +109,7 @@ module.exports = {
 				              newInven += item[index-1].name + ",";
 				            } 
 
-			            	sql = `UPDATE ksrpg SET inventory = '${newInven}', WHERE id = '${message.author.id}'`
+			            	sql = `UPDATE ksrpg SET inventory = '${newInven}' WHERE id = '${message.author.id}'`
          					con.query(sql);
          					sql2 = `UPDATE user SET money = ${money - total} WHERE id = '${message.author.id}'`
          					con.query(sql2);
