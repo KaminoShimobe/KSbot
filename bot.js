@@ -1285,16 +1285,16 @@ if(command === `!shop`){
 
 }
 
-// if(command === `!purchase` && messageArray[1] != undefined){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!purchase` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('buyKsrpg').execute(message, args, con, bot);
+    bot.commands.get('buyKsrpg').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 // if(command === `!leave`){
 //         if(message.author.id == '242118931769196544'){
