@@ -16,35 +16,35 @@ module.exports = {
 				"special": false
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"hp": 200,
 				"ap": 0,
 				"special": false
 			},
 			{
-				"name": "ultimate potion",
+				"name": "ultimate-potion",
 				"description" : "Heals 500 HP",
 				"hp": 500,
 				"ap": 0,
 				"special": false
 			},
 			{
-				"name": "energy bar",
+				"name": "energy-bar",
 				"description" : "Heals 10 AP",
 				"hp": 0,
 				"ap": 10,
 				"special": false
 			},
 			{
-				"name": "mega energy bar",
+				"name": "mega-energy-bar",
 				"description" : "Heals 25 AP",
 				"hp": 0,
 				"ap": 25,
 				"special": false
 			},
 			{
-				"name": "cave map",
+				"name": "cave-map",
 				"description" : "Allows Access to the Cave",
 				"hp": 0,
 				"ap": 0,
