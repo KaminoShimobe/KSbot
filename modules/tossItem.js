@@ -14,22 +14,22 @@ module.exports = {
 				"tossable" : true
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"tossable" : true
 			},
 			{
-				"name": "ultimate potion",
+				"name": "ultimate-potion",
 				"description" : "Heals 500 HP",
 				"tossable" : true
 			},
 			{
-				"name": "energy bar",
+				"name": "energy-bar",
 				"description" : "Heals 10 AP",
 				"tossable" : true
 			},
 			{
-				"name": "mega energy bar",
+				"name": "mega-energy-bar",
 				"description" : "Heals 25 AP",
 				"tossable" : true
 			},
@@ -44,7 +44,7 @@ module.exports = {
 				"tossable" : true
 			},
 			{
-				"name": "dusty cap",
+				"name": "dusty-cap",
 				"description" : "+1 DEF when equipped",
 				"tossable" : true
 			},
@@ -59,12 +59,12 @@ module.exports = {
 				"tossable" : true
 			},
 			{
-				"name": "magic wand",
+				"name": "magic-wand",
 				"description" : "+10 MATK when equipped",
 				"tossable" : true
 			},
 			{
-				"name": "cave map",
+				"name": "cave-map",
 				"description" : "Allows Access to the Cave",
 				"tossable" : false
 			}
