@@ -80,7 +80,7 @@ module.exports = {
  			for(var i = 0; i < item.length; i++){
               inven += (i+1) + ". " + item[i].name + " - $" + item[i].buyValue + "\n";
             } 
-            
+            inven = inven.replace(undefined, "");
 
             
             let stats = new Discord.MessageEmbed()
