@@ -30,7 +30,7 @@ module.exports = {
 				"bodygear": false
 			},
 			{
-				"name": "dusty cap",
+				"name": "dusty-cap",
 				"description" : "+1 DEF when equipped",
 				"sellValue" : 15,
 				"buyValue " : 0,
@@ -60,7 +60,7 @@ module.exports = {
 				"bodygear": false
 			},
 			{
-				"name": "magic wand",
+				"name": "magic-wand",
 				"description" : "+10 MATK when equipped",
 				"sellValue" : 100,
 				"buyValue " : 0,
@@ -80,7 +80,7 @@ module.exports = {
 				"bodygear": false
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"sellValue" : 100,
 				"buyValue " : 0,
