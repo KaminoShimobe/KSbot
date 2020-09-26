@@ -30,7 +30,7 @@ module.exports = {
               inven += (i+1) + ". " + list[i] + "\n";
             } 
             inven = inven.replace(undefined, "");
-	    if(inven == ""){
+	    if(inven == undefined){
 		    inven = "You have no items!";
 	    }    
            
