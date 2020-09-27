@@ -16,7 +16,7 @@ module.exports = {
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'mortal', 'potion,mega-potion', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${25}, ${0}, ${1}, ${0}, 'yeet', '', ${0}, '', '', ${125}, ${25}, ${0}, ${20})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'mortal', '', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${25}, ${0}, ${1}, ${0}, 'yeet', '', ${0}, '', '', ${125}, ${25}, ${0}, ${20})`;
       con.query(sql, console.log);
       message.channel.send("Mortal class selected!");
       return;
