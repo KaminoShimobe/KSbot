@@ -137,8 +137,10 @@ module.exports = {
             		newInven += list[i];
             	} else if(i == (index - 1)) {
 
+            	} else if(i == list.length) {
+            		newInven += list[i];
             	} else {
-            		newInven += "," + list[i] ;
+            		newInven += "," + list[i];
             	}
             } 
             newInven = newInven.replace(undefined, "")
