@@ -131,7 +131,17 @@ module.exports = {
 
             
 
-            
+            var newInven;
+            for(var i = 0; i < list.length; i++){
+            	if(i == 0){
+            		newInven += list[i];
+            	} else if(i == (index - 1)) {
+
+            	} else {
+            		newInven += "," + list[i] ;
+            	}
+            } 
+            newInven = newInven.replace(undefined, "")
             
 
 
@@ -141,7 +151,7 @@ module.exports = {
                     collector.once('collect', message => {
 
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
-			            	sql = `UPDATE ksrpg SET inventory = '${inven}' WHERE id = '${message.author.id}'`
+			            	sql = `UPDATE ksrpg SET inventory = '${newInven}' WHERE id = '${message.author.id}'`
          					con.query(sql);
          					sql2 = `UPDATE user SET money = ${money + price} WHERE id = '${message.author.id}'`
          					con.query(sql2);
