@@ -125,8 +125,7 @@ module.exports = {
             		newInven += "," + list[i] ;
             	}
             } 
-
-            
+            newInven = newInven.replace(undefined, "")
             
 
 
