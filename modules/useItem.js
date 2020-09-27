@@ -73,6 +73,8 @@ module.exports = {
 			let inventory = rows[0].inventory;
 			let health = rows[0].health;
 			let energy = rows[0].energy;
+			let capacity = rows[0].capacity;
+			let space = rows[0].space;
 			let hp = rows[0].hp;
 			let ap = rows[0].ap;
 			let sql;
@@ -146,11 +148,11 @@ module.exports = {
 
          if(special != true){
          	if(list[index-1] == name && _ap == 0){
-         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = '${newInven}' WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You healed " + (healthHealed) + " health points from the " + name +"!")
          	} else if(list[index-1] == name && _hp == 0){
-         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = '${newInven}' WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You energy " + (energyHealed) + " ability points from the " + name +"!")
          	}
