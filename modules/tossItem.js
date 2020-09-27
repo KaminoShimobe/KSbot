@@ -89,7 +89,8 @@ module.exports = {
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let inventory = rows[0].inventory;
-			
+			let capacity = rows[0].capacity;
+			let space = rows[0].space;
 			let sql;
 			
 
@@ -138,7 +139,7 @@ module.exports = {
                     collector.once('collect', message => {
 
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
-			            	 sql = `UPDATE ksrpg SET inventory = '${newInven}' WHERE id = '${message.author.id}'`
+			            	 sql = `UPDATE ksrpg SET inventory = '${newInven}', space - ${space - 1} WHERE id = '${message.author.id}'`
          					con.query(sql);
            					message.author.send("You tossed the " + name + "!")
            					return;
