@@ -42,6 +42,9 @@ const goldExpCD = new Set();
 const weatherReportCD = new Set();
 const mafiaServers = new Set();
 const EpitaphCD = new Set();
+const battling = new Set();
+const PvP = new Set();
+const KOd = new Set();
 
 
 
@@ -610,7 +613,7 @@ bot.on("message", async message => {
     var sql39 = "CREATE TABLE gardenShop (hotItem VARCHAR 7)";
     var sql40 = "ALTER TABLE plant MODIFY health SMALLINT"; 
     var sql41 = `UPDATE user SET updates =  ${true}`;
-    var sql42 = "CREATE TABLE ksrpg (id VARCHAR(30), class VARCHAR(30), inventory TEXT, location VARCHAR(30), status VARCHAR(30), rank VARCHAR(30), hp INT, atk INT, def INT, matk INT, mdef INT, spd INT, ap INT, luck INT, lvl INT, exp INT, moves TEXT, party TEXT, turn INT, skillpoints INT, bodygear VARCHAR(30), handgear VARCHAR(30), health INT, energy INT)"
+    var sql42 = "CREATE TABLE ksrpg (id VARCHAR(30), class VARCHAR(30), inventory TEXT, location VARCHAR(30), status VARCHAR(30), rank VARCHAR(30), hp INT, atk INT, def INT, matk INT, mdef INT, spd INT, ap INT, luck INT, lvl INT, exp INT, moves TEXT, party TEXT, turn INT, skillpoints INT, bodygear VARCHAR(30), handgear VARCHAR(30), health INT, energy INT, space INT, capacity INT)"
 
 //      con.query(sql19, function (err, result) {
 //      if (err) throw err;
