@@ -23,6 +23,8 @@ module.exports = {
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let inventory = rows[0].inventory;
+			let capacity = rows[0].capacity;
+			let space = rows[0].space;
 
 			var inven;
             var list = inventory.split(",");
@@ -43,7 +45,7 @@ module.exports = {
 			.setDescription(inven)
 			.setColor(hexcolor)
 			.setTimestamp()
-            .setFooter("ID: "  + message.author.id, message.author.avatarURL());
+            .setFooter(space + "/" + capacity + " inventory space");
 
 		message.author.send(stats);
 
