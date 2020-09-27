@@ -108,7 +108,7 @@ module.exports = {
                     collector.once('collect', message => {
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
                     		var newInven = inventory;
-			    	if(amount >= (capacity - space)){
+			    	if(amount > (capacity - space)){
 					message.author.send("Your inventory space is full!");
 					return;
 				}
