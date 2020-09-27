@@ -16,7 +16,7 @@ module.exports = {
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy) VALUES ('${message.author.id}', 'mortal', 'potion,mega-potion', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${25}, ${0}, ${1}, ${0}, 'yeet', '', ${0}, '', '', ${125}, ${25})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'mortal', 'potion,mega-potion', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${25}, ${0}, ${1}, ${0}, 'yeet', '', ${0}, '', '', ${125}, ${25}, ${0}, ${20})`;
       con.query(sql, console.log);
       message.channel.send("Mortal class selected!");
       return;
@@ -43,7 +43,7 @@ module.exports = {
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp moves, party, turn, bodygear, handgear, health, energy) VALUES ('${message.author.id}', 'mage', '', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${30}, ${0}, ${1}, ${0}, 'beam', '', ${0}, '', '', ${100}, ${30})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'mage', '', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${30}, ${0}, ${1}, ${0}, 'beam', '', ${0}, '', '', ${100}, ${30}, ${0}, ${20})`;
       con.query(sql, console.log);
       message.channel.send("Mage class selected!");
       return;
@@ -70,7 +70,7 @@ module.exports = {
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy) VALUES ('${message.author.id}', 'martial artist', '', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${20}, ${0}, ${1}, ${0}, 'punch', '', ${0}, '', '', ${135}, ${20})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'martial artist', '', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${20}, ${0}, ${1}, ${0}, 'punch', '', ${0}, '', '', ${135}, ${20}, ${0}, ${20})`;
       con.query(sql, console.log);
       message.channel.send("Martial Artist class selected!");
       return;
@@ -97,7 +97,7 @@ module.exports = {
     let sql;
     if(rows.length < 1) {
       
-      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy) VALUES ('${message.author.id}', 'mortal', '', '', '', '', ${75}, ${7}, ${2}, ${7}, ${2}, ${7}, ${50}, ${0}, ${1}, ${0}, 'shot', '', ${0}, '', '', ${75}, ${50})`;
+      sql = `INSERT INTO ksrpg (id, class, inventory, location, status, rank, hp, atk, def, matk, mdef, spd, ap, luck, lvl, exp, moves, party, turn, bodygear, handgear, health, energy, space, capacity) VALUES ('${message.author.id}', 'mortal', '', '', '', '', ${75}, ${7}, ${2}, ${7}, ${2}, ${7}, ${50}, ${0}, ${1}, ${0}, 'shot', '', ${0}, '', '', ${75}, ${50}, ${0}, ${20})`;
       con.query(sql, console.log);
       message.channel.send("Marksman class selected!");
       return;
