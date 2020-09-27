@@ -132,7 +132,7 @@ module.exports = {
             		newInven += list[i];
             	} else if(i == (index - 1)) {
 
-            	} else if(i == list.length) {
+            	} else if(i == (list.length-1)) {
             		newInven += list[i];
             	} else {
             		newInven += "," + list[i];
