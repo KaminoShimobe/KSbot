@@ -61,7 +61,10 @@ module.exports = {
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let inventory = rows[0].inventory;
 			let level = rows[0].lvl;
+			let capacity = rows[0].capacity;
+			let space = rows[0].space;
 			let sql;
+			let sql2;
 			
 
 			var inven;
@@ -105,6 +108,10 @@ module.exports = {
                     collector.once('collect', message => {
                     if(message.content == `Yes` || message.content == `yes` || message.content == `Y` || message.content == `y`) {
                     		var newInven = inventory;
+			    	if(amount >= (capacity - space)){
+					message.author.send("Your inventory space is full!");
+					return;
+				}
                     		for(var i = 0; i < amount; i++){
                     			if(inventory == "" && i == 0){
                     				newInven += item[index-1].name;
@@ -113,7 +120,7 @@ module.exports = {
                     			}
 				            } 
 
-			            	sql = `UPDATE ksrpg SET inventory = '${newInven}' WHERE id = '${message.author.id}'`
+			            	sql = `UPDATE ksrpg SET inventory = '${newInven}', space = ${space + amount} WHERE id = '${message.author.id}'`
          					con.query(sql);
          					sql2 = `UPDATE user SET money = ${money - total} WHERE id = '${message.author.id}'`
          					con.query(sql2);
