@@ -142,7 +142,7 @@ module.exports = {
             	}
             } 
             newInven = newInven.replace(undefined, "")
-            
+            console.log(newInven)
 
 
          if(canSell == true){
@@ -164,7 +164,7 @@ module.exports = {
             }				
            			});
          }   else{
-         	message.author.send("You cannot toss special items!")
+         	message.author.send("You cannot sell special items!")
          	return;
          }
 
