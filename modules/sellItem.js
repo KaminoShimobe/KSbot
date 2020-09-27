@@ -142,9 +142,9 @@ module.exports = {
             	}
             } 
             if(newInven == undefined){
-
+            	newInven = "";
             } else {
-            	newInven = newInven.replace(undefined, "")
+            	newInven = newInven.replace(undefined, "");
             }
             
             
