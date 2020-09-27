@@ -125,16 +125,28 @@ module.exports = {
             } else {
                 energyHealed = 0
             }
+			
+			var newInven;
+            for(var i = 0; i < list.length; i++){
+            	if(i == 0){
+            		newInven += list[i];
+            	} else if(i == (index - 1)) {
+
+            	} else {
+            		newInven += "," + list[i] ;
+            	}
+            } 
+            newInven = newInven.replace(undefined, "")
             
 
 
          if(special != true){
          	if(list[index-1] == name && _ap == 0){
-         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = '${inven}' WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = '${newInven}' WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You healed " + (healthHealed) + " health points from the " + name +"!")
          	} else if(list[index-1] == name && _hp == 0){
-         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = '${inven}' WHERE id = '${message.author.id}'`
+         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = '${newInven}' WHERE id = '${message.author.id}'`
          		con.query(sql);
          		message.author.send("You energy " + (energyHealed) + " ability points from the " + name +"!")
          	}
