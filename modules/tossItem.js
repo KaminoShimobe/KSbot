@@ -117,7 +117,7 @@ module.exports = {
 
             var newInven;
             for(var i = 0; i < list.length; i++){
-            	if(i == 0){
+            	if(i == 0 && i != (index - 1)){
             		newInven += list[i];
             	} else if(i == (index - 1)) {
 
