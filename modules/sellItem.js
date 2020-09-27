@@ -15,25 +15,25 @@ module.exports = {
 				"sellable" : true
 			},
 			{
-				"name": "mega potion",
+				"name": "mega-potion",
 				"description" : "Heals 200 HP",
 				"sellValue" : 200,
 				"sellable" : true
 			},
 			{
-				"name": "ultimate potion",
+				"name": "ultimate-potion",
 				"description" : "Heals 500 HP",
 				"sellValue" : 500,
 				"sellable" : true
 			},
 			{
-				"name": "energy bar",
+				"name": "energy-bar",
 				"description" : "Heals 10 AP",
 				"sellValue" : 50,
 				"sellable" : true
 			},
 			{
-				"name": "mega energy bar",
+				"name": "mega-energy-bar",
 				"description" : "Heals 25 AP",
 				"sellValue" : 750,
 				"sellable" : true
@@ -51,7 +51,7 @@ module.exports = {
 				"sellable" : true
 			},
 			{
-				"name": "dusty cap",
+				"name": "dusty-cap",
 				"description" : "+1 DEF when equipped",
 				"sellValue" : 15,
 				"sellable" : true
@@ -69,13 +69,13 @@ module.exports = {
 				"sellable" : true
 			},
 			{
-				"name": "magic wand",
+				"name": "magic-wand",
 				"description" : "+10 MATK when equipped",
 				"sellValue" : 100,
 				"sellable" : true
 			},
 			{
-				"name": "cave map",
+				"name": "cave-map",
 				"description" : "Allows Access to the Cave",
 				"sellValue" : 0,
 				"sellable" : false
