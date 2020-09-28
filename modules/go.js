@@ -1,17 +1,18 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
-bot.commands = new Discord.Collection();
+
+
+module.exports = {
+	name: 'go',
+	description: 'Travel through KSRPG dungeons',
+	execute(message, args, con, bot, Battling, PvP, KOd) {
+		bot.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./modules').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const command = require(`./modules/${file}`);
   bot.commands.set(command.name, command);
 }
-
-module.exports = {
-	name: 'go',
-	description: 'Travel through KSRPG dungeons',
-	execute(message, args, con, bot, Battling, PvP, KOd) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
 	var items = [
