@@ -95,9 +95,59 @@ for (const file of commandFiles) {
 				"hp" : 0,
 				"ap" : 0,
 				"effect" : false
+			},
+
+			
+			
+
+	]
+
+	var healingItems = [
+
+			{
+				"name": "potion",
+				"description" : "Heals 50 HP",
+				"hp": 50,
+				"ap": 0,
+				"special": false
+			},
+			{
+				"name": "mega-potion",
+				"description" : "Heals 200 HP",
+				"hp": 200,
+				"ap": 0,
+				"special": false
+			},
+			{
+				"name": "ultimate-potion",
+				"description" : "Heals 500 HP",
+				"hp": 500,
+				"ap": 0,
+				"special": false
+			},
+			{
+				"name": "energy-bar",
+				"description" : "Heals 10 AP",
+				"hp": 0,
+				"ap": 10,
+				"special": false
+			},
+			{
+				"name": "mega-energy-bar",
+				"description" : "Heals 25 AP",
+				"hp": 0,
+				"ap": 25,
+				"special": false
+			},
+			{
+				"name": "cave-map",
+				"description" : "Allows Access to the Cave",
+				"hp": 0,
+				"ap": 0,
+				"special": true
 			}
-			
-			
+
+
 
 	]
 	var movesList = [
@@ -794,7 +844,7 @@ for (const file of commandFiles) {
 								          eTurn();
 								        }		
 
-							        	let item = items.find(item => item.name === list[index-1])
+							        	let item = healingItems.find(item => item.name === list[index-1])
 
 							        	var itemName = item.name;
 							            var desc = item.description;
