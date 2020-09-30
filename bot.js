@@ -42,7 +42,7 @@ const goldExpCD = new Set();
 const weatherReportCD = new Set();
 const mafiaServers = new Set();
 const EpitaphCD = new Set();
-const battling = new Set();
+const Battling = new Set();
 const PvP = new Set();
 const KOd = new Set();
 
@@ -1255,27 +1255,27 @@ if(command === `!sell` && messageArray[1] != undefined){
 
 }
 
-// if(command === `!search` && messageArray[1] != undefined){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!search` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('searchKsrpg').execute(message, args, con, bot);
+    bot.commands.get('searchKsrpg').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
-// if(command === `!go`){
-//         if(message.author.id == '242118931769196544'){
+if(command === `!go`){
+        if(message.author.id == '242118931769196544'){
 
         
-//     bot.commands.get('go').execute(message, args, con, bot);
+    bot.commands.get('go').execute(message, args, con, bot);
 
-//          return;    
-//        }
+         return;    
+       }
 
-// }
+}
 
 if(command === `!shop`){
         if(message.author.id == '242118931769196544'){
