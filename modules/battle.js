@@ -896,12 +896,12 @@ for (const file of commandFiles) {
 
 
 							         if(special != true){
-							         	if(list[index-1] == name && _ap == 0){
+							         	if(list[index-1] == itemName && _ap == 0){
 							         		sql = `UPDATE ksrpg SET health = ${final_hp_}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
 							         		con.query(sql);
 							         		message.author.send("You healed " + (healthHealed) + " health points from the " + itemName +"!")
 							         		eTurn();
-							         	} else if(list[index-1] == name && _hp == 0){
+							         	} else if(list[index-1] == itemName && _hp == 0){
 							         		sql = `UPDATE ksrpg SET energy = ${final_ap_}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
 							         		con.query(sql);
 							         		message.author.send("You energy " + (energyHealed) + " ability points from the " + itemName +"!")
