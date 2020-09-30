@@ -409,7 +409,7 @@ for (const file of commandFiles) {
 			var eAp = (eLvl / 10) + enemy.ap;
 			var eLuck = (eLvl / 10) + enemy.luck;
 			var eExp = (eLvl / 10) + enemy.expGain;
-			var eMoves = enemy.moves.split(",");
+			var eMoves = enemies.moves.split(",");
 
 			var final_hp;
 			var final_ap;
