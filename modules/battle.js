@@ -823,8 +823,8 @@ for (const file of commandFiles) {
                     			});
                     	} else if(message.content.toLowerCase() == `item`) {
                     		var inven;
-
-							 var list = inventory.split(",");
+                    		var theInventory = rows[0].inventory;
+							 var list = theInventory.split(",");
 							            for(var i = 0; i < list.length; i++){
 							              inven += (i+1) + ". " + list[i] + "\n";
 							            } 
@@ -843,7 +843,7 @@ for (const file of commandFiles) {
 								          message.reply("You don't have an item in that spot!");
 								          eTurn();
 								        }		
-
+								        
 							        	let item = healingItems.find(item => item.name === list[index-1])
 
 							        	var itemName = item.name;
