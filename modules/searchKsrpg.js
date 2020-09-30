@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Find new locations with the search function',
 	execute(message, args, con, bot, Battling, PvP, KOd) {
 	let messageArray = message.content.split(" ");
-	var index = parseInt(messageArray[1]);
+	
 	var items = [
 			{
 				"name": "cave-map",
@@ -39,21 +39,7 @@ module.exports = {
 			let sql;
 			let sql2;
 
-			var inven;
-            var list = inventory.split(",");
-            if(index == list.length){
-			    inven = inventory.replace(list[index-1], "")
-			} else {
-			    inven = inventory.replace(list[index-1] + ",", "")
-		    }
-
-             
-            
-            
-            if(list[index-1] == undefined || list[0] == ""){
-          message.reply("You don't have an item in that spot!");
-          return;
-        }	
+			
 
         	let cavemap = items.find(item => item.name === "cave-map")
 
