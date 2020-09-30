@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'shopKsrpg',
 	description: 'Shows KS RPG shop based on level',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, Battling, PvP) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
 	var items = [
@@ -53,6 +53,17 @@ module.exports = {
 		}
 	
 		
+	    if(Battling.has(message.author.id)){
+				message.author.send("You are in a battle right now! You cannot access the shop!")
+				return;
+			}
+
+			if(PvP.has(message.author.id)){
+				message.author.send("You are in a PVP match right now! You cannot access the shop!")
+				return;
+			}
+
+			
 		
 		let hexcolor = rows[0].hue;
 		let money = rows[0].money;
