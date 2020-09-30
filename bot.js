@@ -1193,7 +1193,7 @@ if(command === `!stats`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('stats').execute(message, args, con, bot);
+    bot.commands.get('stats').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1204,7 +1204,7 @@ if(command === `!inventory`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('inventory').execute(message, args, con, bot);
+    bot.commands.get('inventory').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1215,7 +1215,7 @@ if(command === `!use` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('useItem').execute(message, args, con, bot);
+    bot.commands.get('useItem').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1226,7 +1226,7 @@ if(command === `!equip` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('equipItem').execute(message, args, con, bot);
+    bot.commands.get('equipItem').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1237,7 +1237,7 @@ if(command === `!toss` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('tossItem').execute(message, args, con, bot);
+    bot.commands.get('tossItem').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1248,7 +1248,7 @@ if(command === `!sell` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('sellItem').execute(message, args, con, bot);
+    bot.commands.get('sellItem').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
