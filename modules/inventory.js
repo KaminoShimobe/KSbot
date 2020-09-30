@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'inventory',
 	description: 'View KSRPG inventory',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, Battling, PvP) {
 	let messageArray = message.content.split(" ");
     
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -37,6 +37,15 @@ module.exports = {
 		    inven = "You have no items!";
 	    }    
            
+			if(Battling.has(message.author.id)){
+				message.author.send("You are in a battle right now!")
+				return;
+			}
+
+			if(PvP.has(message.author.id)){
+				message.author.send("You are in a PVP match right now!")
+				return;
+			}
 
 			let stats = new Discord.MessageEmbed()
 
