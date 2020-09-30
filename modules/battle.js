@@ -523,7 +523,7 @@ for (const file of commandFiles) {
 			.setImage(url.href)
 			.setColor("#8800ff")
 			.setTimestamp()
-            .setFooter("Turn: " + floor);
+            .setFooter("Floor: " + turn);
 
             message.author.send(menu);
             battle();
