@@ -501,9 +501,9 @@ for (const file of commandFiles) {
 				return;
 			}
 			
-			battle();
+			
 
-			function battle(){
+			
 				const booru = new Danbooru()
 		booru.posts({ tags: enemy.tags, random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -518,13 +518,17 @@ for (const file of commandFiles) {
 				let menu = new Discord.MessageEmbed()
 
 			
-			.setTitle("A " + enemy.name + " appeared!")
+			// .setTitle("A " + enemy.name + " appeared!")
 			.setImage(url.href)
 			.setColor("#8800ff")
-			.setTimestamp()
+			// .setTimestamp()
             .setFooter("Turn: " + turn);
 
             message.author.send(menu);
+            battle();
+        });
+
+        function battle(){
 
             if(spd > enemy.spd){
             	turn();
@@ -876,11 +880,11 @@ for (const file of commandFiles) {
                     });
 
             }
-        })
+        
 
 
-			}
-			 
+			
+			 }
 
 
 		});
