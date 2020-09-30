@@ -506,6 +506,8 @@ for (const file of commandFiles) {
 			.setTimestamp()
             .setFooter("Turn: " + turn);
 
+            message.author.send(menu);
+
             if(spd > enemy.spd){
             	turn();
             } else {
