@@ -397,7 +397,7 @@ for (const file of commandFiles) {
 			}
 
 			
-			let enemy = enemies.filter(enemy => enemy.name == enemyName)
+			let enemy = enemies.find(enemy => enemy.name == enemyName)
 
 			var eLvl = (Math.floor(Math.random() * enemy.maxLvl) + 1);
 			var eHp = (eLvl / 10) + enemy.hp;
@@ -409,7 +409,7 @@ for (const file of commandFiles) {
 			var eAp = (eLvl / 10) + enemy.ap;
 			var eLuck = (eLvl / 10) + enemy.luck;
 			var eExp = (eLvl / 10) + enemy.expGain;
-			var eMoves = enemies.moves.split(",");
+			var eMoves = enemy.moves.split(",");
 
 			var final_hp;
 			var final_ap;
