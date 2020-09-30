@@ -468,6 +468,7 @@ for (const file of commandFiles) {
 				sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
 				con.query(sql2);
 				message.author.send("You got $" + payout + "!")
+				return;
 			}
 
 			function battleLose(){
@@ -475,8 +476,10 @@ for (const file of commandFiles) {
 				KOd.add(message.author.id)
 				sql = `UPDATE ksrpg SET turn = ${0}, health = ${0} location = "" WHERE id = '${message.author.id}'`
 				con.query(sql);
-				sql2 = `UPDATE user SET money = ${money/2} WHERE id = '${message.author.id}'`
-				con.query(sql2);
+// 				sql2 = `UPDATE user SET money = ${money/2} WHERE id = '${message.author.id}'`
+// 				con.query(sql2);
+				message.author.send("You have been defeated!");
+				return;
 			}
 			
 			battle();
