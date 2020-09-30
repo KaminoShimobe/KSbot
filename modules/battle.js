@@ -831,7 +831,7 @@ for (const file of commandFiles) {
 
 							            inven = inven.replace(undefined, "");
 								    console.log(inven)
-								    if(list[index-1] == undefined || list[0] == ""){
+								    if(list[0] == ""){
 								          message.reply("You don't have an item in that spot!");
 								          eTurn();
 								        }
@@ -844,7 +844,10 @@ for (const file of commandFiles) {
                     					turn();
                     				} else {
                     					var index = parseInt(message.content);
-                    							
+                    					 if(list[index-1] == undefined || list[0] == ""){
+								          message.reply("You don't have an item in that spot!");
+								          eTurn();
+								        }		
 								        
 							        	let item = healingItems.find(item => item.name === list[index-1])
 
