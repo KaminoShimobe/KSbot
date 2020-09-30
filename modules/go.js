@@ -406,12 +406,14 @@ for (const file of commandFiles) {
               } else {
 
               }
-              sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
+
+            }
+            sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
          	  con.query(sql);
          	  message.author.send("You made to to floor " + (turn + 1) + "!")
            					
               bot.commands.get('battle').execute(message, args, con, bot, Battling, PvP, KOd, enemyName);
-            }
+              return;
 			} else {
 				var outcome = Math.floor(Math.random() * 10) + 1;
 				if(outcome > 3){
@@ -424,8 +426,8 @@ for (const file of commandFiles) {
 					var moneyGain = (Math.floor(Math.random() * 10000) + 1000) * level;
 					sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
          	  		con.query(sql);
-         	  		sql = `UPDATE user SET money = ${money + moneyGain} WHERE id = '${message.author.id}'`
-         	  		con.query(sql);
+         	  		sql2 = `UPDATE user SET money = ${money + moneyGain} WHERE id = '${message.author.id}'`
+         	  		con.query(sql2);
          	 	 	message.author.send("You made to to floor " + (turn + 1) + " and found $" + moneyGain +"!")
          	 	 	return;
 				}
