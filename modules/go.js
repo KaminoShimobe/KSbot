@@ -383,7 +383,7 @@ for (const file of commandFiles) {
 
 			var options = Math.floor(Math.random() * 100) + 1;
 			let spawn = enemies.filter(enemy => enemy.spawnRate > 0)
-			let dungeon = location.find(dungeon => dungeon.name === "forest")
+			let dungeon = location.find(dungeons => dungeons.name === "forest")
 			var enemySpawn = 0;
 			var enemyName;
 
