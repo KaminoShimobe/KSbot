@@ -383,11 +383,11 @@ for (const file of commandFiles) {
 
 			var options = Math.floor(Math.random() * 100) + 1;
 			let spawn = enemies.filter(enemy => enemy.spawnRate > 0)
-			let dungeon = location.find(place => place.name = location.name)
+			let dungeon = location.find(place => place.name === location[location.indexOf(place.name)])
 			var enemySpawn = 0;
 			var enemyName;
 
-			if(floor == (dungeon.maxFloors - 1)){
+			if(turn == (dungeon.maxFloors - 1)){
 				bot.commands.get('boss').execute(message, args, con, bot, Battling, PvP, KOd, dungeon.name);
 			}
 
@@ -399,9 +399,9 @@ for (const file of commandFiles) {
               } else {
 
               }
-              sql = `UPDATE ksrpg SET floor = ${floor + 1} WHERE id = '${message.author.id}'`
+              sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
          	  con.query(sql);
-         	  message.author.send("You made to to floor " + (floor + 1) + "!")
+         	  message.author.send("You made to to floor " + (turn + 1) + "!")
            					
               bot.commands.get('battle').execute(message, args, con, bot, Battling, PvP, KOd, enemyName);
             }
@@ -409,17 +409,17 @@ for (const file of commandFiles) {
 				var outcome = Math.floor(Math.random() * 10) + 1;
 				if(outcome > 3){
 
-					  sql = `UPDATE ksrpg SET floor = ${floor + 1} WHERE id = '${message.author.id}'`
+					  sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
 		         	  con.query(sql);
-		         	  message.author.send("You made to to floor " + (floor + 1) + "!")
+		         	  message.author.send("You made to to floor " + (turn + 1) + "!")
 		         	  return;
 				} else {
 					var moneyGain = (Math.floor(Math.random() * 10000) + 1000) * level;
-					sql = `UPDATE ksrpg SET floor = ${floor + 1} WHERE id = '${message.author.id}'`
+					sql = `UPDATE ksrpg SET turn = ${turn + 1} WHERE id = '${message.author.id}'`
          	  		con.query(sql);
          	  		sql = `UPDATE user SET money = ${money + moneyGain} WHERE id = '${message.author.id}'`
          	  		con.query(sql);
-         	 	 	message.author.send("You made to to floor " + (floor + 1) + " and found $" + moneyGain +"!")
+         	 	 	message.author.send("You made to to floor " + (turn + 1) + " and found $" + moneyGain +"!")
          	 	 	return;
 				}
 			}
