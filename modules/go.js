@@ -11,7 +11,7 @@ module.exports = {
 const commandFiles = fs.readdirSync('./modules').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-  const command = require(`./modules/${file}`);
+  const command = require(`./${file}`);
   bot.commands.set(command.name, command);
 }
 	let messageArray = message.content.split(" ");
