@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
+const Danbooru = require('danbooru');
 const fs = require('fs'); // file manager
 
 module.exports = {
