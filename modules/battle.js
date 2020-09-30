@@ -547,7 +547,7 @@ for (const file of commandFiles) {
                     							if(eAttack.statAffected == "atk"){
                     								message.author.send("The " + enemy.name + " attacked!")
 								            		
-								            		var dmg = (((eAttack.basePower/10) * eAtk) + eAtk) - (def * (final_hp/10));
+								            		var dmg = Mathfloor((((eAttack.basePower/10) * eAtk) + eAtk) - (def));
 								                    		if(dmg < 0){
 								                    			dmg = 0;
 								                    		} 
@@ -569,7 +569,7 @@ for (const file of commandFiles) {
                     							} else if(eAttack.statAffected == "matk"){
                     								message.author.send("The " + enemy.name + " attacked!")
 								            		
-								            		var dmg = (((eAttack.basePower/10) * eMatk) + eMatk) - (mDef * (final_hp/10));
+								            		var dmg = Math.floor((((eAttack.basePower/10) * eMatk) + eMatk) - (mDef));
 								                    		if(dmg < 0){
 								                    			dmg = 0;
 								                    		} 
@@ -601,7 +601,7 @@ for (const file of commandFiles) {
             	} else {
             		message.author.send("The " + enemy.name + " attacked!")
             		var scale = Math.floor(Math.random() * 10) + 1;
-            		var dmg = (((scale/10) * eAtk) + eAtk) - (def * (final_hp/10));
+            		var dmg = Math.floor((((scale/10) * eAtk) + eAtk) - (def));
                     		if(dmg < 0){
                     			dmg = 0;
                     		} 
@@ -630,7 +630,7 @@ for (const file of commandFiles) {
                     collector.once('collect', message => {
                     	if(message.content.toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
-                    		var dmg = (((scale/10) * final_atk) + final_atk) - (eDef);
+                    		var dmg = Math.floor((((scale/10) * final_atk) + final_atk) - (eDef));
                     		if(dmg < 0){
                     			dmg = 0;
                     		} 
@@ -678,7 +678,7 @@ for (const file of commandFiles) {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(selection.statAffected == "atk"){
-                    								var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef);
+                    								var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
 						                    		if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -697,7 +697,7 @@ for (const file of commandFiles) {
 						                    			eTurn();
 						                    		}
                     							} else if(selection.statAffected == "matk"){
-                    								var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef);
+                    								var dmg = Math.floor((((selection.basePower/10) * final_matk) + final_matk) - (eMdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -718,7 +718,7 @@ for (const file of commandFiles) {
                     							}
                     						} else if(selection.statAffected == "off>"){
                     								if(matk > atk){
-                    									var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef);
+                    									var dmg = Math.floor((((selection.basePower/10) * final_matk) + final_matk) - (eMdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -737,7 +737,7 @@ for (const file of commandFiles) {
 						                    			eTurn();
 						                    		}
                     								} else {
-                    									var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef);
+                    									var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
