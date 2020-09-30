@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'stats',
 	description: 'View KSRPG stats',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, Battling, PvP) {
 	let messageArray = message.content.split(" ");
     
     con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -19,7 +19,15 @@ module.exports = {
 		
 		let money = rows[0].money;
 		let hexcolor = rows[0].hue;
-		
+		if(Battling.has(message.author.id)){
+				message.author.send("You are in a battle right now!")
+				return;
+			}
+
+			if(PvP.has(message.author.id)){
+				message.author.send("You are in a PVP match right now!")
+				return;
+			}
 
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let exp = rows[0].exp;
