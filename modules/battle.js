@@ -796,21 +796,21 @@ for (const file of commandFiles) {
 
 							        	let item = items.find(item => item.name === list[index-1])
 
-							        	var name = item.name;
+							        	var itemName = item.name;
 							            var desc = item.description;
 							            var _hp = item.hp;
 							            var _ap = item.ap;
 							            var special = item.special;
 
-							            var final_hp = health + _hp;
-							            var final_ap = energy + _ap;
+							            var final_hp_ = health + _hp;
+							            var final_ap_ = energy + _ap;
 
-							            if(final_hp >= hp){
-							            	final_hp = hp;
+							            if(final_hp_ >= hp){
+							            	final_hp_ = hp;
 							            } 
 
-							            if(final_ap >= ap){
-							            	final_ap = ap;
+							            if(final_ap_ >= ap){
+							            	final_ap_ = ap;
 							            }
 
 							            var healthHealed;
@@ -847,14 +847,14 @@ for (const file of commandFiles) {
 
 							         if(special != true){
 							         	if(list[index-1] == name && _ap == 0){
-							         		sql = `UPDATE ksrpg SET health = ${final_hp}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
+							         		sql = `UPDATE ksrpg SET health = ${final_hp_}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
 							         		con.query(sql);
-							         		message.author.send("You healed " + (healthHealed) + " health points from the " + name +"!")
+							         		message.author.send("You healed " + (healthHealed) + " health points from the " + itemName +"!")
 							         		eTurn();
 							         	} else if(list[index-1] == name && _hp == 0){
-							         		sql = `UPDATE ksrpg SET energy = ${final_ap}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
+							         		sql = `UPDATE ksrpg SET energy = ${final_ap_}, inventory = '${newInven}', space = ${space - 1} WHERE id = '${message.author.id}'`
 							         		con.query(sql);
-							         		message.author.send("You energy " + (energyHealed) + " ability points from the " + name +"!")
+							         		message.author.send("You energy " + (energyHealed) + " ability points from the " + itemName +"!")
 							         		eTurn();
 							         	}
 							         }   else{
