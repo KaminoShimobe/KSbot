@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
-
+const fs = require('fs'); // file manager
 
 module.exports = {
 	name: 'battle',
