@@ -309,7 +309,7 @@ for (const file of commandFiles) {
 
 	]
 
-	var location = [
+	var locations = [
 
 			{
 				"name": "forest",
@@ -390,7 +390,7 @@ for (const file of commandFiles) {
 
 			var options = Math.floor(Math.random() * 100) + 1;
 			let spawn = enemies.filter(enemy => enemy.spawnRate > 0)
-			let dungeon = location.find(dungeon => dungeon.name === "forest")
+			let forest = locations.find(dungeon => dungeon.name = locations[locations.indexOf(location)])
 			var enemySpawn = 0;
 			var enemyName;
 
