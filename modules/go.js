@@ -398,7 +398,7 @@ for (const file of commandFiles) {
 				bot.commands.get('boss').execute(message, args, con, bot, Battling, PvP, KOd, dungeon.name);
 			}
 
-			if(options < spawn[i].spawnRate){
+			if(options < spawn[0].spawnRate){
 				for(var i = 0; i < spawn.length; i++){
               if(spawn[i].spawnRate > enemySpawn){
               	enemyName = spawn[i].name;
