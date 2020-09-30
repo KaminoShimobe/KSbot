@@ -846,11 +846,11 @@ for (const file of commandFiles) {
 
 							        	let item = healingItems.find(item => item.name === list[index-1])
 
-							        	var itemName = item.name;
-							            var desc = item.description;
-							            var _hp = item.hp;
-							            var _ap = item.ap;
-							            var special = item.special;
+							        	var itemName = healingItems.name;
+							            var desc = healingItems.description;
+							            var _hp = healingItems.hp;
+							            var _ap = healingItems.ap;
+							            var special = healingItems.special;
 
 							            var final_hp_ = health + _hp;
 							            var final_ap_ = energy + _ap;
