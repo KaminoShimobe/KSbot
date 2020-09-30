@@ -100,7 +100,7 @@ for (const file of commandFiles) {
 			
 
 	]
-	var moves = [
+	var movesList = [
 
 			{
 				"name": "punch",
@@ -674,7 +674,7 @@ for (const file of commandFiles) {
                     					turn();
                     				} else {
                     					var index = parseInt(message.content);
-                    					let selection = moves.find(skill => skill.name == list[index-1])
+                    					let selection = movesList.find(skill => skill.name == list[index-1])
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(selection.statAffected == "atk"){
