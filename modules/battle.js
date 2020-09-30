@@ -516,7 +516,7 @@ for (const file of commandFiles) {
             	var AI = Math.floor(Math.random() * 10) + 1;
             	if(AI >= 7){
             		var AImove = Math.floor(Math.random() * eMoves.length);
-            			let eAttack = enemyMoves.find(attack => attack.name === enemyMoves[AImove]);
+            			let eAttack = enemyMoves.find(attack => attack.name === eMoves[AImove]);
 						
                     						if(eAttack.special == false){
                     							if(eAttack.statAffected == "atk"){
