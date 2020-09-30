@@ -1259,7 +1259,7 @@ if(command === `!search` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('searchKsrpg').execute(message, args, con, bot);
+    bot.commands.get('searchKsrpg').execute(message, args, con, bot, Battling, PvP, KOd);
 
          return;    
        }
@@ -1270,7 +1270,7 @@ if(command === `!go`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('go').execute(message, args, con, bot);
+    bot.commands.get('go').execute(message, args, con, bot, Battling, PvP, KOd);
 
          return;    
        }
@@ -1281,7 +1281,7 @@ if(command === `!shop`){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('shopKsrpg').execute(message, args, con, bot);
+    bot.commands.get('shopKsrpg').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
@@ -1292,7 +1292,7 @@ if(command === `!purchase` && messageArray[1] != undefined){
         if(message.author.id == '242118931769196544'){
 
         
-    bot.commands.get('buyKsrpg').execute(message, args, con, bot);
+    bot.commands.get('buyKsrpg').execute(message, args, con, bot, Battling, PvP);
 
          return;    
        }
