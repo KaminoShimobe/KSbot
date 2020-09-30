@@ -431,6 +431,15 @@ for (const file of commandFiles) {
 				final_mdef = mdef + bodygear.hp;
 				final_spd = spd + bodygear.hp;
 				final_luck = luck + bodygear.hp;
+			} else {
+				final_hp = hp;
+				final_ap = ap;
+				final_atk = atk;
+				final_matk = matk;
+				final_def = def;
+				final_mdef = mdef;
+				final_spd = spd;
+				final_luck = luck;
 			}
 
 			if(hand != ""){
@@ -443,6 +452,17 @@ for (const file of commandFiles) {
 				final_mdef = mdef + handgear.hp;
 				final_spd = spd + handgear.hp;
 				final_luck = luck + handgear.hp;
+			} else {
+				else {
+				final_hp = hp;
+				final_ap = ap;
+				final_atk = atk;
+				final_matk = matk;
+				final_def = def;
+				final_mdef = mdef;
+				final_spd = spd;
+				final_luck = luck;
+			}
 			}
 
 			//stat modifiers
