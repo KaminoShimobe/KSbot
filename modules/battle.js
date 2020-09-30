@@ -828,8 +828,13 @@ for (const file of commandFiles) {
 							            for(var i = 0; i < list.length; i++){
 							              inven += (i+1) + ". " + list[i] + "\n";
 							            } 
+
 							            inven = inven.replace(undefined, "");
 								    console.log(inven)
+								    if(list[index-1] == undefined || list[0] == ""){
+								          message.reply("You don't have an item in that spot!");
+								          eTurn();
+								        }
 								     
                     		message.author.send("Which item would you like to use? \n " + inven + "\n !cancel to cancel")
                     		 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
@@ -839,10 +844,7 @@ for (const file of commandFiles) {
                     					turn();
                     				} else {
                     					var index = parseInt(message.content);
-                    					if(list[index-1] == undefined || list[0] == ""){
-								          message.reply("You don't have an item in that spot!");
-								          eTurn();
-								        }		
+                    							
 								        
 							        	let item = healingItems.find(item => item.name === list[index-1])
 
