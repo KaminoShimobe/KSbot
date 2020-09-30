@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'equipItem',
 	description: 'Equip a KS RPG item',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, Battling, PvP) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
 	var items = [
@@ -103,7 +103,15 @@ module.exports = {
 			return;
 		}
 	
-		
+		if(Battling.has(message.author.id)){
+				message.author.send("You are in a battle right now!")
+				return;
+			}
+
+			if(PvP.has(message.author.id)){
+				message.author.send("You are in a PVP match right now!")
+				return;
+			}
 		
 		let hexcolor = rows[0].hue;
 		
