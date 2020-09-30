@@ -4,7 +4,7 @@ const mysql = require("mysql");
 module.exports = {
 	name: 'searchKsrpg',
 	description: 'Find new locations with the search function',
-	execute(message, args, con, bot) {
+	execute(message, args, con, bot, Battling, PvP, KOd) {
 	let messageArray = message.content.split(" ");
 	var index = parseInt(messageArray[1]);
 	var items = [
@@ -60,7 +60,20 @@ module.exports = {
         	
         	
             
+		if(Battling.has(message.author.id)){
+				message.author.send("You are in a battle right now! You cannot search for a new location!")
+				return;
+			}
 
+			if(PvP.has(message.author.id)){
+				message.author.send("You are in a PVP match right now! You cannot search for a new location!")
+				return;
+			}
+
+			if(KOd.has(message.author.id)){
+				message.author.send("You are to weak to progress!")
+				return;
+			}
             
 
             
