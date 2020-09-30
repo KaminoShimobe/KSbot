@@ -68,14 +68,14 @@ module.exports = {
 
 
          if(messageArray[1] == "forest"){
-         	sql = `UPDATE ksrpg SET location = 'forest', floor = ${1} WHERE id = '${message.author.id}'`
+         	sql = `UPDATE ksrpg SET location = 'forest', turn = ${1} WHERE id = '${message.author.id}'`
          					con.query(sql);
          					message.author.send("You have made it to the forest! \n !go to progress and !leave to leave!")
            					return;
             				
            			
          } else if(messageArray[1] == "cave" && cavemap != undefined){
-         	sql = `UPDATE ksrpg SET location = 'cave', floor = ${1} WHERE id = '${message.author.id}'`
+         	sql = `UPDATE ksrpg SET location = 'cave', turn = ${1} WHERE id = '${message.author.id}'`
          					con.query(sql);
          					message.author.send("You have made it to the cave! \n !go to progress and !leave to leave!")
            					return;
