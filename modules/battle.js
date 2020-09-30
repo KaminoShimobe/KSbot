@@ -831,10 +831,6 @@ for (const file of commandFiles) {
 
 							            inven = inven.replace(undefined, "");
 								    console.log(inven)
-								    if(list[0] == ""){
-								          message.reply("You don't have an item in that spot!");
-								          eTurn();
-								        }
 								     
                     		message.author.send("Which item would you like to use? \n " + inven + "\n !cancel to cancel")
                     		 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
