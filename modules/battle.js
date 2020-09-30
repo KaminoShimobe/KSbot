@@ -470,6 +470,7 @@ for (const file of commandFiles) {
 			var currTurn = 1;
 
 			function battleWin(){
+				Battling.delete(message.author.id)
 				message.author.send("You defeated the " + enemy.name + "!")
 				var newExp;
 				var newLevel;
@@ -518,10 +519,10 @@ for (const file of commandFiles) {
 				let menu = new Discord.MessageEmbed()
 
 			
-			// .setTitle("A " + enemy.name + " appeared!")
+			.setTitle("A " + enemy.name + " appeared!")
 			.setImage(url.href)
 			.setColor("#8800ff")
-			// .setTimestamp()
+			.setTimestamp()
             .setFooter("Turn: " + floor);
 
             message.author.send(menu);
@@ -629,7 +630,7 @@ for (const file of commandFiles) {
                     collector.once('collect', message => {
                     	if(message.content.toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
-                    		var dmg = (((scale/10) * final_atk) + final_atk) - (eDef * (eHp/10));
+                    		var dmg = (((scale/10) * final_atk) + final_atk) - (eDef);
                     		if(dmg < 0){
                     			dmg = 0;
                     		} 
@@ -677,7 +678,7 @@ for (const file of commandFiles) {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(selection.statAffected == "atk"){
-                    								var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef * (eHp/10));
+                    								var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef);
 						                    		if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -696,7 +697,7 @@ for (const file of commandFiles) {
 						                    			eTurn();
 						                    		}
                     							} else if(selection.statAffected == "matk"){
-                    								var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef * (eHp/10));
+                    								var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef);
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -717,7 +718,7 @@ for (const file of commandFiles) {
                     							}
                     						} else if(selection.statAffected == "off>"){
                     								if(matk > atk){
-                    									var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef * (eHp/10));
+                    									var dmg = (((selection.basePower/10) * final_matk) + final_matk) - (eMdef);
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -736,7 +737,7 @@ for (const file of commandFiles) {
 						                    			eTurn();
 						                    		}
                     								} else {
-                    									var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef * (eHp/10));
+                    									var dmg = (((selection.basePower/10) * final_atk) + final_atk) - (eDef);
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -866,6 +867,7 @@ for (const file of commandFiles) {
                     	} else if(message.content.toLowerCase() == `flee`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
                     		if(scale < 4){
+                    			Battling.delete(message.author.id)
                     			message.author.send("You fled successfully!")
                     			return;
                     		} else {
