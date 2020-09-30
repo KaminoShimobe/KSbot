@@ -453,7 +453,6 @@ for (const file of commandFiles) {
 				final_spd = spd + handgear.hp;
 				final_luck = luck + handgear.hp;
 			} else {
-				else {
 				final_hp = hp;
 				final_ap = ap;
 				final_atk = atk;
@@ -462,7 +461,6 @@ for (const file of commandFiles) {
 				final_mdef = mdef;
 				final_spd = spd;
 				final_luck = luck;
-			}
 			}
 
 			//stat modifiers
