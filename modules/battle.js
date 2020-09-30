@@ -669,7 +669,7 @@ for (const file of commandFiles) {
                     					turn();
                     				} else {
                     					var index = parseInt(message.content);
-                    					let selection = skills.find(skill => skill.name == list[index-1])
+                    					let selection = moves.find(skill => skill.name == list[index-1])
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(selection.statAffected == "atk"){
