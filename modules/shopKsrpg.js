@@ -72,14 +72,19 @@ module.exports = {
 		con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
 			let inventory = rows[0].inventory;
 			let level = rows[0].lvl;
+			
 			let sql;
 			
 
 			var inven;
             var list = inventory.split(",");
             
-
-             
+		let floor = rows[0].turn;
+			
+             if(floor > 0){
+		message.author.send("You cannot open the shop in a dungeon!");
+		     return;
+	     }	     
             
             
         //     if(list[index-1] == undefined || list[0] == ""){
