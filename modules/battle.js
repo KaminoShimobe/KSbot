@@ -772,7 +772,7 @@ for (const file of commandFiles) {
 						                    		}
                     							}
                     						} else if(selection.statAffected == "off>"){
-                    								if(matk >= atk){
+                    								if(final_matk >= final_atk){
                     									var dmg = Math.floor((((selection.basePower/10) * final_matk) + final_matk) - (eMdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
