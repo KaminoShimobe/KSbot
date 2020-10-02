@@ -529,12 +529,12 @@ for (const file of commandFiles) {
 				if((exp + eExp) >= cap){
 					newExp = (exp + eExp) - cap;
 					newLevel = level + 1;
-					sql = `UPDATE ksrpg SET exp = ${newExp}, lvl = ${newLevel} WHERE id = '${message.author.id}'`
+					sql = `UPDATE ksrpg SET exp = ${newExp}, lvl = ${newLevel}, energy = ${final_ap} WHERE id = '${message.author.id}'`
 					message.author.send("LEVEL UP")
 					console.log("LEVEL UP")
 					con.query(sql);
 				} else {
-					sql = `UPDATE ksrpg SET exp = ${exp + eExp} WHERE id = '${message.author.id}'`
+					sql = `UPDATE ksrpg SET exp = ${exp + eExp}, energy = ${final_ap} WHERE id = '${message.author.id}'`
 				
 				con.query(sql);
 				}
@@ -549,7 +549,7 @@ for (const file of commandFiles) {
 			function battleLose(){
 				Battling.delete(message.author.id)
 				KOd.add(message.author.id)
-				sql = `UPDATE ksrpg SET turn = ${0}, health = ${0} location = "" WHERE id = '${message.author.id}'`
+				sql = `UPDATE ksrpg SET turn = ${0}, health = ${0}, energy = ${final_ap} location = "" WHERE id = '${message.author.id}'`
 				con.query(sql);
 // 				sql2 = `UPDATE user SET money = ${money/2} WHERE id = '${message.author.id}'`
 // 				con.query(sql2);
@@ -597,7 +597,10 @@ for (const file of commandFiles) {
             	if(AI >= 7){
             		var AImove = Math.floor(Math.random() * eMoves.length);
             			let eAttack = enemyMoves.find(attack => attack.name === eMoves[AImove]);
-						
+											if(eAp < eAttack.cost){
+                    								message.author.send("not enough energy to perform that skill!")
+                    								turn();
+                    							}
                     						if(eAttack.special == false){
                     							if(eAttack.statAffected == "atk"){
                     								message.author.send("The " + enemy.name + " attacked!")
@@ -613,6 +616,7 @@ for (const file of commandFiles) {
 								                    		}
 
 								                    		final_hp -= dmg;
+								                    		eAp -= eAttack.cost;
 								                    		message.author.send(message.author.username + " took " + dmg + " damage!")
 								                    		if(final_hp <= 0){
 								                    			final_hp = 0;
@@ -635,6 +639,7 @@ for (const file of commandFiles) {
 								                    		}
 
 								                    		final_hp -= dmg;
+								                    		eAp -= eAttack.cost;
 								                    		message.author.send(message.author.username + " took " + dmg + " damage!")
 								                    		if(final_hp <= 0){
 								                    			final_hp = 0;
@@ -696,6 +701,7 @@ for (const file of commandFiles) {
                     		}
 
                     		eHp -= dmg;
+
                     		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
                     		if(eHp <= 0){
                     			battleWin();
@@ -732,6 +738,10 @@ for (const file of commandFiles) {
                     					let selection = movesList.find(skill => skill.name == list[index-1])
                     					if(selection != undefined){
                     						if(selection.special == false){
+                    							if(final_ap < selection.cost){
+                    								message.author.send("not enough energy to perform that skill!")
+                    								turn();
+                    							}
                     							if(selection.statAffected == "atk"){
                     								var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
 						                    		if(dmg < 0){
@@ -744,6 +754,7 @@ for (const file of commandFiles) {
 						                    		}
 
 						                    		eHp -= dmg;
+						                    		final_ap -= selection.cost;
 						                    		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
 						                    		if(eHp <= 0){
 						                    			battleWin();
@@ -763,6 +774,7 @@ for (const file of commandFiles) {
 						                    		}
 
 						                    		eHp -= dmg;
+						                    		final_ap -= selection.cost;
 						                    		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
 						                    		if(eHp <= 0){
 						                    			battleWin();
@@ -804,6 +816,7 @@ for (const file of commandFiles) {
 						                    		}
 
 						                    		eHp -= dmg;
+						                    		final_ap -= selection.cost;
 						                    		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
 						                    		if(eHp <= 0){
 						                    			battleWin();
