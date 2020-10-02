@@ -76,7 +76,12 @@ module.exports = {
 			
 
 			var inven;
-            
+            		let floor = rows[0].turn;
+			
+             if(floor > 0){
+		message.author.send("You cannot buy stuff in a dungeon!");
+		     return;
+	     }	  
             
 
              
