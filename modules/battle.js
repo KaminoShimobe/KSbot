@@ -532,10 +532,13 @@ for (const file of commandFiles) {
 					sql = `UPDATE ksrpg SET exp = ${newExp}, lvl = ${newLevel} WHERE id = '${message.author.id}'`
 					message.author.send("LEVEL UP")
 					console.log("LEVEL UP")
-				}
-				sql = `UPDATE ksrpg SET exp = ${exp + eExp} WHERE id = '${message.author.id}'`
+					con.query(sql);
+				} else {
+					sql = `UPDATE ksrpg SET exp = ${exp + eExp} WHERE id = '${message.author.id}'`
 				
 				con.query(sql);
+				}
+				
 				sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
 				con.query(sql2);
 				message.author.send("You got $" + payout + "!")
