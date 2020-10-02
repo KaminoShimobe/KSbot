@@ -771,9 +771,9 @@ for (const file of commandFiles) {
 						                    			eTurn();
 						                    		}
                     							}
-                    						} else if(selection.statAffected == "off>"){
+                    						 else if(selection.statAffected == "off>"){
                     							console.log("Shot should fire")
-                    								if(matk >= atk){
+                    								if(matk > atk){
                     									var dmg = Math.floor((((selection.basePower/10) * final_matk) + final_matk) - (eMdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
@@ -813,7 +813,7 @@ for (const file of commandFiles) {
 						                    		}
                     								}
                     							
-                    						} else {
+                    						} }else {
                     							message.author.send("Special Move go brrr..")
                     							currTurn += 1;
                     							eTurn();
