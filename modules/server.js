@@ -26,7 +26,7 @@ module.exports = {
         let cooldown = rows[0].cooldown;
         let stands = rows[0].stands;
         let waifu = rows[0].waifu;
-        let prefix = rows[0].prefix;
+        let prefixe = rows[0].prefix;
         let RPG = rows[0].rpg;
         let chests = rows[0].chests;
         let canvas = rows[0].canvas;
@@ -91,7 +91,7 @@ module.exports = {
 
             
             .setAuthor(message.guild.name + " KS Bot-settings")
-            .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefix + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
+            .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefixe + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
             .setColor("#1f3c5b"); 
 
         message.channel.send(stats);
