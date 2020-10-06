@@ -1168,7 +1168,7 @@ function choose(){
 
 
        if(command === `!ksrpg`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         choose();
     
@@ -1179,7 +1179,7 @@ function choose(){
 }
 
 if(command === `!ksrpgD`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592'|| message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592'|| message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         deleteKSRPG();
     
@@ -1191,7 +1191,7 @@ if(command === `!ksrpgD`){
 
 
 if(command === `!stats`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('stats').execute(message, args, con, bot, Battling, PvP);
@@ -1202,7 +1202,7 @@ if(command === `!stats`){
 }
 
 if(command === `!inventory`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('inventory').execute(message, args, con, bot, Battling, PvP);
@@ -1213,7 +1213,7 @@ if(command === `!inventory`){
 }
 
 if(command === `!use` && messageArray[1] != undefined){ 
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592'|| message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592'|| message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('useItem').execute(message, args, con, bot, Battling, PvP);
@@ -1224,7 +1224,7 @@ if(command === `!use` && messageArray[1] != undefined){
 }
 
 if(command === `!equip` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('equipItem').execute(message, args, con, bot, Battling, PvP);
@@ -1235,7 +1235,7 @@ if(command === `!equip` && messageArray[1] != undefined){
 }
 
 if(command === `!toss` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('tossItem').execute(message, args, con, bot, Battling, PvP);
@@ -1246,7 +1246,7 @@ if(command === `!toss` && messageArray[1] != undefined){
 }
 
 if(command === `!sell` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('sellItem').execute(message, args, con, bot, Battling, PvP);
@@ -1257,7 +1257,7 @@ if(command === `!sell` && messageArray[1] != undefined){
 }
 
 if(command === `!search` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544'|| message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544'|| message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('searchKsrpg').execute(message, args, con, bot, Battling, PvP, KOd);
@@ -1268,7 +1268,7 @@ if(command === `!search` && messageArray[1] != undefined){
 }
 
 if(command === `!go`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('go').execute(message, args, con, bot, Battling, PvP, KOd);
@@ -1279,7 +1279,7 @@ if(command === `!go`){
 }
 
 if(command === `!shop`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('shopKsrpg').execute(message, args, con, bot, Battling, PvP);
@@ -1290,7 +1290,7 @@ if(command === `!shop`){
 }
 
 if(command === `!purchase` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520'|| message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520'|| message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('buyKsrpg').execute(message, args, con, bot, Battling, PvP);
@@ -1301,7 +1301,7 @@ if(command === `!purchase` && messageArray[1] != undefined){
 }
 
 if(command === `!leave`){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520'|| message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520'|| message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('leave').execute(message, args, con, bot, Battling, PvP, KOd);
@@ -1312,7 +1312,7 @@ if(command === `!leave`){
 }
 
 if(command === `!info` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('itemInfo').execute(message, args, con, bot);
@@ -1328,7 +1328,7 @@ if(command === `!info` && messageArray[1] != undefined){
 
 
  if(command === `!challenge` && messageArray[1] != undefined){
-        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889' || message.author.id == '557952302749712407'){
 
         
     bot.commands.get('pvp').execute(message, args, con, bot, Battling, PvP, KOd);
