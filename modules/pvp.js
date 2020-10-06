@@ -372,7 +372,7 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**").then(() => {
+            	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills**").then(() => {
             		other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
             		  .then(collected => {
             		  	if(String(collected.first()).toLowerCase() == `attack`) {
@@ -572,7 +572,7 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**").then(() => {
+            	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills**").then(() => {
             		them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
             		  .then(collected => {
             		  	if(String(collected.first()).toLowerCase() == `attack`) {
