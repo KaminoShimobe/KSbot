@@ -730,7 +730,7 @@ module.exports = {
         }   
         
         if(money > 0){
-            message.reply(`challenges ${other} to Rock Paper Scissors for $` + num + `! \n respond with **yes** to accept the challenge!`);
+            message.reply(`challenges ${other} to a PVP match!`);
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collector.once('collect', message => {
                        if (message.content == `yes` || message.content == `Yes` || message.content == `YES` || message.content == `ye` || message.content == `Ye` || message.content == `y` || message.content == `Y`) {
