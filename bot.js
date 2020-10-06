@@ -1327,7 +1327,16 @@ if(command === `!info` && messageArray[1] != undefined){
     if(message.channel.type === "dm") return;
 
 
-    
+ if(command === `!challenge` && messageArray[1] != undefined){
+        if(message.author.id == '242118931769196544' || message.author.id == '193045612302827520' || message.author.id == '251408937587310592' || message.author.id == '453010554919845889'){
+
+        
+    bot.commands.get('pvp').execute(message, args, con, bot, Battling, PvP, KOd);
+
+         return;    
+       }
+
+}   
     
     
 
