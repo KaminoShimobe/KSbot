@@ -7,7 +7,6 @@ module.exports = {
 	execute(message, args, con, bot, Battling, PvP, KO) {
 	let messageArray = message.content.split(" ");
     let other = message.mentions.users.first();
-    let otherer = bot.users.cache.get(other.id);
    
     let them = bot.users.cache.get(message.author.id);
     let results = message.channel;
@@ -373,8 +372,8 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
-            	otherer.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
+            	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**").then(() => {
+            		other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
             		  .then(collected => {
             		  	if(String(collected.first()).toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
@@ -426,7 +425,7 @@ module.exports = {
 						    }  
 						    
 						    	other.send("Which skill would you like to use? \n " + skillList + "\n !cancel to cancel")
-                    		otherer.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
+                    		other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
             		  		.then(collected => {
                     				if(String(collected.first()).toLowerCase() == `!cancel`) {
                     					turn();
@@ -560,8 +559,10 @@ module.exports = {
                     	}
 					
             		 });
-            }
             
+            	})
+            	
+            }
             
         }  
             
@@ -571,8 +572,8 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
-            	them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
+            	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**").then(() => {
+            		them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
             		  .then(collected => {
             		  	if(String(collected.first()).toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
@@ -754,7 +755,9 @@ module.exports = {
                     	}
 					
             		 });
-            }
+            
+            	})
+            	}
             	
             	
             
