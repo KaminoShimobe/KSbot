@@ -730,16 +730,23 @@ module.exports = {
         }   
         
         if(money > 0){
-            message.reply(`challenges ${other} to a PVP match!`);
+            message.reply(`challenges ${other} to a PVP match! \n respond **accept** to accept or **decline** to decline!`);
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collector.once('collect', message => {
-                       if (message.content == `yes` || message.content == `Yes` || message.content == `YES` || message.content == `ye` || message.content == `Ye` || message.content == `y` || message.content == `Y`) {
+                       if (message.content.toLowerCase() == `accept`) {
                          con.query(`UPDATE user SET rank = 'rps' WHERE id = '${them.id}'`, console.log);
                          con.query(`UPDATE user SET rank = 'rps' WHERE id = '${other.id}'`, console.log);
                          message.channel.send("Check your dms and let the best win!");
-                    if(spd > enemy.spd){
+                    if(spd > eSpd){
             	duel();
-            } else {
+            } else if(spd == eSpd){
+            	var chance = Math.floor(Math.random() * 2) + 1;
+            	if(chance == 1){
+            		duel();
+            	} else {
+            		eDuel();
+            	}
+            }else {
             	eDuel();
             }
                             return;
