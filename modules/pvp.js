@@ -608,7 +608,7 @@ module.exports = {
                     		
                     	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
-					            var list = eoves.split(",");
+					            var list = moves.split(",");
 					            for(var i = 0; i < list.length; i++){
 					              skillList += (i+1) + ". " + list[i] + "\n";
 					            } 
