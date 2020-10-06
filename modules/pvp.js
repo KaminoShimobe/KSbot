@@ -372,7 +372,7 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	message.author.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
+            	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
             	 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                     	if(message.content.toLowerCase() == `attack`) {
@@ -551,7 +551,7 @@ module.exports = {
             var flavorText = "";
             turn();
             function turn(){
-            	message.author.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
+            	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
             	 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                     	if(message.content.toLowerCase() == `attack`) {
