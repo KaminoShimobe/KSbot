@@ -170,10 +170,7 @@ module.exports = {
         var mName = rows[0].uname;
         var rank = rows[0].rank;
         
-        if (soulless.has(message.author.id)) {
-        message.reply(" 's soul has been stolen by OSIRIS");
-            return;
-        }
+       
         
         if(rank == "rps"){
             message.reply("You cannot gamble while doing PVP");
