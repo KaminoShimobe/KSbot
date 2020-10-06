@@ -373,9 +373,9 @@ module.exports = {
             turn();
             function turn(){
             	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
-            	 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    collector.once('collect', message => {
-                    	if(message.content.toLowerCase() == `attack`) {
+            	other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
+            		  .then(collected => {
+            		  	if(String(collected.first()).toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
                     		var dmg = Math.floor((((scale/10) * efinal_atk) + efinal_atk) - (def));
                     		if(dmg < 0){
@@ -392,18 +392,19 @@ module.exports = {
                     		flavorText += "\n" + them.username + " took " + dmg + " damage!";
                     		if(final_hp <= 0){
                     			results.send(`${other} has won the battle!`)
-                    			return;
+                    									return;
+
                     		} else {
                     			currTurn += 1;
                     			
                     		}
              
-                    	} else if(message.content.toLowerCase() == `defend`) {
+                    	} else if(String(collected.first()).toLowerCase() == `defend`) {
                     		edefending = true;
                     		flavorText += "\n" + other.username + " raised their defenses!";
                     		currTurn += 1;
                     		
-                    	} else if(message.content.toLowerCase() == `skills`) {
+                    	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
 					            var list = moves.split(",");
 					            for(var i = 0; i < list.length; i++){
@@ -416,18 +417,19 @@ module.exports = {
 
 							   turn();
 						    }  
-						    message.author.send("Which skill would you like to use? \n " + skillList + "\n !cancel to cancel")
-                    		 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    			collector.once('collect', message => {
-                    				if(message.content == `!cancel`) {
+						    
+						    	other.send("Which skill would you like to use? \n " + skillList + "\n !cancel to cancel")
+                    		other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
+            		  		.then(collected => {
+                    				if(String(collected.first()).toLowerCase() == `!cancel`) {
                     					turn();
                     				} else {
-                    					var index = parseInt(message.content);
+                    					var index = parseInt(collected.first());
                     					let selection = movesList.find(skill => skill.name == list[index-1])
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(efinal_ap < selection.cost){
-                    								message.author.send("not enough energy to perform that skill!")
+                    								other.send("not enough energy to perform that skill!")
                     								turn();
                     							}
                     							if(selection.statAffected == "atk"){
@@ -447,6 +449,7 @@ module.exports = {
 						                    		if(final_hp <= 0){
 						                    			results.send(`${other} has won the battle!`)
                     									return;
+
 						                    		} else {
 						                    			currTurn += 1;
 						                    			
@@ -468,6 +471,7 @@ module.exports = {
 						                    		if(final_hp <= 0){
 						                    			results.send(`${other} has won the battle!`)
                     									return;
+
 						                    		} else {
 						                    			currTurn += 1;
 						                    			
@@ -475,7 +479,7 @@ module.exports = {
                     							}
                     						 else if(selection.statAffected == "off>"){
                     							console.log("Shot should fire")
-                    								if(eMatk > eAtk){
+                    								if(matk > atk){
                     									var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mDef));
                     								if(dmg < 0){
 						                    			dmg = 0;
@@ -492,12 +496,13 @@ module.exports = {
 						                    		if(final_hp <= 0){
 						                    			results.send(`${other} has won the battle!`)
                     									return;
+
 						                    		} else {
 						                    			currTurn += 1;
 						                    			
 						                    		}
                     								} else {
-                    									var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
+                    									var dmg = Math.floor((((selection.basePower/10) * efinal_atk) + efinal_atk) - (def));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -507,12 +512,13 @@ module.exports = {
 						                    			flavorText += "\n**CRITICAL HIT!**";
 						                    		}
 
-						                    		final_hp -= dmg;
+						                    		final_hp-= dmg;
 						                    		efinal_ap -= selection.cost;
-						                    		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
+						                    		flavorText += "\n" + them.username + " took " + dmg + " damage!";
 						                    		if(final_hp <= 0){
 						                    			results.send(`${other} has won the battle!`)
                     									return;
+
 						                    		} else {
 						                    			currTurn += 1;
 						                    			
@@ -525,22 +531,21 @@ module.exports = {
                     							
                     						}
                     					} else {
-                    						message.author.send("Invalid skill!")
+                    						other.send("Invalid skill!")
                     						turn();
                     					}
 
                     				}
                     			});
                     	}  else {
-                    		message.author.send("Invalid Input!")
+                    		other.send("Invalid Input!")
                     		turn();
                     	}
-
-                    });
-
+					
+            		 });
             }
             
-            other.send(flavorText)
+            them.send(flavorText)
             .then(eDuel())
             .catch(console.error);
         }  
@@ -552,9 +557,9 @@ module.exports = {
             turn();
             function turn(){
             	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills** \n - **item** \n - **flee**");
-            	 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    collector.once('collect', message => {
-                    	if(message.content.toLowerCase() == `attack`) {
+            	them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
+            		  .then(collected => {
+            		  	if(String(collected.first()).toLowerCase() == `attack`) {
                     		var scale = Math.floor(Math.random() * 10) + 1;
                     		var dmg = Math.floor((((scale/10) * final_atk) + final_atk) - (eDef));
                     		if(dmg < 0){
@@ -578,12 +583,12 @@ module.exports = {
                     			
                     		}
              
-                    	} else if(message.content.toLowerCase() == `defend`) {
+                    	} else if(String(collected.first()).toLowerCase() == `defend`) {
                     		defending = true;
                     		flavorText += "\n" + message.author.username + " raised their defenses!";
                     		currTurn += 1;
                     		
-                    	} else if(message.content.toLowerCase() == `skills`) {
+                    	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
 					            var list = moves.split(",");
 					            for(var i = 0; i < list.length; i++){
@@ -596,18 +601,19 @@ module.exports = {
 
 							   turn();
 						    }  
-						    message.author.send("Which skill would you like to use? \n " + skillList + "\n !cancel to cancel")
-                    		 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-                    			collector.once('collect', message => {
-                    				if(message.content == `!cancel`) {
+						    
+						    	them.send("Which skill would you like to use? \n " + skillList + "\n !cancel to cancel")
+                    		them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
+            		  		.then(collected => {
+                    				if(String(collected.first()).toLowerCase() == `!cancel`) {
                     					turn();
                     				} else {
-                    					var index = parseInt(message.content);
+                    					var index = parseInt(collected.first());
                     					let selection = movesList.find(skill => skill.name == list[index-1])
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(final_ap < selection.cost){
-                    								message.author.send("not enough energy to perform that skill!")
+                    								them.send("not enough energy to perform that skill!")
                     								turn();
                     							}
                     							if(selection.statAffected == "atk"){
@@ -669,7 +675,7 @@ module.exports = {
 						                    		}
 
 						                    		efinal_hp -= dmg;
-						                    		efinal_ap -= selection.cost;
+						                    		final_ap -= selection.cost;
 						                    		flavorText += "\n" + other.username + " took " + dmg + " damage!";
 						                    		if(efinal_hp <= 0){
 						                    			results.send(`${them} has won the battle!`)
@@ -691,8 +697,8 @@ module.exports = {
 						                    		}
 
 						                    		efinal_hp-= dmg;
-						                    		efinal_ap -= selection.cost;
-						                    		message.author.send("The " + enemy.name + " took " + dmg + " damage!")
+						                    		final_ap -= selection.cost;
+						                    		flavorText += "\n" + other.username + " took " + dmg + " damage!";
 						                    		if(efinal_hp <= 0){
 						                    			results.send(`${them} has won the battle!`)
                     									return;
@@ -709,22 +715,23 @@ module.exports = {
                     							
                     						}
                     					} else {
-                    						message.author.send("Invalid skill!")
+                    						them.send("Invalid skill!")
                     						turn();
                     					}
 
                     				}
                     			});
                     	}  else {
-                    		message.author.send("Invalid Input!")
+                    		them.send("Invalid Input!")
                     		turn();
                     	}
-
-                    });
-
+					
+            		 });
             }
+            	
+            	
             
-            them.send(flavorText)
+            other.send(flavorText)
             .then(eDuel())
             .catch(console.error);
         }   
