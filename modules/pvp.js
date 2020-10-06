@@ -201,7 +201,7 @@ module.exports = {
         }
 
         con.query(`SELECT * FROM ksrpg WHERE id = '${message.author.id}'`, (err, rows) => {		
-			let inventory = rows[0].inventory;
+			
 			
 			let clas = rows[0].class;
 			let health = rows[0].health;
@@ -282,7 +282,7 @@ module.exports = {
 			
 
 			con.query(`SELECT * FROM ksrpg WHERE id = '${other.id}'`, (err, rows) => {		
-			let inventory = rows[0].inventory;
+			
 			
 			let clas = rows[0].class;
 			let health = rows[0].health;
