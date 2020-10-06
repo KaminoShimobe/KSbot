@@ -734,8 +734,7 @@ module.exports = {
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collector.once('collect', message => {
                        if (message.content.toLowerCase() == `accept`) {
-                         con.query(`UPDATE user SET rank = 'rps' WHERE id = '${them.id}'`, console.log);
-                         con.query(`UPDATE user SET rank = 'rps' WHERE id = '${other.id}'`, console.log);
+                         
                          message.channel.send("Check your dms and let the best win!");
                     if(spd > eSpd){
             	duel();
