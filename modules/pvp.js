@@ -729,7 +729,7 @@ module.exports = {
             .catch(console.error);
         }   
         
-        if(money > 0 && money > num && message.author.id != other.id && num > 0 && theirMoney > num){
+        if(money > 0){
             message.reply(`challenges ${other} to Rock Paper Scissors for $` + num + `! \n respond with **yes** to accept the challenge!`);
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id === other.id, { time: 100000000 });
                     collector.once('collect', message => {
