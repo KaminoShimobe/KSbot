@@ -412,7 +412,7 @@ module.exports = {
                     		
                     	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
-					            var list = moves.split(",");
+					            var list = eMoves.split(",");
 					            for(var i = 0; i < list.length; i++){
 					              skillList += (i+1) + ". " + list[i] + "\n";
 					            } 
@@ -608,7 +608,7 @@ module.exports = {
                     		
                     	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
-					            var list = moves.split(",");
+					            var list = eoves.split(",");
 					            for(var i = 0; i < list.length; i++){
 					              skillList += (i+1) + ". " + list[i] + "\n";
 					            } 
