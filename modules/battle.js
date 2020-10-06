@@ -519,6 +519,65 @@ for (const file of commandFiles) {
 			
 			var currTurn = 1;
 
+			function statAllocate(){
+				message.author.send("Which Stat would you like to increase? \n atk \n def \n matk \n mdef \n spd \n luck \n hp \n ap");
+            	 const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                    	if(message.content.toLowerCase() == `atk`) {
+                    		sql = `UPDATE ksrpg SET atk = ${atk + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your attack by 1!")
+							con.query(sql);
+							return;
+
+                    	} else if(message.content.toLowerCase() == `def`) {
+                    		sql = `UPDATE ksrpg SET def = ${def + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your defense by 1!")
+							con.query(sql);
+							return;
+
+                    	}  else if(message.content.toLowerCase() == `matk`) {
+                    		sql = `UPDATE ksrpg SET matk = ${matk + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your magic attack by 1!")
+							con.query(sql);
+							return;
+
+                    	}  else if(message.content.toLowerCase() == `mdef`) {
+                    		sql = `UPDATE ksrpg SET mdef = ${mdef + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your magic defense by 1!")
+							con.query(sql);
+							return;
+                    	}  else if(message.content.toLowerCase() == `spd`) {
+                    		sql = `UPDATE ksrpg SET spd = ${spd + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your speed by 1!")
+							con.query(sql);
+							return;
+
+                    	}  else if(message.content.toLowerCase() == `luck`) {
+                    		sql = `UPDATE ksrpg SET atk = ${luck + 1} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your luck by 1!")
+							con.query(sql);
+							return;
+
+                    	}  else if(message.content.toLowerCase() == `hp`) {
+                    		sql = `UPDATE ksrpg SET hp = ${hp + 10} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your health by 1!")
+							con.query(sql);
+							return;
+
+                    	}  else if(message.content.toLowerCase() == `ap`) {
+                    		sql = `UPDATE ksrpg SET ap = ${ap + 10} WHERE id = '${message.author.id}'`
+							message.author.send("You increased your energy by 1!")
+							con.query(sql);
+							return;
+
+                    	} else {
+                    		message.author.send("Invalid input!");
+                    		statAllocate();
+                    	}
+                    	
+                    });		
+			}
+
 			function battleWin(){
 				Battling.delete(message.author.id)
 				message.author.send("You defeated the " + enemy.name + "!")
@@ -533,6 +592,7 @@ for (const file of commandFiles) {
 					message.author.send("LEVEL UP")
 					console.log("LEVEL UP")
 					con.query(sql);
+
 				} else {
 					sql = `UPDATE ksrpg SET exp = ${exp + eExp}, energy = ${final_ap} WHERE id = '${message.author.id}'`
 				
@@ -543,6 +603,7 @@ for (const file of commandFiles) {
 				con.query(sql2);
 				message.author.send("You got $" + payout + "!")
 				console.log("You got $" + payout + "!");
+				statAllocate();
 				return;
 			}
 
