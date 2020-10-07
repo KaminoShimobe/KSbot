@@ -288,7 +288,7 @@ module.exports = {
 			let health = rows[0].health;
 			let energy = rows[0].energy;
 			let location = rows[0].location;
-			let status = rows[0].status;
+			let eStatus = rows[0].status;
 			let eHp = rows[0].hp;
 			let eAtk = rows[0].atk;
 			let eDef = rows[0].def;
@@ -370,7 +370,18 @@ module.exports = {
 
 
             var flavorText = "";
-            turn();
+            let stats = new Discord.MessageEmbed()
+
+			
+			.setAuthor(other.username + "'s KS-RPG stats:")
+			.setDescription("Lvl: " + eLvl + "\n Status: \n" + eStatus + "\n HP: " + efinal_hp + "/" + eHp + "\n AP:" + efinal_ap + "/" + eAp + "\n ATK: " + eAtk + "\n DEF:" + eDef + "\n MATK:" +  eMatk + "\n MDEF: "+ eMdef + "\n SPD: " + eSpd + "\n LUCK: " + eLuck + "\n Moves: **" + eMoves + "**\n Body Gear: " + eBody + "\n Hand Gear:" + eHand)
+			.setColor("#")
+			.setTimestamp()
+            .setFooter(them.username + ": HP: " + final_hp + "/" + hp + "| AP: " + final_ap + "/" + ap , them.avatarURL());
+            other.send(stats).then(() =>{
+            	turn();
+            })
+            
             function turn(){
             	other.send("What will you do?: \n - **attack** \n - **defend** \n - **skills**").then(() => {
             		other.dmChannel.awaitMessages(m => m.author.id === other.id, { max: 1, time: 300000000, errors: ['time'] })
@@ -435,8 +446,9 @@ module.exports = {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(efinal_ap < selection.cost){
-                    								other.send("not enough energy to perform that skill!")
-                    								turn();
+                    								other.send("not enough energy to perform that skill!").then(turn())
+                    								.catch(console.error);
+                    								
                     							}
                     							if(selection.statAffected == "atk"){
                     								var dmg = Math.floor((((selection.basePower/10) * efinal_atk) + efinal_atk) - (def));
@@ -570,7 +582,17 @@ module.exports = {
 
 
             var flavorText = "";
-            turn();
+            let stats = new Discord.MessageEmbed()
+
+			
+			.setAuthor(them.username + "'s KS-RPG stats:")
+			.setDescription("Lvl: " + level + "\n Status: \n" + status + "\n HP: " + final_hp + "/" + hp + "\n AP:" + final_ap + "/" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand)
+			.setColor("#")
+			.setTimestamp()
+            .setFooter(other.username + ": HP: " + efinal_hp + "/" + eHp + "| AP: " + efinal_ap + "/" + eAp , other.avatarURL());
+            them.send(stats).then(() =>{
+            	turn();
+            })
             function turn(){
             	them.send("What will you do?: \n - **attack** \n - **defend** \n - **skills**").then(() => {
             		them.dmChannel.awaitMessages(m => m.author.id === them.id, { max: 1, time: 300000000, errors: ['time'] })
@@ -631,8 +653,8 @@ module.exports = {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(final_ap < selection.cost){
-                    								them.send("not enough energy to perform that skill!")
-                    								turn();
+                    								them.send("not enough energy to perform that skill!").then(turn())
+                    								.catch(console.error);
                     							}
                     							if(selection.statAffected == "atk"){
                     								var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
