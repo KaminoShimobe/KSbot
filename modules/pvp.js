@@ -463,7 +463,7 @@ module.exports = {
             .catch(console.error);
 						                    		}
                     							} else if(selection.statAffected == "matk"){
-                    								var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mDef));
+                    								var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
@@ -490,7 +490,7 @@ module.exports = {
                     						 else if(selection.statAffected == "off>"){
                     							console.log("Shot should fire")
                     								if(matk > atk){
-                    									var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mDef));
+                    									var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mdef));
                     								if(dmg < 0){
 						                    			dmg = 0;
 						                    		} 
