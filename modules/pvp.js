@@ -407,9 +407,10 @@ module.exports = {
 
                     		} else {
                     			currTurn += 1;
-                    			them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+                    			other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
                     			
                     		}
              
@@ -417,9 +418,10 @@ module.exports = {
                     		edefending = true;
                     		flavorText += "\n" + other.username + " raised their defenses!";
                     		currTurn += 1;
-                    		them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+                    		other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
                     		
                     	} else if(String(collected.first()).toLowerCase() == `skills`) {
                     		var skillList;
@@ -446,7 +448,7 @@ module.exports = {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(efinal_ap < selection.cost){
-                    								other.send("not enough energy to perform that skill!").then(turn())
+                    								other.send("not enough energy to perform that skill!").then(eDuel())
                     								.catch(console.error);
                     								
                     							}
@@ -470,9 +472,11 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+						                    			other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
+						                    			
 						                    		}
                     							} else if(selection.statAffected == "matk"){
                     								var dmg = Math.floor((((selection.basePower/10) * efinal_matk) + efinal_matk) - (mdef));
@@ -494,9 +498,10 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+						                    			other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     							}
                     						 else if(selection.statAffected == "off>"){
@@ -521,9 +526,10 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+						                    			other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     								} else {
                     									var dmg = Math.floor((((selection.basePower/10) * efinal_atk) + efinal_atk) - (def));
@@ -545,18 +551,20 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			them.send(flavorText)
-											            .then(eDuel())
-											            .catch(console.error);
+						                    			other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     								}
                     							
                     						} }else {
                     							flavorText += "\nSpecial Move go brrr..";
                     							currTurn += 1;
-                    							them.send(flavorText)
-            .then(duel())
-            .catch(console.error);
+                    							other.send(flavorText).then(them.send(flavorText)
+            											.then(duel())
+            											.catch(console.error))
+            											.catch(console.error);
                     						}
                     					} else {
                     						other.send("Invalid skill!")
@@ -618,9 +626,10 @@ module.exports = {
 
                     		} else {
                     			currTurn += 1;
-                    			other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+                    			them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
                     		}
              
                     	} else if(String(collected.first()).toLowerCase() == `defend`) {
@@ -653,7 +662,7 @@ module.exports = {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(final_ap < selection.cost){
-                    								them.send("not enough energy to perform that skill!").then(turn())
+                    								them.send("not enough energy to perform that skill!").then(duel())
                     								.catch(console.error);
                     							}
                     							if(selection.statAffected == "atk"){
@@ -676,9 +685,10 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+						                    			them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     							} else if(selection.statAffected == "matk"){
                     								var dmg = Math.floor((((selection.basePower/10) * final_matk) + final_matk) - (eMdef));
@@ -700,9 +710,10 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+						                    			them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     							}
                     						 else if(selection.statAffected == "off>"){
@@ -727,9 +738,10 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+						                    			them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     								} else {
                     									var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
@@ -751,18 +763,20 @@ module.exports = {
 
 						                    		} else {
 						                    			currTurn += 1;
-						                    			other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+						                    			them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
 						                    		}
                     								}
                     							
                     						} }else {
                     							flavorText += "\nSpecial Move go brrr..";
                     							currTurn += 1;
-                    							other.send(flavorText)
-            .then(eDuel())
-            .catch(console.error);
+                    							them.send(flavorText).then(other.send(flavorText)
+            											.then(eDuel())
+            											.catch(console.error))
+            											.catch(console.error);
                     						}
                     					} else {
                     						them.send("Invalid skill!")
