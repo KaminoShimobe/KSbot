@@ -374,7 +374,7 @@ module.exports = {
 
 			
 			.setAuthor(other.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + eLvl + "\n Status: \n" + eStatus + "\n HP: " + efinal_hp + "/" + eHp + "\n AP:" + efinal_ap + "/" + eAp + "\n ATK: " + eAtk + "\n DEF:" + eDef + "\n MATK:" +  eMatk + "\n MDEF: "+ eMdef + "\n SPD: " + eSpd + "\n LUCK: " + eLuck + "\n Moves: **" + eMoves + "**\n Body Gear: " + eBody + "\n Hand Gear:" + eHand)
+			.setDescription("Lvl: " + eLvl + "\n Status: \n" + eStatus + "\n HP: " + efinal_hp + "/" + eHp + "\n AP:" + efinal_ap + "/" + eAp + "\n Moves: **" + eMoves + "**\n Body Gear: " + eBody + "\n Hand Gear:" + eHand)
 			.setColor("#")
 			.setTimestamp()
             .setFooter(them.username + ": HP: " + final_hp + "/" + hp + "| AP: " + final_ap + "/" + ap , them.avatarURL());
@@ -586,7 +586,7 @@ module.exports = {
 
 			
 			.setAuthor(them.username + "'s KS-RPG stats:")
-			.setDescription("Lvl: " + level + "\n Status: \n" + status + "\n HP: " + final_hp + "/" + hp + "\n AP:" + final_ap + "/" + ap + "\n ATK: " + atk + "\n DEF:" + def + "\n MATK:" +  matk + "\n MDEF: "+ mdef + "\n SPD: " + spd + "\n LUCK: " + luck + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand)
+			.setDescription("Lvl: " + level + "\n Status: \n" + status + "\n HP: " + final_hp + "/" + hp + "\n AP:" + final_ap + "/" + ap + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand)
 			.setColor("#")
 			.setTimestamp()
             .setFooter(other.username + ": HP: " + efinal_hp + "/" + eHp + "| AP: " + efinal_ap + "/" + eAp , other.avatarURL());
