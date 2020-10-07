@@ -169,7 +169,7 @@ module.exports = {
         var losses = rows[0].losses;
         var mName = rows[0].uname;
         var rank = rows[0].rank;
-        
+        var color = rows[0].hue;
        
         
         if(rank == "rps"){
@@ -187,6 +187,7 @@ module.exports = {
                 var theirLosses = rows[0].losses;
                 var tName = rows[0].uname;
                 var trank = rows[0].rank;
+                var color2 = rows[0].hue;
         
 
         if(trank == "rps"){
@@ -375,7 +376,7 @@ module.exports = {
 			
 			.setAuthor(other.username + "'s KS-RPG stats:")
 			.setDescription("Lvl: " + eLvl + "\n Status: \n" + eStatus + "\n HP: " + efinal_hp + "/" + eHp + "\n AP:" + efinal_ap + "/" + eAp + "\n Moves: **" + eMoves + "**\n Body Gear: " + eBody + "\n Hand Gear:" + eHand)
-			.setColor("#")
+			.setColor(color)
 			.setTimestamp()
             .setFooter(them.username + ": HP: " + final_hp + "/" + hp + "| AP: " + final_ap + "/" + ap , them.avatarURL());
             other.send(stats).then(() =>{
@@ -450,6 +451,7 @@ module.exports = {
                     							if(efinal_ap < selection.cost){
                     								other.send("not enough energy to perform that skill!").then(eDuel())
                     								.catch(console.error);
+                    								return;
                     								
                     							}
                     							if(selection.statAffected == "atk"){
@@ -595,7 +597,7 @@ module.exports = {
 			
 			.setAuthor(them.username + "'s KS-RPG stats:")
 			.setDescription("Lvl: " + level + "\n Status: \n" + status + "\n HP: " + final_hp + "/" + hp + "\n AP:" + final_ap + "/" + ap + "\n Moves: **" + moves + "**\n Body Gear: " + body + "\n Hand Gear:" + hand)
-			.setColor("#")
+			.setColor(color2)
 			.setTimestamp()
             .setFooter(other.username + ": HP: " + efinal_hp + "/" + eHp + "| AP: " + efinal_ap + "/" + eAp , other.avatarURL());
             them.send(stats).then(() =>{
@@ -664,6 +666,7 @@ module.exports = {
                     							if(final_ap < selection.cost){
                     								them.send("not enough energy to perform that skill!").then(duel())
                     								.catch(console.error);
+                    								return;
                     							}
                     							if(selection.statAffected == "atk"){
                     								var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
