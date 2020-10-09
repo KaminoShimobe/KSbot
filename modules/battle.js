@@ -473,8 +473,8 @@ for (const file of commandFiles) {
 
 			if(body != ""){
 				let bodygear = items.find(item => items.name === body)
-				final_hp = hp + bodygear.hp;
-				final_ap = ap + bodygear.hp;
+				final_hp = health + handgear.hp;
+				final_ap = energy + handgear.hp;
 				final_atk = atk + bodygear.hp;
 				final_matk = matk + bodygear.hp;
 				final_def = def + bodygear.hp;
@@ -482,8 +482,8 @@ for (const file of commandFiles) {
 				final_spd = spd + bodygear.hp;
 				final_luck = luck + bodygear.hp;
 			} else {
-				final_hp = hp;
-				final_ap = ap;
+				final_hp = health;
+				final_ap = energy;
 				final_atk = atk;
 				final_matk = matk;
 				final_def = def;
@@ -494,8 +494,8 @@ for (const file of commandFiles) {
 
 			if(hand != ""){
 				let handgear = items.find(item => items.name === hand)
-				final_hp = hp + handgear.hp;
-				final_ap = ap + handgear.hp;
+				final_hp = health + handgear.hp;
+				final_ap = energy + handgear.hp;
 				final_atk = atk + handgear.hp;
 				final_matk = matk + handgear.hp;
 				final_def = def + handgear.hp;
@@ -503,8 +503,8 @@ for (const file of commandFiles) {
 				final_spd = spd + handgear.hp;
 				final_luck = luck + handgear.hp;
 			} else {
-				final_hp = hp;
-				final_ap = ap;
+				final_hp = health;
+				final_ap = energy;
 				final_atk = atk;
 				final_matk = matk;
 				final_def = def;
