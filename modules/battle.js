@@ -527,47 +527,79 @@ for (const file of commandFiles) {
                     		sql = `UPDATE ksrpg SET atk = ${atk + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your attack by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	} else if(message.content.toLowerCase() == `def`) {
                     		sql = `UPDATE ksrpg SET def = ${def + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your defense by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	}  else if(message.content.toLowerCase() == `matk`) {
                     		sql = `UPDATE ksrpg SET matk = ${matk + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your magic attack by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	}  else if(message.content.toLowerCase() == `mdef`) {
                     		sql = `UPDATE ksrpg SET mdef = ${mdef + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your magic defense by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
                     	}  else if(message.content.toLowerCase() == `spd`) {
                     		sql = `UPDATE ksrpg SET spd = ${spd + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your speed by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	}  else if(message.content.toLowerCase() == `luck`) {
                     		sql = `UPDATE ksrpg SET atk = ${luck + 1} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your luck by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	}  else if(message.content.toLowerCase() == `hp`) {
                     		sql = `UPDATE ksrpg SET hp = ${hp + 10} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your health by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	}  else if(message.content.toLowerCase() == `ap`) {
                     		sql = `UPDATE ksrpg SET ap = ${ap + 10} WHERE id = '${message.author.id}'`
 							message.author.send("You increased your energy by 1!")
 							con.query(sql);
+							sql2 = `UPDATE user SET money = ${money + payout} WHERE id = '${message.author.id}'`
+				con.query(sql2);
+				message.author.send("You got $" + payout + "!")
+				console.log("You got $" + payout + "!");
 							return;
 
                     	} else {
@@ -592,6 +624,7 @@ for (const file of commandFiles) {
 					message.author.send("LEVEL UP")
 					console.log("LEVEL UP")
 					con.query(sql);
+					statAllocate();
 
 				} else {
 					sql = `UPDATE ksrpg SET exp = ${exp + eExp}, energy = ${final_ap} WHERE id = '${message.author.id}'`
@@ -603,7 +636,7 @@ for (const file of commandFiles) {
 				con.query(sql2);
 				message.author.send("You got $" + payout + "!")
 				console.log("You got $" + payout + "!");
-				statAllocate();
+				
 				return;
 			}
 
