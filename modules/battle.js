@@ -833,8 +833,9 @@ for (const file of commandFiles) {
                     					if(selection != undefined){
                     						if(selection.special == false){
                     							if(final_ap < selection.cost){
-                    								message.author.send("not enough energy to perform that skill!")
-                    								turn();
+                    								message.author.send("not enough energy to perform that skill!").then(turn())
+                    								.catch(console.error);
+                    								return;
                     							}
                     							if(selection.statAffected == "atk"){
                     								var dmg = Math.floor((((selection.basePower/10) * final_atk) + final_atk) - (eDef));
