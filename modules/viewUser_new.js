@@ -136,7 +136,7 @@ module.exports = {
 
 
 
-            message.channel.send(`Image:`, { files: ["test.png"] })
+            message.channel.send( { files: ["test.png"] })
         
 
         })
