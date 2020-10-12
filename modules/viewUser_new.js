@@ -16,7 +16,7 @@ module.exports = {
 
     const image = Canvas.loadImage('./modules/ksBotUserBG.png');
 
-    Jimp.read(image)
+    Jimp.read('./modules/ksBotUserBG.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [100] }]);
                             image.write("test.png");
@@ -25,7 +25,7 @@ module.exports = {
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
 
-    channel.send(`Image: `, attachment);
+    message.channel.send(`Image: `, attachment);
 
                             
                           })
