@@ -23,7 +23,7 @@ module.exports = {
             message.channel.send(`Image:`, { files: ["test.png"] })
 
            
-                const imageC = Canvas.loadImage(image)
+                const imageC = Canvas.loadImage('./modules/ksBotUserBG.png')
                         imageC.then(() => {
           ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
 
