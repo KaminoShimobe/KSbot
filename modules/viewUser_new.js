@@ -144,6 +144,7 @@ module.exports = {
 
             
             .setAuthor(message.author.username + supporter)
+            .attachFiles("test.png")
             .setImage("test.png")
             .setFooter("ID:" + message.author.id, message.author.avatarURL())
             .setColor(color); 
