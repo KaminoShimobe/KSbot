@@ -16,7 +16,7 @@ module.exports = {
 
     const image = Canvas.loadImage('./modules/ksBotUserBG.png');
 
-    Jimp.read(img)
+    Jimp.read(image)
                     .then(image => {
                             image.color([{ apply: 'red', params: [100] }]);
                             image.write("test.png");
