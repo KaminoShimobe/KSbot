@@ -126,6 +126,11 @@ module.exports = {
                                     150,
                                     30
                                   )
+
+                              function onBuffer(err, buffer) {
+                                if (err) throw err;
+                                console.log(buffer);
+                            }
                              var p = stand.replace("「", "")
                              var standName = p.replace("」", "")
                              image.print(font, 230, 60, "Money: $" + money, 250)
@@ -134,7 +139,7 @@ module.exports = {
                              image.print(font, 230, 120, "Stand: " + standName, 250)
                              image.print(font, 230, 140, "Spouse: " + marriage, 250)
                              image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
-                             var imgBuf = image.getBuffer(Jimp.MIME_PNG)
+                             var imgBuf = image.getBuffer(Jimp.MIME_PNG, onBuffer)
 
                         
                             // image.write("test.png");
