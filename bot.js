@@ -2403,7 +2403,7 @@ function gambleFlip(){
                 
                 if (fateLose.has(message.author.id)) {
                 chance = 2;
-                fateWin.delete(message.author.id);
+                fateLose.delete(message.author.id);
 
                 } 
             } else if(eChannel.has(message.channel.id) == true && Epitaph.has(message.author.id) == false){
