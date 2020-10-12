@@ -12178,7 +12178,7 @@ if(command === `!image`){
 }
 
 if(command === `!viewN`){
-    if(message.author.id == '242118931769196544'){
+    if(message.author.id == '242118931769196544' || || message.channel.id == '496322540579454986'){
         bot.commands.get('viewUser_new').execute(message, args, con, bot, prefix);
 
     }
