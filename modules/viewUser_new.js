@@ -149,8 +149,8 @@ module.exports = {
 
             
             .setAuthor(message.author.username + supporter)
-            .attachFiles([{name: "test.png", attachment:imgBuf}])
-            .setImage("attachment://test.png")
+            .attachFiles([ attachment:imgBuf])
+            .setImage("attachment://imgBuf")
             .setFooter("ID:" + message.author.id, message.author.avatarURL())
             .setColor(color); 
             // message.channel.send( { files: ["test.png"] })
