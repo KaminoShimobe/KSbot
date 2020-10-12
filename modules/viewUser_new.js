@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
 const Canvas = require('canvas');
-import jimp from 'jimp';
+const Jimp = require('jimp');
 
 module.exports = {
     name: 'viewUser_new',
@@ -11,6 +11,8 @@ module.exports = {
 
     const canvas = Canvas.createCanvas(500, 250);
     const ctx = canvas.getContext('2d');
+
+    
 
     const image = await jimp.read('modules/ksBotUserBG.png')
 
