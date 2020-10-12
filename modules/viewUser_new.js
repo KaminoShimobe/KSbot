@@ -139,7 +139,7 @@ module.exports = {
                              image.print(font, 230, 120, "Stand: " + standName, 250)
                              image.print(font, 230, 140, "Spouse: " + marriage, 250)
                              image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
-                             var imgBuf = image.getBuffer(Jimp.MIME_PNG, onBuffer)
+                             var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
 
                         
                             // image.write("test.png");
