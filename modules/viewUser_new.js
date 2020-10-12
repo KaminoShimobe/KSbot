@@ -25,11 +25,19 @@ module.exports = {
            
                 // const imageC = Canvas.loadImage('./modules/ksBotUserBG.png')
                 //         imageC.then(() => {
-          ctx.drawImage(image.bitmap.data, 0, 0, canvas.width, canvas.height);
-
-            const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
+                    var img = new Image(image.bitmap.width, image.bitmap.height);
+                    img.onload = () => {
+                      canvas.getContext("2d").drawImage(img, 0, 0)
+                       const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
 
                             message.channel.send(`Image Again: `, attachment);
+                    }
+                    image.getBase64(Jimp.AUTO, (err, src) => {
+                      img.src = src
+                    })
+          // ctx.drawImage(image.bitmap.data, 0, 0, canvas.width, canvas.height);
+
+           
                 // }).catch(err => {
                 //   console.log('oh no!', err)
                 // })
