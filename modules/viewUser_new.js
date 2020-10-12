@@ -134,7 +134,7 @@ module.exports = {
                              image.print(font, 230, 120, "Stand: " + standName, 250)
                              image.print(font, 230, 140, "Spouse: " + marriage, 250)
                              image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
-
+                             var imgBuf = image.getBuffer(Jimp.MIME_PNG)
 
                         
                             // image.write("test.png");
@@ -144,8 +144,8 @@ module.exports = {
 
             
             .setAuthor(message.author.username + supporter)
-            .attachFiles("test.png")
-            .setImage("test.png")
+            .attachFiles([{name: "test.png", attachment:imgBuf}])
+            .setImage("attachment://test.png")
             .setFooter("ID:" + message.author.id, message.author.avatarURL())
             .setColor(color); 
             // message.channel.send( { files: ["test.png"] })
