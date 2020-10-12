@@ -93,6 +93,15 @@ module.exports = {
     var red = hexToRgb(color).r
     var green = hexToRgb(color).g
     var blue = hexToRgb(color).b
+    if(red == undefined){
+        red = 0
+    }
+    if(blue == undefined){
+        blue = 0
+    }
+    if(green == undefined){
+        green = 0
+    }
 
     Jimp.read('./modules/ksBotUserBG3.png')
                     .then(image => {
