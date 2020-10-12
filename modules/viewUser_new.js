@@ -109,14 +109,14 @@ module.exports = {
                         pfp.mask(mask, 0, 0);
                         image.composite(pfp, 25, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0])
                         Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
-                             image.print(font, 25, 145, message.author.username, 125)
-                             image.print(font, 175, 15, `"` + bio + `"`, 200)
-                             image.print(font, 175, 115, "Money: $" + money, 125)
-                             image.print(font, 175, 125, "Gifts: " + gifts, 125)
-                             image.print(font, 175, 135, "Achievements: " + achievement, 125)
-                             image.print(font, 175, 145, "Stand: " + stand, 125)
-                             image.print(font, 175, 155, "Spouse: " + marriage, 125)
-                             image.print(font, 175, 165, "Win Ratio: " + wins + ":" + losses, 125).write("test.png");
+                             image.print(font, 50, 235, message.author.username, 125)
+                             image.print(font, 225, 15, `"` + bio + `"`, 250)
+                             image.print(font, 225, 115, "Money: $" + money, 125)
+                             image.print(font, 225, 130, "Gifts: " + gifts, 125)
+                             image.print(font, 225, 145, "Achievements: " + achievement, 125)
+                             image.print(font, 225, 155, "Stand: " + stand, 125)
+                             image.print(font, 225, 170, "Spouse: " + marriage, 125)
+                             image.print(font, 225, 185, "Win Ratio: " + wins + ":" + losses, 125).write("test.png");
 
 
                         
