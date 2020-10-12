@@ -33,7 +33,7 @@ module.exports = {
         let money = rows[0].money;
         let bio = rows[0].bio;
         let patreon = rows[0].patreon;
-        let color = rows[0].hue;
+        var color = rows[0].hue;
         let rank = rows[0].rank;
         let marriage = rows[0].marriage;
         let stand = rows[0].stand;
@@ -63,6 +63,9 @@ module.exports = {
             supporter = "";
         }
             
+        if(color.startsWith("#") != true){
+            color = "#000000"
+        }    
     
     con.query(`SELECT * FROM achievements WHERE id = '${message.author.id}'`, (err, rows) => {
         if(err) throw err;
@@ -87,15 +90,7 @@ module.exports = {
     var red = hexToRgb(color).r
     var green = hexToRgb(color).g
     var blue = hexToRgb(color).b
-    if(red == undefined){
-        red = 0
-    }
-    if(blue == undefined){
-        blue = 0
-    }
-    if(green == undefined){
-        green = 0
-    }
+    
 
     Jimp.read('./modules/ksBotUserBG3.png')
                     .then(image => {
