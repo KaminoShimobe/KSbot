@@ -73,13 +73,7 @@ module.exports = {
             let tasks = rows[0].tasks;
             let status = rows[0].status;    
 
-        let stats = new Discord.MessageEmbed()
-
-            
-            .setAuthor(message.author.username + supporter)
-            .setDescription("Money: $" + money + "\n" + bio + "\n Ws: " + wins + " \n Ls: " + losses + "\n :gift: : " + gifts + "\n Achievements: " + achievement + "\n Stand: **" + stand + "** \n Spouse: " + marriage)
-            .setFooter("ID:" + message.author.id, message.author.avatarURL())
-            .setColor(color); 
+        
 
   function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -146,8 +140,15 @@ module.exports = {
                             // image.write("test.png");
 
 
+        let stats = new Discord.MessageEmbed()
 
-            message.channel.send( { files: ["test.png"] })
+            
+            .setAuthor(message.author.username + supporter)
+            .setImage("test.png")
+            .setFooter("ID:" + message.author.id, message.author.avatarURL())
+            .setColor(color); 
+            // message.channel.send( { files: ["test.png"] })
+            message.channel.send(stats)
         
 
         })
