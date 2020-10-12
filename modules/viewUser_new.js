@@ -12,16 +12,20 @@ module.exports = {
     const canvas = Canvas.createCanvas(500, 250);
     const ctx = canvas.getContext('2d');
 
+    const img = new Image()
+    img.onload = () => ctx.drawImage(img, 0, 0)
+    img.onerror = err => { throw err }
+    img.src = './modules/ksBotUserBG.png'
     
 
-    const image = Canvas.loadImage('./modules/ksBotUserBG.png');
+    // const image = loadImage('./modules/ksBotUserBG.png');
 
     Jimp.read('./modules/ksBotUserBG.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [100] }]);
                             image.write("test.png");
 
-                            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
 
