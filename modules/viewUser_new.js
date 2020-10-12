@@ -27,7 +27,7 @@ module.exports = {
 
                             ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
 
     message.channel.send(`Image Again: `, attachment);
             }
