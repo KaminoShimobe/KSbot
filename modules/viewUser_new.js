@@ -21,11 +21,14 @@ module.exports = {
                             image.color([{ apply: 'red', params: [100] }]);
                             image.write("test.png");
             message.channel.send(`Image:`, { files: ["test.png"] })
-                            //ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    //const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
+            const imageC = Canvas.loadImage('./modules/ksBotUserBG.png');
 
-    //message.channel.send(`Image: `, attachment);
+                            ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
+
+    message.channel.send(`Image Again: `, attachment);
 
                             
                           })
