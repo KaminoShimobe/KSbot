@@ -107,12 +107,26 @@ module.exports = {
 
                         pfp.resize(200, 200);
                         pfp.mask(mask, 0, 0);
-                        image.composite(pfp, 25, 25, [Jimp.BLEND_SOURCE_OVER, 0, 0]).write("test.png");
+                        image.composite(pfp, 25, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0])
+                        Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
+                             image.print(font, 25, 145, message.author.username, 125)
+                             image.print(font, 175, 15, `"` + bio + `"`, 200)
+                             image.print(font, 175, 115, "Money: $" + money, 125)
+                             image.print(font, 175, 125, "Gifts: " + gift, 125)
+                             image.print(font, 175, 135, "Achievements: " + achievement, 125)
+                             image.print(font, 175, 145, "Stand: " + stand, 125)
+                             image.print(font, 175, 155, "Spouse: " + marriage, 125)
+                             image.print(font, 175, 165, "Win Ratio: " + wins + ":" + losses, 125).write("test.png");
+
+
+                        
                             // image.write("test.png");
 
 
 
             message.channel.send(`Image:`, { files: ["test.png"] })
+
+        })
 
         })
                             
