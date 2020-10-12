@@ -8,7 +8,7 @@ module.exports = {
     description: 'View your KS Bot Account',
     execute(message, args, con, bot, prefix) {
     let messageArray = message.content.split(" ");
-
+    console.log("image time")
     const canvas = Canvas.createCanvas(500, 250);
     const ctx = canvas.getContext('2d');
 
