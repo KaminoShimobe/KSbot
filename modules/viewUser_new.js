@@ -94,7 +94,7 @@ module.exports = {
     var green = hexToRgb(color).g
     var blue = hexToRgb(color).b
 
-    Jimp.read('./modules/ksBotUserBG3.png')
+    Jimp.read('./modules/ksBotUserBG2.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [red] }]);
                             image.color([{ apply: 'green', params: [green] }]);
@@ -123,10 +123,12 @@ module.exports = {
                                     150,
                                     30
                                   )
+                             var p = stand.replace("「", "")
+                             var standName = p.replace("」", "")
                              image.print(font, 230, 60, "Money: $" + money, 250)
                              image.print(font, 230, 80, "Gifts: " + gifts, 250)
                              image.print(font, 230, 100, "Achievements: " + achievement, 250)
-                             image.print(font, 230, 120, "Stand: " + stand, 250)
+                             image.print(font, 230, 120, "Stand: " + standName, 250)
                              image.print(font, 230, 140, "Spouse: " + marriage, 250)
                              image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
 
