@@ -96,9 +96,9 @@ module.exports = {
 
     Jimp.read('./modules/ksBotUserBG.png')
                     .then(image => {
-                            image.color([{ apply: 'red', params: [r] }]);
-                            image.color([{ apply: 'green', params: [g] }]);
-                            image.color([{ apply: 'blue', params: [b] }]);
+                            image.color([{ apply: 'red', params: [red] }]);
+                            image.color([{ apply: 'green', params: [green] }]);
+                            image.color([{ apply: 'blue', params: [blue] }]);
                             Jimp.read('./modules/profileMask.png')
                     .then(mask => {
 
