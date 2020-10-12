@@ -22,11 +22,11 @@ module.exports = {
                             image.write("test.png");
             message.channel.send(`Image:`, { files: ["test.png"] })
 
-            const imageC = Canvas.loadImage('./modules/ksBotUserBG.png');
+            const imageC = Canvas.loadImage('test.png');
 
                             ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
 
     message.channel.send(`Image Again: `, attachment);
 
