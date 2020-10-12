@@ -19,28 +19,28 @@ module.exports = {
     Jimp.read('./modules/ksBotUserBG.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [100] }]);
-                            image.write("test.png");
+
+                            Jimp.read('./modules/profileMask.png')
+                    .then(mask => {
+
+                        Jimp.read(message.author.avatarURL({format: 'png'}))
+                    .then(pfp => {
+
+                        pfp.resize(100, 100);
+                        pfp.mask(mask, 0, 0);
+                        image.composite(pfp, 50, 25, [Jimp.BLEND_SOURCE_OVER, 0, 0]).write("test.png");
+                            // image.write("test.png");
+
+
+
             message.channel.send(`Image:`, { files: ["test.png"] })
 
-           
-                // const imageC = Canvas.loadImage('./modules/ksBotUserBG.png')
-                //         imageC.then(() => {
-                    var img = new Image(image.bitmap.width, image.bitmap.height);
-                    img.onload = () => {
-                      canvas.getContext("2d").drawImage(img, 0, 0)
-                       const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
+        })
+                            
 
-                            message.channel.send(`Image Again: `, attachment);
-                    }
-                    image.getBase64(Jimp.AUTO, (err, src) => {
-                      img.src = src
-                    })
-          // ctx.drawImage(image.bitmap.data, 0, 0, canvas.width, canvas.height);
-
+        })
            
-                // }).catch(err => {
-                //   console.log('oh no!', err)
-                // })
+                
 
                             
             
