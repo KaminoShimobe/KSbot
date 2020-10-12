@@ -108,7 +108,7 @@ module.exports = {
                         pfp.resize(200, 200);
                         pfp.mask(mask, 0, 0);
                         image.composite(pfp, 25, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0])
-                        Jimp.loadFont('https://fonts.googleapis.com/css2?family=Roboto&display=swap').then(font => {
+                        Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
                              // image.print(font, 52, 215, message.author.username, 150)
                              image.print(font, 230, 15, `"` + bio + `"`, 250)
                              image.print(
