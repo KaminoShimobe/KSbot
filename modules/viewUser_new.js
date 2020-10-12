@@ -111,7 +111,7 @@ module.exports = {
                         Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
                              image.print(font, 52, 215, message.author.username, 150)
                              image.print(font, 230, 15, `"` + bio + `"`, 250)
-                             Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
+                             
                              image.print(font, 230, 40, "Money: $" + money, 250)
                              image.print(font, 230, 80, "Gifts: " + gifts, 250)
                              image.print(font, 230, 120, "Achievements: " + achievement, 250)
@@ -126,7 +126,7 @@ module.exports = {
 
 
             message.channel.send(`Image:`, { files: ["test.png"] })
-        })
+        
 
         })
 
