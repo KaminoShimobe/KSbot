@@ -14,7 +14,7 @@ module.exports = {
 
     
 
-    const image = await Canvas.loadImage('./modules/ksBotUserBG.png');
+    const image = Canvas.loadImage('./modules/ksBotUserBG.png');
 
     Jimp.read(img)
                     .then(image => {
