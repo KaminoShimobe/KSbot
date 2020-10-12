@@ -112,7 +112,7 @@ module.exports = {
                              image.print(font, 25, 145, message.author.username, 125)
                              image.print(font, 175, 15, `"` + bio + `"`, 200)
                              image.print(font, 175, 115, "Money: $" + money, 125)
-                             image.print(font, 175, 125, "Gifts: " + gift, 125)
+                             image.print(font, 175, 125, "Gifts: " + gifts, 125)
                              image.print(font, 175, 135, "Achievements: " + achievement, 125)
                              image.print(font, 175, 145, "Stand: " + stand, 125)
                              image.print(font, 175, 155, "Spouse: " + marriage, 125)
