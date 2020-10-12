@@ -99,8 +99,12 @@ module.exports = {
                             image.color([{ apply: 'blue', params: [blue] }]);
                             Jimp.read('./modules/profileMask.png')
                     .then(mask => {
+                        var avatar = message.author.avatarURL({format: 'png'})
+                        if(avatar == undefined){
+                            avatar = "https://icon-library.com/images/blue-discord-icon/blue-discord-icon-17.jpg"
+                        }
 
-                        Jimp.read(message.author.avatarURL({format: 'png'}))
+                        Jimp.read(avatar)
                     .then(pfp => {
 
                         pfp.resize(200, 200);
