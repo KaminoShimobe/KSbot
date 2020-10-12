@@ -20,6 +20,13 @@ module.exports = {
                     .then(image => {
                             image.color([{ apply: 'red', params: [100] }]);
                             image.write("test.png");
+
+                            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
+
+    channel.send(`Image: `, attachment);
+
                             
                           })
                           .catch(err => {
@@ -29,12 +36,7 @@ module.exports = {
 
     // image.color([{ apply: 'red', params: [100] }]);
 
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
-
-    channel.send(`Image: `, attachment);
-
+    
   // con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
   //       if(err) throw err;
 
