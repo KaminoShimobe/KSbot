@@ -12177,6 +12177,16 @@ if(command === `!image`){
 
 }
 
+if(command === `!viewN`){
+    if(message.author.id == '242118931769196544'){
+        bot.commands.get('viewUser_new').execute(message, args, con, bot, prefix);
+
+    }
+
+}
+
+
+
 if(command === `!cleanShop`){
     if(message.author.id == '242118931769196544'){
 con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
