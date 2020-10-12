@@ -23,16 +23,16 @@ module.exports = {
             message.channel.send(`Image:`, { files: ["test.png"] })
 
            
-                const imageC = Canvas.loadImage('./modules/ksBotUserBG.png')
-                        imageC.then(() => {
-          ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
+                // const imageC = Canvas.loadImage('./modules/ksBotUserBG.png')
+                //         imageC.then(() => {
+          ctx.drawImage(image.bitmap.data, 0, 0, canvas.width, canvas.height);
 
             const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test2.png');
 
                             message.channel.send(`Image Again: `, attachment);
-                }).catch(err => {
-                  console.log('oh no!', err)
-                })
+                // }).catch(err => {
+                //   console.log('oh no!', err)
+                // })
 
                             
             
