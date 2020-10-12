@@ -26,9 +26,9 @@ module.exports = {
                         Jimp.read(message.author.avatarURL({format: 'png'}))
                     .then(pfp => {
 
-                        pfp.resize(100, 100);
+                        pfp.resize(200, 200);
                         pfp.mask(mask, 0, 0);
-                        image.composite(pfp, 50, 25, [Jimp.BLEND_SOURCE_OVER, 0, 0]).write("test.png");
+                        image.composite(pfp, 25, 25, [Jimp.BLEND_SOURCE_OVER, 0, 0]).write("test.png");
                             // image.write("test.png");
 
 
