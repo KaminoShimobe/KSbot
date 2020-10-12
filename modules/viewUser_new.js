@@ -94,7 +94,7 @@ module.exports = {
     var green = hexToRgb(color).g
     var blue = hexToRgb(color).b
 
-    Jimp.read('./modules/ksBotUserBG.png')
+    Jimp.read('./modules/ksBotUserBG2.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [red] }]);
                             image.color([{ apply: 'green', params: [green] }]);
