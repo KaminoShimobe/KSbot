@@ -14,9 +14,20 @@ module.exports = {
 
     
 
-    const image = await jimp.read('modules/ksBotUserBG.png')
+    const image = await Canvas.loadImage('./modules/ksBotUserBG.png');
 
-    image.color([{ apply: 'red', params: [100] }]);
+    Jimp.read(img)
+                    .then(image => {
+                            image.color([{ apply: 'red', params: [100] }]);
+                            image.write("test.png");
+                            
+                          })
+                          .catch(err => {
+                            console.error(err);
+                            // Handle an exception.
+                          });
+
+    // image.color([{ apply: 'red', params: [100] }]);
 
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
