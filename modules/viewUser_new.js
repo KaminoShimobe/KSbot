@@ -139,22 +139,15 @@ module.exports = {
                              image.print(font, 230, 120, "Stand: " + standName, 250)
                              image.print(font, 230, 140, "Spouse: " + marriage, 250)
                              image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
-                             var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
+                             //var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
 
                         
                             // image.write("test.png");
 
 
-        let stats = new Discord.MessageEmbed()
-
-            
-            .setAuthor(message.author.username + supporter)
-            .attachFiles([ attachment:imgBuf])
-            .setImage("attachment://imgBuf")
-            .setFooter("ID:" + message.author.id, message.author.avatarURL())
-            .setColor(color); 
-            // message.channel.send( { files: ["test.png"] })
-            message.channel.send(stats)
+        
+            message.channel.send( { files: ["test.png"] })
+           
         
 
         })
