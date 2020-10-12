@@ -22,13 +22,17 @@ module.exports = {
                             image.write("test.png");
             message.channel.send(`Image:`, { files: ["test.png"] })
 
-            const imageC = Canvas.loadImage(image);
+            async function canvasImage(){
+                const imageC = await Canvas.loadImage(image);
 
                             ctx.drawImage(imageC, 0, 0, canvas.width, canvas.height);
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'test.png');
 
     message.channel.send(`Image Again: `, attachment);
+            }
+
+            canvasImage();
 
                             
                           })
