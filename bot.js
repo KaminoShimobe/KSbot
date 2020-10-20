@@ -9711,7 +9711,7 @@ if (soulless.has(message.author.id)) {
           Bomb1CD.delete(message.author.id);
         }, (1000*30));  
             
-        message.channel.fetchMessages({ limit: 2 }).then(messages => {
+        message.channel.messages.fetch({ limit: 2 }).then(messages => {
   const botMessages = messages.filter(msg => msg.author.id != message.author.id );
 
 
@@ -10041,11 +10041,11 @@ if (soulless.has(message.author.id)) {
           act3CD.delete(message.author.id);
         }, (1000*60*30));   
     message.channel.fetchMessages({ limit: 2 }).then(messages => {
-  
+  var lastMessage = messages.last(); 
 
 
 
-      message.pin()
+      lastMessage.pin()
          .then(console.log)
         .catch(console.error);
 
