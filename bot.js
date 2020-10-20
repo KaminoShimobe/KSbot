@@ -10040,7 +10040,7 @@ if (soulless.has(message.author.id)) {
           // Removes the user from the set after a minute
           act3CD.delete(message.author.id);
         }, (1000*60*30));   
-    message.channel.fetchMessages({ limit: 2 }).then(messages => {
+    message.channel.messages.fetch({ limit: 2 }).then(messages => {
   var lastMessage = messages.last(); 
 
 
