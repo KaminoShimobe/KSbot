@@ -10041,11 +10041,11 @@ if (soulless.has(message.author.id)) {
           act3CD.delete(message.author.id);
         }, (1000*60*30));   
     message.channel.fetchMessages({ limit: 2 }).then(messages => {
-  var lastMessage = messages.last(); 
+  
 
 
 
-      lastMessage.pin()
+      messages.pin()
          .then(console.log)
         .catch(console.error);
 
