@@ -10045,7 +10045,7 @@ if (soulless.has(message.author.id)) {
 
 
 
-      messages.pin()
+      message.pin()
          .then(console.log)
         .catch(console.error);
 
