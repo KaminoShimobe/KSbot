@@ -136,11 +136,12 @@ module.exports = {
                 energyHealed = 0
             }
 			
-	    var newInven;
+	    var newInven = "";
+	    var initial = false;
             for(var i = 0; i < list.length; i++){
             	if(i == (index - 1)){
-            		
-            	} else if(i == 0 || list.length == 2) {
+            		initial = true;
+            	} else if(i == 1 && initial == true) {
             		newInven += list[i];
             	} else {
             		newInven += "," + list[i];
