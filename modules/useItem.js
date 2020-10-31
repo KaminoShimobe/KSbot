@@ -145,6 +145,7 @@ module.exports = {
             	} else {
             		newInven += "," + list[i];
             	}
+            	console.log(newInven)
             } 
             if(newInven == undefined){
             	newInven = "";
@@ -152,7 +153,7 @@ module.exports = {
             	newInven = newInven.replace(undefined, "");
             }
 
-            
+            console.log(newInven)
 
 
          if(special != true){
