@@ -169,7 +169,7 @@ module.exports = {
 				"equippable" : false,
 				"sellable" : false,
 				"unlockedAt" : 0
-			}
+			},
 			{
 				"name": "temple-map",
 				"description" : "Allows Access to the Temple",
