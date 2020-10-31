@@ -136,9 +136,9 @@ module.exports = {
                 energyHealed = 0
             }
 			
-			var newInven;
+	    var newInven;
             for(var i = 0; i < list.length; i++){
-            	if(i == (index - 1) && i != 0){
+            	if(i == (index - 1)){
             		
             	} else if(i == 0 || list.length == 2) {
             		newInven += list[i];
@@ -151,6 +151,7 @@ module.exports = {
             } else {
             	newInven = newInven.replace(undefined, "");
             }
+
             
 
 
