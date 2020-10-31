@@ -88,6 +88,86 @@ module.exports = {
 				"sellable" : true,
 				"unlockedAt" : 0,
 				"bodygear": false
+			},
+			{
+				"name": "rusty-shield",
+				"description" : "+3 DEF when equipped",
+				"sellValue" : 30,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": false
+			},
+			{
+				"name": "spiked-bat",
+				"description" : "+3 ATK when equipped",
+				"sellValue" : 30,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": false
+			},
+			{
+				"name": "mystic-brooch",
+				"description" : "+3 MDEF when equipped",
+				"sellValue" : 30,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": true
+			},
+			{
+				"name": "gemstone-wand",
+				"description" : "+3 MATK when equipped",
+				"sellValue" : 30,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": false
+			},
+			{
+				"name": "used-kamino-fedora",
+				"description" : "+10 LUCK when equipped. Smells like eboy.",
+				"sellValue" : 10000,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": true
+			},
+			{
+				"name": "kamino-fedora",
+				"description" : "+30 LUCK when equipped. Fresh and new!",
+				"sellValue" : 1000000,
+				"buyValue" : 0,
+				"equippable" : true,
+				"sellable" : true,
+				"unlockedAt" : 0,
+				"bodygear": true
+			},
+			{
+				"name": "cave-map",
+				"description" : "Allows Access to the Cave",
+				"sellValue" : 0,
+				"buyValue" : 0,
+				"equippable" : false,
+				"sellable" : false,
+				"unlockedAt" : 0,
+				"bodygear": false
+			},
+			{
+				"name": "temple-map",
+				"description" : "Allows Access to the Temple",
+				"sellValue" : 0,
+				"buyValue" : 0,
+				"equippable" : false,
+				"sellable" : false,
+				"unlockedAt" : 0,
+				"bodygear": false
 			}
 			
 			
