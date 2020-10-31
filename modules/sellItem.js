@@ -131,21 +131,25 @@ module.exports = {
 
             
 
-            var newInven;
+            var newInven = "";
+	    var initial = false;
             for(var i = 0; i < list.length; i++){
             	if(i == (index - 1)){
-            		
-            	} else if(i == 0 || list.length == 2) {
+            		initial = true;
+            	} else if(i == 1 && initial == true) {
             		newInven += list[i];
             	} else {
             		newInven += "," + list[i];
             	}
+            	console.log(newInven)
             } 
             if(newInven == undefined){
             	newInven = "";
             } else {
             	newInven = newInven.replace(undefined, "");
             }
+
+            console.log(newInven)
             
             
 
