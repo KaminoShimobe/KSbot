@@ -696,8 +696,8 @@ for (const file of commandFiles) {
                     								turn();
                     							}
                     						if(eAttack.special == false){
-                    							if(eAttack.statAffected == "atk"){
-                    								message.author.send("The " + enemy.name + " attacked!")
+                    							if(eAttack.statAffected == "atk" && eAttack.type == "offensive"){
+                    								message.author.send("The " + enemy.name + " used" + eAttack.name +"!")
 								            		
 								            		var dmg = Mathfloor((((eAttack.basePower/10) * eAtk) + eAtk) - (def));
 								                    		if(dmg < 0){
@@ -708,8 +708,13 @@ for (const file of commandFiles) {
 								                    			dmg *= 3;
 								                    			message.author.send("**CRITICAL HIT!**")
 								                    		}
-
-								                    		final_hp -= dmg;
+								                    		if(defending == true){
+								                    			final_hp -= Math.floor(dmg/2);
+								                    			defending = false;
+								                    		} else {
+								                    			final_hp -= dmg;
+								                    		}
+								                    		
 								                    		eAp -= eAttack.cost;
 								                    		message.author.send(message.author.username + " took " + dmg + " damage!")
 								                    		if(final_hp <= 0){
@@ -719,8 +724,8 @@ for (const file of commandFiles) {
 								                    			currTurn += 1;
 								                    			turn();
 								                    		}
-                    							} else if(eAttack.statAffected == "matk"){
-                    								message.author.send("The " + enemy.name + " attacked!")
+                    							} else if(eAttack.statAffected == "matk" && eAttack.type == "offensive"){
+                    								message.author.send("The " + enemy.name + " used" + eAttack.name +"!")
 								            		
 								            		var dmg = Math.floor((((eAttack.basePower/10) * eMatk) + eMatk) - (mDef));
 								                    		if(dmg < 0){
@@ -732,9 +737,43 @@ for (const file of commandFiles) {
 								                    			message.author.send("**CRITICAL HIT!**")
 								                    		}
 
-								                    		final_hp -= dmg;
+								                    		if(defending == true){
+								                    			final_hp -= Math.floor(dmg/2);
+								                    			defending = false;
+								                    		} else {
+								                    			final_hp -= dmg;
+								                    		}
 								                    		eAp -= eAttack.cost;
 								                    		message.author.send(message.author.username + " took " + dmg + " damage!")
+								                    		if(final_hp <= 0){
+								                    			final_hp = 0;
+								                    			battleLose();
+								                    		} else {
+								                    			currTurn += 1;
+								                    			turn();
+								                    		}
+                    							}if(eAttack.statAffected == "atk" && eAttack.type == "status"){
+                    								message.author.send("The " + enemy.name + " used" + eAttack.name +"!")
+								            		eAtk += eAttack.basePower;
+
+								            		message.author.send("The " + enemy.name + " increased its attack by " + eAttack.basePower + "!")
+								            		
+								                    		
+								                    		eAp -= eAttack.cost;
+								                    		
+								                    		if(final_hp <= 0){
+								                    			final_hp = 0;
+								                    			battleLose();
+								                    		} else {
+								                    			currTurn += 1;
+								                    			turn();
+								                    		}
+                    							} else if(eAttack.statAffected == "matk" && eAttack.type == "status"){
+                    								message.author.send("The " + enemy.name + " used" + eAttack.name +"!")
+								            		eMatk += eAttack.basePower;
+								            		message.author.send("The " + enemy.name + " increased its attack by " + eAttack.basePower + "!")
+								                    		eAp -= eAttack.cost;
+								                    		
 								                    		if(final_hp <= 0){
 								                    			final_hp = 0;
 								                    			battleLose();
@@ -746,7 +785,9 @@ for (const file of commandFiles) {
                     						
                     							
                     						} else {
-                    							message.author.send("Special Move go brrr..")
+                    							if(eAttack.name == "jiggle"){
+                    								message.author.send("The slime jiggled.... But nothing happened!")
+                    							}
                     							currTurn += 1;
                     							turn();
                     						}
@@ -990,21 +1031,23 @@ for (const file of commandFiles) {
 							                energyHealed = 0
 							            }
 										
-										var newInven;
-							            for(var i = 0; i < list.length; i++){
-							            	if(i == (index - 1)){
-							            		
-							            	} else if(i == 0 || list.length == 2) {
-							            		newInven += list[i];
-							            	} else {
-							            		newInven += "," + list[i];
-							            	}
-							            } 
-							            if(newInven == undefined){
-							            	newInven = "";
-							            } else {
-							            	newInven = newInven.replace(undefined, "");
-							            }
+										 var newInven = "";
+									    var initial = false;
+								            for(var i = 0; i < list.length; i++){
+								            	if(i == (index - 1)){
+								            		initial = true;
+								            	} else if(i == 1 && initial == true) {
+								            		newInven += list[i];
+								            	} else {
+								            		newInven += "," + list[i];
+								            	}
+								            	console.log(newInven)
+								            } 
+								            if(newInven == undefined){
+								            	newInven = "";
+								            } else {
+								            	newInven = newInven.replace(undefined, "");
+								            }
 							            
 
 
