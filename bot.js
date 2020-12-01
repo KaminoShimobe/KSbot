@@ -1786,7 +1786,7 @@ function collect(){
              }   
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
-                message.reply(" got $" + cost + " as a treat!");
+                message.reply(" got $" + cost + " from the gift!");
 
                 if(achievements.length > 1){
                     //Achievement 6
@@ -1846,7 +1846,7 @@ function collect(){
                 sql = `UPDATE user SET money = ${money - penalty}, lasttrans = ${-1 * penalty} WHERE id = '${message.author.id}'`;
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
-                message.reply(" lost $" + penalty + " from a trick!");
+                message.reply(" lost $" + penalty + " from a trap!");
                 
                 if(achievements.length > 1){
                 //Achievement 6
