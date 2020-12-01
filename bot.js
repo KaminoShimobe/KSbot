@@ -1636,12 +1636,12 @@ function treasure(){
             
         }   else {
             if(chest != 0){
-                room.send("The halloween goodie eerily disappeared!");
+                room.send("The holiday gift eerily disappeared!");
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
         con.query(sql);
         const booru = new Danbooru()
-        booru.posts({ tags: 'halloween rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -1651,9 +1651,9 @@ function treasure(){
             
         let item = new Discord.MessageEmbed()
 
-            .setTitle(`Trick or Treat! Type ${prefix}open to open it!`)
+            .setTitle(`A holiday gift appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#ff920d");
+            .setColor("#ff371c");
 
         room.send(item);
         
@@ -1689,13 +1689,13 @@ function treasure(){
             
         }   else {
             if(chest != 0){
-                room.send("The halloween goodie eerily disappeared!");
+                room.send("The holiday gift eerily disappeared!");
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
             con.query(sql);
 
             const booru = new Danbooru()
-        booru.posts({ tags: 'halloween rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -1705,9 +1705,9 @@ function treasure(){
             
         let item = new Discord.MessageEmbed()
 
-            .setTitle(`Trick or Treat! Type ${prefix}open to open it!`)
+            .setTitle(`A holiday gift! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#ff920d");
+            .setColor("#ff371c");
             //#a57400 brown 
             
 
@@ -1891,7 +1891,7 @@ function lostChest(){
         sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
         con.query(sql);
         if(!channel) return message.channel.send("The halloween goodie eerily disappeared!");
-        channel.send("The halloween goodie eerily disappeared!");
+        channel.send("The holiday gift eerily disappeared!");
         return; 
         });
     }         
