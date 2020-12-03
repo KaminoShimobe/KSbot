@@ -7,6 +7,7 @@ const Jimp = require('jimp');
 const fs = require('fs'); // file manager
 const TwitchBot = require('twitch-bot');
 const Twitter = require('twitter');
+const ytdl = require('ytdl-core');
 const CronJob = require('cron').CronJob;
 const dailyCD = new Set();
 const exposeLimit = new Set();
@@ -750,7 +751,12 @@ if(command === `!end` && messageArray[1] != undefined){
 }     
 
 
-    
+  if(command === `!musicPlay` && messageArray[1] != undefined){
+    if(message.author.id == '242118931769196544'){  
+        bot.commands.get('musicPlay').execute(message, args, prefix);
+
+    }
+}     
 
 if(command === `!directory` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){  
