@@ -8,14 +8,59 @@ module.exports = {
 	description: 'Play a song from youtube',
 	execute(message, args) {
 		
-		console.log("beep")
+		let messageArray = message.content.split(" ");
+
+		const songs = new Set();
+		
+		
+		validateYouTubeUrl()
+
+		function validateYouTubeUrl()
+		{
+		    var url = $('#youTubeUrl').val();
+		        if (url != undefined || url != '') {
+		            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+		            var match = url.match(regExp);
+		            if (match && match[2].length == 11) {
+		                // Do anything for being valid
+		                // if need to change the url to embed url then use below line
+		                queue.add(messageArray[1]);
+
+		            }
+		            else {
+		                // Do anything for not being valid
+		                message.channel.send("That isn't a valid youtube link!")
+		            }
+		        }
+		}
+
 		const voiceChannel = message.member.voice.channel;
 
 		voiceChannel.join().then(connection => {
-	const stream = ytdl('https://www.youtube.com/watch?v=wLtdGU0-gGI', { filter: 'audioonly' });
-	const dispatcher = connection.play(stream);
+
+				function play(){
+
+					var queue = Array.from(songs);
+					var stream = ytdl(queue[0], { filter: 'audioonly' });
+
+					const dispatcher = connection.play(stream);
+					if(queue.length >= 1){
+
+						songs.delete(queue[0]);
+						dispatcher.on('finish', () => play());
+						
+					} else {
+						dispatcher.on('finish', () => voiceChannel.leave());
+					}
+					
+				}
+					
+					
+				
+			
+
 	
-	dispatcher.on('finish', () => voiceChannel.leave());
+	
 })
 		
 
