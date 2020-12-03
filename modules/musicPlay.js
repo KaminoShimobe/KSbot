@@ -11,13 +11,13 @@ module.exports = {
 		let messageArray = message.content.split(" ");
 
 		const songs = new Set();
-		
+
 		
 		validateYouTubeUrl()
 
 		function validateYouTubeUrl()
 		{
-		    var url = $('#youTubeUrl').val();
+		    var url = messageArray[1]
 		        if (url != undefined || url != '') {
 		            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
 		            var match = url.match(regExp);
