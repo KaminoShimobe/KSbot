@@ -6,7 +6,7 @@ const ytdl = require('ytdl-core');
 module.exports = {
 	name: 'musicPlay',
 	description: 'Play a song from youtube',
-	execute(message, args, prefix) {
+	execute(message, args) {
 		
 		console.log("beep")
 		const voiceChannel = message.member.voice.channel;
