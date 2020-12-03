@@ -24,7 +24,7 @@ module.exports = {
 		            if (match && match[2].length == 11) {
 		                // Do anything for being valid
 		                // if need to change the url to embed url then use below line
-		                queue.add(messageArray[1]);
+		                songs.add(messageArray[1]);
 
 		            }
 		            else {
