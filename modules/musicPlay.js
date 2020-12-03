@@ -6,11 +6,18 @@ const ytdl = require('ytdl-core');
 module.exports = {
 	name: 'musicPlay',
 	description: 'Play a song from youtube',
-	execute(message, args) {
+	execute(message, args, bot) {
 		
 		let messageArray = message.content.split(" ");
 
-		const songs = new Set();
+		const voiceChannel = message.member.voice.channel;
+
+		if(bot.voice.channel != voiceChannel){
+			const songs = new Set();
+		} else {
+			
+		}
+		
 
 		
 		validateYouTubeUrl()
@@ -34,7 +41,7 @@ module.exports = {
 		        }
 		}
 
-		const voiceChannel = message.member.voice.channel;
+		
 
 		voiceChannel.join().then(connection => {
 
