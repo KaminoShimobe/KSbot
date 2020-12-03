@@ -8,7 +8,7 @@ module.exports = {
 	description: 'Play a song from youtube',
 	execute(message, args, prefix) {
 		
-
+		console.log("beep")
 		const voiceChannel = message.member.voice.channel;
 
 		voiceChannel.join().then(connection => {
