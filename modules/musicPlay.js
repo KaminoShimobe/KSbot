@@ -13,7 +13,7 @@ module.exports = {
 		const voiceChannel = message.member.voice.channel;
 
 		if(bot.voice.channel != voiceChannel){
-			songs = new Set();
+			songs.clear();
 		} else {
 			
 		}
