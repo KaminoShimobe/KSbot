@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 const fs = require('fs'); // file manager
 const ytdl = require('ytdl-core');
-const songs;
+const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
 	description: 'Play a song from youtube',
