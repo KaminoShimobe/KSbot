@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 const fs = require('fs'); // file manager
 const ytdl = require('ytdl-core');
-
+const songs;
 module.exports = {
 	name: 'musicPlay',
 	description: 'Play a song from youtube',
@@ -13,7 +13,7 @@ module.exports = {
 		const voiceChannel = message.member.voice.channel;
 
 		if(bot.voice.channel != voiceChannel){
-			const songs = new Set();
+			songs = new Set();
 		} else {
 			
 		}
