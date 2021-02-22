@@ -5,14 +5,15 @@ const ytdl = require('ytdl-core');
 const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
-	description: 'Play a song from youtube',
-	execute(message, args, bot) {
+	description: 'Music Features',
+	execute(message, args, bot, funct) {
 		
 		let messageArray = message.content.split(" ");
 
 		const voiceChannel = message.member.voice.channel;
 
-		if(bot.voice.channel != voiceChannel){
+		if(funct == "play"){
+			if(bot.voice.channel != voiceChannel){
 			songs.clear();
 		} else {
 			
@@ -70,6 +71,13 @@ module.exports = {
 	
 	
 })
+		}
+
+		if(funct == "queue"){
+			message.channel.send(songs)
+		}
+
+		
 		
 
 	
