@@ -92,7 +92,7 @@ module.exports = {
   serverQueue.textChannel.send(`Start playing: **${song.title}**`);
 }
 
-function skip(message, serverQueue) {
+function skip() {
   if (!message.member.voice.channel)
     return message.channel.send(
       "You have to be in a voice channel to stop the music!"
@@ -102,7 +102,7 @@ function skip(message, serverQueue) {
   serverQueue.connection.dispatcher.end();
 }
 
-function stop(message, serverQueue) {
+function stop() {
   if (!message.member.voice.channel)
     return message.channel.send(
       "You have to be in a voice channel to stop the music!"
