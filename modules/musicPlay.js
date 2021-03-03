@@ -6,7 +6,7 @@ const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
 	description: 'Music Playing',
-	execute(message, args, bot, serverQueue) {
+	execute(message, args, bot, serverQueue, queue) {
 
 		let messageArray = message.content.split(" ");
 
