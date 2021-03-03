@@ -6,11 +6,18 @@ const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
 	description: 'Music Playing',
-	execute(message, args, bot, queue) {
+	execute(message, args, bot, queue, funct) {
 
 		let messageArray = message.content.split(" ");
 
-		mPlay();
+		if(funct == "play"){
+			mPlay();
+		} else if(funct == "stop"){
+			stop();
+		} else if(funct == "skip"){
+			skip();
+		}
+		
 
 
 	async function mPlay() {		
@@ -85,7 +92,28 @@ module.exports = {
   serverQueue.textChannel.send(`Start playing: **${song.title}**`);
 }
 
+function skip(message, serverQueue) {
+  if (!message.member.voice.channel)
+    return message.channel.send(
+      "You have to be in a voice channel to stop the music!"
+    );
+  if (!serverQueue)
+    return message.channel.send("There is no song that I could skip!");
+  serverQueue.connection.dispatcher.end();
+}
 
+function stop(message, serverQueue) {
+  if (!message.member.voice.channel)
+    return message.channel.send(
+      "You have to be in a voice channel to stop the music!"
+    );
+    
+  if (!serverQueue)
+    return message.channel.send("There is no song that I could stop!");
+    
+  serverQueue.songs = [];
+  serverQueue.connection.dispatcher.end();
+}
 		
 
 	
