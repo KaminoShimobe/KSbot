@@ -5,79 +5,85 @@ const ytdl = require('ytdl-core');
 const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
-	description: 'Music Features',
-	execute(message, args, bot, funct) {
-		
+	description: 'Music Playing',
+	execute(message, args, bot, serverQueue) {
+
 		let messageArray = message.content.split(" ");
 
-		const voiceChannel = message.member.voice.channel;
+		mPlay();
 
-		if(funct == "play"){
-			if(bot.voice.channel != voiceChannel){
-			songs.clear();
-		} else {
-			
-		}
+
+	async function mPlay() {		
+		
 		
 
+		 const voiceChannel = message.member.voice.channel;
+  if (!voiceChannel)
+    return message.channel.send(
+      "You need to be in a voice channel to play music!"
+    );
+  const permissions = voiceChannel.permissionsFor(message.client.user);
+  if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+    return message.channel.send(
+      "I need the permissions to join and speak in your voice channel!"
+    );
+  }
+
+  const songInfo = await ytdl.getInfo(args[1]);
+  const song = {
+        title: songInfo.videoDetails.title,
+        url: songInfo.videoDetails.video_url,
+   };
+
+  if (!serverQueue) {
+    const queueContruct = {
+      textChannel: message.channel,
+      voiceChannel: voiceChannel,
+      connection: null,
+      songs: [],
+      volume: 5,
+      playing: true
+    };
+
+    queue.set(message.guild.id, queueContruct);
+
+    queueContruct.songs.push(song);
+
+    try {
+      var connection = await voiceChannel.join();
+      queueContruct.connection = connection;
+      play(message.guild, queueContruct.songs[0]);
+    } catch (err) {
+      console.log(err);
+      queue.delete(message.guild.id);
+      return message.channel.send(err);
+    }
+  } else {
+    serverQueue.songs.push(song);
+    return message.channel.send(`${song.title} has been added to the queue!`);
+  }
+
+}
 		
-		validateYouTubeUrl()
 
-		function validateYouTubeUrl()
-		{
-		    var url = messageArray[1]
-		        if (url != undefined || url != '') {
-		            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-		            var match = url.match(regExp);
-		            if (match && match[2].length == 11) {
-		                // Do anything for being valid
-		                // if need to change the url to embed url then use below line
-		                songs.add(messageArray[1]);
+		function play(guild, song) {
+  const serverQueue = queue.get(guild.id);
+  if (!song) {
+    serverQueue.voiceChannel.leave();
+    queue.delete(guild.id);
+    return;
+  }
 
-		            }
-		            else {
-		                // Do anything for not being valid
-		                message.channel.send("That isn't a valid youtube link!")
-		            }
-		        }
-		}
-
-		
-
-		voiceChannel.join().then(connection => {
-
-				function play(){
-
-					var queue = Array.from(songs);
-					var stream = ytdl(queue[0], { filter: 'audioonly' });
-
-					const dispatcher = connection.play(stream);
-					if(queue.length >= 1){
-
-						songs.delete(queue[0]);
-						dispatcher.on('finish', () => play());
-						
-					} else {
-						dispatcher.on('finish', () => voiceChannel.leave());
-					}
-					
-				}
-					
-				play();
-					
-				
-			
-
-	
-	
-})
-		}
-
-		if(funct == "queue"){
-			message.channel.send(songs)
-		}
-
-		
+  const dispatcher = serverQueue.connection
+    .play(ytdl(song.url))
+    .on("finish", () => {
+      serverQueue.songs.shift();
+      play(guild, serverQueue.songs[0]);
+    })
+    .on("error", error => console.error(error));
+  dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+  serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+}
 		
 
 	
