@@ -558,7 +558,7 @@ bot.on("message", async message => {
 
     //music bot server queue
 
-    const serverQueue = queue.get(message.guild.id);
+    
     
 
 
@@ -757,7 +757,7 @@ if(command === `!end` && messageArray[1] != undefined){
 
   if(command === `!play`){
     if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, serverQueue, queue);
+        bot.commands.get('musicPlay').execute(message, args, bot, queue);
 
     }
 }     
