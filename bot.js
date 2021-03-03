@@ -757,7 +757,7 @@ if(command === `!end` && messageArray[1] != undefined){
 
   if(command === `!play`){
     if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, serverQueue);
+        bot.commands.get('musicPlay').execute(message, args, bot, serverQueue, queue);
 
     }
 }     
