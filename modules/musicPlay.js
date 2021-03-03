@@ -6,7 +6,7 @@ const songs = new Set();
 module.exports = {
 	name: 'musicPlay',
 	description: 'Music Playing',
-	execute(message, args, bot, serverQueue, queue) {
+	execute(message, args, bot, queue) {
 
 		let messageArray = message.content.split(" ");
 
@@ -16,7 +16,7 @@ module.exports = {
 	async function mPlay() {		
 		
 		
-
+		 const serverQueue = queue.get(message.guild.id);
 		 const voiceChannel = message.member.voice.channel;
   if (!voiceChannel)
     return message.channel.send(
