@@ -762,12 +762,20 @@ if(command === `!end` && messageArray[1] != undefined){
     }
 }     
 
-// if(command === `!stop`){
-//     if(message.author.id == '242118931769196544'){  
-//         bot.commands.get('musicPlay').execute(message, args, bot, "play");
+if(command === `!stop`){
+     if(message.author.id == '242118931769196544'){  
+        bot.commands.get('musicStop').execute(message, args, bot, queue);
 
-//     }
-// }  
+    }
+}  
+
+if(command === `!skip`){
+     if(message.author.id == '242118931769196544'){  
+        bot.commands.get('musicSkip').execute(message, args, bot, queue);
+
+    }
+}  
+
 
 // if(command === `!play`){
 //     if(message.author.id == '242118931769196544'){  
