@@ -46,6 +46,7 @@ const EpitaphCD = new Set();
 const Battling = new Set();
 const PvP = new Set();
 const KOd = new Set();
+const queue = new Map();
 
 
 
@@ -555,7 +556,9 @@ bot.on("message", async message => {
 
     let args = messageArray.slice(1);
 
-    
+    //music bot server queue
+
+    const serverQueue = queue.get(message.guild.id);
     
 
 
@@ -750,20 +753,35 @@ if(command === `!end` && messageArray[1] != undefined){
     }
 }     
 
+//music bot shadow commands
 
   if(command === `!play`){
     if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, "play");
+        bot.commands.get('musicPlay').execute(message, args, bot, serverQueue);
 
     }
 }     
 
-if(command === `!queue`){
-    if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, "queue");
+// if(command === `!stop`){
+//     if(message.author.id == '242118931769196544'){  
+//         bot.commands.get('musicPlay').execute(message, args, bot, "play");
 
-    }
-}   
+//     }
+// }  
+
+// if(command === `!play`){
+//     if(message.author.id == '242118931769196544'){  
+//         bot.commands.get('musicPlay').execute(message, args, bot, "play");
+
+//     }
+// }  
+
+// if(command === `!queue`){
+//     if(message.author.id == '242118931769196544'){  
+//         bot.commands.get('musicPlay').execute(message, args, bot, "queue");
+
+//     }
+// }   
 
 if(command === `!directory` && messageArray[1] != undefined){
     if(message.author.id == '242118931769196544'){  
