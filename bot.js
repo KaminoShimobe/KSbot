@@ -757,21 +757,21 @@ if(command === `!end` && messageArray[1] != undefined){
 
   if(command === `!play`){
     if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue);
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "play");
 
     }
 }     
 
 if(command === `!stop`){
      if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicStop').execute(message, args, bot, queue);
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "stop");
 
     }
 }  
 
 if(command === `!skip`){
      if(message.author.id == '242118931769196544'){  
-        bot.commands.get('musicSkip').execute(message, args, bot, queue);
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "skip");
 
     }
 }  
