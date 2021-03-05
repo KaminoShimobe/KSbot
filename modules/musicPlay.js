@@ -57,15 +57,17 @@ module.exports = {
 
     queueContruct.songs.push(song);
 
-    try {
+    
       var connection = await voiceChannel.join();
       queueContruct.connection = connection;
-      play(message.guild, queueContruct.songs[0]);
-    } catch (err) {
-      console.log(err);
+      play(message.guild, queueContruct.songs[0]).then(() =>{
+      	console.log(`${song.title} playing in ${message.guild.name}`)
+    }).catch((err) => {
+    	 console.log(err);
       queue.delete(message.guild.id);
       return message.channel.send(err);
-    }
+    })
+     
   } else {
     serverQueue.songs.push(song);
     return message.channel.send(`${song.title} has been added to the queue!`);
