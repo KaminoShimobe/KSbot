@@ -24,7 +24,7 @@
     "twitch-bot": "https://github.com/Hammster/twitch-bot.git",
     "twitter": "^1.7.1",
     "cron" : "^1.8.2",
-    "ytdl-core" : "^4.5.0",
+    "ytdl-core" : "^4.8.3",
     "ffmpeg-static" : "^4.2.7",
     "@discordjs/opus" : "^0.3.3"
   }
