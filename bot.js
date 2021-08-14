@@ -1631,9 +1631,9 @@ function theCommands(prefix, chests){
 }
 
 function treasure(){
-        var appear = Math.floor(Math.random() * 50) + 1;
+        var appear = Math.floor(Math.random() * 200) + 1;
         
-        if(appear == 50){
+        if(appear == 200){
             
             
             chest();
@@ -1675,12 +1675,12 @@ function treasure(){
             
         }   else {
             if(chest != 0){
-                room.send("The holiday gift eerily disappeared!");
+                room.send("The chest mysteriously disappeared!");
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
         con.query(sql);
         const booru = new Danbooru()
-        booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -1692,7 +1692,7 @@ function treasure(){
 
             .setTitle(`A holiday gift appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#ff371c");
+            .setColor("#a57400");
 
         room.send(item);
         
@@ -1728,13 +1728,13 @@ function treasure(){
             
         }   else {
             if(chest != 0){
-                room.send("The holiday gift eerily disappeared!");
+                room.send("The chest mysteriously disappeared!");
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
             con.query(sql);
 
             const booru = new Danbooru()
-        booru.posts({ tags: 'christmas gift rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -1744,9 +1744,9 @@ function treasure(){
             
         let item = new Discord.MessageEmbed()
 
-            .setTitle(`A holiday gift! Type ${prefix}open to open it!`)
+            .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
-            .setColor("#ff371c");
+            .setColor("#a57400");
             //#a57400 brown 
             
 
@@ -1814,15 +1814,15 @@ function collect(){
                     return;
                 }   
                     
-                var gift = Math.floor(Math.random() * 3) + 1;
+//                 var gift = Math.floor(Math.random() * 3) + 1;
                 let money = rows[0].money;
                 let lasttrans = rows[0].lasttrans;
-             if(gift == 1){
-             sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
-             message.channel.send("**You received a :gift:!!!**");
-             } else {
+//              if(gift == 1){
+//              sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}, gift = ${yay + 1}  WHERE id = '${message.author.id}'`;
+//              message.channel.send("**You received a :gift:!!!**");
+//              } else {
                 sql = `UPDATE user SET money = ${money + cost}, lasttrans = ${cost}  WHERE id = '${message.author.id}'`;    
-             }   
+//              }   
                 con.query(sql);
                 con.query(`UPDATE achievements SET status = '${status + 1}' WHERE id = '${message.author.id}'`);    
                 message.reply(" got $" + cost + " from the gift!");
