@@ -113,7 +113,7 @@ bot.on("ready", async () => {
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setTimestamp()
-            .setFooter("Version 1.9.2", bot.user.avatarURL());
+            .setFooter("Version 1.9.3", bot.user.avatarURL());
     me.send(yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
@@ -1690,7 +1690,7 @@ function treasure(){
             
         let item = new Discord.MessageEmbed()
 
-            .setTitle(`A holiday gift appeared! Type ${prefix}open to open it!`)
+            .setTitle(`A chest has appeared! Type ${prefix}open to open it!`)
             .setImage(url.href)
             .setColor("#a57400");
 
@@ -1929,8 +1929,8 @@ function lostChest(){
         let channel = bot.channels.cache.get(rows[0].channel);
         sql = `UPDATE server SET chest = ${0}, karma = '' WHERE id = '${message.guild.id}'`
         con.query(sql);
-        if(!channel) return message.channel.send("The halloween goodie eerily disappeared!");
-        channel.send("The holiday gift eerily disappeared!");
+        if(!channel) return message.channel.send("The chest mysteriously disappeared!");
+        channel.send("The chest mysteriously disappeared!");
         return; 
         });
     }         
