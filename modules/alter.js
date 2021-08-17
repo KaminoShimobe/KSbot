@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 
 module.exports = {
-	name: 'alter',
-	description: 'Edit KS-Bot Account info - Kamino',
-	execute(message, args, con, bot, prefix) {
-	let messageArray = message.content.split(" ");
+  name: 'alter',
+  description: 'Edit KS-Bot Account info - Kamino',
+  execute(message, args, con, bot, prefix) {
+  let messageArray = message.content.split(" ");
    con.query(`SELECT * FROM user WHERE id = '${messageArray[1]}'`, (err, rows) => {
         if(err) throw err;
         let sql;
@@ -132,9 +132,25 @@ module.exports = {
                 });
         }
 
+        function alterMarriage(){
+            message.channel.send("What marriage changes would you like to make to " + name +   "'s KS Account?  !cancel to cancel");
+                    const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+                    collector.once('collect', message => {
+                        if (message.content == `!cancel`) {
+                         message.channel.send("Cancelled.");
+                            return;
+                        }  else {
+                            sql = `UPDATE user SET marriage = '', marryKey = '' WHERE id = '${them}'`;
+                            con.query(sql);
+                            message.channel.send("Marriage reset for the User: " + name + "!");
+                            return;
+                        }
+                });
+        }
+
         
 
-                    message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift, username) !cancel to cancel");
+                    message.channel.send("What changes would you like to make to " + name +   "'s KS Account? (money, rank, patreon, stand, gift, username, marriage) !cancel to cancel");
                     const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
                     collector.once('collect', message => {
                         if (message.content == `${prefix}cancel`) {
@@ -164,10 +180,14 @@ module.exports = {
                     
                     alterUsername();
                     return;
+                } else if(message.content == "marriage"){
+                    
+                    alterMarriage();
+                    return;
                 } else {
                     message.channel.send("Invalid selection.")
                 }
                 }); 
             });
-	},
+  },
 };
