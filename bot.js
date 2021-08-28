@@ -372,7 +372,7 @@ Bot.on('message', chatter => {
   let twitchArray = chatter.message.split(" ");
     
   if(chatter.message === '!discord' || chatter.message.indexOf("discord") != -1 || chatter.message.indexOf("Discord") != -1 || chatter.message.indexOf("Discord?") != -1 || chatter.message.indexOf("discord?") != -1) {
-    Bot.say('Join our discord here: https://discord.gg/mfnHdfeH')
+    Bot.say('Join our discord here: https://discord.gg/cBfYZaMfxv')
   }
 
   //  if(chatter.message === '!arena') {
