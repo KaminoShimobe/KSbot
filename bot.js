@@ -364,8 +364,8 @@ Bot.on('error', err => {
 })
 
 Bot.on('message', chatter => {
-  if(chatter.message === '!help') {
-    Bot.say('KS Streamer Commands: !help, !dice, !user, !leaderboard, !collect, !discord, !bet NAME AMOUNT, !view, !bracket')
+  if(chatter.message === '!tournament') {
+    Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
    
   }   
 
