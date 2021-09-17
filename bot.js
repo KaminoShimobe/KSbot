@@ -380,7 +380,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/l43kjok3')
+    Bot.say('Check out the bracket hosted by my friend twitch.tv/baha_zero here: https://leaguetrolli.challonge.com/jq8kgrta')
   }
 
   if(chatter.message === '!user') {
