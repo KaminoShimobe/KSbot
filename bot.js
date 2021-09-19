@@ -380,7 +380,7 @@ Bot.on('message', chatter => {
   // }   
 
   if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://challonge.com/mw2c5dvb')
+    Bot.say('Check out the bracket here: https://smash.gg/tournament/kamino-cup/event/smash-singles-season-1-0/overview')
   }
 
   if(chatter.message === '!user') {
