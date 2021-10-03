@@ -364,10 +364,10 @@ Bot.on('error', err => {
 })
 
 Bot.on('message', chatter => {
-  if(chatter.message === '!tournament') {
-    Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
+//   if(chatter.message === '!tournament') {
+//     Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
    
-  }   
+//   }   
 
   let twitchArray = chatter.message.split(" ");
     
@@ -379,9 +379,9 @@ Bot.on('message', chatter => {
   //   Bot.say('ID: 1KVYD | PASS: 126');
   // }   
 
-  if(chatter.message === '!bracket') {
-    Bot.say('Check out the bracket here: https://smash.gg/tournament/kamino-cup/event/smash-singles-season-1-0/overview')
-  }
+//   if(chatter.message === '!bracket') {
+//     Bot.say('Check out the bracket here: https://smash.gg/tournament/kamino-cup/event/smash-singles-season-1-0/overview')
+//   }
 
   if(chatter.message === '!user') {
       con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
