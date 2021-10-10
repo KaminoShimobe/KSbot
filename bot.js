@@ -364,10 +364,10 @@ Bot.on('error', err => {
 })
 
 Bot.on('message', chatter => {
-//   if(chatter.message === '!tournament') {
-//     Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
+  if(chatter.message === '!tournament') {
+    Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
    
-//   }   
+  }   
 
   let twitchArray = chatter.message.split(" ");
     
