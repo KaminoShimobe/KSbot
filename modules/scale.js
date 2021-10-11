@@ -22,13 +22,13 @@ module.exports = {
     } else if(fortune == 8){
         message.reply("8/10 :eyes:")
     } else if(fortune == 9){
-        message.reply("9/10 :smirk:")
+        message.reply("9/10 😏")
     } else if(fortune == 10){
         message.reply("10/10 YES YES YES")
     } else if(fortune == 11){
-        message.reply("10/10 :no_face:")
+        message.reply("10/10 😶")
     } else if(fortune == 12){
-        message.reply(chance +"/10 :hot_face:")
+        message.reply(chance +"/10 🥵")
     }
 
 
