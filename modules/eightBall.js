@@ -1,6 +1,6 @@
 module.exports = {
     name: 'eightBall',
-    description: 'Deletes your message, has a 25% chance to backfire.',
+    description: 'Roll da 8ball, live by da 8ball.',
     execute(message, args) {
     let fortune = Math.floor(Math.random() * 45) + 1;
 
