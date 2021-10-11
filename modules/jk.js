@@ -1,8 +1,9 @@
 module.exports = {
-	name: 'jk',
-	description: 'Deletes your message, has a 25% chance to backfire.',
-	execute(message, args) {
-	var heh = Math.floor(Math.random() * 4) + 1;
+    name: 'jk',
+    description: 'Deletes your message, has a 25% chance to backfire.',
+    execute(message, args) {
+    var heh = Math.floor(Math.random() * 4) + 1;
+    var emoji = Math.floor(Math.random() * 5) + 1;
     var msg = message.content.replace("!jk", "");
         
         function delet(){
@@ -23,8 +24,18 @@ module.exports = {
          
 
         } else {
-                
-             message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :smirk:");;
+             if(emoji == 0){
+                message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :smirk:");
+             }  else if(emoji == 1){
+                message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :clown:");
+             }   else if(emoji == 2){
+                message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :pleading_face: ");
+             }  else if(emoji == 3){
+                message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :sick:");
+             }   else {
+                message.channel.send(message.author.username + ": __" + msg +  "__ \n but were they *REALLY* joking tho? :skull:");
+             }
+             
             
         }
 
@@ -33,5 +44,5 @@ module.exports = {
 
 
          return;
-	},
+    },
 };
