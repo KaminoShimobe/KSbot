@@ -8173,6 +8173,18 @@ function ball8(){
     bot.commands.get('eightBall').execute(message, args);
     
 }   
+
+function odds(){
+    
+    bot.commands.get('odds').execute(message, args);
+    
+}
+
+function scale(){
+    
+    bot.commands.get('scale').execute(message, args);
+    
+}
     
 function justSaiyan(){
     var wait = Math.floor(Math.random() * 200) + 1;
