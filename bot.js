@@ -13224,7 +13224,80 @@ if(command === `${prefix}marry` && messageArray[1] != undefined){
 
         
 
-    }       
+    }    
+
+    if(command === `${prefix}scale`){
+            
+        if(cooldown > 0){
+    if (commandCD.has(message.author.id)) {
+    message.react('🕒')
+
+    .then(console.log("Reacted."))
+
+    .catch(console.error);  
+    
+        return;
+    } else {
+    commandCD.add(message.author.id);       
+      setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown)); 
+    //insert function here.
+        scale();
+    }
+} else {
+// insert function here.
+    scale();
+}
+        
+        
+
+            
+
+         return; 
+
+        
+
+        
+
+    }   
+
+    if(command === `${prefix}odds`){
+            
+        if(cooldown > 0){
+    if (commandCD.has(message.author.id)) {
+    message.react('🕒')
+
+    .then(console.log("Reacted."))
+
+    .catch(console.error);  
+    
+        return;
+    } else {
+    commandCD.add(message.author.id);       
+      setTimeout(() => {
+          // Removes the user from the set after however long the cooldown is.
+          commandCD.delete(message.author.id);
+        }, (cooldown)); 
+    //insert function here.
+        odds();
+    }
+} else {
+// insert function here.
+    odds();
+}
+        
+        
+
+            
+
+         return; 
+
+        
+
+        }
+
     
 if(command === `${prefix}divorce` && messageArray[1] != undefined){
             
