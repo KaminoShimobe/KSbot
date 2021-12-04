@@ -370,7 +370,7 @@ Bot.on('message', chatter => {
   }   
   
   if(chatter.message === '!lurk') {
-    Bot.say(chatter.username + 'thanks for the lurk! We will miss your vibes!')
+    Bot.say(chatter.username + ' thanks for the lurk! We will miss your vibes!')
    
   }  
 
