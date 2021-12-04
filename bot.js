@@ -368,6 +368,11 @@ Bot.on('message', chatter => {
     Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
    
   }   
+  
+  if(chatter.message === '!lurk') {
+    Bot.say('chatter.username + "thanks for the lurk! We will miss your vibes!')
+   
+  }  
 
   let twitchArray = chatter.message.split(" ");
     
