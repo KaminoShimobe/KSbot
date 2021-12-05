@@ -369,6 +369,11 @@ Bot.on('message', chatter => {
    
   }   
   
+  if(chatter.message === '!nuzlocke') {
+    Bot.say(`Kamino is doing a randomizer nuzlocke! His rules for this nuzlocke are \n 1. Can only catch the first pokemon in each area/route, not including static encounters. \n 2. Must battle with set, not shift. \n 3. Cannot only buy pokeballs from mart \n 4. Must nickname all pokemon \n 5. If a pokemon faints it must be boxed!`)
+   
+  } 
+  
   if(chatter.message === '!lurk') {
     Bot.say(chatter.username + ' thanks for the lurk! We will miss your vibes!')
    
