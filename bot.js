@@ -8493,7 +8493,7 @@ function waifuPic(){
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
         console.log("1");
-        booru.posts({ tags: 'rating:safe 1girl solo maturel_female'}).then(res => {
+        booru.posts({ tags: 'rating:safe solo mature_female'}).then(res => {
          // Select a random post from posts array
          console.log("2");
         const index = Math.floor(Math.random() * res.length)
@@ -8527,7 +8527,7 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe 1boy solo mature_male', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe solo mature_male'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8556,7 +8556,7 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: '1girl rating:explicit', random: true }).then(posts => {
+        booru.posts({ tags: 'mature_female rating:explicit' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8591,7 +8591,7 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: '1boy rating:explicit', random: true }).then(posts => {
+        booru.posts({ tags: 'mature_male solo rating:explicit' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8632,7 +8632,7 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: tag1 + ' ' + tag2, random: true }).then(posts => {
+        booru.posts({ tags: tag1 + ' ' + tag2}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
