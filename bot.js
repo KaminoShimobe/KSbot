@@ -1689,7 +1689,12 @@ function treasure(){
             }
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`;
         con.query(sql);
-        const booru = new Danbooru()
+
+        const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
+
+
         booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -1743,7 +1748,9 @@ function treasure(){
             sql = `UPDATE server SET chest = ${amount}, karma = '${karma}' WHERE id = '${message.guild.id}'`
             con.query(sql);
 
-            const booru = new Danbooru()
+             const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8271,7 +8278,9 @@ function beat(){
 
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe punching', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8299,7 +8308,9 @@ function hug(){
       
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe hug', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8327,7 +8338,9 @@ function pat(){
          
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe petting solo', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8354,7 +8367,9 @@ function kiss(){
           
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
 
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8384,7 +8399,9 @@ function handhold(){
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe holding_hands couple', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8413,7 +8430,9 @@ function handshake(){
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe handshake', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8442,7 +8461,9 @@ function slap(){
         if(!toBeat) return message.channel.send("You did not specify a user mention!");
         
         
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: 'rating:safe slapping', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8468,8 +8489,10 @@ function slap(){
 function waifuPic(){
         
         console.log("waifu");
-        const booru = new Danbooru()
-        booru.posts({ tags: 'rating:safe 1girl solo', random: true }).then(posts => {
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
+        booru.posts({ tags: 'rating:safe 1girl solo mature_female', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8494,8 +8517,10 @@ function waifuPic(){
     function husbandoPic(){
         
         console.log("husbando");
-        const booru = new Danbooru()
-        booru.posts({ tags: 'rating:safe 1boy solo', random: true }).then(posts => {
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
+        booru.posts({ tags: 'rating:safe 1boy solo mature_male', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8521,7 +8546,9 @@ function waifuPic(){
     function lewdWaifu(){
         
         
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: '1girl rating:explicit', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8554,7 +8581,9 @@ function waifuPic(){
     function lewdHusbando(){
         
         
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: '1boy rating:explicit', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
@@ -8593,7 +8622,9 @@ function waifuPic(){
         } else {
             tag2 = messageArray[2];
         }
-        const booru = new Danbooru()
+         const login = 'KaminoShimobe'
+        const key = process.env.booruKey;
+        const booru = new Danbooru(login + ':' + key)
         booru.posts({ tags: tag1 + ' ' + tag2, random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
