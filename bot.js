@@ -8492,15 +8492,15 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru()
-        booru.posts({ tags: 'rating:safe 1girl solo mature_female', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe 1girl solo mature_female', random: true }).then(res => {
          // Select a random post from posts array
-        const index = Math.floor(Math.random() * posts.length)
-        const post = posts[index];
+        const index = Math.floor(Math.random() * res.length)
+        const post = res[index];
 
 
  
         // Get post's url 
-        console.log(posts)
+        console.log(res)
          const url = booru.url(post.file_url)
         
          let pic = new Discord.MessageEmbed()
