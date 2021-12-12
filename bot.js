@@ -1695,7 +1695,7 @@ function treasure(){
         const booru = new Danbooru(login + ':' + key)
 
 
-        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -1751,7 +1751,7 @@ function treasure(){
              const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'treasure_chest rating:safe', random: true }).then(posts => {
+        booru.posts({ tags: 'treasure_chest rating:safe'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8281,7 +8281,7 @@ function beat(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe punching', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe punching' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8311,7 +8311,7 @@ function hug(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe hug', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe hug' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8341,7 +8341,7 @@ function pat(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe petting solo', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe petting solo' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8370,7 +8370,7 @@ function kiss(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe kiss couple', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe kiss couple' }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8402,7 +8402,7 @@ function handhold(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe holding_hands couple', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe holding_hands couple'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8433,7 +8433,7 @@ function handshake(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe handshake', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe handshake'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8464,7 +8464,7 @@ function slap(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe slapping', random: true }).then(posts => {
+        booru.posts({ tags: 'rating:safe slapping'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
@@ -8491,9 +8491,9 @@ function waifuPic(){
         console.log("waifu");
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
-        const booru = new Danbooru()
+        const booru = new Danbooru(login + ':' + key)
         console.log("1");
-        booru.posts({ tags: 'rating:safe 1girl solo mature_female', random: true }).then(res => {
+        booru.posts({ tags: 'rating:safe 1girl solo maturel_female'}).then(res => {
          // Select a random post from posts array
          console.log("2");
         const index = Math.floor(Math.random() * res.length)
