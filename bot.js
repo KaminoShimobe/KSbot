@@ -8498,7 +8498,7 @@ function waifuPic(){
         const post = posts[index]
  
         // Get post's url 
-        console.log(post.file_url)
+        console.log(post)
          const url = booru.url(post.file_url)
         
          let pic = new Discord.MessageEmbed()
