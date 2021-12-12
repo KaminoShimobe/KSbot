@@ -8493,7 +8493,7 @@ function waifuPic(){
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
         console.log("1");
-        booru.posts({ tags: 'rating:safe solo mature_female'}).then(res => {
+        booru.posts({ tags: 'rating:safe solo 1girl'}).then(res => {
          // Select a random post from posts array
          console.log("2");
         const index = Math.floor(Math.random() * res.length)
@@ -8527,7 +8527,7 @@ function waifuPic(){
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
         const booru = new Danbooru(login + ':' + key)
-        booru.posts({ tags: 'rating:safe solo mature_male'}).then(posts => {
+        booru.posts({ tags: 'rating:safe solo 1boy'}).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
         const post = posts[index]
