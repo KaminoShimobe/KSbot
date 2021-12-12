@@ -8509,7 +8509,7 @@ function waifuPic(){
         message.channel.send(pic);
         
          }).catch((err) => {
-          console.error(error);
+          console.log("errorrrrrrrr")
          });
         
         
