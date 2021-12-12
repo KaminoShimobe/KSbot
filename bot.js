@@ -8491,21 +8491,12 @@ function waifuPic(){
         console.log("waifu");
          const login = 'KaminoShimobe'
         const key = process.env.booruKey;
-        const booru = new Danbooru(login + ':' + key)
+        const booru = new Danbooru()
         booru.posts({ tags: 'rating:safe 1girl solo mature_female', random: true }).then(posts => {
          // Select a random post from posts array
         const index = Math.floor(Math.random() * posts.length)
-        const post = posts[index]
+        const post = posts[index];
 
-        fetch(post).then(async response => {
-      try {
-       const data = await response.json()
-       console.log('response data?', data)
-     } catch(error) {
-       console.log('Error happened here!')
-       console.error(error)
-     }
-    })
 
  
         // Get post's url 
