@@ -60,7 +60,7 @@ for (const file of commandFiles) {
   bot.commands.set(command.name, command);
 }
 
-
+//
 
 
 var con_fig = {
