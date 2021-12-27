@@ -60,7 +60,7 @@ for (const file of commandFiles) {
   bot.commands.set(command.name, command);
 }
 
-//
+
 
 
 var con_fig = {
@@ -766,21 +766,21 @@ if(command === `!end` && messageArray[1] != undefined){
 //music bot shadow commands
 
   if(command === `!play`){
-    if(message.author.id == '242118931769196544'){  
+    if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
         bot.commands.get('musicPlay').execute(message, args, bot, queue, "play");
 
     }
 }     
 
 if(command === `!stop`){
-     if(message.author.id == '242118931769196544'){  
+     if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
         bot.commands.get('musicPlay').execute(message, args, bot, queue, "stop");
 
     }
 }  
 
 if(command === `!skip`){
-     if(message.author.id == '242118931769196544'){  
+     if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
         bot.commands.get('musicPlay').execute(message, args, bot, queue, "skip");
 
     }
