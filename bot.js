@@ -365,7 +365,7 @@ Bot.on('error', err => {
 
 Bot.on('message', chatter => {
   if(chatter.message === '!tournament') {
-    Bot.say('Join our monthly smash/league tournament here: https://smash.gg/tournament/kamino-cup')
+    Bot.say('Our next League/Smash Tournament dates are Jan 22-23rd! Join the Discord for more info!')
    
   }   
   
