@@ -92,7 +92,7 @@ module.exports = {
     let stats = new Discord.MessageEmbed()
 
             
-            .setAuthor("Added to queue: " + song.title)
+            .setAuthor("Now Playing: " + song.title)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
@@ -147,11 +147,11 @@ console.log(dur);
   let stats2 = new Discord.MessageEmbed()
 
             
-            .setAuthor("Now Playing: " + song.title)
+            .setAuthor("Added to queue: " + song.title)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
-            .setFooter("Queued by: ", message.author.avatarURL());
+            .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
 
     
   serverQueue.textChannel.send(stats2);
@@ -166,39 +166,7 @@ function skip() {
     return message.channel.send("There is no song that I could skip!");
   serverQueue.connection.dispatcher.end();
 
-   function fancyTimeFormat(duration)
-{   
-    // Hours, minutes and seconds
-    var d = parseInt(duration)
-    var hrs = ~~(d / 3600);
-    var mins = ~~((d % 3600) / 60);
-    var secs = ~~d % 60;
-
-    
-    var ret = "";
-
-    if (hrs > 0) {
-        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
-
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    return ret;
-}
-
-  var dur = fancyTimeFormat(song.length);
-console.log(dur);
-
-  let stats3 = new Discord.MessageEmbed()
-
-            
-            .setAuthor("Skipped: " + song.title)
-            .setDescription("Duration: " + dur)
-            .setColor("#FF0000")
-            .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
-            .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
-
-             message.channel.send(stats3);
+   
 
 }
 
