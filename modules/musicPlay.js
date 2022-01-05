@@ -222,7 +222,8 @@ function queue2() {
   if (!serverQueue){
     return message.channel.send("There are no songs left in queue!");
   }
-    
+
+console.log(serverQueue.songs.length)    
 
 var theQueue = "";
 
