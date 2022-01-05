@@ -25,7 +25,7 @@ module.exports = {
         } else if(funct == "skip"){
             skip();
         } else if(funct == "queue"){
-            queue();
+            queue2();
         }
         
 
@@ -186,7 +186,7 @@ function stop() {
   message.channel.send("Stopped playing songs!");
 }
 
-function queue() {
+function queue2() {
   if (!message.member.voice.channel)
     return message.channel.send(
       "You have to be in a voice channel to see the queue!"
