@@ -226,6 +226,8 @@ function queue2() {
         theQueue += (i + 1) + " " + serverQueue.songs[i].title + "\n"
     }
 
+    console.log(theQueue);
+
      function fancyTimeFormat(duration)
 {   
     // Hours, minutes and seconds
@@ -247,7 +249,7 @@ function queue2() {
 }
 
     var dur = fancyTimeFormat(song.length);
-console.log(dur);
+
     
   let stats4 = new Discord.MessageEmbed()
 
