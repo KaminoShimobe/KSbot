@@ -12,11 +12,26 @@ module.exports = {
         let messageArray = message.content.split(" ");
 
         if(funct == "play"){
-            mPlay();
+              message.delete()
+
+            .then(mPlay())
+
+            .catch(console.error);
+            
+        }
+            
         } else if(funct == "stop"){
-            stop();
+            message.delete()
+
+            .then(stop())
+
+            .catch(console.error);
         } else if(funct == "skip"){
-            skip();
+            message.delete()
+
+            .then(skip())
+
+            .catch(console.error);
         }
         
 
@@ -131,7 +146,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Now Playing: " + song.title)
-            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + dur)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -153,7 +168,7 @@ function skip() {
 
             
             .setAuthor("Skipped: " + song.title)
-            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + dur)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
