@@ -89,10 +89,34 @@ module.exports = {
 
     console.log(song.length);
 
+      function fancyTimeFormat(duration)
+{   
+    // Hours, minutes and seconds
+    var d = parseInt(duration)
+    var hrs = ~~(d / 3600);
+    var mins = ~~((d % 3600) / 60);
+    var secs = ~~d % 60;
+
+    
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+
+  var dur = fancyTimeFormat(song.length);
+
     let stats = new Discord.MessageEmbed()
 
             
-            .setAuthor("Added to queue: " + song.title)
+            .setAuthor("Added to queue")
+            .setTitle(song.title)
+            .setURL(song.url)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
@@ -147,7 +171,9 @@ console.log(dur);
   let stats2 = new Discord.MessageEmbed()
 
             
-            .setAuthor("Now Playing: " + song.title)
+            .setAuthor("Now Playing")
+            .setTitle(song.title)
+            .setURL(song.url)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
