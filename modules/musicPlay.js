@@ -77,6 +77,7 @@ module.exports = {
 }
 
 var dur = fancyTimeFormat(song.length);
+console.log(dur);
 
   if (!serverQueue) {
     const queueContruct = {
@@ -111,10 +112,10 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Added to queue: " + song.title)
-            .setDescription(dur)
+            .setDescription(`${dur}`)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
-            .setFooter("Queued by: ", message.author.avatarURL());
+            .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
 
     return message.channel.send(stats);
   }
@@ -143,7 +144,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Now Playing: " + song.title)
-            .setDescription(dur)
+            .setDescription(`${dur}`)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -165,10 +166,10 @@ function skip() {
 
             
             .setAuthor("Skipped: " + song.title)
-            .setDescription(dur)
+            .setDescription(`${dur}`)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
-            .setFooter("Queued by: ", message.author.avatarURL());
+            .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
 
              message.channel.send(stats3);
 
@@ -210,7 +211,7 @@ function queue2() {
             .setAuthor("Current Queue: ")
             .setDescription(theQueue)
             .setColor("#FF0000")
-            .setFooter("Checked by: ", message.author.avatarURL());
+            .setFooter("Checked by: " + message.author.username, message.author.avatarURL());
 
              message.channel.send(stats4);
 }
