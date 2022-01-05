@@ -92,7 +92,7 @@ module.exports = {
     let stats = new Discord.MessageEmbed()
 
             
-            .setAuthor("Now Playing: " + song.title)
+            .setAuthor("Added to queue: " + song.title)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
@@ -147,7 +147,7 @@ console.log(dur);
   let stats2 = new Discord.MessageEmbed()
 
             
-            .setAuthor("Added to queue: " + song.title)
+            .setAuthor("Now Playing: " + song.title)
             .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
