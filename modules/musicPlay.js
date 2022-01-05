@@ -111,7 +111,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Added to queue: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + song.length)
+            .setDescription(dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -143,7 +143,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Now Playing: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + song.length)
+            .setDescription(dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -165,7 +165,7 @@ function skip() {
 
             
             .setAuthor("Skipped: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + song.length)
+            .setDescription(dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
