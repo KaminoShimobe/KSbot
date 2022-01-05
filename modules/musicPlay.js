@@ -59,9 +59,10 @@ module.exports = {
    function fancyTimeFormat(duration)
 {   
     // Hours, minutes and seconds
-    var hrs = ~~(duration / 3600);
-    var mins = ~~((duration % 3600) / 60);
-    var secs = ~~duration % 60;
+    var d = parseInt(duration)
+    var hrs = ~~(d / 3600);
+    var mins = ~~((d % 3600) / 60);
+    var secs = ~~d % 60;
 
     
     var ret = "";
