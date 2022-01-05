@@ -212,15 +212,19 @@ function stop() {
 }
 
 function queue2() {
-  if (!message.member.voice.channel)
+  if (!message.member.voice.channel){
     return message.channel.send(
       "You have to be in a voice channel to see the queue!"
     );
+  }
     
-  if (!serverQueue)
+    
+  if (!serverQueue){
     return message.channel.send("There are no songs left in queue!");
+  }
+    
 
-    var theQueue = "";
+var theQueue = "";
 
     for(let i = 0; i < serverQueue.songs.length; i++){
         theQueue += (i + 1) + " " + serverQueue.songs[i].title + "\n"
