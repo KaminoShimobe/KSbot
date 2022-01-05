@@ -223,48 +223,7 @@ function queue2() {
     return message.channel.send("There are no songs left in queue!");
   }
 
-console.log(serverQueue.songs.length)    
-
-var theQueue = "";
-
-    for(let i = 0; i < serverQueue.songs.length; i++){
-        theQueue += (i + 1) + " " + serverQueue.songs[i].title + "\n"
-    }
-
-    console.log(theQueue);
-
-     function fancyTimeFormat(duration)
-{   
-    // Hours, minutes and seconds
-    var d = parseInt(duration)
-    var hrs = ~~(d / 3600);
-    var mins = ~~((d % 3600) / 60);
-    var secs = ~~d % 60;
-
-    
-    var ret = "";
-
-    if (hrs > 0) {
-        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
-
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    return ret;
-}
-
-    var dur = fancyTimeFormat(song.length);
-
-    
-  let stats4 = new Discord.MessageEmbed()
-
-            
-            .setAuthor("Current Queue: ")
-            .setDescription(theQueue)
-            .setColor("#FF0000")
-            .setFooter("Checked by: " + message.author.username, message.author.avatarURL());
-
-             message.channel.send(stats4);
+message.channel.send("Coming soon!")
 }
         
 
