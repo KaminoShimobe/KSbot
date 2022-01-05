@@ -76,8 +76,7 @@ module.exports = {
     return ret;
 }
 
-var dur = fancyTimeFormat(song.length);
-console.log(dur);
+
 
   if (!serverQueue) {
     const queueContruct = {
@@ -112,7 +111,7 @@ console.log(dur);
 
             
             .setAuthor("Added to queue: " + song.title)
-            .setDescription(`${dur}`)
+            .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
@@ -140,11 +139,14 @@ console.log(dur);
     .on("error", error => console.error(error));
   dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
+  var dur = fancyTimeFormat(song.length);
+console.log(dur);
+
   let stats2 = new Discord.MessageEmbed()
 
             
             .setAuthor("Now Playing: " + song.title)
-            .setDescription(`${dur}`)
+            .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -162,11 +164,14 @@ function skip() {
     return message.channel.send("There is no song that I could skip!");
   serverQueue.connection.dispatcher.end();
 
+  var dur = fancyTimeFormat(song.length);
+console.log(dur);
+
   let stats3 = new Discord.MessageEmbed()
 
             
             .setAuthor("Skipped: " + song.title)
-            .setDescription(`${dur}`)
+            .setDescription("Duration: " + dur)
             .setColor("#FF0000")
             .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: " + message.author.username, message.author.avatarURL());
@@ -204,6 +209,9 @@ function queue2() {
     for(let i = 0; i < serverQueue.songs.length; i++){
         theQueue += (i + 1) + " " + serverQueue.songs[i].title + "\n"
     }
+
+    var dur = fancyTimeFormat(song.length);
+console.log(dur);
     
   let stats4 = new Discord.MessageEmbed()
 
