@@ -105,13 +105,13 @@ var dur = fancyTimeFormat(song.length);
   } else {
     serverQueue.songs.push(song);
 
-    
+    console.log(song.length);
 
     let stats = new Discord.MessageEmbed()
 
             
             .setAuthor("Added to queue: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -143,7 +143,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Now Playing: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
@@ -165,7 +165,7 @@ function skip() {
 
             
             .setAuthor("Skipped: " + song.title)
-            .setDescription("Author: " + song.author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
