@@ -158,6 +158,8 @@ function skip() {
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
 
+             message.channel.send("stats3");
+
 }
 
 function stop() {
