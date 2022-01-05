@@ -18,20 +18,14 @@ module.exports = {
 
             .catch(console.error);
             
-        }
+
             
         } else if(funct == "stop"){
-            message.delete()
-
-            .then(stop())
-
-            .catch(console.error);
+            stop();
         } else if(funct == "skip"){
-            message.delete()
-
-            .then(skip())
-
-            .catch(console.error);
+            skip();
+        } else if(funct == "queue"){
+            queue();
         }
         
 
@@ -173,7 +167,7 @@ function skip() {
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
 
-             message.channel.send("stats3");
+             message.channel.send(stats3);
 
 }
 
@@ -190,6 +184,32 @@ function stop() {
   serverQueue.connection.dispatcher.end();
 
   message.channel.send("Stopped playing songs!");
+}
+
+function queue() {
+  if (!message.member.voice.channel)
+    return message.channel.send(
+      "You have to be in a voice channel to see the queue!"
+    );
+    
+  if (!serverQueue)
+    return message.channel.send("There are no songs left in queue!");
+
+    var theQueue = "";
+
+    for(let i = 0; i < serverQueue.songs.length; i++){
+        theQueue += (i + 1) + " " + serverQueue.songs[i].title + "\n"
+    }
+    
+  let stats4 = new Discord.MessageEmbed()
+
+            
+            .setAuthor("Current Queue: ")
+            .setDescription(theQueue)
+            .setColor("#FF0000")
+            .setFooter("Checked by: ", message.author.avatarURL());
+
+             message.channel.send(stats4);
 }
         
 
