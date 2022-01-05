@@ -24,7 +24,7 @@ module.exports = {
             stop();
         } else if(funct == "skip"){
             skip();
-        } else if(funct == "queue"){
+        } else if(funct == "thequeue"){
             queue2();
         }
         
