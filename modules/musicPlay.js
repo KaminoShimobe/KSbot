@@ -4,28 +4,28 @@ const fs = require('fs'); // file manager
 const ytdl = require('ytdl-core');
 const songs = new Set();
 module.exports = {
-	name: 'musicPlay',
-	description: 'Music Playing',
-	execute(message, args, bot, queue, funct) {
-		 const serverQueue = queue.get(message.guild.id);
+    name: 'musicPlay',
+    description: 'Music Playing',
+    execute(message, args, bot, queue, funct) {
+         const serverQueue = queue.get(message.guild.id);
 
-		let messageArray = message.content.split(" ");
+        let messageArray = message.content.split(" ");
 
-		if(funct == "play"){
-			mPlay();
-		} else if(funct == "stop"){
-			stop();
-		} else if(funct == "skip"){
-			skip();
-		}
-		
+        if(funct == "play"){
+            mPlay();
+        } else if(funct == "stop"){
+            stop();
+        } else if(funct == "skip"){
+            skip();
+        }
+        
 
 
-	async function mPlay() {		
-		
-		
-		
-		 const voiceChannel = message.member.voice.channel;
+    async function mPlay() {        
+        
+        
+        
+         const voiceChannel = message.member.voice.channel;
   if (!voiceChannel)
     return message.channel.send(
       "You need to be in a voice channel to play music!"
@@ -41,6 +41,10 @@ module.exports = {
   const song = {
         title: songInfo.videoDetails.title,
         url: songInfo.videoDetails.video_url,
+        thumbnail: songInfo.videoDetails.thumbnail,
+        length: songInfo.videoDetails.lengthSeconds,
+        author: songInfo.videoDetails.author
+
    };
 
   if (!serverQueue) {
@@ -59,23 +63,54 @@ module.exports = {
 
     
       voiceChannel.join().then((connection) =>{
-		queueContruct.connection = connection;
-      	play(message.guild, queueContruct.songs[0])
+        queueContruct.connection = connection;
+        play(message.guild, queueContruct.songs[0])
       }).catch((err) => {
-    	 console.log(err);
+         console.log(err);
       queue.delete(message.guild.id);
       return message.channel.send(err);
     })
      
   } else {
     serverQueue.songs.push(song);
-    return message.channel.send(`${song.title} has been added to the queue!`);
+
+    function fancyTimeFormat(duration)
+{   
+    // Hours, minutes and seconds
+    var hrs = ~~(duration / 3600);
+    var mins = ~~((duration % 3600) / 60);
+    var secs = ~~duration % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+
+var dur = fancyTimeFormat(song.length);
+
+    let stats = new Discord.MessageEmbed()
+
+            
+            .setAuthor("Added to queue: " + song.title)
+            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setColor("#FF0000")
+            .setThumnail(song.thumbnail)
+            .setFooter("Queued by: ", message.author.avatarURL());
+
+    return message.channel.send(stats);
   }
 
 }
-		
+        
 
-		function play(guild, song) {
+        function play(guild, song) {
   const serverQueue = queue.get(guild.id);
   if (!song) {
     serverQueue.voiceChannel.leave();
@@ -91,7 +126,18 @@ module.exports = {
     })
     .on("error", error => console.error(error));
   dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-  serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+
+  let stats2 = new Discord.MessageEmbed()
+
+            
+            .setAuthor("Now Playing: " + song.title)
+            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setColor("#FF0000")
+            .setThumnail(song.thumbnail)
+            .setFooter("Queued by: ", message.author.avatarURL());
+
+    
+  serverQueue.textChannel.send(stats2);
 }
 
 function skip() {
@@ -102,6 +148,16 @@ function skip() {
   if (!serverQueue)
     return message.channel.send("There is no song that I could skip!");
   serverQueue.connection.dispatcher.end();
+
+  let stats3 = new Discord.MessageEmbed()
+
+            
+            .setAuthor("Skipped: " + song.title)
+            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setColor("#FF0000")
+            .setThumnail(song.thumbnail)
+            .setFooter("Queued by: ", message.author.avatarURL());
+
 }
 
 function stop() {
@@ -115,9 +171,11 @@ function stop() {
     
   serverQueue.songs = [];
   serverQueue.connection.dispatcher.end();
-}
-		
 
-	
-	},
+  message.channel.send("Stopped playing songs!");
+}
+        
+
+    
+    },
 };
