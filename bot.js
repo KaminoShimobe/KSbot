@@ -788,7 +788,7 @@ if(command === `!skip`){
 
 if(command === `!queue`){
      if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue, "queue");
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "thequeue");
 
     }
 } 
