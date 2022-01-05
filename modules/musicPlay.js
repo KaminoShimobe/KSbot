@@ -52,6 +52,7 @@ module.exports = {
         url: songInfo.videoDetails.video_url,
         length: songInfo.videoDetails.lengthSeconds,
         author: songInfo.videoDetails.author,
+        id: songInfo.videoDetails.videoId,
 
    };
 
@@ -112,7 +113,7 @@ var dur = fancyTimeFormat(song.length);
             .setAuthor("Added to queue: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(songInfo.thumnail_url)
+            .setThumnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
 
     return message.channel.send(stats);
@@ -144,7 +145,7 @@ var dur = fancyTimeFormat(song.length);
             .setAuthor("Now Playing: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(songInfo.thumnail_url)
+            .setThumnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
 
     
@@ -166,7 +167,7 @@ function skip() {
             .setAuthor("Skipped: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(songInfo.thumnail_url)
+            .setThumnail(`https://i.ytimg.com/vi/${song.id}/default.jpg`)
             .setFooter("Queued by: ", message.author.avatarURL());
 
              message.channel.send(stats3);
