@@ -99,7 +99,7 @@ var dur = fancyTimeFormat(song.length);
 
             
             .setAuthor("Added to queue: " + song.title)
-            .setDescription("Author: " + author + "\n Length: " + dur)
+            .setDescription("Author: " + song.author + "\n Length: " + dur)
             .setColor("#FF0000")
             .setThumnail(song.thumbnail)
             .setFooter("Queued by: ", message.author.avatarURL());
