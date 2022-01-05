@@ -50,7 +50,6 @@ module.exports = {
   const song = {
         title: songInfo.videoDetails.title,
         url: songInfo.videoDetails.video_url,
-        thumbnail: songInfo.videoDetails.thumbnails,
         length: songInfo.videoDetails.lengthSeconds,
         author: songInfo.videoDetails.author,
 
@@ -113,7 +112,7 @@ var dur = fancyTimeFormat(song.length);
             .setAuthor("Added to queue: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(song.thumbnail)
+            .setThumnail(songInfo.thumnail_url)
             .setFooter("Queued by: ", message.author.avatarURL());
 
     return message.channel.send(stats);
@@ -145,7 +144,7 @@ var dur = fancyTimeFormat(song.length);
             .setAuthor("Now Playing: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(song.thumbnail)
+            .setThumnail(songInfo.thumnail_url)
             .setFooter("Queued by: ", message.author.avatarURL());
 
     
@@ -167,7 +166,7 @@ function skip() {
             .setAuthor("Skipped: " + song.title)
             .setDescription("Author: " + song.author + "\n Length: " + song.length)
             .setColor("#FF0000")
-            .setThumnail(song.thumbnail)
+            .setThumnail(songInfo.thumnail_url)
             .setFooter("Queued by: ", message.author.avatarURL());
 
              message.channel.send(stats3);
