@@ -63,8 +63,8 @@ if (ytdl.validateURL(messageArray[1])) {
   song = {
     title: videos[0].title,
     url: videos[0].url,
-    id: videos[0].id ,
-    length: videos[0].length,
+    id: videos[0].videoId ,
+    length: videos[0].duration,
     author: videos[0].author
   };
 }
