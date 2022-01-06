@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 const fs = require('fs'); // file manager
 const ytdl = require('ytdl-core');
+const yts = require("yt-search");
 const songs = new Set();
 module.exports = {
     name: 'musicPlay',
@@ -46,15 +47,37 @@ module.exports = {
     );
   }
 
+  let song;
+if (ytdl.validateURL(messageArray[1])) {
   const songInfo = await ytdl.getInfo(messageArray[1]);
-  const song = {
-        title: songInfo.videoDetails.title,
+  song = {
+    title: songInfo.videoDetails.title,
         url: songInfo.videoDetails.video_url,
         length: songInfo.videoDetails.lengthSeconds,
         author: songInfo.videoDetails.author,
         id: songInfo.videoDetails.videoId,
+  }
+} else {
+  const {videos} = await yts(messageArray.slice(1).join(" "));
+  if (!videos.length) return message.channel.send("No songs were found!");
+  song = {
+    title: videos[0].title,
+    url: videos[0].url,
+    id: videos[0].id ,
+    length: videos[0].length,
+    author: videos[0].author
+  };
+}
 
-   };
+  // const songInfo = await ytdl.getInfo(messageArray[1]);
+  // const song = {
+  //       title: songInfo.videoDetails.title,
+  //       url: songInfo.videoDetails.video_url,
+  //       length: songInfo.videoDetails.lengthSeconds,
+  //       author: songInfo.videoDetails.author,
+  //       id: songInfo.videoDetails.videoId,
+
+  //  };
 
   
 
