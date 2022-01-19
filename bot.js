@@ -763,35 +763,7 @@ if(command === `!end` && messageArray[1] != undefined){
     }
 }     
 
-//music bot shadow commands
 
-  if(command === `${prefix}play`){
-    // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue, "play");
-
-    // }
-}     
-
-if(command === `${prefix}stop`){
-     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue, "stop");
-
-    // }
-}  
-
-if(command === `${prefix}skip`){
-     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue, "skip");
-
-    // }
-}  
-
-if(command === `${prefix}queue`){
-     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
-        bot.commands.get('musicPlay').execute(message, args, bot, queue, "thequeue");
-
-    // }
-} 
 
 
 // if(command === `!play`){
@@ -2039,6 +2011,36 @@ function midnight(){
 function shop(){
   bot.commands.get('shop').execute(message, args, con, bot, prefix);
 }
+
+//music bot shadow commands
+
+  if(command === `${prefix}play`){
+    // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "play");
+
+    // }
+}     
+
+if(command === `${prefix}stop`){
+     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "stop");
+
+    // }
+}  
+
+if(command === `${prefix}skip`){
+     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "skip");
+
+    // }
+}  
+
+if(command === `${prefix}queue`){
+     // if(message.author.id == '242118931769196544' || message.author.id == '803664127419351060'){  
+        bot.commands.get('musicPlay').execute(message, args, bot, queue, "thequeue");
+
+    // }
+} 
 
 // function customItem(){
   
