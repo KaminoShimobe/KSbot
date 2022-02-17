@@ -121,7 +121,7 @@ bot.on("ready", async () => {
 
     // bot.user.setPresence({ activity: { name: 'Road to KS-RPG | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
 //     bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
-      bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'busy' });
+      bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'dnd' });
 
 
         
@@ -130,7 +130,7 @@ bot.on("ready", async () => {
     function onlineUpdate(){
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
-     bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'busy' });
+     bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'dnd' });
 
     
         setTimeout(onlineUpdate, 2000);
