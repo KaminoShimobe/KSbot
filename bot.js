@@ -120,7 +120,8 @@ bot.on("ready", async () => {
         if(err) throw err;
 
     // bot.user.setPresence({ activity: { name: 'Road to KS-RPG | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
-    bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
+//     bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
+      bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'busy' });
 
 
         
