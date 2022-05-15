@@ -394,6 +394,8 @@ Bot.on('message', chatter => {
 //     Bot.say('Check out the bracket here: https://smash.gg/tournament/kamino-cup/event/smash-singles-season-1-0/overview')
 //   }
 
+
+
   if(chatter.message === '!user') {
       con.query(`SELECT * FROM twitchBeta WHERE id = '${chatter.user_id}'`, (err, rows) => {
         if(err) throw err;
@@ -539,9 +541,224 @@ Bot.on('message', chatter => {
         Bot.say(chatter.username + ', you cannot place that bet!');
         return;
       }
-         
-
+         if(twitchArray[0] == '!scale' && twitchArray[1] != undefined) {
+    let fortune = Math.floor(Math.random() * 12) +1;
+    let chance = Math.floor(Math.random() * 1000) + 1;
     
+    if(fortune == 1){
+        Bot.say(chatter.username +"1/10 bruh")
+    } else if(fortune == 2){
+        Bot.say(chatter.username +"2/10 aight")
+    } else if(fortune == 3){
+        Bot.say(chatter.username +"3/10 yike")
+    } else if(fortune == 4){
+       Bot.say(chatter.username +"4/10 woah")
+    } else if(fortune == 5){
+       Bot.say(chatter.username +"5/10 ok")
+    } else if(fortune == 6){
+        Bot.say(chatter.username +"6/10 geez")
+    } else if(fortune == 7){
+        Bot.say(chatter.username +"7/10 decent")
+    } else if(fortune == 8){
+       Bot.say(chatter.username +"8/10 :eyes:")
+    } else if(fortune == 9){
+        Bot.say(chatter.username +"9/10 😏")
+    } else if(fortune == 10){
+        Bot.say(chatter.username +"10/10 YES YES YES")
+    } else if(fortune == 11){
+        Bot.say(chatter.username +"10/10 😶")
+    } else if(fortune == 12){
+        Bot.say(chatter.username + " " + chance +"/10 🥵")
+    }
+    
+  } 
+
+    if(twitchArray[0] == '!8ball') {
+    let fortune = Math.floor(Math.random() * 45) + 1;
+
+        if(fortune === 1 ){
+
+            Bot.say(chatter.username +`Yes!`);
+
+        } else if(fortune === 2 ){
+
+            Bot.say(chatter.username +`No.`);
+
+        } else if(fortune === 3 ){
+
+            Bot.say(chatter.username +`Maybe...`);
+
+        } else if(fortune === 4 ){
+
+            Bot.say(chatter.username +`Possibly`);
+
+        } else if(fortune === 5 ){
+
+            Bot.say(chatter.username +`Not a chance LMAO`);
+
+        } else if(fortune === 6 ){
+
+            Bot.say(chatter.username +`Boi you already know 😏`);
+
+        } else if(fortune === 7 ){
+
+            Bot.say(chatter.username +`NAH NAH NAH`);
+
+        }   else if(fortune === 8 ){
+
+            message.reply(`yeah...... no.`);
+
+        } else if(fortune === 9 ){
+
+            Bot.say(chatter.username +`....what`);
+
+        } else if(fortune === 10 ){
+
+            Bot.say(chatter.username +`YAHHHHHH`);
+
+        } else if(fortune === 11 ){
+
+           Bot.say(chatter.username +`*Nope*`);
+
+        } else if(fortune === 12 ){
+
+            Bot.say(chatter.username +`🙄`);
+
+        } else if(fortune === 13 ){
+
+            Bot.say(chatter.username +`LMFAOOOOOOOOO`);
+
+        }  else if(fortune === 14 ){
+
+            Bot.say(chatter.username +`😶`);
+
+        } else if(fortune === 15 ){
+
+            Bot.say(chatter.username +`I meannnnnnnn`);
+
+        } else if(fortune === 16){
+
+            Bot.say(chatter.username +`Ye ye ye`);
+
+        } else if(fortune === 17 ){
+
+            Bot.say(chatter.username +`Wtf bruh`);
+
+        } else if(fortune === 18 ){
+
+            Bot.say(chatter.username +`*No*`);
+
+        } else if(fortune === 19 ){
+
+            Bot.say(chatter.username +`You slow af fam for asking this`);
+
+        } else if(fortune === 20 ){
+
+            Bot.say(chatter.username +`No BOI`);
+
+        } else if(fortune === 21 ){
+
+            Bot.say(chatter.username +`Lemme be real wit u chief...... that shit ain't happenin'`);
+
+        } else if(fortune === 22 ){
+
+            Bot.say(chatter.username +`Yessiree!`);
+
+        } else if(fortune === 23 ){
+
+            Bot.say(chatter.username +`Of course.`);
+        } else if(fortune === 24 ){
+
+            message.reply(`WDYM`);
+
+        } else if(fortune === 25 ){
+
+            Bot.say(chatter.username +`Of course not.`);
+
+        } else if(fortune === 26 ){
+
+            Bot.say(chatter.username +`NO NO NO NO`);
+
+        } else if(fortune === 27 ){
+
+            Bot.say(chatter.username +`YASSSSSSS`);
+
+        } else if(fortune === 28 ){
+
+            Bot.say(chatter.username +`If you don't stop asking stupid questions...`);
+
+        } else if(fortune === 29 ){
+
+            Bot.say(chatter.username +`Can you don't?`);
+
+        } else if(fortune === 30 ){
+
+            Bot.say(chatter.username +`Uh huh!`);
+
+        } else if(fortune === 31 ){
+
+            Bot.say(chatter.username +`Duhhhhhhhhhhh`);
+
+        } else if(fortune === 32 ){
+
+            Bot.say(chatter.username +`This looking like a yes dawg`);
+
+        } else if(fortune === 33 ){
+
+            Bot.say(chatter.username +`Hell yes.`);
+
+        } else if(fortune === 34 ){
+
+            Bot.say(chatter.username +`I dunno bro`);
+
+        } else if(fortune === 35 ){
+
+            Bot.say(chatter.username +`YEET`);
+
+        } else if(fortune === 36 ){
+
+            Bot.say(chatter.username +`:smirk:`);
+
+        } else if(fortune === 37 ){
+
+            Bot.say(chatter.username +`Mmmmmmm`);
+
+        } else if(fortune === 38 ){
+
+            Bot.say(chatter.username +`Mhm.`);
+
+        } else if(fortune === 39 ){
+
+            Bot.say(chatter.username +`That's the tea sis`);
+
+        } else if(fortune === 40 ){
+
+            Bot.say(chatter.username +`Are you in a headspace to receive information which could possibly hurt you?`);
+
+        } else if(fortune === 41 ){
+
+            Bot.say(chatter.username + `No shot 😂`);
+
+        } else if(fortune === 42 ){
+
+            Bot.say(chatter.username + `You smoking crack if you think so`);
+
+        } else if(fortune === 43 ){
+
+            Bot.say(chatter.username + `🤡`);
+
+        } else if(fortune === 44 ){
+
+           Bot.say(chatter.username + `I'd be lying if I said yes fam.`);
+
+        }else {
+
+            
+            Bot.say(chatter.username + `Idk I'm illiterate` );
+
+        }
+    
+  } 
 
   });
   }
@@ -554,6 +771,11 @@ Bot.on('message', chatter => {
    var die2 = Math.floor(Math.random() * 6) + 1;
     Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
   }  
+
+if(chatter.message === '!8ball') {
+   
+    Bot.say('You rolled a ' + die1 + ' and  a ' + die2 + '!');
+  } 
 
  }); 
 
