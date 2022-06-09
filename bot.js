@@ -351,6 +351,13 @@ const Bot = new TwitchBot({
   channels: ['kaminoshimobe']
 })
 
+
+Bot.on('connected', eep => {
+      console.log("twitch bot is being read!!")
+  
+});
+       
+       
 Bot.on('join', channel => {
   console.log(`Joined channel: ${channel}`)
   Bot.say('Kamino is streaming! HYPE IN THE CHAT!!');
