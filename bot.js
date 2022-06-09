@@ -348,7 +348,7 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 const Bot = new TwitchBot({
   username: 'ks_streamer',
   oauth: process.env.TWITCH,
-  channels: ['KaminoShimobe']
+  channels: ['kaminoshimobe']
 })
 
 Bot.on('join', channel => {
