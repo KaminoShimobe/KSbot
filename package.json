@@ -21,7 +21,7 @@
     "pixel-art": "^1.2.0",
     "canvas": "https://github.com/suti/node-canvas.git",
     "jimp": "^0.9.3",
-    "twitch-bot": "https://github.com/Hammster/twitch-bot.git",
+    "twitch-bot": "^1.3.5",
     "twitter": "^1.7.1",
     "cron" : "^1.8.2",
     "ytdl-core" : "^4.9.2",
