@@ -20,6 +20,7 @@ module.exports = {
             heh = 4;
             message.reply(" is trying to cheat the system???")
             msg = msg.replace(/||/g, "")
+            console.log(msg)
         }
         
         if(heh === 1 || heh === 2 || heh === 3){
