@@ -16,7 +16,7 @@ module.exports = {
             
         }
 
-        if(msg.contains("||")){
+        if(msg.includes("||")){
             heh = 4;
             message.reply(" is trying to cheat the system???")
         }
