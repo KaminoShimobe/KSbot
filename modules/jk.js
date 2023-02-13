@@ -15,6 +15,11 @@ module.exports = {
             .catch(console.error);
             
         }
+
+        if(msg.contains("||")){
+            heh = 4;
+            message.reply(" is trying to cheat the system???")
+        }
         
         if(heh === 1 || heh === 2 || heh === 3){
         
