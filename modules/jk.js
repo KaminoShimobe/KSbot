@@ -19,6 +19,7 @@ module.exports = {
         if(msg.includes("||")){
             heh = 4;
             message.reply(" is trying to cheat the system???")
+            msg = msg.replace(/||/g, "")
         }
         
         if(heh === 1 || heh === 2 || heh === 3){
