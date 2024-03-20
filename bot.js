@@ -1,11 +1,11 @@
-const Discord = require("discord.js");
+const fs = require('fs'); 
+const path = require('path');
 const Danbooru = require('danbooru');
 const mysql = require("mysql");
 const http = require('http');
 const pixel = require('pixel-art');
 const Jimp = require('jimp');
-const fs = require('fs'); 
-const path = require('path');
+
 const CronJob = require('cron').CronJob;
 
 const dailyCD = new Set();
@@ -46,8 +46,8 @@ const Battling = new Set();
 const PvP = new Set();
 const KOd = new Set();
 const queue = new Map();
-const token = process.env.BOT_TOKEN
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const token = process.env.BOT_TOKEN;
 
 
 
@@ -55,7 +55,7 @@ const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //commands setup
 client.commands = new Collection();
-const foldersPath = path.join(__dirname, 'commands');
+const foldersPath = path.join(__dirname, 'modules');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -413,4 +413,4 @@ var boop = makeid(30);
 
 //STANDO POWA!!!!!    
 
-bot.login(process.env.BOT_TOKEN);
+bot.login(token);
