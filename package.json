@@ -4,7 +4,8 @@
   "description": "Kamino's Discord Bot",
   "main": "bot.js",
    "engines": {
-    "node": "16.17.1"
+    "node": "20.x",
+    "npm": "10.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
