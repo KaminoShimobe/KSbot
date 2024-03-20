@@ -19,7 +19,7 @@ function boom(){
     }   
 }   
 
-boom();
+// boom();
 
 function bitesTheDust(){
         
