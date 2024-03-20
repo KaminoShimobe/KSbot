@@ -117,7 +117,7 @@ handleDisconnect();
 bot.once(Events.ClientReady, () => {
 
     console.log(`Bot is ready bois! ${bot.user.username}`);
-    var me = bot.users.cache.get('242118931769196544'); 
+    var me = bot.users.fetch('242118931769196544'); 
     console.log(me.username);
     const yeet = new EmbedBuilder()
             .setTitle("Update Live!")
