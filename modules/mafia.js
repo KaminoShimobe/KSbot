@@ -5,6 +5,195 @@ module.exports = {
 	name: 'mafia',
 	description: 'Play mafia in a server.',
 	execute(message, args, bot, mafiaPlayers, mafiaServers, mafia, villagers, doctors, detectives) {
+
+        function mafia(){
+            const mafiaPlayers = new Set();
+            const mafia = new Set();
+            const detectives = new Set();
+            const doctors = new Set();
+            const villagers = new Set();
+            var owner = message.author.id;
+            if(mafiaPlayers.has(owner)){
+                message.reply(" You can't join a mafia game if you've already created one!");
+                return;
+            }
+        
+            if(mafiaServers.has(message.guild.id)){
+                message.reply(" There's already a game of mafia going on in this server!");
+                return;
+            }
+            mafiaServers.add(message.guild.id);
+            mafiaPlayers.add(message.author.id);
+            message.delete()
+        
+                    .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+        
+                    .catch(console.error);
+            
+            const whereIam = message.channel;
+            let note = new Discord.MessageEmbed()
+        
+                    
+                    .setTitle(message.author.username + " is looking to play MAFIA!")
+                    .setDescription("You need at least 6 players to play! React with 👍 to join!")
+                    .setColor("#8a673d")
+                    .setFooter("must react with ✅ to start!", message.author.avatarURL())
+                    .setTimestamp();
+        
+        
+            
+            
+        whereIam.send(note).then(sentEmbed => {
+            sentEmbed.react("👍")
+            sentEmbed.react("✅")
+            sentEmbed.react("❌")
+           
+        
+        
+            bot.on('messageReactionAdd', (messageReaction, user) => {
+        if(user.bot)  return;
+        const { message, emoji } = messageReaction;
+        
+        if(emoji.name === "👍" && message.id === sentEmbed.id) {
+            if(mafiaPlayers.has(user.id)){
+                console.log("Already voted!");
+            } else {
+            mafiaPlayers.add(user.id)   
+            message.channel.send(user.username + " signed up!");    
+            }   
+        
+         }  else if(emoji.name === "✅" && message.id === sentEmbed.id) {
+                 if(user.id == owner){
+                 var players = Array.from(mafiaPlayers);
+                 var amount = players.length;
+                
+                 if(players.length < 5){
+                    sentEmbed.delete()
+        
+                    .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+        
+                    .catch(console.error);
+                    mafiaPlayers.clear(); 
+                    whereIam.send("Not enough players to start a game!");
+                    mafiaServers.delete(message.guild.id);
+                    return;
+                 } else {
+                    sentEmbed.delete()
+        
+                    .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+        
+                    .catch(console.error);
+        
+                    let firstNight = new Discord.MessageEmbed()
+        
+                    
+                    .setTitle("🌙 NIGHT TIME 🌙")
+                    .setDescription("Good night! Sleep well...")
+                    .setColor("#8a673d")
+                    .setTimestamp()
+                    .setFooter("Check your dms!");
+                    whereIam.send(firstNight);
+                   
+                   var attac;
+                   var detec;
+                   var protec;
+                   var ppl;
+        
+                   if(amount >= 6){  
+        
+                      // ratio : 1/3 
+                     var attac = Math.floor(amount / 3)
+                     // ratio : 1/6
+                     var detec = Math.floor(amount / 6) 
+                     // ratio : 1/6
+                     var protec = Math.floor(amount / 6) 
+                     // ratio : 2/3
+                     var ppl = Math.floor((amount * 2) / 3)
+                   }  else {
+                      var attac = Math.floor(amount / 2)
+                      var detec = 0
+                      var protec = 0
+                      var ppl = Math.floor(amount / 2)
+                   }
+        
+                    
+                    // var list;
+                    for ( var i = players.length-1; i >= 0 ; i-- ) {
+                        
+                        var duty = Math.floor((Math.random() * players.length));
+                        if(attac > 0){
+                            mafia.add(players[duty])
+                            attac -= 1;
+                            
+                            
+                            
+                            players.splice(duty, 1);
+                            
+                        } else if(detec > 0){
+                            detectives.add(players[duty])
+                            villagers.add(players[duty])
+                            detec -=1;
+                            ppl -=1;
+                            
+                            
+                            
+                            players.splice(duty, 1);
+                            
+                        } else if(protec > 0){
+                            doctors.add(players[duty])
+                            villagers.add(players[duty])
+                            protec -=1;
+                            ppl -=1;
+                            
+                            
+                            
+                            players.splice(duty, 1);
+                            
+                        }   else {
+                            villagers.add(players[duty])
+                            
+                            ppl -=1
+                            
+                            
+                            players.splice(duty, 1);
+        
+                        }   
+                        
+                    } 
+                    
+                    bot.commands.get('mafia').execute(message, args, bot, mafiaPlayers, mafiaServers, mafia, villagers, doctors, detectives);
+                    return;
+                 }
+                    
+                console.log(user.username + " is starting!");
+            } else {
+                console.log(user.username + " is Not the owner")
+            }
+                
+        
+         } else if(emoji.name === "❌" && message.id === sentEmbed.id) {
+                 if(user.id == owner){
+                  sentEmbed.delete()
+        
+                    .then(msg => console.log(`Deleted message from ${msg.author.username}`))
+        
+                    .catch(console.error);
+                    mafiaPlayers.clear(); 
+                    whereIam.send("Game Cancelled!");
+                    mafiaServers.delete(message.guild.id);
+                    return;
+        
+        
+                 } else {
+                   console.log(user.username + " is Not the owner")
+                 }
+               }
+        })
+        });
+        
+        
+            
+        }  
 	let messageArray = message.content.split(" ");
     
     var werewolves = Array.from(mafia);
