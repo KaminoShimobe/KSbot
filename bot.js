@@ -386,36 +386,36 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 
 
 
-con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
-        if(err) throw err;
-        let sql;
-        if(rows.length < 1) {
-            function makeid(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-}
-var boop = makeid(30);
-            sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp, customRole) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0}, ${false})`;
-            con.query(sql, console.log);
+// con.query(`SELECT * FROM server WHERE id = '${message.guild.id}'`, (err, rows) => {
+//         if(err) throw err;
+//         let sql;
+//         if(rows.length < 1) {
+//             function makeid(length) {
+//    var result           = '';
+//    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//    var charactersLength = characters.length;
+//    for ( var i = 0; i < length; i++ ) {
+//       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//    }
+//    return result;
+// }
+// var boop = makeid(30);
+//             sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp, customRole) VALUES ('${message.guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0}, ${false})`;
+//             con.query(sql, console.log);
             
             
-        }
+//         }
 
 
 
 
         
-            let prefix = rows[0].prefix;
-            let chests = rows[0].chests;
+//             let prefix = rows[0].prefix;
+//             let chests = rows[0].chests;
             
-        theCommands(prefix, chests);
+//         theCommands(prefix, chests);
          
-    }); 
+//     }); 
 
 //STANDO POWA!!!!!    
 
