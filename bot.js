@@ -122,7 +122,7 @@ bot.once(Events.ClientReady, () => {
             .setColor("#1f3c5b")
             .setTimestamp()
             .setFooter({text: "Version 1.9.3", iconURL: bot.user.avatarURL()});
-    bot.users.send('42118931769196544', yeet);
+    bot.users.send('242118931769196544', yeet);
     
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
@@ -152,9 +152,17 @@ onlineUpdate();
     
     try {
 
-        let link = bot.generateInvite(["ADMINISTRATOR"]);
+        let link = bot.generateInvite({
+            permissions: [
+              PermissionFlagsBits.SendMessages,
+              PermissionFlagsBits.ManageGuild,
+              PermissionFlagsBits.MentionEveryone,
+              PermissionFlagsBits.Administrator,
+            ],
+            scopes: [OAuth2Scopes.Bot],
+          });
 
-        console.log(link);
+        console.log(`KS BOT INVITE LINK: ${link}`);
 
     }   catch(e) {
 
@@ -248,7 +256,7 @@ bot.on(Events.guildCreate, guild => {
    return result;
 }
 var boop = makeid(30);
-bot.users.send('42118931769196544', boop + "is the randomized string for bites the dust");
+bot.users.send('242118931769196544', boop + "is the randomized string for bites the dust");
             
             sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0})`;
             con.query(sql, console.log);
@@ -259,17 +267,15 @@ bot.users.send('42118931769196544', boop + "is the randomized string for bites t
 
          
     });                     
-    me.send("Joined a guild: " + guild.name);
+    bot.users.send('242118931769196544', guild.name+ "is the guild I joined!");
     let generalChannel = guild.channels.cache.find(channel => channel.name === "general");
     var homie = bot.users.cache.get(guild.ownerID);
-    let yeet = new Discord.MessageEmbed()
-
-            
+    let yeet = new EmbedBuilder()
             .setTitle("Welcome to KS-Bot!")
             .setColor("#1f3c5b")
             .setDescription(`To get started, a channel designated for bot messages is recommended. \n !help gives a directory of all the commands \n !help :warning: shows admin commands \n To enable chests you need to designate a channel first! \n Any other concerns/questions please contact @KaminoShimobe#1190`)
             .setTimestamp()
-            .setFooter("Thank you for Inviting me!", bot.user.avatarURL);
+            .setFooter({text: "Thank you for Inviting me!", iconURL: bot.user.avatarURL});
         
     if(generalChannel){
         generalChannel.send(yeet);  
