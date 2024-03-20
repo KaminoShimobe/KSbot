@@ -51,7 +51,7 @@ const token = process.env.BOT_TOKEN;
 
 
 
-const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences] });
 
 //commands setup
 bot.commands = new Collection();
