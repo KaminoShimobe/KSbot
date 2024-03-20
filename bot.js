@@ -258,7 +258,7 @@ bot.users.send('242118931769196544', boop + "is the randomized string for bites 
             
             sql = `INSERT INTO server (id, greeting, channel, gchannel, whisper, expose, exposeSet, cooldown, stands, canvas, shop, prices, waifu, prefix, rpg, chests, chest, kqueen, kcrimson, farewell, level, weather, exp) VALUES ('${guild.id}', 'default', 'default', 'default', ${false}, '', ${false}, ${0}, ${true}, ${true}, '', '', ${true}, '!', ${false}, ${false}, ${0}, '${boop}', ${false}, 'nothing', ${0}, '', ${0})`;
             con.query(sql, console.log);
-            me.send(guild.name + " has been set up properly.")
+            bot.users.send('242118931769196544', guild.name + " has been set up properly.")
             
         }
 
@@ -300,7 +300,7 @@ bot.on(Events.guildDelete, guild => {
         } else {
 //          sql = `DELETE FROM server WHERE id = '${guild.id}'`;
 //          con.query(sql, console.log);
-            me.send(`I was kicked from ${guild.name} and that server's id was ${guild.id} \n Code a function to delete server's manually.`);
+        bot.users.send('242118931769196544',`I was kicked from ${guild.name} and that server's id was ${guild.id} \n Code a function to delete server's manually.`);
             return;
         }   
 
