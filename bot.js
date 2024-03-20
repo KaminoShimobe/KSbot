@@ -54,7 +54,7 @@ const token = process.env.BOT_TOKEN;
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //commands setup
-client.commands = new Collection();
+bot.commands = new Collection();
 const foldersPath = path.join(__dirname, 'modules');
 const commandFolders = fs.readdirSync(foldersPath);
 
@@ -65,7 +65,7 @@ for (const folder of commandFolders) {
 		const filePath = path.join(commandsPath, file);
 		const command = require(filePath);
 		if ('data' in command && 'execute' in command) {
-			client.commands.set(command.data.name, command);
+			bot.commands.set(command.data.name, command);
 		} else {
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 		}
