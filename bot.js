@@ -125,7 +125,7 @@ bot.once(Events.ClientReady, () => {
             .setDescription('The New Era is approaching...')
             .setTimestamp()
             .setFooter({text: "Version 1.9.3", iconURL: bot.user.avatarURL()});
-    me.send({ embeds: [yeet] }); 
+    bot.users.send('242118931769196544', { embeds: [yeet] }); 
     
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
