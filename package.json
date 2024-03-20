@@ -18,7 +18,6 @@
     "discord.js": "^14.9.0",
     "mysql": "^2.15.0",
     "pixel-art": "^1.2.0",
-    "canvas": "https://github.com/suti/node-canvas.git",
     "jimp": "^0.9.3",
     "cron" : "^1.8.2",
     "megaten": "^2.1.0",
