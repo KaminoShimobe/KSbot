@@ -86,10 +86,10 @@ function kaminoCard(){
     
 }
     
-if(command === `!card`){
-    if(message.author.id == '242118931769196544'){
-        kaminoCard();
+// if(command === `!card`){
+//     if(message.author.id == '242118931769196544'){
+//         kaminoCard();
 
-    }
+//     }
 
-}   
+// }   
