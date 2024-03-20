@@ -378,11 +378,11 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 
 });
 
-    if(message.author.bot) return;
+    // if(message.author.bot) return;
   
 
   //After this commands are not compatible with DMs
-    if(message.channel.type === "dm") return;
+    // if(message.channel.type === "dm") return;
 
 
 
