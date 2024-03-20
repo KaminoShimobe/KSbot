@@ -46,7 +46,7 @@ const Battling = new Set();
 const PvP = new Set();
 const KOd = new Set();
 const queue = new Map();
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const token = process.env.BOT_TOKEN;
 
 
