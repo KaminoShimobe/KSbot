@@ -120,6 +120,7 @@ bot.once(Events.ClientReady, () => {
     const yeet = new EmbedBuilder()
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
+            .setDescription('The New Era is approaching...')
             .setTimestamp()
             .setFooter({text: "Version 1.9.3", iconURL: bot.user.avatarURL()});
     bot.users.send('242118931769196544', yeet);
@@ -154,12 +155,9 @@ onlineUpdate();
 
         let link = bot.generateInvite({
             permissions: [
-              PermissionFlagsBits.SendMessages,
-              PermissionFlagsBits.ManageGuild,
-              PermissionFlagsBits.MentionEveryone,
-              PermissionFlagsBits.Administrator,
+              Permission.FLAGS.ADMINISTRATOR
             ],
-            scopes: [OAuth2Scopes.Bot],
+            scopes: ['bot'],
           });
 
         console.log(`KS BOT INVITE LINK: ${link}`);
