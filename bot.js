@@ -46,7 +46,7 @@ const Battling = new Set();
 const PvP = new Set();
 const KOd = new Set();
 const queue = new Map();
-const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, EmbedBuilder, Permissions } = require('discord.js');
 const token = process.env.BOT_TOKEN;
 
 
@@ -117,13 +117,15 @@ handleDisconnect();
 bot.once(Events.ClientReady, () => {
 
     console.log(`Bot is ready bois! ${bot.user.username}`);
+    var me = bot.users.cache.get('242118931769196544'); 
+    console.log(me.username);
     const yeet = new EmbedBuilder()
             .setTitle("Update Live!")
             .setColor("#1f3c5b")
             .setDescription('The New Era is approaching...')
             .setTimestamp()
             .setFooter({text: "Version 1.9.3", iconURL: bot.user.avatarURL()});
-    bot.users.send('242118931769196544', yeet);
+    me.send({ embeds: [yeet] }); 
     
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
