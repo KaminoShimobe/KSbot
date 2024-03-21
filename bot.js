@@ -56,7 +56,7 @@ const bot = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildsMembers,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildModeration,
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.DirectMessages,
@@ -169,7 +169,7 @@ onlineUpdate();
 
         let link = bot.generateInvite({
             permissions: [
-              "ADMINISTRATOR",
+              "Permissions.FLAGS.Administrator",
             ],
             scopes: ['bot'],
           });
