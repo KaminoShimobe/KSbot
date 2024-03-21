@@ -51,7 +51,19 @@ const token = process.env.BOT_TOKEN;
 
 
 
-const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildsMembers, GatewayIntentBits.GuildModeration, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildScheduledEvents, GatewayIntentBits.MessageContent,] });
+const bot = new Client({
+     intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildsMembers,
+        GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildScheduledEvents,
+        GatewayIntentBits.MessageContent,
+    ], 
+});
 
 //commands setup
 bot.commands = new Collection();
