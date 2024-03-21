@@ -170,7 +170,7 @@ onlineUpdate();
 
         let link = bot.generateInvite({
             permissions: [
-              "ADMINISTRATOR",
+              "Administrator",
             ],
             scopes: ['bot'],
           });
