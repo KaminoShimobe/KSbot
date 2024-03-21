@@ -170,7 +170,7 @@ onlineUpdate();
 
         let link = bot.generateInvite({
             permissions: [
-              "PermissionsBitField.Flags.Administrator",
+              "ADMINISTRATOR",
             ],
             scopes: ['bot'],
           });
