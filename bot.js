@@ -171,10 +171,8 @@ onlineUpdate();
         let link = bot.generateInvite({
             permissions: [
               "Administrator",
-
             ],
-            scopes: ['bot',
-        'application.commands'],
+            scopes: ['bot',],
           });
 
         console.log(`KS BOT INVITE LINK: ${link}`);
