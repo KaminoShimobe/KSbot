@@ -1,187 +1,190 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
-    name: 'eightBall',
-    description: 'Roll da 8ball, live by da 8ball.',
-    execute(message, args) {
+    data: new SlashCommandBuilder()
+    .setName('eightBall')
+    .setDescription('Roll da 8ball, live by da 8ball.'),
+   async execute(interaction) {
     let fortune = Math.floor(Math.random() * 45) + 1;
 
         if(fortune === 1 ){
 
-            message.reply(`Yes!`);
+            interaction.reply(`Yes!`);
 
         } else if(fortune === 2 ){
 
-            message.reply(`No.`);
+            interaction.reply(`No.`);
 
         } else if(fortune === 3 ){
 
-            message.reply(`Maybe...`);
+            interaction.reply(`Maybe...`);
 
         } else if(fortune === 4 ){
 
-            message.reply(`Possibly`);
+            interaction.reply(`Possibly`);
 
         } else if(fortune === 5 ){
 
-            message.reply(`Not a chance LMAO`);
+            interaction.reply(`Not a chance LMAO`);
 
         } else if(fortune === 6 ){
 
-            message.reply(`Boi you already know :smirk:`);
+            interaction.reply(`Boi you already know :smirk:`);
 
         } else if(fortune === 7 ){
 
-            message.reply(`NAH NAH NAH`);
+            interaction.reply(`NAH NAH NAH`);
 
         }   else if(fortune === 8 ){
 
-            message.reply(`yeah...... no.`);
+            interaction.reply(`yeah...... no.`);
 
         } else if(fortune === 9 ){
 
-            message.reply(`....what`);
+            interaction.reply(`....what`);
 
         } else if(fortune === 10 ){
 
-            message.reply(`YAHHHHHH`);
+            interaction.reply(`YAHHHHHH`);
 
         } else if(fortune === 11 ){
 
-            message.reply(`*Nope*`);
+            interaction.reply(`*Nope*`);
 
         } else if(fortune === 12 ){
 
-            message.reply(`:rolling_eyes:`);
+            interaction.reply(`:rolling_eyes:`);
 
         } else if(fortune === 13 ){
 
-            message.reply(`**LMFAOOOOOOOOO**`);
+            interaction.reply(`**LMFAOOOOOOOOO**`);
 
         }  else if(fortune === 14 ){
 
-            message.reply(`:no_mouth:`);
+            interaction.reply(`:no_mouth:`);
 
         } else if(fortune === 15 ){
 
-            message.reply(`I meannnnnnnn`);
+            interaction.reply(`I meannnnnnnn`);
 
         } else if(fortune === 16){
 
-            message.reply(`Ye ye ye`);
+            interaction.reply(`Ye ye ye`);
 
         } else if(fortune === 17 ){
 
-            message.reply(`Wtf bruh`);
+            interaction.reply(`Wtf bruh`);
 
         } else if(fortune === 18 ){
 
-            message.reply(`*No*`);
+            interaction.reply(`*No*`);
 
         } else if(fortune === 19 ){
 
-            message.reply(`You slow af fam for asking this`);
+            interaction.reply(`You slow af fam for asking this`);
 
         } else if(fortune === 20 ){
 
-            message.reply(`No BOI`);
+            interaction.reply(`No BOI`);
 
         } else if(fortune === 21 ){
 
-            message.reply(`Lemme be real wit u chief...... that shit ain't happenin'`);
+            interaction.reply(`Lemme be real wit u chief...... that shit ain't happenin'`);
 
         } else if(fortune === 22 ){
 
-            message.reply(`Yessiree!`);
+            interaction.reply(`Yessiree!`);
 
         } else if(fortune === 23 ){
 
-            message.reply(`Of course.`);
+            interaction.reply(`Of course.`);
         } else if(fortune === 24 ){
 
-            message.reply(`WDYM`);
+            interaction.reply(`WDYM`);
 
         } else if(fortune === 25 ){
 
-            message.reply(`Of course not.`);
+            interaction.reply(`Of course not.`);
 
         } else if(fortune === 26 ){
 
-            message.reply(`NO NO NO NO`);
+            interaction.reply(`NO NO NO NO`);
 
         } else if(fortune === 27 ){
 
-            message.reply(`YASSSSSSS`);
+            interaction.reply(`YASSSSSSS`);
 
         } else if(fortune === 28 ){
 
-            message.reply(`If you don't stop asking stupid questions...`);
+            interaction.reply(`If you don't stop asking stupid questions...`);
 
         } else if(fortune === 29 ){
 
-            message.reply(`Can you don't?`);
+            interaction.reply(`Can you don't?`);
 
         } else if(fortune === 30 ){
 
-            message.reply(`Uh huh!`);
+            interaction.reply(`Uh huh!`);
 
         } else if(fortune === 31 ){
 
-            message.reply(`Duhhhhhhhhhhh`);
+            interaction.reply(`Duhhhhhhhhhhh`);
 
         } else if(fortune === 32 ){
 
-            message.reply(`This looking like a yes dawg`);
+            interaction.reply(`This looking like a yes dawg`);
 
         } else if(fortune === 33 ){
 
-            message.reply(`Hell yes.`);
+            interaction.reply(`Hell yes.`);
 
         } else if(fortune === 34 ){
 
-            message.reply(`I dunno bro`);
+            interaction.reply(`I dunno bro`);
 
         } else if(fortune === 35 ){
 
-            message.reply(`YEET`);
+            interaction.reply(`YEET`);
 
         } else if(fortune === 36 ){
 
-            message.reply(`:smirk:`);
+            interaction.reply(`:smirk:`);
 
         } else if(fortune === 37 ){
 
-            message.reply(`Mmmmmmm`);
+            interaction.reply(`Mmmmmmm`);
 
         } else if(fortune === 38 ){
 
-            message.reply(`Mhm.`);
+            interaction.reply(`Mhm.`);
 
         } else if(fortune === 39 ){
 
-            message.reply(`That's the tea sis`);
+            interaction.reply(`That's the tea sis`);
 
         } else if(fortune === 40 ){
 
-            message.reply(`Are you in a headspace to receive information which could possibly hurt you?`);
+            interaction.reply(`Are you in a headspace to receive information which could possibly hurt you?`);
 
         } else if(fortune === 41 ){
 
-            message.reply(`No shot :joy:`);
+            interaction.reply(`No shot :joy:`);
 
         } else if(fortune === 42 ){
 
-            message.reply(`You smoking crack if you think so`);
+            interaction.reply(`You smoking crack if you think so`);
 
         } else if(fortune === 43 ){
 
-            message.reply(`:clown:`);
+            interaction.reply(`:clown:`);
 
         } else if(fortune === 44 ){
 
-            message.reply(`I'd be lying if I said yes fam.`);
+            interaction.reply(`I'd be lying if I said yes fam.`);
 
         }else {
 
-            message.reply(`Idk I'm illiterate`);
+            interaction.reply(`Idk I'm illiterate`);
 
         }
          
