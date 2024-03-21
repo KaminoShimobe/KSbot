@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('eightball')
+        .setName('8ball')
         .setDescription('Roll da 8ball, live by da 8ball.'),
    async execute(interaction) {
     let fortune = Math.floor(Math.random() * 45) + 1;
