@@ -51,7 +51,7 @@ const token = process.env.BOT_TOKEN;
 
 
 
-const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.Guilds_Members, GatewayIntentBits.Guild_Moderation, GatewayIntentBits.Guild_Message_Reactions, GatewayIntentBits.Direct_Messages, GatewayIntentBits.Guild_Scheduled_Events, GatewayIntentBits.Message_Content] });
+const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.Guilds_Members, GatewayIntentBits.Guild_Moderation, GatewayIntentBits.Guild_Message_Reactions, GatewayIntentBits.Direct_Messages, GatewayIntentBits.Guild_Scheduled_Events, GatewayIntentBits.Message_Content,] });
 
 //commands setup
 bot.commands = new Collection();
@@ -157,7 +157,7 @@ onlineUpdate();
 
         let link = bot.generateInvite({
             permissions: [
-              Permissions.FLAGS.ADMINISTRATOR
+              Permissions.FLAGS.Administrator,
             ],
             scopes: ['bot'],
           });
