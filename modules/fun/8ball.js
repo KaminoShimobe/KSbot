@@ -78,11 +78,11 @@ module.exports = {
     const question = interaction.options.getString('question') ?? 'No question asked';
     const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')
-        .setTitle(`8ball says...`)
-        .setAuthor({ name: 'KS Bot'})
-        .setDescription(responses[fortune - 1])
+        .setTitle(responses[fortune - 1])
+        .setAuthor({ name: '8ball says...'})
+        .setDescription(question)
         .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
-        .addFields({ name: 'Question:' , value: question})
+        // .addFields({ name: 'Question:' , value: question})
         .setTimestamp()
         .setFooter({text: interaction.user.username, iconURL: interaction.user.avatarURL()});
         //`${interaction.user.username} asked`
