@@ -7,8 +7,8 @@ module.exports = {
         .addStringOption(option =>
 			option
 				.setName('question')
-				.setDescription('What you want to be scaled'))
-                .setRequired(true),
+				.setDescription('What you want to be scaled')
+                .setRequired(true)),
    async execute(interaction) {
     let fortune = Math.floor(Math.random() * 12) +1;
     let chance = Math.floor(Math.random() * 1000) + 1;
@@ -71,6 +71,6 @@ module.exports = {
 
 
 
-         return;
+         
     },
 };
