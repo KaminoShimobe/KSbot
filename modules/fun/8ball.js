@@ -1,19 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder, Client } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
 
-const bot = new Client({
-    intents: [
-       GatewayIntentBits.Guilds,
-       GatewayIntentBits.GuildPresences,
-       GatewayIntentBits.GuildMessages,
-       GatewayIntentBits.GuildMembers,
-       GatewayIntentBits.GuildInvites,
-       GatewayIntentBits.GuildModeration,
-       GatewayIntentBits.GuildMessageReactions,
-       GatewayIntentBits.DirectMessages,
-       GatewayIntentBits.GuildScheduledEvents,
-       GatewayIntentBits.MessageContent,
-   ], 
-});
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -72,6 +59,21 @@ module.exports = {
         `I'd be lying if I said yes fam.`,
         `Idk I'm illiterate`
     ]
+    const bot = new Client({
+        intents: [
+           GatewayIntentBits.Guilds,
+           GatewayIntentBits.GuildPresences,
+           GatewayIntentBits.GuildMessages,
+           GatewayIntentBits.GuildMembers,
+           GatewayIntentBits.GuildInvites,
+           GatewayIntentBits.GuildModeration,
+           GatewayIntentBits.GuildMessageReactions,
+           GatewayIntentBits.DirectMessages,
+           GatewayIntentBits.GuildScheduledEvents,
+           GatewayIntentBits.MessageContent,
+       ], 
+    });
+
     console.log(responses.length + ' responses for 8ball logged.')
     const question = interaction.options.getString('question') ?? 'No question asked';
     const responseEmbed = new EmbedBuilder()
