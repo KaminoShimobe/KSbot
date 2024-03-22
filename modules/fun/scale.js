@@ -19,12 +19,14 @@ module.exports = {
         "4/10 woah",
         "5/10 mid",
         "6/10 geez",
+        "7/10 decent",
+        "8/10 :eyes:",
         "9/10 😏",
         "10/10 PEAK",
         "10/10 😶",
         chance +"/10 🥵"
     ]
-    console.log(responses.length + ' responses for 8ball logged.')
+    console.log(responses.length + ' responses for scale logged.')
     const question = interaction.options.getString('question') ?? 'No question asked';
     const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')

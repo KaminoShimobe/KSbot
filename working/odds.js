@@ -1,9 +1,49 @@
+const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
+
 module.exports = {
-    name: 'odds',
-    description: 'what are the odds right?',
-    execute(message, args) {
+    data: new SlashCommandBuilder()
+        .setName('odds')
+        .setDescription('What are the odds right?')
+        .addStringOption(option =>
+			option
+				.setName('question')
+				.setDescription('What situation are you checking the odds for?')
+                .setRequired(true)),
+   async execute(interaction) {
     let fortune = Math.floor(Math.random() * 100);
+    let roulette = 
     let chance = Math.floor(Math.random() * 2) + 1;
+    responses = [
+        "You got absolutely **no shot** at this happening. You should give up **NOW**.",
+        fortune + "%. Yikes...",
+        "If your rng is goated with this " + fortune + "% chance then MAYBE",
+        "These odds kinda low. They a " + fortune + "% chance...",
+        fortune + "%. LMAO good luck",
+        "I mean " + fortune + "% chance isn't the WORST.",
+        "These aint the worst bruh. " + fortune + "% chance!",
+        fortune + "%. So-so",
+        "Room for improvement lowkey. " + fortune + "%",
+        "Nah you got a decent shot. " + fortune + "% chance...",
+        fortune + "%. mmmmm",
+        "This " + fortune + "% chance may be enough chief",
+        "Ayo bruh a " + fortune + "% chance?!?!?! go for it",
+        fortune + "%. Not bad!!",
+        "With a " + fortune + "% chance you should be straight",
+        "You got a  " + fortune + "% chance just do it already.",
+        fortune + "%. AYO?????",
+        "LETS FUCKING GO YOU GOT " + fortune + "%!!!"
+    ]
+    const responseEmbed = new EmbedBuilder()
+        .setColor('#f87d35')
+        .setTitle(responses[fortune - 1])
+        .setAuthor({ name: 'KS Bot says the odds are...'})
+        .setDescription(question)
+        .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
+        // .addFields({ name: 'Question:' , value: question})
+        .setTimestamp()
+        .setFooter({text: interaction.user.username + ' asked', iconURL: interaction.user.avatarURL()});
+
+
     if(fortune == 0){
         message.reply("You got absolutely **no shot** at this happening. You should give up **NOW**.")  
     } else if(fortune > 0 && fortune <= 10){
