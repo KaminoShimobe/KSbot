@@ -1,4 +1,19 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Client } = require('discord.js');
+
+const bot = new Client({
+    intents: [
+       GatewayIntentBits.Guilds,
+       GatewayIntentBits.GuildPresences,
+       GatewayIntentBits.GuildMessages,
+       GatewayIntentBits.GuildMembers,
+       GatewayIntentBits.GuildInvites,
+       GatewayIntentBits.GuildModeration,
+       GatewayIntentBits.GuildMessageReactions,
+       GatewayIntentBits.DirectMessages,
+       GatewayIntentBits.GuildScheduledEvents,
+       GatewayIntentBits.MessageContent,
+   ], 
+});
 
 module.exports = {
     data: new SlashCommandBuilder()
