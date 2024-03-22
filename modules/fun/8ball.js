@@ -79,7 +79,7 @@ module.exports = {
     const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')
         .setTitle(`8ball says...`)
-        .setAuthor({ name: 'KS Bot', iconURL: bot.user.AvatarURL() })
+        .setAuthor({ name: 'KS Bot', iconURL: bot.user.avatarURL() })
         .setDescription(responses[fortune - 1])
         .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
         .addFields({ name: 'Question:' , value: question})
