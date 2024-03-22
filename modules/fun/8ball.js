@@ -58,15 +58,17 @@ module.exports = {
         `Idk I'm illiterate`
     ]
     console.log(responses.length + ' responses for 8ball logged.')
+    const question = interaction.options.getString('question') ?? 'No question asked';
     const responseEmbed = new EmbedBuilder()
-        .setColor()
-        .setTitle(`${interaction.user.username} asks...`)
-        .setAuthor({ name: `${interaction.user.username}`, iconURL: `${interaction.user.AvatarURL()}` })
-        .setDescription(`${responses[fortune - 1]}`)
+        .setColor('#f87d35')
+        .setTitle(`8ball says...`)
+        .setAuthor({ name: 'KS Bot', iconURL: bot.user.AvatarURL() })
+        .setDescription(responses[fortune - 1])
         .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
+        .addFields({ name: 'Question:' , value: question})
         .setTimestamp()
-        .setFooter({text: "KS Bot", iconURL: bot.user.avatarURL()});
-
+        .setFooter({text: interaction.user.username, iconURL: interaction.user.avatarURL()});
+        //`${interaction.user.username} asked`
         await interaction.reply({embeds: [responseEmbed]});
         // if(fortune === 1 ){
 
