@@ -393,6 +393,8 @@ con.query(`SELECT * FROM server WHERE id = '${member.guild.id}'`, (err, rows) =>
 
 });
 
+
+
     // if(message.author.bot) return;
   
 

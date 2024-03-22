@@ -84,7 +84,7 @@ module.exports = {
         .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
         // .addFields({ name: 'Question:' , value: question})
         .setTimestamp()
-        .setFooter({text: interaction.user.username + 'asked', iconURL: interaction.user.avatarURL()});
+        .setFooter({text: interaction.user.username + ' asked', iconURL: interaction.user.avatarURL()});
         //`${interaction.user.username} asked`
         await interaction.reply({embeds: [responseEmbed]});
         // if(fortune === 1 ){

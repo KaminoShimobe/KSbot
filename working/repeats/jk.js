@@ -1,7 +1,14 @@
+const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
+
 module.exports = {
-    name: 'jk',
-    description: 'Deletes your message, has a 25% chance to backfire.',
-    execute(message, args) {
+   data: new SlashCommandBuilder()
+       .setName('jk')
+       .setDescription('Roll da 8ball, live by da 8ball. 8ball is always right!')
+       .addStringOption(option =>
+        option
+           .setName('question')
+           .setDescription('What you want 8ball to predict')),
+  async execute(interaction) {
     var heh = Math.floor(Math.random() * 4) + 1;
     var emoji = Math.floor(Math.random() * 5) + 1;
     var msg = message.content.replace("!jk", "");
