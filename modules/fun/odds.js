@@ -48,7 +48,7 @@ module.exports = {
     } else if(fortune == 100){
         responder = responses[chance + 16];
     } 
-
+    const question = interaction.options.getString('question') ?? 'No question asked';
     const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')
         .setTitle(responder)
@@ -59,7 +59,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({text: interaction.user.username + ' asked', iconURL: interaction.user.avatarURL()});
 
-    await interaction.reply({embeds: [responseEmbed]});
+        await interaction.reply({embeds: [responseEmbed]});
     // if(fortune == 0){
     //     message.reply("You got absolutely **no shot** at this happening. You should give up **NOW**.")  
     // } else if(fortune > 0 && fortune <= 10){
