@@ -6,7 +6,22 @@ module.exports = {
         .setName('server')
         .setDescription('Gives info about the current server you are in'),
    async execute(interaction) {
-
+    
+    const bot = new Client({
+        intents: [
+           GatewayIntentBits.Guilds,
+           GatewayIntentBits.GuildPresences,
+           GatewayIntentBits.GuildMessages,
+           GatewayIntentBits.GuildMembers,
+           GatewayIntentBits.GuildInvites,
+           GatewayIntentBits.GuildModeration,
+           GatewayIntentBits.GuildMessageReactions,
+           GatewayIntentBits.DirectMessages,
+           GatewayIntentBits.GuildScheduledEvents,
+           GatewayIntentBits.MessageContent,
+       ], 
+   });
+   
     var con_fig = {
         host: "us-cdbr-iron-east-01.cleardb.net",
         user: "bc9ba9370a9522",
@@ -58,7 +73,7 @@ module.exports = {
         if (rows[0].channel == "default"){
             channel = `**/toggle channel** to set a bot channel!`;
         } else {
-            channel = interaction.channels.find(rows[0].channel);
+            channel = bot.channels.cache.get(rows[0].channel);
         }
         let whisper = rows[0].whisper;
         let expose = rows[0].exposeSet;
@@ -119,7 +134,7 @@ module.exports = {
             cr = "No";
         }
     
-        var owner = interaction.users.find(interaction.guild.ownerID);
+        var owner = bot.users.find(interaction.guild.ownerID);
         
 
         var supporter = "";
