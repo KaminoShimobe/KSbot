@@ -1,11 +1,50 @@
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
-const { con } = require('./app/bot.js');
+const mysql = require("mysql");
 
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName('server')
         .setDescription('Gives info about the current server you are in'),
    async execute(interaction) {
+
+    var con_fig = {
+        host: "us-cdbr-iron-east-01.cleardb.net",
+        user: "bc9ba9370a9522",
+        password: process.env.MY_SQL,
+        database: "heroku_b523f37d8e76acb",
+        port: 3306
+    };
+    
+    var con;
+    
+    // function handleDisconnect() {
+    con = mysql.createConnection(con_fig);
+    con.connect(function(err) {              // The server is either down
+        if(err) {                                     // or restarting (takes a while sometimes).
+          console.log('error when connecting to db:', err);
+          setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+        }                                     // to avoid a hot loop, and to allow our node script to
+      });   
+    
+    process.on('uncaughtException', function (err) {
+        console.log(err);
+        
+    }); 
+        
+    
+    
+    con.on('error', function(err) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+          console.log("disconnecting from server command")                        // lost due to either server restart, or a
+        } else {                                      // connnection idle timeout (the wait_timeout
+           throw err;                                 // server variable configures this)
+        }
+    });
+        //    }
+    
+    // handleDisconnect();
+
    con.query(`SELECT * FROM server WHERE id = '${interaction.guild.id}'`, (err, rows) => {
         if(err) throw err;
 
