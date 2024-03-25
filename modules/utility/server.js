@@ -133,8 +133,8 @@ module.exports = {
         } else {
             cr = "No";
         }
-        console.log(interaction.guild.ownerID)
-        var owner = bot.users.cache.get(interaction.guild.ownerID);
+        console.log(interaction.guild.ownerId)
+        var owner = bot.users.cache.get(interaction.guild.ownerId);
         
 
         var supporter = "";
