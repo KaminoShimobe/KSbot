@@ -133,9 +133,9 @@ module.exports = {
         } else {
             cr = "No";
         }
-    
+        console.log(interaction.guild.ownerID)
         var owner = bot.users.cache.get(interaction.guild.ownerID);
-        
+        console.
 
         var supporter = "";
         
