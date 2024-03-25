@@ -58,7 +58,7 @@ module.exports = {
         if (rows[0].channel == "default"){
             channel = `**/toggle channel** to set a bot channel!`;
         } else {
-            channel = interaction.channels.cache.get(rows[0].channel);
+            channel = interaction.channels.find(rows[0].channel);
         }
         let whisper = rows[0].whisper;
         let expose = rows[0].exposeSet;
@@ -119,7 +119,7 @@ module.exports = {
             cr = "No";
         }
     
-        var owner = interaction.users.cache.get(interaction.guild.ownerID);
+        var owner = interaction.users.find(interaction.guild.ownerID);
         
 
         var supporter = "";
