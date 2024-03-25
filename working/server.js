@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
-const { con } = require('./bot.js');
+const { con } = require('./app/bot.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()

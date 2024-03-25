@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const http = require('http');
 const pixel = require('pixel-art');
 const Jimp = require('jimp');
-
+const con = require('./sql.js');
 const CronJob = require('cron').CronJob;
 
 const dailyCD = new Set();
@@ -110,37 +110,38 @@ var con_fig = {
     port: 3306
 };
 
-var con;
+con(con_fig);
+// var con;
 
-function handleDisconnect() {
-con = mysql.createConnection(con_fig);
-con.connect(function(err) {              // The server is either down
-    if(err) {                                     // or restarting (takes a while sometimes).
-      console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    }                                     // to avoid a hot loop, and to allow our node script to
-  });   
+// function handleDisconnect() {
+// con = mysql.createConnection(con_fig);
+// con.connect(function(err) {              // The server is either down
+//     if(err) {                                     // or restarting (takes a while sometimes).
+//       console.log('error when connecting to db:', err);
+//       setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+//     }                                     // to avoid a hot loop, and to allow our node script to
+//   });   
 
-process.on('uncaughtException', function (err) {
-    console.log(err);
+// process.on('uncaughtException', function (err) {
+//     console.log(err);
     
-}); 
+// }); 
     
 
 
-con.on('error', function(err) {
-    console.log('db error', err);
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-      handleDisconnect();                         // lost due to either server restart, or a
-    } else {                                      // connnection idle timeout (the wait_timeout
-       throw err;                                 // server variable configures this)
-    }
-});
-       }
+// con.on('error', function(err) {
+//     console.log('db error', err);
+//     if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+//       handleDisconnect();                         // lost due to either server restart, or a
+//     } else {                                      // connnection idle timeout (the wait_timeout
+//        throw err;                                 // server variable configures this)
+//     }
+// });
+//        }
 
+// exports.con = connector;
 
-
-handleDisconnect();
+// handleDisconnect();
 
 bot.once(Events.ClientReady, () => {
 
@@ -150,7 +151,7 @@ bot.once(Events.ClientReady, () => {
             .setColor("#1f3c5b")
             .setDescription('The New Era is approaching...')
             .setTimestamp()
-            .setFooter({text: "Version 1.9.3", iconURL: bot.user.avatarURL()});
+            .setFooter({text: "Version 2.0.0", iconURL: bot.user.avatarURL()});
     bot.users.send('242118931769196544', { embeds: [yeet] }); 
     
     con.query(`SELECT * FROM user`, (err, rows) => {
