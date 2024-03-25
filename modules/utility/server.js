@@ -135,7 +135,7 @@ module.exports = {
         }
         console.log(interaction.guild.ownerID)
         var owner = bot.users.cache.get(interaction.guild.ownerID);
-        console.
+        
 
         var supporter = "";
         
