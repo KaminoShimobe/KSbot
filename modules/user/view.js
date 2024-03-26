@@ -145,7 +145,7 @@ module.exports = {
     var green = hexToRgb(color).g
     var blue = hexToRgb(color).b
     
-
+    
     Jimp.read('/app/ksBotUserBG3.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [red] }]);
@@ -153,7 +153,7 @@ module.exports = {
                             image.color([{ apply: 'blue', params: [blue] }]);
                             Jimp.read('/app/profileMask.png')
                     .then(mask => {
-                        var avatar = interaction.user.avatarURL({format: 'png'})
+                        var avatar = interaction.user.displayAvatarURL({format: 'png'})
                         if(avatar == undefined){
                             avatar = "https://icon-library.com/images/blue-discord-icon/blue-discord-icon-17.jpg"
                         }
