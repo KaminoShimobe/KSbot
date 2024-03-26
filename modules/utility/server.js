@@ -134,7 +134,8 @@ module.exports = {
             cr = "No";
         }
         console.log(interaction.guild.ownerId)
-        var owner = interaction.guild.members.cache.get(interaction.guild.ownerId);
+        console.log(interaction.guild.members)
+        var owner = interaction.guild.members.fetch(interaction.guild.ownerId);
         console.log(owner.globalName)
 
         var supporter = "";
