@@ -90,8 +90,8 @@ module.exports = {
    
 
     function getMoney() {
-        return new Promise((resolve, reject) => {
-
+        return new Promise(function(resolve, reject) {
+            var daMoney;
             con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
                 if(err) throw err;
         
@@ -138,7 +138,7 @@ module.exports = {
                     color = "#000000"
                 }    
                 setOutput(rows);
-                resolve(money);
+                resolve(daMoney);
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         //         if(err) throw err;
                 
