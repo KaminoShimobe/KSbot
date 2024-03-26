@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
-const Canvas = require('canvas');
+const Canvas = require('@napi-rs/canvas');
 const Jimp = require('jimp');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
+const { request } = require('undici');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -63,11 +64,21 @@ module.exports = {
     
     // handleDisconnect();
     console.log("image time")
-    const canvas = Canvas.createCanvas(500, 250);
-    const ctx = canvas.getContext('2d');
+    const canvas = Canvas.createCanvas(700, 250);
+    const context = canvas.getContext('2d');
 
     
-
+    const applyText = (canvas, text) => {
+        const context = canvas.getContext('2d');
+        let fontSize = 70;
+    
+        do {
+            context.font = `${fontSize -= 10}px sans-serif`;
+        } while (context.measureText(text).width > canvas.width - 300);
+    
+        return context.font;
+    };
+    
    
 
     
@@ -151,66 +162,52 @@ module.exports = {
                             image.color([{ apply: 'red', params: [red] }]);
                             image.color([{ apply: 'green', params: [green] }]);
                             image.color([{ apply: 'blue', params: [blue] }]);
-                            Jimp.read('/app/profileMask.png')
-                    .then(mask => {
-                        var avatar = interaction.user.displayAvatarURL({format: 'png'})
-                        if(avatar == undefined){
-                            avatar = "https://icon-library.com/images/blue-discord-icon/blue-discord-icon-17.jpg"
-                        }
+                            const backgroundImage = new Image();
+                            backgroundImage.src = image;
+                            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-                        Jimp.read(avatar)
-                    .then(pfp => {
+                            context.strokeStyle = '#0099ff';
+                            context.strokeRect(0, 0, canvas.width, canvas.height);
 
-                        pfp.resize(200, 200);
-                        pfp.mask(mask, 0, 0);
-                        image.composite(pfp, 25, 10, [Jimp.BLEND_SOURCE_OVER, 0, 0])
-                        Jimp.loadFont(Jimp.FONT_SANS_16_BLACK).then(font => {
-                             // image.print(font, 52, 215, message.author.username, 150)
-                             image.print(font, 230, 15, `"` + bio + `"`, 250)
-                             image.print(
-                                    font,
-                                    50,
-                                    215,
-                                    {
-                                      text: message.author.username,
-                                      alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-                                      alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
-                                    },
-                                    150,
-                                    30
-                                  )
+                            context.font = '28px sans-serif';
+                            context.fillStyle = '#ffffff';
+                            context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
 
-                              function onBuffer(err, buffer) {
-                                if (err) throw err;
-                                console.log(buffer);
-                            }
-                             var p = stand.replace("「", "")
-                             var standName = p.replace("」", "")
-                             image.print(font, 230, 60, "Money: $" + money, 250)
-                             image.print(font, 230, 80, "Gifts: " + gifts, 250)
-                             image.print(font, 230, 100, "Achievements: " + achievement, 250)
-                             image.print(font, 230, 120, "Stand: " + standName, 250)
-                             image.print(font, 230, 140, "Spouse: " + marriage, 250)
-                             image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
+                            context.font = applyText(canvas, `${interaction.member.displayName}!`);
+                            context.fillStyle = '#ffffff';
+                            context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+
+                            context.beginPath();
+                            context.arc(125, 125, 100, 0, Math.PI * 2, true);
+                            context.closePath();
+                            context.clip();
+
+                            const { body } = request(interaction.user.displayAvatarURL({ format: 'jpg' }));
+		                    const avatar = new Image();
+		                    avatar.src = Buffer.from(body.arrayBuffer());
+		                    context.drawImage(avatar, 25, 25, 200, 200);
+
+                            const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
+
+		                    interaction.reply({ files: [attachment] });
+                            //  var p = stand.replace("「", "")
+                            //  var standName = p.replace("」", "")
+                            //  image.print(font, 230, 60, "Money: $" + money, 250)
+                            //  image.print(font, 230, 80, "Gifts: " + gifts, 250)
+                            //  image.print(font, 230, 100, "Achievements: " + achievement, 250)
+                            //  image.print(font, 230, 120, "Stand: " + standName, 250)
+                            //  image.print(font, 230, 140, "Spouse: " + marriage, 250)
+                            //  image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
                              //var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
-                            const file = new AttachmentBuilder("test.png");
+            //                 const file = new AttachmentBuilder("test.png");
                         
-                            // image.write("test.png");
+            //                 // image.write("test.png");
 
 
         
-            interaction.channel.send( { files: [file] })
+            // interaction.channel.send( { files: [file] })
            
-        
-
-        })
-
-        })
-                            
-
-        })
-           
-          
+       
                             
                           })
                           .catch(err => {
