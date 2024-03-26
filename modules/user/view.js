@@ -138,6 +138,7 @@ module.exports = {
                     color = "#000000"
                 }    
                 setOutput(rows);
+                daMoney = money;
                 resolve(daMoney);
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         //         if(err) throw err;
