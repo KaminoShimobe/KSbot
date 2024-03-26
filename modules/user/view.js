@@ -220,7 +220,7 @@ module.exports = {
         
         });
     });
-    console.log(money)
+    console.log(output.money)
                             const background = await readFile('/app/ksBotUserBG3.png');
                             const backgroundImage = new Image();
                             backgroundImage.src = background;
@@ -233,7 +233,7 @@ module.exports = {
                             context.fillStyle = '#ffffff';
                             context.fillText("Money: $" + output.money, canvas.width / 2.5, canvas.height / 3.5);
 
-                            context.font = applyText(canvas, `${interaction.member.displayName}!`);
+                            context.font = applyText(canvas, `${interaction.member.displayName}`);
                             context.fillStyle = '#ffffff';
                             context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
 
