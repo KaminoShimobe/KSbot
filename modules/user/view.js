@@ -27,6 +27,12 @@ module.exports = {
        ], 
    });
    
+   let output; 
+    const setOutput = (rows) => { 
+        output = rows; 
+        console.log(output); 
+    } 
+
     var con_fig = {
         host: "us-cdbr-iron-east-01.cleardb.net",
         user: "bc9ba9370a9522",
@@ -42,9 +48,138 @@ module.exports = {
     con.connect(function(err) {              // The server is either down
         if(err) {                                     // or restarting (takes a while sometimes).
           console.log('error when connecting to db:', err);
-          setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+          return; // We introduce a delay before attempting to reconnect,
         }                                     // to avoid a hot loop, and to allow our node script to
-      });   
+        con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
+            if(err) throw err;
+    
+            if(rows.length < 1) {
+                interaction.reply(`You have no user! \n Type ${prefix}user to create one!`);
+                
+                return;
+            }
+    
+            let money = rows[0].money;
+            let bio = rows[0].bio;
+            let patreon = rows[0].patreon;
+            var color = rows[0].hue;
+            let rank = rows[0].rank;
+            let marriage = rows[0].marriage;
+            let stand = rows[0].stand;
+            let wins = rows[0].wins;
+            let losses = rows[0].losses;
+            var spouse = '';
+            let gifts = rows[0].gift;
+    
+            if(wins == undefined){
+                wins = 0;
+            } 
+            if(losses == undefined){
+                losses = 0;
+            }
+    
+    
+            var supporter = "";
+            if(patreon == 1){
+                supporter = " ⭐";
+            } else if(patreon == 2){
+                supporter = "⭐⭐";
+            } else if(patreon == 3){
+                supporter = "⭐⭐⭐";
+            } else if(patreon == 4) {
+                supporter = "⭐⭐⭐⭐";
+            } else {
+                supporter = "";
+            }
+                
+            if(color.startsWith("#") != true){
+                color = "#000000"
+            }    
+            setOutput(rows); 
+    //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
+    //         if(err) throw err;
+            
+            
+    //             let mission;
+    //             let achievement = rows[0].completed;
+    //             let tasks = rows[0].tasks;
+    //             let status = rows[0].status;    
+    
+            
+    
+    // //   function hexToRgb(hex) {
+    // //   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    // //   return result ? {
+    // //     r: parseInt(result[1], 16),
+    // //     g: parseInt(result[2], 16),
+    // //     b: parseInt(result[3], 16)
+    // //   } : null;
+    // //     }
+    
+    // //     var red = hexToRgb(color).r
+    // //     var green = hexToRgb(color).g
+    // //     var blue = hexToRgb(color).b
+        
+        
+                                
+    //                             //  var p = stand.replace("「", "")
+    //                             //  var standName = p.replace("」", "")
+    //                             //  image.print(font, 230, 60, "Money: $" + money, 250)
+    //                             //  image.print(font, 230, 80, "Gifts: " + gifts, 250)
+    //                             //  image.print(font, 230, 100, "Achievements: " + achievement, 250)
+    //                             //  image.print(font, 230, 120, "Stand: " + standName, 250)
+    //                             //  image.print(font, 230, 140, "Spouse: " + marriage, 250)
+    //                             //  image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
+    //                              //var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
+    //             //                 const file = new AttachmentBuilder("test.png");
+                            
+    //             //                 // image.write("test.png");
+    
+    
+            
+    //             // interaction.channel.send( { files: [file] })
+               
+           
+                                
+                              
+    
+    //         // message.channel.send(stats);
+    //         if(tasks.indexOf("Get 10 Ws with 0 Ls") != -1 && wins == 10 && losses == 0){
+    //                     var done = tasks.replace("Get 10 Ws with 0 Ls", "complete");
+    //                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+    //                     con.query(mission);
+    //                     interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `You think this is a game??`");
+    //                 }   
+    
+    //         if(tasks.indexOf("Get 100 Ws with 0 Ls") != -1 && wins == 100 && losses == 0){
+    //                     var done = tasks.replace("Get 100 Ws with 0 Ls", "complete");
+    //                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+    //                     con.query(mission);
+    //                     interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Certified G.O.A.T of Rock Paper Scissors.`");
+    //                 }   
+            
+    //         if(tasks.indexOf("Get $1M") != -1 && money >= 1000000){
+    //                     var done = tasks.replace("Get $1M", "complete");
+    //                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+    //                     con.query(mission);
+    //                     interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Millionaire gang!`");
+    //                 } 
+    //         if(tasks.indexOf("Get $10M") != -1 && money >= 10000000){
+    //                     var done = tasks.replace("Get $10M", "complete");
+    //                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+    //                     con.query(mission);
+    //                     interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Multimillionaire squad!`");
+    //                 } 
+    //         if(tasks.indexOf("Get $100M") != -1 && money >= 100000000){
+    //                     var done = tasks.replace("Get $100M", "complete");
+    //                     mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
+    //                     con.query(mission);
+    //                     interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Capitalism!!!`");
+    //                 } 
+            
+    //         });
+        });
+    });   
     
     process.on('uncaughtException', function (err) {
         console.log(err);
@@ -84,142 +219,10 @@ module.exports = {
 
     
 
-    let output; 
-    const setOutput = (rows) => { 
-        output = rows; 
-        console.log(output); 
-    } 
+    
     console.log(interaction.user.id)
 
-    con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
-        if(err) throw err;
-
-        if(rows.length < 1) {
-            interaction.reply(`You have no user! \n Type ${prefix}user to create one!`);
-            
-            return;
-        }
-
-        let money = rows[0].money;
-        let bio = rows[0].bio;
-        let patreon = rows[0].patreon;
-        var color = rows[0].hue;
-        let rank = rows[0].rank;
-        let marriage = rows[0].marriage;
-        let stand = rows[0].stand;
-        let wins = rows[0].wins;
-        let losses = rows[0].losses;
-        var spouse = '';
-        let gifts = rows[0].gift;
-
-        if(wins == undefined){
-            wins = 0;
-        } 
-        if(losses == undefined){
-            losses = 0;
-        }
-
-
-        var supporter = "";
-        if(patreon == 1){
-            supporter = " ⭐";
-        } else if(patreon == 2){
-            supporter = "⭐⭐";
-        } else if(patreon == 3){
-            supporter = "⭐⭐⭐";
-        } else if(patreon == 4) {
-            supporter = "⭐⭐⭐⭐";
-        } else {
-            supporter = "";
-        }
-            
-        if(color.startsWith("#") != true){
-            color = "#000000"
-        }    
-        setOutput(rows); 
-    con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
-        if(err) throw err;
-        
-        
-            let mission;
-            let achievement = rows[0].completed;
-            let tasks = rows[0].tasks;
-            let status = rows[0].status;    
-
-        
-
-//   function hexToRgb(hex) {
-//   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-//   return result ? {
-//     r: parseInt(result[1], 16),
-//     g: parseInt(result[2], 16),
-//     b: parseInt(result[3], 16)
-//   } : null;
-//     }
-
-//     var red = hexToRgb(color).r
-//     var green = hexToRgb(color).g
-//     var blue = hexToRgb(color).b
     
-    
-                            
-                            //  var p = stand.replace("「", "")
-                            //  var standName = p.replace("」", "")
-                            //  image.print(font, 230, 60, "Money: $" + money, 250)
-                            //  image.print(font, 230, 80, "Gifts: " + gifts, 250)
-                            //  image.print(font, 230, 100, "Achievements: " + achievement, 250)
-                            //  image.print(font, 230, 120, "Stand: " + standName, 250)
-                            //  image.print(font, 230, 140, "Spouse: " + marriage, 250)
-                            //  image.print(font, 230, 160, "Win Ratio: " + wins + ":" + losses, 250).write("test.png");
-                             //var imgBuf = image.getBuffer(Jimp.AUTO, onBuffer)
-            //                 const file = new AttachmentBuilder("test.png");
-                        
-            //                 // image.write("test.png");
-
-
-        
-            // interaction.channel.send( { files: [file] })
-           
-       
-                            
-                          
-
-        // message.channel.send(stats);
-        if(tasks.indexOf("Get 10 Ws with 0 Ls") != -1 && wins == 10 && losses == 0){
-                    var done = tasks.replace("Get 10 Ws with 0 Ls", "complete");
-                    mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
-                    con.query(mission);
-                    interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `You think this is a game??`");
-                }   
-
-        if(tasks.indexOf("Get 100 Ws with 0 Ls") != -1 && wins == 100 && losses == 0){
-                    var done = tasks.replace("Get 100 Ws with 0 Ls", "complete");
-                    mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
-                    con.query(mission);
-                    interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Certified G.O.A.T of Rock Paper Scissors.`");
-                }   
-        
-        if(tasks.indexOf("Get $1M") != -1 && money >= 1000000){
-                    var done = tasks.replace("Get $1M", "complete");
-                    mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
-                    con.query(mission);
-                    interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Millionaire gang!`");
-                } 
-        if(tasks.indexOf("Get $10M") != -1 && money >= 10000000){
-                    var done = tasks.replace("Get $10M", "complete");
-                    mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
-                    con.query(mission);
-                    interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Multimillionaire squad!`");
-                } 
-        if(tasks.indexOf("Get $100M") != -1 && money >= 100000000){
-                    var done = tasks.replace("Get $100M", "complete");
-                    mission = `UPDATE achievements SET tasks = '${done}', completed = ${achievement + 1} WHERE id = '${message.author.id}'`;
-                    con.query(mission);
-                    interaction.send(":star: **ACHIEVEMENT UNLOCKED** :star: \n `Capitalism!!!`");
-                } 
-        
-        });
-    });
     console.log(output)
     console.log(output.money)
                             const background = await readFile('/app/ksBotUserBG3.png');
