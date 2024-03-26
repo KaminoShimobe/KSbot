@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
-const Canvas = require('@napi-rs/canvas');
+const { createCanvas, Image } = require('@napi-rs/canvas');
 const Jimp = require('jimp');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { request } = require('undici');
@@ -64,7 +64,7 @@ module.exports = {
     
     // handleDisconnect();
     console.log("image time")
-    const canvas = Canvas.createCanvas(700, 250);
+    const canvas = createCanvas(700, 250);
     const context = canvas.getContext('2d');
 
     
