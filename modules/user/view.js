@@ -84,9 +84,13 @@ module.exports = {
 
     
 
-    
-    var money;
-    
+    let output; 
+    const setOutput = (rows) => { 
+        output = rows; 
+        console.log(output); 
+    } 
+    console.log(interaction.user.id)
+
     con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
         if(err) throw err;
 
@@ -132,7 +136,7 @@ module.exports = {
         if(color.startsWith("#") != true){
             color = "#000000"
         }    
-    
+        setOutput(rows); 
     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         if(err) throw err;
         
@@ -227,7 +231,7 @@ module.exports = {
 
                             context.font = '28px sans-serif';
                             context.fillStyle = '#ffffff';
-                            context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
+                            context.fillText("Money: $" + output.money, canvas.width / 2.5, canvas.height / 3.5);
 
                             context.font = applyText(canvas, `${interaction.member.displayName}!`);
                             context.fillStyle = '#ffffff';
