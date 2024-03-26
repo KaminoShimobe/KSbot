@@ -230,8 +230,7 @@ module.exports = {
     console.log(interaction.user.id)
 
     
-    console.log(output)
-    console.log(output.money)
+    
                     const value = async ()=> {
                         var mon = await getMoney();
                         return mon
