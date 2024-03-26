@@ -92,7 +92,7 @@ module.exports = {
     let value;
     function getMoney(callback) {
     
-            con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
+         return con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
                 if(err) throw err;
         
                 if(rows.length < 1) {
@@ -227,6 +227,7 @@ module.exports = {
      
     } 
     function setMoney(money){
+        console.log("callbacked " + money)
         value = money;
     }
     getMoney(setMoney);
