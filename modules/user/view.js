@@ -89,7 +89,7 @@ module.exports = {
     };
     
    
-    let value = "";
+    let value = 0;
     function getMoney(callback) {
     
          return con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
@@ -231,7 +231,7 @@ module.exports = {
         value = money;
         console.log("Value is now " + value)
     }
-    getMoney(setMoney);
+    await getMoney(setMoney);
     
     console.log(value);
     console.log(interaction.user.id)
