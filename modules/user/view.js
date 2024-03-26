@@ -85,9 +85,9 @@ module.exports = {
     
 
     
-
+    var money;
     
-  con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
+    con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
         if(err) throw err;
 
         if(rows.length < 1) {
@@ -144,49 +144,21 @@ module.exports = {
 
         
 
-  function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-    }
+//   function hexToRgb(hex) {
+//   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+//   return result ? {
+//     r: parseInt(result[1], 16),
+//     g: parseInt(result[2], 16),
+//     b: parseInt(result[3], 16)
+//   } : null;
+//     }
 
-    var red = hexToRgb(color).r
-    var green = hexToRgb(color).g
-    var blue = hexToRgb(color).b
+//     var red = hexToRgb(color).r
+//     var green = hexToRgb(color).g
+//     var blue = hexToRgb(color).b
     
     
-                            const background = readFile('/app/ksBotUserBG3.png');
-                            const backgroundImage = new Image();
-                            backgroundImage.src = background;
-                            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
-                            context.strokeStyle = '#0099ff';
-                            context.strokeRect(0, 0, canvas.width, canvas.height);
-
-                            context.font = '28px sans-serif';
-                            context.fillStyle = '#ffffff';
-                            context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
-
-                            context.font = applyText(canvas, `${interaction.member.displayName}!`);
-                            context.fillStyle = '#ffffff';
-                            context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-                            context.beginPath();
-                            context.arc(125, 125, 100, 0, Math.PI * 2, true);
-                            context.closePath();
-                            context.clip();
-
-                            const { body } = request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-		                    const avatar = new Image();
-		                    avatar.src = Buffer.from(body.arrayBuffer());
-		                    context.drawImage(avatar, 25, 25, 200, 200);
-
-                            const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
-
-		                    interaction.reply({ files: [attachment] });
+                            
                             //  var p = stand.replace("「", "")
                             //  var standName = p.replace("」", "")
                             //  image.print(font, 230, 60, "Money: $" + money, 250)
@@ -244,5 +216,35 @@ module.exports = {
         
         });
     });
+    console.log(money)
+                            const background = await readFile('/app/ksBotUserBG3.png');
+                            const backgroundImage = new Image();
+                            backgroundImage.src = background;
+                            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+                            context.strokeStyle = '#0099ff';
+                            context.strokeRect(0, 0, canvas.width, canvas.height);
+
+                            context.font = '28px sans-serif';
+                            context.fillStyle = '#ffffff';
+                            context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
+
+                            context.font = applyText(canvas, `${interaction.member.displayName}!`);
+                            context.fillStyle = '#ffffff';
+                            context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+
+                            context.beginPath();
+                            context.arc(125, 125, 100, 0, Math.PI * 2, true);
+                            context.closePath();
+                            context.clip();
+
+                            const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
+		                    const avatar = new Image();
+		                    avatar.src = Buffer.from(await body.arrayBuffer());
+		                    context.drawImage(avatar, 25, 25, 200, 200);
+
+                            const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
+
+		                    interaction.reply({ files: [attachment] });
     },
 };
