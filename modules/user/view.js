@@ -146,12 +146,12 @@ module.exports = {
     var blue = hexToRgb(color).b
     
 
-    Jimp.read('./modules/ksBotUserBG3.png')
+    Jimp.read('./ksBotUserBG3.png')
                     .then(image => {
                             image.color([{ apply: 'red', params: [red] }]);
                             image.color([{ apply: 'green', params: [green] }]);
                             image.color([{ apply: 'blue', params: [blue] }]);
-                            Jimp.read('./modules/profileMask.png')
+                            Jimp.read('./profileMask.png')
                     .then(mask => {
                         var avatar = interaction.user.avatarURL({format: 'png'})
                         if(avatar == undefined){
