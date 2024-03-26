@@ -137,7 +137,7 @@ module.exports = {
                 if(color.startsWith("#") != true){
                     color = "#000000"
                 }    
-                console.log(money)
+                console.log(money + " callbacked")
                 callback(money);
                 
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
@@ -226,7 +226,7 @@ module.exports = {
          
      
     } 
-    function setMoney(getMoney){
+    function setMoney(money){
         value = money;
     }
     getMoney(setMoney);
