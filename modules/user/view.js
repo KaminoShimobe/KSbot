@@ -138,7 +138,7 @@ module.exports = {
                     color = "#000000"
                 }    
                 console.log(money + " callbacked")
-                callback(money);
+                build(money);
                 
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         //         if(err) throw err;
@@ -231,42 +231,44 @@ module.exports = {
         value = money;
         console.log("Value is now " + value)
     }
-    await getMoney(setMoney);
+    getMoney(setMoney);
     
     console.log(value);
     console.log(interaction.user.id)
 
     
+                            async function build(money){
+                                const background = await readFile('/app/ksBotUserBG3.png');
+                                const backgroundImage = new Image();
+                                backgroundImage.src = background;
+                                context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     
+                                context.strokeStyle = '#0099ff';
+                                context.strokeRect(0, 0, canvas.width, canvas.height);
+    
+                                context.font = '28px sans-serif';
+                                context.fillStyle = '#ffffff';
+                                context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
+    
+                                context.font = applyText(canvas, `${interaction.member.displayName}`);
+                                context.fillStyle = '#ffffff';
+                                context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+    
+                                context.beginPath();
+                                context.arc(125, 125, 100, 0, Math.PI * 2, true);
+                                context.closePath();
+                                context.clip();
+    
+                                const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
+                                const avatar = new Image();
+                                avatar.src = Buffer.from(await body.arrayBuffer());
+                                context.drawImage(avatar, 25, 25, 200, 200);
+    
+                                const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
+    
+                                interaction.reply({ files: [attachment] });
+                            }
                     
-                            const background = await readFile('/app/ksBotUserBG3.png');
-                            const backgroundImage = new Image();
-                            backgroundImage.src = background;
-                            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
-                            context.strokeStyle = '#0099ff';
-                            context.strokeRect(0, 0, canvas.width, canvas.height);
-
-                            context.font = '28px sans-serif';
-                            context.fillStyle = '#ffffff';
-                            context.fillText("Money: $" + value, canvas.width / 2.5, canvas.height / 3.5);
-
-                            context.font = applyText(canvas, `${interaction.member.displayName}`);
-                            context.fillStyle = '#ffffff';
-                            context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-                            context.beginPath();
-                            context.arc(125, 125, 100, 0, Math.PI * 2, true);
-                            context.closePath();
-                            context.clip();
-
-                            const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-		                    const avatar = new Image();
-		                    avatar.src = Buffer.from(await body.arrayBuffer());
-		                    context.drawImage(avatar, 25, 25, 200, 200);
-
-                            const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
-
-		                    interaction.reply({ files: [attachment] });
+                            
     },
 };
