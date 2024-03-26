@@ -135,7 +135,7 @@ module.exports = {
         }
         console.log(interaction.guild.ownerId)
         var owner = bot.users.fetch(interaction.guild.ownerId);
-        
+        console.log(owner.globalName)
 
         var supporter = "";
         
@@ -144,7 +144,7 @@ module.exports = {
         .setColor('#f87d35')
         .setTitle('Server Settings')
         .setAuthor({ name: interaction.guild.name + "'s"})
-        .setDescription("ID: " + interaction.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefixe + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
+        .setDescription("ID: " + interaction.guild.id + "\n Owner: " + owner.globalName + " \n Server Prefix: " + prefixe + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
         .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
         .setTimestamp();
 
