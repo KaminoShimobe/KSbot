@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const mysql = require("mysql");
 const { createCanvas, Image } = require('@napi-rs/canvas');
 const Jimp = require('jimp');
+const { readFile } = require('fs/promises');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { request } = require('undici');
 
@@ -157,13 +158,9 @@ module.exports = {
     var blue = hexToRgb(color).b
     
     
-    Jimp.read('/app/ksBotUserBG3.png')
-                    .then(image => {
-                            image.color([{ apply: 'red', params: [red] }]);
-                            image.color([{ apply: 'green', params: [green] }]);
-                            image.color([{ apply: 'blue', params: [blue] }]);
+                            const background = readFile('/app/ksBotUserBG3.png');
                             const backgroundImage = new Image();
-                            backgroundImage.src = image;
+                            backgroundImage.src = background;
                             context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
                             context.strokeStyle = '#0099ff';
@@ -209,11 +206,7 @@ module.exports = {
            
        
                             
-                          })
-                          .catch(err => {
-                            console.error(err);
-                            // Handle an exception.
-                          });
+                          
 
         // message.channel.send(stats);
         if(tasks.indexOf("Get 10 Ws with 0 Ls") != -1 && wins == 10 && losses == 0){
