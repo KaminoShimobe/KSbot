@@ -229,8 +229,10 @@ module.exports = {
     function setMoney(money){
         console.log("callbacked " + money)
         value = money;
+        console.log("Value is now" + value)
     }
     getMoney(setMoney);
+    console.log(getMoney(setMoney));
     console.log(value);
     console.log(interaction.user.id)
 
