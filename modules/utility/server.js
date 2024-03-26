@@ -134,10 +134,8 @@ module.exports = {
             cr = "No";
         }
         console.log(interaction.guild.ownerId)
-        var owner = bot.users.fetch(interaction.guild.ownerId);
-        owner.then(function(id){
-            console.log(id.globalName);
-        })
+        var owner = interaction.options.getUser(interaction.guild.ownerId)
+        console.log(owner.globalName)
 
         var supporter = "";
         
