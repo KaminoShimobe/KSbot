@@ -89,10 +89,10 @@ module.exports = {
     };
     
    
-    let value = 0;
-    function getMoney(callback) {
     
-         return con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
+    
+    
+        con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
                 if(err) throw err;
         
                 if(rows.length < 1) {
@@ -225,15 +225,10 @@ module.exports = {
             });
          
      
-    } 
-    function setMoney(money){
-        console.log("callbacked " + money)
-        value = money;
-        console.log("Value is now " + value)
-    }
-    getMoney(setMoney);
     
-    console.log(value);
+    
+    
+    
     console.log(interaction.user.id)
 
     
@@ -252,7 +247,7 @@ module.exports = {
     
                                 context.font = applyText(canvas, `${interaction.member.displayName}`);
                                 context.fillStyle = '#ffffff';
-                                context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+                                context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
     
                                 context.beginPath();
                                 context.arc(125, 125, 100, 0, Math.PI * 2, true);
