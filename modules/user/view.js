@@ -220,6 +220,7 @@ module.exports = {
         
         });
     });
+    console.log(output)
     console.log(output.money)
                             const background = await readFile('/app/ksBotUserBG3.png');
                             const backgroundImage = new Image();
