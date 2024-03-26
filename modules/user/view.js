@@ -5,6 +5,7 @@ const Jimp = require('jimp');
 const { readFile } = require('fs/promises');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { request } = require('undici');
+const { validateHeaderValue } = require("http");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -88,10 +89,9 @@ module.exports = {
     };
     
    
-
-    function getMoney() {
-        return new Promise(function(resolve, reject) {
-            var daMoney;
+    let value;
+    function getMoney(callback) {
+    
             con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
                 if(err) throw err;
         
@@ -137,9 +137,9 @@ module.exports = {
                 if(color.startsWith("#") != true){
                     color = "#000000"
                 }    
-                setOutput(rows);
-                daMoney = money;
-                resolve(daMoney);
+                console.log(money)
+                callback(money);
+                
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         //         if(err) throw err;
                 
@@ -224,18 +224,18 @@ module.exports = {
         //         });
             });
          
-     })
+     
     } 
-
-    
+    function setMoney(getMoney){
+        value = money;
+    }
+    getMoney(setMoney);
+    console.log(value);
     console.log(interaction.user.id)
 
     
     
-                    const value = async ()=> {
-                        var mon = await getMoney();
-                        return mon;
-                    }
+                    
                             const background = await readFile('/app/ksBotUserBG3.png');
                             const backgroundImage = new Image();
                             backgroundImage.src = background;
