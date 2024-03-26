@@ -50,7 +50,46 @@ module.exports = {
           console.log('error when connecting to db:', err);
           return; 
         }    
-       function getMoney() {
+        
+    });   
+    
+    process.on('uncaughtException', function (err) {
+        console.log(err);
+        
+    }); 
+        
+    
+    
+    con.on('error', function(err) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+          console.log("disconnecting from user command")                        // lost due to either server restart, or a
+        } else {                                      // connnection idle timeout (the wait_timeout
+           throw err;                                 // server variable configures this)
+        }
+    });
+        //    }
+    
+    // handleDisconnect();
+    console.log("image time")
+    const canvas = createCanvas(700, 250);
+    const context = canvas.getContext('2d');
+
+    
+    const applyText = (canvas, text) => {
+        const context = canvas.getContext('2d');
+        let fontSize = 70;
+    
+        do {
+            context.font = `${fontSize -= 10}px sans-serif`;
+        } while (context.measureText(text).width > canvas.width - 300);
+    
+        return context.font;
+    };
+    
+   
+
+    function getMoney() {
         const promise = new Promise((resolve, reject) => {
 
             con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
@@ -185,46 +224,7 @@ module.exports = {
             });
          
      })
-    }  
-    });   
-    
-    process.on('uncaughtException', function (err) {
-        console.log(err);
-        
-    }); 
-        
-    
-    
-    con.on('error', function(err) {
-        console.log('db error', err);
-        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-          console.log("disconnecting from user command")                        // lost due to either server restart, or a
-        } else {                                      // connnection idle timeout (the wait_timeout
-           throw err;                                 // server variable configures this)
-        }
-    });
-        //    }
-    
-    // handleDisconnect();
-    console.log("image time")
-    const canvas = createCanvas(700, 250);
-    const context = canvas.getContext('2d');
-
-    
-    const applyText = (canvas, text) => {
-        const context = canvas.getContext('2d');
-        let fontSize = 70;
-    
-        do {
-            context.font = `${fontSize -= 10}px sans-serif`;
-        } while (context.measureText(text).width > canvas.width - 300);
-    
-        return context.font;
-    };
-    
-   
-
-    
+    } 
 
     
     console.log(interaction.user.id)
