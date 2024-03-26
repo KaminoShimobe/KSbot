@@ -90,7 +90,7 @@ module.exports = {
    
 
     function getMoney() {
-        const promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
             con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
                 if(err) throw err;
@@ -233,7 +233,7 @@ module.exports = {
     
                     const value = async ()=> {
                         var mon = await getMoney();
-                        return mon
+                        return mon;
                     }
                             const background = await readFile('/app/ksBotUserBG3.png');
                             const backgroundImage = new Image();
