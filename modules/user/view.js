@@ -27,7 +27,7 @@ module.exports = {
        ], 
    });
    
-   let output; 
+   var output; 
     const setOutput = (rows) => { 
         output = rows; 
         console.log(output); 
@@ -48,8 +48,8 @@ module.exports = {
     con.connect(function(err) {              // The server is either down
         if(err) {                                     // or restarting (takes a while sometimes).
           console.log('error when connecting to db:', err);
-          return; // We introduce a delay before attempting to reconnect,
-        }                                     // to avoid a hot loop, and to allow our node script to
+          return; 
+        }                                    
         con.query(`SELECT * FROM user WHERE id = '${interaction.user.id}'`, (err, rows) => {
             if(err) throw err;
     
@@ -95,7 +95,8 @@ module.exports = {
             if(color.startsWith("#") != true){
                 color = "#000000"
             }    
-            setOutput(rows); 
+            setOutput(rows);
+            console.log(output.money) 
     //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
     //         if(err) throw err;
             
