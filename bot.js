@@ -155,7 +155,7 @@ bot.once(Events.ClientReady, () => {
     // bot.user.setPresence({ activity: { name: 'Road to KS-RPG | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'idle' });
     //bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
     bot.users.send('242118931769196544', `${rows.length} users currently`); 
-    bot.user.setPresence({ activities: [{ name: '3.24.24' }], status: 'dnd' });
+    bot.user.setPresence({ activities: [{ name: 'Loading...' }], status: 'dnd' });
 //       bot.user.setPresence({ activity: { name: 'Undergoing Maintenance'}, status: 'dnd' });
 
 

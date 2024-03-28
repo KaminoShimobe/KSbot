@@ -12,27 +12,8 @@ module.exports = {
         .setName('view')
         .setDescription('Views stats about yourself or another user'),
    async execute(interaction) {
-    
-    const bot = new Client({
-        intents: [
-           GatewayIntentBits.Guilds,
-           GatewayIntentBits.GuildPresences,
-           GatewayIntentBits.GuildMessages,
-           GatewayIntentBits.GuildMembers,
-           GatewayIntentBits.GuildInvites,
-           GatewayIntentBits.GuildModeration,
-           GatewayIntentBits.GuildMessageReactions,
-           GatewayIntentBits.DirectMessages,
-           GatewayIntentBits.GuildScheduledEvents,
-           GatewayIntentBits.MessageContent,
-       ], 
-   });
    
-   var output; 
-    const setOutput = (rows) => { 
-        output = rows; 
-        console.log(output); 
-    } 
+
 
     var con_fig = {
         host: "us-cdbr-iron-east-01.cleardb.net",
@@ -226,7 +207,18 @@ module.exports = {
          
      
     
-    
+            var i;
+            for(i = 0;i < roundedPercent; i++)  {
+                ctx.beginPath()
+                ctx.lineWidth = 14
+                ctx.strokeStyle = randomColor
+                ctx.fillStyle = randomColor
+                ctx.arc(203 + (i * 4.32), 190, 8, 0, Math.PI * 2, true)
+                ctx.stroke()
+                ctx.fill()
+                //total length of the total bar is 432, so 1% is 4.32.
+                //This code basically draws a circle for each percent
+                }
     
     
     console.log(interaction.user.id)

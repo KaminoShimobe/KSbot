@@ -7,21 +7,6 @@ module.exports = {
         .setDescription('Gives info about the current server you are in'),
    async execute(interaction) {
     
-    const bot = new Client({
-        intents: [
-           GatewayIntentBits.Guilds,
-           GatewayIntentBits.GuildPresences,
-           GatewayIntentBits.GuildMessages,
-           GatewayIntentBits.GuildMembers,
-           GatewayIntentBits.GuildInvites,
-           GatewayIntentBits.GuildModeration,
-           GatewayIntentBits.GuildMessageReactions,
-           GatewayIntentBits.DirectMessages,
-           GatewayIntentBits.GuildScheduledEvents,
-           GatewayIntentBits.MessageContent,
-       ], 
-   });
-   
     var con_fig = {
         host: "us-cdbr-iron-east-01.cleardb.net",
         user: "bc9ba9370a9522",
@@ -146,15 +131,8 @@ module.exports = {
         .setTitle('Server Settings')
         .setAuthor({ name: interaction.guild.name + "'s"})
         .setDescription("ID: " + interaction.guild.id + "\n Owner: " + owner.globalName + " \n Server Prefix: " + prefixe + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
-        .setThumbnail('https://cdn.discordapp.com/emojis/876518125884039228.webp?size=96&quality=lossless')
+        .setThumbnail(interaction.guild.icon)
         .setTimestamp();
-
-        // let stats = new Discord.MessageEmbed()
-
-            
-        //     .setAuthor(message.guild.name + " KS Bot-settings")
-        //     .setDescription("ID: " + message.guild.id + "\n Owner: " + owner.username + "#" + owner.discriminator + " \n Server Prefix: " + prefixe + "\n Bot Channel: <#" + channel + ">\n Whisper Allowed? :" + w + "\n Expose Allowed? :" + e + "\n Command Cooldown: " + cooldown + " millisecond(s) \n Waifu/Husbandos allowed?: " + wi + "\n KS-RPG allowed? :" + r + "\n Chests allowed? :" + ch + "\n Pixel Art allowed? :" + ca + "\n Stand Abilities allowed? :" + s + "\n Custom Role Creation allowed? :" + cr)
-        //     .setColor("#1f3c5b"); 
 
         interaction.reply({embeds: [stats]});
 

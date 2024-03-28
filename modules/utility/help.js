@@ -1,3 +1,259 @@
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+        .setName('help')
+        .setDescription('KS Bot Help'),
+   async execute(interaction) {
+    
+    var page = 1;
+    var topic = [
+        'Utility',
+        'Admin',
+        'User',
+        'Fun: Gambling',
+        'Fun: Misc.'
+    ];
+    async function helpPage(tab){
+        var responseEmbed;
+        var row;
+        if(tab == 1){
+            responseEmbed = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page ' + tab + '/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '/help' , value: 'Brings up this menu.'},
+                { name: '/server' , value: 'Shows info about the server you are in.'},
+                { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
+                { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
+                { name: '/poll' , value: 'Create a poll!'},
+                { name: '/remind ...' , value: 'Create a reminder for later!'},
+                { name: '... in' , value: 'Create a time based reminder.'},
+                { name: '... when' , value: 'Create a user based reminder.', inline: true},
+                { name: '... channel' , value: 'Create a channel based reminder', inline: true},
+                { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
+                );
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(true);        
+                
+            row = new ActionRowBuilder()
+                .addComponents(left, right);      
+        } else if(tab == 2){
+            responseEmbed = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page ' + tab+ '/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '/command' , value: 'Create a custom command'},
+                { name: '/deleteCommand' , value: 'delete a custom command'},
+                { name: '/toggle ...' , value: 'Changes permissions for certain KS Bot Commands'},
+                { name: '... bot channel' , value: 'Changes what channel the bot channel in.'},
+                { name: '... greeting' , value: 'Changes the greeting message.', inline: true},
+                { name: '... farewell' , value: 'Changes the farewell message', inline: true},
+                { name: '... prefix' , value: 'Changes the prefix for this server'},
+                { name: '... whisper' , value: 'Enable Whispers to server: Anonymous messages in bot channel.', inline: true},
+                { name: '... expose' , value: 'Enable Expose to server: Exposing the last anonymous message in bot channel.', inline: true},
+                { name: '... stands' , value: 'Enables Jojo Stand abilities'},
+                { name: '... megaten ' , value: 'Enables Megaten rpg and raids', inline: true},
+                { name: '... chests' , value: 'Enables random chests to spawn.', inline: true}
+                )
+            .setFooter({text: "Admin commands can only be used by those with server modification permissions." });
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false);      
+            row = new ActionRowBuilder()
+                .addComponents(left, right); 
+        } else if(tab == 3){
+            responseEmbed = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page ' + tab+ '/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '/view' , value: 'Shows ones own KS-Bot stats or another user stats.'},
+                { name: '/color' , value: 'Change the text color on your stat card.'},
+                { name: '/daily' , value: 'Get a daily amount of money proportionate to server level.'},
+                { name: '/give' , value: 'Give some money to a user. Cannot give all currency.'},
+                { name: '/inventory' , value: 'View inventory of yourself(hidden to others).'},
+                { name: '/use' , value: 'Use an item from your inventory.'},
+                { name: '/toss' , value: 'Discard an item from your inventory.'},
+                { name: '/sell' , value: 'Sell an item from your inventory.'},
+                { name: '/bazaar' , value: 'Sell an item from your inventory in the server shop.'},
+                { name: '/shop' , value: 'View the server shop.'},
+                { name: '/buy' , value: 'Buy an item from the shop.'}
+                );
+
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+                
+            row = new ActionRowBuilder()
+                .addComponents(left, right);     
+        } else if(tab == 4){
+            responseEmbed = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page ' + tab+ '/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '/slots' , value: 'Spend $10 to roll the slots. Match 2 or higher to win!'},
+                { name: '/spin' , value: 'Choose an amount to double or nothing.'},
+                { name: '/daily' , value: 'Get a daily amount proportionate to server level.'},
+                { name: '/midnight' , value: 'Guess the correct tile of a 3x3 grid to progress.'},
+                { name: '/duel' , value: 'Challenge someone in rock paper scissors!'},
+                { name: '/fish' , value: 'start fishing for a random fish. Must respond with the correct phrase to catch it before it gets away!'},
+                { name: '/plant' , value: 'Plant a seed in your garden to harvest for later. Weather affects how fast the plants grow.'},
+                { name: '/water' , value: 'Water plants your plant.'},
+                { name: '/reap' , value: 'Harvest crops that you planted in your garden.'},
+                { name: '/cook' , value: 'Cook multiple items in your inventory to create a dish that can increase stats.'}
+                );
+            
+
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false);     
+            row = new ActionRowBuilder()
+                .addComponents(left, right);  
+        } else if(tab == 5){
+            responseEmbed = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page ' + tab+ '/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '!jk' , value: 'Sends a message but then deletes it instantly, has a 1/4 chance to backfire.'},
+                { name: '/8ball' , value: 'Ask 8ball a question!'},
+                { name: '/odds' , value: 'Ask the odds on a scenario!'},
+                { name: '/who' , value: 'select a random user for a question you ask!'},
+                { name: '/flip' , value: 'Flip a coin heads or tails.'},
+                { name: '/tierlist' , value: 'Create a tierlist of users in the server.'},
+                );
+            
+
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(true); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false);    
+            row = new ActionRowBuilder()
+                .addComponents(left, right);   
+        } 
+        await interaction.edit({ embeds: [responseEmbed], components: [row] });
+    }
+    
+    
+
+
+    const helpMenu = new EmbedBuilder()
+            .setColor('#f87d35')
+            .setTitle('KS Bot Help')
+            .setAuthor({ name: 'Page 1/5'})
+            .setDescription(topic[tab-1])
+            .setThumbnail(interaction.client.avatarURL())
+            .addFields(
+                { name: '/help' , value: 'Brings up this menu.'},
+                { name: '/server' , value: 'Shows info about the server you are in.'},
+                { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
+                { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
+                { name: '/poll' , value: 'Create a poll!'},
+                { name: '/remind ...' , value: 'Create a reminder for later!'},
+                { name: '... in' , value: 'Create a time based reminder.'},
+                { name: '... when' , value: 'Create a user based reminder.', inline: true},
+                { name: '... channel' , value: 'Create a channel based reminder', inline: true},
+                { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
+                );
+            const arrowRight = new ButtonBuilder()
+                .setCustomId('right')
+                .setLabel('>')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(false); 
+        
+            const arrowLeft = new ButtonBuilder()
+                .setCustomId('left')
+                .setLabel('<')
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(true);        
+                
+           const firstRow = new ActionRowBuilder()
+                .addComponents(left, right);
+         
+
+    await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] });  
+    
+    const filter = (interaction) => {
+        return ['left', 'right'].includes(interaction.customID);
+      };
+    
+      const collectors = {};
+      ['left', 'right'].forEach((customID) => {
+        collectors[customID] = new interaction.channel.createMessageComponentCollector(filter, { time: 100000 }); // 100 seconds
+      });
+        // Listen for collect event
+        collectors[customID].on('collect', (interaction) => {
+          console.log(`Button ${interaction.customID} pressed!`);
+
+          if(interaction.customID == 'left'){
+            page -= 1;
+            helpPage(page);
+          } else {
+            page += 1;
+            helpPage(page);
+          }
+        });
+          
+          collectors[customID].on('end', (collected) => {
+              console.log(`Collected ${collected.size} items for button ${customID}.`);
+              
+            });
+
+
 function standHelp(){
 
     let stand1 = new Discord.MessageEmbed()
@@ -240,3 +496,6 @@ function socialHelp(){
         message.author.send(help);
         message.reply(" sent you a dm of the social help list!");
 }
+
+    },
+};
