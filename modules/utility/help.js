@@ -225,7 +225,8 @@ module.exports = {
                 .addComponents(left, right);
          
 
-    await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] });  
+    const response = await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] }); 
+    response(); 
     
     const filter = (interaction) => {
         return ['left', 'right'].includes(interaction.customID);
@@ -233,7 +234,7 @@ module.exports = {
     
       const collectors = {};
       ['left', 'right'].forEach((customID) => {
-        collectors[customID] = new interaction.channel.createMessageComponentCollector(filter, { time: 100000 }); // 100 seconds
+        collectors[customID] = response.createMessageComponentCollector(filter, { time: 100000 }); // 100 seconds
       });
         // Listen for collect event
         collectors[customID].on('collect', (interaction) => {
