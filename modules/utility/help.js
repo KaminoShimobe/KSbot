@@ -96,6 +96,7 @@ module.exports = {
                 { name: '/view' , value: 'Shows ones own KS-Bot stats or another user stats.'},
                 { name: '/color' , value: 'Change the text color on your stat card.'},
                 { name: '/daily' , value: 'Get a daily amount of money proportionate to server level.'},
+                { name: '/quest' , value: 'Check the daily quest!'},
                 { name: '/give' , value: 'Give some money to a user. Cannot give all currency.'},
                 { name: '/inventory' , value: 'View inventory of yourself(hidden to others).'},
                 { name: '/use' , value: 'Use an item from your inventory.'},
@@ -166,8 +167,11 @@ module.exports = {
                 { name: '/8ball' , value: 'Ask 8ball a question!'},
                 { name: '/odds' , value: 'Ask the odds on a scenario!'},
                 { name: '/who' , value: 'select a random user for a question you ask!'},
+                { name: '/scale' , value: 'Scales something from 1-10!'},
                 { name: '/flip' , value: 'Flip a coin heads or tails.'},
                 { name: '/tierlist' , value: 'Create a tierlist of users in the server.'},
+                { name: '/localboard' , value: 'Check the top 10 richest users in the server!'},
+                { name: '/leaderboard' , value: 'Check the top 10 richest users/servers on KS Bot!'},
                 );
             
 
@@ -230,7 +234,7 @@ module.exports = {
     
    
     
-     const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 10000 }); // 10 seconds
+     const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 100000 }); // 100 seconds
       
         // Listen for collect event
         collector.on('collect', async i => {

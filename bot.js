@@ -166,7 +166,7 @@ bot.once(Events.ClientReady, () => {
     con.query(`SELECT * FROM user`, (err, rows) => {
         if(err) throw err;
     //  bot.user.setPresence({ activity: { name: 'KS!help | ' + bot.guilds.cache.size + ' servers | ' + rows.length + ' users'}, status: 'online' });
-    bot.user.setPresence({ activities: [{ name: '3.24.24' }], status: 'dnd' });
+    bot.user.setPresence({ activities: [{ name: 'Loading...' }], status: 'dnd' });
     
         setTimeout(onlineUpdate, 2000);
     });
