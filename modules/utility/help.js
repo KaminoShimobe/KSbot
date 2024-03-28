@@ -185,7 +185,7 @@ module.exports = {
             row = new ActionRowBuilder()
                 .addComponents(left, right);   
         } 
-        await interaction.edit({ embeds: [responseEmbed], components: [row] });
+        await interaction.update({ephemeral: true, embeds: [responseEmbed], components: [row] });
     }
     
     
@@ -238,7 +238,7 @@ module.exports = {
       });
         // Listen for collect event
         collectors['left'].on('collect', (interaction) => {
-          console.log(`Button ${interaction.customID} pressed!`);
+          console.log(`Button left pressed!`);
 
          
             page -= 1;
@@ -247,7 +247,7 @@ module.exports = {
         });
 
         collectors['right'].on('collect', (interaction) => {
-            console.log(`Button ${interaction.customID} pressed!`);
+            console.log(`Button right pressed!`);
   
            
               page += 1;
