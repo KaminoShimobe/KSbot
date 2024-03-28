@@ -228,42 +228,32 @@ module.exports = {
     const response = await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] }); 
     
     
-    const filter = (interaction) => {
-        return ['left', 'right'].includes(interaction.customID);
-      };
+    const filter  = i => i.user.id === interaction.user.id;
     
-      const collectors = {};
-      ['left', 'right'].forEach((customID) => {
-        collectors[customID] = response.createMessageComponentCollector(filter, { time: 100000 }); // 100 seconds
-      });
+     const collector = response.createMessageComponentCollector({ComponentType: ComponentType.Button, time: 10000 }); // 10 seconds
+      
         // Listen for collect event
-        collectors['left'].on('collect', (interaction) => {
-          console.log(`Button left pressed!`);
+        collector.on('collect', async i => {
+            const selection = i.values[0];
 
-         
-            page -= 1;
-            helpPage(page);
-         
+            if(i.values[0]== 'left'){
+                page -= 1;
+                helpPage(page); 
+            }
+            if(i.values[0]== 'right'){
+                page += 1;
+                helpPage(page); 
+            }
         });
 
-        collectors['right'].on('collect', (interaction) => {
-            console.log(`Button right pressed!`);
-  
-           
-              page += 1;
-              helpPage(page);
-           
-          });
+        
             
           
-          collectors['left'].on('end', (collected) => {
-              console.log(`Collected ${collected.size} items for button ${customID}.`);
+          collector.on('end', (collected) => {
+              console.log(`Collected ${collected.size} items for button.`);
               
             });
-            collectors['right'].on('end', (collected) => {
-                console.log(`Collected ${collected.size} items for button ${customID}.`);
-                
-              });
+            
 
 function standHelp(){
 
