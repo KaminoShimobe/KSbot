@@ -234,8 +234,8 @@ module.exports = {
       
         // Listen for collect event
         collector.on('collect', async i => {
-            console.log(i);
-            const selection = i.values[0];
+            console.log(i.customId);
+            const selection = i.customId;
             
             if(selection == 'left'){
                 page -= 1;
