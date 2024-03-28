@@ -230,7 +230,7 @@ module.exports = {
     
     const filter  = i => i.user.id === interaction.user.id;
     
-     const collector = response.createMessageComponentCollector({ComponentType: ComponentType.Button, time: 10000 }); // 10 seconds
+     const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 10000 }); // 10 seconds
       
         // Listen for collect event
         collector.on('collect', async i => {
