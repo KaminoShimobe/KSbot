@@ -226,7 +226,7 @@ module.exports = {
          
 
     const response = await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] }); 
-    response(); 
+    
     
     const filter = (interaction) => {
         return ['left', 'right'].includes(interaction.customID);
