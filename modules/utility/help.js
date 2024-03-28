@@ -230,7 +230,7 @@ module.exports = {
     
    
     
-     const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 10000 }); // 100 seconds
+     const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 10000 }); // 10 seconds
       
         // Listen for collect event
         collector.on('collect', async i => {
@@ -252,7 +252,7 @@ module.exports = {
           
           collector.on('end', (collected) => {
               console.log(`Collected ${collected.size} items for button.`);
-              collected.delete();
+              interaction.deleteReply();
             });
             
 
