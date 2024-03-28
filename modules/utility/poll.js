@@ -17,7 +17,8 @@ module.exports = {
    var upvotes = 0; 
    var downvotes = 0;
    const canvas = createCanvas(700, 250);
-   const context = canvas.getContext('2d'); 
+   const context = canvas.getContext('2d');
+   const question = interaction.options.getString('question') ?? 'No question asked'; 
    async function poll(upv, downv, responder){
     const background = await readFile('/app/ksBotUserBG3.png');
     const backgroundImage = new Image();
@@ -61,7 +62,7 @@ module.exports = {
         //This code basically draws a circle for each percent
         }    
     const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'poll.png' });
-    
+   
     const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')
         .setTitle(question)
@@ -96,6 +97,7 @@ module.exports = {
 
     await responder.update({embeds: [responseEmbed], components: [firstRow] });
    }
+   
    const responseEmbed = new EmbedBuilder()
         .setColor('#f87d35')
         .setTitle(question)
