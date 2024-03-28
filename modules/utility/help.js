@@ -23,7 +23,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page ' + tab + '/5'})
             .setDescription(topic[tab-1])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/help' , value: 'Brings up this menu.'},
                 { name: '/server' , value: 'Shows info about the server you are in.'},
@@ -56,7 +56,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page ' + tab+ '/5'})
             .setDescription(topic[tab-1])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/command' , value: 'Create a custom command'},
                 { name: '/deleteCommand' , value: 'delete a custom command'},
@@ -91,7 +91,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page ' + tab+ '/5'})
             .setDescription(topic[tab-1])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/view' , value: 'Shows ones own KS-Bot stats or another user stats.'},
                 { name: '/color' , value: 'Change the text color on your stat card.'},
@@ -126,7 +126,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page ' + tab+ '/5'})
             .setDescription(topic[tab-1])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/slots' , value: 'Spend $10 to roll the slots. Match 2 or higher to win!'},
                 { name: '/spin' , value: 'Choose an amount to double or nothing.'},
@@ -160,7 +160,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page ' + tab+ '/5'})
             .setDescription(topic[tab-1])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '!jk' , value: 'Sends a message but then deletes it instantly, has a 1/4 chance to backfire.'},
                 { name: '/8ball' , value: 'Ask 8ball a question!'},
@@ -196,7 +196,7 @@ module.exports = {
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page 1/5'})
             .setDescription(topic[page])
-            .setThumbnail(interaction.client.avatarURL())
+            .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/help' , value: 'Brings up this menu.'},
                 { name: '/server' , value: 'Shows info about the server you are in.'},
