@@ -195,7 +195,7 @@ module.exports = {
             .setColor('#f87d35')
             .setTitle('KS Bot Help')
             .setAuthor({ name: 'Page 1/5'})
-            .setDescription(topic[tab-1])
+            .setDescription(topic[page])
             .setThumbnail(interaction.client.avatarURL())
             .addFields(
                 { name: '/help' , value: 'Brings up this menu.'},
