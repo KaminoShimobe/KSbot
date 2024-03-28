@@ -36,13 +36,13 @@ module.exports = {
                 { name: '... channel' , value: 'Create a channel based reminder', inline: true},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(false); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left = new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
@@ -72,13 +72,13 @@ module.exports = {
                 { name: '... chests' , value: 'Enables random chests to spawn.', inline: true}
                 )
             .setFooter({text: "Admin commands can only be used by those with server modification permissions." });
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(false); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left = new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
@@ -106,13 +106,13 @@ module.exports = {
                 { name: '/buy' , value: 'Buy an item from the shop.'}
                 );
 
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(false); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left = new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
@@ -141,13 +141,13 @@ module.exports = {
                 );
             
 
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(false); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left = new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
@@ -171,13 +171,13 @@ module.exports = {
                 );
             
 
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(true); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left= new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
@@ -209,13 +209,13 @@ module.exports = {
                 { name: '... channel' , value: 'Create a channel based reminder', inline: true},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
-            const arrowRight = new ButtonBuilder()
+            const right = new ButtonBuilder()
                 .setCustomId('right')
                 .setLabel('>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(false); 
         
-            const arrowLeft = new ButtonBuilder()
+            const left = new ButtonBuilder()
                 .setCustomId('left')
                 .setLabel('<')
                 .setStyle(ButtonStyle.Primary)
