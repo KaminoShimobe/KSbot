@@ -100,6 +100,7 @@ module.exports = {
                 { name: '/give' , value: 'Give some money to a user. Cannot give all currency.'},
                 { name: '/inventory' , value: 'View inventory of yourself(hidden to others).'},
                 { name: '/use' , value: 'Use an item from your inventory.'},
+                { name: '/equip' , value: 'Equip an item from your inventory.'},
                 { name: '/toss' , value: 'Discard an item from your inventory.'},
                 { name: '/sell' , value: 'Sell an item from your inventory.'},
                 { name: '/bazaar' , value: 'Sell an item from your inventory in the server shop.'},
