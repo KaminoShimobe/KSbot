@@ -237,17 +237,24 @@ module.exports = {
         collectors[customID] = response.createMessageComponentCollector(filter, { time: 100000 }); // 100 seconds
       });
         // Listen for collect event
-        collectors[customID].on('collect', (interaction) => {
+        collectors['left'].on('collect', (interaction) => {
           console.log(`Button ${interaction.customID} pressed!`);
 
-          if(interaction.customID == 'left'){
+         
             page -= 1;
             helpPage(page);
-          } else {
-            page += 1;
-            helpPage(page);
-          }
+         
         });
+
+        collectors['right'].on('collect', (interaction) => {
+            console.log(`Button ${interaction.customID} pressed!`);
+  
+           
+              page += 1;
+              helpPage(page);
+           
+          });
+            
           
           collectors[customID].on('end', (collected) => {
               console.log(`Collected ${collected.size} items for button ${customID}.`);
