@@ -256,11 +256,14 @@ module.exports = {
           });
             
           
-          collectors[customID].on('end', (collected) => {
+          collectors['left'].on('end', (collected) => {
               console.log(`Collected ${collected.size} items for button ${customID}.`);
               
             });
-
+            collectors['right'].on('end', (collected) => {
+                console.log(`Collected ${collected.size} items for button ${customID}.`);
+                
+              });
 
 function standHelp(){
 
