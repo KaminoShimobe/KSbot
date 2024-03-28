@@ -14,7 +14,7 @@ module.exports = {
         'Fun: Gambling',
         'Fun: Misc.'
     ];
-    async function helpPage(tab){
+    async function helpPage(tab, id){
         var responseEmbed;
         var row;
         if(tab == 1){
@@ -185,7 +185,7 @@ module.exports = {
             row = new ActionRowBuilder()
                 .addComponents(left, right);   
         } 
-        await interaction.update({ephemeral: true, embeds: [responseEmbed], components: [row] });
+        await id.update({ephemeral: true, embeds: [responseEmbed], components: [row] });
     }
     
     
@@ -228,7 +228,7 @@ module.exports = {
     const response = await interaction.reply({ ephemeral: true, embeds: [helpMenu], components: [firstRow] }); 
     
     
-    const filter  = i => i.user.id === interaction.user.id;
+   
     
      const collector = response.createMessageComponentCollector({componentType: ComponentType.Button, time: 10000 }); // 10 seconds
       
@@ -239,11 +239,11 @@ module.exports = {
             
             if(selection == 'left'){
                 page -= 1;
-                helpPage(page); 
+                helpPage(page, i); 
             }
             if(selection == 'right'){
                 page += 1;
-                helpPage(page); 
+                helpPage(page, i); 
             }
         });
 
