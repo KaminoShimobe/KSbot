@@ -234,8 +234,9 @@ module.exports = {
       
         // Listen for collect event
         collector.on('collect', async i => {
+            console.log(i);
             const selection = i.values[0];
-
+            
             if(selection == 'left'){
                 page -= 1;
                 helpPage(page); 
