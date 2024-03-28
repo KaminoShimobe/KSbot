@@ -236,11 +236,11 @@ module.exports = {
         collector.on('collect', async i => {
             const selection = i.values[0];
 
-            if(i.values[0]== 'left'){
+            if(selection == 'left'){
                 page -= 1;
                 helpPage(page); 
             }
-            if(i.values[0]== 'right'){
+            if(selection == 'right'){
                 page += 1;
                 helpPage(page); 
             }
