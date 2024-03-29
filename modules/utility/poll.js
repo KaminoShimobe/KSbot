@@ -28,13 +28,11 @@ module.exports = {
     context.strokeStyle = '#0099ff';
     context.strokeRect(0, 0, canvas.width, canvas.height);
 
-    context.font = '20px Apple Emoji';
-    context.fillStyle = '#ffffff';
-    context.fillText("👍", canvas.width / 2.5, canvas.height / 3.5);
+    context.font = '50px Apple Emoji';
+    context.strokeText("👍", canvas.width / 2.5, canvas.height / 3.5);
 
-    context.font = '20px Apple Emoji';
-    context.fillStyle = '#ffffff';
-    context.fillText("👎", canvas.width / 2.5, canvas.height / 1.8);
+    context.font = '50px Apple Emoji';
+    context.strokeText("👎", canvas.width / 2.5, canvas.height / 1.8);
     const colors = [0x00E2FF, 0x00FF85];
     const randomColorNo = Math.floor(Math.random() * colors.length);
     const randomColor = colors[randomColorNo];
@@ -47,7 +45,7 @@ module.exports = {
         context.lineWidth = 14
         context.strokeStyle = randomColor
         context.fillStyle = randomColor
-        context.arc(203 + (i * 4.32), 190, 8, 0, Math.PI * 2, true)
+        context.arc(203 + (i * 4.32), 75, 8, 0, Math.PI * 2, true)
         context.stroke()
         context.fill()
         //total length of the total bar is 432, so 1% is 4.32.
@@ -62,7 +60,7 @@ module.exports = {
         context.lineWidth = 14
         context.strokeStyle = randomColor
         context.fillStyle = randomColor
-        context.arc(203 + (j * 4.32), 400, 8, 0, Math.PI * 2, true)
+        context.arc(203 + (j * 4.32), 200, 8, 0, Math.PI * 2, true)
         context.stroke()
         context.fill()
         //total length of the total bar is 432, so 1% is 4.32.
