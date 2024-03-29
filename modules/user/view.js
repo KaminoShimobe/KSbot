@@ -205,7 +205,7 @@ module.exports = {
         //         });
             });
          
-     
+            
     
             var i;
             for(i = 0;i < roundedPercent; i++)  {

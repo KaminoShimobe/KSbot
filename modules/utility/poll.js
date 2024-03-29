@@ -36,8 +36,10 @@ module.exports = {
     context.fillStyle = '#ffffff';
     context.fillText("👎", canvas.width / 2.5, canvas.height / 1.8);
 
+    const percentage1 = Math.floor((upvotes / (upvotes + downvotes)) * 100);
+    const roundedPercent1 = Math.round(percentage1);
     //upvotes
-    for(upv = 0;upv < roundedPercent; upv++)  {
+    for(upv = 0;upv < roundedPercent1; upv++)  {
         context.beginPath()
         context.lineWidth = 14
         context.strokeStyle = randomColor
@@ -48,9 +50,10 @@ module.exports = {
         //total length of the total bar is 432, so 1% is 4.32.
         //This code basically draws a circle for each percent
         }
-    
+    const percentage2 = Math.floor((downvotes / (upvotes + downvotes)) * 100);
+    const roundedPercent2 = Math.round(percentage2);
     //downvotes
-    for(downv = 0;downv < roundedPercent; downv++)  {
+    for(downv = 0;downv < roundedPercent2; downv++)  {
         context.beginPath()
         context.lineWidth = 14
         context.strokeStyle = randomColor
