@@ -94,7 +94,6 @@ module.exports = {
             .setThumbnail(interaction.client.user.avatarURL())
             .addFields(
                 { name: '/view' , value: 'Shows ones own KS-Bot stats or another user stats.'},
-                { name: '/color' , value: 'Change the text color on your stat card.'},
                 { name: '/daily' , value: 'Get a daily amount of money proportionate to server level.'},
                 { name: '/quest' , value: 'Check the daily quest!'},
                 { name: '/give' , value: 'Give some money to a user. Cannot give all currency.'},
@@ -414,95 +413,7 @@ function standHelp(){
     
 }
 
-function help(){
 
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Command Directory")
-            .setDescription(`**${prefix}help** :gear: \n Pulls up utility commands. \n **${prefix}help** :warning: \n Pulls up admin commands. \n **${prefix}help** :bust_in_silhouette: \n Pulls up user commands. \n **${prefix}help** :busts_in_silhouette: \n Pulls up social commands. \n **${prefix}help** :dollar: \n Pulls up monetary commands.\n **${prefix}help** :tada: \n Pulls up fun commands! \n **${prefix}help** :beetle: \n Pulls up stand commands. \n **${prefix}help** :seedling: \n Pulls up garden commands.`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the help list!");
-}
-
-function utilityHelp(){
-
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Utility commands ⚙️")
-            .setDescription(`**${prefix}server**: \n Gives info about KS-Bot Permissions in this server. \n **${prefix}channel**: \n Sends the ID of the current channel. \n **${prefix}remind in [number] to [phrase]**:\n Sets a time based reminder using minutes. \n **${prefix}remind when [user id] talks**: \n Sets a reminder to alert the user of when someone speaks in chat. \n **${prefix}remind at [channel id]**: \n Sends a reminder if someone speaks in the channel. \n **${prefix}!cancelReminder**: \n Cancels a reminder.\n **${prefix}invite**: \n Sends a link for you to add KS-Bot to your server! \n  **${prefix}credits**: \n Typical credits nothing cool here :eyes: \n **${prefix}discord**: \n Sends invite to Kamino's House! Stop by and say hi (:`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the utility help list!");
-}
-
-function userHelp(){
-
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot User commands 👤")
-            .setDescription(`**${prefix}user**: \n Creates a user account with KS-Bot \n **${prefix}view**: \n Views your own KS-Bot account info. \n **${prefix}view [mention]**: \n Views another persons KS-Bot account info. \n **${prefix}delete**: \n Deletes your KS-Bot account. \n **__DM CHANNEL COMPATIBLE__** \n **!bio**: \n Set your KS-Bot account bio. \n **!color**: \n Set your KS-Bot account color. `)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the user help list!");
-}
-
-function moneyHelp(){
-
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Monetary commands 💵")
-            .setDescription(`**${prefix}daily**: \n Collects some money every 24 hours. \n **${prefix}slots**:\n Spins a slot machine for $10. Match 2 or more to win! \n **${prefix}spin [amount]**: \n 50/50 Chance to win or lose the amount you're gambling. Consecutive wins can get streak bonuses. \n **${prefix}midnight [amount]**: \n Guess the correct tile to double your money! The odds decrease the longer you continue! \n **${prefix}give [mention] [amount]**: \n Gives another user some money. \n **${prefix}shop**:\n DMs you the shop list. \n **${prefix}giftShop**: \n DMs you the gift shop. \n **${prefix}roleShop**: \n Sends the role shop for purchasing a role. \n **${prefix}removeRole**: \n Allows you to remove a role assigned from the role shop.`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the user help list!");
- 
-}
-
-function funHelp(){
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Fun commands 🎉")
-            .setDescription(`**${prefix}8ball**: \n 8Ball Answers a question you have. \n **${prefix}flip**: \n Flips a coin heads or tails. \n **${prefix}who**: \n Answers a who question. \n **${prefix}poll** [question] \n Creates a poll that can be managed by the creator. \n **${prefix}just**: \n Just.....Saiyan. Bot requires message manage permissions for full effect. \n **${prefix}jk**: \n Deletes your message but has a 1/4 chance to back fire. \n **${prefix}customCommand**: \n Creates a custom command! \n **${prefix}deleteCommand**: \n Deletes a custom command! \n **${prefix}localCommands**:\n Views the custom commands. \n **${prefix}globalCommands**:\n Views the global commands. \n **${prefix}tierlist**: \n Creates a tierlist using other user's avatars! \n **${prefix}mafia**: \n Starts up a game of MAFIA, needs 6 or more players!`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the fun help list!");
-}
-
-function gardenHelp(){
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Garden commands 🌱")
-            .setDescription(`**${prefix}water [index]**: \n Waters a plant in that garden slot. \n **${prefix}toss [index]**: \n Trashes a plant in that index. \n **${prefix}tradePlant [mention] [index of you plant] for [index of their plant]**: \n Prompts a user to trade plants. \n **${prefix}garden** \n Checks your garden in that server. \n **${prefix}weather**: \n Checks the weather in your server. \n **${prefix}trashGarden**: \n Trashes your garden.`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the garden help list!");
-}
-
-function socialHelp(){
-
-    let help = new Discord.MessageEmbed()
-
-            
-            .setTitle("KS-Bot Social commands 👥")
-            .setDescription(`**${prefix}duel [mention] [amount]**: \n Challenges someone to Rock Paper Scissors for the amount you declare. \n **${prefix}expose**: \n Exposes the user of the last whisper message. \n **__DM CHANNEL ONLY__** \n **!whisper [server id]**: \n Sends an anonymous message to the bot channel in that server. **__WAIFU/HUSBANDO ENABLED__** \n **${prefix}hug [mention]**:\n Hugs a user. \n **${prefix}beat [mention]**: \n Beats up a user. \n **${prefix}pat [mention]**: \n Pats a user. \n **${prefix}kiss [mention]**: \n Kisses a user. \n **${prefix}handhold [mention]**: \n Holds a user's hand \n **${prefix}slap [mention]**: \n Slaps a user \n **${prefix}handshake [mention]**: \n Shakes a users hand \n **${prefix}marry [mention]**: \n Propose to a user for their hand in marriage. \n **${prefix}divorce [mention]**: \n Divorces a user and destroys joint married account.`)
-            .setColor("#1d498e"); 
-
-        message.author.send(help);
-        message.reply(" sent you a dm of the social help list!");
-}
 
     },
 };

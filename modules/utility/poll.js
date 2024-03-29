@@ -108,7 +108,7 @@ module.exports = {
         .setAuthor({ name: interaction.user.username + ' is hosting a poll:'})
         .setThumbnail(interaction.user.avatarURL())
         .setTimestamp()
-        .setFooter({text: 'This poll will automatically close one hour from now.'});
+        .setFooter({text: 'End the poll by reacting with ✅'});
         //`${interaction.user.username} asked`
         
         
