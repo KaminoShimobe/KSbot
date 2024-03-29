@@ -69,7 +69,7 @@ module.exports = {
         .setAuthor({ name: interaction.user.username + ' is hosting a poll:'})
         .setImage(attachment)
         .setThumbnail(interaction.user.avatarURL())
-        .setTimestamp(attachment)
+        .setTimestamp()
         .setFooter({text: 'This poll will automatically close one hour from now.'});
         //`${interaction.user.username} asked`
         
@@ -103,7 +103,7 @@ module.exports = {
         .setTitle(question)
         .setAuthor({ name: interaction.user.username + ' is hosting a poll:'})
         .setThumbnail(interaction.user.avatarURL())
-        .setTimestamp(attachment)
+        .setTimestamp()
         .setFooter({text: 'This poll will automatically close one hour from now.'});
         //`${interaction.user.username} asked`
         
