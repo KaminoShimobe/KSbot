@@ -38,10 +38,11 @@ module.exports = {
     const colors = [0x00E2FF, 0x00FF85];
     const randomColorNo = Math.floor(Math.random() * colors.length);
     const randomColor = colors[randomColorNo];
-    const percentage1 = Math.floor((upvotes / (upvotes + downvotes)) * 100);
+    const percentage1 = Math.floor((upv / (upv + downv)) * 100);
     const roundedPercent1 = Math.round(percentage1);
     //upvotes
-    for(upv = 0;upv < roundedPercent1; upv++)  {
+    var i;
+    for(i = 0;i < roundedPercent1; i++)  {
         context.beginPath()
         context.lineWidth = 14
         context.strokeStyle = randomColor
@@ -52,15 +53,16 @@ module.exports = {
         //total length of the total bar is 432, so 1% is 4.32.
         //This code basically draws a circle for each percent
         }
-    const percentage2 = Math.floor((downvotes / (upvotes + downvotes)) * 100);
+    const percentage2 = Math.floor((downv / (upv + downv)) * 100);
     const roundedPercent2 = Math.round(percentage2);
     //downvotes
-    for(downv = 0;downv < roundedPercent2; downv++)  {
+    var j;
+    for(j = 0;j < roundedPercent2; j++)  {
         context.beginPath()
         context.lineWidth = 14
         context.strokeStyle = randomColor
         context.fillStyle = randomColor
-        context.arc(203 + (i * 4.32), 400, 8, 0, Math.PI * 2, true)
+        context.arc(203 + (j * 4.32), 400, 8, 0, Math.PI * 2, true)
         context.stroke()
         context.fill()
         //total length of the total bar is 432, so 1% is 4.32.
