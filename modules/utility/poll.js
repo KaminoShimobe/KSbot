@@ -74,7 +74,6 @@ module.exports = {
         .setColor('#f87d35')
         .setTitle(question)
         .setAuthor({ name: interaction.user.username + ' is hosting a poll:'})
-        .setImage(attachment)
         .setThumbnail(interaction.user.avatarURL())
         .setTimestamp()
         .setFooter({text: 'This poll will automatically close one hour from now.'});
@@ -102,7 +101,7 @@ module.exports = {
            const firstRow = new ActionRowBuilder()
                 .addComponents(up, down, endPoll);    
 
-    await responder.update({embeds: [responseEmbed], components: [firstRow] });
+    await responder.update({embeds: [responseEmbed], components: [firstRow], files: [attachment]  });
    }
    
    const responseEmbed = new EmbedBuilder()
