@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -20,17 +20,12 @@ module.exports = {
             .setDescription("Thanks so much for inviting KS-Bot to your server!")
             .setImage(interaction.client.user.avatarURL())
             
-            const link2 = new ButtonBuilder()
-            .setCustomId('link')
-            .setLabel('Invite')
-            .setURL(link)
-            .setStyle(ButtonStyle.Link);
+            
                     
 
-       const row = new ActionRowBuilder()
-            .addComponents(link2);  
+       
 
-        await interaction.reply({ ephemeral: true, embeds: [responseEmbed], components: [row] }); 
+        await interaction.reply({ ephemeral: true, embeds: [responseEmbed]}); 
 
 
    },
