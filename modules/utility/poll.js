@@ -16,7 +16,7 @@ module.exports = {
    async execute(interaction) {
    var upvotes = 0; 
    var downvotes = 0;
-   const canvas = createCanvas(1000, 1000);
+   const canvas = createCanvas(700, 250);
    const context = canvas.getContext('2d');
    const question = interaction.options.getString('question') ?? 'No question asked'; 
    async function poll(upv, downv, responder){
