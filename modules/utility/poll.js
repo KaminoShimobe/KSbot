@@ -30,7 +30,7 @@ module.exports = {
 
     context.font = '20px Apple Emoji';
     context.fillStyle = '#ffffff';
-    context.fillText("👍" + money, canvas.width / 2.5, canvas.height / 3.5);
+    context.fillText("👍", canvas.width / 2.5, canvas.height / 3.5);
 
     context.font = '20px Apple Emoji';
     context.fillStyle = '#ffffff';
@@ -84,13 +84,13 @@ module.exports = {
                 .setCustomId('down')
                 .setLabel('👎')
                 .setStyle(ButtonStyle.Primary)
-                .setDisabled(true);        
+                .setDisabled(false);        
                 
     const endPoll = new ButtonBuilder()
                 .setCustomId('end')
                 .setLabel('✅')
                 .setStyle(ButtonStyle.Primary)
-                .setDisabled(true);            
+                .setDisabled(false);            
 
            const firstRow = new ActionRowBuilder()
                 .addComponents(up, down, endPoll);    
@@ -118,13 +118,13 @@ module.exports = {
                 .setCustomId('down')
                 .setLabel('👎')
                 .setStyle(ButtonStyle.Primary)
-                .setDisabled(true);        
+                .setDisabled(false);        
                 
     const endPoll = new ButtonBuilder()
                 .setCustomId('end')
                 .setLabel('✅')
                 .setStyle(ButtonStyle.Primary)
-                .setDisabled(true);            
+                .setDisabled(false);            
 
            const firstRow = new ActionRowBuilder()
                 .addComponents(up, down, endPoll);
