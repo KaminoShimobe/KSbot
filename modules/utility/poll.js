@@ -35,7 +35,9 @@ module.exports = {
     context.font = '20px Apple Emoji';
     context.fillStyle = '#ffffff';
     context.fillText("👎", canvas.width / 2.5, canvas.height / 1.8);
-
+    const colors = [0x00E2FF, 0x00FF85];
+    const randomColorNo = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomColorNo];
     const percentage1 = Math.floor((upvotes / (upvotes + downvotes)) * 100);
     const roundedPercent1 = Math.round(percentage1);
     //upvotes
