@@ -93,7 +93,7 @@ module.exports = {
                 .setDisabled(true);            
 
            const firstRow = new ActionRowBuilder()
-                .addComponents(left, right, endPoll);    
+                .addComponents(up, down, endPoll);    
 
     await responder.update({embeds: [responseEmbed], components: [firstRow] });
    }
@@ -127,7 +127,7 @@ module.exports = {
                 .setDisabled(true);            
 
            const firstRow = new ActionRowBuilder()
-                .addComponents(left, right, endPoll);
+                .addComponents(up, down, endPoll);
 
     const response = await interaction.reply({embeds: [responseEmbed], components: [firstRow] });   
     
