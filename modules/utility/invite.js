@@ -23,6 +23,7 @@ module.exports = {
             const link2 = new ButtonBuilder()
             .setCustomId('link')
             .setLabel('Invite')
+            .setURL(link)
             .setStyle(ButtonStyle.Link);
                     
 
