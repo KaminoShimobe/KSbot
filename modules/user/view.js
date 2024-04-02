@@ -232,12 +232,12 @@ module.exports = {
     
                                 // context.strokeStyle = '#0099ff';
                                 // context.strokeRect(0, 0, canvas.width, canvas.height);
-                                registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
-                                registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
-                                // GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji.ttf'), 'Apple Emoji')
-                                // GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'Arial Rounded MT Bold')
+                                // registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
+                                // registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
+                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Emoji')
+                                GlobalFonts.registerFromPath("/app/fonts/arialroundedmtbold.ttf", 'Arial Rounded MT Bold')
 
-                                // console.info(GlobalFonts.families)
+                                console.info(GlobalFonts.families)
 
                                 context.font = '28px Arial Rounded MT Bold';
                                 context.fillStyle = '#ffffff';
