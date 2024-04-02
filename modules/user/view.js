@@ -238,7 +238,7 @@ module.exports = {
 
                                 console.info(GlobalFonts.families)
 
-                                context.font = '28px Arial Rounded MT Bold';
+                                context.font = '12px Arial Rounded MT Bold';
                                 context.fillStyle = '#ffffff';
                                 context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
     
@@ -246,7 +246,7 @@ module.exports = {
                                 context.fillStyle = '#ffffff';
                                 context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
 
-                                context.font = '25px Apple Emoji';
+                                context.font = '50px Apple Emoji';
                                 context.fillText(`😇`, canvas.width / 2.5, canvas.height / .5);
     
                                 context.beginPath();
