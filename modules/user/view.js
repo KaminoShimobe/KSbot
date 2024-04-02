@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
-const { createCanvas, Image } = require('@napi-rs/canvas');
-const Jimp = require('jimp');
+const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { request } = require('undici');
@@ -61,9 +60,9 @@ module.exports = {
     const applyText = (canvas, text) => {
         const context = canvas.getContext('2d');
         let fontSize = 70;
-    
+        GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'arial rounded mt bold')
         do {
-            context.font = `${fontSize -= 10}px sans-serif`;
+            context.font = `${fontSize -= 10}px arial rounded mt bold`;
         } while (context.measureText(text).width > canvas.width - 300);
     
         return context.font;
@@ -230,16 +229,22 @@ module.exports = {
                                 backgroundImage.src = background;
                                 context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     
-                                context.strokeStyle = '#0099ff';
-                                context.strokeRect(0, 0, canvas.width, canvas.height);
-    
-                                context.font = '28px sans-serif';
+                                // context.strokeStyle = '#0099ff';
+                                // context.strokeRect(0, 0, canvas.width, canvas.height);
+                                
+                                GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji.ttf'), 'Apple Emoji')
+                                GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'Arial Rounded MT Bold')
+
+                                context.font = '28px Arial Rounded MT Bold';
                                 context.fillStyle = '#ffffff';
                                 context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
     
                                 context.font = applyText(canvas, `${interaction.member.displayName}`);
                                 context.fillStyle = '#ffffff';
                                 context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
+
+                                context.font = '25px Apple Emoji';
+                                context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / .5);
     
                                 context.beginPath();
                                 context.arc(125, 125, 100, 0, Math.PI * 2, true);
