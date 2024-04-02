@@ -236,6 +236,8 @@ module.exports = {
                                 GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji.ttf'), 'Apple Emoji')
                                 GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'Arial Rounded MT Bold')
 
+                                console.info(GlobalFonts.families)
+
                                 context.font = '28px Arial Rounded MT Bold';
                                 context.fillStyle = '#ffffff';
                                 context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
@@ -245,7 +247,7 @@ module.exports = {
                                 context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
 
                                 context.font = '25px Apple Emoji';
-                                context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / .5);
+                                context.fillText(`😇`, canvas.width / 2.5, canvas.height / .5);
     
                                 context.beginPath();
                                 context.arc(125, 125, 100, 0, Math.PI * 2, true);
