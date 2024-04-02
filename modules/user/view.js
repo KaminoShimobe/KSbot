@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
 const { join } = require('path')
-const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
+const { createCanvas, Image, GlobalFonts, registerFont } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { request } = require('undici');
@@ -232,13 +232,14 @@ module.exports = {
     
                                 // context.strokeStyle = '#0099ff';
                                 // context.strokeRect(0, 0, canvas.width, canvas.height);
-                                
-                                GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji.ttf'), 'Apple Emoji')
-                                GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'Arial Rounded MT Bold')
+                                registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
+                                registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
+                                // GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'AppleColorEmoji.ttf'), 'Apple Emoji')
+                                // GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'Arial Rounded MT Bold')
 
-                                console.info(GlobalFonts.families)
+                                // console.info(GlobalFonts.families)
 
-                                context.font = '12px Arial Rounded MT Bold';
+                                context.font = '28px Arial Rounded MT Bold';
                                 context.fillStyle = '#ffffff';
                                 context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
     
