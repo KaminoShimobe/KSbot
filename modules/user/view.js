@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const mysql = require("mysql");
+const { join } = require('path')
 const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
@@ -206,18 +207,18 @@ module.exports = {
          
             
     
-            var i;
-            for(i = 0;i < roundedPercent; i++)  {
-                ctx.beginPath()
-                ctx.lineWidth = 14
-                ctx.strokeStyle = randomColor
-                ctx.fillStyle = randomColor
-                ctx.arc(203 + (i * 4.32), 190, 8, 0, Math.PI * 2, true)
-                ctx.stroke()
-                ctx.fill()
-                //total length of the total bar is 432, so 1% is 4.32.
-                //This code basically draws a circle for each percent
-                }
+            // var i;
+            // for(i = 0;i < roundedPercent; i++)  {
+            //     ctx.beginPath()
+            //     ctx.lineWidth = 14
+            //     ctx.strokeStyle = randomColor
+            //     ctx.fillStyle = randomColor
+            //     ctx.arc(203 + (i * 4.32), 190, 8, 0, Math.PI * 2, true)
+            //     ctx.stroke()
+            //     ctx.fill()
+            //     //total length of the total bar is 432, so 1% is 4.32.
+            //     //This code basically draws a circle for each percent
+            //     }
     
     
     console.log(interaction.user.id)
