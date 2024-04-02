@@ -61,9 +61,9 @@ module.exports = {
     const applyText = (canvas, text) => {
         const context = canvas.getContext('2d');
         let fontSize = 70;
-        GlobalFonts.registerFromPath(join(__dirname, '..', 'fonts', 'arialroundedmtbold.ttf'), 'arial rounded mt bold')
+        GlobalFonts.registerFromPath("/app/fonts/arialroundedmtbold.ttf", 'Arial Rounded MT Bold')
         do {
-            context.font = `${fontSize -= 10}px arial rounded mt bold`;
+            context.font = `${fontSize -= 10}px Arial Rounded MT Bold`;
         } while (context.measureText(text).width > canvas.width - 300);
     
         return context.font;
@@ -234,7 +234,7 @@ module.exports = {
                                 // context.strokeRect(0, 0, canvas.width, canvas.height);
                                 // registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
                                 // registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
-                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Emoji')
+                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Color Emoji')
                                 GlobalFonts.registerFromPath("/app/fonts/arialroundedmtbold.ttf", 'Arial Rounded MT Bold')
 
                                 console.info(GlobalFonts.families)
@@ -247,7 +247,7 @@ module.exports = {
                                 context.fillStyle = '#ffffff';
                                 context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
 
-                                context.font = '50px Apple Emoji';
+                                context.font = '50px Apple Color Emoji';
                                 context.fillText(`😇`, canvas.width / 2.5, canvas.height / .5);
     
                                 context.beginPath();
