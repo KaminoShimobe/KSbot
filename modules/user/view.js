@@ -234,7 +234,7 @@ module.exports = {
                                 // context.strokeRect(0, 0, canvas.width, canvas.height);
                                 // registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
                                 // registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
-                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Emoji')
+                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Color Emoji')
                                 GlobalFonts.registerFromPath("/app/fonts/arialroundedmtbold.ttf", 'Arial Rounded MT Bold')
 
                                 console.info(GlobalFonts.families)
@@ -247,8 +247,8 @@ module.exports = {
                                 context.fillStyle = '#ffffff';
                                 context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
 
-                                context.font = '50px Apple Emoji';
-                                context.fillText(`😇`, canvas.width / 2.5, canvas.height / .5);
+                                context.font = '50px Apple Color Emoji';
+                                context.fillText(`⭐`, canvas.width / 2.5, canvas.height / .5);
     
                                 context.beginPath();
                                 context.arc(125, 125, 100, 0, Math.PI * 2, true);
