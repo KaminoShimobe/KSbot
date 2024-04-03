@@ -119,7 +119,7 @@ module.exports = {
                     color = "#000000"
                 }    
                 console.log(money + " callbacked")
-                build(money);
+                build(money, color, stand);
                 
         //     con.query(`SELECT * FROM achievements WHERE id = '${interaction.user.id}'`, (err, rows) => {
         //         if(err) throw err;
@@ -224,7 +224,7 @@ module.exports = {
     console.log(interaction.user.id)
 
     
-                            async function build(money){
+                            async function build(money, hue, stand){
                                 const background = await readFile('/app/ksBotUserBG3.png');
                                 const backgroundImage = new Image();
                                 backgroundImage.src = background;
@@ -234,21 +234,40 @@ module.exports = {
                                 // context.strokeRect(0, 0, canvas.width, canvas.height);
                                 // registerFont("/app/fonts/AppleColorEmoji.ttf", { family: "Apple Emoji" })
                                 // registerFont("/app/fonts/arialroundedmtbold.ttf", { family: "Arial Rounded MT Bold" })
-                                GlobalFonts.registerFromPath("/app/fonts/AppleColorEmoji.ttf", 'Apple Color Emoji')
+                                
                                 GlobalFonts.registerFromPath("/app/fonts/arialroundedmtbold.ttf", 'Arial Rounded MT Bold')
 
                                 console.info(GlobalFonts.families)
+                                if(hue != undefined){
+                                    context.font = '28px Arial Rounded MT Bold';
+                                    context.fillStyle = hue;
+                                    context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 1.8 + 20);
+                                    
+        
+                                    context.font = applyText(canvas, `${interaction.member.displayName}`);
+                                    context.fillStyle = hue;
+                                    context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 3.5);
 
-                                context.font = '28px Arial Rounded MT Bold';
-                                context.fillStyle = '#ffffff';
-                                context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 3.5);
-    
-                                context.font = applyText(canvas, `${interaction.member.displayName}`);
-                                context.fillStyle = '#ffffff';
-                                context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 1.8);
+                                    context.font = '28px Arial Rounded MT Bold';
+                                    context.fillStyle = hue;
+                                    context.fillText("Stand: [" + stand + "]", canvas.width / 2.5, canvas.height / 1.8);
+                                } else {
+                                    context.font = '28px Arial Rounded MT Bold';
+                                    context.fillStyle = '#ffffff';
+                                    context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 1.8);
+                                    
+        
+                                    context.font = applyText(canvas, `${interaction.member.displayName}`);
+                                    context.fillStyle = '#ffffff';
+                                    context.fillText(`${interaction.member.displayName}`, canvas.width / 2.5, canvas.height / 3.5);
 
-                                context.font = '50px Apple Color Emoji';
-                                context.fillText(`⭐`, canvas.width / 2.5, canvas.height / .5);
+                                    context.font = '28px Arial Rounded MT Bold';
+                                    context.fillStyle = "#ffffff";
+                                    context.fillText("Stand: [" + stand + "]", canvas.width / 2.5, canvas.height / 1.8 + 20);
+                                }
+                                
+
+                                
     
                                 context.beginPath();
                                 context.arc(125, 125, 100, 0, Math.PI * 2, true);
