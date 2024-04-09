@@ -5,10 +5,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('toggle')
         .setDescription('Admin command for changing server features with KS Bot!')
-        .addStringOption(option =>
-			option.setName('toggle')
-				.setDescription('Admin controls to toggle KS-Bot features')
-				.setRequired(true)
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('bot channel')
@@ -54,7 +50,6 @@ module.exports = {
                         .setName('chests')
                         .setDescription('Toggle the ability to randomly spawn chests.')
                         .addBooleanOption(option => option.setName('chests_status').setDescription('Turn on or off.')))                            
-				)
                 .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
    async execute(interaction) {
 
