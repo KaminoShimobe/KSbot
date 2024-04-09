@@ -24,7 +24,7 @@ module.exports = {
                     subcommand
                         .setName('prefix')
                         .setDescription('Change the prefix for commands for this discord.')
-                        .addStringOption(option => option.setName('thePrefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setminLength(1)))
+                        .addStringOption(option => option.setName('theprefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setminLength(1)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('whisper')
@@ -98,7 +98,7 @@ module.exports = {
         interaction.reply('Farewell changed in ' + interaction.guild.name)
 
     } else if (interaction.options.getSubcommand() === 'prefix') {
-        const prefix = interaction.options.getString('thePrefix');
+        const prefix = interaction.options.getString('theprefix');
         sql = `UPDATE server SET prefix = "${prefix}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Prefix changed in ' + interaction.guild.name)
