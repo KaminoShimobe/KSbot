@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Admin command for changing server features with KS Bot!')
                 .addSubcommand(subcommand =>
                     subcommand
-                        .setName('bot channel')
+                        .setName('bot_channel')
                         .setDescription('Select a bot channel.')
                         .addChannelOption(option => option.setName('channel').setDescription('The channel to be used as the bot channel')))
                 .addSubcommand(subcommand =>
@@ -79,7 +79,7 @@ module.exports = {
         // let canvas = rows[0].canvas;
         // let customRoles = rows[0].customRole;
     
-    if (interaction.options.getSubcommand() === 'bot channel') {
+    if (interaction.options.getSubcommand() === 'bot_channel') {
         const channel = interaction.options.getChannel('channel');
         sql = `UPDATE server SET channel = "${channel}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
