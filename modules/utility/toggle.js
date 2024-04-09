@@ -24,7 +24,7 @@ module.exports = {
                     subcommand
                         .setName('prefix')
                         .setDescription('Change the prefix for commands for this discord.')
-                        .addStringOption(option => option.setName('theprefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setminLength(1)))
+                        .addStringOption(option => option.setName('theprefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setMinLength(1)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('whisper')
