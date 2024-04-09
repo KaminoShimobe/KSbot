@@ -241,7 +241,7 @@ module.exports = {
                                 if(hue != undefined){
                                     context.font = '28px Arial Rounded MT Bold';
                                     context.fillStyle = hue;
-                                    context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 1.8 + 20);
+                                    context.fillText("Money: $" + money, canvas.width / 2.5, canvas.height / 1.8 + 30);
                                     
         
                                     context.font = applyText(canvas, `${interaction.member.displayName}`);
@@ -263,7 +263,7 @@ module.exports = {
 
                                     context.font = '28px Arial Rounded MT Bold';
                                     context.fillStyle = "#ffffff";
-                                    context.fillText("Stand: [" + stand + "]", canvas.width / 2.5, canvas.height / 1.8 + 20);
+                                    context.fillText("Stand: [" + stand + "]", canvas.width / 2.5, canvas.height / 1.8 + 30);
                                 }
                                 
 

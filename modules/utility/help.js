@@ -30,10 +30,7 @@ module.exports = {
                 { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
                 { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
                 { name: '/poll' , value: 'Create a poll!'},
-                { name: '/remind ...' , value: 'Create a reminder for later!'},
-                { name: '... in' , value: 'Create a time based reminder.'},
-                { name: '... when' , value: 'Create a user based reminder.', inline: true},
-                { name: '... channel' , value: 'Create a channel based reminder', inline: true},
+                { name: '/remind' , value: 'Create a reminder for later!'},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
             const right = new ButtonBuilder()
@@ -104,7 +101,8 @@ module.exports = {
                 { name: '/sell' , value: 'Sell an item from your inventory.'},
                 { name: '/bazaar' , value: 'Sell an item from your inventory in the server shop.'},
                 { name: '/shop' , value: 'View the server shop.'},
-                { name: '/buy' , value: 'Buy an item from the shop.'}
+                { name: '/buy' , value: 'Buy an item from the shop.'},
+                { name: '/fund' , value: 'Fund the current server you are in!'}
                 );
 
             const right = new ButtonBuilder()
@@ -169,6 +167,8 @@ module.exports = {
                 { name: '/who' , value: 'select a random user for a question you ask!'},
                 { name: '/scale' , value: 'Scales something from 1-10!'},
                 { name: '/flip' , value: 'Flip a coin heads or tails.'},
+                { name: '/whisper' , value: 'Send an anonymous message to the bot channel.'},
+                { name: '/expose' , value: 'Exposes an anonymous message to the bot channel.'},
                 { name: '/tierlist' , value: 'Create a tierlist of users in the server.'},
                 { name: '/localboard' , value: 'Check the top 10 richest users in the server!'},
                 { name: '/leaderboard' , value: 'Check the top 10 richest users/servers on KS Bot!'},
@@ -207,10 +207,7 @@ module.exports = {
                 { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
                 { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
                 { name: '/poll' , value: 'Create a poll!'},
-                { name: '/remind ...' , value: 'Create a reminder for later!'},
-                { name: '... in' , value: 'Create a time based reminder.'},
-                { name: '... when' , value: 'Create a user based reminder.', inline: true},
-                { name: '... channel' , value: 'Create a channel based reminder', inline: true},
+                { name: '/remind' , value: 'Create a reminder for later!'},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
             const right = new ButtonBuilder()
