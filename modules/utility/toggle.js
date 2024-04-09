@@ -101,7 +101,7 @@ module.exports = {
         if (rows[0].channel == "default"){
             channel = `**/toggle channel** to set a bot channel!`;
         } else {
-            channel = bot.channels.fetch(rows[0].channel);
+            channel = interaction.client.channels.fetch(rows[0].channel);
         }
         // let whisper = rows[0].whisper;
         // let expose = rows[0].exposeSet;
