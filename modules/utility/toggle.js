@@ -9,47 +9,47 @@ module.exports = {
                     subcommand
                         .setName('bot_channel')
                         .setDescription('Select a bot channel.')
-                        .addChannelOption(option => option.setName('channel').setDescription('The channel to be used as the bot channel')))
+                        .addChannelOption(option => option.setName('channel').setDescription('The channel to be used as the bot channel').setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('greeting')
                         .setDescription('Change the message for when users join your server.')
-                        .addStringOption(option => option.setName('welcome').setDescription('The welcome message that will be sent upon arrival!').setMaxLength(2_000)))
+                        .addStringOption(option => option.setName('welcome').setDescription('The welcome message that will be sent upon arrival!').setMaxLength(2_000).setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('farewell')
                         .setDescription('Change the message for when users leave your server.')
-                        .addStringOption(option => option.setName('goodbye').setDescription('The farewell message that will be sent upon departure').setMaxLength(2_000)))
+                        .addStringOption(option => option.setName('goodbye').setDescription('The farewell message that will be sent upon departure').setMaxLength(2_000).setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('prefix')
                         .setDescription('Change the prefix for commands for this discord.')
-                        .addStringOption(option => option.setName('theprefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setMinLength(1)))
+                        .addStringOption(option => option.setName('theprefix').setDescription('The character to be used as a prefix for your commands.').setMaxLength(1).setMinLength(1).setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('whisper')
                         .setDescription('Toggle the ability to send anonymous messages to the bot channel.')
-                        .addBooleanOption(option => option.setName('whisper_status').setDescription('Turn on or off.')))
+                        .addBooleanOption(option => option.setName('whisper_status').setDescription('Turn on or off.').setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('expose')
                         .setDescription('Toggle the ability to reveal anonymous messages to the bot channel. With a cooldown of 24 hours.')
-                        .addBooleanOption(option => option.setName('expose_status').setDescription('Turn on or off.')))
+                        .addBooleanOption(option => option.setName('expose_status').setDescription('Turn on or off.').setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('stands')
                         .setDescription('Toggle the ability to use Jojo stand abilities in this server.')
-                        .addBooleanOption(option => option.setName('jojo').setDescription('Turn on or off.')))
+                        .addBooleanOption(option => option.setName('jojo').setDescription('Turn on or off.').setRequired(true)))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('megaten')
                         .setDescription('Toggle the ability use megaten features in this server and spawn raids.')
-                        .addBooleanOption(option => option.setName('smt').setDescription('Turn on or off.'))) 
+                        .addBooleanOption(option => option.setName('smt').setDescription('Turn on or off.').setRequired(true))) 
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('chests')
                         .setDescription('Toggle the ability to randomly spawn chests.')
-                        .addBooleanOption(option => option.setName('chests_status').setDescription('Turn on or off.')))                            
+                        .addBooleanOption(option => option.setName('chests_status').setDescription('Turn on or off.').setRequired(true)))                            
                 .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
    async execute(interaction) {
 
