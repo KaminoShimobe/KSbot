@@ -115,7 +115,8 @@ module.exports = {
         // let customRoles = rows[0].customRole;
     
     if (interaction.options.getSubcommand() === 'bot_channel') {
-        const channel = interaction.options.getChannel('channel');
+        const channel = interaction.options.getChannel('channel').id;
+        console.log(channel)
         sql = `UPDATE server SET channel = "${channel}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Bot channel changed in ' + interaction.guild.name)
