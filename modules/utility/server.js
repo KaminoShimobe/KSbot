@@ -124,7 +124,7 @@ module.exports = {
         console.log(interaction.guild.members)
         var owner = interaction.guild.members.cache.get(interaction.guild.ownerId).user;
         console.log(owner.globalName)
-
+        console.log(channel)
         var supporter = "";
         
                 
