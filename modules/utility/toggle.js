@@ -112,7 +112,7 @@ module.exports = {
     if (interaction.options.getSubcommand() === 'bot_channel') {
         const botchannel = interaction.options.getChannel('channel').id;
         console.log(botchannel)
-        sql = `UPDATE server SET channel = "${channel}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET channel = "${botchannel}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Bot channel changed in ' + interaction.guild.name)
 
