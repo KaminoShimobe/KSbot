@@ -136,6 +136,7 @@ module.exports = {
 
     } else if (interaction.options.getSubcommand() === 'whisper') {
         const whisper = interaction.options.getBoolean('whisper_status');
+        console.log(whisper)
         sql = `UPDATE server SET whisper = "${whisper}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Whisper changed in ' + interaction.guild.name)
