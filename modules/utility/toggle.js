@@ -97,12 +97,7 @@ module.exports = {
             return;
         }
         
-        let channel;
-        if (rows[0].channel == "default"){
-            channel = `**/toggle channel** to set a bot channel!`;
-        } else {
-            channel = interaction.client.channels.fetch(rows[0].channel);
-        }
+        
         // let whisper = rows[0].whisper;
         // let expose = rows[0].exposeSet;
         // let cooldown = rows[0].cooldown;
@@ -115,8 +110,8 @@ module.exports = {
         // let customRoles = rows[0].customRole;
     
     if (interaction.options.getSubcommand() === 'bot_channel') {
-        const channel = interaction.options.getChannel('channel').id;
-        console.log(channel)
+        const botchannel = interaction.options.getChannel('channel').id;
+        console.log(botchannel)
         sql = `UPDATE server SET channel = "${channel}" WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Bot channel changed in ' + interaction.guild.name)

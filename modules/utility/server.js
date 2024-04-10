@@ -78,6 +78,8 @@ module.exports = {
         var ch;
         var ca;
         var cr;
+        console.log(whisper)
+        console.log(expose)
         if(whisper == true){
             w = "Yes";
         } else {
