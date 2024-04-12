@@ -69,7 +69,7 @@ module.exports = {
     var sTiers = sTier.split(',');
     //S tier
     for(i = 0; i < sTiers.length; i++){
-        let user = interaction.client.users.find("username", sTiers[i]);
+        let user = interaction.client.users.find(user => user.username == sTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -87,7 +87,7 @@ module.exports = {
     }
     //A tier
     for(i = 0; i < aTiers.length; i++){
-        let user = interaction.client.users.find("username", aTiers[i]);
+        let user = interaction.client.users.find(user => user.username == aTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -105,7 +105,7 @@ module.exports = {
     }
     //B tier
     for(i = 0; i < bTiers.length; i++){
-        let user = interaction.client.users.find("username", bTiers[i]);
+        let user = interaction.client.users.find(user => user.username == bTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -123,7 +123,7 @@ module.exports = {
     }
     //C tier
     for(i = 0; i < cTiers.length; i++){
-        let user = interaction.client.users.find("username", cTiers[i]);
+        let user = interaction.client.users.find(user => user.username == cTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -141,7 +141,7 @@ module.exports = {
     }
     //D tier
     for(i = 0; i < dTiers.length; i++){
-        let user = interaction.client.users.find("username", dTiers[i]);
+        let user = interaction.client.users.find(user => user.username == dTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -159,7 +159,7 @@ module.exports = {
     }
     //E tier
     for(i = 0; i < eTiers.length; i++){
-        let user = interaction.client.users.find("username", eTiers[i]);
+        let user = interaction.client.users.find(user => user.username == eTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
@@ -177,7 +177,7 @@ module.exports = {
     }
     //F tier
     for(i = 0; i < fTiers.length; i++){
-        let user = interaction.client.users.find("username", fTiers[i]);
+        let user = interaction.client.users.find(user => user.username == fTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
