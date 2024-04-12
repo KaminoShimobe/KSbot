@@ -70,7 +70,7 @@ module.exports = {
     //S tier
     for(i = 0; i < sTiers.length; i++){
         let user = interaction.guild.members.search("username", sTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
@@ -89,7 +89,7 @@ module.exports = {
     //A tier
     for(i = 0; i < aTiers.length; i++){
         let user = interaction.guild.members.search("username", aTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
@@ -108,7 +108,7 @@ module.exports = {
     //B tier
     for(i = 0; i < bTiers.length; i++){
         let user = interaction.guild.members.search("username", bTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
             if(user != undefined){
@@ -128,7 +128,7 @@ module.exports = {
     //C tier
     for(i = 0; i < cTiers.length; i++){
         let user = interaction.guild.members.search("username", cTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
             if(user != undefined){
@@ -148,7 +148,7 @@ module.exports = {
     //D tier
     for(i = 0; i < dTiers.length; i++){
         let user = interaction.guild.members.search("username", dTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
             if(user != undefined){
@@ -168,7 +168,7 @@ module.exports = {
     //E tier
     for(i = 0; i < eTiers.length; i++){
         let user = interaction.guild.members.search("username", eTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
             if(user != undefined){
@@ -188,7 +188,7 @@ module.exports = {
     //F tier
     for(i = 0; i < fTiers.length; i++){
         let user = interaction.guild.members.search("username", fTiers[i]);
-        let username = interaction.client.user.cache.get(user.id);
+        let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
             if(user != undefined){
