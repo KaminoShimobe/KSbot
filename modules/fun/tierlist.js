@@ -70,6 +70,7 @@ module.exports = {
     //S tier
     for(i = 0; i < sTiers.length; i++){
         let user = interaction.guild.members.search("username", sTiers[i]);
+        console.log(user);
         let username = interaction.client.users.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
