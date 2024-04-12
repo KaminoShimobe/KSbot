@@ -69,24 +69,29 @@ module.exports = {
     var sTiers = sTier.split(',');
     //S tier
     for(i = 0; i < sTiers.length; i++){
-       await interaction.guild.members.fetch()
-        let user = interaction.guild.members.cache.find(user => user.username == sTiers[i]);
+       await interaction.guild.members.fetch().then(fetched => {
+        let user = fetched.filter(member => member.user.username == sTiers[i]);
         console.log(user);
-        let username = interaction.client.users.cache.get(user.id);
-        if(i < 9){
-            if(user != undefined){
-                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
-                const avatar = new Image();
-                avatar.src = Buffer.from(await body.arrayBuffer());
-                context.drawImage(avatar, 85, 85, 135 + (85*(i)), 597);
+       }
+
+       )
+        async function tier(){
+            if(i < 9){
+                if(user != undefined){
+                    const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
+                    const avatar = new Image();
+                    avatar.src = Buffer.from(await body.arrayBuffer());
+                    context.drawImage(avatar, 85, 85, 135 + (85*(i)), 597);
+                } else {
+                    console.log("Could not find user " + sTiers[i]);
+                
+                }
             } else {
-                console.log("Could not find user " + sTiers[i]);
-            break; 
+                console.log("Limit to spaces in tierlist for line S met.")
+                
             }
-        } else {
-            console.log("Limit to spaces in tierlist for line S met.")
-            break;
         }
+        
     }
     //A tier
     for(i = 0; i < aTiers.length; i++){
