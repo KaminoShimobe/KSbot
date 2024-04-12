@@ -69,7 +69,8 @@ module.exports = {
     var sTiers = sTier.split(',');
     //S tier
     for(i = 0; i < sTiers.length; i++){
-        let user = interaction.guild.members.search("username", sTiers[i]);
+       await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == sTiers[i]);
         console.log(user);
         let username = interaction.client.users.cache.get(user.id);
         if(i < 9){
@@ -89,7 +90,8 @@ module.exports = {
     }
     //A tier
     for(i = 0; i < aTiers.length; i++){
-        let user = interaction.guild.members.search("username", aTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == aTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
@@ -108,7 +110,8 @@ module.exports = {
     }
     //B tier
     for(i = 0; i < bTiers.length; i++){
-        let user = interaction.guild.members.search("username", bTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == bTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
@@ -128,7 +131,8 @@ module.exports = {
     }
     //C tier
     for(i = 0; i < cTiers.length; i++){
-        let user = interaction.guild.members.search("username", cTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == cTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
@@ -148,7 +152,8 @@ module.exports = {
     }
     //D tier
     for(i = 0; i < dTiers.length; i++){
-        let user = interaction.guild.members.search("username", dTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == dTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
@@ -168,7 +173,8 @@ module.exports = {
     }
     //E tier
     for(i = 0; i < eTiers.length; i++){
-        let user = interaction.guild.members.search("username", eTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == eTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
@@ -188,7 +194,8 @@ module.exports = {
     }
     //F tier
     for(i = 0; i < fTiers.length; i++){
-        let user = interaction.guild.members.search("username", fTiers[i]);
+        await interaction.guild.members.fetch()
+        let user = interaction.guild.members.cache.find(user => user.username == fTiers[i]);
         let username = interaction.client.users.cache.get(user.id);
 
         if(i < 9){
