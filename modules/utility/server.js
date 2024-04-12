@@ -78,44 +78,42 @@ module.exports = {
         var ch;
         var ca;
         var cr;
-        console.log(whisper)
-        console.log(expose)
-        if(whisper == 0){
+        if(whisper == true){
             w = "Yes";
         } else {
             w = "No";
         }   
-        if(expose == 0){
+        if(expose == true){
             e = "Yes";
         } else {
             e = "No";
         }
-        if(stands == 0){
+        if(stands == true){
             s = "Yes";
         } else {
             s = "No";
         }
-        if(waifu == 0){
+        if(waifu == true){
             wi = "Yes";
         } else {
             wi = "No";
         }
-        if(RPG == 0){
+        if(RPG == true){
             r = "Yes";
         } else {
             r = "No";
         }
-        if(canvas == 0){
+        if(canvas == true){
             ca = "Yes";
         } else {
             ca = "No";
         }
-        if(chests == 0){
+        if(chests == true){
             ch = "Yes";
         } else {
             ch = "No";
         }
-        if(customRoles == 0){
+        if(customRoles == true){
             cr = "Yes";
         } else {
             cr = "No";
