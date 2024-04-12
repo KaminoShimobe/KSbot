@@ -70,9 +70,10 @@ module.exports = {
     //S tier
     for(i = 0; i < sTiers.length; i++){
         let user = interaction.guild.members.search("username", sTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 597);
@@ -88,9 +89,10 @@ module.exports = {
     //A tier
     for(i = 0; i < aTiers.length; i++){
         let user = interaction.guild.members.search("username", aTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 500);
@@ -106,9 +108,11 @@ module.exports = {
     //B tier
     for(i = 0; i < bTiers.length; i++){
         let user = interaction.guild.members.search("username", bTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
+
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 403);
@@ -124,9 +128,11 @@ module.exports = {
     //C tier
     for(i = 0; i < cTiers.length; i++){
         let user = interaction.guild.members.search("username", cTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
+
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 306);
@@ -142,9 +148,11 @@ module.exports = {
     //D tier
     for(i = 0; i < dTiers.length; i++){
         let user = interaction.guild.members.search("username", dTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
+
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 209);
@@ -160,9 +168,11 @@ module.exports = {
     //E tier
     for(i = 0; i < eTiers.length; i++){
         let user = interaction.guild.members.search("username", eTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
+
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 112);
@@ -178,9 +188,11 @@ module.exports = {
     //F tier
     for(i = 0; i < fTiers.length; i++){
         let user = interaction.guild.members.search("username", fTiers[i]);
+        let username = interaction.client.user.cache.get(user.id);
+
         if(i < 9){
             if(user != undefined){
-                const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
+                const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                 const avatar = new Image();
                 avatar.src = Buffer.from(await body.arrayBuffer());
                 context.drawImage(avatar, 85, 85, 135 + (85*(i)), 15);
