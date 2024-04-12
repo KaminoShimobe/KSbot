@@ -69,7 +69,7 @@ module.exports = {
     var sTiers = sTier.split(',');
     //S tier
     for(i = 0; i < sTiers.length; i++){
-        let user = interaction.client.guild.members.search("username", sTiers[i]);
+        let user = interaction.guild.members.search("username", sTiers[i]);
         if(i < 9){
             if(user != undefined){
                 const { body } = await request(user.displayAvatarURL({ format: 'jpg' }));
