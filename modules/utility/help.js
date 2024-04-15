@@ -29,8 +29,6 @@ module.exports = {
                 { name: '/server' , value: 'Shows info about the server you are in.'},
                 { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
                 { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
-                { name: '/poll' , value: 'Create a poll!'},
-                { name: '/remind' , value: 'Create a reminder for later!'},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
             const right = new ButtonBuilder()
@@ -206,8 +204,6 @@ module.exports = {
                 { name: '/server' , value: 'Shows info about the server you are in.'},
                 { name: '/invite' , value: 'Sends a link to invite KS-Bot to your discord server!'},
                 { name: '/patreon' , value: 'Become a patreon supporter for additional KS-Bot benefits!'},
-                { name: '/poll' , value: 'Create a poll!'},
-                { name: '/remind' , value: 'Create a reminder for later!'},
                 { name: '/discord' , value: 'Sends a link to the KS-Bot support server.'}
                 );
             const right = new ButtonBuilder()
