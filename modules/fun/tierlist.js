@@ -71,15 +71,16 @@ module.exports = {
     for(i = 0; i < sTiers.length; i++){
        await interaction.guild.members.fetch().then(fetched => {
         let user = fetched.filter(member => member.user.username == sTiers[i]);
+        let username = interaction.client.users.cache.get(user.id);
         console.log(user);
-        tier(user);
+        tier(user, username);
        }
 
        )
-        async function tier(u){
+        async function tier(u, name){
             if(i < 9){
                 if(u != undefined){
-                    const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
+                    const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
                     context.drawImage(avatar, 85, 85, 135 + (85*(i)), 597);
