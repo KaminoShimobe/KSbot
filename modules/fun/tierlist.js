@@ -72,13 +72,13 @@ module.exports = {
        await interaction.guild.members.fetch().then(fetched => {
         let user = fetched.filter(member => member.user.username == sTiers[i]);
         console.log(user);
-        tier();
+        tier(user);
        }
 
        )
-        async function tier(){
+        async function tier(u){
             if(i < 9){
-                if(user != undefined){
+                if(u != undefined){
                     const { body } = await request(username.displayAvatarURL({ format: 'jpg' }));
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
