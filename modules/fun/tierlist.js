@@ -73,6 +73,7 @@ module.exports = {
     var dTiers = dTier.split(',');
     var eTiers = eTier.split(',');
     var fTiers = fTier.split(',');
+    await interaction.deferReply({empheral: true});
     //S tier
     for(i = 0; i < sTiers.length; i++){
        await interaction.guild.members.fetch().then(fetched => {
@@ -281,8 +282,8 @@ module.exports = {
 
     const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'tierlist-image.png' });
     
-    await interaction.deferReply({empheral: true});
-    interaction.editReply({ files: [attachment] });
+    
+    await interaction.editReply({ files: [attachment] });
     
                                 
                             
