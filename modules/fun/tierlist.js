@@ -73,11 +73,8 @@ module.exports = {
         let person = fetched.filter(member => member.user.username == sTiers[i]);
         // let username = interaction.client.users.cache.get(user.id);
         console.log(person);
-        console.log(person[0].user);
-        console.log(person[0].user.username);
-        console.log(person[0].username);
-        console.log(person.user.username);
-        tier(person, person[0].user.username);
+        console.log(person.id);
+        tier(person, person.username);
        }
 
        )
