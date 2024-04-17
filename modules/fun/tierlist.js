@@ -75,7 +75,7 @@ module.exports = {
         console.log(person);
         console.log(person.id)
         console.log(person.user.username)
-        tier(person, person.username);
+        tier(person, person.user);
        }
 
        )
