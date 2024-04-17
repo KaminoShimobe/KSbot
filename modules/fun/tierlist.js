@@ -164,7 +164,7 @@ module.exports = {
     //C tier
     for(i = 0; i < cTiers.length; i++){
         await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == CTiers[i]).first();
+            let person = fetched.filter(member => member.user.username == cTiers[i]).first();
             // let username = interaction.client.users.cache.get(user.id);
             console.log(person);
             console.log(person.id)
