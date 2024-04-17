@@ -74,7 +74,7 @@ module.exports = {
         // let username = interaction.client.users.cache.get(user.id);
         console.log(person);
         console.log(person.id)
-        console.log(person.username)
+        console.log(person.user.username)
         tier(person, person.username);
        }
 
