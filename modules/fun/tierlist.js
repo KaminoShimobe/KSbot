@@ -67,6 +67,12 @@ module.exports = {
     const fTier = interaction.options.getString('f') ?? '';
     var usernames = sTier.split(',') + aTier.split(',') + bTier.split(',') + cTier.split(',') + dTier.split(',') + eTier.split(',') + fTier.split(',');
     var sTiers = sTier.split(',');
+    var aTiers = aTier.split(',');
+    var bTiers = bTier.split(',');
+    var cTiers = cTier.split(',');
+    var dTiers = dTier.split(',');
+    var eTiers = eTier.split(',');
+    var fTiers = fTier.split(',');
     //S tier
     for(i = 0; i < sTiers.length; i++){
        await interaction.guild.members.fetch().then(fetched => {
