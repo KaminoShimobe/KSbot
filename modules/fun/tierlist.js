@@ -281,7 +281,8 @@ module.exports = {
 
     const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'tierlist-image.png' });
     
-    interaction.reply({ files: [attachment] });
+    await interaction.deferReply({empheral: true});
+    interaction.editReply({ files: [attachment] });
     
                                 
                             
