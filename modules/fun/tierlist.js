@@ -79,7 +79,6 @@ module.exports = {
        await interaction.guild.members.fetch().then(fetched => {
         let person = fetched.filter(member => member.user.username == sTiers[i]).first();
         
-        console.log(person);
         console.log(person.id)
         console.log(person.user.username)
         tier(person, person.user);
@@ -109,7 +108,7 @@ module.exports = {
         await interaction.guild.members.fetch().then(fetched => {
             let person = fetched.filter(member => member.user.username == aTiers[i]).first();
            
-            console.log(person);
+            
             console.log(person.id)
             console.log(person.user.username)
             tier(person, person.user);
@@ -120,9 +119,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 79);
+                        const avatar2 = new Image();
+                        avatar2.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar2, 64, 64, 93 + (64*(i)), 79);
                     } else {
                         console.log("Could not find user " + aTiers[i]);
                     
@@ -138,7 +137,7 @@ module.exports = {
         await interaction.guild.members.fetch().then(fetched => {
             let person = fetched.filter(member => member.user.username == bTiers[i]).first();
             // let username = interaction.client.users.cache.get(user.id);
-            console.log(person);
+            
             console.log(person.id)
             console.log(person.user.username)
             tier(person, person.user);
@@ -149,9 +148,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 149);
+                        const avatar3 = new Image();
+                        avatar3.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar3, 64, 64, 93 + (64*(i)), 149);
                     } else {
                         console.log("Could not find user " + bTiers[i]);
                     
@@ -167,7 +166,7 @@ module.exports = {
         await interaction.guild.members.fetch().then(fetched => {
             let person = fetched.filter(member => member.user.username == cTiers[i]).first();
             // let username = interaction.client.users.cache.get(user.id);
-            console.log(person);
+           
             console.log(person.id)
             console.log(person.user.username)
             tier(person, person.user);
@@ -178,9 +177,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 219);
+                        const avatar4 = new Image();
+                        avatar4.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar4, 64, 64, 93 + (64*(i)), 219);
                     } else {
                         console.log("Could not find user " + cTiers[i]);
                     
@@ -196,7 +195,7 @@ module.exports = {
         await interaction.guild.members.fetch().then(fetched => {
             let person = fetched.filter(member => member.user.username == dTiers[i]).first();
             // let username = interaction.client.users.cache.get(user.id);
-            console.log(person);
+           
             console.log(person.id)
             console.log(person.user.username)
             tier(person, person.user);
@@ -207,9 +206,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 289);
+                        const avatar5 = new Image();
+                        avatar5.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar5, 64, 64, 93 + (64*(i)), 289);
                     } else {
                         console.log("Could not find user " + dTiers[i]);
                     
@@ -236,9 +235,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 359);
+                        const avatar6 = new Image();
+                        avatar6.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar6, 64, 64, 93 + (64*(i)), 359);
                     } else {
                         console.log("Could not find user " + eTiers[i]);
                     
@@ -265,9 +264,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 64, 64, 93 + (64*(i)), 429);
+                        const avatar7 = new Image();
+                        avatar7.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar7, 64, 64, 93 + (64*(i)), 429);
                     } else {
                         console.log("Could not find user " + fTiers[i]);
                     
