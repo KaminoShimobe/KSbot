@@ -70,12 +70,14 @@ module.exports = {
     //S tier
     for(i = 0; i < sTiers.length; i++){
        await interaction.guild.members.fetch().then(fetched => {
-        let user = fetched.filter(member => member.user.username == sTiers[i]);
-        let username = interaction.client.users.cache.get(user.id);
-        console.log(user);
-        console.log(user.user.username);
-        console.log(user[0].username);
-        tier(user, username);
+        let person = fetched.filter(member => member.user.username == sTiers[i]);
+        // let username = interaction.client.users.cache.get(user.id);
+        console.log(person);
+        console.log(person[0].user);
+        console.log(person[0].user.username);
+        console.log(person[0].username);
+        console.log(person.user.username);
+        tier(person, person[0].user.username);
        }
 
        )
