@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { join } = require('path')
 const { createCanvas, Image, GlobalFonts, registerFont } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
