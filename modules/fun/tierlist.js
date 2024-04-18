@@ -303,6 +303,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
+                        console.log("printed for F tier")
                     } else {
                         console.log("Could not find user " + fTiers[i]);
                     
