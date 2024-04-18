@@ -73,6 +73,13 @@ module.exports = {
     var dTiers = dTier.split(',');
     var eTiers = eTier.split(',');
     var fTiers = fTier.split(',');
+    console.log(sTiers)
+    console.log(aTiers)
+    console.log(bTiers)
+    console.log(cTiers)
+    console.log(dTiers)
+    console.log(eTiers)
+    console.log(fTiers)
     await interaction.deferReply({empheral: true});
     //S tier
     for(i = 0; i < sTiers.length; i++){
