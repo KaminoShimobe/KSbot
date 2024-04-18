@@ -50,7 +50,7 @@ module.exports = {
 				.setDescription('Usernames of 1-9 members in F tier. Seperate with commas.')
                 .setRequired(false)),
    async execute(interaction) {
-
+    await interaction.deferReply({empheral: true});
     const canvas = createCanvas(628, 504);
     const context = canvas.getContext('2d');
     const background = await readFile('/app/tierlist.png');
@@ -80,7 +80,7 @@ module.exports = {
     console.log(dTiers)
     console.log(eTiers)
     console.log(fTiers)
-    await interaction.deferReply({empheral: true});
+    
     //S tier
     for(i = 0; i < sTiers.length; i++){
         if (sTiers.length > 0) {
