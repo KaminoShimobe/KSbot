@@ -51,7 +51,7 @@ module.exports = {
                 .setRequired(false)),
    async execute(interaction) {
 
-    const canvas = createCanvas(900, 700);
+    const canvas = createCanvas(628, 504);
     const context = canvas.getContext('2d');
     const background = await readFile('/app/tierlist.png');
     const backgroundImage = new Image();
@@ -91,7 +91,7 @@ module.exports = {
                     const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
-                    context.drawImage(avatar, 64, 64, 93 + (64*(i)), 9);
+                    context.drawImage(avatar, 93 + (64*(i)), 9, 64, 64);
                 } else {
                     console.log("Could not find user " + sTiers[i]);
                 
@@ -119,9 +119,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar2 = new Image();
-                        avatar2.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar2, 64, 64, 93 + (64*(i)), 79);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 79, 64, 64);
                     } else {
                         console.log("Could not find user " + aTiers[i]);
                     
@@ -148,9 +148,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar3 = new Image();
-                        avatar3.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar3, 64, 64, 93 + (64*(i)), 149);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 149, 64, 64);
                     } else {
                         console.log("Could not find user " + bTiers[i]);
                     
@@ -177,9 +177,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar4 = new Image();
-                        avatar4.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar4, 64, 64, 93 + (64*(i)), 219);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 219, 64, 64);
                     } else {
                         console.log("Could not find user " + cTiers[i]);
                     
@@ -206,9 +206,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar5 = new Image();
-                        avatar5.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar5, 64, 64, 93 + (64*(i)), 289);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 289, 64, 64);
                     } else {
                         console.log("Could not find user " + dTiers[i]);
                     
@@ -235,9 +235,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar6 = new Image();
-                        avatar6.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar6, 64, 64, 93 + (64*(i)), 359);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 359, 64, 64);
                     } else {
                         console.log("Could not find user " + eTiers[i]);
                     
@@ -264,9 +264,9 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar7 = new Image();
-                        avatar7.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar7, 64, 64, 93 + (64*(i)), 429);
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
                     } else {
                         console.log("Could not find user " + fTiers[i]);
                     
