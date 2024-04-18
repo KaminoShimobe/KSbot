@@ -76,6 +76,7 @@ module.exports = {
     await interaction.deferReply({empheral: true});
     //S tier
     for(i = 0; i < sTiers.length; i++){
+        if (sTiers.length > 0) {
        await interaction.guild.members.fetch().then(fetched => {
         let person = fetched.filter(member => member.user.username == sTiers[i]).first();
         
@@ -83,8 +84,12 @@ module.exports = {
         console.log(person.user.username)
         tier(person, person.user);
        }
+    
 
        )
+        } else {
+            console.log("Skipped tier S")
+        }
         async function tier(u, name){
             if(i < 9){
                 if(u != undefined){
@@ -105,16 +110,20 @@ module.exports = {
     }
     //A tier
     for(i = 0; i < aTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == aTiers[i]).first();
-           
-            
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (aTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == aTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier A")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
@@ -134,16 +143,20 @@ module.exports = {
     }
     //B tier
     for(i = 0; i < bTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == bTiers[i]).first();
-            // let username = interaction.client.users.cache.get(user.id);
-            
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (bTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == bTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier B")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
@@ -163,16 +176,20 @@ module.exports = {
     }
     //C tier
     for(i = 0; i < cTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == cTiers[i]).first();
-            // let username = interaction.client.users.cache.get(user.id);
-           
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (cTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == cTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier C")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
@@ -192,16 +209,20 @@ module.exports = {
     }
     //D tier
     for(i = 0; i < dTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == dTiers[i]).first();
-            // let username = interaction.client.users.cache.get(user.id);
-           
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (dTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == dTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier D")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
@@ -221,16 +242,20 @@ module.exports = {
     }
     //E tier
     for(i = 0; i < eTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == eTiers[i]).first();
-            // let username = interaction.client.users.cache.get(user.id);
-            console.log(person);
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (eTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == eTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier E")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
@@ -250,16 +275,20 @@ module.exports = {
     }
     //F tier
     for(i = 0; i < fTiers.length; i++){
-        await interaction.guild.members.fetch().then(fetched => {
-            let person = fetched.filter(member => member.user.username == fTiers[i]).first();
-            // let username = interaction.client.users.cache.get(user.id);
-            console.log(person);
-            console.log(person.id)
-            console.log(person.user.username)
-            tier(person, person.user);
-           }
-    
-           )
+        if (fTiers.length > 0) {
+            await interaction.guild.members.fetch().then(fetched => {
+             let person = fetched.filter(member => member.user.username == fTiers[i]).first();
+             
+             console.log(person.id)
+             console.log(person.user.username)
+             tier(person, person.user);
+            }
+         
+     
+            )
+             } else {
+                 console.log("Skipped tier F")
+             }
             async function tier(u, name){
                 if(i < 9){
                     if(u != undefined){
