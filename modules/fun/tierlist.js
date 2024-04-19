@@ -86,7 +86,7 @@ module.exports = {
         if (sTiers.length > 0) {
        await interaction.guild.members.fetch().then(fetched => {
         let person = fetched.filter(member => member.user.username == sTiers[i]).first();
-        
+        console.log(i)
         console.log(person.id)
         console.log(person.user.username)
         tier(person, person.user);
@@ -103,7 +103,7 @@ module.exports = {
                     const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
-                    context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
+                    context.drawImage(avatar, 93 + (64*(i)), 9, 64, 64);
                 } else {
                     console.log("Could not find user " + sTiers[i]);
                 
@@ -120,7 +120,7 @@ module.exports = {
         if (aTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == aTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
@@ -153,7 +153,7 @@ module.exports = {
         if (bTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == bTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
@@ -186,7 +186,7 @@ module.exports = {
         if (cTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == cTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
@@ -219,7 +219,7 @@ module.exports = {
         if (dTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == dTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
@@ -252,7 +252,7 @@ module.exports = {
         if (eTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == eTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
@@ -285,7 +285,7 @@ module.exports = {
         if (fTiers.length > 0) {
             await interaction.guild.members.fetch().then(fetched => {
              let person = fetched.filter(member => member.user.username == fTiers[i]).first();
-             
+             console.log(i)
              console.log(person.id)
              console.log(person.user.username)
              tier(person, person.user);
