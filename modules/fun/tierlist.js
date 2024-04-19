@@ -87,8 +87,8 @@ module.exports = {
        await interaction.guild.members.fetch().then(fetched => {
         let person = fetched.filter(member => member.user.username == sTiers[i]).first();
         console.log(i)
-        console.log(person.id)
-        console.log(person.user.username)
+        console.log(sTiers[i])
+        console.log(person)
         tier(person, person.user);
        }
     
