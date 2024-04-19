@@ -66,13 +66,13 @@ module.exports = {
     const eTier = interaction.options.getString('e') ?? '';
     const fTier = interaction.options.getString('f') ?? '';
     var usernames = sTier.split(',') + aTier.split(',') + bTier.split(',') + cTier.split(',') + dTier.split(',') + eTier.split(',') + fTier.split(',');
-    var sTiers = sTier.split(',');
-    var aTiers = aTier.split(',');
-    var bTiers = bTier.split(',');
-    var cTiers = cTier.split(',');
-    var dTiers = dTier.split(',');
-    var eTiers = eTier.split(',');
-    var fTiers = fTier.split(',');
+    var sTiers = sTier.replace('/ /g', '').split(',');
+    var aTiers = aTier.replace('/ /g', '').split(',');
+    var bTiers = bTier.replace('/ /g', '').split(',');
+    var cTiers = cTier.replace('/ /g', '').split(',');
+    var dTiers = dTier.replace('/ /g', '').split(',');
+    var eTiers = eTier.replace('/ /g', '').split(',');
+    var fTiers = fTier.replace('/ /g', '').split(',');
     console.log(sTiers)
     console.log(aTiers)
     console.log(bTiers)
@@ -88,7 +88,7 @@ module.exports = {
         var person = fetched.filter(member => member.user.username == sTiers[i]).first();
         console.log(i)
         console.log(sTiers[i])
-        console.log(person)
+       
         tier(person, person.user);
        }
     
@@ -300,6 +300,7 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
+                        console.log(body)
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
