@@ -80,6 +80,7 @@ module.exports = {
     console.log(dTiers)
     console.log(eTiers)
     console.log(fTiers)
+    console.log(fTier)
     
     //S tier
     for(i = 0; i < sTiers.length; i++){
