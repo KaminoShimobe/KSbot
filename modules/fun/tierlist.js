@@ -289,37 +289,37 @@ module.exports = {
     //F tier
     for(i = 0; i < fTiers.length; i++){
         if (fTiers.length > 0) {
-            await interaction.guild.members.fetch().then(fetched => {
-             var person = fetched.filter(member => member.user.username == fTiers[i]).first();
-             console.log(i)
-             console.log(person.id)
-             console.log(person.user.username)
-             tier(person, person.user);
-            }
-         
-     
-            )
-             } else {
-                 console.log("Skipped tier F")
-             }
-            async function tier(u, name){
-                if(i < 9){
-                    if(u != undefined){
-                        const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        const avatar = new Image();
-                        avatar.src = Buffer.from(await body.arrayBuffer());
-                        context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
-                        console.log(avatar.src);
-                        console.log("printed for F tier")
-                    } else {
-                        console.log("Could not find user " + fTiers[i]);
-                    
-                    }
+       await interaction.guild.members.fetch().then(fetched => {
+        var person = fetched.filter(member => member.user.username == fTiers[i]).first();
+        console.log(i)
+        console.log(fTiers[i])
+       
+        tier(person, person.user);
+       }
+    
+
+       )
+        } else {
+            console.log("Skipped tier F")
+        }
+        async function tier(u, name){
+            if(i < 9){
+                if(u != undefined){
+                    const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
+                    const avatar = new Image();
+                    avatar.src = Buffer.from(await body.arrayBuffer());
+                    context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
+                    console.log(avatar.src);
                 } else {
-                    console.log("Limit to spaces in tierlist for line F met.")
-                    
+                    console.log("Could not find user " + fTiers[i]);
+                
                 }
+            } else {
+                console.log("Limit to spaces in tierlist for line F met.")
+                
             }
+        }
+        
     }
 
 
