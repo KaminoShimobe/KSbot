@@ -289,7 +289,7 @@ module.exports = {
     //F tier
     for(i = 0; i < fTiers.length; i++){
         if (fTiers.length > 0) {
-       await interaction.guild.members.fetch().then(fetched => {
+        await interaction.guild.members.fetch().then(fetched => {
         var person = fetched.filter(member => member.user.username == fTiers[i]).first();
         console.log(i)
         console.log(fTiers[i])
@@ -308,7 +308,7 @@ module.exports = {
                     const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
-                    context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
+                    context.drawImage(avatar, 93 + (64*(i-1)), 429, 64, 64);
                     console.log(avatar.src);
                 } else {
                     console.log("Could not find user " + fTiers[i]);
@@ -327,10 +327,44 @@ module.exports = {
     
     
     await interaction.editReply({ files: [attachment] });
-    
-                                
-    function tierlister(){
 
+   
+                                
+    async function tierlister(){
+        for(i = 0; i < sTiers.length; i++){
+            if (sTiers.length > 0) {
+           await interaction.guild.members.fetch().then(fetched => {
+            var person = fetched.filter(member => member.user.username == sTiers[i]).first();
+            console.log(i)
+            console.log(sTiers[i])
+           
+            tier(person, person.user);
+           }
+        
+    
+           )
+            } else {
+                console.log("Skipped tier S")
+            }
+            async function tier(u, name){
+                if(i < 9){
+                    if(u != undefined){
+                        const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
+                        const avatar = new Image();
+                        avatar.src = Buffer.from(await body.arrayBuffer());
+                        context.drawImage(avatar, 93 + (64*(i)), 9, 64, 64);
+                        console.log(avatar.src);
+                    } else {
+                        console.log("Could not find user " + sTiers[i]);
+                    
+                    }
+                } else {
+                    console.log("Limit to spaces in tierlist for line S met.")
+                    
+                }
+            }
+            
+        }
     }                        
 
 
