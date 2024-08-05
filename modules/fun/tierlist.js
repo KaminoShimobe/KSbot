@@ -104,6 +104,7 @@ module.exports = {
                     const avatar = new Image();
                     avatar.src = Buffer.from(await body.arrayBuffer());
                     context.drawImage(avatar, 93 + (64*(i)), 9, 64, 64);
+                    console.log(context);
                 } else {
                     console.log("Could not find user " + sTiers[i]);
                 
@@ -138,6 +139,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 79, 64, 64);
+                        console.log(context);
                     } else {
                         console.log("Could not find user " + aTiers[i]);
                     
@@ -171,6 +173,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 149, 64, 64);
+                        console.log(context);
                     } else {
                         console.log("Could not find user " + bTiers[i]);
                     
@@ -204,6 +207,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 219, 64, 64);
+                        console.log(context);
                     } else {
                         console.log("Could not find user " + cTiers[i]);
                     
@@ -237,6 +241,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 289, 64, 64);
+                        console.log(context);
                     } else {
                         console.log("Could not find user " + dTiers[i]);
                     
@@ -270,6 +275,7 @@ module.exports = {
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 359, 64, 64);
+                        console.log(context);
                     } else {
                         console.log("Could not find user " + eTiers[i]);
                     
@@ -300,10 +306,10 @@ module.exports = {
                 if(i < 9){
                     if(u != undefined){
                         const { body } = await request(name.displayAvatarURL({ format: 'jpg' }));
-                        console.log(body)
                         const avatar = new Image();
                         avatar.src = Buffer.from(await body.arrayBuffer());
                         context.drawImage(avatar, 93 + (64*(i)), 429, 64, 64);
+                        console.log(context);
                         console.log("printed for F tier")
                     } else {
                         console.log("Could not find user " + fTiers[i]);
@@ -323,7 +329,9 @@ module.exports = {
     await interaction.editReply({ files: [attachment] });
     
                                 
-                            
+    function tierlister(){
+
+    }                        
 
 
     function tierlist(){
