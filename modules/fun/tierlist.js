@@ -288,7 +288,7 @@ module.exports = {
             }
     }
     //F tier
-    for(i = 0; i < fTiers.length; i++){
+    for(i = 1; i < fTiers.length; i++){
         if (fTiers.length > 0) {
         await interaction.guild.members.fetch().then(fetched => {
         var person = fetched.filter(member => member.user.username == fTiers[i]).first();
