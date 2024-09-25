@@ -35,7 +35,14 @@ const rest = new REST({ version: '10' }).setToken(token);
 			{ body: commands },
 		);
 
+		const data2 = await rest.put(
+			Routes.applicationGuildCommands(clientId, otherId),
+			{ body: commands },
+		);
+		
+
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		console.log(`Successfully reloaded ${data2.length} application (/) commands. in Monkeybrain`);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
