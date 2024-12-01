@@ -100,18 +100,18 @@ for (const folder of commandFolders) {
 
 
 //SQL Database stuff
-var con_fig = {
-    host: "us-cdbr-iron-east-01.cleardb.net",
-    user: "bc9ba9370a9522",
-    password: process.env.MY_SQL,
-    database: "heroku_b523f37d8e76acb",
-    port: 3306
-};
+// var con_fig = {
+//     host: "us-cdbr-iron-east-01.cleardb.net",
+//     user: "bc9ba9370a9522",
+//     password: process.env.MY_SQL,
+//     database: "heroku_b523f37d8e76acb",
+//     port: 3306
+// };
 
 var con;
 
 function handleDisconnect() {
-con = mysql.createConnection(con_fig);
+con = mysql.createConnection(process.env.jawsDBKey);
 con.connect(function(err) {              // The server is either down
     if(err) {                                     // or restarting (takes a while sometimes).
       console.log('error when connecting to db:', err);
