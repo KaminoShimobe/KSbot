@@ -34,7 +34,7 @@ module.exports = {
 			interaction.reply("Reminding <@" + interaction.author + "> to \n **" + reason + "**"); 
 		   }, (1000*60*limit));    
 	   
-	   Reminders.add(interaction.author.id)
+	   Reminders.add(interaction.user.id)
 	   
 	   
 	  let note = new EmbedBuilder()
