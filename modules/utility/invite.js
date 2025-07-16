@@ -20,11 +20,6 @@ module.exports = {
             .setDescription("Thanks so much for inviting KS-Bot to your server!")
             .setImage(interaction.client.user.avatarURL())
             
-            
-                    
-
-       
-
         await interaction.reply({ ephemeral: true, embeds: [responseEmbed]}); 
 
 

@@ -44,7 +44,7 @@ module.exports = {
 	  .setTimestamp()
 	  .setFooter({text:"in " + limit + " minute(s)", iconURL: interaction.user.avatarURL()});
 	   
-	  await interaction.reply({embeds: [responseEmbed]});
+	  await interaction.reply({embeds: [note], ephemeral: true});
 	
 	
    } 
