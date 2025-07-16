@@ -137,31 +137,31 @@ module.exports = {
     } else if (interaction.options.getSubcommand() === 'whisper') {
         const whisper = interaction.options.getBoolean('whisper_status');
         console.log(whisper)
-        sql = `UPDATE server SET whisper = "${whisper}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET whisper = ${whisper} WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Whisper changed in ' + interaction.guild.name)
 
     } else if (interaction.options.getSubcommand() === 'expose') {
         const expose = interaction.options.getBoolean('expose_status');
-        sql = `UPDATE server SET expose = "${expose}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET expose = ${expose} WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Expose changed in ' + interaction.guild.name)
 
     } else if (interaction.options.getSubcommand() === 'stands') {
         const jojo = interaction.options.getBoolean('jojo');
-        sql = `UPDATE server SET stands = "${jojo}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET stands = ${jojo} WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Jojo changed in ' + interaction.guild.name)
 
     } else if (interaction.options.getSubcommand() === 'megaten') {
         const megaten = interaction.options.getBoolean('smt');
-        sql = `UPDATE server SET megaten = "${megaten}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET megaten = ${megaten} WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Megaten changed in ' + interaction.guild.name)
 
     } else if (interaction.options.getSubcommand() === 'chests') {
         const chests = interaction.options.getBoolean('chests_status');
-        sql = `UPDATE server SET chests = "${chests}" WHERE id = '${interaction.guild.id}'`;
+        sql = `UPDATE server SET chests = ${chests} WHERE id = '${interaction.guild.id}'`;
         con.query(sql);
         interaction.reply('Chests changed in ' + interaction.guild.name)
     }
